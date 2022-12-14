@@ -11,8 +11,9 @@ stages:
 
 # # Initialize system
 before_script:
+  - ls -la
   - export NVM_DIR=~/.nvm
-    source ~/.nvm/nvm.sh
+  - source ~/.nvm/nvm.sh
   - nvm -v
 #   # Check for ssh-agent + rsync and install if not present
 #   - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y  )"
