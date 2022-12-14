@@ -27,7 +27,7 @@ deploy_dev:
     SERVER_PROJECT_DIR: $PROJECT_BASE_PATH/development
   tags:
     # Runner name
-    - deployment
+    - deployment-frontend
   script:
     # Scripts to resolve gitlab variables
     - INSTALL_DEPS_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-front && npm i"
