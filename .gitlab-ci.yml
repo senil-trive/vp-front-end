@@ -46,6 +46,9 @@ deploy_dev:
     # Delete pm2 process if it exists
     - ssh $SERVER_USER@$SERVER_IP 'pm2 delete -s vp-website-dev || :'
 
+    # Build the project
+    - ssh $SERVER_USER@$SERVER_IP $BUILD_SCRIPT
+
     # Start pm2 process
     - ssh $SERVER_USER@$SERVER_IP $START_PROJECT_SCRIPT
 
