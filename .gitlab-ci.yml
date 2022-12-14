@@ -1,7 +1,9 @@
-# # Reference: https://www.exclamationlabs.com/blog/continuous-deployment-to-npm-using-gitlab-ci/
-# # and this file: https://gist.github.com/superjose/709989dd58aa90bfeda75767668482b2
-
 image: node:19.2.0
+
+cache:
+  key: "$CI_PROJECT_ID"
+  paths:
+    - node_modules/
 
 stages:
   - build
@@ -9,10 +11,7 @@ stages:
 
 # # Initialize system
 before_script:
-  - which nvm
-  - which node
-  - which npm
-  - which npx
+  - npm set progress=false
   # - export PATH=/home/ubuntu/.nvm/versions/node/v19.2.0/bin/:$PATH
 #   # Check for ssh-agent + rsync and install if not present
 #   - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y  )"
