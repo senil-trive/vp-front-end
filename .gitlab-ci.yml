@@ -8,7 +8,8 @@ stages:
   - deploy
 
 # # Initialize system
-# before_script:
+before_script:
+  - export PATH=/home/ubuntu/.nvm/versions/node/v19.2.0/bin/:$PATH
 #   # Check for ssh-agent + rsync and install if not present
 #   - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y  )"
 #   - "which rsync || ( apt-get update -y && apt-get install rsync -y )"
@@ -25,6 +26,7 @@ stages:
 # DEVELOPMENT DEPLOY SCRIPT
 build_dev:
   stage: build
+
   script:
     - npm run build
 # deploy_dev:
