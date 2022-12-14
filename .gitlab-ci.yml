@@ -1,0 +1,140 @@
+# # Reference: https://www.exclamationlabs.com/blog/continuous-deployment-to-npm-using-gitlab-ci/
+# # and this file: https://gist.github.com/superjose/709989dd58aa90bfeda75767668482b2
+
+image: node:19.2.0
+
+stages:
+  - build
+  - deploy
+
+# Initialize system
+before_script:
+  # Check for ssh-agent + rsync and install if not present
+  - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y  )"
+  - "which rsync || ( apt-get update -y && apt-get install rsync -y )"
+  - "which git || ( apt-get update -y && apt-get install git -y )"
+  - eval $(ssh-agent -s)
+  # Inject the remote's private key
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+  # Append keyscan output into known hosts
+  - ssh-keyscan $SERVER_IP >> ~/.ssh/known_hosts
+  - chmod 644 ~/.ssh/known_hosts
+
+# DEVELOPMENT DEPLOY SCRIPT
+build_dev:
+  stage: build
+  script:
+    - npm run build
+# deploy_dev:
+#   stage: deploy
+#   variables:
+#     SERVER_PROJECT_DIR: $PROJECT_BASE_PATH/development
+#   tags:
+#     # Runner name
+#     - deployment
+#   script:
+#     # Scripts to resolve gitlab variables
+#     - INSTALL_DEPS_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-api && npm i"
+#     - START_PROJECT_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-api && npm run server:dev"
+#     # - APPLY_SNAPSHOTS_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-api && npm run snap:apply"
+
+#     # Inject .env
+#     - cat $DEV_ENV_FILE > .env
+
+#     # Copy all the content
+#     - rsync -aO --filter="merge rsync_ignore.txt" $CI_PROJECT_DIR $SERVER_USER@$SERVER_IP:$SERVER_PROJECT_DIR
+
+#     # Install npm dependencies
+#     - ssh $SERVER_USER@$SERVER_IP $INSTALL_DEPS_SCRIPT
+
+#     # Delete pm2 process if it exists
+#     - ssh $SERVER_USER@$SERVER_IP 'pm2 delete -s vp-website-dev-admin || :'
+
+#     # Start pm2 process
+#     - ssh $SERVER_USER@$SERVER_IP $START_PROJECT_SCRIPT
+
+#   environment:
+#     name: development
+#   only:
+#     # Trigger deployments only from development branch
+#     - development
+
+# # STAGING DEPLOY SCRIPT
+# deploy_staging:
+#   stage: deploy
+#   variables:
+#     SERVER_PROJECT_DIR: $PROJECT_BASE_PATH/staging
+#   tags:
+#     # Runner name
+#     - deployment
+#   script:
+#     # Scripts to resolve gitlab variables
+#     - INSTALL_DEPS_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-api && npm i"
+#     - START_PROJECT_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-api && npm run server:staging"
+#     # - APPLY_SNAPSHOTS_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-api && npm run snap:apply"
+#     # - CREATE_SNAPSHOTS_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-api && npm run snap:create"
+
+#     # Inject .env
+#     - cat $STAGING_ENV_FILE > .env
+
+#     # Copy all the content
+#     - rsync -aO --filter="merge rsync_ignore.txt" $CI_PROJECT_DIR $SERVER_USER@$SERVER_IP:$SERVER_PROJECT_DIR
+
+#     # Install npm dependencies
+#     - ssh $SERVER_USER@$SERVER_IP $INSTALL_DEPS_SCRIPT
+
+#     # Delete pm2 process if it exists
+#     - ssh $SERVER_USER@$SERVER_IP 'pm2 delete -s vp-website-staging-admin || :'
+
+#     # Apply snapshots
+#     # - ssh $SERVER_USER@$SERVER_IP $APPLY_SNAPSHOTS_SCRIPT
+
+#     # Start pm2 process
+#     - ssh $SERVER_USER@$SERVER_IP $START_PROJECT_SCRIPT
+
+#   environment:
+#     name: staging
+#   only:
+#     # Trigger deployments only from staging branch
+#     - staging
+
+# # PRODUCTION DEPLOY SCRIPT
+# deploy_prod:
+#   stage: deploy
+#   variables:
+#     SERVER_PROJECT_DIR: $PROJECT_BASE_PATH/production
+#   tags:
+#     # Runner name
+#     - deployment
+#   script:
+#     # Scripts to resolve gitlab variables
+#     - INSTALL_DEPS_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-api && npm i"
+#     - START_PROJECT_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-api && npm run server"
+#     # - APPLY_SNAPSHOTS_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-api && npm run snap:apply"
+#     # - CREATE_SNAPSHOTS_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-api && npm run snap:create"
+
+#     # Inject .env
+#     - cat $PROD_ENV_FILE > .env
+
+#     # Copy all the content
+#     - rsync -aO --filter="merge rsync_ignore.txt" $CI_PROJECT_DIR $SERVER_USER@$SERVER_IP:$SERVER_PROJECT_DIR
+
+#     # Install npm dependencies
+#     - ssh $SERVER_USER@$SERVER_IP $INSTALL_DEPS_SCRIPT
+
+#     # Delete pm2 process if it exists
+#     - ssh $SERVER_USER@$SERVER_IP 'pm2 delete -s vp-website-admin || :'
+
+#     # Apply snapshots
+#     # - ssh $SERVER_USER@$SERVER_IP $APPLY_SNAPSHOTS_SCRIPT
+
+#     # Start pm2 process
+#     - ssh $SERVER_USER@$SERVER_IP $START_PROJECT_SCRIPT
+
+#   environment:
+#     name: production
+#   only:
+#     # Trigger deployments only from master branch
+#     - master
