@@ -1,68 +1,59 @@
 image: node:19.2.0
 
 stages:
-  - build
   - deploy
 
 # # Initialize system
 before_script:
-#   # Check for ssh-agent + rsync and install if not present
-#   - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y  )"
-#   - "which rsync || ( apt-get update -y && apt-get install rsync -y )"
-#   - "which git || ( apt-get update -y && apt-get install git -y )"
-#   - eval $(ssh-agent -s)
-#   # Inject the remote's private key
-#   - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
-#   - mkdir -p ~/.ssh
-#   - chmod 700 ~/.ssh
-#   # Append keyscan output into known hosts
-#   - ssh-keyscan $SERVER_IP >> ~/.ssh/known_hosts
-#   - chmod 644 ~/.ssh/known_hosts
+  # Check for ssh-agent + rsync and install if not present
+  - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y  )"
+  - "which rsync || ( apt-get update -y && apt-get install rsync -y )"
+  - "which git || ( apt-get update -y && apt-get install git -y )"
+  - eval $(ssh-agent -s)
+
+  # Inject the remote's private key
+  - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+
+  # Append keyscan output into known hosts
+  - ssh-keyscan $SERVER_IP >> ~/.ssh/known_hosts
+  - chmod 644 ~/.ssh/known_hosts
 
 # DEVELOPMENT DEPLOY SCRIPT
-build_dev:
-  stage: build
-
+deploy_dev:
+  stage: deploy
+  variables:
+    SERVER_PROJECT_DIR: $PROJECT_BASE_PATH/development
   tags:
     # Runner name
-    - deployment-frontend
-
+    - deployment
   script:
-    - npm --version
-# deploy_dev:
-#   stage: deploy
-#   variables:
-#     SERVER_PROJECT_DIR: $PROJECT_BASE_PATH/development
-#   tags:
-#     # Runner name
-#     - deployment
-#   script:
-#     # Scripts to resolve gitlab variables
-#     - INSTALL_DEPS_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-api && npm i"
-#     - START_PROJECT_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-api && npm run server:dev"
-#     # - APPLY_SNAPSHOTS_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-api && npm run snap:apply"
+    # Scripts to resolve gitlab variables
+    - INSTALL_DEPS_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-front && npm i"
+    - BUILD_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-front && npm run build"
+    - START_PROJECT_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-front && npm run server:dev"
 
-#     # Inject .env
-#     - cat $DEV_ENV_FILE > .env
+    # Inject .env
+    - cat $DEV_ENV_FILE > .env
 
-#     # Copy all the content
-#     - rsync -aO --filter="merge rsync_ignore.txt" $CI_PROJECT_DIR $SERVER_USER@$SERVER_IP:$SERVER_PROJECT_DIR
+    # Copy all the content
+    - rsync -aO --filter="merge rsync_ignore.txt" $CI_PROJECT_DIR $SERVER_USER@$SERVER_IP:$SERVER_PROJECT_DIR
 
-#     # Install npm dependencies
-#     - ssh $SERVER_USER@$SERVER_IP $INSTALL_DEPS_SCRIPT
+    # Install npm dependencies
+    - ssh $SERVER_USER@$SERVER_IP $INSTALL_DEPS_SCRIPT
 
-#     # Delete pm2 process if it exists
-#     - ssh $SERVER_USER@$SERVER_IP 'pm2 delete -s vp-website-dev-admin || :'
+    # Delete pm2 process if it exists
+    - ssh $SERVER_USER@$SERVER_IP 'pm2 delete -s vp-website-dev || :'
 
-#     # Start pm2 process
-#     - ssh $SERVER_USER@$SERVER_IP $START_PROJECT_SCRIPT
+    # Start pm2 process
+    - ssh $SERVER_USER@$SERVER_IP $START_PROJECT_SCRIPT
 
-#   environment:
-#     name: development
-#   only:
-#     # Trigger deployments only from development branch
-#     - development
-
+  environment:
+    name: development
+  only:
+    # Trigger deployments only from development branch
+    - development
 # # STAGING DEPLOY SCRIPT
 # deploy_staging:
 #   stage: deploy
