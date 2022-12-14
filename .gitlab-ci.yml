@@ -11,7 +11,8 @@ stages:
 
 # # Initialize system
 before_script:
-  - PATH=/home/ubuntu/.nvm/versions/node/v19.2.0/bin/:$PATH
+  - export NVM_DIR=~/.nvm
+    source ~/.nvm/nvm.sh
   - nvm -v
 #   # Check for ssh-agent + rsync and install if not present
 #   - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y  )"
