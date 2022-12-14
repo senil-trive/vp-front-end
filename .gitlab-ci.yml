@@ -11,7 +11,8 @@ stages:
 
 # # Initialize system
 before_script:
-  - ls -la
+  - ls /home
+  - ls -la /home/ubuntu
   - export NVM_DIR=~/.nvm
   - source ~/.nvm/nvm.sh
   - nvm -v
