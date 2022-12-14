@@ -1,21 +1,11 @@
 image: node:19.2.0
 
-cache:
-  key: "$CI_PROJECT_ID"
-  paths:
-    - node_modules/
-
 stages:
   - build
   - deploy
 
 # # Initialize system
 before_script:
-  - ls /home
-  - ls -la /home/ubuntu
-  - export NVM_DIR=~/.nvm
-  - source ~/.nvm/nvm.sh
-  - nvm -v
 #   # Check for ssh-agent + rsync and install if not present
 #   - "which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y  )"
 #   - "which rsync || ( apt-get update -y && apt-get install rsync -y )"
@@ -33,8 +23,12 @@ before_script:
 build_dev:
   stage: build
 
+  tags:
+    # Runner name
+    - deployment-frontend
+
   script:
-    - npm run build
+    - npm --version
 # deploy_dev:
 #   stage: deploy
 #   variables:
