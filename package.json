@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "start:server": "next start -p 8001",
+    "server": "pm2 start npm --name 'vp-website' -- start -- -- -p 8005",
+    "server:dev": "pm2 start npm --name 'vp-website-dev' -- start -- -- -p 8001",
+    "server:staging": "pm2 start npm --name 'vp-website-staging' -- start -- -p 8003",
     "lint": "next lint"
   },
   "dependencies": {
