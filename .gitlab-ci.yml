@@ -95,41 +95,41 @@ deploy_staging:
   only:
     # Trigger deployments only from development branch
     - staging
+
 # # PRODUCTION DEPLOY SCRIPT
-# deploy_prod:
-#   stage: deploy
-#   variables:
-#     SERVER_PROJECT_DIR: $PROJECT_BASE_PATH/production
-#   tags:
-#     # Runner name
-#     - deployment
-#   script:
-#     # Scripts to resolve gitlab variables
-#     - INSTALL_DEPS_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-api && npm i"
-#     - START_PROJECT_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-api && npm run server"
-#     # - APPLY_SNAPSHOTS_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-api && npm run snap:apply"
-#     # - CREATE_SNAPSHOTS_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-api && npm run snap:create"
+deploy_prod:
+  stage: deploy
+  variables:
+    SERVER_PROJECT_DIR: $PROJECT_BASE_PATH/production
+  tags:
+    # Runner name
+    - deployment-frontend
+  script:
+    # Scripts to resolve gitlab variables
+    - INSTALL_DEPS_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-front && npm i"
+    - BUILD_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-front && npm run build"
+    - START_PROJECT_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-front && npm run server"
 
-#     # Inject .env
-#     - cat $PROD_ENV_FILE > .env
+    # Inject .env
+    - cat $DEV_ENV_FILE > .env
 
-#     # Copy all the content
-#     - rsync -aO --filter="merge rsync_ignore.txt" $CI_PROJECT_DIR $SERVER_USER@$SERVER_IP:$SERVER_PROJECT_DIR
+    # Copy all the content
+    - rsync -aO --filter="merge rsync_ignore.txt" $CI_PROJECT_DIR $SERVER_USER@$SERVER_IP:$SERVER_PROJECT_DIR
 
-#     # Install npm dependencies
-#     - ssh $SERVER_USER@$SERVER_IP $INSTALL_DEPS_SCRIPT
+    # Install npm dependencies
+    - ssh $SERVER_USER@$SERVER_IP $INSTALL_DEPS_SCRIPT
 
-#     # Delete pm2 process if it exists
-#     - ssh $SERVER_USER@$SERVER_IP 'pm2 delete -s vp-website-admin || :'
+    # Delete pm2 process if it exists
+    - ssh $SERVER_USER@$SERVER_IP 'pm2 delete -s vp-website || :'
 
-#     # Apply snapshots
-#     # - ssh $SERVER_USER@$SERVER_IP $APPLY_SNAPSHOTS_SCRIPT
+    # Build the project
+    - ssh $SERVER_USER@$SERVER_IP $BUILD_SCRIPT
 
-#     # Start pm2 process
-#     - ssh $SERVER_USER@$SERVER_IP $START_PROJECT_SCRIPT
+    # Start pm2 process
+    - ssh $SERVER_USER@$SERVER_IP $START_PROJECT_SCRIPT
 
-#   environment:
-#     name: production
-#   only:
-#     # Trigger deployments only from master branch
-#     - master
+  environment:
+    name: production
+  only:
+    # Trigger deployments only from development branch
+    - master
