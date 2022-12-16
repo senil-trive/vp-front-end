@@ -73,7 +73,7 @@ deploy_staging:
     - START_PROJECT_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-front && npm run server:staging"
 
     # Inject .env
-    - cat $DEV_ENV_FILE > .env
+    - cat $STAGING_ENV_FILE > .env
 
     # Copy all the content
     - rsync -aO --filter="merge rsync_ignore.txt" $CI_PROJECT_DIR $SERVER_USER@$SERVER_IP:$SERVER_PROJECT_DIR
@@ -111,7 +111,7 @@ deploy_prod:
     - START_PROJECT_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-front && npm run server"
 
     # Inject .env
-    - cat $DEV_ENV_FILE > .env
+    - cat $PROD_ENV_FILE > .env
 
     # Copy all the content
     - rsync -aO --filter="merge rsync_ignore.txt" $CI_PROJECT_DIR $SERVER_USER@$SERVER_IP:$SERVER_PROJECT_DIR
