@@ -13,6 +13,14 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>Coming soon</h1>
+        <button
+          type="button"
+          onClick={() => {
+            throw new Error("Sentry Frontend Error");
+          }}
+        >
+          Test error
+        </button>
       </main>
 
       <footer className={styles.footer}>
