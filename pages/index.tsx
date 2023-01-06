@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
@@ -13,14 +12,6 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>Coming soon</h1>
-        <button
-          type="button"
-          onClick={() => {
-            throw new Error("Sentry Frontend Error");
-          }}
-        >
-          Test error
-        </button>
       </main>
 
       <footer className={styles.footer}>
