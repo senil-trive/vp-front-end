@@ -32,7 +32,11 @@ const customWebpack = {
 
 module.exports = {
   styleguideDir: "docs",
+  skipComponentsWithoutExample: true,
   components: `${root}/components/**/[A-Z]*.{js,jsx,ts,tsx}`,
   webpackConfig: customWebpack,
   require: [path.join(__dirname, "./styles/globals.css")],
+  styleguideComponents: {
+    Wrapper: path.join(__dirname, "providers/AppProviders"),
+  },
 };
