@@ -23,6 +23,11 @@
     "pretty": true,
     "sourceMap": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "docs/styleguid.config.js"
+  ],
   "exclude": ["node_modules"]
 }
