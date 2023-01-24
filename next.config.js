@@ -5,15 +5,19 @@ const { withSentryConfig } = require("@sentry/nextjs");
 const moduleExports = {
   reactStrictMode: true,
   swcMinify: true,
-
-  sentry: {
-    hideSourceMaps: true,
-  },
 };
+
+if (!process.env.LOCAL) {
+  moduleExports.sentry = {
+    hideSourceMaps: true,
+  };
+}
 
 const sentryWebpackPluginOptions = {
   token: process.env.SENTRY_AUTH_TOKEN,
   // silent: true, // Suppresses all logs
 };
 
-module.exports = withSentryConfig(moduleExports, sentryWebpackPluginOptions);
+module.exports = !process.env.LOCAL
+  ? withSentryConfig(moduleExports, sentryWebpackPluginOptions)
+  : moduleExports;
