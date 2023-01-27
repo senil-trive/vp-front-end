@@ -1,14 +1,18 @@
+import { type } from "os";
 import React, { ReactNode } from "react";
 import styled from "styled-components";
 
-type Props = {
-  size?: "m" | "l";
-  children: ReactNode;
-  onClick?: () => void;
-};
+type Variant = { variant?: "light" | "dark" };
 
-const BaseTag = styled.span`
-  background: #888888;
+type Props = React.HTMLAttributes<HTMLSpanElement> &
+  Variant & {
+    size?: "m" | "l";
+    children: ReactNode;
+    onClick?: () => void;
+  };
+
+const BaseTag = styled.span<Variant>`
+  background: ${({ variant }) => (variant === "light" ? "#888888" : "#010101")};
   border-radius: 8px;
 
   font-family: "Open Sans";
@@ -28,18 +32,24 @@ const StyledTagSmall = styled(BaseTag)`
   line-height: 120%;
 `;
 
-export default function Tag({ size = "l", onClick, children, ...rest }: Props) {
+export default function Tag({
+  variant = "light",
+  size = "l",
+  onClick,
+  children,
+  ...rest
+}: Props) {
   switch (size) {
     case "m":
       return (
-        <StyledTagSmall onClick={onClick} {...rest}>
+        <StyledTagSmall onClick={onClick} variant={variant} {...rest}>
           {children}
         </StyledTagSmall>
       );
 
     default:
       return (
-        <StyledTag onClick={onClick} {...rest}>
+        <StyledTag onClick={onClick} variant={variant} {...rest}>
           {children}
         </StyledTag>
       );

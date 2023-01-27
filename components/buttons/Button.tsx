@@ -9,7 +9,6 @@ type Props = {
 
 const StyledButton = styled.button<Props>`
   width: 100%;
-  max-width: 314px;
   border-radius: 12px;
 
   padding: 16px;

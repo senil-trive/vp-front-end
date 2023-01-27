@@ -21,6 +21,11 @@ const customWebpack = {
           },
         },
       },
+
+      {
+        test: /\.(png|jpeg|jpg|webp)?$/,
+        use: "url-loader",
+      },
       // Other loaders that are needed for your components
       {
         test: /\.css$/,
@@ -38,5 +43,14 @@ module.exports = {
   require: [path.join(__dirname, "./styles/globals.css")],
   styleguideComponents: {
     Wrapper: path.join(__dirname, "providers/AppProviders"),
+  },
+  template: {
+    head: {
+      scripts: [
+        {
+          src: "//www.instagram.com/embed.js",
+        },
+      ],
+    },
   },
 };

@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import styled from "styled-components";
 
-type Props = {
+type Props = React.HTMLAttributes<HTMLHeadingElement> & {
   variant?: "bold" | "regular" | "light";
   children: ReactNode;
 };
