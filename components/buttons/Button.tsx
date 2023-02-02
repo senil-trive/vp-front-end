@@ -28,7 +28,7 @@ const StyledButton = styled.button<Props>`
     switch (variant) {
       case "primary":
         return css`
-          background: #232323;
+          background: #ffffff;
         `;
       case "secondary":
         return css`
@@ -65,7 +65,7 @@ const StyledButton = styled.button<Props>`
   }}
 `;
 
-export function Button({ variant, children, onClick, ...rest }: Props) {
+export default function Button({ variant, children, onClick, ...rest }: Props) {
   return (
     <StyledButton onClick={onClick} variant={variant} {...rest}>
       {children}

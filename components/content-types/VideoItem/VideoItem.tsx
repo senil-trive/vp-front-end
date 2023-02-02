@@ -4,6 +4,7 @@ import { IoIosPlay } from "react-icons/io";
 
 import { H3, P } from "../../typography/Typography";
 import IconButton from "../../buttons/IconButton/IconButton";
+import Tag from "../../buttons/Tag/Tag";
 
 type Props = {
   title: string;
@@ -79,12 +80,25 @@ export default function VideoItem({
     }
   };
 
+  const stopVideo = () => {
+    const player = videoRef.current;
+    if (isPlaying && player) {
+      player.pause();
+      setIsPlaying(() => false);
+    }
+  };
+
   return (
     <StyledFigure>
-      <video src={src} ref={videoRef} onClick={handlePlayPause}></video>
+      <video
+        src={src}
+        ref={videoRef}
+        controls={isPlaying}
+        onClick={stopVideo}
+      ></video>
       {!isPlaying && (
         <>
-          <PlayIconWrapper>
+          <PlayIconWrapper onClick={handlePlayPause}>
             <IconButton Icon={IoIosPlay} />
           </PlayIconWrapper>
           <figcaption>

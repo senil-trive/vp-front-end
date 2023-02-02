@@ -7,7 +7,6 @@ type Props = React.HTMLAttributes<HTMLParagraphElement> & {
 };
 
 const BaseP = styled.p`
-  font-family: "Open Sans";
   font-style: normal;
   font-size: 16px;
   line-height: 140%;
