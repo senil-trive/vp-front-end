@@ -83,6 +83,10 @@ module.exports = {
       components: "./components/buttons/**/*.tsx",
     },
     {
+      name: "Form Elements",
+      components: "./components/form/**/*.tsx",
+    },
+    {
       name: "Cards",
       components: "./components/card/**/*.tsx",
     },
