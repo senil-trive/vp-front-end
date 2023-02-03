@@ -29,6 +29,8 @@ import HeartIcon from "/components/icons/HeartIcon/HeartIcon";
 import ChevronUp from "/components/icons/ChevronUp/ChevronUp";
 import ChevronDown from "/components/icons/ChevronDown/ChevronDown";
 import ImportantCircle from "/components/icons/ImportantCircle/ImportantCircle";
+import UserIcon from "/components/icons/UserIcon/UserIcon";
+import SearchIcon from "/components/icons/SearchIcon/SearchIcon";
 
 <>
   <Grid>
@@ -47,6 +49,12 @@ import ImportantCircle from "/components/icons/ImportantCircle/ImportantCircle";
     </GridItem>
     <GridItem>
       <ImportantCircle />
+    </GridItem>
+    <GridItem>
+      <UserIcon />
+    </GridItem>
+    <GridItem>
+      <SearchIcon />
     </GridItem>
   </Grid>
 </>;

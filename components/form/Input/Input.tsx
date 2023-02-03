@@ -1,5 +1,5 @@
-import React, { ReactNode } from "react";
-import styled from "styled-components";
+import React, { ReactNode, useRef } from "react";
+import styled, { css } from "styled-components";
 import { InputType } from "../../../types/formTypes";
 import ImportantCircle from "../../icons/ImportantCircle/ImportantCircle";
 import { P } from "../../typography/Typography";
@@ -8,10 +8,10 @@ type Props = {
   /** Label of the input field. */
   label?: string;
 
-  /** React Icon to be placed in front of the input  */
+  /** React or custom Icon to be placed in front of the input  */
   iconLeft?: ReactNode;
 
-  /** React Icon to be placed in after of the input  */
+  /** React or custom Icon to be placed in after of the input  */
   iconRight?: ReactNode;
 
   /** Small text that will appear under the input field. */
@@ -19,11 +19,18 @@ type Props = {
 
   /** Type of input. Same as HTML Input type. */
   type?: InputType;
+
+  /** Placeholder for the input field */
+  placeholder?: string;
+
+  /** Wether the  input field should be disabled */
+  disabled?: boolean;
 };
 
-const InputWrapper = styled.div`
+const InputWrapper = styled.div<{ disabled: boolean }>`
   display: flex;
   flex-direction: column;
+  cursor: text;
 
   label {
     margin-bottom: 16px;
@@ -67,11 +74,25 @@ const InputWrapper = styled.div`
     display: flex;
     align-items: center;
     margin-top: 13.5px;
-
-    svg {
-      margin-right: ;
-    }
   }
+
+  ${({ disabled }) =>
+    disabled
+      ? css`
+          cursor: not-allowed;
+          > div {
+            border: 1px solid #e0e0e0;
+            input {
+              cursor: not-allowed;
+              color: #e0e0e0;
+            }
+          }
+
+          footer {
+            color: #e0e0e0;
+          }
+        `
+      : null}
 `;
 
 const StyledIconWrapper = styled.div`
@@ -97,16 +118,30 @@ export default function Input({
   type = "text",
   label,
   helperText,
+  placeholder = "Enter a value",
+  disabled = false,
   ...rest
 }: Props) {
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const handleInputFocus = () => {
+    inputRef?.current?.focus();
+  };
+
   return (
-    <InputWrapper>
+    <InputWrapper disabled={disabled} onClick={handleInputFocus}>
       {!!label && <label>{label}</label>}
       <div>
         {!!iconLeft && (
           <IconWrapper style={{ marginRight: 10 }}>{iconLeft}</IconWrapper>
         )}
-        <input type={type} {...rest} />
+        <input
+          ref={inputRef}
+          type={type}
+          placeholder={placeholder}
+          disabled={disabled}
+          {...rest}
+        />
         {!!iconRight && (
           <IconWrapper style={{ marginLeft: 10 }}>{iconRight}</IconWrapper>
         )}
