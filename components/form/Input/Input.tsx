@@ -1,16 +1,17 @@
 import React, { ReactNode } from "react";
 import styled from "styled-components";
 import { InputType } from "../../../types/formTypes";
+import ImportantCircle from "../../icons/ImportantCircle/ImportantCircle";
 import { P } from "../../typography/Typography";
 
 type Props = {
   /** Label of the input field. */
   label?: string;
 
-  /** ReactNode to be placed in front of the input  */
+  /** React Icon to be placed in front of the input  */
   iconLeft?: ReactNode;
 
-  /** ReactNode to be placed in after of the input  */
+  /** React Icon to be placed in after of the input  */
   iconRight?: ReactNode;
 
   /** Small text that will appear under the input field. */
@@ -62,13 +63,22 @@ const InputWrapper = styled.div`
     }
   }
 
-  p {
+  footer {
+    display: flex;
+    align-items: center;
     margin-top: 13.5px;
+
+    svg {
+      margin-right: ;
+    }
   }
 `;
 
 const StyledIconWrapper = styled.div`
   padding: 5px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const IconWrapper = ({
@@ -76,7 +86,7 @@ const IconWrapper = ({
   ...rest
 }: {
   children: ReactNode;
-  style: {};
+  style?: {};
 }) => {
   return <StyledIconWrapper {...rest}>{children}</StyledIconWrapper>;
 };
@@ -102,7 +112,16 @@ export default function Input({
         )}
       </div>
 
-      {!!helperText && <P variant="helper">{helperText}</P>}
+      {!!helperText && (
+        <footer>
+          <IconWrapper style={{ marginRight: 16 }}>
+            <ImportantCircle />
+          </IconWrapper>
+          <P variant="helper" style={{ margin: 0 }}>
+            {helperText}
+          </P>
+        </footer>
+      )}
     </InputWrapper>
   );
 }
