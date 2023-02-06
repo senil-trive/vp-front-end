@@ -94,3 +94,20 @@ import SearchIcon from "/components/icons/SearchIcon/SearchIcon";
   />
 </>;
 ```
+
+### Input with error
+
+```jsx harmony
+import SearchIcon from "/components/icons/SearchIcon/SearchIcon";
+
+<>
+  <Input
+    label="Label"
+    type="text"
+    placeholder="Search"
+    helperText="Text to help "
+    iconLeft={<SearchIcon />}
+    hasError
+  />
+</>;
+```

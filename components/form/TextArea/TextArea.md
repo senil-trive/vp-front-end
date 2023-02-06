@@ -67,3 +67,16 @@ import UserIcon from "/components/icons/UserIcon/UserIcon";
   />
 </>
 ```
+
+### TextArea with error
+
+```jsx harmony
+<>
+  <TextArea
+    label="Label"
+    placeholder="Vul hier je reactie in..."
+    helperText="Text to help "
+    hasError
+  />
+</>
+```

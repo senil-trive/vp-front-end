@@ -21,3 +21,9 @@ export type InputType =
   | "time"
   | "url"
   | "week";
+
+export type InputStateType = {
+  disabled: boolean;
+  active: boolean;
+  hasError: boolean;
+};

@@ -1,6 +1,7 @@
 import React, { ReactNode, useRef } from "react";
 import styled, { css } from "styled-components";
-import { InputType } from "../../../types/formTypes";
+import { InputStateType, InputType } from "../../../types/formTypes";
+import IconWrapper from "../../icons/IconWrapper/IconWrapper";
 import ImportantCircle from "../../icons/ImportantCircle/ImportantCircle";
 import { P } from "../../typography/Typography";
 
@@ -28,9 +29,12 @@ type Props = {
 
   /** Wether the  input field is active */
   active?: boolean;
+
+  /** Wether the  input field has errors */
+  hasError?: boolean;
 };
 
-const InputWrapper = styled.div<{ disabled: boolean; active: boolean }>`
+const InputWrapper = styled.div<InputStateType>`
   display: flex;
   flex-direction: column;
   cursor: text;
@@ -66,6 +70,7 @@ const InputWrapper = styled.div<{ disabled: boolean; active: boolean }>`
       line-height: 160%;
 
       color: #888888;
+      background-color: transparent;
 
       &:focus {
         outline: 0;
@@ -104,24 +109,26 @@ const InputWrapper = styled.div<{ disabled: boolean; active: boolean }>`
           }
         `
       : null}
-`;
 
-const StyledIconWrapper = styled.div`
-  padding: 5px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+  ${({ hasError }) =>
+    hasError
+      ? css`
+          > div {
+            background-color: rgba(255, 51, 51, 0.1);
+            border-color: #ff3333;
+          }
 
-const IconWrapper = ({
-  children,
-  ...rest
-}: {
-  children: ReactNode;
-  style?: {};
-}) => {
-  return <StyledIconWrapper {...rest}>{children}</StyledIconWrapper>;
-};
+          footer {
+            svg path {
+              fill: #ff3333;
+            }
+            p {
+              color: #ff3333;
+            }
+          }
+        `
+      : null}
+`;
 
 export default function Input({
   iconLeft,
@@ -132,6 +139,7 @@ export default function Input({
   placeholder = "Enter a value",
   active = false,
   disabled = false,
+  hasError = false,
   ...rest
 }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -144,6 +152,7 @@ export default function Input({
     <InputWrapper
       disabled={disabled}
       active={active}
+      hasError={hasError}
       onClick={handleInputFocus}
     >
       {!!label && <label>{label}</label>}
