@@ -25,9 +25,12 @@ type Props = {
 
   /** Wether the  input field should be disabled */
   disabled?: boolean;
+
+  /** Wether the  input field is active */
+  active?: boolean;
 };
 
-const InputWrapper = styled.div<{ disabled: boolean }>`
+const InputWrapper = styled.div<{ disabled: boolean; active: boolean }>`
   display: flex;
   flex-direction: column;
   cursor: text;
@@ -81,15 +84,23 @@ const InputWrapper = styled.div<{ disabled: boolean }>`
       ? css`
           cursor: not-allowed;
           > div {
-            border: 1px solid #e0e0e0;
+            opacity: 0.3;
             input {
               cursor: not-allowed;
-              color: #e0e0e0;
             }
           }
 
           footer {
-            color: #e0e0e0;
+            opacity: 0.3;
+          }
+        `
+      : null}
+
+  ${({ active }) =>
+    active
+      ? css`
+          > div {
+            border-color: #black;
           }
         `
       : null}
@@ -119,6 +130,7 @@ export default function Input({
   label,
   helperText,
   placeholder = "Enter a value",
+  active = false,
   disabled = false,
   ...rest
 }: Props) {
@@ -129,7 +141,11 @@ export default function Input({
   };
 
   return (
-    <InputWrapper disabled={disabled} onClick={handleInputFocus}>
+    <InputWrapper
+      disabled={disabled}
+      active={active}
+      onClick={handleInputFocus}
+    >
       {!!label && <label>{label}</label>}
       <div>
         {!!iconLeft && (
