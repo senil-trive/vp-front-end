@@ -33,6 +33,7 @@ import ChevronDownFilled from "/components/icons/ChevronDownFilled/ChevronDownFi
 import ImportantCircle from "/components/icons/ImportantCircle/ImportantCircle";
 import UserIcon from "/components/icons/UserIcon/UserIcon";
 import SearchIcon from "/components/icons/SearchIcon/SearchIcon";
+import CheckmarkIcon from "/components/icons/Checkmark/CheckmarkIcon";
 
 <>
   <Grid>
@@ -63,6 +64,9 @@ import SearchIcon from "/components/icons/SearchIcon/SearchIcon";
     </GridItem>
     <GridItem>
       <SearchIcon />
+    </GridItem>
+    <GridItem>
+      <CheckmarkIcon />
     </GridItem>
   </Grid>
 </>;
