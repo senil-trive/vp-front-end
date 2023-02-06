@@ -1,10 +1,5 @@
 import React, { useRef, useState } from "react";
-import styled, { css } from "styled-components";
-import ChevronDownFilled from "../../icons/ChevronDownFilled/ChevronDownFilled";
-import ChevronUpFilled from "../../icons/ChevronUpFilled/ChevronUpFilled";
-import IconWrapper from "../../icons/IconWrapper/IconWrapper";
-import ImportantCircle from "../../icons/ImportantCircle/ImportantCircle";
-import { P } from "../../typography/Typography";
+import styled from "styled-components";
 
 export type DropdownItem = {
   /** Name of the dropdown option. */
@@ -15,26 +10,11 @@ export type DropdownItem = {
 };
 
 export type Props = {
-  /** Label of the dropdown field. */
-  label?: string;
-
   /** Options that should be used as dropdown options */
   options: DropdownItem[];
 
-  /** Small text that will appear under the dropdown field. */
-  helperText?: string;
-
   /** Placeholder for the dropdown field */
   placeholder?: string;
-
-  /** Wether the dropdown field should be disabled */
-  disabled?: boolean;
-
-  /** Wether the dropdown field is active */
-  active?: boolean;
-
-  /** Wether the  dropdown field has any error */
-  hasError?: boolean;
 };
 
 const Wrapper = styled.div`
@@ -119,8 +99,6 @@ const Wrapper = styled.div`
 
 export default function DisplayDropdown({
   options,
-  label,
-  disabled,
   placeholder = "Select",
   ...rest
 }: Props) {
@@ -143,7 +121,6 @@ export default function DisplayDropdown({
         <select
           ref={inputRef}
           placeholder={placeholder}
-          disabled={disabled}
           onBlur={() => setIsOpen(false)}
           {...rest}
         >
