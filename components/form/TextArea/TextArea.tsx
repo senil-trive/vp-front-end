@@ -1,6 +1,7 @@
 import React, { ReactNode, useRef } from "react";
 import styled, { css } from "styled-components";
 import { InputStateType, InputType } from "../../../types/formTypes";
+import IconWrapper from "../../icons/IconWrapper/IconWrapper";
 import ImportantCircle from "../../icons/ImportantCircle/ImportantCircle";
 import { P } from "../../typography/Typography";
 
@@ -31,12 +32,9 @@ const Wrapper = styled.div<InputStateType>`
 
   label {
     margin-bottom: 16px;
-
     font-weight: 700;
     font-size: 18px;
     line-height: 160%;
-    /* identical to box height, or 29px */
-
     color: #000000;
   }
 
@@ -45,7 +43,6 @@ const Wrapper = styled.div<InputStateType>`
     background-color: white;
     width: 100%;
     border-radius: 8px;
-
     display: flex;
     align-items: center;
     padding: 10px 12px 10px 16px;
@@ -54,11 +51,9 @@ const Wrapper = styled.div<InputStateType>`
       border: none;
       width: 100%;
       border-radius: 8px;
-
       font-weight: 400;
       font-size: 18px;
       line-height: 160%;
-
       color: #888888;
       background-color: transparent;
 
@@ -119,23 +114,6 @@ const Wrapper = styled.div<InputStateType>`
         `
       : null}
 `;
-
-const StyledIconWrapper = styled.div`
-  padding: 5px 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const IconWrapper = ({
-  children,
-  ...rest
-}: {
-  children: ReactNode;
-  style?: {};
-}) => {
-  return <StyledIconWrapper {...rest}>{children}</StyledIconWrapper>;
-};
 
 export default function TextArea({
   label,

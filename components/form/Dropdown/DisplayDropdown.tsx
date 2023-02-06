@@ -37,7 +37,7 @@ export type Props = {
   hasError?: boolean;
 };
 
-const Wrapper = styled.div<{ hasError: boolean }>`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   cursor: text;
@@ -55,93 +55,77 @@ const Wrapper = styled.div<{ hasError: boolean }>`
     color: #000000;
   }
 
-  .selectBox {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid #555555;
-    background-color: white;
-    width: 100%;
-    border-radius: 8px;
+  > div {
+    position: relative;
 
-    display: flex;
-    align-items: center;
-    padding: 10px 16px;
+    .selectBox {
+      /* position: absolute; */
+      /* top: 0;
+      left: 0; */
+      /* border: 1px solid #555555; */
+      /* background-color: white; */
+      /* width: 100%; */
+      /* border-radius: 8px; */
 
-    span {
-      font-weight: 400;
-      font-size: 18px;
-      line-height: 160%;
+      /* display: flex; */
+      /* justify-content: space-between; */
+      /* align-items: center; */
+      /* padding: 10px 16px; */
+      cursor: pointer;
+
+      span {
+        color: #888888;
+        font-weight: 700;
+        font-size: 48px;
+        line-height: 140%;
+        text-align: center;
+      }
+
+      &.open {
+        border-radius: 8px 8px 0 0;
+      }
     }
 
-    &.open {
-      border-radius: 8px 8px 0 0;
+    .selectItems {
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-radius: 8px;
+      overflow: hidden;
+
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+
+      button {
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 120%;
+        border: none;
+        outline: 0;
+
+        padding: 14px 42px;
+
+        color: #000000;
+
+        &.active {
+          background-color: #888888;
+          color: white;
+        }
+      }
     }
   }
-
-  .selectItems {
-    border: 1px solid #555555;
-    border-top-width: 0;
-    background-color: white;
-    width: 100%;
-    border-radius: 0 0 8px 8px;
-
-    display: flex;
-    flex-direction: column;
-    padding: 6.18px 16px 10px 16px;
-
-    button {
-      font-weight: 400;
-      font-size: 18px;
-      line-height: 160%;
-      width: 100%;
-      border: none;
-      outline: 0;
-      text-align: left;
-      background-color: white;
-      padding: 0;
-
-      color: #000000;
-    }
-  }
-
-  footer {
-    display: flex;
-    align-items: center;
-    margin-top: 13.5px;
-  }
-
-  ${({ hasError }) =>
-    hasError
-      ? css`
-          .selectBox {
-            background-color: rgba(255, 51, 51, 0.1);
-            border-color: #ff3333;
-          }
-
-          footer {
-            svg path {
-              fill: #ff3333;
-            }
-            p {
-              color: #ff3333;
-            }
-          }
-        `
-      : null}
 `;
 
-export default function Dropdown({
+export default function DisplayDropdown({
   options,
   label,
   disabled,
-  helperText,
   placeholder = "Select",
-  hasError = false,
   ...rest
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState<string>("");
+  const [selected, setSelected] = useState<DropdownItem | null>(null);
   const inputRef = useRef<HTMLSelectElement>(null);
 
   const handleInputFocus = () => {
@@ -149,18 +133,18 @@ export default function Dropdown({
   };
 
   const handleSelect = (option: DropdownItem) => {
-    setSelected(option.value);
+    setSelected(option);
     setIsOpen(() => false);
   };
 
   return (
-    <Wrapper hasError={hasError} onClick={handleInputFocus}>
-      {!!label && <label>{label}</label>}
+    <Wrapper onClick={handleInputFocus}>
       <div>
         <select
           ref={inputRef}
           placeholder={placeholder}
           disabled={disabled}
+          onBlur={() => setIsOpen(false)}
           {...rest}
         >
           {options.map((option) => (
@@ -173,30 +157,23 @@ export default function Dropdown({
           className={`selectBox ${isOpen ? "open" : ""}`}
           onClick={() => setIsOpen((state) => !state)}
         >
-          <span>{selected || placeholder}</span>
-          <span>{!isOpen ? <ChevronDownFilled /> : <ChevronUpFilled />}</span>
+          <span>{selected?.name ?? placeholder}</span>
+          {/* <span>{!isOpen ? <ChevronDownFilled /> : <ChevronUpFilled />}</span> */}
         </div>
         {isOpen && (
           <div className="selectItems">
             {options.map((option) => (
-              <button key={option.value} onClick={() => handleSelect(option)}>
+              <button
+                className={selected?.value === option.value ? "active" : ""}
+                key={option.value}
+                onClick={() => handleSelect(option)}
+              >
                 {option.name}
               </button>
             ))}
           </div>
         )}
       </div>
-
-      {!!helperText && (
-        <footer>
-          <IconWrapper style={{ marginRight: 16 }}>
-            <ImportantCircle />
-          </IconWrapper>
-          <P variant="helper" style={{ margin: 0 }}>
-            {helperText}
-          </P>
-        </footer>
-      )}
     </Wrapper>
   );
 }
