@@ -32,6 +32,9 @@ type Props = {
 
   /** Wether the  input field has errors */
   hasError?: boolean;
+
+  /** Callback to handle the input */
+  onChange: (x: string) => void;
 };
 
 const InputWrapper = styled.div<InputStateType>`
@@ -140,6 +143,7 @@ export default function Input({
   active = false,
   disabled = false,
   hasError = false,
+  onChange,
   ...rest
 }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -165,6 +169,7 @@ export default function Input({
           type={type}
           placeholder={placeholder}
           disabled={disabled}
+          onChange={(e) => onChange(e.target.value)}
           {...rest}
         />
         {!!iconRight && (

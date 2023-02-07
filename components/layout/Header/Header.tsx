@@ -1,17 +1,18 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import ChevronDown from "../../icons/ChevronDown/ChevronDown";
-import ChevronUp from "../../icons/ChevronUp/ChevronUp";
+import Input from "../../form/Input/Input";
 import Logo from "../../icons/Logo/Logo";
-import { P } from "../../typography/Typography";
+import HeaderNav from "./HeaderNav/HeaderNav";
+import HeaderSubmenu from "./HeaderSubmenu/HeaderSubmenu";
+import SearchIcon from "../../icons/SearchIcon/SearchIcon";
 
-type MenuItem = {
+export type MenuItem = {
   id: string;
   name: string;
   categories: Category[];
 };
 
-type Category = {
+export type Category = {
   name: string;
   items: {
     name: string;
@@ -19,276 +20,50 @@ type Category = {
   }[];
 };
 
-const menuCols: MenuItem[] = [
-  {
-    id: "1",
-    name: "Menu Item",
-    categories: [
-      {
-        name: "Category",
-        items: [
-          {
-            name: "Menu item c1 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item c1 2",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item c1 3",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item c1 4",
-            link: "#menuItem",
-          },
-        ],
-      },
-      {
-        name: "Category",
-        items: [
-          {
-            name: "Menu item c2 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item c2 2",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item c2 3",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item c2 4",
-            link: "#menuItem",
-          },
-        ],
-      },
-      {
-        name: "Category",
-        items: [
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 2",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 3",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 4",
-            link: "#menuItem",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: "2",
-    name: "Menu Item",
-    categories: [
-      {
-        name: "Category",
-        items: [
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-        ],
-      },
-      {
-        name: "Category",
-        items: [
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-        ],
-      },
-      {
-        name: "Category",
-        items: [
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: "3",
-    name: "Menu Item",
-    categories: [
-      {
-        name: "Category",
-        items: [
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-        ],
-      },
-      {
-        name: "Category",
-        items: [
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-        ],
-      },
-      {
-        name: "Category",
-        items: [
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-        ],
-      },
-    ],
-  },
-];
+const StyledHeader = styled.header`
+  .inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 41px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+
+    > div {
+      display: flex;
+      align-items: center;
+    }
+  }
+`;
 
 export default function Header() {
-  const [selected, setSelected] = useState<MenuItem | null>(null);
+  const [selected, setSelected] = useState<MenuItem | undefined>(undefined);
 
   const toggleMenu = (menu: MenuItem) => {
     if (selected?.id === menu.id) {
-      return setSelected(() => null);
+      return setSelected(() => undefined);
     }
 
     return setSelected(() => menu);
   };
 
+  const handleSearch = (x: string) => {
+    console.log(x);
+  };
+
   return (
-    <header>
-      <div className="flex justify-between items-center shadow-md py-[12px] px-[41px]">
-        <div className="flex items-center">
-          <Logo className="mr-[52px]" />
-          <nav>
-            <ul className="flex items-center">
-              {menuCols.map((menu) => (
-                <li
-                  key={menu.id}
-                  className={`mr-[52px] flex items-center ${
-                    selected?.id === menu.id ? "font-bold" : ""
-                  }`}
-                  onClick={() => toggleMenu(menu)}
-                >
-                  <P className="mr-2">{menu.name}</P>{" "}
-                  {selected?.id === menu.id ? <ChevronUp /> : <ChevronDown />}
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
+    <StyledHeader>
+      <div className="inner">
+        <Logo className="mr-[52px]" />
+        <HeaderNav selected={selected} onChange={(x) => toggleMenu(x)} />
         <div>
-          <div className="px-[12px] py-[10px] border">Searchbox</div>
+          <Input
+            iconLeft={<SearchIcon />}
+            placeholder="Zoeken..."
+            onChange={handleSearch}
+          />
         </div>
       </div>
-      {selected && (
-        <div
-          className="flex-1 py-[32px] px-[64px]"
-          style={{ background: "#ededed" }}
-        >
-          <ul className="flex">
-            {selected?.categories.map((category, index) => (
-              <div key={index} className="mr-16">
-                <li>
-                  <P variant="bold">{category.name}</P>
-                </li>
-                {category.items.map((item) => (
-                  <li key={item.link}>
-                    <P>
-                      <a href={item.link}>{item.name}</a>
-                    </P>
-                  </li>
-                ))}
-              </div>
-            ))}
-          </ul>
-        </div>
-      )}
-    </header>
+      {selected && <HeaderSubmenu categories={selected?.categories} />}
+    </StyledHeader>
   );
 }

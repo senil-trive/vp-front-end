@@ -158,7 +158,10 @@ const pagination = (
 export default function Pagination({ truncated = false, total = 1 }: Props) {
   const [currentPage, setCurrentPage] = useState(1);
 
-  let pages: (number | string)[] = Array.from({ length: total }, (v, i) => i);
+  let pages: (number | string)[] = Array.from(
+    { length: total },
+    (v, i) => i
+  ).map((i) => i + 1);
 
   if (truncated) {
     pages = pagination(currentPage, total, 5, 7);
