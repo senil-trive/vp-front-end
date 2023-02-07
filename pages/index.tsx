@@ -2,7 +2,7 @@ import Head from "next/head";
 import Tag from "../components/buttons/Tag/Tag";
 import Grid from "../components/grid/Grid";
 import GridItem from "../components/grid/GridItem";
-import Header from "../components/layout/Header";
+import Header from "../components/layout/Header/Header";
 
 const tags = ["Alles", "Mijn family"];
 

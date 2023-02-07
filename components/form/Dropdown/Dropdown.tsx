@@ -141,7 +141,7 @@ export default function Dropdown({
   ...rest
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState<string>("");
+  const [selected, setSelected] = useState<DropdownItem | null>(null);
   const inputRef = useRef<HTMLSelectElement>(null);
 
   const handleInputFocus = () => {
@@ -149,7 +149,7 @@ export default function Dropdown({
   };
 
   const handleSelect = (option: DropdownItem) => {
-    setSelected(option.value);
+    setSelected(option);
     setIsOpen(() => false);
   };
 
@@ -173,7 +173,7 @@ export default function Dropdown({
           className={`selectBox ${isOpen ? "open" : ""}`}
           onClick={() => setIsOpen((state) => !state)}
         >
-          <span>{selected || placeholder}</span>
+          <span>{selected?.name || placeholder}</span>
           <span>{!isOpen ? <ChevronDownFilled /> : <ChevronUpFilled />}</span>
         </div>
         {isOpen && (

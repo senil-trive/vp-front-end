@@ -98,6 +98,10 @@ module.exports = {
       name: "Modals",
       components: "./components/modals/**/*.tsx",
     },
+    {
+      name: "Layout Elements",
+      components: "./components/layout/**/*.tsx",
+    },
   ],
 
   template: {

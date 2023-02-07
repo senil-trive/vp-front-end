@@ -53,7 +53,7 @@ const Wrapper = styled.div<{ hasError: boolean }>`
 export default function Checkbox({
   hasError = false,
   label,
-  checked = true,
+  checked = false,
 }: Props) {
   const [isChecked, setChecked] = useState(checked);
 

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import ChevronDown from "../icons/ChevronDown/ChevronDown";
-import ChevronUp from "../icons/ChevronUp/ChevronUp";
-import Logo from "../icons/Logo/Logo";
-import { P } from "../typography/Typography";
+import ChevronDown from "../../icons/ChevronDown/ChevronDown";
+import ChevronUp from "../../icons/ChevronUp/ChevronUp";
+import Logo from "../../icons/Logo/Logo";
+import { P } from "../../typography/Typography";
 
 type MenuItem = {
   id: string;
