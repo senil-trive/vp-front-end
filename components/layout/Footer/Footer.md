@@ -1,0 +1,5 @@
+### Footer
+
+```jsx harmony
+<Footer />
+```
