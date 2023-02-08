@@ -15,13 +15,17 @@ type Props = React.HTMLAttributes<HTMLSpanElement> &
   };
 
 const BaseTag = styled.span<Variant & Position>`
-  background: ${({ variant }) => (variant === "light" ? "#888888" : "#010101")};
+  background: ${({ variant, theme }) =>
+    variant === "light" ? "transparent" : theme.colors.primary};
   border-radius: 8px;
 
-  font-family: "Open Sans";
-  font-style: normal;
-  font-weight: 400;
-  color: #ffffff;
+  color: ${({ variant, theme }) =>
+    variant === "light" ? theme.colors.primary : "white"};
+  border: 1px solid ${({ theme }) => theme.colors.primary};
+
+  font-weight: 300;
+
+  line-height: 160%;
 
   ${({ position }) => {
     switch (position) {
@@ -57,14 +61,21 @@ const BaseTag = styled.span<Variant & Position>`
 `;
 
 const StyledTag = styled(BaseTag)`
-  font-size: 18px;
   line-height: 160%;
-  padding: 6px 10px;
+  padding: 14.5px 24px;
+  font-size: ${({ theme }) => theme.fontSizes.p.mobile};
+
+  @media ${({ theme }) => theme.breakpoints.tablet} {
+    font-size: ${({ theme }) => theme.fontSizes.p.desktop};
+  }
 `;
+
 const StyledTagSmall = styled(BaseTag)`
   font-size: 10px;
   padding: 8px;
   line-height: 120%;
+  padding: 6px 10px;
+  font-size: ${({ theme }) => theme.fontSizes.p.mobile};
 `;
 
 export default function Tag({

@@ -1,9 +1,3 @@
-### Description
-
-By default the button will take `100%` of it's parent container up to `314px`.
-
-### Examples
-
 **Button Primary:**
 
 ```js
@@ -22,6 +16,14 @@ By default the button will take `100%` of it's parent container up to `314px`.
 
 ```js
 <Button variant="tertiary" onClick={() => alert("Pizza: 🍕")}>
+  Click me
+</Button>
+```
+
+**Button link:**
+
+```js
+<Button variant="link" onClick={() => alert("Pizza: 🍕")}>
   Click me
 </Button>
 ```

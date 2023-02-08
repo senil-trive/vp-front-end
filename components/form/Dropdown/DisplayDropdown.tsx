@@ -1,5 +1,7 @@
 import React, { useRef, useState } from "react";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
+import ChevronDown from "../../icons/ChevronDown/ChevronDown";
+import ChevronUp from "../../icons/ChevronUp/ChevronUp";
 
 export type DropdownItem = {
   /** Name of the dropdown option. */
@@ -20,45 +22,34 @@ export type Props = {
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  cursor: text;
+  cursor: pointer;
 
   select {
     display: none;
   }
 
-  label {
-    margin-bottom: 16px;
-
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 160%;
-    color: #000000;
-  }
-
-  > div {
+  .inner {
     position: relative;
+    z-index: 1;
 
     .selectBox {
-      /* position: absolute; */
-      /* top: 0;
-      left: 0; */
-      /* border: 1px solid #555555; */
-      /* background-color: white; */
-      /* width: 100%; */
-      /* border-radius: 8px; */
-
-      /* display: flex; */
-      /* justify-content: space-between; */
-      /* align-items: center; */
-      /* padding: 10px 16px; */
       cursor: pointer;
+      display: flex;
+      align-items: center;
 
       span {
-        color: #888888;
+        color: ${({ theme }) => theme.colors.primary};
         font-weight: 700;
-        font-size: 48px;
+        font-size: ${({ theme }) => theme.fontSizes.h1.mobile};
         line-height: 140%;
         text-align: center;
+        margin-right: 16px;
+      }
+
+      svg {
+        path {
+          stroke: ${({ theme }) => theme.colors.info};
+        }
       }
 
       &.open {
@@ -68,14 +59,16 @@ const Wrapper = styled.div`
 
     .selectItems {
       position: absolute;
-      top: 0;
+      z-index: 999999;
       left: 0;
       border-radius: 8px;
-      overflow: hidden;
-
       display: flex;
       flex-direction: column;
       cursor: pointer;
+      background-color: ${({ theme }) => theme.colors.white};
+      padding: 12.5px 16px;
+      box-shadow: ${({ theme }) => theme.shadows.sm};
+      transform: translateY(11px);
 
       button {
         font-weight: 700;
@@ -83,14 +76,55 @@ const Wrapper = styled.div`
         line-height: 120%;
         border: none;
         outline: 0;
-
+        background-color: ${({ theme }) => theme.colors.white};
+        z-index: 999;
         padding: 14px 42px;
-
+        position: relative;
         color: #000000;
 
+        &:hover,
         &.active {
-          background-color: #888888;
+          background-color: ${({ theme }) => theme.colors.primary};
           color: white;
+          border-radius: 8px;
+        }
+      }
+
+      &:before {
+        content: "";
+        width: 18px;
+        height: 18px;
+        position: absolute;
+        z-index: 3;
+        border-radius: 4px;
+
+        top: 0;
+        left: 0;
+        transform: translate(20.78px, -50%) rotate(45deg);
+        transform-origin: center;
+        background-color: ${({ theme }) => theme.colors.white};
+        box-shadow: ${({ theme }) => theme.shadows.sm};
+      }
+      &::after {
+        content: "";
+        width: 100px;
+        height: 16px;
+        position: absolute;
+        z-index: 4;
+        border-radius: 8px;
+        top: 0;
+        left: 0;
+        transform-origin: center;
+        background-color: ${({ theme }) => theme.colors.white};
+      }
+    }
+  }
+
+  @media ${({ theme }) => theme.breakpoints.tablet} {
+    .inner {
+      .selectBox {
+        span {
+          font-size: ${({ theme }) => theme.fontSizes.h1.desktop};
         }
       }
     }
@@ -117,7 +151,7 @@ export default function DisplayDropdown({
 
   return (
     <Wrapper onClick={handleInputFocus}>
-      <div>
+      <div className="inner">
         <select
           ref={inputRef}
           placeholder={placeholder}
@@ -135,7 +169,7 @@ export default function DisplayDropdown({
           onClick={() => setIsOpen((state) => !state)}
         >
           <span>{selected?.name ?? placeholder}</span>
-          {/* <span>{!isOpen ? <ChevronDownFilled /> : <ChevronUpFilled />}</span> */}
+          {!isOpen ? <ChevronDown /> : <ChevronUp />}
         </div>
         {isOpen && (
           <div className="selectItems">

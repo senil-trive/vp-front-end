@@ -6,7 +6,7 @@ export type Props = {
   /** Label of the dropdown field. */
   label?: string;
 
-  /** Wheter the checkbox should be default checked */
+  /** Wether the checkbox should be default checked */
   checked?: boolean;
 
   /** Wether the  dropdown field has any error */
@@ -20,8 +20,8 @@ const Wrapper = styled.div<{ hasError: boolean }>`
   button {
     width: 18px;
     height: 18px;
-    background: #ffffff;
-    border: 1px solid #555555;
+    background: ${({ theme }) => theme.colors.white};
+    border: 1px solid ${({ theme }) => theme.colors.primary};
     border-radius: 4px;
     margin-right: 16px;
     position: relative;
@@ -33,12 +33,12 @@ const Wrapper = styled.div<{ hasError: boolean }>`
       left: 0%;
       transform: translate(2px, 3px);
       path {
-        fill: #ffffff;
+        fill: ${({ theme }) => theme.colors.white};
       }
     }
 
     &.checked {
-      background-color: #555555;
+      background-color: ${({ theme }) => theme.colors.primary};
     }
   }
 

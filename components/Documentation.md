@@ -3,16 +3,37 @@
 ```jsx harmony
 import Grid from "/components/grid/Grid";
 import GridItem from "/components/grid/GridItem";
+import ColorCard from "/components/card/ColorCard/ColorCard";
+import { COLORS } from "/styles/theme";
 
 <>
   <Grid>
-    <GridItem>
-      <div>Color 1</div>
-      <div>Color 1</div>
-      <div>Color 1</div>
-      <div>Color 1</div>
-      <div>Color 1</div>
-      <div>Color 1</div>
+    <GridItem size={4}>
+      <ColorCard color={COLORS.primary} />
+    </GridItem>
+    <GridItem size={4}>
+      <ColorCard color={COLORS.secondary} />
+    </GridItem>
+    <GridItem size={4}>
+      <ColorCard color={COLORS.tertiary} />
+    </GridItem>
+    <GridItem size={4}>
+      <ColorCard color={COLORS.text} />
+    </GridItem>
+    <GridItem size={4}>
+      <ColorCard color={COLORS.white} />
+    </GridItem>
+    <GridItem size={4}>
+      <ColorCard color={COLORS.black} />
+    </GridItem>
+    <GridItem size={4}>
+      <ColorCard color={COLORS.error} />
+    </GridItem>
+    <GridItem size={4}>
+      <ColorCard color={COLORS.success} />
+    </GridItem>
+    <GridItem size={4}>
+      <ColorCard color={COLORS.info} />
     </GridItem>
   </Grid>
 </>;

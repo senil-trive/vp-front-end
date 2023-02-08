@@ -1,45 +1,51 @@
 import { DefaultTheme } from "styled-components";
 
 export const COLORS = {
-  primary: "#000000",
-  secondary: "#06D6A0",
-  tertiary: "#3BBBDE",
-  text: "#444444",
+  primary: "#006EF7",
+  secondary: "#3FC7B4",
+  tertiary: "#FE517E",
+  text: "#150F2F",
   white: "#fff",
-  black: "#000",
-  error: "#FA5400",
+  black: "#150F2F",
+  grey: "#EDEDED",
+  error: "#FF3333",
   success: "#06D6A0",
   info: "orange",
 };
 
 export const SHADOWS = {
+  sm: "0px 0px 10px rgba(0, 0, 0, 0.1)",
   cardDefault: "0px 4px 25px 0px rgba(0, 0, 0, 0.1)",
   cardHover: "0px 4px 25px 0px rgba(0, 0, 0, 0.2)",
 };
 
 export const FONT_SIZES = {
-  heading1: {
-    mobile: "44px",
-    desktop: "72px",
+  h1: {
+    mobile: "32px",
+    desktop: "48px",
   },
-  heading2: {
-    mobile: "2rem",
-    desktop: "2rem",
+  h2: {
+    mobile: "24px",
+    desktop: "40px",
   },
-  heading3: {
-    mobile: "1.5rem",
-    desktop: "1.5rem",
+  h3: {
+    mobile: "16px",
+    desktop: "32px",
   },
-  heading4: {
-    mobile: "1.25rem",
-    desktop: "1.25rem",
+  h4: {
+    mobile: "16px",
+    desktop: "24px",
   },
-  heading5: {
-    mobile: "1rem",
-    desktop: "1rem",
+  h5: {
+    mobile: "16px",
+    desktop: "24px",
   },
-  paragraph: {
-    mobile: "1rem",
+  h6: {
+    mobile: "16px",
+    desktop: "18px",
+  },
+  p: {
+    mobile: "16px",
     desktop: "18px",
   },
 };
