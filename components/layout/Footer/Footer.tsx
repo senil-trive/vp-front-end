@@ -35,7 +35,7 @@ export default function Footer() {
       <div className="footer-top">
         <Grid>
           <GridItem size={4}>
-            <Logo />
+            <Logo variant="light" />
             <P style={{ textAlign: "center" }}>We komen voor in:</P>
           </GridItem>
           <GridItem size={3}>
