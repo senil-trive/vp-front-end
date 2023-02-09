@@ -17,8 +17,8 @@ import Tag from "/components/buttons/Tag/Tag";
 import Button from "/components/buttons/Button";
 import { H3, H5, P } from "/components/typography";
 
-<Grid>
-  <Grid md={8}>
+<Grid container spacing={"32px"}>
+  <Grid item md={8}>
     <H5 variant="bold">8 Col</H5>
     <Card>
       <CardHeader>
@@ -30,9 +30,43 @@ import { H3, H5, P } from "/components/typography";
             alt="Brief voor alle kinderen"
           />
 
-          <Tag variant="dark" position="bl">
+          <Tag variant="dark" size="m" position="bl">
             Thema
           </Tag>
+        </>
+      </CardHeader>
+      <CardFooter>
+        <H3 variant="bold" className="mb-[12px]">
+          Brief voor alle kinderen
+        </H3>
+        <P className="mb-[56px]">
+          Lieve jij. Deze brief is speciaal voor jou: voor kinderen van wie de
+          ouders uit elkaar gaan of al zijn. Wist je dat 86.000 kinderen per
+          jaar horen dat hun ouders gaan scheiden?
+        </P>
+
+        <Button
+          variant="primary"
+          onClick={() =>
+            window.open("https://www.africau.edu/images/default/sample.pdf")
+          }
+        >
+          Download brief
+        </Button>
+      </CardFooter>
+    </Card>
+  </Grid>
+  <Grid item md={4}>
+    <H5 variant="bold">8 Col</H5>
+    <Card>
+      <CardHeader>
+        <>
+          {/* Image element of NextJS doesn't work with Styleguidist */}
+          <img
+            className="absolute h-full w-full top-0 left-0 z-0 object-cover"
+            src="https://picsum.photos/920/180"
+            alt="Brief voor alle kinderen"
+          />
         </>
       </CardHeader>
       <CardFooter>

@@ -12,7 +12,6 @@ const Wrapper = styled.div`
   position: relative;
 
   .inner {
-    /* border: solid; */
     height: 100%;
     display: flex;
     justify-content: center;
@@ -46,7 +45,7 @@ const Wrapper = styled.div`
 export default function Hero({ children }: Props) {
   return (
     <Wrapper>
-      <Grid container>
+      <Grid container style={{ height: "100%" }}>
         <Grid item xs={12}>
           <div className="inner">{children}</div>
         </Grid>

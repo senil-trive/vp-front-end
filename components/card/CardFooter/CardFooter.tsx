@@ -5,7 +5,9 @@ type Props = React.HtmlHTMLAttributes<HTMLDivElement> & {
   hasPadding?: boolean;
 };
 
-const StyledFooter = styled.footer``;
+const StyledFooter = styled.footer<{ hasPadding: boolean }>`
+  padding: 32px 24px;
+`;
 
 export default function CardFooter({
   hasPadding = true,
@@ -13,7 +15,7 @@ export default function CardFooter({
   ...rest
 }: Props) {
   return (
-    <StyledFooter className={hasPadding ? "py-[32px] px-[24px]" : ""} {...rest}>
+    <StyledFooter hasPadding={hasPadding} {...rest}>
       {children}
     </StyledFooter>
   );

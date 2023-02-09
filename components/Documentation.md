@@ -5,7 +5,7 @@ import { Box, Grid } from "/components/layout";
 import ColorCard from "/components/card/ColorCard/ColorCard";
 import { COLORS } from "/styles/theme";
 
-<Grid container>
+<Grid container spacing={"32px"}>
   <Grid item lg={2} xs={6}>
     <Box
       sx={{
@@ -153,41 +153,39 @@ import UserIcon from "/components/icons/UserIcon/UserIcon";
 import SearchIcon from "/components/icons/SearchIcon/SearchIcon";
 import CheckmarkIcon from "/components/icons/Checkmark/CheckmarkIcon";
 
-<>
-  <Grid container>
-    <Grid item md={12}>
-      <Logo />
-    </Grid>
-
-    <Grid md={1}>
-      <HeartIcon />
-    </Grid>
-    <Grid md={1}>
-      <ChevronUp />
-    </Grid>
-    <Grid md={1}>
-      <ChevronDown />
-    </Grid>
-    <Grid md={1}>
-      <ChevronUpFilled />
-    </Grid>
-    <Grid md={1}>
-      <ChevronDownFilled />
-    </Grid>
-    <Grid md={1}>
-      <ImportantCircle />
-    </Grid>
-    <Grid md={1}>
-      <UserIcon />
-    </Grid>
-    <Grid md={1}>
-      <SearchIcon />
-    </Grid>
-    <Grid md={1}>
-      <CheckmarkIcon />
-    </Grid>
+<Grid container>
+  <Grid item md={12}>
+    <Logo />
   </Grid>
-</>;
+
+  <Grid md={1}>
+    <HeartIcon />
+  </Grid>
+  <Grid md={1}>
+    <ChevronUp />
+  </Grid>
+  <Grid md={1}>
+    <ChevronDown />
+  </Grid>
+  <Grid md={1}>
+    <ChevronUpFilled />
+  </Grid>
+  <Grid md={1}>
+    <ChevronDownFilled />
+  </Grid>
+  <Grid md={1}>
+    <ImportantCircle />
+  </Grid>
+  <Grid md={1}>
+    <UserIcon />
+  </Grid>
+  <Grid md={1}>
+    <SearchIcon />
+  </Grid>
+  <Grid md={1}>
+    <CheckmarkIcon />
+  </Grid>
+</Grid>;
 ```
 
 ### Grid System
