@@ -4,7 +4,7 @@ import { IoMdPerson } from "react-icons/io";
 import { format } from "date-fns";
 
 import IconButton from "../../buttons/IconButton/IconButton";
-import { H3, P } from "../../typography/Typography";
+import { H3, P } from "../../typography";
 import Tag from "../../buttons/Tag/Tag";
 import HeartIcon from "../../icons/HeartIcon/HeartIcon";
 

@@ -12,6 +12,8 @@ const BaseP = styled.p`
   line-height: 140%;
   color: #000000;
 
+  margin: 12px 0;
+
   @media ${({ theme }) => theme.devices.tablet} {
     font-size: 18px;
     line-height: 160%;

@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Tag from "../components/buttons/Tag/Tag";
-import Grid from "../components/grid/Grid";
-import GridItem from "../components/grid/GridItem";
+import { Grid } from "../components/layout";
 import Header from "../components/layout/Header/Header";
 
 const tags = ["Alles", "Mijn family"];
@@ -22,11 +21,11 @@ export default function Home() {
 
       <main>
         <Grid className="mb-[32px]">
-          <GridItem size={12}>
+          <Grid item xs={12}>
             {tags.map((tag, index) => (
               <Tag key={index}>{tag}</Tag>
             ))}
-          </GridItem>
+          </Grid>
         </Grid>
       </main>
 

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { P } from "../../../typography/Typography";
+import { P } from "../../../typography";
 import { Category } from "../Header";
 
 type Props = {

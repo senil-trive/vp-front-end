@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import ChevronDown from "../../../icons/ChevronDown/ChevronDown";
 import ChevronUp from "../../../icons/ChevronUp/ChevronUp";
-import { P } from "../../../typography/Typography";
+import { P } from "../../../typography";
 import { MenuItem } from "../Header";
 import { menuCols } from "../Header.data";
 

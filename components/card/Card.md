@@ -9,17 +9,16 @@ The card component.
 Brief (Dutch for Letter) item that displays a summary of downloadable letter.
 
 ```js
-import Grid from "/components/grid/Grid";
-import GridItem from "/components/grid/GridItem";
+import { Grid } from "/components/layout";
 import Card from "/components/card/Card";
 import CardHeader from "/components/card/CardHeader/CardHeader";
 import CardFooter from "/components/card/CardFooter/CardFooter";
 import Tag from "/components/buttons/Tag/Tag";
 import Button from "/components/buttons/Button";
-import { H3, H5, P } from "/components/typography/Typography";
+import { H3, H5, P } from "/components/typography";
 
 <Grid>
-  <GridItem size={8}>
+  <Grid md={8}>
     <H5 variant="bold">8 Col</H5>
     <Card>
       <CardHeader>
@@ -56,7 +55,7 @@ import { H3, H5, P } from "/components/typography/Typography";
         </Button>
       </CardFooter>
     </Card>
-  </GridItem>
+  </Grid>
 </Grid>;
 ```
 

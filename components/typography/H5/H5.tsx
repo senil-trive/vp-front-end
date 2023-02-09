@@ -7,11 +7,11 @@ type Props = {
 };
 
 const BaseH5 = styled.h5`
-  font-family: "Open Sans";
   font-size: 20px;
   line-height: 110%;
   color: #000000;
   font-style: normal;
+  margin: 12px 0;
 `;
 
 const StyledH5Bold = styled(BaseH5)`

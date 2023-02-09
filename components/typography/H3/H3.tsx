@@ -11,6 +11,7 @@ const BaseH3 = styled.h3`
   line-height: 120%;
   color: #000000;
   font-style: normal;
+  margin: 12px 0;
 `;
 
 const StyledH3Bold = styled(BaseH3)`

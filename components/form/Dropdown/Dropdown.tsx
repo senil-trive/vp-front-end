@@ -4,7 +4,7 @@ import ChevronDownFilled from "../../icons/ChevronDownFilled/ChevronDownFilled";
 import ChevronUpFilled from "../../icons/ChevronUpFilled/ChevronUpFilled";
 import IconWrapper from "../../icons/IconWrapper/IconWrapper";
 import ImportantCircle from "../../icons/ImportantCircle/ImportantCircle";
-import { P } from "../../typography/Typography";
+import { P } from "../../typography";
 
 export type DropdownItem = {
   /** Name of the dropdown option. */

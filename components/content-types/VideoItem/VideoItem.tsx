@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { IoIosPlay } from "react-icons/io";
 
-import { H3, P } from "../../typography/Typography";
+import { H3, P } from "../../typography";
 import IconButton from "../../buttons/IconButton/IconButton";
 import Tag from "../../buttons/Tag/Tag";
 

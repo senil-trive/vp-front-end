@@ -3,7 +3,7 @@ import styled, { css } from "styled-components";
 import { InputStateType, InputType } from "../../../types/formTypes";
 import IconWrapper from "../../icons/IconWrapper/IconWrapper";
 import ImportantCircle from "../../icons/ImportantCircle/ImportantCircle";
-import { P } from "../../typography/Typography";
+import { P } from "../../typography";
 
 type Props = {
   /** Label of the input field. */

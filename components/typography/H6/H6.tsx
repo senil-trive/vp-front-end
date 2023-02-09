@@ -12,6 +12,7 @@ const BaseH6 = styled.h6`
   line-height: 100%;
   color: #000000;
   font-style: normal;
+  margin: 12px 0;
 `;
 
 const StyledH6Bold = styled(BaseH6)`

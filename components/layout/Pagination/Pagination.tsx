@@ -1,88 +1,6 @@
 import React, { useState } from "react";
-import styled, { css } from "styled-components";
-
-type Props = {
-  /** The total amount of items of the pagination */
-  total: number;
-
-  /** Wether to show a shortened variant of the pagination items */
-  truncated?: boolean;
-};
-
-const ellipsis = css<{ before: boolean }>`
-  content: "\2026";
-  font-size: 24px;
-  display: inline-block;
-
-  ${({ before }) => {
-    if (before) {
-      return "margin-right: 2.5px;";
-    } else {
-      return "margin-left: 2.5px;";
-    }
-  }}
-`;
-
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  button {
-    background-color: white;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-  }
-  > button {
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 160%;
-    color: #000000;
-  }
-
-  nav {
-    padding-left: 4px;
-    padding-right: 4px;
-
-    ol {
-      padding: 0;
-      display: flex;
-      justify-content: space-between;
-      list-style: none;
-
-      li {
-        /* display: none; */
-        button {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 6px 11px;
-          gap: 6px;
-
-          margin: 0 4px;
-
-          height: 30px;
-          min-width: 30px;
-
-          border-radius: 8px;
-          background: #e0e0e0;
-          color: #555555;
-
-          &.active {
-            color: white;
-            background: #555555;
-          }
-        }
-
-        &:first-child,
-        &.active,
-        &.active-sibling {
-        }
-      }
-    }
-  }
-`;
+import { PaginationWrapper } from "./Pagination.styled";
+import { PaginationProps } from "./Pagination.types";
 
 const getRange = (start: number, end: number) => {
   const length = end - start + 1;
@@ -155,7 +73,10 @@ const pagination = (
   return pages;
 };
 
-export default function Pagination({ truncated = false, total = 1 }: Props) {
+export default function Pagination({
+  truncated = false,
+  total = 1,
+}: PaginationProps) {
   const [currentPage, setCurrentPage] = useState(1);
 
   let pages: (number | string)[] = Array.from(
@@ -196,7 +117,7 @@ export default function Pagination({ truncated = false, total = 1 }: Props) {
   };
 
   return (
-    <Wrapper>
+    <PaginationWrapper>
       <button onClick={handlePrev}>Prev</button>
       <nav>
         <ol>
@@ -213,6 +134,6 @@ export default function Pagination({ truncated = false, total = 1 }: Props) {
         </ol>
       </nav>
       <button onClick={handleNext}>Next</button>
-    </Wrapper>
+    </PaginationWrapper>
   );
 }
