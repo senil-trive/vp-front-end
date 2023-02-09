@@ -18,14 +18,19 @@ const BaseTag = styled.span<Variant & Position>`
   background: ${({ variant, theme }) =>
     variant === "light" ? "transparent" : theme.colors.primary};
   border-radius: 8px;
-
   color: ${({ variant, theme }) =>
     variant === "light" ? theme.colors.primary : "white"};
-  border: 1px solid ${({ theme }) => theme.colors.primary};
-
+  border: 1px solid;
   font-weight: 300;
-
   line-height: 160%;
+  cursor: pointer;
+
+  &:hover {
+    background: ${({ variant, theme }) =>
+      variant === "light" ? "transparent" : theme.colors.tertiary};
+    color: ${({ variant, theme }) =>
+      variant === "light" ? theme.colors.tertiary : "white"};
+  }
 
   ${({ position }) => {
     switch (position) {

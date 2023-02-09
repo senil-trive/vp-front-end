@@ -10,17 +10,22 @@ const StyledPost = styled.article`
   background: #ffffff;
   border-radius: 8px;
   overflow: hidden;
+  width: 100%;
   height: 624px;
   border: 1px solid rgb(219, 219, 219);
+
+  > div {
+    height: 100%;
+    width: 100%;
+  }
 
   iframe,
   blockquote {
     max-width: 100% !important;
     min-width: 100% !important;
     width: 100% !important;
-    height: 624px !important;
     max-height: 624px !important;
-    height: 100% !important;
+    height: inherit !important;
     border: none !important;
   }
 
@@ -53,7 +58,6 @@ export default function InstagramPost({ embedCode }: Props) {
   return (
     <StyledPost>
       <div
-        className="w-full h-full"
         dangerouslySetInnerHTML={{
           __html: embedCode,
         }}

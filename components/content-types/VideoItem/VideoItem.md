@@ -6,11 +6,11 @@ Video item that displays self hosted image.
 
 **Video Item in Grid cols:**
 
-```js
-import Grid from "/components/layout";
+```jsx
+import { Grid } from "/components/layout";
 import { H5 } from "/components/typography";
 
-<Grid container>
+<Grid container spacing={"32px"}>
   <Grid item md={8}>
     <H5 variant="bold">8 Col</H5>
     <VideoItem

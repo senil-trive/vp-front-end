@@ -17,13 +17,15 @@ const StyledFigure = styled.figure`
   border-radius: 8px;
   overflow: hidden;
   position: relative;
-  min-height: 624px;
-  height: 100%;
+  max-height: 624px;
+  height: 624px;
+  margin: 0;
 
   video {
     height: 100%;
     width: 100%;
     object-fit: cover;
+    cursor: pointer;
   }
 
   figcaption {
@@ -54,6 +56,7 @@ const PlayIconWrapper = styled.div`
   top: calc(50% - 90px);
   left: calc(50% - 90px);
   transform: translate(calc(-50% + 90px), calc(-50% + 90px));
+  cursor: pointer;
 `;
 
 const placeholderUrl =
