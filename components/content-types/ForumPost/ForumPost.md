@@ -10,7 +10,7 @@ Forum post that displays a summary of the forum post.
 import { Grid } from "/components/layout";
 import { H5 } from "/components/typography";
 
-<Grid>
+<Grid container spacing="32px">
   <Grid item md={8}>
     <H5 variant="bold">8 Col</H5>
     <ForumPost

@@ -8,8 +8,9 @@
 
 ```js
 import CardHeader from "/components/card/CardHeader/CardHeader";
+import { COLORS } from "/styles/theme";
 
-<CardHeader style={{ border: "1px solid" }}>
+<CardHeader style={{ border: "1px solid " + COLORS.primary }}>
   <Tag position="tl" size="m" onClick={() => alert("Optional click")}>
     Position tl
   </Tag>
