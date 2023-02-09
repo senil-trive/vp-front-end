@@ -202,6 +202,8 @@ import { COLORS } from "/styles/theme";
       sx={{
         border: "1px solid",
         borderRadius: "3px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
         backgroundColor: "white",
         color: COLORS.primary,
         textAlign: "center",
@@ -215,6 +217,8 @@ import { COLORS } from "/styles/theme";
       sx={{
         border: "1px solid",
         borderRadius: "3px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
         backgroundColor: "white",
         color: COLORS.primary,
         textAlign: "center",
@@ -228,6 +232,8 @@ import { COLORS } from "/styles/theme";
       sx={{
         border: "1px solid",
         borderRadius: "3px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
         backgroundColor: "white",
         color: COLORS.primary,
         textAlign: "center",
@@ -241,6 +247,8 @@ import { COLORS } from "/styles/theme";
       sx={{
         border: "1px solid",
         borderRadius: "3px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
         backgroundColor: "white",
         color: COLORS.primary,
         textAlign: "center",
@@ -254,6 +262,8 @@ import { COLORS } from "/styles/theme";
       sx={{
         border: "1px solid",
         borderRadius: "3px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
         backgroundColor: "white",
         color: COLORS.primary,
         textAlign: "center",
@@ -267,6 +277,8 @@ import { COLORS } from "/styles/theme";
       sx={{
         border: "1px solid",
         borderRadius: "3px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
         backgroundColor: "white",
         color: COLORS.primary,
         textAlign: "center",
@@ -280,6 +292,8 @@ import { COLORS } from "/styles/theme";
       sx={{
         border: "1px solid",
         borderRadius: "3px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
         backgroundColor: "white",
         color: COLORS.primary,
         textAlign: "center",
@@ -293,6 +307,8 @@ import { COLORS } from "/styles/theme";
       sx={{
         border: "1px solid",
         borderRadius: "3px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
         backgroundColor: "white",
         color: COLORS.primary,
         textAlign: "center",
@@ -306,6 +322,8 @@ import { COLORS } from "/styles/theme";
       sx={{
         border: "1px solid",
         borderRadius: "3px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
         backgroundColor: "white",
         color: COLORS.primary,
         textAlign: "center",
@@ -319,6 +337,8 @@ import { COLORS } from "/styles/theme";
       sx={{
         border: "1px solid",
         borderRadius: "3px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
         backgroundColor: "white",
         color: COLORS.primary,
         textAlign: "center",
@@ -332,6 +352,8 @@ import { COLORS } from "/styles/theme";
       sx={{
         border: "1px solid",
         borderRadius: "3px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
         backgroundColor: "white",
         color: COLORS.primary,
         textAlign: "center",
@@ -345,6 +367,8 @@ import { COLORS } from "/styles/theme";
       sx={{
         border: "1px solid",
         borderRadius: "3px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
         backgroundColor: "white",
         color: COLORS.primary,
         textAlign: "center",
@@ -358,6 +382,8 @@ import { COLORS } from "/styles/theme";
       sx={{
         border: "1px solid",
         borderRadius: "3px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
         backgroundColor: "white",
         color: COLORS.primary,
         textAlign: "center",
@@ -371,6 +397,8 @@ import { COLORS } from "/styles/theme";
       sx={{
         border: "1px solid",
         borderRadius: "3px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
         backgroundColor: "white",
         color: COLORS.primary,
         textAlign: "center",
@@ -384,6 +412,8 @@ import { COLORS } from "/styles/theme";
       sx={{
         border: "1px solid",
         borderRadius: "3px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
         backgroundColor: "white",
         color: COLORS.primary,
         textAlign: "center",
@@ -397,6 +427,8 @@ import { COLORS } from "/styles/theme";
       sx={{
         border: "1px solid",
         borderRadius: "3px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
         backgroundColor: "white",
         color: COLORS.primary,
         textAlign: "center",
@@ -410,6 +442,8 @@ import { COLORS } from "/styles/theme";
       sx={{
         border: "1px solid",
         borderRadius: "3px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
         backgroundColor: "white",
         color: COLORS.primary,
         textAlign: "center",
@@ -423,6 +457,8 @@ import { COLORS } from "/styles/theme";
       sx={{
         border: "1px solid",
         borderRadius: "3px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
         backgroundColor: "white",
         color: COLORS.primary,
         textAlign: "center",
@@ -436,6 +472,8 @@ import { COLORS } from "/styles/theme";
       sx={{
         border: "1px solid",
         borderRadius: "3px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
         backgroundColor: "white",
         color: COLORS.primary,
         textAlign: "center",
@@ -449,6 +487,8 @@ import { COLORS } from "/styles/theme";
       sx={{
         border: "1px solid",
         borderRadius: "3px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
         backgroundColor: "white",
         color: COLORS.primary,
         textAlign: "center",
@@ -462,6 +502,8 @@ import { COLORS } from "/styles/theme";
       sx={{
         border: "1px solid",
         borderRadius: "3px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
         backgroundColor: "white",
         color: COLORS.primary,
         textAlign: "center",
@@ -475,6 +517,8 @@ import { COLORS } from "/styles/theme";
       sx={{
         border: "1px solid",
         borderRadius: "3px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
         backgroundColor: "white",
         color: COLORS.primary,
         textAlign: "center",
@@ -488,6 +532,8 @@ import { COLORS } from "/styles/theme";
       sx={{
         border: "1px solid",
         borderRadius: "3px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
         backgroundColor: "white",
         color: COLORS.primary,
         textAlign: "center",
@@ -501,6 +547,8 @@ import { COLORS } from "/styles/theme";
       sx={{
         border: "1px solid",
         borderRadius: "3px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
         backgroundColor: "white",
         color: COLORS.primary,
         textAlign: "center",
@@ -514,6 +562,8 @@ import { COLORS } from "/styles/theme";
       sx={{
         border: "1px solid",
         borderRadius: "3px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
         backgroundColor: "white",
         color: COLORS.primary,
         textAlign: "center",
@@ -527,6 +577,8 @@ import { COLORS } from "/styles/theme";
       sx={{
         border: "1px solid",
         borderRadius: "3px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
         backgroundColor: "white",
         color: COLORS.primary,
         textAlign: "center",
@@ -540,6 +592,8 @@ import { COLORS } from "/styles/theme";
       sx={{
         border: "1px solid",
         borderRadius: "3px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
         backgroundColor: "white",
         color: COLORS.primary,
         textAlign: "center",
@@ -553,6 +607,8 @@ import { COLORS } from "/styles/theme";
       sx={{
         border: "1px solid",
         borderRadius: "3px",
+        paddingTop: "50px",
+        paddingBottom: "50px",
         backgroundColor: "white",
         color: COLORS.primary,
         textAlign: "center",

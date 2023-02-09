@@ -1,29 +1,22 @@
-**Button Primary:**
+```jsx
+const style = {
+  maxWidth: "400px",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  gap: "13px",
+};
 
-```js
-<Button onClick={() => alert("Pizza: 🍕")}>Click me</Button>
-```
-
-**Button Secondary:**
-
-```js
-<Button variant="secondary" onClick={() => alert("Pizza: 🍕")}>
-  Click me
-</Button>
-```
-
-**Button tertiary:**
-
-```js
-<Button variant="tertiary" onClick={() => alert("Pizza: 🍕")}>
-  Click me
-</Button>
-```
-
-**Button link:**
-
-```js
-<Button variant="link" onClick={() => alert("Pizza: 🍕")}>
-  Click me
-</Button>
+<div style={style}>
+  <Button onClick={() => alert("Pizza: 🍕")}>Button Primary</Button>
+  <Button variant="secondary" onClick={() => alert("Pizza: 🍕")}>
+    Button Secondary
+  </Button>
+  <Button variant="tertiary" onClick={() => alert("Pizza: 🍕")}>
+    Button tertiary
+  </Button>
+  <Button variant="link" onClick={() => alert("Pizza: 🍕")}>
+    Button link
+  </Button>
+</div>;
 ```
