@@ -32,7 +32,7 @@ export default function Footer() {
   return (
     <StyledFooter>
       <div className="footer-top">
-        <Grid>
+        <Grid container>
           <Grid item md={4}>
             <Logo variant="light" />
             <P style={{ textAlign: "center" }}>We komen voor in:</P>
@@ -77,7 +77,7 @@ export default function Footer() {
         </Grid>
       </div>
       <div className="footer-bottom">
-        <Grid>
+        <Grid container>
           <Grid item md={4} />
           <Grid item md={3}>
             <a href="#privacy">Privacyverklaring</a>

@@ -1,6 +1,6 @@
 ### Input
 
-```jsx harmony
+```jsx
 import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 <Input type="text" />;
@@ -8,7 +8,7 @@ import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 ### Input with label
 
-```jsx harmony
+```jsx
 import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 <Input label="Label" type="text" />;
@@ -16,7 +16,7 @@ import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 ### Input with helper-text
 
-```jsx harmony
+```jsx
 import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 <Input type="text" helperText="Text to help " />;
@@ -24,7 +24,7 @@ import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 ### Input with label and helper text
 
-```jsx harmony
+```jsx
 import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 <Input label="Label" type="text" helperText="Text to help " />;
@@ -32,7 +32,7 @@ import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 ### Input with helper text & Icon
 
-```jsx harmony
+```jsx
 import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 <>
@@ -47,7 +47,7 @@ import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 ### Input with helper text, icon and placeholder
 
-```jsx harmony
+```jsx
 import SearchIcon from "/components/icons/SearchIcon/SearchIcon";
 
 <>
@@ -63,7 +63,7 @@ import SearchIcon from "/components/icons/SearchIcon/SearchIcon";
 
 ### Input disabled
 
-```jsx harmony
+```jsx
 import SearchIcon from "/components/icons/SearchIcon/SearchIcon";
 
 <>
@@ -80,7 +80,7 @@ import SearchIcon from "/components/icons/SearchIcon/SearchIcon";
 
 ### Input active
 
-```jsx harmony
+```jsx
 import SearchIcon from "/components/icons/SearchIcon/SearchIcon";
 
 <>
@@ -97,7 +97,7 @@ import SearchIcon from "/components/icons/SearchIcon/SearchIcon";
 
 ### Input with error
 
-```jsx harmony
+```jsx
 import SearchIcon from "/components/icons/SearchIcon/SearchIcon";
 
 <>

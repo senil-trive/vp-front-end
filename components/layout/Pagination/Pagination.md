@@ -1,11 +1,11 @@
 ### Pagination
 
-```jsx harmony
+```jsx
 <Pagination total={10} />
 ```
 
 ### Pagination truncated
 
-```jsx harmony
+```jsx
 <Pagination total={10} truncated />
 ```

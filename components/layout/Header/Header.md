@@ -1,5 +1,5 @@
 ### Header
 
-```jsx harmony
+```jsx
 <Header />
 ```

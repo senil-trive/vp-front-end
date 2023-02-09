@@ -1,5 +1,5 @@
 ### Footer
 
-```jsx harmony
+```jsx
 <Footer />
 ```

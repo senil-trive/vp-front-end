@@ -1,6 +1,6 @@
 ### TextArea
 
-```jsx harmony
+```jsx
 import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 <TextArea />;
@@ -8,7 +8,7 @@ import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 ### TextArea with label
 
-```jsx harmony
+```jsx
 import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 <TextArea label="Label" />;
@@ -16,7 +16,7 @@ import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 ### TextArea with helper-text
 
-```jsx harmony
+```jsx
 import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 <TextArea helperText="Text to help " />;
@@ -24,7 +24,7 @@ import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 ### TextArea with label and helper text
 
-```jsx harmony
+```jsx
 import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 <TextArea label="Label" helperText="Text to help " />;
@@ -32,7 +32,7 @@ import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 ### TextArea with helper text and placeholder
 
-```jsx harmony
+```jsx
 <>
   <TextArea
     label="Label"
@@ -44,7 +44,7 @@ import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 ### TextArea disabled
 
-```jsx harmony
+```jsx
 <>
   <TextArea
     label="Label"
@@ -57,7 +57,7 @@ import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 ### TextArea active
 
-```jsx harmony
+```jsx
 <>
   <TextArea
     label="Label"
@@ -70,7 +70,7 @@ import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 ### TextArea with error
 
-```jsx harmony
+```jsx
 <>
   <TextArea
     label="Label"

@@ -1,11 +1,11 @@
 ### Checkbox
 
-```jsx harmony
+```jsx
 <Checkbox label="Checkbox" />
 ```
 
 ### Checkbox checked
 
-```jsx harmony
+```jsx
 <Checkbox label="Checkbox" checked />
 ```

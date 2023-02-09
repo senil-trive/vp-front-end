@@ -114,6 +114,11 @@ module.exports = {
     },
   },
   styles: {
+    StyleGuide: {
+      content: {
+        maxWidth: 1440,
+      },
+    },
     Playground: {
       preview: {
         position: "relative",

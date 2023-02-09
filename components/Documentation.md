@@ -1,6 +1,6 @@
 ### Colors
 
-```jsx harmony
+```jsx
 import { Box, Grid } from "/components/layout";
 import ColorCard from "/components/card/ColorCard/ColorCard";
 import { COLORS } from "/styles/theme";
@@ -139,7 +139,7 @@ import { COLORS } from "/styles/theme";
 
 ### Icons & Logos
 
-```jsx harmony
+```jsx
 import { Grid } from "/components/layout";
 import Logo from "/components/icons/Logo/Logo";
 
@@ -192,7 +192,7 @@ import CheckmarkIcon from "/components/icons/Checkmark/CheckmarkIcon";
 
 ### Grid System
 
-```jsx harmony
+```jsx
 import { Box, Grid } from "/components/layout";
 import { COLORS } from "/styles/theme";
 
@@ -633,7 +633,7 @@ import { COLORS } from "/styles/theme";
 
 ### Typography
 
-```jsx harmony
+```jsx
 import { H1, H2, H3, H4, H5, H6, P } from "/components/typography";
 
 <>

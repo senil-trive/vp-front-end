@@ -1,6 +1,6 @@
 ### Display Dropdown
 
-```jsx harmony
+```jsx
 <DisplayDropdown
   options={[
     { name: "Basisschool", value: "Basisschool" },

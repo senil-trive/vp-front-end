@@ -1,6 +1,6 @@
 ### Dropdown
 
-```jsx harmony
+```jsx
 <Dropdown
   options={[
     { name: "Option 1", value: 1 },
@@ -13,7 +13,7 @@
 
 ### Dropdown with label
 
-```jsx harmony
+```jsx
 import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 <Dropdown
@@ -29,7 +29,7 @@ import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 ### Dropdown with helper-text
 
-```jsx harmony
+```jsx
 import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 <Dropdown
@@ -45,7 +45,7 @@ import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 ### Dropdown with label and helper text
 
-```jsx harmony
+```jsx
 import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 <Dropdown
@@ -62,7 +62,7 @@ import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 ### Dropdown with helper text & Icon
 
-```jsx harmony
+```jsx
 import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 <>
@@ -81,7 +81,7 @@ import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 ### Dropdown with helper text, icon and placeholder
 
-```jsx harmony
+```jsx
 <>
   <Dropdown
     options={[
@@ -99,7 +99,7 @@ import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 ### Dropdown disabled
 
-```jsx harmony
+```jsx
 <>
   <Dropdown
     options={[
@@ -118,7 +118,7 @@ import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 ### Dropdown active
 
-```jsx harmony
+```jsx
 <>
   <Dropdown
     options={[
@@ -137,7 +137,7 @@ import UserIcon from "/components/icons/UserIcon/UserIcon";
 
 ### Dropdown with error
 
-```jsx harmony
+```jsx
 <>
   <Dropdown
     options={[
