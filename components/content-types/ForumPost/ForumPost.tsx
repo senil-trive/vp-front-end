@@ -24,6 +24,8 @@ const StyledForumPost = styled.article`
   border-radius: 8px;
   padding: 24px;
   overflow: hidden;
+  position: relative;
+  z-index: 1;
 
   header {
     display: flex;

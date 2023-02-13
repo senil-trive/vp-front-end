@@ -53,8 +53,10 @@ export default function Header() {
   return (
     <StyledHeader>
       <div className="inner">
-        <Logo className="mr-[52px]" />
-        <HeaderNav selected={selected} onChange={(x) => toggleMenu(x)} />
+        <div>
+          <Logo className="mr-[52px]" />
+          <HeaderNav selected={selected} onChange={(x) => toggleMenu(x)} />
+        </div>
         <div>
           <Input
             iconLeft={<SearchIcon />}

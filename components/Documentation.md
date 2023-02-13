@@ -632,7 +632,7 @@ import { COLORS } from "/styles/theme";
 ### Typography
 
 ```jsx
-import { H1, H2, H3, H4, H5, H6, P } from "/components/typography";
+import { H1, H2, H3, H4, H5, H6, P, ColorSpan } from "/components/typography";
 
 <>
   <H1 variant="bold">Heading 1 - Bold</H1>
@@ -679,6 +679,24 @@ import { H1, H2, H3, H4, H5, H6, P } from "/components/typography";
   </P>
   <P variant="helper">
     Helper text: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  </P>
+  <br />
+  <br />
+  <P variant="bold">
+    Paragraph with primary color span: Lorem ipsum dolor{" "}
+    <ColorSpan variant="primary">sit amet</ColorSpan>.
+  </P>
+  <P variant="regular">
+    Paragraph with secondary color span: Lorem ipsum dolor{" "}
+    <ColorSpan variant="secondary">sit amet</ColorSpan>.
+  </P>
+  <P variant="light">
+    Paragraph with tertiary color span: Lorem ipsum dolor{" "}
+    <ColorSpan variant="tertiary">sit amet</ColorSpan>.
+  </P>
+  <P variant="italic">
+    Paragraph with info color span: Lorem ipsum dolor{" "}
+    <ColorSpan variant="info">sit amet</ColorSpan>.
   </P>
 </>;
 ```
