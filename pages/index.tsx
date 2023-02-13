@@ -1,8 +1,13 @@
 import Head from "next/head";
+import Tag from "../components/buttons/Tag/Tag";
+import { Grid } from "../components/layout";
+import Header from "../components/layout/Header/Header";
+
+const tags = ["Alles", "Mijn family"];
 
 export default function Home() {
   return (
-    <div className="container">
+    <div>
       <Head>
         <title>Villa Pinedo - Voor kinderen met gescheiden ouders</title>
         <meta
@@ -12,8 +17,16 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <Header />
+
       <main>
-        <h1 className="text-3xl ">Coming soon</h1>
+        <Grid className="mb-[32px]">
+          <Grid item xs={12}>
+            {tags.map((tag, index) => (
+              <Tag key={index}>{tag}</Tag>
+            ))}
+          </Grid>
+        </Grid>
       </main>
 
       <footer className="bg-black">

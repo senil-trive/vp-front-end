@@ -9,34 +9,37 @@ declare module "styled-components" {
       tertiary: string;
       text: string;
       white: string;
+      grey: string;
       black: string;
       error: string;
       success: string;
       info: string;
     };
-    shadows: any;
+    shadows: {
+      sm: string;
+    };
     fontSizes: {
-      heading1: {
+      h1: {
         mobile: string;
         desktop: string;
       };
-      heading2: {
+      h2: {
         mobile: string;
         desktop: string;
       };
-      heading3: {
+      h3: {
         mobile: string;
         desktop: string;
       };
-      heading4: {
+      h4: {
         mobile: string;
         desktop: string;
       };
-      heading5: {
+      h5: {
         mobile: string;
         desktop: string;
       };
-      paragraph: {
+      p: {
         mobile: string;
         desktop: string;
       };

@@ -7,13 +7,14 @@ type Props = {
 };
 
 const BaseH1 = styled.h1`
-  font-family: "Open Sans";
   font-size: 32px;
   line-height: 120%;
   color: #000000;
   font-style: normal;
+  margin: 12px 0;
 
   @media ${({ theme }) => theme.devices.tablet} {
+    margin: 24px 0;
     font-size: 48px;
     line-height: 140%;
   }

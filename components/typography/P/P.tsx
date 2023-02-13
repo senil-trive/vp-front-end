@@ -1,17 +1,18 @@
 import React, { ReactNode } from "react";
 import styled from "styled-components";
 
-type Props = {
+type Props = React.HTMLAttributes<HTMLParagraphElement> & {
   variant?: "bold" | "regular" | "italic" | "light" | "helper";
   children: ReactNode;
 };
 
 const BaseP = styled.p`
-  font-family: "Open Sans";
   font-style: normal;
   font-size: 16px;
   line-height: 140%;
   color: #000000;
+
+  margin: 12px 0;
 
   @media ${({ theme }) => theme.devices.tablet} {
     font-size: 18px;
@@ -39,20 +40,20 @@ const StyledHelperText = styled(BaseP)`
   color: #000000;
 `;
 
-export default function P({ variant = "regular", children }: Props) {
+export default function P({ variant = "regular", children, ...rest }: Props) {
   switch (variant) {
     case "bold":
-      return <StyledPBold>{children}</StyledPBold>;
+      return <StyledPBold {...rest}>{children}</StyledPBold>;
     case "italic":
-      return <StyledPItalic>{children}</StyledPItalic>;
+      return <StyledPItalic {...rest}>{children}</StyledPItalic>;
     case "regular":
-      return <StyledP>{children}</StyledP>;
+      return <StyledP {...rest}>{children}</StyledP>;
     case "light":
-      return <StyledPLight>{children}</StyledPLight>;
+      return <StyledPLight {...rest}>{children}</StyledPLight>;
     case "helper":
-      return <StyledHelperText>{children}</StyledHelperText>;
+      return <StyledHelperText {...rest}>{children}</StyledHelperText>;
 
     default:
-      return <StyledP>{children}</StyledP>;
+      return <StyledP {...rest}>{children}</StyledP>;
   }
 }

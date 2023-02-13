@@ -1,17 +1,17 @@
 import React, { ReactNode } from "react";
 import styled from "styled-components";
 
-type Props = {
+type Props = React.HTMLAttributes<HTMLHeadingElement> & {
   variant?: "bold" | "regular" | "light";
   children: ReactNode;
 };
 
 const BaseH3 = styled.h3`
-  font-family: "Open Sans";
   font-size: 32px;
   line-height: 120%;
   color: #000000;
   font-style: normal;
+  margin: 12px 0;
 `;
 
 const StyledH3Bold = styled(BaseH3)`

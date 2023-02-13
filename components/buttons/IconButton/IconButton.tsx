@@ -5,6 +5,8 @@ import styled from "styled-components";
 type Props = {
   iconSize?: "s" | "m " | "l" | number;
   iconColor?: string;
+  wrapperColor?: string;
+  wrapperSize?: number;
   Icon: IconType;
   onClick?: () => void;
 };
@@ -23,11 +25,21 @@ export default function IconButton({
   Icon,
   iconColor = "black",
   iconSize = 32,
+  wrapperSize = 90,
+  wrapperColor = "white",
   onClick,
   ...rest
 }: Props) {
   return (
-    <IconWrapper onClick={onClick} {...rest}>
+    <IconWrapper
+      style={{
+        height: wrapperSize,
+        width: wrapperSize,
+        backgroundColor: wrapperColor,
+      }}
+      onClick={onClick}
+      {...rest}
+    >
       <Icon color={iconColor} size={iconSize} />
     </IconWrapper>
   );

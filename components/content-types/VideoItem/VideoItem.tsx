@@ -2,8 +2,9 @@ import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { IoIosPlay } from "react-icons/io";
 
-import { H3, P } from "../../typography/Typography";
+import { H3, P } from "../../typography";
 import IconButton from "../../buttons/IconButton/IconButton";
+import Tag from "../../buttons/Tag/Tag";
 
 type Props = {
   title: string;
@@ -16,13 +17,15 @@ const StyledFigure = styled.figure`
   border-radius: 8px;
   overflow: hidden;
   position: relative;
-  min-height: 624px;
-  height: 100%;
+  max-height: 624px;
+  height: 624px;
+  margin: 0;
 
   video {
     height: 100%;
     width: 100%;
     object-fit: cover;
+    cursor: pointer;
   }
 
   figcaption {
@@ -53,6 +56,7 @@ const PlayIconWrapper = styled.div`
   top: calc(50% - 90px);
   left: calc(50% - 90px);
   transform: translate(calc(-50% + 90px), calc(-50% + 90px));
+  cursor: pointer;
 `;
 
 const placeholderUrl =
@@ -79,12 +83,25 @@ export default function VideoItem({
     }
   };
 
+  const stopVideo = () => {
+    const player = videoRef.current;
+    if (isPlaying && player) {
+      player.pause();
+      setIsPlaying(() => false);
+    }
+  };
+
   return (
     <StyledFigure>
-      <video src={src} ref={videoRef} onClick={handlePlayPause}></video>
+      <video
+        src={src}
+        ref={videoRef}
+        controls={isPlaying}
+        onClick={stopVideo}
+      ></video>
       {!isPlaying && (
         <>
-          <PlayIconWrapper>
+          <PlayIconWrapper onClick={handlePlayPause}>
             <IconButton Icon={IoIosPlay} />
           </PlayIconWrapper>
           <figcaption>
