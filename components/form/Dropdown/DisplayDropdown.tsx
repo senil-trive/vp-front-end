@@ -138,7 +138,7 @@ export default function DisplayDropdown({
   placeholder = "Select",
   ...rest
 }: Props) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState<DropdownItem | null>(null);
   const inputRef = useRef<HTMLSelectElement>(null);
 

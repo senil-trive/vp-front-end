@@ -5,6 +5,7 @@ import TagList from "../components/buttons/TagList/TagList";
 import DisplayDropdown from "../components/form/Dropdown/DisplayDropdown";
 import { Footer, Grid, Hero } from "../components/layout";
 import Header from "../components/layout/Header/Header";
+import { HomeGrid } from "../components/layout/HomeGrid/HomeGrid";
 import { H1, P } from "../components/typography";
 
 const tags = [
@@ -94,6 +95,8 @@ export default function Home() {
             </Grid>
           </Grid>
         </Container>
+
+        <HomeGrid />
       </main>
 
       <Footer />
