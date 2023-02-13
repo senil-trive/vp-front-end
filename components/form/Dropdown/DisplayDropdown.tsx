@@ -20,12 +20,13 @@ export type Props = {
 };
 
 const Wrapper = styled.div`
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   cursor: pointer;
 
   select {
-    display: none;
+    position: absolute;
+    left: -999999px;
   }
 
   .inner {
@@ -61,6 +62,7 @@ const Wrapper = styled.div`
       position: absolute;
       z-index: 999999;
       left: 0;
+      top: 100%;
       border-radius: 8px;
       display: flex;
       flex-direction: column;
@@ -136,11 +138,13 @@ export default function DisplayDropdown({
   placeholder = "Select",
   ...rest
 }: Props) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const [selected, setSelected] = useState<DropdownItem | null>(null);
   const inputRef = useRef<HTMLSelectElement>(null);
 
   const handleInputFocus = () => {
+    console.log(inputRef.current);
+
     inputRef?.current?.focus();
   };
 
@@ -155,7 +159,8 @@ export default function DisplayDropdown({
         <select
           ref={inputRef}
           placeholder={placeholder}
-          onBlur={() => setIsOpen(false)}
+          onFocus={() => setIsOpen(() => true)}
+          onBlur={() => setIsOpen(() => false)}
           {...rest}
         >
           {options.map((option) => (
@@ -164,10 +169,7 @@ export default function DisplayDropdown({
             </option>
           ))}
         </select>
-        <div
-          className={`selectBox ${isOpen ? "open" : ""}`}
-          onClick={() => setIsOpen((state) => !state)}
-        >
+        <div className={`selectBox ${isOpen ? "open" : ""}`}>
           <span>{selected?.name ?? placeholder}</span>
           {!isOpen ? <ChevronDown /> : <ChevronUp />}
         </div>

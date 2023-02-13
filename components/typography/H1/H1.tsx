@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import styled from "styled-components";
 
-type Props = {
+type Props = React.HTMLAttributes<HTMLHeadingElement> & {
   variant?: "bold" | "regular" | "light";
   children: ReactNode;
 };
@@ -30,16 +30,16 @@ const StyledH1Light = styled(BaseH1)`
   font-weight: 300;
 `;
 
-export default function H1({ variant = "regular", children }: Props) {
+export default function H1({ variant = "regular", children, ...rest }: Props) {
   switch (variant) {
     case "bold":
-      return <StyledH1Bold>{children}</StyledH1Bold>;
+      return <StyledH1Bold {...rest}>{children}</StyledH1Bold>;
     case "regular":
-      return <StyledH1>{children}</StyledH1>;
+      return <StyledH1 {...rest}>{children}</StyledH1>;
     case "light":
-      return <StyledH1Light>{children}</StyledH1Light>;
+      return <StyledH1Light {...rest}>{children}</StyledH1Light>;
 
     default:
-      return <StyledH1>{children}</StyledH1>;
+      return <StyledH1 {...rest}>{children}</StyledH1>;
   }
 }

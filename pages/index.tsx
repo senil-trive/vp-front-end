@@ -1,9 +1,50 @@
+import { Container } from "@mui/material";
 import Head from "next/head";
 import Tag from "../components/buttons/Tag/Tag";
-import { Grid } from "../components/layout";
+import TagList from "../components/buttons/TagList/TagList";
+import DisplayDropdown from "../components/form/Dropdown/DisplayDropdown";
+import { Footer, Grid, Hero } from "../components/layout";
 import Header from "../components/layout/Header/Header";
+import { H1, P } from "../components/typography";
 
-const tags = ["Alles", "Mijn family"];
+const tags = [
+  "Alles",
+  "Mijn family",
+  "Alles",
+  "Mijn family",
+  "Alles",
+  "Mijn family",
+  "Alles",
+  "Mijn family",
+  "Alles",
+  "Mijn family",
+  "Alles",
+  "Mijn family",
+  "Alles",
+  "Mijn family",
+  "Alles",
+  "Mijn family",
+  "Alles",
+  "Mijn family",
+  "Alles",
+  "Mijn family",
+  "Alles",
+  "Mijn family",
+  "Alles",
+  "Mijn family",
+  "Alles",
+  "Mijn family",
+  "Alles",
+  "Mijn family",
+  "Alles",
+  "Mijn family",
+  "Alles",
+  "Mijn family",
+  "Alles",
+  "Mijn family",
+  "Alles",
+  "Mijn family",
+];
 
 export default function Home() {
   return (
@@ -19,26 +60,43 @@ export default function Home() {
 
       <Header />
 
-      <main>
-        <Grid className="mb-[32px]">
-          <Grid item xs={12}>
-            {tags.map((tag, index) => (
-              <Tag key={index}>{tag}</Tag>
-            ))}
+      <Hero>
+        <Container>
+          <Grid container>
+            <Grid item xs={0} md={2} lg={3} />
+            <Grid item xs={12} md={8} lg={6}>
+              <H1 style={{ textAlign: "center", padding: "0 24px" }}>
+                Ik zit op de{" "}
+                <DisplayDropdown
+                  options={[{ name: "Basisschool", value: "basisschool" }]}
+                />
+                <br />
+                daarnaast kan je mij vinden op de{" "}
+                <DisplayDropdown
+                  options={[{ name: "Manege", value: "manege" }]}
+                />
+              </H1>
+
+              <P variant="light">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </P>
+            </Grid>
+            <Grid item xs={0} md={2} lg={3} />
           </Grid>
-        </Grid>
+        </Container>
+      </Hero>
+      <main>
+        <Container>
+          <Grid container style={{ marginBottom: "32px" }}>
+            <Grid item xs={12}>
+              <TagList tags={tags} />
+            </Grid>
+          </Grid>
+        </Container>
       </main>
 
-      <footer className="bg-black">
-        <a
-          href="https://trivetechnology.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-white"
-        >
-          Powered by Trive
-        </a>
-      </footer>
+      <Footer />
     </div>
   );
 }

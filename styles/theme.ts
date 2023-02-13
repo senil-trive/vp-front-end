@@ -1,16 +1,16 @@
 import { DefaultTheme } from "styled-components";
 
 export const COLORS = {
-  primary: "#006EF7",
-  secondary: "#3FC7B4",
-  tertiary: "#FE517E",
-  text: "#150F2F",
-  white: "#fff",
-  black: "#150F2F",
-  grey: "#EDEDED",
-  error: "#FF3333",
-  success: "#06D6A0",
-  info: "orange",
+  primary: "#006EF7", // Blue
+  secondary: "#3FC7B4", // Green
+  tertiary: "#FE517E", // Pink
+  text: "#150F2F", // Black
+  white: "#fff", // White
+  black: "#150F2F", // Black
+  grey: "#EDEDED", // Grey
+  error: "#FF3333", // Error red
+  success: "#06D6A0", // Success
+  info: "#FF971D", // Orange
 };
 
 export const SHADOWS = {
