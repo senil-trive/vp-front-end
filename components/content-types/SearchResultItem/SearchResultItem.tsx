@@ -98,7 +98,7 @@ export default function SearchResultItem({
       <ul>
         {list.map((item) => (
           <li key={item.link}>
-            <Link href={item.link}>{item.name}</Link>
+            <a href={item.link}>{item.name}</a>
           </li>
         ))}
       </ul>
