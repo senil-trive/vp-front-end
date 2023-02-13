@@ -7,45 +7,7 @@ import { Footer, Grid, Hero } from "../components/layout";
 import Header from "../components/layout/Header/Header";
 import { HomeGrid } from "../components/layout/HomeGrid/HomeGrid";
 import { H1, P } from "../components/typography";
-
-const tags = [
-  "Alles",
-  "Mijn family",
-  "Alles",
-  "Mijn family",
-  "Alles",
-  "Mijn family",
-  "Alles",
-  "Mijn family",
-  "Alles",
-  "Mijn family",
-  "Alles",
-  "Mijn family",
-  "Alles",
-  "Mijn family",
-  "Alles",
-  "Mijn family",
-  "Alles",
-  "Mijn family",
-  "Alles",
-  "Mijn family",
-  "Alles",
-  "Mijn family",
-  "Alles",
-  "Mijn family",
-  "Alles",
-  "Mijn family",
-  "Alles",
-  "Mijn family",
-  "Alles",
-  "Mijn family",
-  "Alles",
-  "Mijn family",
-  "Alles",
-  "Mijn family",
-  "Alles",
-  "Mijn family",
-];
+import { FEED_TAGS } from "../constants/mockData";
 
 export default function Home() {
   return (
@@ -91,7 +53,7 @@ export default function Home() {
         <Container>
           <Grid container style={{ marginBottom: "32px" }}>
             <Grid item xs={12}>
-              <TagList tags={tags} />
+              <TagList tags={FEED_TAGS} />
             </Grid>
           </Grid>
         </Container>

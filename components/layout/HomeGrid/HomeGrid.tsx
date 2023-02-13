@@ -2,7 +2,6 @@ import { Container, Grid } from "@mui/material";
 import React from "react";
 import styled from "styled-components";
 import { INSTA_EMBED_POST } from "../../../constants/mockData";
-import Card from "../../card/Card";
 import BriefItem from "../../content-types/BriefItem/BriefItem";
 import ForumPost from "../../content-types/ForumPost/ForumPost";
 import InstagramPost from "../../content-types/InstagramPost/InstagramPost";
