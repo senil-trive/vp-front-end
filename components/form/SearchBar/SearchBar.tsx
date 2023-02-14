@@ -26,7 +26,6 @@ export default function SearchBar({ onSearch, waitTime = 300 }: Props) {
   useEffect(() => {
     if (router.pathname === "/search" && router.query.q) {
       setVal(router.query.q as string);
-      console.log(router.pathname, router.query.q);
     }
   }, [router.query, router.pathname]);
 

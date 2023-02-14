@@ -27,6 +27,7 @@ const Wrapper = styled.div`
     position: absolute;
     left: 0;
     top: 0;
+    z-index: -1;
   }
   &:after {
     content: "";
@@ -39,6 +40,7 @@ const Wrapper = styled.div`
     position: absolute;
     right: 0;
     top: 0;
+    z-index: -1;
   }
 `;
 
