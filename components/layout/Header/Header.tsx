@@ -5,6 +5,7 @@ import Logo from "../../icons/Logo/Logo";
 import HeaderNav from "./HeaderNav/HeaderNav";
 import HeaderSubmenu from "./HeaderSubmenu/HeaderSubmenu";
 import SearchIcon from "../../icons/SearchIcon/SearchIcon";
+import SearchBar from "../../form/SearchBar/SearchBar";
 
 export type MenuItem = {
   id: string;
@@ -46,10 +47,6 @@ export default function Header() {
     return setSelected(() => menu);
   };
 
-  const handleSearch = (x: string) => {
-    console.log(x);
-  };
-
   return (
     <StyledHeader>
       <div className="inner">
@@ -58,11 +55,7 @@ export default function Header() {
           <HeaderNav selected={selected} onChange={(x) => toggleMenu(x)} />
         </div>
         <div>
-          <Input
-            iconLeft={<SearchIcon />}
-            placeholder="Zoeken..."
-            onChange={handleSearch}
-          />
+          <SearchBar />
         </div>
       </div>
       {selected && <HeaderSubmenu categories={selected?.categories} />}

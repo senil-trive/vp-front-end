@@ -5,6 +5,7 @@ import React from "react";
 import BriefItem from "../../components/content-types/BriefItem/BriefItem";
 import SearchResultItem from "../../components/content-types/SearchResultItem/SearchResultItem";
 import Input from "../../components/form/Input/Input";
+import SearchBar from "../../components/form/SearchBar/SearchBar";
 import SearchIcon from "../../components/icons/SearchIcon/SearchIcon";
 import { Footer, Header, Hero } from "../../components/layout";
 import { H1, P } from "../../components/typography";
@@ -27,10 +28,6 @@ const items = [
 export default function Search() {
   const router = useRouter();
   const { q } = router.query;
-
-  const handleSearch = (x: string) => {
-    console.log(x);
-  };
 
   return (
     <div>
@@ -61,11 +58,7 @@ export default function Search() {
               </P>
 
               <div>
-                <Input
-                  iconLeft={<SearchIcon />}
-                  placeholder="Zoeken..."
-                  onChange={handleSearch}
-                />
+                <SearchBar />
               </div>
             </Grid>
             <Grid item xs={0} md={2} lg={3} />

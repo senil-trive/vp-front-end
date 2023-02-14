@@ -33,6 +33,8 @@ type Props = {
   /** Wether the  input field has errors */
   hasError?: boolean;
 
+  defaultValue?: string;
+
   /** Callback to handle the input */
   onChange: (x: string) => void;
 };
@@ -143,6 +145,7 @@ export default function Input({
   active = false,
   disabled = false,
   hasError = false,
+  defaultValue = "",
   onChange,
   ...rest
 }: Props) {
@@ -151,6 +154,8 @@ export default function Input({
   const handleInputFocus = () => {
     inputRef?.current?.focus();
   };
+
+  console.log({ defaultValue });
 
   return (
     <InputWrapper
@@ -169,6 +174,7 @@ export default function Input({
           type={type}
           placeholder={placeholder}
           disabled={disabled}
+          defaultValue={defaultValue}
           onChange={(e) => onChange(e.target.value)}
           {...rest}
         />
