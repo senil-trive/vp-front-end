@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import styled, { useTheme } from "styled-components";
+
 import ChevronDown from "../../icons/ChevronDown/ChevronDown";
 import ChevronUp from "../../icons/ChevronUp/ChevronUp";
 
@@ -143,8 +144,6 @@ export default function DisplayDropdown({
   const inputRef = useRef<HTMLSelectElement>(null);
 
   const handleInputFocus = () => {
-    console.log(inputRef.current);
-
     inputRef?.current?.focus();
   };
 

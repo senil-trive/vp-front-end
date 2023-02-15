@@ -1,7 +1,8 @@
+import { Container, Grid } from "@mui/material";
 import { Header, Hero } from "../../components/layout";
 
+import Button from "../../components/buttons/Button";
 import ENDPOINTS from "../../constants/endpoints";
-import { H1 } from "../../components/typography";
 import Head from "next/head";
 import P from "../../components/typography/P/P";
 import React from "react";
@@ -28,8 +29,6 @@ export const getServerSideProps = async () => {
 
     const res = await req.json();
 
-    console.log(res.data);
-
     return {
       props: {
         pageData: res.data,
@@ -52,11 +51,11 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
   return (
     <div>
       <Head>
-        <title>Villa Pinedo - Voor kinderen met gescheiden ouders</title>
-        <meta
-          name="description"
-          content="Praten, lachen, klagen of huilen omdat je ouders gescheiden zijn kan bij Villa Pinedo op het forum of 1 op 1 met een Buddy. Je hoeft het niet alleen te doen."
-        />
+        <title>
+          Over onze vrijwilligers | Villa Pinedo - Voor kinderen met gescheiden
+          ouders
+        </title>
+        <meta name="description" content={pageData?.page_subtitle} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -80,6 +79,22 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
               headerElement="h1"
             />
             <P>{pageData?.page_subtitle}</P>
+
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: 16,
+                width: "80%",
+                marginTop: 56,
+              }}
+            >
+              <Button onClick={() => alert("Pizza: 🍕")}>Button Primary</Button>
+              <Button variant="inverted" onClick={() => alert("Pizza: 🍕")}>
+                Button Secondary
+              </Button>
+            </div>
           </div>
         </Hero>
       </main>

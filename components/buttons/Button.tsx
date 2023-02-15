@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import styled, { css } from "styled-components";
 
 type Props = {
-  variant?: "primary" | "secondary" | "tertiary" | "link";
+  variant?: "primary" | "secondary" | "tertiary" | "link" | "inverted";
   filled?: boolean;
   children: ReactNode;
   onClick?: () => void;
@@ -19,6 +19,7 @@ const StyledButton = styled.button<Props>`
   line-height: 160%;
   text-align: center;
   cursor: pointer;
+  transition: all 0.1s ease-in-out;
 
   ${({ variant }) => {
     switch (variant) {
@@ -34,6 +35,17 @@ const StyledButton = styled.button<Props>`
           background: ${({ theme }) => theme.colors.tertiary};
           &:hover {
             box-shadow: inset -8px -8px 24px rgba(0, 0, 0, 0.3);
+          }
+        `;
+
+      case "inverted":
+        return css`
+          background: transparent;
+          color: ${({ theme }) => theme.colors.info};
+          border: 2px solid ${({ theme }) => theme.colors.info};
+          &:hover {
+            background: ${({ theme }) => theme.colors.info};
+            color: #ffffff;
           }
         `;
       case "link":
