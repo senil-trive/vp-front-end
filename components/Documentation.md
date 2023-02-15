@@ -152,6 +152,7 @@ import ImportantCircle from "/components/icons/ImportantCircle/ImportantCircle";
 import UserIcon from "/components/icons/UserIcon/UserIcon";
 import SearchIcon from "/components/icons/SearchIcon/SearchIcon";
 import CheckmarkIcon from "/components/icons/Checkmark/CheckmarkIcon";
+import MenuIcon from "/components/icons/MenuIcon/MenuIcon";
 
 <Grid container>
   <Grid item md={12}>
@@ -184,6 +185,9 @@ import CheckmarkIcon from "/components/icons/Checkmark/CheckmarkIcon";
   </Grid>
   <Grid md={1}>
     <CheckmarkIcon />
+  </Grid>
+  <Grid md={1}>
+    <MenuIcon />
   </Grid>
 </Grid>;
 ```

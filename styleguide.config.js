@@ -43,6 +43,12 @@ const customWebpack = {
       },
     ],
   },
+  resolve: {
+    fallback: { url: require.resolve("url/") },
+    alias: {
+      "next/router": "next-router-mock",
+    },
+  },
   plugins: [
     // Rewrites the absolute paths to those two files into relative paths
     new webpack.NormalModuleReplacementPlugin(
@@ -53,17 +59,22 @@ const customWebpack = {
       /react-styleguidist\/lib\/loaders\/utils\/client\/evalInContext$/,
       "react-styleguidist/lib/loaders/utils/client/evalInContext"
     ),
+    new webpack.DefinePlugin({
+      process: { env: {} },
+    }),
   ],
 };
 
 module.exports = {
   styleguideDir: "docs",
+  title: "Villa Pinedo Styleguide",
   skipComponentsWithoutExample: true,
   components: `${root}/components/**/[A-Z]*.{js,jsx,ts,tsx}`,
   webpackConfig: customWebpack,
+  pagePerSection: true,
   require: [path.join(__dirname, "./styles/globals.css")],
   styleguideComponents: {
-    Wrapper: path.join(__dirname, "providers/AppProviders"),
+    Wrapper: path.join(__dirname, "providers/StyleGuideProvider"),
   },
 
   propsParser: require("react-docgen-typescript").withCustomConfig(
