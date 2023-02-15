@@ -6,25 +6,52 @@ import Button from "../../components/buttons/Button";
 import TagList from "../../components/buttons/TagList/TagList";
 import ForumPost from "../../components/content-types/ForumPost/ForumPost";
 import { Footer, Header, Hero, Pagination } from "../../components/layout";
+import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import { H1, P } from "../../components/typography";
 import ColorSpan from "../../components/typography/ColorSpan/ColorSpan";
+import ENDPOINTS from "../../constants/endpoints";
 import { FEED_TAGS, FORUM_POSTS } from "../../constants/mockData";
 import { titleToSlug } from "../../utils/slugify";
 
-export default function Forum() {
+// export const getServerSideProps = async () => {
+//   // fetch page data from API
+
+//   try {
+//     const req = await fetch(`${ENDPOINTS.COLLECTIONS}/forum_posts?fields=*`, {
+//       method: "GET",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     });
+
+//     const res = await req.json();
+
+//     console.log(res.data);
+
+//     return {
+//       props: {
+//         pageData: res.data,
+//       },
+//     };
+//   } catch (error) {
+//     console.log(error);
+
+//     return {
+//       redirect: {
+//         destination: "/500",
+//       },
+//     };
+//   }
+// };
+
+type Props = {
+  pageData: any;
+  error?: boolean;
+};
+
+export default function Forum({ pageData }: Props) {
   return (
-    <div>
-      <Head>
-        <title>Forum overzicht - Villa Pinedo</title>
-        <meta
-          name="description"
-          content="Praten, lachen, klagen of huilen omdat je ouders gescheiden zijn kan bij Villa Pinedo op het forum of 1 op 1 met een Buddy. Je hoeft het niet alleen te doen."
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <Header />
-
+    <PageWrapper title="Forum overzicht">
       <Hero>
         <Container>
           <Grid container>
@@ -65,7 +92,7 @@ export default function Forum() {
 
           <Grid container spacing={"34px"}>
             {FORUM_POSTS.map((item, index) => (
-              <Grid key={index} item md={4}>
+              <Grid key={index} item xs={12} md={4}>
                 <Link href={`forum/${titleToSlug(item.title)}`}>
                   <ForumPost
                     author={item.author}
@@ -83,8 +110,6 @@ export default function Forum() {
         </Container>
         <Pagination total={10} truncated />
       </main>
-
-      <Footer />
-    </div>
+    </PageWrapper>
   );
 }

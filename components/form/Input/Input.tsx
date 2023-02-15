@@ -36,7 +36,7 @@ type Props = {
   defaultValue?: string;
 
   /** Callback to handle the input */
-  onChange: (x: string) => void;
+  onChange?: (x: string) => void;
 };
 
 const InputWrapper = styled.div<InputStateType>`
@@ -155,8 +155,6 @@ export default function Input({
     inputRef?.current?.focus();
   };
 
-  console.log({ defaultValue });
-
   return (
     <InputWrapper
       disabled={disabled}
@@ -175,7 +173,7 @@ export default function Input({
           placeholder={placeholder}
           disabled={disabled}
           defaultValue={defaultValue}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => onChange?.(e.target.value)}
           {...rest}
         />
         {!!iconRight && (

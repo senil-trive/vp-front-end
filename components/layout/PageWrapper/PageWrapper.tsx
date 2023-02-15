@@ -20,7 +20,7 @@ export default function PageWrapper({
   description = defaultValues.description,
   children,
 }: Props) {
-  console.log(title);
+  console.log({ title });
   return (
     <div>
       <Head>

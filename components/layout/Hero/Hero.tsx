@@ -7,7 +7,7 @@ type Props = {
 };
 
 const Wrapper = styled.div`
-  height: 481px;
+  min-height: 481px;
   padding: 29px 41px 40px 41px;
   position: relative;
 
@@ -22,7 +22,7 @@ const Wrapper = styled.div`
     &:before {
       content: "";
       background: url("/Hero-bg-left.png");
-      background-repeat: no-repeat;
+      background-repeat: repeat-y;
       background-size: 377px, 407px, auto;
       height: 100%;
       width: 377px;
@@ -34,7 +34,7 @@ const Wrapper = styled.div`
     &:after {
       content: "";
       background: url("/Hero-bg-right.png");
-      background-repeat: no-repeat;
+      background-repeat: repeat-y;
       background-position: right;
       background-size: 377px, 407px, auto;
       height: 100%;
