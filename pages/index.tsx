@@ -1,28 +1,15 @@
 import { Container } from "@mui/material";
-import Head from "next/head";
-import Tag from "../components/buttons/Tag/Tag";
 import TagList from "../components/buttons/TagList/TagList";
 import DisplayDropdown from "../components/form/Dropdown/DisplayDropdown";
-import { Footer, Grid, Hero } from "../components/layout";
-import Header from "../components/layout/Header/Header";
+import { Grid, Hero } from "../components/layout";
 import { HomeGrid } from "../components/layout/HomeGrid/HomeGrid";
+import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
 import { H1, P } from "../components/typography";
 import { FEED_TAGS } from "../constants/mockData";
 
 export default function Home() {
   return (
-    <div>
-      <Head>
-        <title>Villa Pinedo - Voor kinderen met gescheiden ouders</title>
-        <meta
-          name="description"
-          content="Praten, lachen, klagen of huilen omdat je ouders gescheiden zijn kan bij Villa Pinedo op het forum of 1 op 1 met een Buddy. Je hoeft het niet alleen te doen."
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <Header />
-
+    <PageWrapper>
       <Hero>
         <Container>
           <Grid container>
@@ -60,8 +47,6 @@ export default function Home() {
 
         <HomeGrid />
       </main>
-
-      <Footer />
-    </div>
+    </PageWrapper>
   );
 }

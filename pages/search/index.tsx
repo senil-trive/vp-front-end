@@ -1,15 +1,14 @@
 import { Container, Grid } from "@mui/material";
-import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
 import BriefItem from "../../components/content-types/BriefItem/BriefItem";
 import SearchResultItem from "../../components/content-types/SearchResultItem/SearchResultItem";
-import Input from "../../components/form/Input/Input";
 import SearchBar from "../../components/form/SearchBar/SearchBar";
-import SearchIcon from "../../components/icons/SearchIcon/SearchIcon";
-import { Footer, Header, Hero } from "../../components/layout";
+import { Hero } from "../../components/layout";
+import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import { H1, P } from "../../components/typography";
 
+// Temp searchresults
 const items = [
   {
     name: "test 1",
@@ -30,20 +29,7 @@ export default function Search() {
   const { q } = router.query;
 
   return (
-    <div>
-      <Head>
-        <title>
-          Zoekresultaten q Villa Pinedo - Voor kinderen met gescheiden ouders
-        </title>
-        <meta
-          name="description"
-          content="Praten, lachen, klagen of huilen omdat je ouders gescheiden zijn kan bij Villa Pinedo op het forum of 1 op 1 met een Buddy. Je hoeft het niet alleen te doen."
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <Header />
-
+    <PageWrapper title="Zoekresultaten">
       <Hero>
         <Container>
           <Grid container>
@@ -69,14 +55,14 @@ export default function Search() {
       <main style={{ marginBottom: "80px" }}>
         <Container>
           <Grid container spacing={"22px"}>
-            <Grid item md={4}>
+            <Grid item xs={12} md={4}>
               <SearchResultItem
                 amount={3}
                 resultTitleSuffix={<span>in ons Forum</span>}
                 list={items}
               />
             </Grid>
-            <Grid item md={4}>
+            <Grid item xs={12} md={4}>
               <SearchResultItem
                 colorVariant={2}
                 amount={3}
@@ -84,7 +70,7 @@ export default function Search() {
                 list={items}
               />
             </Grid>
-            <Grid item md={4}>
+            <Grid item xs={12} md={4}>
               <BriefItem
                 imgSrc="https://picsum.photos/920/180"
                 title="Brief voor alle kinderen"
@@ -98,8 +84,6 @@ export default function Search() {
           </Grid>
         </Container>
       </main>
-
-      <Footer />
-    </div>
+    </PageWrapper>
   );
 }

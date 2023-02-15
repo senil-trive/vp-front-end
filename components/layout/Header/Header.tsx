@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Input from "../../form/Input/Input";
 import Logo from "../../icons/Logo/Logo";
 import HeaderNav from "./HeaderNav/HeaderNav";
 import HeaderSubmenu from "./HeaderSubmenu/HeaderSubmenu";
-import SearchIcon from "../../icons/SearchIcon/SearchIcon";
 import SearchBar from "../../form/SearchBar/SearchBar";
+import MenuIcon from "../../icons/MenuIcon/MenuIcon";
+import SearchIcon from "../../icons/SearchIcon/SearchIcon";
+import HeaderSubmenuMobile from "./HeaderSubmenuMobile/HeaderSubmenuMobile";
 
 export type MenuItem = {
   id: string;
@@ -22,6 +23,16 @@ export type Category = {
 };
 
 const StyledHeader = styled.header`
+  position: relative;
+
+  /* Header Sub Menu */
+  .inner + div {
+    position: absolute;
+    top: 100%;
+    z-index: 999;
+    right: 0;
+  }
+
   .inner {
     display: flex;
     justify-content: space-between;
@@ -34,10 +45,31 @@ const StyledHeader = styled.header`
       align-items: center;
     }
   }
+
+  .mobile-menu {
+    display: block;
+    width: 100%;
+  }
+
+  .desktop-menu {
+    display: none;
+    .inner + div {
+      width: 100%;
+    }
+  }
+  @media ${({ theme }) => theme.devices.laptop} {
+    .mobile-menu {
+      display: none;
+    }
+    .desktop-menu {
+      display: block;
+    }
+  }
 `;
 
 export default function Header() {
   const [selected, setSelected] = useState<MenuItem | undefined>(undefined);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const toggleMenu = (menu: MenuItem) => {
     if (selected?.id === menu.id) {
@@ -49,16 +81,30 @@ export default function Header() {
 
   return (
     <StyledHeader>
-      <div className="inner">
-        <div>
-          <Logo className="mr-[52px]" />
-          <HeaderNav selected={selected} onChange={(x) => toggleMenu(x)} />
+      <div className="desktop-menu">
+        <div className="inner">
+          <div>
+            <Logo />
+            <HeaderNav selected={selected} onChange={(x) => toggleMenu(x)} />
+          </div>
+          <div>
+            <SearchBar />
+          </div>
         </div>
-        <div>
-          <SearchBar />
-        </div>
+        {selected && <HeaderSubmenu categories={selected?.categories} />}
       </div>
-      {selected && <HeaderSubmenu categories={selected?.categories} />}
+      <div className="mobile-menu">
+        <div className="inner">
+          <div>
+            <Logo />
+          </div>
+          <div>
+            <SearchIcon />
+            <MenuIcon onClick={() => setMobileMenuOpen((isOpen) => !isOpen)} />
+          </div>
+        </div>
+        {mobileMenuOpen && <HeaderSubmenuMobile />}
+      </div>
     </StyledHeader>
   );
 }

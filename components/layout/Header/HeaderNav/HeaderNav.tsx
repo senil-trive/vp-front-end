@@ -12,6 +12,7 @@ type Props = {
 };
 
 const StyledNav = styled.nav`
+  /* display: none; */
   ul {
     display: flex;
     align-items: center;
@@ -30,6 +31,10 @@ const StyledNav = styled.nav`
         font-weight: 700;
       }
     }
+  }
+
+  @media ${({ theme }) => theme.devices.laptop} {
+    /* display: block; */
   }
 `;
 
