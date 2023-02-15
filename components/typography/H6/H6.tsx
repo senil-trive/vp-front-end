@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+
 import styled from "styled-components";
 
 type Props = {
@@ -7,7 +8,6 @@ type Props = {
 };
 
 const BaseH6 = styled.h6`
-  font-family: "Open Sans";
   font-size: 18px;
   line-height: 100%;
   color: #000000;

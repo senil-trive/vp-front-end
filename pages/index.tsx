@@ -1,11 +1,12 @@
-import { Container } from "@mui/material";
-import TagList from "../components/buttons/TagList/TagList";
-import DisplayDropdown from "../components/form/Dropdown/DisplayDropdown";
 import { Grid, Hero } from "../components/layout";
+import { H1, P } from "../components/typography";
+
+import { Container } from "@mui/material";
+import DisplayDropdown from "../components/form/Dropdown/DisplayDropdown";
+import { FEED_TAGS } from "../constants/mockData";
 import { HomeGrid } from "../components/layout/HomeGrid/HomeGrid";
 import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
-import { H1, P } from "../components/typography";
-import { FEED_TAGS } from "../constants/mockData";
+import TagList from "../components/buttons/TagList/TagList";
 
 export default function Home() {
   return (

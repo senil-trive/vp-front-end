@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "styled-components";
-import { MENU_COLS } from "../../../../constants/mockData";
 import ChevronDown from "../../../icons/ChevronDown/ChevronDown";
 import ChevronUp from "../../../icons/ChevronUp/ChevronUp";
-import { P } from "../../../typography";
+import { MENU_COLS } from "../../../../constants/mockData";
 import { MenuItem } from "../Header";
+import { P } from "../../../typography";
+import React from "react";
+import styled from "styled-components";
 
 type Props = {
   selected?: MenuItem;
