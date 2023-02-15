@@ -10,11 +10,18 @@ type Props = React.HTMLAttributes<HTMLSpanElement> &
   Position & {
     /* size Size of the component */
     size?: "m" | "l";
+
+    /** Content of the tag */
     children: ReactNode;
+
+    /** Click event handler */
     onClick?: () => void;
+
+    /** Wether the tag has an active state */
+    isActive?: boolean;
   };
 
-const BaseTag = styled.span<Variant & Position>`
+const BaseTag = styled.span<Variant & Position & { isActive: boolean }>`
   background: ${({ variant, theme }) =>
     variant === "light" ? "transparent" : theme.colors.primary};
   border-radius: 8px;
@@ -24,6 +31,7 @@ const BaseTag = styled.span<Variant & Position>`
   font-weight: 300;
   line-height: 160%;
   cursor: pointer;
+  white-space: nowrap;
 
   &:hover {
     background: ${({ variant, theme }) =>
@@ -31,6 +39,13 @@ const BaseTag = styled.span<Variant & Position>`
     color: ${({ variant, theme }) =>
       variant === "light" ? theme.colors.tertiary : "white"};
   }
+
+  ${({ isActive }) =>
+    isActive &&
+    css`
+      background-color: ${({ theme }) => theme.colors.info};
+      color: ${({ theme }) => theme.colors.white};
+    `}
 
   ${({ position }) => {
     switch (position) {
@@ -89,6 +104,7 @@ export default function Tag({
   onClick,
   children,
   position,
+  isActive = false,
   ...rest
 }: Props) {
   switch (size) {
@@ -98,6 +114,7 @@ export default function Tag({
           position={position}
           onClick={onClick}
           variant={variant}
+          isActive={isActive}
           {...rest}
         >
           {children}
@@ -110,6 +127,7 @@ export default function Tag({
           position={position}
           onClick={onClick}
           variant={variant}
+          isActive={isActive}
           {...rest}
         >
           {children}

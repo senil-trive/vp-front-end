@@ -1,44 +1,52 @@
-import Head from "next/head";
-import Tag from "../components/buttons/Tag/Tag";
-import { Grid } from "../components/layout";
-import Header from "../components/layout/Header/Header";
-
-const tags = ["Alles", "Mijn family"];
+import { Container } from "@mui/material";
+import TagList from "../components/buttons/TagList/TagList";
+import DisplayDropdown from "../components/form/Dropdown/DisplayDropdown";
+import { Grid, Hero } from "../components/layout";
+import { HomeGrid } from "../components/layout/HomeGrid/HomeGrid";
+import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
+import { H1, P } from "../components/typography";
+import { FEED_TAGS } from "../constants/mockData";
 
 export default function Home() {
   return (
-    <div>
-      <Head>
-        <title>Villa Pinedo - Voor kinderen met gescheiden ouders</title>
-        <meta
-          name="description"
-          content="Praten, lachen, klagen of huilen omdat je ouders gescheiden zijn kan bij Villa Pinedo op het forum of 1 op 1 met een Buddy. Je hoeft het niet alleen te doen."
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <PageWrapper>
+      <Hero>
+        <Container>
+          <Grid container>
+            <Grid item xs={0} md={2} lg={3} />
+            <Grid item xs={12} md={8} lg={6}>
+              <H1 style={{ textAlign: "center", padding: "0 24px" }}>
+                Ik zit op de{" "}
+                <DisplayDropdown
+                  options={[{ name: "Basisschool", value: "basisschool" }]}
+                />
+                <br />
+                daarnaast kan je mij vinden op de{" "}
+                <DisplayDropdown
+                  options={[{ name: "Manege", value: "manege" }]}
+                />
+              </H1>
 
-      <Header />
-
-      <main>
-        <Grid className="mb-[32px]">
-          <Grid item xs={12}>
-            {tags.map((tag, index) => (
-              <Tag key={index}>{tag}</Tag>
-            ))}
+              <P variant="light">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </P>
+            </Grid>
+            <Grid item xs={0} md={2} lg={3} />
           </Grid>
-        </Grid>
-      </main>
+        </Container>
+      </Hero>
+      <main>
+        <Container>
+          <Grid container style={{ marginBottom: "32px" }}>
+            <Grid item xs={12}>
+              <TagList tags={FEED_TAGS} />
+            </Grid>
+          </Grid>
+        </Container>
 
-      <footer className="bg-black">
-        <a
-          href="https://trivetechnology.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-white"
-        >
-          Powered by Trive
-        </a>
-      </footer>
-    </div>
+        <HomeGrid />
+      </main>
+    </PageWrapper>
   );
 }

@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 
 type Props = {
   variant?: "primary" | "secondary" | "tertiary" | "link";
+  filled?: boolean;
   children: ReactNode;
   onClick?: () => void;
 };
@@ -63,6 +64,16 @@ const StyledButton = styled.button<Props>`
     }
   }}
 
+  ${({ filled, variant }) =>
+    !filled &&
+    variant &&
+    variant !== "link" &&
+    css`
+      background-color: white;
+      color: ${({ theme }) => theme.colors[variant]};
+      border: 2px solid;
+    `}
+
   @media ${({ theme }) => theme.breakpoints.tablet} {
     font-size: ${({ theme }) => theme.fontSizes.p.mobile};
   }
@@ -70,12 +81,13 @@ const StyledButton = styled.button<Props>`
 
 export default function Button({
   variant = "primary",
+  filled = true,
   children,
   onClick,
   ...rest
 }: Props) {
   return (
-    <StyledButton onClick={onClick} variant={variant} {...rest}>
+    <StyledButton onClick={onClick} variant={variant} filled={filled} {...rest}>
       {children}
     </StyledButton>
   );

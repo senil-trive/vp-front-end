@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import { MENU_COLS } from "../../../../constants/mockData";
 import ChevronDown from "../../../icons/ChevronDown/ChevronDown";
 import ChevronUp from "../../../icons/ChevronUp/ChevronUp";
 import { P } from "../../../typography";
 import { MenuItem } from "../Header";
-import { menuCols } from "../Header.data";
 
 type Props = {
   selected?: MenuItem;
@@ -12,6 +12,7 @@ type Props = {
 };
 
 const StyledNav = styled.nav`
+  /* display: none; */
   ul {
     display: flex;
     align-items: center;
@@ -31,13 +32,17 @@ const StyledNav = styled.nav`
       }
     }
   }
+
+  @media ${({ theme }) => theme.devices.laptop} {
+    /* display: block; */
+  }
 `;
 
 export default function HeaderNav({ selected, onChange }: Props) {
   return (
     <StyledNav>
       <ul>
-        {menuCols.map((menu) => (
+        {MENU_COLS.map((menu) => (
           <li
             key={menu.id}
             className={selected?.id === menu.id ? "selected" : ""}

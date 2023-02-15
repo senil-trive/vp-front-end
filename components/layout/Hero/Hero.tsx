@@ -17,28 +17,33 @@ const Wrapper = styled.div`
     justify-content: center;
     align-items: center;
   }
-  &:before {
-    content: "";
-    background: url("/Hero-bg-left.png");
-    background-repeat: no-repeat;
-    background-size: 377px, 407px, auto;
-    height: 100%;
-    width: 377px;
-    position: absolute;
-    left: 0;
-    top: 0;
-  }
-  &:after {
-    content: "";
-    background: url("/Hero-bg-right.png");
-    background-repeat: no-repeat;
-    background-position: right;
-    background-size: 377px, 407px, auto;
-    height: 100%;
-    width: 377px;
-    position: absolute;
-    right: 0;
-    top: 0;
+
+  @media ${({ theme }) => theme.devices.laptop} {
+    &:before {
+      content: "";
+      background: url("/Hero-bg-left.png");
+      background-repeat: no-repeat;
+      background-size: 377px, 407px, auto;
+      height: 100%;
+      width: 377px;
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: -1;
+    }
+    &:after {
+      content: "";
+      background: url("/Hero-bg-right.png");
+      background-repeat: no-repeat;
+      background-position: right;
+      background-size: 377px, 407px, auto;
+      height: 100%;
+      width: 377px;
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: -1;
+    }
   }
 `;
 
