@@ -6,3 +6,4 @@ export { default as H5 } from "./H5/H5";
 export { default as H6 } from "./H6/H6";
 export { default as P } from "./P/P";
 export { default as ColorSpan } from "./ColorSpan/ColorSpan";
+export { default as TitleWithHighlights } from "./TitleWithHighlights";
