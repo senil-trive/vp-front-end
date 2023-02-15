@@ -16,3 +16,5 @@ const Error500Page: NextPage = () => {
     </div>
   );
 };
+
+export default Error500Page;
