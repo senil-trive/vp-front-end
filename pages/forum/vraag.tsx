@@ -18,7 +18,11 @@ type Inputs = {
   user_age: number;
   user_gender: string;
   content: string;
-  attachment_image: string;
+  attachment_image: File[];
+  comments: [];
+  homepage_id: string;
+  likes: string;
+  status: "draft";
 };
 
 const genders = [
@@ -27,6 +31,39 @@ const genders = [
   { name: "Zeg ik liever niet", value: "o" },
 ];
 
+const handleFileUpload = async (file: File) => {
+  const formData = new FormData();
+  console.log(file);
+
+  formData.append("title", file.name);
+  formData.append("file", file);
+
+  const res = await fetch(`${ENDPOINTS.BASE}/files`, {
+    method: "POST",
+    body: formData,
+  });
+
+  return await res.json();
+};
+
+const submitForm = async (data: any) => {
+  const res = await fetch(`${ENDPOINTS.COLLECTIONS}/forum_posts`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      ...data,
+      comments: [],
+      homepage_id: null,
+      likes: 2,
+      status: "draft",
+    }),
+  });
+
+  console.log(await res.json());
+};
+
 export default function Vraag() {
   const {
     register,
@@ -34,23 +71,26 @@ export default function Vraag() {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const res = await fetch(`${ENDPOINTS.COLLECTIONS}/forum_posts`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ ...data }),
-    });
-
-    console.log(res.json());
+  const onSubmit: SubmitHandler<Inputs> = async ({
+    attachment_image,
+    ...rest
+  }) => {
+    if (attachment_image) {
+      const file = await handleFileUpload(attachment_image[0]);
+      submitForm({
+        attachment_image: file.data.id,
+        ...rest,
+      });
+    } else {
+      submitForm(rest);
+    }
   };
 
   return (
     <PageWrapper title="Vraag Insturen">
       <Hero>
         <Container>
-          <Grid container>
+          <Grid container style={{ marginBottom: 65 }}>
             <Grid item xs={0} md={2} lg={3} />
             <Grid item xs={12} md={8} lg={6}>
               <H1 style={{ textAlign: "center", padding: "0 24px" }}>
@@ -63,7 +103,7 @@ export default function Vraag() {
             </Grid>
             <Grid item xs={0} md={2} lg={3} />
           </Grid>
-          <main>
+          <main style={{ paddingBottom: 100 }}>
             <Container>
               <Section>
                 <form onSubmit={handleSubmit(onSubmit)}>

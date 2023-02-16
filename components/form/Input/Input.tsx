@@ -43,7 +43,7 @@ type Props = {
   defaultValue?: string;
 
   /** Callback to handle the input */
-  onChange?: (x: string) => void;
+  onChange?: (x: any) => void;
 
   /** React hook form register function for error handling */
   register?: any;
@@ -178,7 +178,7 @@ export default function Input({
         )}
         <input
           type={type}
-          onChange={(e) => onChange?.(e.target.value)}
+          onChange={(e) => onChange?.(e)}
           {...formRegister}
           {...rest}
         />
