@@ -10,6 +10,7 @@ import { Grid, Hero } from "../../components/layout";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import Section from "../../components/layout/Section/Section";
 import { ColorSpan, H1, P } from "../../components/typography";
+import ENDPOINTS from "../../constants/endpoints";
 
 type Inputs = {
   user_name: string;
@@ -33,7 +34,17 @@ export default function Vraag() {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    const res = await fetch(`${ENDPOINTS.COLLECTIONS}/forum_posts`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...data }),
+    });
+
+    console.log(res.json());
+  };
 
   return (
     <PageWrapper title="Vraag Insturen">
@@ -44,7 +55,7 @@ export default function Vraag() {
             <Grid item xs={12} md={8} lg={6}>
               <H1 style={{ textAlign: "center", padding: "0 24px" }}>
                 Stuur je
-                <ColorSpan variant="info">vraag</ColorSpan> in
+                <ColorSpan variant="info"> vraag</ColorSpan> in
               </H1>
               <P variant="light">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
