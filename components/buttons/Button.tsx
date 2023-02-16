@@ -1,8 +1,16 @@
 import React, { ReactNode } from "react";
 import styled, { css } from "styled-components";
 
+export type ButtonVariant =
+  | "primary"
+  | "secondary"
+  | "tertiary"
+  | "link"
+  | "info"
+  | "infoReversed";
+
 type Props = {
-  variant?: "primary" | "secondary" | "tertiary" | "link" | "inverted";
+  variant?: ButtonVariant;
   filled?: boolean;
   children: ReactNode;
   onClick?: () => void;
@@ -10,6 +18,7 @@ type Props = {
 
 const StyledButton = styled.button<Props>`
   width: 100%;
+  height: 60px;
   border-radius: 12px;
   padding: 16px;
   border: none;
@@ -38,7 +47,17 @@ const StyledButton = styled.button<Props>`
           }
         `;
 
-      case "inverted":
+      case "info":
+        return css`
+          background: ${({ theme }) => theme.colors.info};
+          color: #fff;
+          border: 2px solid ${({ theme }) => theme.colors.info};
+          &:hover {
+            background: transparent;
+            color: ${({ theme }) => theme.colors.info};
+          }
+        `;
+      case "infoReversed":
         return css`
           background: transparent;
           color: ${({ theme }) => theme.colors.info};

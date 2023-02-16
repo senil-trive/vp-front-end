@@ -1,15 +1,16 @@
-import React, { useRef, useState } from "react";
-import styled from "styled-components";
-import { IoIosPlay } from "react-icons/io";
-
 import { H3, P } from "../../typography";
+import React, { useRef, useState } from "react";
+
 import IconButton from "../../buttons/IconButton/IconButton";
+import { IoIosPlay } from "react-icons/io";
 import Tag from "../../buttons/Tag/Tag";
+import styled from "styled-components";
 
 type Props = {
   title: string;
   subtitle?: string;
   src: string;
+  poster?: string;
 };
 
 const StyledFigure = styled.figure`
@@ -47,6 +48,7 @@ const StyledFigure = styled.figure`
     h6,
     p {
       color: inherit;
+      text-align: left;
     }
   }
 `;
@@ -65,6 +67,7 @@ const placeholderUrl =
 export default function VideoItem({
   title,
   subtitle,
+  poster,
   src = placeholderUrl,
 }: Props) {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -98,6 +101,7 @@ export default function VideoItem({
         ref={videoRef}
         controls={isPlaying}
         onClick={stopVideo}
+        poster={poster}
       ></video>
       {!isPlaying && (
         <>
@@ -105,7 +109,7 @@ export default function VideoItem({
             <IconButton Icon={IoIosPlay} />
           </PlayIconWrapper>
           <figcaption>
-            <H3>{title}</H3>
+            <H3 variant="bold">{title}</H3>
             {!!subtitle && <P>{subtitle}</P>}
           </figcaption>
         </>

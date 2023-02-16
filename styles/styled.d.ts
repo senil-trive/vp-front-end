@@ -14,6 +14,7 @@ declare module "styled-components" {
       error: string;
       success: string;
       info: string;
+      infoReversed: string;
     };
     shadows: {
       sm: string;

@@ -1,15 +1,19 @@
 import React, { ReactNode } from "react";
+
 import styled from "styled-components";
 
 type Props = React.HTMLAttributes<HTMLHeadingElement> & {
   variant?: "bold" | "regular" | "light";
+  color?: "blue" | "black";
   children: ReactNode;
+  style?: React.CSSProperties;
 };
 
 const BaseH3 = styled.h3`
   font-size: 32px;
   line-height: 120%;
-  color: #000000;
+  color: ${({ theme, color }) =>
+    color === "blue" ? theme.colors.primary : theme.colors.text};
   font-style: normal;
   margin: 12px 0;
 `;
@@ -24,16 +28,37 @@ const StyledH3Light = styled(BaseH3)`
   font-weight: 300;
 `;
 
-export default function H3({ variant = "regular", children }: Props) {
+export default function H3({
+  variant = "regular",
+  color = "black",
+  children,
+  ...rest
+}: Props) {
   switch (variant) {
     case "bold":
-      return <StyledH3Bold>{children}</StyledH3Bold>;
+      return (
+        <StyledH3Bold color={color} {...rest}>
+          {children}
+        </StyledH3Bold>
+      );
     case "regular":
-      return <StyledH3>{children}</StyledH3>;
+      return (
+        <StyledH3 color={color} {...rest}>
+          {children}
+        </StyledH3>
+      );
     case "light":
-      return <StyledH3Light>{children}</StyledH3Light>;
+      return (
+        <StyledH3Light color={color} {...rest}>
+          {children}
+        </StyledH3Light>
+      );
 
     default:
-      return <StyledH3>{children}</StyledH3>;
+      return (
+        <StyledH3 color={color} {...rest}>
+          {children}
+        </StyledH3>
+      );
   }
 }
