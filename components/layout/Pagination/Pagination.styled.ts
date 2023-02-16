@@ -15,7 +15,7 @@ export const PaginationWrapper = styled.div`
     font-weight: 700;
     font-size: 18px;
     line-height: 160%;
-    color: #000000;
+    color: ${({ theme }) => theme.colors.tertiary};
   }
 
   nav {
@@ -43,12 +43,13 @@ export const PaginationWrapper = styled.div`
           min-width: 30px;
 
           border-radius: 8px;
-          background: #e0e0e0;
-          color: #555555;
+          background: white;
+          border: 1px solid;
+          color: ${({ theme }) => theme.colors.tertiary};
 
           &.active {
             color: white;
-            background: #555555;
+            background: ${({ theme }) => theme.colors.tertiary};
           }
         }
 

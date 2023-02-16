@@ -1,4 +1,5 @@
 import { Container } from "@mui/system";
+import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 import Button from "../../components/buttons/Button";
@@ -11,19 +12,7 @@ import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import Section from "../../components/layout/Section/Section";
 import { ColorSpan, H1, P } from "../../components/typography";
 import ENDPOINTS from "../../constants/endpoints";
-
-type Inputs = {
-  user_name: string;
-  user_email: string;
-  user_age: number;
-  user_gender: string;
-  content: string;
-  attachment_image: File[];
-  comments: [];
-  homepage_id: string;
-  likes: string;
-  status: "draft";
-};
+import { ForumPostType } from "../../types/forumTypes";
 
 const genders = [
   { name: "Man", value: "m" },
@@ -31,47 +20,57 @@ const genders = [
   { name: "Zeg ik liever niet", value: "o" },
 ];
 
-const handleFileUpload = async (file: File) => {
-  const formData = new FormData();
-  console.log(file);
-
-  formData.append("title", file.name);
-  formData.append("file", file);
-
-  const res = await fetch(`${ENDPOINTS.BASE}/files`, {
-    method: "POST",
-    body: formData,
-  });
-
-  return await res.json();
-};
-
-const submitForm = async (data: any) => {
-  const res = await fetch(`${ENDPOINTS.COLLECTIONS}/forum_posts`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      ...data,
-      comments: [],
-      homepage_id: null,
-      likes: 2,
-      status: "draft",
-    }),
-  });
-
-  console.log(await res.json());
-};
-
 export default function Vraag() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors },
-  } = useForm<Inputs>();
+  } = useForm<ForumPostType>();
 
-  const onSubmit: SubmitHandler<Inputs> = async ({
+  const handleFileUpload = async (file: File) => {
+    const formData = new FormData();
+
+    formData.append("title", file.name);
+    formData.append("file", file);
+
+    const res = await fetch(`${ENDPOINTS.BASE}/files`, {
+      method: "POST",
+      body: formData,
+    });
+
+    return await res.json();
+  };
+
+  const submitForm = async (data: any) => {
+    setIsLoading(true);
+
+    try {
+      const res = await fetch(`${ENDPOINTS.COLLECTIONS}/forum_posts`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...data,
+          comments: [],
+          homepage_id: null,
+          likes: 0,
+          status: "draft",
+        }),
+      });
+      setIsSubmitted(true);
+    } catch (error) {
+      setIsSubmitted(false);
+    }
+
+    setIsLoading(false);
+  };
+
+  const onSubmit: SubmitHandler<ForumPostType> = async ({
     attachment_image,
     ...rest
   }) => {
@@ -166,7 +165,11 @@ export default function Vraag() {
                       <P variant="light">* Verplichte velden</P>
                     </Grid>
                     <Grid item xs={12} md={4}>
-                      <Button>Vraag insturen</Button>
+                      <Button loading={isLoading} disabled={isSubmitted}>
+                        {isLoading && "bezig..."}
+                        {isSubmitted && "Verzonden"}
+                        {!isLoading && !isSubmitted && "Vraag insturen"}
+                      </Button>
                     </Grid>
                   </Grid>
                 </form>

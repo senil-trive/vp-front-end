@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+import { CircleSpinner } from "react-spinners-kit";
 import styled, { css } from "styled-components";
 
 export type ButtonVariant =
@@ -13,6 +14,13 @@ type Props = {
   variant?: ButtonVariant;
   filled?: boolean;
   children: ReactNode;
+
+  /** Wether the button is disabled */
+  disabled?: boolean;
+
+  /** Loading state of the button */
+  loading?: boolean;
+
   onClick?: () => void;
 };
 
@@ -29,6 +37,10 @@ const StyledButton = styled.button<Props>`
   text-align: center;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 
   ${({ variant }) => {
     switch (variant) {
@@ -115,10 +127,19 @@ export default function Button({
   filled = true,
   children,
   onClick,
+  disabled = false,
+  loading = false,
   ...rest
 }: Props) {
   return (
-    <StyledButton onClick={onClick} variant={variant} filled={filled} {...rest}>
+    <StyledButton
+      disabled={disabled}
+      onClick={onClick}
+      variant={variant}
+      filled={filled}
+      {...rest}
+    >
+      {loading && <CircleSpinner size={20} color="#fff" />}
       {children}
     </StyledButton>
   );
