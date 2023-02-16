@@ -11,6 +11,7 @@ export const COLORS = {
   error: "#FF3333", // Error red
   success: "#06D6A0", // Success
   info: "#FF971D", // Orange
+  infoReversed: "#FF971D", // Orange
 };
 
 export const SHADOWS = {

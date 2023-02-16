@@ -4,13 +4,16 @@ import styled from "styled-components";
 
 type Props = {
   variant?: "bold" | "regular" | "light";
+  color?: "blue" | "black";
   children: ReactNode;
+  style?: React.CSSProperties;
 };
 
 const BaseH6 = styled.h6`
   font-size: 18px;
   line-height: 100%;
-  color: #000000;
+  color: ${({ theme, color }) =>
+    color === "blue" ? theme.colors.primary : theme.colors.text};
   font-style: normal;
   margin: 12px 0;
 `;
@@ -25,16 +28,37 @@ const StyledH6Light = styled(BaseH6)`
   font-weight: 300;
 `;
 
-export default function H6({ variant = "regular", children }: Props) {
+export default function H6({
+  variant = "regular",
+  children,
+  color = "black",
+  ...rest
+}: Props) {
   switch (variant) {
     case "bold":
-      return <StyledH6Bold>{children}</StyledH6Bold>;
+      return (
+        <StyledH6Bold color={color} {...rest}>
+          {children}
+        </StyledH6Bold>
+      );
     case "regular":
-      return <StyledH6>{children}</StyledH6>;
+      return (
+        <StyledH6 color={color} {...rest}>
+          {children}
+        </StyledH6>
+      );
     case "light":
-      return <StyledH6Light>{children}</StyledH6Light>;
+      return (
+        <StyledH6Light color={color} {...rest}>
+          {children}
+        </StyledH6Light>
+      );
 
     default:
-      return <StyledH6>{children}</StyledH6>;
+      return (
+        <StyledH6 color={color} {...rest}>
+          {children}
+        </StyledH6>
+      );
   }
 }

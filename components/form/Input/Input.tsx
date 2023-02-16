@@ -1,6 +1,7 @@
+import { InputStateType, InputType } from "../../../types/formTypes";
 import React, { ReactNode, useRef } from "react";
 import styled, { css } from "styled-components";
-import { InputStateType, InputType } from "../../../types/formTypes";
+
 import IconWrapper from "../../icons/IconWrapper/IconWrapper";
 import ImportantCircle from "../../icons/ImportantCircle/ImportantCircle";
 import { P } from "../../typography";

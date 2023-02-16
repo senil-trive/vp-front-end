@@ -1,15 +1,19 @@
 import React, { ReactNode } from "react";
+
 import styled from "styled-components";
 
 type Props = React.HTMLAttributes<HTMLHeadingElement> & {
   variant?: "bold" | "regular" | "light";
+  color?: "blue" | "black";
   children: ReactNode;
+  style?: React.CSSProperties;
 };
 
 const BaseH1 = styled.h1`
   font-size: 32px;
   line-height: 120%;
-  color: #000000;
+  color: ${({ theme, color }) =>
+    color === "blue" ? theme.colors.primary : theme.colors.text};
   font-style: normal;
   margin: 12px 0;
 
@@ -30,16 +34,37 @@ const StyledH1Light = styled(BaseH1)`
   font-weight: 300;
 `;
 
-export default function H1({ variant = "regular", children, ...rest }: Props) {
+export default function H1({
+  variant = "regular",
+  color = "black",
+  children,
+  ...rest
+}: Props) {
   switch (variant) {
     case "bold":
-      return <StyledH1Bold {...rest}>{children}</StyledH1Bold>;
+      return (
+        <StyledH1Bold color={color} {...rest}>
+          {children}
+        </StyledH1Bold>
+      );
     case "regular":
-      return <StyledH1 {...rest}>{children}</StyledH1>;
+      return (
+        <StyledH1 color={color} {...rest}>
+          {children}
+        </StyledH1>
+      );
     case "light":
-      return <StyledH1Light {...rest}>{children}</StyledH1Light>;
+      return (
+        <StyledH1Light color={color} {...rest}>
+          {children}
+        </StyledH1Light>
+      );
 
     default:
-      return <StyledH1 {...rest}>{children}</StyledH1>;
+      return (
+        <StyledH1 color={color} {...rest}>
+          {children}
+        </StyledH1>
+      );
   }
 }

@@ -9,6 +9,12 @@ const style = {
 
 <div style={style}>
   <Button onClick={() => alert("Pizza: 🍕")}>Button Primary</Button>
+  <Button variant="info" onClick={() => alert("Pizza: 🍕")}>
+    Button Info
+  </Button>
+  <Button variant="infoReversed" onClick={() => alert("Pizza: 🍕")}>
+    Button Inverted
+  </Button>
   <Button variant="secondary" onClick={() => alert("Pizza: 🍕")}>
     Button Secondary
   </Button>
