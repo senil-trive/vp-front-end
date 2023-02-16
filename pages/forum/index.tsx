@@ -88,9 +88,7 @@ export default function Forum() {
               </P>
 
               <div style={{ display: "flex", gap: 32 }}>
-                <Link href="/forum/vraag">
-                  <Button>Stuur je eigen vraag in!</Button>
-                </Link>
+                <Button href="/forum/vraag">Stuur je eigen vraag in!</Button>
                 <Button filled={false} onClick={() => console.log("clicked")}>
                   Chat met een buddy
                 </Button>

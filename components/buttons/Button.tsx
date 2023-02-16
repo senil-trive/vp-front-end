@@ -15,16 +15,20 @@ type Props = {
   filled?: boolean;
   children: ReactNode;
 
+  /** Wether the button should be treated as a <a/> */
+  href?: string;
+
   /** Wether the button is disabled */
   disabled?: boolean;
 
   /** Loading state of the button */
   loading?: boolean;
 
+  /** Callback */
   onClick?: () => void;
 };
 
-const StyledButton = styled.button<Props>`
+const Style = css<Props>`
   width: 100%;
   height: 60px;
   border-radius: 12px;
@@ -116,10 +120,18 @@ const StyledButton = styled.button<Props>`
       color: ${({ theme }) => theme.colors[variant]};
       border: 2px solid;
     `}
-
+  
   @media ${({ theme }) => theme.breakpoints.tablet} {
     font-size: ${({ theme }) => theme.fontSizes.p.mobile};
   }
+`;
+
+const StyledButton = styled.button<Props>`
+  ${Style}
+`;
+
+const StyledLink = styled.a`
+  ${Style}
 `;
 
 export default function Button({
@@ -129,8 +141,25 @@ export default function Button({
   onClick,
   disabled = false,
   loading = false,
+  href,
   ...rest
 }: Props) {
+  if (href) {
+    return (
+      <StyledLink
+        href={href}
+        disabled={disabled}
+        onClick={onClick}
+        variant={variant}
+        filled={filled}
+        {...rest}
+      >
+        {loading && <CircleSpinner size={20} color="#fff" />}
+        {children}
+      </StyledLink>
+    );
+  }
+
   return (
     <StyledButton
       disabled={disabled}
