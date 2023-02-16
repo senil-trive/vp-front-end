@@ -30,13 +30,22 @@ type Props = {
   /** Wether the  input field is active */
   active?: boolean;
 
+  /** Wether the  input field is required */
+  required?: boolean;
+
   /** Wether the  input field has errors */
   hasError?: boolean;
+
+  /** Name of the input field. required for submitting the form */
+  name?: string;
 
   defaultValue?: string;
 
   /** Callback to handle the input */
   onChange?: (x: string) => void;
+
+  /** React hook form register function for error handling */
+  register?: any;
 };
 
 const InputWrapper = styled.div<InputStateType>`
@@ -146,34 +155,30 @@ export default function Input({
   disabled = false,
   hasError = false,
   defaultValue = "",
+  name,
   onChange,
+  register,
+  required,
   ...rest
 }: Props) {
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const handleInputFocus = () => {
-    inputRef?.current?.focus();
-  };
+  const formRegister =
+    register && name
+      ? register(name, {
+          required: required ? "This field can't be empty" : null,
+        })
+      : {};
 
   return (
-    <InputWrapper
-      disabled={disabled}
-      active={active}
-      hasError={hasError}
-      onClick={handleInputFocus}
-    >
+    <InputWrapper disabled={disabled} active={active} hasError={hasError}>
       {!!label && <label>{label}</label>}
       <div>
         {!!iconLeft && (
           <IconWrapper style={{ marginRight: 10 }}>{iconLeft}</IconWrapper>
         )}
         <input
-          ref={inputRef}
           type={type}
-          placeholder={placeholder}
-          disabled={disabled}
-          defaultValue={defaultValue}
           onChange={(e) => onChange?.(e.target.value)}
+          {...formRegister}
           {...rest}
         />
         {!!iconRight && (

@@ -35,6 +35,15 @@ export type Props = {
 
   /** Wether the  dropdown field has any error */
   hasError?: boolean;
+
+  /** Wether the  input field is required */
+  required?: boolean;
+
+  /** Name of the input field. required for submitting the form */
+  name: string;
+
+  /** React hook form register function for error handling */
+  register?: any;
 };
 
 const Wrapper = styled.div<{ hasError: boolean }>`
@@ -138,11 +147,20 @@ export default function Dropdown({
   helperText,
   placeholder = "Select",
   hasError = false,
+  register,
+  name,
+  required,
   ...rest
 }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState<DropdownItem | null>(null);
   const inputRef = useRef<HTMLSelectElement>(null);
+
+  const formRegister = register
+    ? register(name, {
+        required: required ? "This field can't be empty" : null,
+      })
+    : {};
 
   const handleInputFocus = () => {
     inputRef?.current?.focus();
@@ -161,6 +179,7 @@ export default function Dropdown({
           ref={inputRef}
           placeholder={placeholder}
           disabled={disabled}
+          {...formRegister}
           {...rest}
         >
           {options.map((option) => (

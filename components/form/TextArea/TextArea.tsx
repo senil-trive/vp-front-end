@@ -23,6 +23,15 @@ type Props = {
 
   /** Wether the  input field has errors */
   hasError?: boolean;
+
+  /** Wether the  input field is required */
+  required?: boolean;
+
+  /** Name of the input field. required for submitting the form */
+  name: string;
+
+  /** React hook form register function for error handling */
+  register?: any;
 };
 
 const Wrapper = styled.div<InputStateType>`
@@ -122,8 +131,17 @@ export default function TextArea({
   active = false,
   disabled = false,
   hasError = false,
+  register,
+  required,
+  name,
   ...rest
 }: Props) {
+  const formRegister = register
+    ? register(name, {
+        required: required ? "This field can't be empty" : null,
+      })
+    : {};
+
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
   const handleInputFocus = () => {
@@ -144,6 +162,7 @@ export default function TextArea({
           ref={inputRef}
           placeholder={placeholder}
           disabled={disabled}
+          {...formRegister}
           {...rest}
         />
       </div>

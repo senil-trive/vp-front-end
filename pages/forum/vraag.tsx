@@ -1,12 +1,24 @@
 import { Container } from "@mui/system";
+import { useForm, SubmitHandler } from "react-hook-form";
+
 import Button from "../../components/buttons/Button";
 import Dropdown from "../../components/form/Dropdown/Dropdown";
+import { Form } from "../../components/form/Form/Form";
 import Input from "../../components/form/Input/Input";
 import TextArea from "../../components/form/TextArea/TextArea";
 import { Grid, Hero } from "../../components/layout";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import Section from "../../components/layout/Section/Section";
 import { ColorSpan, H1, P } from "../../components/typography";
+
+type Inputs = {
+  user_name: string;
+  user_email: string;
+  user_age: number;
+  user_gender: string;
+  content: string;
+  attachment_image: string;
+};
 
 const genders = [
   { name: "Man", value: "m" },
@@ -15,6 +27,14 @@ const genders = [
 ];
 
 export default function Vraag() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
+
+  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+
   return (
     <PageWrapper title="Vraag Insturen">
       <Hero>
@@ -35,28 +55,65 @@ export default function Vraag() {
           <main>
             <Container>
               <Section>
-                <form>
+                <form onSubmit={handleSubmit(onSubmit)}>
                   <Grid container spacing="33px">
                     <Grid item xs={12} md={6}>
-                      <Input label="Voornaam" />
+                      <Input
+                        label="Voornaam"
+                        name="user_name"
+                        register={register}
+                        hasError={!!errors.user_name}
+                      />
                     </Grid>
                     <Grid item xs={12} md={6}>
-                      <Input label="Leeftijd" type="number" />
+                      <Input
+                        label="Leeftijd"
+                        type="number"
+                        name="user_age"
+                        register={register}
+                      />
                     </Grid>
                     <Grid item xs={12}>
-                      <Input label="Email adres" type="email" />
+                      <Input
+                        label="Email adres"
+                        type="email"
+                        name="user_email"
+                        register={register}
+                      />
                     </Grid>
 
                     <Grid item xs={12} md={6}>
-                      <Dropdown options={genders} label="Geslacht" />
+                      <Dropdown
+                        options={genders}
+                        label="Geslacht"
+                        name="user_gender"
+                        register={register}
+                      />
                     </Grid>
                     <Grid item xs={12} md={6}>
-                      <Input label="Leeftijd" type="number" />
+                      <Input
+                        label="Upload bestand"
+                        type="file"
+                        name="attachment_image"
+                        register={register}
+                      />
                     </Grid>
                     <Grid item xs={12}>
-                      <TextArea label="Bericht" />
+                      <TextArea
+                        label="Bericht *"
+                        name="content"
+                        required
+                        register={register}
+                        hasError={!!errors.content}
+                        helperText={
+                          !!errors.content ? "This field is required" : ""
+                        }
+                      />
                     </Grid>
 
+                    <Grid item xs={12}>
+                      <P variant="light">* Verplichte velden</P>
+                    </Grid>
                     <Grid item xs={12} md={4}>
                       <Button>Vraag insturen</Button>
                     </Grid>
