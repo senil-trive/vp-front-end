@@ -27,7 +27,7 @@ const CTAItem: React.FC<CTAItemProps> = ({
   const router = useRouter();
 
   return (
-    <div className="rounded bg-white border-2 border-orange-100 flex flex-col gap-10 p-10 ">
+    <div className="rounded-lg bg-white border-2 border-orange-900 flex flex-col gap-10 p-10 ">
       {imageURL ? (
         <Image
           src={imageURL}

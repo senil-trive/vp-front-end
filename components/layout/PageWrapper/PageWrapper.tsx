@@ -1,6 +1,7 @@
-import Head from "next/head";
 import React, { ReactNode } from "react";
+
 import Footer from "../Footer/Footer";
+import Head from "next/head";
 import Header from "../Header/Header";
 
 type Props = {
@@ -20,7 +21,6 @@ export default function PageWrapper({
   description = defaultValues.description,
   children,
 }: Props) {
-  console.log(title);
   return (
     <div>
       <Head>
