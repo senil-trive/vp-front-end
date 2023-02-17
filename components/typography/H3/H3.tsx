@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 type Props = React.HTMLAttributes<HTMLHeadingElement> & {
   variant?: "bold" | "regular" | "light";
-  color?: "blue" | "black";
+  color?: "blue" | "black" | "green";
   children: ReactNode;
   style?: React.CSSProperties;
 };
@@ -12,8 +12,18 @@ type Props = React.HTMLAttributes<HTMLHeadingElement> & {
 const BaseH3 = styled.h3`
   font-size: 32px;
   line-height: 120%;
-  color: ${({ theme, color }) =>
-    color === "blue" ? theme.colors.primary : theme.colors.text};
+  color: ${({ theme, color }) => {
+    switch (color) {
+      case "blue":
+        return theme.colors.primary;
+      case "green":
+        return theme.colors.secondary;
+      case "black":
+        return theme.colors.black;
+      default:
+        return theme.colors.black;
+    }
+  }};
   font-style: normal;
   margin: 12px 0;
 `;

@@ -4,10 +4,14 @@ import { Header, Hero } from "../../components/layout";
 
 import Button from "../../components/buttons/Button";
 import CTAItem from "../../components/content-types/CTAItem/CTAItem";
+import ContentCarousel from "../../components/carousels/ContentCarousel";
 import ENDPOINTS from "../../constants/endpoints";
+import { FAQ } from "../../types/content-types/FAQ.type";
+import FAQItem from "../../components/content-types/FAQItem/FAQItem";
 import Head from "next/head";
 import P from "../../components/typography/P/P";
 import React from "react";
+import { Testimonial } from "../../types/content-types/Testimonial.type";
 import TextItem from "../../components/content-types/TextItem/TextItem";
 import TitleWithHighlights from "../../components/typography/TitleWithHighlights";
 import USPItem from "../../components/content-types/USPItem/USPItem";
@@ -52,8 +56,6 @@ export const getServerSideProps = async () => {
 };
 
 const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
-  console.log(pageData);
-
   return (
     <div>
       <Head>
@@ -216,6 +218,52 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
                 buttonURL={pageData?.cta_section_block_2_button_url}
                 buttonVariant="primary"
               />
+            </div>
+          </Container>
+        </section>
+        <section className="my-[200px] text-center py-20">
+          <Container>
+            <div className="flex flex-col items-center justify-center mb-14">
+              <H3 variant="bold" color="black">
+                {pageData?.testimonials_section_title}
+              </H3>
+              <P className="max-w-4xl">
+                {pageData?.testimonials_section_subtitle}
+              </P>
+            </div>
+          </Container>
+
+          <Container>
+            <ContentCarousel
+              slides={pageData?.testimonials?.map(
+                (testimonial: Testimonial) => ({
+                  title: testimonial.title,
+                  description: testimonial.description,
+                  author: testimonial.author,
+                  date: testimonial.date,
+                })
+              )}
+            />
+          </Container>
+        </section>
+        <section className="my-[200px] text-center py-20">
+          <Container>
+            <div className="flex flex-col items-center justify-center mb-14">
+              <H3 variant="bold" color="black">
+                {pageData?.faq_section_title}
+              </H3>
+            </div>
+          </Container>
+
+          <Container>
+            <div className="flex flex-col gap-8">
+              {pageData?.faq_items?.map((faq: FAQ) => (
+                <FAQItem
+                  key={faq.id}
+                  title={faq.title}
+                  description={faq.description}
+                />
+              ))}
             </div>
           </Container>
         </section>
