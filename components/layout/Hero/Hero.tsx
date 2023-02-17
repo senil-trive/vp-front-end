@@ -1,15 +1,23 @@
 import React, { ReactNode } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Grid } from "../";
 
 type Props = {
+  center?: boolean;
   children: ReactNode;
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ center: boolean }>`
   min-height: 481px;
   padding: 29px 41px 40px 41px;
   position: relative;
+
+  ${({ center }) =>
+    center &&
+    css`
+      display: flex;
+      align-items: center;
+    `}
 
   .inner {
     height: 100%;
@@ -47,9 +55,9 @@ const Wrapper = styled.div`
   }
 `;
 
-export default function Hero({ children }: Props) {
+export default function Hero({ children, center = false }: Props) {
   return (
-    <Wrapper>
+    <Wrapper center={center}>
       <Grid container style={{ height: "100%" }}>
         <Grid item xs={12}>
           <div className="inner">{children}</div>

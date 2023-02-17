@@ -4,21 +4,15 @@ import { useForm, SubmitHandler } from "react-hook-form";
 
 import Button from "../../components/buttons/Button";
 import Dropdown from "../../components/form/Dropdown/Dropdown";
-import { Form } from "../../components/form/Form/Form";
 import Input from "../../components/form/Input/Input";
 import TextArea from "../../components/form/TextArea/TextArea";
 import { Grid, Hero } from "../../components/layout";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import Section from "../../components/layout/Section/Section";
 import { ColorSpan, H1, P } from "../../components/typography";
-import ENDPOINTS from "../../constants/endpoints";
+import { GENDERS } from "../../constants/genders";
 import { ForumPostType } from "../../types/forumTypes";
-
-const genders = [
-  { name: "Man", value: "m" },
-  { name: "Vrouw", value: "v" },
-  { name: "Zeg ik liever niet", value: "o" },
-];
+import { postForum, uploadFile } from "../../utils/api";
 
 export default function Vraag() {
   const [isLoading, setIsLoading] = useState(false);
@@ -27,41 +21,14 @@ export default function Vraag() {
   const {
     register,
     handleSubmit,
-    setError,
     formState: { errors },
   } = useForm<ForumPostType>();
-
-  const handleFileUpload = async (file: File) => {
-    const formData = new FormData();
-
-    formData.append("title", file.name);
-    formData.append("file", file);
-
-    const res = await fetch(`${ENDPOINTS.BASE}/files`, {
-      method: "POST",
-      body: formData,
-    });
-
-    return await res.json();
-  };
 
   const submitForm = async (data: any) => {
     setIsLoading(true);
 
     try {
-      const res = await fetch(`${ENDPOINTS.COLLECTIONS}/forum_posts`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...data,
-          comments: [],
-          homepage_id: null,
-          likes: 0,
-          status: "draft",
-        }),
-      });
+      await postForum(data);
       setIsSubmitted(true);
     } catch (error) {
       setIsSubmitted(false);
@@ -75,7 +42,7 @@ export default function Vraag() {
     ...rest
   }) => {
     if (attachment_image) {
-      const file = await handleFileUpload(attachment_image[0]);
+      const file = await uploadFile(attachment_image[0]);
       submitForm({
         attachment_image: file.data.id,
         ...rest,
@@ -134,7 +101,7 @@ export default function Vraag() {
 
                     <Grid item xs={12} md={6}>
                       <Dropdown
-                        options={genders}
+                        options={GENDERS}
                         label="Geslacht"
                         name="user_gender"
                         register={register}

@@ -14,14 +14,9 @@ import { FEED_TAGS } from "../../constants/mockData";
 import { ForumPostType } from "../../types/forumTypes";
 import { titleToSlug } from "../../utils/slugify";
 
-type ForumResponse = ForumPostType & {
-  date_created: string;
-  date_updated: string;
-};
-
 export default function Forum() {
   const [isLoading, setIsLoading] = useState(false);
-  const [posts, setPosts] = useState<ForumResponse[]>([]);
+  const [posts, setPosts] = useState<ForumPostType[]>([]);
   const [totalPosts, setTotalPosts] = useState(0);
   const postPerPage = 9;
 
@@ -113,7 +108,7 @@ export default function Forum() {
             ) : (
               posts.map((item, index) => (
                 <Grid key={index} item xs={12} md={4}>
-                  <Link href={`forum/${titleToSlug(item.date_created)}`}>
+                  <Link href={`forum/${item.id}`}>
                     <ForumPost
                       author={item.user_name}
                       age={item.user_age}
