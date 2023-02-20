@@ -17,6 +17,7 @@ import TitleWithHighlights from "../../components/typography/TitleWithHighlights
 import USPItem from "../../components/content-types/USPItem/USPItem";
 import VideoItem from "../../components/content-types/VideoItem/VideoItem";
 import parseImageURL from "../../utils/parseImageURL";
+import { useRouter } from "next/router";
 
 type VolunteersPageProps = {
   pageData: any;
@@ -56,11 +57,12 @@ export const getServerSideProps = async () => {
 };
 
 const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
+  const router = useRouter();
   return (
     <div>
       <Head>
         <title>
-          Over onze vrijwilligers | Villa Pinedo - Voor kinderen met gescheiden
+          {pageData?.page_title} | Villa Pinedo - Voor kinderen met gescheiden
           ouders
         </title>
         <meta name="description" content={pageData?.page_subtitle} />
@@ -119,7 +121,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
             </div>
           </Container>
 
-          <Container>
+          <Container maxWidth="xl">
             <div className="grid md:grid-cols-4 gap-8 mt-14 mx-auto">
               {pageData?.usps?.map((usp: any) => (
                 <USPItem
@@ -148,7 +150,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
             </div>
           </Container>
 
-          <Container>
+          <Container maxWidth="xl">
             <div className="grid md:grid-cols-3 gap-8 mt-14 mx-auto">
               {pageData?.video_items?.map((video: any) => (
                 <VideoItem
@@ -194,7 +196,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
             </div>
           </Container>
 
-          <Container>
+          <Container maxWidth="xl">
             <div className="grid md:grid-cols-2 gap-8 mt-14 mx-auto">
               <CTAItem
                 title={pageData?.cta_section_block_1_title}
@@ -233,7 +235,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
             </div>
           </Container>
 
-          <Container>
+          <Container maxWidth="xl">
             <ContentCarousel
               slides={pageData?.testimonials?.map(
                 (testimonial: Testimonial) => ({
@@ -255,7 +257,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
             </div>
           </Container>
 
-          <Container>
+          <Container maxWidth="xl">
             <div className="flex flex-col gap-8">
               {pageData?.faq_items?.map((faq: FAQ) => (
                 <FAQItem
@@ -264,6 +266,14 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
                   description={faq.description}
                 />
               ))}
+            </div>
+            <div className="flex justify-center mt-14">
+              <Button
+                variant="link"
+                onClick={() => router.push("/vrijwilligerswerk/faq")}
+              >
+                Meer lezen
+              </Button>
             </div>
           </Container>
         </section>
