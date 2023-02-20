@@ -6,6 +6,7 @@ import ENDPOINTS from "../../../constants/endpoints";
 import { FAQ } from "../../../types/content-types/FAQ.type";
 import FAQItem from "../../../components/content-types/FAQItem/FAQItem";
 import Head from "next/head";
+import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 
 type VolunteersFAQPageProps = {
   pageData: any;
@@ -62,47 +63,43 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
 }) => {
   return (
     <div>
-      <Head>
-        <title>
-          Veelgestelde vragen | Villa Pinedo - Voor kinderen met gescheiden
-          ouders
-        </title>
-        <meta name="description" content={pageData?.page_subtitle} />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <PageWrapper
+        title={pageData?.page_title}
+        description={pageData?.page_subtitle}
+      >
+        <Header />
 
-      <Header />
-
-      <main>
-        <Hero>
-          <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16">
-            <H1 variant="bold">{pageData?.page_title}</H1>
-            <P>{pageData?.page_subtitle}</P>
-          </div>
-        </Hero>
-
-        <section className="my-[200px] text-center py-20">
-          <Container>
-            <div className="flex flex-col items-center justify-center mb-14">
-              <H3 variant="bold" color="black">
-                Meest gestelde vragen
-              </H3>
+        <main>
+          <Hero>
+            <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16">
+              <H1 variant="bold">{pageData?.page_title}</H1>
+              <P>{pageData?.page_subtitle}</P>
             </div>
-          </Container>
+          </Hero>
 
-          <Container>
-            <div className="flex flex-col gap-8">
-              {faqData?.map((faq: FAQ) => (
-                <FAQItem
-                  key={faq.id}
-                  title={faq.title}
-                  description={faq.description}
-                />
-              ))}
-            </div>
-          </Container>
-        </section>
-      </main>
+          <section className="my-[200px] text-center py-20">
+            <Container>
+              <div className="flex flex-col items-center justify-center mb-14">
+                <H3 variant="bold" color="black">
+                  Meest gestelde vragen
+                </H3>
+              </div>
+            </Container>
+
+            <Container>
+              <div className="flex flex-col gap-8">
+                {faqData?.map((faq: FAQ) => (
+                  <FAQItem
+                    key={faq.id}
+                    title={faq.title}
+                    description={faq.description}
+                  />
+                ))}
+              </div>
+            </Container>
+          </section>
+        </main>
+      </PageWrapper>
     </div>
   );
 };
