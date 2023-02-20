@@ -13,13 +13,9 @@ const FAQItem: React.FC<FAQItemProps> = ({ title, description }) => {
   const theme = useTheme();
   return (
     <div
-      style={{
-        padding: 48,
-        borderRadius: 8,
-        backgroundColor: open
-          ? "rgba(0, 110, 247, 0.05)"
-          : "background: rgba(63, 199, 180, 0.05);",
-      }}
+      className={`p-[48px] rounded-lg ${
+        open ? "bg-[#006ef7]/5" : "bg-[#3fc7b4]/5"
+      } hover:bg-[#006ef7]/5`}
     >
       <div
         className="flex items-center justify-between cursor-pointer text-left"

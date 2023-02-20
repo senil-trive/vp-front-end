@@ -12,6 +12,7 @@ interface TextItemProps {
   content: string;
   imageURL?: string;
   imageAlt: string;
+  showButton?: boolean;
   buttonLabel: string;
   buttonURL: string;
   buttonVariant?: ButtonVariant;
@@ -24,6 +25,7 @@ const TextItem: React.FC<TextItemProps> = ({
   content,
   imageURL,
   imageAlt,
+  showButton = true,
   buttonLabel,
   buttonURL,
   buttonVariant = "primary",
@@ -47,9 +49,9 @@ const TextItem: React.FC<TextItemProps> = ({
               <H3 variant="bold">{title}</H3>
             )}
 
-            <div className="mb-14">{parseHTMLtoReact(content)}</div>
+            <div className="mb-8">{parseHTMLtoReact(content)}</div>
 
-            {buttonURL && buttonLabel && (
+            {showButton && buttonURL && buttonLabel && (
               <div className="w-80 mb-12">
                 <Button
                   variant={buttonVariant}

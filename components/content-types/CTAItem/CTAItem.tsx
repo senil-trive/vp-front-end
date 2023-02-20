@@ -10,9 +10,9 @@ interface CTAItemProps {
   imageAlt: string;
   title: string;
   description: string;
-  buttonLabel: string;
-  buttonURL: string;
-  buttonVariant: ButtonVariant;
+  buttonLabel?: string;
+  buttonURL?: string;
+  buttonVariant?: ButtonVariant;
 }
 
 const CTAItem: React.FC<CTAItemProps> = ({
@@ -28,7 +28,7 @@ const CTAItem: React.FC<CTAItemProps> = ({
 
   return (
     <div className="rounded-lg bg-white border-2 border-orange-900 flex flex-col gap-10 p-10 ">
-      {imageURL ? (
+      {imageURL?.length > 0 && (
         <Image
           src={imageURL}
           alt={imageAlt}
@@ -36,8 +36,6 @@ const CTAItem: React.FC<CTAItemProps> = ({
           height={112}
           className="rounded-full object-cover mx-auto"
         />
-      ) : (
-        <div className="w-[112px] h-[112px]" />
       )}
       <span className="max-w-[320px] mx-auto flex flex-col gap-5">
         <H4
@@ -49,9 +47,15 @@ const CTAItem: React.FC<CTAItemProps> = ({
           {title}
         </H4>
         <P>{description}</P>
-        <Button variant={buttonVariant} onClick={() => router.push(buttonURL)}>
-          {buttonLabel}
-        </Button>
+
+        {buttonLabel && buttonURL && buttonVariant && (
+          <Button
+            variant={buttonVariant}
+            onClick={() => router.push(buttonURL)}
+          >
+            {buttonLabel}
+          </Button>
+        )}
       </span>
     </div>
   );
