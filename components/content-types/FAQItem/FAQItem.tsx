@@ -13,7 +13,7 @@ const FAQItem: React.FC<FAQItemProps> = ({ title, description }) => {
   const theme = useTheme();
   return (
     <div
-      className={`p-[48px] rounded-lg hover:bg-orange ${
+      className={`p-[48px] rounded-lg ${
         open ? "bg-[#006ef7]/5" : "bg-[#3fc7b4]/5"
       } hover:bg-[#006ef7]/5`}
     >
