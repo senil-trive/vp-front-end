@@ -9,7 +9,7 @@ import { Letter } from "../../types/content-types/Letter.type";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import React from "react";
 import TextItem from "../../components/content-types/TextItem/TextItem";
-import { parseFileURL } from "../../utils/components/parseFileURL";
+import { parseFileURL } from "../../utils/parseFileURL";
 import parseImageURL from "../../utils/parseImageURL";
 
 interface LettersOverviewPageProps {
@@ -148,7 +148,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                       titleHighlighted={letter.title_highlighted}
                       content={letter.description}
                       imgSrc={parseImageURL(letter.image?.id)}
-                      fileSrc={parseFileURL(letter.downloadable_document?.id)}
+                      fileSrc={`/open-brieven/${letter.slug}`}
                     />
                   ))}
               </div>

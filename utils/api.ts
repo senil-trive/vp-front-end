@@ -61,3 +61,18 @@ export const postComment = async (
     }),
   });
 };
+
+/**
+ * Add a letter subscription
+ * @param data
+ */
+export const postLetterSubscription = async (data: any) => {
+  console.log(data);
+  await fetch(`${ENDPOINTS.COLLECTIONS}/letter_submissions`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+};

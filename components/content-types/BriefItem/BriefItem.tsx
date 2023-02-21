@@ -7,6 +7,7 @@ import CardFooter from "../../card/CardFooter/CardFooter";
 import CardHeader from "../../card/CardHeader/CardHeader";
 import React from "react";
 import Tag from "../../buttons/Tag/Tag";
+import { truncate } from "../../../utils/truncate";
 
 type Props = {
   title: string;
@@ -52,7 +53,9 @@ export default function BriefItem({
           headerElement="h3"
         />
 
-        <P style={{ marginBottom: 56, marginTop: 12 }}>{content}</P>
+        <P style={{ marginBottom: 56, marginTop: 12 }}>
+          {truncate(content, 200)}
+        </P>
 
         <Button variant="secondary" onClick={() => window.open(fileSrc)}>
           Download brief
