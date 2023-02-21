@@ -41,7 +41,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
     const { data } = await res.json();
 
-    console.log(data);
     if (!data[0]) {
       return {
         redirect: "/forum",
@@ -56,11 +55,9 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       },
     };
   } catch (error) {
-    console.log(error);
     return {
-      props: {
-        slug: "Not Found",
-        pageData: null,
+      redirect: {
+        destination: "/500",
       },
     };
   }

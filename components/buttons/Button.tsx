@@ -126,7 +126,7 @@ const Style = css<Props>`
   }
 `;
 
-const StyledButton = styled.button<Props>`
+const StyledButton = styled.button`
   ${Style}
 `;
 

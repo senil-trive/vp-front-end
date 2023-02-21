@@ -16,7 +16,7 @@ export default function SearchBar({ onSearch, waitTime = 300 }: Props) {
   const router = useRouter();
   const [val, setVal] = useState("");
 
-  const handleSearch = (x: any) => {
+  const handleSearch: React.ChangeEventHandler<HTMLInputElement> = (x) => {
     if (onSearch) return onSearch(x.target.value);
     return router.push(`/search?q=${x.target.value}`);
   };

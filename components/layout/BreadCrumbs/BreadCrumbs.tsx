@@ -24,7 +24,7 @@ const StyledNav = styled.nav`
         color: ${({ theme }) => theme.colors.secondary};
       }
 
-      &.withDivider {
+      &.with-divider {
         &::after {
           content: "/";
           margin-left: 5px;
@@ -66,7 +66,7 @@ export default function BreadCrumbs() {
   return (
     <StyledNav>
       <ol>
-        <li className="withDivider">
+        <li className="with-divider">
           <Link href="/">home</Link>
         </li>
         {breadcrumbs?.map((breadcrumb, i) => {
@@ -76,7 +76,7 @@ export default function BreadCrumbs() {
           return (
             <li
               key={breadcrumb.href}
-              className={i < breadcrumbs.length - 1 ? "withDivider" : ""}
+              className={i < breadcrumbs.length - 1 ? "with-divider" : ""}
             >
               <Link href={breadcrumb.href}>
                 {convertBreadcrumb(breadcrumb.breadcrumb)}
