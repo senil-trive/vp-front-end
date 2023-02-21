@@ -123,7 +123,7 @@ export default function Vraag() {
                         register={register}
                         hasError={!!errors.content}
                         helperText={
-                          !!errors.content ? "This field is required" : ""
+                          !!errors.content ? "Dit veld is verplicht" : ""
                         }
                       />
                     </Grid>

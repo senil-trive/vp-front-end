@@ -158,7 +158,7 @@ export default function Dropdown({
 
   const formRegister = register
     ? register(name, {
-        required: required ? "This field can't be empty" : null,
+        required: required ? "Dit veld is verplicht" : null,
       })
     : {};
 

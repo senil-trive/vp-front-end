@@ -127,7 +127,7 @@ const Wrapper = styled.div<InputStateType>`
 export default function TextArea({
   label,
   helperText,
-  placeholder = "Enter a value",
+  placeholder = "Vul hier je reactie in",
   active = false,
   disabled = false,
   hasError = false,
@@ -138,7 +138,7 @@ export default function TextArea({
 }: Props) {
   const formRegister = register
     ? register(name, {
-        required: required ? "This field can't be empty" : null,
+        required: required ? "Dit veld is verplicht" : null,
       })
     : {};
 
