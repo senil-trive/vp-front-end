@@ -7,6 +7,7 @@ import SearchBar from "../../form/SearchBar/SearchBar";
 import MenuIcon from "../../icons/MenuIcon/MenuIcon";
 import SearchIcon from "../../icons/SearchIcon/SearchIcon";
 import HeaderSubmenuMobile from "./HeaderSubmenuMobile/HeaderSubmenuMobile";
+import Link from "next/link";
 
 export type MenuItem = {
   id: string;
@@ -84,7 +85,9 @@ export default function Header() {
       <div className="desktop-menu">
         <div className="inner">
           <div>
-            <Logo />
+            <Link href="/">
+              <Logo />
+            </Link>
             <HeaderNav selected={selected} onChange={(x) => toggleMenu(x)} />
           </div>
           <div>

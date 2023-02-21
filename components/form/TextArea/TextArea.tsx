@@ -23,6 +23,15 @@ type Props = {
 
   /** Wether the  input field has errors */
   hasError?: boolean;
+
+  /** Wether the  input field is required */
+  required?: boolean;
+
+  /** Name of the input field. required for submitting the form */
+  name: string;
+
+  /** React hook form register function for error handling */
+  register?: any;
 };
 
 const Wrapper = styled.div<InputStateType>`
@@ -118,12 +127,21 @@ const Wrapper = styled.div<InputStateType>`
 export default function TextArea({
   label,
   helperText,
-  placeholder = "Enter a value",
+  placeholder = "Vul hier je reactie in",
   active = false,
   disabled = false,
   hasError = false,
+  register,
+  required,
+  name,
   ...rest
 }: Props) {
+  const formRegister = register
+    ? register(name, {
+        required: required ? "Dit veld is verplicht" : null,
+      })
+    : {};
+
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
   const handleInputFocus = () => {
@@ -144,6 +162,7 @@ export default function TextArea({
           ref={inputRef}
           placeholder={placeholder}
           disabled={disabled}
+          {...formRegister}
           {...rest}
         />
       </div>

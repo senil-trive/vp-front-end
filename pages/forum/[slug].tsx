@@ -1,68 +1,224 @@
 import { Container, Grid } from "@mui/material";
-import Head from "next/head";
-import { useRouter } from "next/router";
-import React from "react";
+import { GetServerSidePropsContext } from "next";
+import React, { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import Button from "../../components/buttons/Button";
+import ForumComment from "../../components/content-types/ForumComment/ForumComment";
 import ForumPost from "../../components/content-types/ForumPost/ForumPost";
-import { Footer, Header, Hero, Pagination } from "../../components/layout";
-import { H1 } from "../../components/typography";
-import { FORUM_POSTS } from "../../constants/mockData";
-import { slugToTitle } from "../../utils/slugify";
+import Dropdown from "../../components/form/Dropdown/Dropdown";
+import Input from "../../components/form/Input/Input";
+import TextArea from "../../components/form/TextArea/TextArea";
+import { Hero } from "../../components/layout";
+import BreadCrumbs from "../../components/layout/BreadCrumbs/BreadCrumbs";
+import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
+import Section from "../../components/layout/Section/Section";
+import { H2, H4, P } from "../../components/typography";
+import ENDPOINTS from "../../constants/endpoints";
+import { GENDERS } from "../../constants/genders";
+import { ForumCommentType, ForumPostType } from "../../types/forumTypes";
+import { postComment } from "../../utils/api";
+import { slugToTitle, titleToSlug } from "../../utils/url";
 
-const item = FORUM_POSTS[0];
+type Props = {
+  pageData: ForumPostType;
+  slug: string;
+};
 
-export default function Forum() {
-  const router = useRouter();
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const { slug: id } = ctx.query;
 
-  const { slug } = router.query;
+  try {
+    // Get the posts
+    const res = await fetch(
+      `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=*.*&filter[id][_eq]=${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const { data } = await res.json();
+
+    if (!data[0]) {
+      return {
+        redirect: "/forum",
+        permanent: false,
+      };
+    }
+
+    return {
+      props: {
+        slug: titleToSlug(data[0].content),
+        pageData: data[0] ?? null,
+      },
+    };
+  } catch (error) {
+    return {
+      redirect: {
+        destination: "/500",
+      },
+    };
+  }
+};
+
+export default function ForumDetail({ slug, pageData }: Props) {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ForumCommentType>();
+
+  const submitForm = async (data: any) => {
+    setIsLoading(true);
+
+    const body = {
+      ...data,
+      post_id: pageData.id,
+    };
+
+    try {
+      await postComment("forum", body);
+      setIsSubmitted(true);
+    } catch (error) {
+      setIsSubmitted(false);
+    }
+
+    setIsLoading(false);
+  };
+
+  const onSubmit: SubmitHandler<ForumCommentType> = async (data) => {
+    submitForm(data);
+  };
 
   return (
-    <div>
-      <Head>
-        <title>Forum detail - Villa Pinedo</title>
-        <meta
-          name="description"
-          content="Praten, lachen, klagen of huilen omdat je ouders gescheiden zijn kan bij Villa Pinedo op het forum of 1 op 1 met een Buddy. Je hoeft het niet alleen te doen."
-        />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <Header />
-
-      <Hero>
-        <Container>
-          <Grid container>
-            <Grid item xs={0} md={2} lg={2} />
-            <Grid item xs={12} md={8} lg={8}>
-              <H1 style={{ textAlign: "center", padding: "0 24px" }}>
-                {slugToTitle(slug as string)}
-              </H1>
-            </Grid>
-            <Grid item xs={0} md={2} lg={2} />
+    <PageWrapper title={slugToTitle(slug as string)}>
+      <BreadCrumbs />
+      <Container>
+        <Grid container>
+          <Grid item xs={0} md={2} lg={2} />
+          <Grid item xs={12} md={8} lg={8}>
+            <ForumPost
+              author={pageData.user_name}
+              age={pageData.user_age}
+              likes={Number(pageData.likes)}
+              authorType={"Anonamous"}
+              postDate={new Date(pageData.date_created)}
+              tags={[]}
+              title={pageData.content}
+            />
           </Grid>
-        </Container>
-      </Hero>
+          <Grid item xs={0} md={2} lg={2} />
+        </Grid>
+      </Container>
 
       <main style={{ marginBottom: "80px" }}>
         <Container>
-          <Grid container style={{ marginBottom: "32px" }}>
+          <Grid container style={{ margin: "70px 0" }}>
             <Grid item xs={0} md={2} lg={2} />
             <Grid item xs={12} md={8} lg={8}>
-              <ForumPost
-                author={item.author}
-                age={item.age}
-                likes={item.likes}
-                authorType={item.authorType}
-                postDate={item.postDate}
-                tags={item.tags}
-                title={item.title}
-              />
+              <H4 variant="bold">Reacties ({pageData.comments.length})</H4>
             </Grid>
-            <Grid item xs={0} md={2} lg={2} />
           </Grid>
         </Container>
-      </main>
+        <Container>
+          <Grid container>
+            {pageData?.comments.map((comment) => (
+              <>
+                <Grid item xs={0} md={2} lg={2} />
+                <Grid item xs={12} md={8} lg={8}>
+                  <ForumComment
+                    author={comment.user_name}
+                    age={comment.user_age}
+                    authorType={"Anonamous"}
+                    postDate={new Date(comment.date_created)}
+                    title={comment.content}
+                  />
+                </Grid>
+                <Grid item xs={0} md={2} lg={2} />
+              </>
+            ))}
+          </Grid>
+        </Container>
+        <Hero center>
+          <Container>
+            <Section>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <Grid container spacing="33px">
+                  <Grid item xs={12} md={6}>
+                    <Input
+                      label="Voornaam"
+                      name="user_name"
+                      register={register}
+                      hasError={!!errors.user_name}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    <Input
+                      label="Leeftijd"
+                      type="number"
+                      name="user_age"
+                      register={register}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Input
+                      label="Email adres"
+                      type="email"
+                      name="user_email"
+                      register={register}
+                    />
+                  </Grid>
 
-      <Footer />
-    </div>
+                  <Grid item xs={12} md={6}>
+                    <Dropdown
+                      options={GENDERS}
+                      label="Geslacht"
+                      name="user_gender"
+                      register={register}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={6}>
+                    {/* <Input
+                label="Upload bestand"
+                type="file"
+                name="attachment_image"
+                register={register}
+              /> */}
+                  </Grid>
+                  <Grid item xs={12}>
+                    <TextArea
+                      label="Bericht *"
+                      name="content"
+                      required
+                      register={register}
+                      hasError={!!errors.content}
+                      helperText={
+                        !!errors.content ? "Dit veld is verplicht" : ""
+                      }
+                    />
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <P variant="light">* Verplichte velden</P>
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <Button loading={isLoading} disabled={isSubmitted}>
+                      {isLoading && "bezig..."}
+                      {isSubmitted && "Verzonden"}
+                      {!isLoading && !isSubmitted && "Vraag insturen"}
+                    </Button>
+                  </Grid>
+                </Grid>
+              </form>
+            </Section>
+          </Container>
+        </Hero>
+      </main>
+    </PageWrapper>
   );
 }

@@ -1,5 +1,5 @@
-import ReactHtmlParser from "react-html-parser";
+import ReactHtmlParser from "html-react-parser";
 
-export default function parseHTMLtoReact(html: string | undefined) {
+export default function parseHTMLtoReact(html: string) {
   return ReactHtmlParser(html);
 }

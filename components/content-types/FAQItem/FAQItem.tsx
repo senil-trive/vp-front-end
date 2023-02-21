@@ -36,7 +36,9 @@ const FAQItem: React.FC<FAQItemProps> = ({ title, description }) => {
         </button>
       </div>
       {open && (
-        <div className="mt-4 text-left">{parseHTMLtoReact(description)}</div>
+        <div className="mt-4 text-left">
+          {parseHTMLtoReact(description ?? "")}
+        </div>
       )}
     </div>
   );

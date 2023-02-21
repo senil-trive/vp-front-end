@@ -68,6 +68,7 @@ export default function ForumPost({
   tags = [],
 }: Props) {
   const { colors } = useTheme();
+
   return (
     <StyledForumPost>
       <header>

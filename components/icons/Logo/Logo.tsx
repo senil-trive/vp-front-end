@@ -39,26 +39,25 @@ const White = (props: SVGProps<SVGSVGElement>) => (
 
 const Dark = () => {
   const { devices } = useTheme();
-  const isLaptop = useMediaQuery(`${devices.laptop}`);
+  const isTablet = useMediaQuery(`${devices.tablet}`);
 
-  if (isLaptop) {
-    return (
+  return (
+    <>
       <Image
         src={"/logo.png"}
         height={66}
         width={177}
+        className={isTablet ? "" : "hidden"}
         alt="Logo Villa pinedo"
       />
-    );
-  }
-
-  return (
-    <Image
-      src={"/logo-small.png"}
-      width={45}
-      height={44.88}
-      alt="Logo Villa pinedo"
-    />
+      <Image
+        src={"/logo-small.png"}
+        width={45}
+        height={44.88}
+        className={isTablet ? "hidden" : ""}
+        alt="Logo Villa pinedo small"
+      />
+    </>
   );
 };
 
