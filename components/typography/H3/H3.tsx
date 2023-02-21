@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 type Props = React.HTMLAttributes<HTMLHeadingElement> & {
   variant?: "bold" | "regular" | "light";
-  color?: "blue" | "black" | "green";
+  color?: "blue" | "black" | "green" | "white";
   children: ReactNode;
   style?: React.CSSProperties;
 };
@@ -20,6 +20,8 @@ const BaseH3 = styled.h3`
         return theme.colors.secondary;
       case "black":
         return theme.colors.black;
+      case "white":
+        return theme.colors.white;
       default:
         return theme.colors.black;
     }
