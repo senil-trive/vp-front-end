@@ -67,8 +67,6 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
         title={pageData?.page_title}
         description={pageData?.page_subtitle}
       >
-        <Header />
-
         <main>
           <Hero>
             <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16">
