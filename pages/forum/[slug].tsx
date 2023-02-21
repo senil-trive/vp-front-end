@@ -9,17 +9,15 @@ import Dropdown from "../../components/form/Dropdown/Dropdown";
 import Input from "../../components/form/Input/Input";
 import TextArea from "../../components/form/TextArea/TextArea";
 import { Hero } from "../../components/layout";
+import BreadCrumbs from "../../components/layout/BreadCrumbs/BreadCrumbs";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import Section from "../../components/layout/Section/Section";
-import { P } from "../../components/typography";
+import { H2, H4, P } from "../../components/typography";
 import ENDPOINTS from "../../constants/endpoints";
 import { GENDERS } from "../../constants/genders";
-import { FORUM_POSTS } from "../../constants/mockData";
 import { ForumCommentType, ForumPostType } from "../../types/forumTypes";
-import { postComment, uploadFile } from "../../utils/api";
-import { slugToTitle, titleToSlug } from "../../utils/slugify";
-
-const item = FORUM_POSTS[0];
+import { postComment } from "../../utils/api";
+import { slugToTitle, titleToSlug } from "../../utils/url";
 
 type Props = {
   pageData: ForumPostType;
@@ -102,6 +100,7 @@ export default function ForumDetail({ slug, pageData }: Props) {
 
   return (
     <PageWrapper title={slugToTitle(slug as string)}>
+      <BreadCrumbs />
       <Container>
         <Grid container>
           <Grid item xs={0} md={2} lg={2} />
@@ -122,12 +121,15 @@ export default function ForumDetail({ slug, pageData }: Props) {
 
       <main style={{ marginBottom: "80px" }}>
         <Container>
-          <Grid container>
+          <Grid container style={{ margin: "70px 0" }}>
             <Grid item xs={0} md={2} lg={2} />
             <Grid item xs={12} md={8} lg={8}>
-              <h2>Reacties ({pageData.comments.length})</h2>
+              <H4 variant="bold">Reacties ({pageData.comments.length})</H4>
             </Grid>
-            <Grid item xs={0} md={2} lg={2} />
+          </Grid>
+        </Container>
+        <Container>
+          <Grid container>
             {pageData?.comments.map((comment) => (
               <>
                 <Grid item xs={0} md={2} lg={2} />
@@ -137,7 +139,6 @@ export default function ForumDetail({ slug, pageData }: Props) {
                     age={comment.user_age}
                     authorType={"Anonamous"}
                     postDate={new Date(comment.date_created)}
-                    tags={[]}
                     title={comment.content}
                   />
                 </Grid>
@@ -145,7 +146,9 @@ export default function ForumDetail({ slug, pageData }: Props) {
               </>
             ))}
           </Grid>
-          <Hero center>
+        </Container>
+        <Hero center>
+          <Container>
             <Section>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <Grid container spacing="33px">
@@ -216,8 +219,8 @@ export default function ForumDetail({ slug, pageData }: Props) {
                 </Grid>
               </form>
             </Section>
-          </Hero>
-        </Container>
+          </Container>
+        </Hero>
       </main>
     </PageWrapper>
   );

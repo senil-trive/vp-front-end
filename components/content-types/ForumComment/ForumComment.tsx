@@ -1,59 +1,48 @@
 import React from "react";
 import styled, { useTheme } from "styled-components";
-import { IoMdPerson } from "react-icons/io";
-import { format } from "date-fns";
+import { formatDistance } from "date-fns";
+import { nl } from "date-fns/locale";
 
-import IconButton from "../../buttons/IconButton/IconButton";
 import { P } from "../../typography";
-import Tag from "../../buttons/Tag/Tag";
-import HeartIcon from "../../icons/HeartIcon/HeartIcon";
+import Person from "../Person/Person";
+import ShareIcon from "../../icons/ShareIcon/ShareIcon";
+import MoreIcon from "../../icons/MoreIcon/MoreIcon";
+import { rgba } from "../../../utils/colors";
 
 type Props = {
   authorType: string;
   author: string;
   age: number;
   title: string;
-  tags: string[];
   postDate?: Date;
+  profileImage?: string;
 };
 
 const StyledForumPost = styled.article`
-  background: #ffffff;
-  border: 1px solid ${({ theme }) => theme.colors.primary};
-  border-radius: 8px;
-  padding: 24px;
-  overflow: hidden;
   position: relative;
   z-index: 1;
+  margin-bottom: 40px;
 
   header {
     display: flex;
     align-items: center;
-    gap: 30px;
-    margin-bottom: 32px;
+    justify-content: space-between;
+    margin-bottom: 20px;
   }
 
   .content {
-    margin-bottom: 30px;
-    > div {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 30px;
-    }
+    border: 1px solid ${({ theme }) => theme.colors.secondary};
+    padding: 24px;
+    border-radius: 8px;
+    margin-bottom: 34px;
   }
 
   footer {
     display: flex;
-    justify-content: space-between;
+    gap: 28px;
     align-items: center;
-
-    .likes {
-      display: flex;
-      gap: 5.55px;
-    }
-    p {
-      margin: 0;
-    }
+    padding-bottom: 14px;
+    border-bottom: 1px solid ${({ theme }) => rgba(theme.colors.primary, 0.2)};
   }
 `;
 
@@ -63,39 +52,39 @@ export default function ForumComment({
   age,
   authorType,
   postDate,
-  tags = [],
+  profileImage = "https://randomuser.me/api/portraits/lego/2.jpg",
 }: Props) {
   const { colors } = useTheme();
+  const accentColor = colors.secondary;
+
   return (
     <StyledForumPost>
       <header>
-        <IconButton wrapperSize={64} wrapperColor="#E0E0E0" Icon={IoMdPerson} />
-        <div>
-          <P variant="bold">{authorType}</P>
-          <P variant="helper" style={{ color: colors.tertiary }}>
-            {author}, {age} jaar
-          </P>
-        </div>
-      </header>
-      <div className="content">
-        <div className="flex">
-          {tags.map((item, index) => (
-            <Tag key={index} size="m">
-              {item}
-            </Tag>
-          ))}
-        </div>
-        <P>{title}</P>
-      </div>
-      <footer>
-        <div className="likes"></div>
+        <Person
+          avatar={profileImage}
+          age={age}
+          name={author}
+          type={authorType}
+          color={accentColor}
+        />
         <div>
           {postDate && (
             <P variant="helper" style={{ textAlign: "right", color: "#555" }}>
-              Geplaatst op {format(postDate, "dd/mm/yyyy")}
+              {formatDistance(postDate, new Date(), {
+                includeSeconds: false,
+                addSuffix: true,
+                locale: nl,
+              })}
             </P>
           )}
         </div>
+      </header>
+      <div className="content">
+        <P>{title}</P>
+      </div>
+      <footer>
+        <ShareIcon />
+        <MoreIcon />
       </footer>
     </StyledForumPost>
   );

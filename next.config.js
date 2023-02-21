@@ -6,7 +6,7 @@ const moduleExports = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["admin.villapinedo.nl"],
+    domains: ["admin.villapinedo.nl", "randomuser.me"],
   },
 };
 

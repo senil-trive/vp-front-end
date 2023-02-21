@@ -12,7 +12,7 @@ import ColorSpan from "../../components/typography/ColorSpan/ColorSpan";
 import ENDPOINTS from "../../constants/endpoints";
 import { FEED_TAGS } from "../../constants/mockData";
 import { ForumPostType } from "../../types/forumTypes";
-import { titleToSlug } from "../../utils/slugify";
+import { titleToSlug } from "../../utils/url";
 
 export default function Forum() {
   const [isLoading, setIsLoading] = useState(false);

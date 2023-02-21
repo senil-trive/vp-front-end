@@ -153,10 +153,26 @@ import UserIcon from "/components/icons/UserIcon/UserIcon";
 import SearchIcon from "/components/icons/SearchIcon/SearchIcon";
 import CheckmarkIcon from "/components/icons/Checkmark/CheckmarkIcon";
 import MenuIcon from "/components/icons/MenuIcon/MenuIcon";
+import ShareIcon from "/components/icons/ShareIcon/ShareIcon";
+import UserAvatar from "/components/icons/UserAvatar/UserAvatar";
 
 <Grid container>
-  <Grid item md={12}>
+  <Grid item md={6}>
     <Logo />
+  </Grid>
+  <Grid item md={3}>
+    <UserAvatar
+      alt="John Doe"
+      size="sm"
+      src="https://randomuser.me/api/portraits/lego/2.jpg"
+    />
+  </Grid>
+  <Grid item md={3}>
+    <UserAvatar
+      alt="John Doe"
+      size="md"
+      src="https://randomuser.me/api/portraits/lego/2.jpg"
+    />
   </Grid>
 
   <Grid md={1}>
@@ -188,6 +204,9 @@ import MenuIcon from "/components/icons/MenuIcon/MenuIcon";
   </Grid>
   <Grid md={1}>
     <MenuIcon />
+  </Grid>
+  <Grid md={1}>
+    <ShareIcon />
   </Grid>
 </Grid>;
 ```
