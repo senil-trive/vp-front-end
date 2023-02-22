@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
-import { CircleSpinner } from "react-spinners-kit";
 import styled, { css } from "styled-components";
+
+import { CircleSpinner } from "react-spinners-kit";
 
 export type ButtonVariant =
   | "primary"
@@ -41,6 +42,7 @@ const Style = css<Props>`
   text-align: center;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
+  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 
   &:disabled {
     cursor: not-allowed;

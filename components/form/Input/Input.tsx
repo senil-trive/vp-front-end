@@ -185,8 +185,8 @@ export default function Input({
         )}
         <input
           type={type}
-          onChange={(e) => onChange?.(e)}
           placeholder={placeholder}
+          onChange={(e) => onChange?.(e)}
           {...formRegister}
           {...rest}
         />
