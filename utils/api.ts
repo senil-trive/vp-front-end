@@ -83,7 +83,7 @@ export const getMenuItems = async () => {
     const resData = await res.json();
     return resData.data as MenuItem[];
   } catch (error) {
-    console.log("error getting menuitems", error);
+    console.log("error getting menu items", error);
     return null;
   }
 };
@@ -107,7 +107,7 @@ export const getCompanyInfo = async () => {
     const resData = await res.json();
     return resData.data as CompanyInfo;
   } catch (error) {
-    console.log("error getting menuitems", error);
+    console.log("error getting the company", error);
     return null;
   }
 };
