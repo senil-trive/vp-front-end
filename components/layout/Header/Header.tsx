@@ -9,6 +9,7 @@ import SearchIcon from "../../icons/SearchIcon/SearchIcon";
 import HeaderSubmenuMobile from "./HeaderSubmenuMobile/HeaderSubmenuMobile";
 import Link from "next/link";
 import { getMenuItems } from "../../../utils/api";
+import CloseIcon from "../../icons/CloseIcon/CloseIcon";
 
 export type MenuItem = {
   id: string;
@@ -119,10 +120,15 @@ export default function Header() {
           <div>
             {!isLoading && (
               <div className="flex items-center gap-[24px]">
-                <SearchIcon />
-                <MenuIcon
+                <Link href="/search">
+                  <SearchIcon />
+                </Link>
+                <button
+                  style={{ border: "none", backgroundColor: "white" }}
                   onClick={() => setMobileMenuOpen((isOpen) => !isOpen)}
-                />
+                >
+                  {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+                </button>
               </div>
             )}
           </div>

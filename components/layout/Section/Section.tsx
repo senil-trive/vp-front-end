@@ -11,7 +11,11 @@ type Props = {
 
 const Wrapper = styled.div`
   border-radius: 8px;
-  padding: 51px 90px;
+  padding: 24px;
+
+  @media ${({ theme }) => theme.devices.tablet} {
+    padding: 51px 90px;
+  }
 `;
 
 export default function Section({
