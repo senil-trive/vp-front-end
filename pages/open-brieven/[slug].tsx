@@ -45,7 +45,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     );
 
     const lettersReq = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*.*`,
+      `${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*.*&filter[status][_eq]=published`,
       {
         method: "GET",
         headers: {
@@ -77,7 +77,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   }
 };
 
-export default function ForumDetail({ pageData, relatedLetters }: Props) {
+export default function LetterDetail({ pageData, relatedLetters }: Props) {
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const theme = useTheme();

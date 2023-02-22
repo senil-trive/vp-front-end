@@ -30,7 +30,7 @@ export const getServerSideProps = async () => {
     );
 
     const lettersReq = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*.*`,
+      `${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*.*&filter[status][_eq]=published`,
       {
         method: "GET",
         headers: {

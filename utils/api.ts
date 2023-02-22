@@ -67,7 +67,6 @@ export const postComment = async (
  * @param data
  */
 export const postLetterSubscription = async (data: any) => {
-  console.log(data);
   await fetch(`${ENDPOINTS.COLLECTIONS}/letter_submissions`, {
     method: "POST",
     headers: {
