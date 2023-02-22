@@ -1,4 +1,6 @@
+import { MenuItem } from "../components/layout/Header/Header";
 import ENDPOINTS from "../constants/endpoints";
+import { CompanyInfo } from "../types/componayInfoTypes";
 
 /**
  * Uploads a file to the backend
@@ -62,6 +64,10 @@ export const postComment = async (
   });
 };
 
+/**
+ * Get all the menu items used for navigation
+ * @returns array or null
+ */
 export const getMenuItems = async () => {
   try {
     const res = await fetch(
@@ -75,8 +81,33 @@ export const getMenuItems = async () => {
     );
 
     const resData = await res.json();
-    return resData.data;
+    return resData.data as MenuItem[];
   } catch (error) {
     console.log("error getting menuitems", error);
+    return null;
+  }
+};
+
+/**
+ * Get all the menu items used for navigation
+ * @returns array
+ */
+export const getCompanyInfo = async () => {
+  try {
+    const res = await fetch(
+      `${ENDPOINTS.COLLECTIONS}/general_info?fields=*.*.*`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const resData = await res.json();
+    return resData.data as CompanyInfo;
+  } catch (error) {
+    console.log("error getting menuitems", error);
+    return null;
   }
 };
