@@ -67,6 +67,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
           <Hero>
             <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16">
               <TitleWithHighlights
+                highlightColor="info"
                 text={pageData?.page_title}
                 textToHighlight={pageData?.page_title_highlighted}
                 headerElement="h1"

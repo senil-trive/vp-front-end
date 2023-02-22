@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+
 import styled from "styled-components";
 
 type Variant = {
@@ -27,6 +28,10 @@ const StyledPost = styled(BaseStyle)`
   }
 `;
 
+const StyledLetter = styled(BaseStyle)`
+  border-color: ${({ theme }) => theme.colors.info};
+`;
+
 const StyledBlog = styled(BaseStyle)`
   padding: 24px;
 
@@ -51,6 +56,9 @@ const CardWrapper = ({
     case "vlog":
     case "blog":
       return <StyledBlog>{children}</StyledBlog>;
+
+    case "brief":
+      return <StyledLetter>{children}</StyledLetter>;
 
     default:
       return <StyledPost>{children}</StyledPost>;

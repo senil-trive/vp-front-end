@@ -1,8 +1,10 @@
 import React, { ReactNode } from "react";
+
 import styled from "styled-components";
 
 type Props = React.HTMLAttributes<HTMLParagraphElement> & {
   variant?: "bold" | "regular" | "italic" | "light" | "helper";
+  color?: "white" | "black";
   children: ReactNode;
 };
 
@@ -10,8 +12,16 @@ const BaseP = styled.p`
   font-style: normal;
   font-size: 16px;
   line-height: 140%;
-  color: #000000;
-
+  color: ${({ theme, color }) => {
+    switch (color) {
+      case "white":
+        return theme.colors.white;
+      case "black":
+        return theme.colors.black;
+      default:
+        return theme.colors.black;
+    }
+  }};
   margin: 12px 0;
 
   @media ${({ theme }) => theme.devices.tablet} {
@@ -40,20 +50,49 @@ const StyledHelperText = styled(BaseP)`
   color: #000000;
 `;
 
-export default function P({ variant = "regular", children, ...rest }: Props) {
+export default function P({
+  variant = "regular",
+  color = "black",
+  children,
+  ...rest
+}: Props) {
   switch (variant) {
     case "bold":
-      return <StyledPBold {...rest}>{children}</StyledPBold>;
+      return (
+        <StyledPBold {...rest} color={color}>
+          {children}
+        </StyledPBold>
+      );
     case "italic":
-      return <StyledPItalic {...rest}>{children}</StyledPItalic>;
+      return (
+        <StyledPItalic {...rest} color={color}>
+          {children}
+        </StyledPItalic>
+      );
     case "regular":
-      return <StyledP {...rest}>{children}</StyledP>;
+      return (
+        <StyledP {...rest} color={color}>
+          {children}
+        </StyledP>
+      );
     case "light":
-      return <StyledPLight {...rest}>{children}</StyledPLight>;
+      return (
+        <StyledPLight {...rest} color={color}>
+          {children}
+        </StyledPLight>
+      );
     case "helper":
-      return <StyledHelperText {...rest}>{children}</StyledHelperText>;
+      return (
+        <StyledHelperText {...rest} color={color}>
+          {children}
+        </StyledHelperText>
+      );
 
     default:
-      return <StyledP {...rest}>{children}</StyledP>;
+      return (
+        <StyledP {...rest} color={color}>
+          {children}
+        </StyledP>
+      );
   }
 }
