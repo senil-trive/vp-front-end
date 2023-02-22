@@ -61,3 +61,22 @@ export const postComment = async (
     }),
   });
 };
+
+export const getMenuItems = async () => {
+  try {
+    const res = await fetch(
+      `${ENDPOINTS.COLLECTIONS}/main_nav_items?fields=*.*.*`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const resData = await res.json();
+    return resData.data;
+  } catch (error) {
+    console.log("error getting menuitems", error);
+  }
+};

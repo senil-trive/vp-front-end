@@ -1,10 +1,11 @@
 import { InputStateType, InputType } from "../../../types/formTypes";
 import React, { ReactNode, useRef } from "react";
-import styled, { css } from "styled-components";
+import styled, { css, useTheme } from "styled-components";
 
 import IconWrapper from "../../icons/IconWrapper/IconWrapper";
 import ImportantCircle from "../../icons/ImportantCircle/ImportantCircle";
 import { P } from "../../typography";
+import { ColorType } from "../../../types/colorTypes";
 
 type Props = {
   /** Label of the input field. */
@@ -47,6 +48,9 @@ type Props = {
 
   /** React hook form register function for error handling */
   register?: any;
+
+  /** The color of the border */
+  borderColor?: ColorType;
 };
 
 const InputWrapper = styled.div<InputStateType>`
@@ -66,7 +70,7 @@ const InputWrapper = styled.div<InputStateType>`
   }
 
   > div {
-    border: 1px solid #555555;
+    border: 1px solid;
     background-color: white;
     width: 100%;
     border-radius: 8px;
@@ -160,8 +164,11 @@ export default function Input({
   onChange,
   register,
   required,
+  borderColor = "primary",
   ...rest
 }: Props) {
+  const { colors } = useTheme();
+
   const formRegister =
     register && name
       ? register(name, {
@@ -172,13 +179,14 @@ export default function Input({
   return (
     <InputWrapper disabled={disabled} active={active} hasError={hasError}>
       {!!label && <label>{label}</label>}
-      <div>
+      <div style={{ borderColor: colors[borderColor] }}>
         {!!iconLeft && (
           <IconWrapper style={{ marginRight: 10 }}>{iconLeft}</IconWrapper>
         )}
         <input
           type={type}
           onChange={(e) => onChange?.(e)}
+          placeholder={placeholder}
           {...formRegister}
           {...rest}
         />

@@ -8,11 +8,11 @@ import styled from "styled-components";
 
 type Props = {
   selected?: MenuItem;
+  menuCols: MenuItem[];
   onChange: (x: MenuItem) => void;
 };
 
 const StyledNav = styled.nav`
-  /* display: none; */
   ul {
     display: flex;
     align-items: center;
@@ -29,20 +29,26 @@ const StyledNav = styled.nav`
 
       &.selected {
         font-weight: 700;
+        p {
+          color: ${({ theme }) => theme.colors.primary};
+        }
       }
     }
   }
 
   @media ${({ theme }) => theme.devices.laptop} {
-    /* display: block; */
   }
 `;
 
-export default function HeaderNav({ selected, onChange }: Props) {
+export default function HeaderNav({
+  selected,
+  onChange,
+  menuCols = MENU_COLS,
+}: Props) {
   return (
     <StyledNav>
       <ul>
-        {MENU_COLS.map((menu) => (
+        {menuCols.map((menu) => (
           <li
             key={menu.id}
             className={selected?.id === menu.id ? "selected" : ""}

@@ -3,6 +3,11 @@ import React, { ReactNode } from "react";
 import Footer from "../Footer/Footer";
 import Head from "next/head";
 import Header from "../Header/Header";
+import dynamic from "next/dynamic";
+
+const DynamicHeader = dynamic(() => import("../Header/Header"), {
+  loading: () => <>Loading...</>,
+});
 
 type Props = {
   title?: string;
@@ -50,7 +55,7 @@ export default function PageWrapper({
         <meta name="theme-color" content="#ffffff"></meta>
       </Head>
 
-      <Header />
+      <DynamicHeader />
 
       {children}
 

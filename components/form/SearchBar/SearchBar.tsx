@@ -35,6 +35,7 @@ export default function SearchBar({ onSearch, waitTime = 300 }: Props) {
       placeholder="Zoeken..."
       defaultValue={val}
       onChange={debouncedSearch}
+      borderColor="grey"
     />
   );
 }
