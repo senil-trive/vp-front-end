@@ -80,3 +80,17 @@ export const getMenuItems = async () => {
     console.log("error getting menuitems", error);
   }
 };
+
+/**
+ * Add a letter subscription
+ * @param data
+ */
+export const postLetterSubscription = async (data: any) => {
+  await fetch(`${ENDPOINTS.COLLECTIONS}/letter_submissions`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+};

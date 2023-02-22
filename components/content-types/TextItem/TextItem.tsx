@@ -13,8 +13,8 @@ interface TextItemProps {
   imageURL?: string;
   imageAlt: string;
   showButton?: boolean;
-  buttonLabel: string;
-  buttonURL: string;
+  buttonLabel?: string;
+  buttonURL?: string;
   buttonVariant?: ButtonVariant;
   rtl?: boolean;
 }
@@ -40,6 +40,7 @@ const TextItem: React.FC<TextItemProps> = ({
           <div>
             {titleHighlighted && title ? (
               <TitleWithHighlights
+                highlightColor="info"
                 text={title}
                 textToHighlight={titleHighlighted}
                 headerElement="h3"
@@ -90,6 +91,7 @@ const TextItem: React.FC<TextItemProps> = ({
           <div>
             {titleHighlighted && title ? (
               <TitleWithHighlights
+                highlightColor="info"
                 text={title}
                 textToHighlight={titleHighlighted}
                 headerElement="h3"
