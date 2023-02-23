@@ -112,14 +112,9 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                     pageData?.highlighted_letter?.image?.id
                   )}
                   imageAlt={pageData?.highlighted_letter?.title}
-                  showButton={
-                    pageData?.highlighted_letter?.download_enabled &&
-                    pageData?.highlighted_letter?.downloadable_document?.id
-                  }
+                  showButton={true}
                   buttonLabel={"Download de brief"}
-                  buttonURL={parseFileURL(
-                    pageData?.highlighted_letter?.downloadable_document?.id
-                  )}
+                  buttonURL={`/open-brieven/${pageData?.highlighted_letter?.slug}`}
                 />
               )}
             </Container>
