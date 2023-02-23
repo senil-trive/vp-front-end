@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Logo from "../../icons/Logo/Logo";
 import HeaderNav from "./HeaderNav/HeaderNav";
@@ -8,31 +8,29 @@ import MenuIcon from "../../icons/MenuIcon/MenuIcon";
 import SearchIcon from "../../icons/SearchIcon/SearchIcon";
 import HeaderSubmenuMobile from "./HeaderSubmenuMobile/HeaderSubmenuMobile";
 import Link from "next/link";
+import { getMenuItems } from "../../../utils/api";
+import CloseIcon from "../../icons/CloseIcon/CloseIcon";
 
 export type MenuItem = {
   id: string;
   name: string;
-  categories: Category[];
+  children: ChildMenuItem[];
 };
 
-export type Category = {
+export type ChildMenuItem = {
+  id: string;
   name: string;
-  items: {
-    name: string;
-    link: string;
-  }[];
+  children: GrandChildMenuItem[];
+};
+
+export type GrandChildMenuItem = {
+  id: string;
+  name: string;
+  link: string;
 };
 
 const StyledHeader = styled.header`
   position: relative;
-
-  /* Header Sub Menu */
-  .inner + div {
-    position: absolute;
-    top: 100%;
-    z-index: 999;
-    right: 0;
-  }
 
   .inner {
     display: flex;
@@ -69,6 +67,8 @@ const StyledHeader = styled.header`
 `;
 
 export default function Header() {
+  const [isLoading, setIsloading] = useState(true);
+  const [menuItems, setMenuItems] = useState([]);
   const [selected, setSelected] = useState<MenuItem | undefined>(undefined);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -80,6 +80,16 @@ export default function Header() {
     return setSelected(() => menu);
   };
 
+  useEffect(() => {
+    if (menuItems.length === 0 && isLoading) {
+      (async () => {
+        const data = await getMenuItems();
+        setMenuItems(data);
+        setIsloading(false);
+      })();
+    }
+  }, []);
+
   return (
     <StyledHeader>
       <div className="desktop-menu">
@@ -88,13 +98,19 @@ export default function Header() {
             <Link href="/">
               <Logo />
             </Link>
-            <HeaderNav selected={selected} onChange={(x) => toggleMenu(x)} />
+            {!isLoading && (
+              <HeaderNav
+                menuCols={menuItems}
+                selected={selected}
+                onChange={(x) => toggleMenu(x)}
+              />
+            )}
           </div>
           <div>
             <SearchBar />
           </div>
         </div>
-        {selected && <HeaderSubmenu categories={selected?.categories} />}
+        {selected && <HeaderSubmenu categories={selected?.children} />}
       </div>
       <div className="mobile-menu">
         <div className="inner">
@@ -102,11 +118,28 @@ export default function Header() {
             <Logo />
           </div>
           <div>
-            <SearchIcon />
-            <MenuIcon onClick={() => setMobileMenuOpen((isOpen) => !isOpen)} />
+            {!isLoading && (
+              <div className="flex items-center gap-[24px]">
+                <Link href="/search">
+                  <SearchIcon />
+                </Link>
+                <button
+                  style={{ border: "none", backgroundColor: "white" }}
+                  onClick={() => setMobileMenuOpen((isOpen) => !isOpen)}
+                >
+                  {mobileMenuOpen ? <CloseIcon /> : <MenuIcon />}
+                </button>
+              </div>
+            )}
           </div>
         </div>
-        {mobileMenuOpen && <HeaderSubmenuMobile />}
+        {mobileMenuOpen && (
+          <HeaderSubmenuMobile
+            menuCols={menuItems}
+            selected={selected}
+            onChange={(x) => toggleMenu(x)}
+          />
+        )}
       </div>
     </StyledHeader>
   );

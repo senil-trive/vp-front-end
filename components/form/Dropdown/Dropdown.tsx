@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
-import styled, { css } from "styled-components";
+import styled, { css, useTheme } from "styled-components";
+import { ColorType } from "../../../types/colorTypes";
 import ChevronDownFilled from "../../icons/ChevronDownFilled/ChevronDownFilled";
 import ChevronUpFilled from "../../icons/ChevronUpFilled/ChevronUpFilled";
 import IconWrapper from "../../icons/IconWrapper/IconWrapper";
@@ -44,6 +45,9 @@ export type Props = {
 
   /** React hook form register function for error handling */
   register?: any;
+
+  /** The color of the border */
+  borderColor?: ColorType;
 };
 
 const Wrapper = styled.div<{ hasError: boolean }>`
@@ -68,7 +72,7 @@ const Wrapper = styled.div<{ hasError: boolean }>`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid #555555;
+    border: 1px solid;
     background-color: white;
     width: 100%;
     border-radius: 8px;
@@ -89,7 +93,7 @@ const Wrapper = styled.div<{ hasError: boolean }>`
   }
 
   .selectItems {
-    border: 1px solid #555555;
+    border: 1px solid;
     border-top-width: 0;
     background-color: white;
     width: 100%;
@@ -97,7 +101,7 @@ const Wrapper = styled.div<{ hasError: boolean }>`
 
     display: flex;
     flex-direction: column;
-    padding: 6.18px 16px 10px 16px;
+    padding: 6.18px 0 10px 0;
 
     button {
       font-weight: 400;
@@ -109,8 +113,14 @@ const Wrapper = styled.div<{ hasError: boolean }>`
       text-align: left;
       background-color: white;
       padding: 0;
+      padding: 0 16px;
 
       color: #000000;
+
+      &:hover {
+        background-color: ${({ theme }) => theme.colors.primary};
+        color: ${({ theme }) => theme.colors.white};
+      }
     }
   }
 
@@ -150,8 +160,10 @@ export default function Dropdown({
   register,
   name,
   required,
+  borderColor = "primary",
   ...rest
 }: Props) {
+  const { colors } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState<DropdownItem | null>(null);
   const inputRef = useRef<HTMLSelectElement>(null);
@@ -190,13 +202,17 @@ export default function Dropdown({
         </select>
         <div
           className={`selectBox ${isOpen ? "open" : ""}`}
+          style={{ borderColor: colors[borderColor] }}
           onClick={() => setIsOpen((state) => !state)}
         >
           <span>{selected?.name || placeholder}</span>
           <span>{!isOpen ? <ChevronDownFilled /> : <ChevronUpFilled />}</span>
         </div>
         {isOpen && (
-          <div className="selectItems">
+          <div
+            className="selectItems"
+            style={{ borderColor: colors[borderColor] }}
+          >
             {options.map((option) => (
               <button key={option.value} onClick={() => handleSelect(option)}>
                 {option.name}

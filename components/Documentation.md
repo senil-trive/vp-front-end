@@ -155,6 +155,7 @@ import CheckmarkIcon from "/components/icons/Checkmark/CheckmarkIcon";
 import MenuIcon from "/components/icons/MenuIcon/MenuIcon";
 import ShareIcon from "/components/icons/ShareIcon/ShareIcon";
 import UserAvatar from "/components/icons/UserAvatar/UserAvatar";
+import CloseIcon from "/components/icons/CloseIcon/CloseIcon";
 
 <Grid container>
   <Grid item md={6}>
@@ -207,6 +208,9 @@ import UserAvatar from "/components/icons/UserAvatar/UserAvatar";
   </Grid>
   <Grid md={1}>
     <ShareIcon />
+  </Grid>
+  <Grid md={1}>
+    <CloseIcon />
   </Grid>
 </Grid>;
 ```

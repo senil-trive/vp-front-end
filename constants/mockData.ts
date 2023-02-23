@@ -47,66 +47,29 @@ export const MENU_COLS: MenuItem[] = [
   {
     id: "1",
     name: "Kinderen",
-    categories: [
+    children: [
       {
+        id: "cat-1",
         name: "Category",
-        items: [
+        children: [
           {
+            id: "item-1",
             name: "Menu item c1 1",
             link: "#menuItem",
           },
           {
+            id: "item-2",
             name: "Menu item c1 2",
             link: "#menuItem",
           },
           {
+            id: "item-3",
             name: "Menu item c1 3",
             link: "#menuItem",
           },
           {
+            id: "item-4",
             name: "Menu item c1 4",
-            link: "#menuItem",
-          },
-        ],
-      },
-      {
-        name: "Category",
-        items: [
-          {
-            name: "Menu item c2 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item c2 2",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item c2 3",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item c2 4",
-            link: "#menuItem",
-          },
-        ],
-      },
-      {
-        name: "Category",
-        items: [
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 2",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 3",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 4",
             link: "#menuItem",
           },
         ],
@@ -116,66 +79,29 @@ export const MENU_COLS: MenuItem[] = [
   {
     id: "2",
     name: "Ouders",
-    categories: [
+    children: [
       {
+        id: "cat-2-1",
         name: "Category",
-        items: [
+        children: [
           {
-            name: "Menu item 1",
+            id: "item-2-1",
+            name: "Menu item c1 1",
             link: "#menuItem",
           },
           {
-            name: "Menu item 1",
+            id: "item-2-2",
+            name: "Menu item c1 2",
             link: "#menuItem",
           },
           {
-            name: "Menu item 1",
+            id: "item-2-3",
+            name: "Menu item c1 3",
             link: "#menuItem",
           },
           {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-        ],
-      },
-      {
-        name: "Category",
-        items: [
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-        ],
-      },
-      {
-        name: "Category",
-        items: [
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
+            id: "item-2-4",
+            name: "Menu item c1 4",
             link: "#menuItem",
           },
         ],
@@ -184,67 +110,30 @@ export const MENU_COLS: MenuItem[] = [
   },
   {
     id: "3",
-    name: "Vrijwilligers",
-    categories: [
+    name: "Vrijwilliger",
+    children: [
       {
+        id: "cat-3-1",
         name: "Category",
-        items: [
+        children: [
           {
-            name: "Menu item 1",
+            id: "item-3-1",
+            name: "Menu item c1 1",
             link: "#menuItem",
           },
           {
-            name: "Menu item 1",
+            id: "item-3-2",
+            name: "Menu item c1 2",
             link: "#menuItem",
           },
           {
-            name: "Menu item 1",
+            id: "item-3-3",
+            name: "Menu item c1 3",
             link: "#menuItem",
           },
           {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-        ],
-      },
-      {
-        name: "Category",
-        items: [
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-        ],
-      },
-      {
-        name: "Category",
-        items: [
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
-            link: "#menuItem",
-          },
-          {
-            name: "Menu item 1",
+            id: "item-3-4",
+            name: "Menu item c1 4",
             link: "#menuItem",
           },
         ],

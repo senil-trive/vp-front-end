@@ -1,5 +1,6 @@
 import React, { ReactNode, useRef } from "react";
-import styled, { css } from "styled-components";
+import styled, { css, useTheme } from "styled-components";
+import { ColorType } from "../../../types/colorTypes";
 import { InputStateType, InputType } from "../../../types/formTypes";
 import IconWrapper from "../../icons/IconWrapper/IconWrapper";
 import ImportantCircle from "../../icons/ImportantCircle/ImportantCircle";
@@ -32,6 +33,9 @@ type Props = {
 
   /** React hook form register function for error handling */
   register?: any;
+
+  /** The color of the border */
+  borderColor?: ColorType;
 };
 
 const Wrapper = styled.div<InputStateType>`
@@ -48,7 +52,7 @@ const Wrapper = styled.div<InputStateType>`
   }
 
   > div {
-    border: 1px solid #555555;
+    border: 1px solid;
     background-color: white;
     width: 100%;
     border-radius: 8px;
@@ -133,9 +137,12 @@ export default function TextArea({
   hasError = false,
   register,
   required,
+  borderColor = "primary",
   name,
   ...rest
 }: Props) {
+  const { colors } = useTheme();
+
   const formRegister = register
     ? register(name, {
         required: required ? "Dit veld is verplicht" : null,
@@ -156,7 +163,7 @@ export default function TextArea({
       onClick={handleInputFocus}
     >
       {!!label && <label>{label}</label>}
-      <div>
+      <div style={{ borderColor: colors[borderColor] }}>
         <textarea
           rows={7}
           ref={inputRef}
