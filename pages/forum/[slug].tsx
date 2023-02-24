@@ -1,23 +1,24 @@
 import { Container, Grid } from "@mui/material";
-import { GetServerSidePropsContext } from "next";
+import { ForumCommentType, ForumPostType } from "../../types/forumTypes";
+import { H2, H4, P } from "../../components/typography";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { slugToTitle, titleToSlug } from "../../utils/url";
+
+import BreadCrumbs from "../../components/layout/BreadCrumbs/BreadCrumbs";
 import Button from "../../components/buttons/Button";
+import Dropdown from "../../components/form/Dropdown/Dropdown";
+import ENDPOINTS from "../../constants/endpoints";
 import ForumComment from "../../components/content-types/ForumComment/ForumComment";
 import ForumPost from "../../components/content-types/ForumPost/ForumPost";
-import Dropdown from "../../components/form/Dropdown/Dropdown";
-import Input from "../../components/form/Input/Input";
-import TextArea from "../../components/form/TextArea/TextArea";
+import { GENDERS } from "../../constants/genders";
+import { GetServerSidePropsContext } from "next";
 import { Hero } from "../../components/layout";
-import BreadCrumbs from "../../components/layout/BreadCrumbs/BreadCrumbs";
+import Input from "../../components/form/Input/Input";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import Section from "../../components/layout/Section/Section";
-import { H2, H4, P } from "../../components/typography";
-import ENDPOINTS from "../../constants/endpoints";
-import { GENDERS } from "../../constants/genders";
-import { ForumCommentType, ForumPostType } from "../../types/forumTypes";
+import TextArea from "../../components/form/TextArea/TextArea";
 import { postComment } from "../../utils/api";
-import { slugToTitle, titleToSlug } from "../../utils/url";
 
 type Props = {
   pageData: ForumPostType;
@@ -144,80 +145,85 @@ export default function ForumDetail({ slug, pageData }: Props) {
             ))}
           </Grid>
         </Container>
-        <Hero center>
-          <Container>
-            <Section>
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <Grid container spacing="33px">
-                  <Grid item xs={12} md={6}>
-                    <Input
-                      label="Voornaam"
-                      name="user_name"
-                      register={register}
-                      hasError={!!errors.user_name}
-                    />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <Input
-                      label="Leeftijd"
-                      type="number"
-                      name="user_age"
-                      register={register}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Input
-                      label="Email adres"
-                      type="email"
-                      name="user_email"
-                      register={register}
-                    />
-                  </Grid>
 
-                  <Grid item xs={12} md={6}>
-                    <Dropdown
-                      options={GENDERS}
-                      label="Geslacht"
-                      name="user_gender"
-                      register={register}
-                    />
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    {/* <Input
+        <Container>
+          <div className="my-20 text-center max-w-2xl mx-auto">
+            <P>
+              De Buddy’s beantwoorden alle vragen. Zij zaten in eenzelfde
+              situatie als jij en hebben dus heel veel wijze raad. Maar niet
+              alleen Budd&apos;s weten hoe het voelt om gescheiden ouders te
+              hebben, jij ook! Heb jij een goede tip? Deel &apos;m hieronder!
+            </P>
+          </div>
+          <Section>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <Grid container spacing="33px">
+                <Grid item xs={12} md={6}>
+                  <Input
+                    label="Voornaam"
+                    name="user_name"
+                    register={register}
+                    hasError={!!errors.user_name}
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Input
+                    label="Leeftijd"
+                    type="number"
+                    name="user_age"
+                    register={register}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Input
+                    label="Email adres"
+                    type="email"
+                    name="user_email"
+                    register={register}
+                  />
+                </Grid>
+
+                <Grid item xs={12} md={6}>
+                  <Dropdown
+                    options={GENDERS}
+                    label="Geslacht"
+                    name="user_gender"
+                    register={register}
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  {/* <Input
                 label="Upload bestand"
                 type="file"
                 name="attachment_image"
                 register={register}
               /> */}
-                  </Grid>
-                  <Grid item xs={12}>
-                    <TextArea
-                      label="Bericht *"
-                      name="content"
-                      required
-                      register={register}
-                      hasError={!!errors.content}
-                      helperText={
-                        !!errors.content ? "Dit veld is verplicht" : ""
-                      }
-                    />
-                  </Grid>
-
-                  <Grid item xs={12}>
-                    <P variant="light">* Verplichte velden</P>
-                  </Grid>
-                  <Grid item xs={12} md={4}>
-                    <Button loading={isLoading} disabled={isSubmitted}>
-                      {isLoading && "bezig..."}
-                      {isSubmitted && "Verzonden"}
-                      {!isLoading && !isSubmitted && "Vraag insturen"}
-                    </Button>
-                  </Grid>
                 </Grid>
-              </form>
-            </Section>
-          </Container>
-        </Hero>
+                <Grid item xs={12}>
+                  <TextArea
+                    label="Bericht *"
+                    name="content"
+                    required
+                    register={register}
+                    hasError={!!errors.content}
+                    helperText={!!errors.content ? "Dit veld is verplicht" : ""}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <P variant="light">* Verplichte velden</P>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <Button loading={isLoading} disabled={isSubmitted}>
+                    {isLoading && "bezig..."}
+                    {isSubmitted && "Verzonden"}
+                    {!isLoading && !isSubmitted && "Vraag insturen"}
+                  </Button>
+                </Grid>
+              </Grid>
+            </form>
+          </Section>
+        </Container>
       </main>
     </PageWrapper>
   );

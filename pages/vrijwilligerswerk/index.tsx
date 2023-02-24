@@ -75,7 +75,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
               />
               <P>{pageData?.page_subtitle}</P>
 
-              <div className="flex gap-4 mt-14 w-[80%]">
+              <div className="flex gap-4 mt-14 w-[90%]">
                 <Button onClick={() => alert("Pizza: 🍕")}>
                   {pageData?.signup_button_label}
                 </Button>

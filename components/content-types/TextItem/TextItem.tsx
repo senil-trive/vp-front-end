@@ -1,4 +1,6 @@
+import { ANDROID_APP_URL, IOS_APP_URL } from "../../../constants/app-urls";
 import Button, { ButtonVariant } from "../../buttons/Button";
+import { FaAppStoreIos, FaGooglePlay } from "react-icons/fa";
 import { H3, TitleWithHighlights } from "../../typography";
 
 import Image from "next/image";
@@ -12,6 +14,7 @@ interface TextItemProps {
   content: string;
   imageURL?: string;
   imageAlt: string;
+  showAppStoreButtons?: boolean;
   showButton?: boolean;
   buttonLabel?: string;
   buttonURL?: string;
@@ -25,7 +28,8 @@ const TextItem: React.FC<TextItemProps> = ({
   content,
   imageURL,
   imageAlt,
-  showButton = true,
+  showAppStoreButtons = false,
+  showButton = false,
   buttonLabel,
   buttonURL,
   buttonVariant = "primary",
@@ -59,6 +63,19 @@ const TextItem: React.FC<TextItemProps> = ({
                   onClick={() => router.push(buttonURL)}
                 >
                   {buttonLabel}
+                </Button>
+              </div>
+            )}
+
+            {showAppStoreButtons && (
+              <div className="flex gap-8">
+                <Button href={IOS_APP_URL}>
+                  <FaAppStoreIos size={25} />
+                  App Store
+                </Button>
+                <Button href={ANDROID_APP_URL}>
+                  <FaGooglePlay size={25} />
+                  Google Play
                 </Button>
               </div>
             )}
@@ -102,13 +119,25 @@ const TextItem: React.FC<TextItemProps> = ({
             )}
             <div className="mb-14">{parseHTMLtoReact(content)}</div>
 
-            {buttonURL && buttonLabel && (
+            {showButton && buttonURL && buttonLabel && (
               <div className="w-80 mb-12">
                 <Button
                   variant={buttonVariant}
                   onClick={() => router.push(buttonURL)}
                 >
                   {buttonLabel}
+                </Button>
+              </div>
+            )}
+            {showAppStoreButtons && (
+              <div className="flex gap-8">
+                <Button href={IOS_APP_URL}>
+                  <FaAppStoreIos size={25} />
+                  App Store
+                </Button>
+                <Button href={ANDROID_APP_URL}>
+                  <FaGooglePlay size={25} />
+                  Google Play
                 </Button>
               </div>
             )}

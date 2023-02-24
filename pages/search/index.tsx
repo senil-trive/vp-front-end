@@ -1,12 +1,13 @@
 import { Container, Grid } from "@mui/material";
-import { useRouter } from "next/router";
-import React from "react";
+import { H1, P } from "../../components/typography";
+
 import BriefItem from "../../components/content-types/BriefItem/BriefItem";
-import SearchResultItem from "../../components/content-types/SearchResultItem/SearchResultItem";
-import SearchBar from "../../components/form/SearchBar/SearchBar";
 import { Hero } from "../../components/layout";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
-import { H1, P } from "../../components/typography";
+import React from "react";
+import SearchBar from "../../components/form/SearchBar/SearchBar";
+import SearchResultItem from "../../components/content-types/SearchResultItem/SearchResultItem";
+import { useRouter } from "next/router";
 
 // Temp searchresults
 const items = [
@@ -40,7 +41,7 @@ export default function Search() {
               </H1>
 
               <P variant="light" style={{ textAlign: "center" }}>
-                U heeft gezocht op zoekterm `{q}`
+                Je hebt gezocht op `{q}`
               </P>
 
               <div>

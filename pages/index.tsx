@@ -10,7 +10,10 @@ import TagList from "../components/buttons/TagList/TagList";
 
 export default function Home() {
   return (
-    <PageWrapper>
+    <PageWrapper
+      title="Leeg je hoofd, lucht je hart"
+      description="Praten, lachen, klagen of huilen omdat je ouders uit elkaar zijn kan hier bij Villa Pinedo. Stel jouw vragen aan anderen die begrijpen wat jij meemaakt en deel wat er in jouw hoofd en hart omgaat."
+    >
       <Hero>
         <Container>
           <Grid container>
