@@ -75,8 +75,13 @@ export default function Footer() {
         <Container maxWidth="xl">
           <Grid container spacing={"24px"}>
             <Grid item xs={12} md={3}>
-              {generateLogo()}
-              <P style={{ textAlign: isLaptop ? "center" : "left" }}>
+              <div className="mb-[50px]">{generateLogo()}</div>
+              <P
+                style={{
+                  textAlign: isLaptop ? "center" : "left",
+                  marginBottom: "50px",
+                }}
+              >
                 We komen voor in:
               </P>
               <Grid container>
