@@ -62,7 +62,6 @@ export default function Footer() {
         const data = await getCompanyInfo();
         if (data) {
           setCompanyInfo(data);
-          console.log(data);
         }
         setIsLoading(false);
       })();
