@@ -1,18 +1,18 @@
-import { Container } from "@mui/system";
-import { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { ColorSpan, H1, P } from "../../components/typography";
+import { Grid, Hero } from "../../components/layout";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { postForum, uploadFile } from "../../utils/api";
 
 import Button from "../../components/buttons/Button";
+import { Container } from "@mui/system";
 import Dropdown from "../../components/form/Dropdown/Dropdown";
+import { ForumPostType } from "../../types/forumTypes";
+import { GENDERS } from "../../constants/genders";
 import Input from "../../components/form/Input/Input";
-import TextArea from "../../components/form/TextArea/TextArea";
-import { Grid, Hero } from "../../components/layout";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import Section from "../../components/layout/Section/Section";
-import { ColorSpan, H1, P } from "../../components/typography";
-import { GENDERS } from "../../constants/genders";
-import { ForumPostType } from "../../types/forumTypes";
-import { postForum, uploadFile } from "../../utils/api";
+import TextArea from "../../components/form/TextArea/TextArea";
+import { useState } from "react";
 
 export default function Vraag() {
   const [isLoading, setIsLoading] = useState(false);
@@ -60,11 +60,13 @@ export default function Vraag() {
             <Grid item xs={0} md={2} lg={3} />
             <Grid item xs={12} md={8} lg={6}>
               <H1 style={{ textAlign: "center", padding: "0 24px" }}>
-                Stuur je
-                <ColorSpan variant="info"> vraag</ColorSpan> in
+                Stel je
+                <ColorSpan variant="info"> vraag</ColorSpan>
               </H1>
               <P variant="light">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Heb jij een vraag over de scheiding? Stel ‘m hier! De Buddy’s en
+                andere kinderen met gescheiden ouders geven jou tips en
+                beantwoorden je vraag.
               </P>
             </Grid>
             <Grid item xs={0} md={2} lg={3} />

@@ -134,6 +134,10 @@ const StyledButton = styled.button`
 
 const StyledLink = styled.a`
   ${Style}
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 `;
 
 export default function Button({

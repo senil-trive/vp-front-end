@@ -1,3 +1,4 @@
+import { FaAppStoreIos, FaGooglePlay } from "react-icons/fa";
 import { H1, H3, P } from "../../components/typography";
 
 import Button from "../../components/buttons/Button";
@@ -82,6 +83,8 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                   content={item?.description}
                   imageURL={parseImageURL(item?.image?.id)}
                   imageAlt={item?.image?.title}
+                  showAppStoreButtons={true}
+                  showButton={item?.show_button}
                   buttonLabel={item?.button_label}
                   buttonURL={item?.button_url}
                   buttonVariant="primary"
@@ -106,7 +109,7 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
             </Container>
 
             <Container maxWidth="xl">
-              <div className="grid md:grid-cols-3 gap-8 mt-14 mx-auto">
+              <div className="grid md:grid-cols-4 gap-8 mt-14 mx-auto">
                 <CTAItem
                   title={pageData?.cta_block_1_title}
                   description={pageData?.cta_block_1_description}
@@ -125,6 +128,34 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                   imageURL={parseImageURL(pageData?.cta_block_3_image?.id)}
                   imageAlt={pageData?.cta_block_3_title}
                 />
+                <CTAItem
+                  title={pageData?.cta_block_4_title}
+                  description={pageData?.cta_block_4_description}
+                  imageURL={parseImageURL(pageData?.cta_block_4_image?.id)}
+                  imageAlt={pageData?.cta_block_4_title}
+                />
+              </div>
+            </Container>
+
+            <Container>
+              <div className="flex flex-col items-center justify-center my-20 ">
+                <H3 variant="bold" color="blue">
+                  {pageData?.cta_section_footer_title}
+                </H3>
+                <P className="max-w-4xl">
+                  {pageData?.cta_section_footer_subtitle}
+                </P>
+
+                <div className="flex gap-8 sm:w-[300px] md:w-[600px]">
+                  <Button href={pageData?.cta_section_footer_ios_url}>
+                    <FaAppStoreIos size={25} />
+                    App Store
+                  </Button>
+                  <Button href={pageData?.cta_section_footer_android_url}>
+                    <FaGooglePlay size={25} />
+                    Google Play
+                  </Button>
+                </div>
               </div>
             </Container>
           </section>

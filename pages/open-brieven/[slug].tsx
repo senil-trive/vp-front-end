@@ -20,6 +20,7 @@ import Input from "../../components/form/Input/Input";
 import { Letter } from "../../types/content-types/Letter.type";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import { parseFileURL } from "../../utils/parseFileURL";
+import parseHTMLtoReact from "../../utils/parseHTMLtoReact";
 import parseImageURL from "../../utils/parseImageURL";
 import { postLetterSubscription } from "../../utils/api";
 import { useTheme } from "styled-components";
@@ -131,12 +132,12 @@ export default function LetterDetail({ pageData, relatedLetters }: Props) {
           <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16">
             <TitleWithHighlights
               highlightColor="info"
-              text={pageData?.title}
-              textToHighlight={pageData?.title_highlighted}
+              text={pageData?.detail_title}
+              textToHighlight={pageData?.detail_title_highlighted}
               headerElement="h1"
               color="blue"
             />
-            <P>{pageData?.description}</P>
+            <div className="mb-8">{parseHTMLtoReact(pageData?.content)}</div>
           </div>
         </Hero>
 

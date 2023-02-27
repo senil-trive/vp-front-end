@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import Logo from "../../icons/Logo/Logo";
+
+import CloseIcon from "../../icons/CloseIcon/CloseIcon";
 import HeaderNav from "./HeaderNav/HeaderNav";
 import HeaderSubmenu from "./HeaderSubmenu/HeaderSubmenu";
-import SearchBar from "../../form/SearchBar/SearchBar";
-import MenuIcon from "../../icons/MenuIcon/MenuIcon";
-import SearchIcon from "../../icons/SearchIcon/SearchIcon";
 import HeaderSubmenuMobile from "./HeaderSubmenuMobile/HeaderSubmenuMobile";
 import Link from "next/link";
+import Logo from "../../icons/Logo/Logo";
+import MenuIcon from "../../icons/MenuIcon/MenuIcon";
+import SearchBar from "../../form/SearchBar/SearchBar";
+import SearchIcon from "../../icons/SearchIcon/SearchIcon";
 import { getMenuItems } from "../../../utils/api";
-import CloseIcon from "../../icons/CloseIcon/CloseIcon";
+import styled from "styled-components";
 
 export type MenuItem = {
   id: string;
@@ -90,7 +91,7 @@ export default function Header() {
         setIsLoading(false);
       })();
     }
-  }, []);
+  }, [isLoading, menuItems]);
 
   return (
     <StyledHeader>
