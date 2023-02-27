@@ -1,5 +1,10 @@
+import { PublicationType } from "./content-types/Publication.type";
+import { ImageType } from "./fileTypes";
+
 export type CompanyInfo = {
   id: string;
+  company_logo_black: ImageType;
+  company_logo_white: ImageType;
   company_name: string;
   company_address: string;
   company_zipcode: string;
@@ -15,4 +20,7 @@ export type CompanyInfo = {
   privacy_url: string;
   terms_condition_url: string;
   cookies_url: string;
+  external_publications: {
+    external_publications_id: PublicationType;
+  }[];
 };
