@@ -27,6 +27,7 @@ const TitleWithHighlights: React.FC<TitleWithHighlightsProps> = ({
         <>
           {parts[0]}{" "}
           <span
+            className="font-heading"
             style={{ color: theme.colors[highlightColor], fontWeight: "bold" }}
           >
             {textToHighlight}
