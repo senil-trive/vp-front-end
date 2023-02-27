@@ -62,6 +62,7 @@ export default function Footer() {
         const data = await getCompanyInfo();
         if (data) {
           setCompanyInfo(data);
+          console.log(data);
         }
         setIsLoading(false);
       })();
@@ -120,19 +121,12 @@ export default function Footer() {
               <P style={{ margin: 0 }}>{companyInfo?.company_RSIN}</P>
             </Grid>
             <Grid item md={3}>
-              <H3 variant="bold">Voor Volwassenen</H3>
-              <P>
-                <a href="#terms">Over Villa Pinedo</a>
-              </P>
-              <P>
-                <a href="#terms">Over Villa Pinedo</a>
-              </P>
-              <P>
-                <a href="#terms">Over Villa Pinedo</a>
-              </P>
-              <P>
-                <a href="#terms">Over Villa Pinedo</a>
-              </P>
+              <H3 variant="bold">{companyInfo?.important_links_title}</H3>
+              {companyInfo?.important_links?.map?.((item) => (
+                <P key={item.id}>
+                  <a href={item.link}>{item.name}</a>
+                </P>
+              ))}
             </Grid>
             <Grid item xs={12} md={3}>
               <H3 variant="bold">Socials</H3>

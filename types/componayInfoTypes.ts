@@ -20,6 +20,12 @@ export type CompanyInfo = {
   privacy_url: string;
   terms_condition_url: string;
   cookies_url: string;
+  important_links: {
+    id: number;
+    name: string;
+    link: string;
+  }[];
+  important_links_title: string;
   external_publications: {
     external_publications_id: PublicationType;
   }[];
