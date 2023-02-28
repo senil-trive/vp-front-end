@@ -24,7 +24,7 @@ function YoutubePlayer({ src }: YoutubeProps) {
           src={`https://www.youtube.com/embed/${getVideoID(src).id ?? ""}`}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
-          title="Embedded youtube"
+          title="Villa Pinedo Embedded youtube"
         />
       )}
     </StyledWrapper>
