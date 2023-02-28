@@ -76,6 +76,7 @@ const pagination = (
 export default function Pagination({
   truncated = false,
   total = 1,
+  onChange,
 }: PaginationProps) {
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -91,18 +92,23 @@ export default function Pagination({
   const handleChangePage = (page: number | string) => {
     if (typeof page === "number") {
       setCurrentPage(page);
+      if (onChange) onChange(page);
     }
   };
 
   const handlePrev = () => {
     if (currentPage > 1) {
-      setCurrentPage((val) => val - 1);
+      const newPage = currentPage - 1;
+      setCurrentPage(newPage);
+      if (onChange) onChange(newPage);
     }
   };
 
   const handleNext = () => {
     if (currentPage < total) {
-      setCurrentPage((val) => val + 1);
+      const newPage = currentPage + 1;
+      setCurrentPage(newPage);
+      if (onChange) onChange(newPage);
     }
   };
 

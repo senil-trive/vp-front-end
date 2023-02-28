@@ -89,7 +89,11 @@ export default function Footer() {
                     return null;
                   }
                   return (
-                    <Grid xs={4} key={publication.external_publications_id.id}>
+                    <Grid
+                      item
+                      xs={4}
+                      key={publication.external_publications_id.id}
+                    >
                       <div
                         style={{
                           height: "49.5px",

@@ -125,3 +125,50 @@ export const postLetterSubscription = async (data: any) => {
     body: JSON.stringify(data),
   });
 };
+
+/**
+ * Gets the blog overview page details
+ */
+export const getPostOverviewPageData = async () => {
+  return await fetch(
+    `${ENDPOINTS.COLLECTIONS}/blog_overview_page?fields=*.*.*`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+};
+
+/**
+ * Gets a list of blog posts
+ * @returns
+ */
+export const getPosts = async (page: number = 1) => {
+  return await fetch(
+    `${ENDPOINTS.COLLECTIONS}/vlogposts?fields=*.*.*&filter[status][_eq]=published&limit=9&page=${page}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+};
+
+/**
+ * Gets the number of total blog posts
+ * @returns
+ */
+export const getPostsTotal = async () => {
+  return await fetch(
+    `${ENDPOINTS.COLLECTIONS}/vlogposts?aggregate[count]=*&filter[status][_eq]=published`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+};

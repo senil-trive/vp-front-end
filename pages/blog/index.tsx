@@ -1,5 +1,6 @@
 import { Container, Grid } from "@mui/material";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { CircleSpinner } from "react-spinners-kit";
 import Button from "../../components/buttons/Button";
@@ -14,42 +15,23 @@ import ColorSpan from "../../components/typography/ColorSpan/ColorSpan";
 import ENDPOINTS from "../../constants/endpoints";
 import { FEED_TAGS } from "../../constants/mockData";
 import { BlogPageProps } from "../../types/pageTypes";
+import {
+  getPostOverviewPageData,
+  getPosts,
+  getPostsTotal,
+} from "../../utils/api";
 import parseImageURL from "../../utils/parseImageURL";
 
 const postPerPage = 9;
 
 export const getServerSideProps = async () => {
   try {
-    const pageReq = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/blog_overview_page?fields=*.*.*`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const pageReq = await getPostOverviewPageData();
 
-    const blogsReq = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/vlogposts?fields=*.*.*&filter[status][_eq]=published&limit=9`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const blogsReq = await getPosts();
 
     // Get the posts count
-    const countReq = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/vlogposts?aggregate[count]=*&filter[status][_eq]=published`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const countReq = await getPostsTotal();
 
     const pageRes = await pageReq.json();
     const blogRes = await blogsReq.json();
@@ -78,7 +60,32 @@ export default function Forum({
   blogsData,
   totalPosts,
 }: BlogPageProps) {
-  // console.log(blogsData);
+  const { query, push } = useRouter();
+  const [posts, setPosts] = useState(blogsData);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const changePage = (index: number) => {
+    if (index <= 1) {
+      setCurrentPage(1);
+    } else {
+      setCurrentPage(index);
+    }
+  };
+
+  useEffect(() => {
+    const getPaginatedBlogs = async () => {
+      try {
+        const req = await getPosts(currentPage);
+        const res = await req.json();
+
+        setPosts(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getPaginatedBlogs();
+  }, [currentPage]);
 
   return (
     <PageWrapper title="Forum overzicht">
@@ -114,7 +121,7 @@ export default function Forum({
         />
         <Container style={{ margin: "56px auto" }}>
           <Grid container spacing={"34px"}>
-            {blogsData.map((item, index) => (
+            {posts.map((item, index) => (
               <Grid key={index} item xs={12} md={4}>
                 <Link href={`blog/${item.id}`}>
                   <BlogItem
@@ -137,7 +144,11 @@ export default function Forum({
         </Container>
 
         {totalPosts / postPerPage > 2 && (
-          <Pagination total={Math.ceil(totalPosts / postPerPage)} truncated />
+          <Pagination
+            total={Math.ceil(totalPosts / postPerPage)}
+            truncated
+            onChange={changePage}
+          />
         )}
       </main>
     </PageWrapper>

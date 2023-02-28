@@ -4,15 +4,20 @@
  */
 
 import getVideoID from "get-video-id";
-import React, { LegacyRef, memo, useEffect, useState } from "react";
+import React, {
+  LegacyRef,
+  memo,
+  MutableRefObject,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import YouTube from "react-youtube";
 import styled from "styled-components";
 
 type YoutubeProps = {
   src: string;
 };
-
-type Youtubeplayer = LegacyRef<YouTube> | undefined;
 
 const opts: any = {
   playerVars: {
@@ -43,22 +48,10 @@ const StyledWrapper = styled.div`
 `;
 
 function YoutubePlayer({ src }: YoutubeProps) {
-  const [youtubePlayer, setYoutubePlayer] = useState<Youtubeplayer | null>(
-    null
-  );
-
   const handleReady = (e: any) => {
     const player = e.target;
     player.pauseVideo();
-
-    setYoutubePlayer(player);
   };
-
-  useEffect(() => {
-    if (youtubePlayer) {
-      setYoutubePlayer(null);
-    }
-  }, [src]);
 
   return (
     <StyledWrapper className="overflow-hidden rounded-[8px]">
@@ -66,7 +59,6 @@ function YoutubePlayer({ src }: YoutubeProps) {
         <YouTube
           id="player"
           className="h-full w-full"
-          ref={youtubePlayer}
           videoId={getVideoID(src).id ?? ""}
           // onStateChange={handleStateChange}
           onReady={handleReady}
