@@ -4,10 +4,12 @@ import ListIcon from "../../icons/ListIcon/ListIcon";
 import Dropdown from "../Dropdown/Dropdown";
 
 const defaultSortOptions = [
-  { name: "Alphabetisch", value: "title" },
-  { name: "Autheur oplopend", value: "author" },
-  { name: "Autheur aflopend", value: "-author" },
-  { name: "Post datum aflopend", value: "-date_created" },
+  { name: "Titel (a-z)", value: "title" },
+  { name: "Titel (z-a)", value: "-title" },
+  { name: "Autheur (oplopend)", value: "author" },
+  { name: "Autheur (aflopend)", value: "-author" },
+  { name: "Post datum (oplopend)", value: "date_created" },
+  { name: "Post datum (aflopend)", value: "-date_created" },
 ];
 
 type Props = {
