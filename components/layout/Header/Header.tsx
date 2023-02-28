@@ -68,8 +68,8 @@ const StyledHeader = styled.header`
 `;
 
 export default function Header() {
-  const [isLoading, setIsloading] = useState(true);
-  const [menuItems, setMenuItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [selected, setSelected] = useState<MenuItem | undefined>(undefined);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -85,8 +85,10 @@ export default function Header() {
     if (menuItems.length === 0 && isLoading) {
       (async () => {
         const data = await getMenuItems();
-        setMenuItems(data);
-        setIsloading(false);
+        if (data) {
+          setMenuItems(data);
+        }
+        setIsLoading(false);
       })();
     }
   }, [isLoading, menuItems]);

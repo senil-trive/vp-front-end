@@ -1,11 +1,12 @@
 import React, { ReactNode } from "react";
 
-import Footer from "../Footer/Footer";
 import Head from "next/head";
-import Header from "../Header/Header";
 import dynamic from "next/dynamic";
 
 const DynamicHeader = dynamic(() => import("../Header/Header"), {
+  loading: () => <>Loading...</>,
+});
+const DynamicFooter = dynamic(() => import("../Footer/Footer"), {
   loading: () => <>Loading...</>,
 });
 
@@ -59,7 +60,7 @@ export default function PageWrapper({
 
       {children}
 
-      <Footer />
+      <DynamicFooter />
     </div>
   );
 }
