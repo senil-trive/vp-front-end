@@ -10,6 +10,7 @@ import Tag from "../../buttons/Tag/Tag";
 import { truncate } from "../../../utils/truncate";
 import { format } from "date-fns";
 import YoutubePlayer from "../../media/YoutubePlayer";
+import Image from "next/image";
 
 type Props = {
   type: "blog" | "vlog";
@@ -50,12 +51,12 @@ export default function BlogItem({
         />
       );
     } else if (mediaSrc) {
-      /* TODO: Image element of NextJS doesn't work with Styleguidist */
       Child = (
-        <img
+        <Image
           className="absolute h-full w-full top-0 left-0 z-0 object-cover"
           src={mediaSrc}
           alt={title}
+          fill
         />
       );
     }

@@ -38,8 +38,11 @@ const StyledBlog = styled(BaseStyle)`
 
   header {
     height: 366px;
-    img {
+    img,
+    video,
+    iframe {
       border-radius: 8px;
+      background-color: ${({ theme }) => theme.colors.grey};
     }
   }
   section {
