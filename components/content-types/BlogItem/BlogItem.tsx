@@ -90,7 +90,7 @@ export default function BlogItem({
           <P variant="bold">{author}</P>
           <P>{format(postDate, "dd/mm/yyyy")}</P>
         </div>
-        <Button variant="secondary" onClick={() => window.open(link)}>
+        <Button variant="secondary" href={link}>
           {type == "vlog" ? "Vlog bekijken" : "Blog lezen"}
         </Button>
       </CardFooter>

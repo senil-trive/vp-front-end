@@ -21,7 +21,9 @@ function YoutubePlayer({ src }: YoutubeProps) {
     <StyledWrapper className="overflow-hidden rounded-[8px]">
       {src && (
         <iframe
-          src={`https://www.youtube.com/embed/${getVideoID(src).id ?? ""}`}
+          src={`https://www.youtube.com/embed/${
+            getVideoID(src).id ?? ""
+          }?rel=0`}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
           title="Villa Pinedo Embedded youtube"

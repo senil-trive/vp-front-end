@@ -19,6 +19,7 @@ import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import Section from "../../components/layout/Section/Section";
 import TextArea from "../../components/form/TextArea/TextArea";
 import { postComment } from "../../utils/api";
+import CommentForm from "../../components/form/CommentForm/CommentForm";
 
 type Props = {
   pageData: ForumPostType;
@@ -65,37 +66,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 };
 
 export default function ForumDetail({ slug, pageData }: Props) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<ForumCommentType>();
-
-  const submitForm = async (data: any) => {
-    setIsLoading(true);
-
-    const body = {
-      ...data,
-      post_id: pageData.id,
-    };
-
-    try {
-      await postComment("forum", body);
-      setIsSubmitted(true);
-    } catch (error) {
-      setIsSubmitted(false);
-    }
-
-    setIsLoading(false);
-  };
-
-  const onSubmit: SubmitHandler<ForumCommentType> = async (data) => {
-    submitForm(data);
-  };
-
   return (
     <PageWrapper title={slugToTitle(slug as string)}>
       <BreadCrumbs />
@@ -118,112 +88,15 @@ export default function ForumDetail({ slug, pageData }: Props) {
       </Container>
 
       <main style={{ marginBottom: "80px" }}>
-        <Container>
-          <Grid container style={{ margin: "70px 0" }}>
-            <Grid item xs={0} md={2} lg={2} />
-            <Grid item xs={12} md={8} lg={8}>
-              <H4 variant="bold">Reacties ({pageData.comments.length})</H4>
-            </Grid>
-          </Grid>
-        </Container>
-        <Container>
-          <Grid container>
-            {pageData?.comments.map((comment) => (
-              <>
-                <Grid item xs={0} md={2} lg={2} />
-                <Grid item xs={12} md={8} lg={8}>
-                  <ForumComment
-                    author={comment.user_name}
-                    age={comment.user_age}
-                    authorType={"Anonamous"}
-                    postDate={new Date(comment.date_created)}
-                    title={comment.content}
-                  />
-                </Grid>
-                <Grid item xs={0} md={2} lg={2} />
-              </>
-            ))}
-          </Grid>
-        </Container>
-
-        <Container>
-          <div className="my-20 text-center max-w-2xl mx-auto">
-            <P>
-              De Buddy’s beantwoorden alle vragen. Zij zaten in eenzelfde
-              situatie als jij en hebben dus heel veel wijze raad. Maar niet
-              alleen Budd&apos;s weten hoe het voelt om gescheiden ouders te
-              hebben, jij ook! Heb jij een goede tip? Deel &apos;m hieronder!
-            </P>
-          </div>
-          <Section>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <Grid container spacing="33px">
-                <Grid item xs={12} md={6}>
-                  <Input
-                    label="Voornaam"
-                    name="user_name"
-                    register={register}
-                    hasError={!!errors.user_name}
-                  />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  <Input
-                    label="Leeftijd"
-                    type="number"
-                    name="user_age"
-                    register={register}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <Input
-                    label="Email adres"
-                    type="email"
-                    name="user_email"
-                    register={register}
-                  />
-                </Grid>
-
-                <Grid item xs={12} md={6}>
-                  <Dropdown
-                    options={GENDERS}
-                    label="Geslacht"
-                    name="user_gender"
-                    register={register}
-                  />
-                </Grid>
-                <Grid item xs={12} md={6}>
-                  {/* <Input
-                label="Upload bestand"
-                type="file"
-                name="attachment_image"
-                register={register}
-              /> */}
-                </Grid>
-                <Grid item xs={12}>
-                  <TextArea
-                    label="Bericht *"
-                    name="content"
-                    required
-                    register={register}
-                    hasError={!!errors.content}
-                    helperText={!!errors.content ? "Dit veld is verplicht" : ""}
-                  />
-                </Grid>
-
-                <Grid item xs={12}>
-                  <P variant="light">* Verplichte velden</P>
-                </Grid>
-                <Grid item xs={12} md={4}>
-                  <Button loading={isLoading} disabled={isSubmitted}>
-                    {isLoading && "bezig..."}
-                    {isSubmitted && "Verzonden"}
-                    {!isLoading && !isSubmitted && "Vraag insturen"}
-                  </Button>
-                </Grid>
-              </Grid>
-            </form>
-          </Section>
-        </Container>
+        <CommentForm
+          type="forum"
+          comments={pageData.comments}
+          preText="De Buddy’s beantwoorden alle vragen. Zij zaten in eenzelfde situatie
+          als jij en hebben dus heel veel wijze raad. Maar niet alleen
+          Budd's weten hoe het voelt om gescheiden ouders te hebben, jij
+          ook! Heb jij een goede tip? Deel 'm hieronder!"
+          postId={pageData.id}
+        />
       </main>
     </PageWrapper>
   );

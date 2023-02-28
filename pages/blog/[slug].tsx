@@ -1,72 +1,32 @@
-import {
-  H2,
-  H3,
-  H4,
-  P,
-  TitleWithHighlights,
-} from "../../components/typography";
-import React, { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { H3, P, TitleWithHighlights } from "../../components/typography";
+import React from "react";
 
 import BreadCrumbs from "../../components/layout/BreadCrumbs/BreadCrumbs";
-import BriefItem from "../../components/content-types/BriefItem/BriefItem";
-import Button from "../../components/buttons/Button";
 import { Container } from "@mui/material";
-import ENDPOINTS from "../../constants/endpoints";
-import { FiCheck } from "react-icons/fi";
 import { GetServerSidePropsContext } from "next";
 import { Hero } from "../../components/layout";
-import Input from "../../components/form/Input/Input";
-import { Letter } from "../../types/content-types/Letter.type";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
-import { parseFileURL } from "../../utils/parseFileURL";
 import parseHTMLtoReact from "../../utils/parseHTMLtoReact";
 import parseImageURL from "../../utils/parseImageURL";
-import { postLetterSubscription } from "../../utils/api";
-import { useTheme } from "styled-components";
-
-type Props = {
-  pageData: Letter;
-  relatedLetters: Letter[];
-};
+import { getPostDetail } from "../../utils/api";
+import { BlogDetailPageProps } from "../../types/pageTypes";
+import BlogItem from "../../components/content-types/BlogItem/BlogItem";
+import Tag from "../../components/buttons/Tag/Tag";
+import Image from "next/image";
+import YoutubePlayer from "../../components/media/YoutubePlayer";
+import CommentForm from "../../components/form/CommentForm/CommentForm";
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-  const { slug: id } = ctx.query;
+  const { slug } = ctx.query;
 
   try {
     // Get the letters
-    const res = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*&filter[slug][_eq]=${id}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    const lettersReq = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*.*&filter[status][_eq]=published`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
-    const { data } = await res.json();
-    const { data: letters } = await lettersReq.json();
-
-    // shuffle letters
-    const randomizedLetters = letters
-      .sort(() => 0.5 - Math.random())
-      .slice(0, 3);
+    const pageReq = await getPostDetail(slug as string);
+    const { data } = await pageReq.json();
 
     return {
       props: {
         pageData: data[0] ?? null,
-        relatedLetters: randomizedLetters,
       },
     };
   } catch (error) {
@@ -78,155 +38,113 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   }
 };
 
-export default function LetterDetail({ pageData, relatedLetters }: Props) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const theme = useTheme();
+export default function BlogDetail({ pageData }: BlogDetailPageProps) {
+  const generateMediaItem = () => {
+    let Child = null;
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<any>();
-
-  const watchFields = watch(["user_name", "user_email"]);
-
-  const submitForm = async (data: any) => {
-    setIsLoading(true);
-
-    try {
-      const body = {
-        user_email: data.user_email,
-        user_name: data.user_name,
-        subscribed_to_newsletter: data.subscribe_to_newsletter,
-        letter: {
-          id: pageData.id,
-        },
-      };
-      await postLetterSubscription(body);
-      setIsSubmitted(true);
-
-      // download downloadable document
-      if (pageData?.downloadable_document?.id) {
-        window.open(parseFileURL(pageData.downloadable_document?.id), "_blank");
-      }
-    } catch (error) {
-      console.log(error);
-      setIsSubmitted(false);
+    if (pageData?.youtube_embed) {
+      Child = <YoutubePlayer src={pageData?.youtube_embed} />;
     }
 
-    setIsLoading(false);
-  };
+    if (pageData?.type === "vlog" && pageData?.video?.id) {
+      Child = (
+        <video
+          src={parseImageURL(pageData?.video.id)}
+          className="absolute h-full w-full top-0 left-0 z-0 object-cover"
+        />
+      );
+    } else if (pageData?.image?.id) {
+      Child = (
+        <Image
+          className="absolute h-full w-full top-0 left-0 z-0 object-cover"
+          src={parseImageURL(pageData?.image.id)}
+          alt={pageData.title}
+          fill
+        />
+      );
+    }
 
-  const onSubmit: SubmitHandler<any> = async (data) => {
-    submitForm(data);
+    if (!Child) return;
+
+    return (
+      <div className="relative border overflow-hidden h-[317px] rounded-[8px]">
+        <>{Child}</>
+      </div>
+    );
   };
 
   return (
-    <PageWrapper title={pageData.title}>
+    <PageWrapper title={pageData?.title}>
       <BreadCrumbs />
 
       <main style={{ marginBottom: "80px" }}>
         <Hero>
           <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16">
+            {pageData?.categories[0] && (
+              <Tag variant="dark" size="m">
+                <>{pageData?.categories[0].categories_id.name}</>
+              </Tag>
+            )}
+            {pageData?.author && <P>{pageData.author}:</P>}
             <TitleWithHighlights
               highlightColor="info"
-              text={pageData?.detail_title}
-              textToHighlight={pageData?.detail_title_highlighted}
+              text={`"${pageData?.title}"`}
+              textToHighlight={pageData?.title ?? ""}
               headerElement="h1"
               color="blue"
             />
-            <div className="mb-8">{parseHTMLtoReact(pageData?.content)}</div>
           </div>
         </Hero>
 
-        <section>
-          <Container>
-            <div className="flex flex-col items-center justify-center my-20">
-              <H3 variant="bold" color="blue">
-                De hele brief downloaden?
-              </H3>
-              <P>Vertel ons hoe je heet en hij komt naar je toe!</P>
+        <Container>
+          <article>
+            <div>{generateMediaItem()}</div>
+
+            <div className="columns-2 mt-[50px] mb-[90px]">
+              {parseHTMLtoReact(pageData?.content ?? "")}
             </div>
+          </article>
 
-            <div className="bg-blue-100 p-12 rounded-lg max-w-[850px] mx-auto">
-              {!isSubmitted ? (
-                <form
-                  onSubmit={handleSubmit(onSubmit)}
-                  className="flex flex-col gap-10"
-                >
-                  <Input
-                    placeholder="Vul je naam in"
-                    label="Naam"
-                    name="user_name"
-                    register={register}
-                    hasError={!!errors.user_name}
-                  />
+          {pageData?.id && (
+            <CommentForm comments={pageData?.comments} postId={pageData?.id} />
+          )}
+        </Container>
 
-                  <Input
-                    label="Email adres"
-                    placeholder="Vul je email adres in"
-                    type="email"
-                    name="user_email"
-                    register={register}
-                  />
-
-                  <label className={`flex gap-4`}>
-                    <input
-                      type="checkbox"
-                      {...register("subscribe_to_newsletter")}
-                    />
-                    <span style={{ color: theme.colors.primary }}>
-                      Ja, ik wil graag maandelijks tips & inspiratie via de mail
-                      ontvangen
-                    </span>
-                  </label>
-
-                  <Button
-                    loading={isLoading}
-                    disabled={
-                      watchFields[0]?.length === 0 ||
-                      watchFields[1]?.length === 0
+        {pageData?.related?.length && pageData?.related?.length > 0 ? (
+          <section>
+            <Container>
+              <div className="flex flex-col items-center justify-center my-[100px]">
+                <H3 variant="bold" style={{ margin: 0 }}>
+                  Relevante blogs of vlogs
+                </H3>
+              </div>
+            </Container>
+            <Container maxWidth="xl">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-20">
+                {pageData?.related.map((post) => (
+                  <BlogItem
+                    key={post.related_vlogposts_id.id}
+                    mediaSrc={
+                      post.related_vlogposts_id?.image?.id
+                        ? parseImageURL(post.related_vlogposts_id.image.id)
+                        : ""
                     }
-                  >
-                    Verzenden
-                  </Button>
-                </form>
-              ) : (
-                <div className="flex flex-col items-center justify-center">
-                  <FiCheck size={40} color={theme.colors.secondary} />
-                  <H3 variant="bold" color="blue">
-                    Bedankt! De brief wordt nu gedownload.
-                  </H3>
-                </div>
-              )}
-            </div>
-          </Container>
-        </section>
-        <section>
-          <Container>
-            <div className="flex flex-col items-center justify-center my-[100px]">
-              <H3 variant="bold" color="blue" style={{ margin: 0 }}>
-                Meer open brieven
-              </H3>
-            </div>
-          </Container>
-          <Container maxWidth="xl">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-20">
-              {relatedLetters.map((letter: Letter) => (
-                <BriefItem
-                  key={letter.id}
-                  title={letter.title}
-                  titleHighlighted={letter.title_highlighted}
-                  content={letter.description}
-                  imgSrc={parseImageURL(letter.image?.id)}
-                  fileSrc={`/open-brieven/${letter.slug}`}
-                />
-              ))}
-            </div>
-          </Container>
-        </section>
+                    embedSrc={post.related_vlogposts_id.youtube_embed}
+                    link={`blog/${post.related_vlogposts_id.id}`}
+                    type={post.related_vlogposts_id.type}
+                    author={post.related_vlogposts_id.author}
+                    content={post.related_vlogposts_id.content}
+                    postDate={new Date(post.related_vlogposts_id.date_created)}
+                    category={
+                      post.related_vlogposts_id.categories[0].categories_id.name
+                    }
+                    title={post.related_vlogposts_id.title}
+                  />
+                ))}
+              </div>
+            </Container>
+          </section>
+        ) : null}
       </main>
     </PageWrapper>
   );

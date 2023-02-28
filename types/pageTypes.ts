@@ -9,3 +9,7 @@ export type BlogPageProps = {
   blogsData: BlogType[];
   totalPosts: number;
 };
+
+export type BlogDetailPageProps = {
+  pageData?: BlogType;
+};
