@@ -3,7 +3,7 @@
 const { withSentryConfig } = require("@sentry/nextjs");
 
 const moduleExports = {
-  reactStrictMode: false,
+  reactStrictMode: true,
   swcMinify: true,
   images: {
     domains: ["admin.villapinedo.nl", "randomuser.me"],

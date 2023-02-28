@@ -130,8 +130,8 @@ export default function Footer() {
             </Grid>
             <Grid item md={3}>
               <H3 variant="bold">{companyInfo?.important_links_title}</H3>
-              {companyInfo?.important_links?.map?.((item) => (
-                <P key={item.id}>
+              {companyInfo?.important_links?.map?.((item, index) => (
+                <P key={`${item.id}-${index}`}>
                   <a href={item.link}>{item.name}</a>
                 </P>
               ))}
