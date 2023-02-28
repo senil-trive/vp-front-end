@@ -1,6 +1,6 @@
-import { MenuItem } from "../components/layout/Header/Header";
-import ENDPOINTS from "../constants/endpoints";
 import { CompanyInfo } from "../types/componayInfoTypes";
+import ENDPOINTS from "../constants/endpoints";
+import { MenuItem } from "../components/layout/Header/Header";
 
 /**
  * Uploads a file to the backend
@@ -71,7 +71,7 @@ export const postComment = async (
 export const getMenuItems = async () => {
   try {
     const res = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/main_nav_items?fields=*.*.*`,
+      `${ENDPOINTS.COLLECTIONS}/main_nav_items?fields=*.*.*&filter[status][_eq]=published`,
       {
         method: "GET",
         headers: {

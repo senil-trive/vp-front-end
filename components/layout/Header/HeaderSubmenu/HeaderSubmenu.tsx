@@ -1,8 +1,10 @@
-import { Container } from "@mui/system";
-import React from "react";
-import styled from "styled-components";
-import { P } from "../../../typography";
+import React, { useMemo } from "react";
+
 import { ChildMenuItem } from "../Header";
+import { Container } from "@mui/system";
+import { P } from "../../../typography";
+import styled from "styled-components";
+import { useRouter } from "next/router";
 
 type Props = {
   categories: ChildMenuItem[];
@@ -16,21 +18,19 @@ const Wrapper = styled.div`
   position: absolute;
   z-index: 999;
   width: 100%;
-  max-width: 1200px;
+  max-width: 1440px;
   border-radius: 8px;
   top: calc(100% + 5px);
 
   section {
-    flex: 1;
-    padding: 0 56px;
+    /* flex: 1; */
+    padding: 0 30px;
 
     p {
       margin-bottom: 16px;
     }
 
     ul {
-      display: flex;
-      flex-direction: column;
       list-style: none;
       padding: 0;
 
@@ -41,6 +41,13 @@ const Wrapper = styled.div`
           line-height: 160%;
           letter-spacing: 0.02em;
           color: ${({ theme }) => theme.colors.text};
+          &:hover {
+            color: ${({ theme }) => theme.colors.primary};
+          }
+          &.active {
+            color: ${({ theme }) => theme.colors.primary};
+            text-decoration: underline;
+          }
         }
       }
     }
@@ -52,8 +59,10 @@ const Wrapper = styled.div`
 `;
 
 export default function HeaderSubmenu({ categories }: Props) {
+  const router = useRouter();
+
   return (
-    <Container>
+    <Container maxWidth="xl">
       <Wrapper>
         {categories.map((category, index) => (
           <section
@@ -61,10 +70,19 @@ export default function HeaderSubmenu({ categories }: Props) {
             className={index < categories.length - 1 ? "with-divider" : ""}
           >
             <P variant="bold">{category.name}</P>
-            <ul>
+            <ul
+              className={`grid gap-x-6 ${
+                category.children.length > 4 ? "grid-cols-2" : "grid-cols-1"
+              }`}
+            >
               {category.children.map((item) => (
                 <li key={item.link}>
-                  <a href={item.link}>{item.name}</a>
+                  <a
+                    className={router.asPath === item.link ? "active" : ""}
+                    href={item.link}
+                  >
+                    {item.name}
+                  </a>
                 </li>
               ))}
             </ul>
