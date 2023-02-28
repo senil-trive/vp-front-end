@@ -187,7 +187,7 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
             </Container>
           </section>
 
-          <section className="my-[200px] text-center py-20">
+          <section className="my-[200px] text-center py-20" id="faq">
             <Container>
               <div className="flex flex-col items-center justify-center mb-14">
                 <H3 variant="bold" color="black">
