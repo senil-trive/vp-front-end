@@ -5,6 +5,8 @@ import { useTheme } from "styled-components";
 import TagList from "../../components/buttons/TagList/TagList";
 import BlogItem from "../../components/content-types/BlogItem/BlogItem";
 import CollectionSearchBar from "../../components/form/CollectionSearchBar/CollectionSearchBar";
+import Dropdown from "../../components/form/Dropdown/Dropdown";
+import SortBar from "../../components/form/SortBar/SortBar";
 import { Hero, Pagination } from "../../components/layout";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import { H1, P } from "../../components/typography";
@@ -21,7 +23,7 @@ const postPerPage = 9;
 export const getServerSideProps = async () => {
   try {
     const pageReq = await getPostOverviewPageData();
-    const blogsReq = await getPosts(postPerPage);
+    const blogsReq = await getPosts({ postPerPage });
     const countReq = await getPostsTotal();
 
     const pageRes = await pageReq.json();
@@ -56,6 +58,7 @@ export default function Forum({
   const [posts, setPosts] = useState(blogsData);
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
+  const [sort, setSort] = useState("");
 
   const changePage = (index: number) => {
     if (index <= 1) {
@@ -70,13 +73,20 @@ export default function Forum({
     setCurrentPage(1);
   };
 
-  useEffect(() => {
-    const getPaginatedBlogs = async (q?: string) => {
-      try {
-        const req = await getPosts(postPerPage, currentPage, q);
-        const res = await req.json();
+  const handleSort = (x: string) => {
+    setSort(x);
+  };
 
-        console.log(res.data);
+  useEffect(() => {
+    const getPaginatedBlogs = async () => {
+      try {
+        const req = await getPosts({
+          postPerPage,
+          page: currentPage,
+          search,
+          sort,
+        });
+        const res = await req.json();
 
         setPosts(res.data);
       } catch (error) {
@@ -84,8 +94,8 @@ export default function Forum({
       }
     };
 
-    getPaginatedBlogs(search);
-  }, [currentPage, search]);
+    getPaginatedBlogs();
+  }, [currentPage, search, sort]);
 
   return (
     <PageWrapper title="Forum overzicht">
@@ -127,11 +137,7 @@ export default function Forum({
               </P>
             </Grid>
             <Grid item xs={12} md={3}>
-              {/* <Dropdown
-                name="sort"
-                placeholder="Sorteer op"
-                options={[{ name: "test", value: "test" }]}
-              /> */}
+              <SortBar onSort={handleSort} />
             </Grid>
             {posts.map((item, index) => (
               <Grid key={index} item xs={12} md={4}>

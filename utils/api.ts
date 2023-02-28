@@ -148,17 +148,24 @@ export const getPostOverviewPageData = async () => {
  * @param query the search query
  * @returns
  */
-export const getPosts = async (
-  postPerPage: number,
-  page: number = 1,
-  query?: string
-) => {
-  console.log({ query });
-
+export const getPosts = async ({
+  postPerPage,
+  page = 1,
+  search,
+  sort,
+}: {
+  postPerPage: number;
+  page?: number;
+  search?: string;
+  sort?: string;
+}) => {
   let url = `${ENDPOINTS.COLLECTIONS}/vlogposts?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
 
-  if (query) {
-    url = `${url}&search=${query}`;
+  if (search) {
+    url = `${url}&search=${search}`;
+  }
+  if (sort) {
+    url = `${url}&sort=${sort}`;
   }
 
   return await fetch(url, {

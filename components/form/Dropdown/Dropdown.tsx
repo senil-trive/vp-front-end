@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { ReactNode, useRef, useState } from "react";
 import styled, { css, useTheme } from "styled-components";
 import { ColorType } from "../../../types/colorTypes";
 import ChevronDownFilled from "../../icons/ChevronDownFilled/ChevronDownFilled";
@@ -18,6 +18,9 @@ export type DropdownItem = {
 export type Props = {
   /** Label of the dropdown field. */
   label?: string;
+
+  /** React or custom Icon to be placed in front of the input  */
+  iconLeft?: ReactNode;
 
   /** Options that should be used as dropdown options */
   options: DropdownItem[];
@@ -48,6 +51,9 @@ export type Props = {
 
   /** The color of the border */
   borderColor?: ColorType;
+
+  /** Event called when the dropdown changes */
+  onChange?: (x: string) => void;
 };
 
 const Wrapper = styled.div<{ hasError: boolean }>`
@@ -100,6 +106,7 @@ const Wrapper = styled.div<{ hasError: boolean }>`
     width: 100%;
     border-radius: 0 0 8px 8px;
     position: absolute;
+    z-index: 999;
     display: flex;
     flex-direction: column;
     padding: 6.18px 0 10px 0;
@@ -152,6 +159,7 @@ const Wrapper = styled.div<{ hasError: boolean }>`
 `;
 
 export default function Dropdown({
+  iconLeft,
   options,
   label,
   disabled,
@@ -162,6 +170,7 @@ export default function Dropdown({
   name,
   required,
   borderColor = "primary",
+  onChange,
   ...rest
 }: Props) {
   const { colors } = useTheme();
@@ -181,6 +190,8 @@ export default function Dropdown({
 
   const handleSelect = (option: DropdownItem) => {
     setSelected(option);
+
+    if (onChange) onChange(option.value);
     setIsOpen(() => false);
   };
 
@@ -206,7 +217,12 @@ export default function Dropdown({
           style={{ borderColor: colors[borderColor] }}
           onClick={() => setIsOpen((state) => !state)}
         >
-          <span>{selected?.name || placeholder}</span>
+          <div className="flex items-center">
+            {!!iconLeft && (
+              <IconWrapper style={{ marginRight: 10 }}>{iconLeft}</IconWrapper>
+            )}
+            <span>{selected?.name || placeholder}</span>
+          </div>
           <span>{!isOpen ? <ChevronDownFilled /> : <ChevronUpFilled />}</span>
         </div>
         {isOpen && (
