@@ -143,18 +143,30 @@ export const getPostOverviewPageData = async () => {
 
 /**
  * Gets a list of blog posts
+ * @param postPerPage the amount of posts to be shown per page
+ * @param page the current paginated page
+ * @param query the search query
  * @returns
  */
-export const getPosts = async (page: number = 1) => {
-  return await fetch(
-    `${ENDPOINTS.COLLECTIONS}/vlogposts?fields=*.*.*&filter[status][_eq]=published&limit=9&page=${page}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+export const getPosts = async (
+  postPerPage: number,
+  page: number = 1,
+  query?: string
+) => {
+  console.log({ query });
+
+  let url = `${ENDPOINTS.COLLECTIONS}/vlogposts?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+
+  if (query) {
+    url = `${url}&search=${query}`;
+  }
+
+  return await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 };
 
 /**

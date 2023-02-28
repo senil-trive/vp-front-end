@@ -1,7 +1,10 @@
 import * as React from "react";
 import { SVGProps } from "react";
+import { useTheme } from "styled-components";
 
 export default function ChevronDownFilled(props: SVGProps<SVGSVGElement>) {
+  const { colors } = useTheme();
+
   return (
     <svg
       width={17}
@@ -12,7 +15,7 @@ export default function ChevronDownFilled(props: SVGProps<SVGSVGElement>) {
     >
       <path
         d="M8.892 11.434a1 1 0 0 1-1.6 0L.287 2.1a1 1 0 0 1 .8-1.6h14.011a1 1 0 0 1 .8 1.6l-7.006 9.334Z"
-        fill="#555"
+        fill={colors.info}
       />
     </svg>
   );

@@ -5,7 +5,7 @@ import { useTheme } from "styled-components";
 
 interface TitleWithHighlightsProps {
   text: string;
-  textToHighlight: string;
+  textToHighlight?: string;
   headerElement: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   color: "blue" | "black";
   highlightColor: "info" | "tertiary";
@@ -19,7 +19,7 @@ const TitleWithHighlights: React.FC<TitleWithHighlightsProps> = ({
   highlightColor = "info",
 }) => {
   const theme = useTheme();
-  const parts = text.split(textToHighlight);
+  const parts = textToHighlight ? text.split(textToHighlight) : [text];
 
   const HeaderComponent = () => {
     const Text: React.FC = () => {

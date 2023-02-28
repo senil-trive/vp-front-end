@@ -53,7 +53,8 @@ export type Props = {
 const Wrapper = styled.div<{ hasError: boolean }>`
   display: flex;
   flex-direction: column;
-  cursor: text;
+  cursor: pointer;
+  position: relative;
 
   select {
     display: none;
@@ -98,7 +99,7 @@ const Wrapper = styled.div<{ hasError: boolean }>`
     background-color: white;
     width: 100%;
     border-radius: 0 0 8px 8px;
-
+    position: absolute;
     display: flex;
     flex-direction: column;
     padding: 6.18px 0 10px 0;

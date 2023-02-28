@@ -1,18 +1,13 @@
 import { Container, Grid } from "@mui/material";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import { CircleSpinner } from "react-spinners-kit";
-import Button from "../../components/buttons/Button";
+import { useTheme } from "styled-components";
 import TagList from "../../components/buttons/TagList/TagList";
 import BlogItem from "../../components/content-types/BlogItem/BlogItem";
-import ForumPost from "../../components/content-types/ForumPost/ForumPost";
 import CollectionSearchBar from "../../components/form/CollectionSearchBar/CollectionSearchBar";
 import { Hero, Pagination } from "../../components/layout";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import { H1, P } from "../../components/typography";
-import ColorSpan from "../../components/typography/ColorSpan/ColorSpan";
-import ENDPOINTS from "../../constants/endpoints";
 import { FEED_TAGS } from "../../constants/mockData";
 import { BlogPageProps } from "../../types/pageTypes";
 import {
@@ -23,14 +18,10 @@ import {
 import parseImageURL from "../../utils/parseImageURL";
 
 const postPerPage = 9;
-
 export const getServerSideProps = async () => {
   try {
     const pageReq = await getPostOverviewPageData();
-
-    const blogsReq = await getPosts();
-
-    // Get the posts count
+    const blogsReq = await getPosts(postPerPage);
     const countReq = await getPostsTotal();
 
     const pageRes = await pageReq.json();
@@ -60,9 +51,11 @@ export default function Forum({
   blogsData,
   totalPosts,
 }: BlogPageProps) {
-  const { query, push } = useRouter();
+  const { colors } = useTheme();
+  // const { query, push } = useRouter(); // TODO: also the pagination and search through url query
   const [posts, setPosts] = useState(blogsData);
   const [currentPage, setCurrentPage] = useState(1);
+  const [search, setSearch] = useState("");
 
   const changePage = (index: number) => {
     if (index <= 1) {
@@ -72,11 +65,18 @@ export default function Forum({
     }
   };
 
+  const handleSearch = (x: string) => {
+    setSearch(x);
+    setCurrentPage(1);
+  };
+
   useEffect(() => {
-    const getPaginatedBlogs = async () => {
+    const getPaginatedBlogs = async (q?: string) => {
       try {
-        const req = await getPosts(currentPage);
+        const req = await getPosts(postPerPage, currentPage, q);
         const res = await req.json();
+
+        console.log(res.data);
 
         setPosts(res.data);
       } catch (error) {
@@ -84,8 +84,8 @@ export default function Forum({
       }
     };
 
-    getPaginatedBlogs();
-  }, [currentPage]);
+    getPaginatedBlogs(search);
+  }, [currentPage, search]);
 
   return (
     <PageWrapper title="Forum overzicht">
@@ -117,10 +117,22 @@ export default function Forum({
 
         <CollectionSearchBar
           quote={pageData?.search_bar_quote ?? ""}
-          onSearch={(x) => console.log({ x })}
+          onSearch={handleSearch}
         />
         <Container style={{ margin: "56px auto" }}>
           <Grid container spacing={"34px"}>
+            <Grid item xs={12} md={9}>
+              <P style={{ color: colors.primary }}>
+                {search ? posts.length : totalPosts} blogs en vlogs
+              </P>
+            </Grid>
+            <Grid item xs={12} md={3}>
+              {/* <Dropdown
+                name="sort"
+                placeholder="Sorteer op"
+                options={[{ name: "test", value: "test" }]}
+              /> */}
+            </Grid>
             {posts.map((item, index) => (
               <Grid key={index} item xs={12} md={4}>
                 <Link href={`blog/${item.id}`}>
@@ -143,7 +155,7 @@ export default function Forum({
           </Grid>
         </Container>
 
-        {totalPosts / postPerPage > 2 && (
+        {totalPosts / postPerPage > 2 && posts.length >= postPerPage && (
           <Pagination
             total={Math.ceil(totalPosts / postPerPage)}
             truncated

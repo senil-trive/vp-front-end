@@ -34,6 +34,7 @@ const StyledLetter = styled(BaseStyle)`
 
 const StyledBlog = styled(BaseStyle)`
   padding: 24px;
+  border-color: ${({ theme }) => theme.colors.primary};
 
   header {
     height: 366px;

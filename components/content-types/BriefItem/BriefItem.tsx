@@ -49,7 +49,7 @@ export default function BriefItem({
           color="black"
           highlightColor="tertiary"
           text={title}
-          textToHighlight={titleHighlighted ?? ""}
+          textToHighlight={titleHighlighted ?? "    "}
           headerElement="h3"
         />
 
