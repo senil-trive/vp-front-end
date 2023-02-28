@@ -91,7 +91,7 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
               text={`"${pageData?.title}"`}
               textToHighlight={pageData?.title ?? ""}
               headerElement="h1"
-              color="blue"
+              color="primary"
             />
           </div>
         </Hero>

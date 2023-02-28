@@ -1,27 +1,19 @@
 import React, { ReactNode } from "react";
 
 import styled from "styled-components";
+import { ColorType } from "../../../types/colorTypes";
 
 type Props = React.HTMLAttributes<HTMLParagraphElement> & {
   variant?: "bold" | "regular" | "italic" | "light" | "helper";
-  color?: "white" | "black";
+  color?: ColorType;
   children: ReactNode;
 };
 
-const BaseP = styled.p`
+const BaseP = styled.p<{ color: ColorType }>`
   font-style: normal;
   font-size: 16px;
   line-height: 140%;
-  color: ${({ theme, color }) => {
-    switch (color) {
-      case "white":
-        return theme.colors.white;
-      case "black":
-        return theme.colors.black;
-      default:
-        return theme.colors.black;
-    }
-  }};
+  color: ${({ theme, color }) => theme.colors[color]};
   margin: 12px 0;
 
   @media ${({ theme }) => theme.devices.tablet} {

@@ -88,19 +88,21 @@ export default function CommentForm({
         ))}
       </Grid>
 
-      <Grid
-        container
-        direction="column"
-        justifyItems="center"
-        alignItems="center"
-        className="mb-[32px]"
-      >
-        <Grid item xs={4}>
-          <Button onClick={() => setIsOpen((open) => !open)}>
-            Commentaar toevoegen
-          </Button>
+      {!isSubmitted && (
+        <Grid
+          container
+          direction="column"
+          justifyItems="center"
+          alignItems="center"
+          className="mb-[32px]"
+        >
+          <Grid item xs={4}>
+            <Button onClick={() => setIsOpen((open) => !open)}>
+              Commentaar toevoegen
+            </Button>
+          </Grid>
         </Grid>
-      </Grid>
+      )}
 
       <div
         className={
@@ -185,7 +187,7 @@ export default function CommentForm({
           ) : (
             <div className="flex flex-col items-center justify-center">
               <FiCheck size={40} color={colors.secondary} />
-              <H3 variant="bold" color="blue">
+              <H3 variant="bold" color="primary">
                 Bedankt! Jouw commentaar wordt door ons beoordeeld.
               </H3>
             </div>
