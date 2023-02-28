@@ -1,68 +1,30 @@
-/**
- * Resources
- * - https://docs.mux.com/guides/video/play-your-videos
- */
-
 import getVideoID from "get-video-id";
-import React, {
-  LegacyRef,
-  memo,
-  MutableRefObject,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import YouTube from "react-youtube";
+import React, { memo } from "react";
 import styled from "styled-components";
 
 type YoutubeProps = {
   src: string;
 };
 
-const opts: any = {
-  playerVars: {
-    autoplay: 0,
-    controls: 1, // turn off yt controls
-    showinfo: 0, // Hide the video title
-    disablekb: 1, // prevent keyboard controls
-    enablejsapi: 1, // allow the player to be controlled by the api
-    autohide: 1,
-
-    playsinline: 1, // inline on iOS
-    rel: 0, // show only more-content of the channel
-    modestbranding: 1, // prevent logo
-    version: 3,
-    playerapiid: "iframe_P1",
-    wmode: "transparent",
-    iv_load_policy: 3,
-    cc_load_policy: 0,
-    html5: 1,
-    widgetid: 1,
-  },
-};
-
 const StyledWrapper = styled.div`
+  height: inherit;
+
   iframe {
+    height: inherit;
     width: 100%;
+    object-fit: contain;
   }
 `;
 
 function YoutubePlayer({ src }: YoutubeProps) {
-  const handleReady = (e: any) => {
-    const player = e.target;
-    player.pauseVideo();
-  };
-
   return (
     <StyledWrapper className="overflow-hidden rounded-[8px]">
       {src && (
-        <YouTube
-          id="player"
-          className="h-full w-full"
-          videoId={getVideoID(src).id ?? ""}
-          // onStateChange={handleStateChange}
-          onReady={handleReady}
-          opts={opts}
+        <iframe
+          src={`https://www.youtube.com/embed/${getVideoID(src).id ?? ""}`}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          title="Embedded youtube"
         />
       )}
     </StyledWrapper>
