@@ -1,6 +1,9 @@
 export const truncate = (str: string, length: number) => {
-  if (str.length > length) {
-    return str.slice(0, length) + "...";
+  // remove html tags from string
+  const text = str.replace(/(<([^>]+)>)/gi, "");
+
+  if (text.length > length) {
+    return text.slice(0, length) + "...";
   }
-  return str;
+  return text;
 };

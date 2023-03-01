@@ -101,7 +101,7 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
           >
             <Container>
               <div className="flex flex-col items-center justify-center ">
-                <H3 variant="bold" color="blue">
+                <H3 variant="bold" color="primary">
                   {pageData?.cta_section_title}
                 </H3>
                 <P className="max-w-4xl">{pageData?.cta_section_subtitle}</P>
@@ -139,7 +139,7 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
 
             <Container>
               <div className="flex flex-col items-center justify-center my-20 ">
-                <H3 variant="bold" color="blue">
+                <H3 variant="bold" color="primary">
                   {pageData?.cta_section_footer_title}
                 </H3>
                 <P className="max-w-4xl">
@@ -163,7 +163,7 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
           <section className="my-[200px] text-center py-20">
             <Container>
               <div className="flex flex-col items-center justify-center ">
-                <H3 variant="bold" color="blue">
+                <H3 variant="bold" color="primary">
                   {pageData?.stories_section_title}
                 </H3>
                 <P className="max-w-4xl">

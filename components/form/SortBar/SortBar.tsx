@@ -8,8 +8,8 @@ const defaultSortOptions = [
   { name: "Titel (z-a)", value: "-title" },
   { name: "Autheur (oplopend)", value: "author" },
   { name: "Autheur (aflopend)", value: "-author" },
-  { name: "Post datum (oplopend)", value: "date_created" },
-  { name: "Post datum (aflopend)", value: "-date_created" },
+  { name: "Datum (oud-nieuw)", value: "date_created" },
+  { name: "Datum (nieuw-oud)", value: "-date_created" },
 ];
 
 type Props = {

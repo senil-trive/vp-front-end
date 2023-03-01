@@ -77,7 +77,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                 text={pageData?.page_title}
                 textToHighlight={pageData?.page_title_highlighted}
                 headerElement="h1"
-                color="blue"
+                color="primary"
               />
               <P>{pageData?.page_subtitle}</P>
             </div>
@@ -122,7 +122,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
           <section>
             <Container>
               <div className="flex flex-col items-center justify-center my-[100px]">
-                <H4 variant="bold" color="blue" style={{ margin: 0 }}>
+                <H4 variant="bold" color="primary" style={{ margin: 0 }}>
                   Meer open brieven
                 </H4>
                 <P>Bekijk ze allemaal</P>

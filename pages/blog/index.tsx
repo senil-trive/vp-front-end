@@ -5,7 +5,6 @@ import { useTheme } from "styled-components";
 import TagList from "../../components/buttons/TagList/TagList";
 import BlogItem from "../../components/content-types/BlogItem/BlogItem";
 import CollectionSearchBar from "../../components/form/CollectionSearchBar/CollectionSearchBar";
-import Dropdown from "../../components/form/Dropdown/Dropdown";
 import SortBar from "../../components/form/SortBar/SortBar";
 import { Hero, Pagination } from "../../components/layout";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
@@ -98,7 +97,7 @@ export default function Forum({
   }, [currentPage, search, sort]);
 
   return (
-    <PageWrapper title="Forum overzicht">
+    <PageWrapper title="Blog en vlog overzicht">
       <Hero center>
         <Container>
           <Grid container>
@@ -141,21 +140,17 @@ export default function Forum({
             </Grid>
             {posts.map((item, index) => (
               <Grid key={index} item xs={12} md={4}>
-                <Link href={`blog/${item.id}`}>
-                  <BlogItem
-                    mediaSrc={
-                      item?.image?.id ? parseImageURL(item.image.id) : ""
-                    }
-                    embedSrc={item.youtube_embed}
-                    link={`blog/${item.id}`}
-                    type={item.type}
-                    author={item.author}
-                    content={item.content}
-                    postDate={new Date(item.date_created)}
-                    category={item.categories[0].categories_id.name}
-                    title={item.title}
-                  />
-                </Link>
+                <BlogItem
+                  mediaSrc={item?.image?.id ? parseImageURL(item.image.id) : ""}
+                  embedSrc={item.youtube_embed}
+                  link={`blog/${item.slug}`}
+                  type={item.type}
+                  author={item.author}
+                  content={item.content}
+                  postDate={new Date(item.date_created)}
+                  category={item.categories[0].categories_id.name}
+                  title={item.title}
+                />
               </Grid>
             ))}
           </Grid>

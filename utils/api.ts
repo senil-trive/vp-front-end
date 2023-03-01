@@ -65,6 +65,24 @@ export const postComment = async (
 };
 
 /**
+ * Get all the comments of a post
+ * @param type the type of post
+ * @param post_id
+ * @returns
+ */
+export const getComments = async (type: "forum" | "blog", post_id: string) => {
+  return await fetch(
+    `${ENDPOINTS.COLLECTIONS}/comments?filter[status][_eq]=published&filter[${type}_post][_eq]=${post_id}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+};
+
+/**
  * Get all the menu items used for navigation
  * @returns array or null
  */
@@ -174,6 +192,23 @@ export const getPosts = async ({
       "Content-Type": "application/json",
     },
   });
+};
+
+/**
+ * Get the post detail base on the slug
+ * @param slug the post slug
+ * @returns
+ */
+export const getPostDetail = async (slug: string) => {
+  return await fetch(
+    `${ENDPOINTS.COLLECTIONS}/vlogposts?fields=*.*.*.*&filter[slug][_eq]=${slug}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
 };
 
 /**

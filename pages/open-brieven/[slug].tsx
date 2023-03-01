@@ -135,7 +135,7 @@ export default function LetterDetail({ pageData, relatedLetters }: Props) {
               text={pageData?.detail_title}
               textToHighlight={pageData?.detail_title_highlighted}
               headerElement="h1"
-              color="blue"
+              color="primary"
             />
             <div className="mb-8">{parseHTMLtoReact(pageData?.content)}</div>
           </div>
@@ -144,7 +144,7 @@ export default function LetterDetail({ pageData, relatedLetters }: Props) {
         <section>
           <Container>
             <div className="flex flex-col items-center justify-center my-20">
-              <H3 variant="bold" color="blue">
+              <H3 variant="bold" color="primary">
                 De hele brief downloaden?
               </H3>
               <P>Vertel ons hoe je heet en hij komt naar je toe!</P>
@@ -196,7 +196,7 @@ export default function LetterDetail({ pageData, relatedLetters }: Props) {
               ) : (
                 <div className="flex flex-col items-center justify-center">
                   <FiCheck size={40} color={theme.colors.secondary} />
-                  <H3 variant="bold" color="blue">
+                  <H3 variant="bold" color="primary">
                     Bedankt! De brief wordt nu gedownload.
                   </H3>
                 </div>
@@ -207,7 +207,7 @@ export default function LetterDetail({ pageData, relatedLetters }: Props) {
         <section>
           <Container>
             <div className="flex flex-col items-center justify-center my-[100px]">
-              <H3 variant="bold" color="blue" style={{ margin: 0 }}>
+              <H3 variant="bold" color="primary" style={{ margin: 0 }}>
                 Meer open brieven
               </H3>
             </div>

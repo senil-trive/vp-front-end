@@ -21,7 +21,7 @@ const FAQItem: React.FC<FAQItemProps> = ({ title, description }) => {
         className="flex items-center justify-between cursor-pointer text-left"
         onClick={() => setOpen(!open)}
       >
-        <H3 variant="bold" color={open ? "blue" : "green"}>
+        <H3 variant="bold" color={open ? "primary" : "secondary"}>
           {title}
         </H3>
         <button
