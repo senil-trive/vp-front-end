@@ -1,16 +1,16 @@
-import { H3, H4, P, TitleWithHighlights } from "../../components/typography";
+import { H3, H4, P, TitleWithHighlights } from "../../../components/typography";
 
-import BriefItem from "../../components/content-types/BriefItem/BriefItem";
+import BriefItem from "../../../components/content-types/BriefItem/BriefItem";
 import { Container } from "@mui/material";
-import ENDPOINTS from "../../constants/endpoints";
+import ENDPOINTS from "../../../constants/endpoints";
 import { FiChevronsDown } from "react-icons/fi";
-import { Hero } from "../../components/layout";
-import { Letter } from "../../types/content-types/Letter.type";
-import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
+import { Hero } from "../../../components/layout";
+import { Letter } from "../../../types/content-types/Letter.type";
+import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import React from "react";
-import TextItem from "../../components/content-types/TextItem/TextItem";
-import { parseFileURL } from "../../utils/parseFileURL";
-import parseImageURL from "../../utils/parseImageURL";
+import TextItem from "../../../components/content-types/TextItem/TextItem";
+import { parseFileURL } from "../../../utils/parseFileURL";
+import parseImageURL from "../../../utils/parseImageURL";
 
 interface LettersOverviewPageProps {
   pageData: any;

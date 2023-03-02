@@ -1,17 +1,17 @@
 import { FaAppStoreIos, FaGooglePlay } from "react-icons/fa";
-import { H1, H3, P } from "../../components/typography";
+import { H1, H3, P } from "../../../components/typography";
 
-import Button from "../../components/buttons/Button";
-import CTAItem from "../../components/content-types/CTAItem/CTAItem";
+import Button from "../../../components/buttons/Button";
+import CTAItem from "../../../components/content-types/CTAItem/CTAItem";
 import { Container } from "@mui/material";
-import ENDPOINTS from "../../constants/endpoints";
-import { FAQ } from "../../types/content-types/FAQ.type";
-import FAQItem from "../../components/content-types/FAQItem/FAQItem";
-import { Hero } from "../../components/layout";
-import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
-import TextItem from "../../components/content-types/TextItem/TextItem";
-import VideoItem from "../../components/content-types/VideoItem/VideoItem";
-import parseImageURL from "../../utils/parseImageURL";
+import ENDPOINTS from "../../../constants/endpoints";
+import { FAQ } from "../../../types/content-types/FAQ.type";
+import FAQItem from "../../../components/content-types/FAQItem/FAQItem";
+import { Hero } from "../../../components/layout";
+import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
+import TextItem from "../../../components/content-types/TextItem/TextItem";
+import VideoItem from "../../../components/content-types/VideoItem/VideoItem";
+import parseImageURL from "../../../utils/parseImageURL";
 
 type BuddyPageProps = {
   pageData: any;
