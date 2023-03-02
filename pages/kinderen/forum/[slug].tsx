@@ -1,25 +1,25 @@
 import { Container, Grid } from "@mui/material";
-import { ForumCommentType, ForumPostType } from "../../types/forumTypes";
-import { H2, H4, P } from "../../components/typography";
+import { ForumCommentType, ForumPostType } from "../../../types/forumTypes";
+import { H2, H4, P } from "../../../components/typography";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { slugToTitle, titleToSlug } from "../../utils/url";
+import { slugToTitle, titleToSlug } from "../../../utils/url";
 
-import BreadCrumbs from "../../components/layout/BreadCrumbs/BreadCrumbs";
-import Button from "../../components/buttons/Button";
-import Dropdown from "../../components/form/Dropdown/Dropdown";
-import ENDPOINTS from "../../constants/endpoints";
-import ForumComment from "../../components/content-types/ForumComment/ForumComment";
-import ForumPost from "../../components/content-types/ForumPost/ForumPost";
-import { GENDERS } from "../../constants/genders";
+import BreadCrumbs from "../../../components/layout/BreadCrumbs/BreadCrumbs";
+import Button from "../../../components/buttons/Button";
+import Dropdown from "../../../components/form/Dropdown/Dropdown";
+import ENDPOINTS from "../../../constants/endpoints";
+import ForumComment from "../../../components/content-types/ForumComment/ForumComment";
+import ForumPost from "../../../components/content-types/ForumPost/ForumPost";
+import { GENDERS } from "../../../constants/genders";
 import { GetServerSidePropsContext } from "next";
-import { Hero } from "../../components/layout";
-import Input from "../../components/form/Input/Input";
-import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
-import Section from "../../components/layout/Section/Section";
-import TextArea from "../../components/form/TextArea/TextArea";
-import { postComment } from "../../utils/api";
-import CommentForm from "../../components/form/CommentForm/CommentForm";
+import { Hero } from "../../../components/layout";
+import Input from "../../../components/form/Input/Input";
+import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
+import Section from "../../../components/layout/Section/Section";
+import TextArea from "../../../components/form/TextArea/TextArea";
+import { postComment } from "../../../utils/api";
+import CommentForm from "../../../components/form/CommentForm/CommentForm";
 
 type Props = {
   pageData: ForumPostType;

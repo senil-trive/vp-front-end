@@ -31,7 +31,10 @@ export type GrandChildMenuItem = {
 };
 
 const StyledHeader = styled.header`
-  position: relative;
+  position: sticky;
+  top: 0;
+  background-color: ${({ theme }) => theme.colors.white};
+  z-index: 500;
 
   .inner {
     display: flex;
