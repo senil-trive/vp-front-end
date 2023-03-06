@@ -9,50 +9,43 @@ import SearchBar from "../../components/form/SearchBar/SearchBar";
 import SearchResultItem from "../../components/content-types/SearchResultItem/SearchResultItem";
 import { useRouter } from "next/router";
 import { POST_PER_PAGE } from "../../constants/app-configs";
-import { getPosts, getPostsTotal } from "../../utils/api";
+import {
+  getForums,
+  getLetters,
+  getPosts,
+  getPostsTotal,
+} from "../../utils/api";
 import { BlogType } from "../../types/content-types/Blog.type";
+import { ForumPostType } from "../../types/forumTypes";
+import { Letter } from "../../types/content-types/Letter.type";
 
-// Temp searchresults
-const items = [
-  {
-    name: "test 1",
-    link: "test-1",
-  },
-  {
-    name: "test 2",
-    link: "test-2",
-  },
-  {
-    name: "test 3",
-    link: "test-3",
-  },
-];
-
-export const getServerSideProps = async () => {
-  // try {
-  //   const blogsReq = await getPosts({ postPerPage: POST_PER_PAGE });
-  //   const countReq = await getPostsTotal();
-  //   const blogRes = await blogsReq.json();
-  //   const countRes = await countReq.json();
-  //   return {
-  //     props: {
-  //       blogsData: blogRes.data,
-  //       totalPosts: countRes.data[0].count,
-  //     },
-  //   };
-  // } catch (error) {
-  //   console.log(error);
-  //   return {
-  //     redirect: {
-  //       destination: "/500",
-  //     },
-  //   };
-  // }
-};
+// export const getServerSideProps = async () => {
+// try {
+//   const blogsReq = await getPosts({ postPerPage: POST_PER_PAGE });
+//   const countReq = await getPostsTotal();
+//   const blogRes = await blogsReq.json();
+//   const countRes = await countReq.json();
+//   return {
+//     props: {
+//       blogsData: blogRes.data,
+//       totalPosts: countRes.data[0].count,
+//     },
+//   };
+// } catch (error) {
+//   console.log(error);
+//   return {
+//     redirect: {
+//       destination: "/500",
+//     },
+//   };
+// }
+// };
 
 export default function Search() {
   const router = useRouter();
   const [posts, setPosts] = useState<BlogType[]>([]);
+  const [forumPosts, setForumPosts] = useState<ForumPostType[]>([]);
+  const [letters, setLetters] = useState<Letter[]>([]);
   const { q } = router.query;
 
   useEffect(() => {
@@ -70,7 +63,33 @@ export default function Search() {
       }
     };
 
+    const getPaginatedForum = async () => {
+      try {
+        const req = await getForums({
+          postPerPage: POST_PER_PAGE,
+          search: q as string,
+        });
+        const res = await req.json();
+
+        setForumPosts(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const getPaginatedLetters = async () => {
+      try {
+        const req = await getLetters();
+        const res = await req.json();
+
+        setLetters(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
     getPaginatedBlogs();
+    getPaginatedForum();
+    getPaginatedLetters();
   }, [q]);
 
   return (
@@ -81,7 +100,7 @@ export default function Search() {
             <Grid item xs={0} md={2} lg={3} />
             <Grid item xs={12} md={8} lg={6}>
               <H1 style={{ textAlign: "center", padding: "0 24px" }}>
-                11 resultaten gevonden
+                {posts.length + forumPosts.length} resultaten gevonden
               </H1>
 
               <P variant="light" style={{ textAlign: "center" }}>
@@ -102,9 +121,12 @@ export default function Search() {
           <Grid container spacing={"22px"}>
             <Grid item xs={12} md={4}>
               <SearchResultItem
-                amount={3}
+                amount={forumPosts.length}
                 resultTitleSuffix={<span>in ons Forum</span>}
-                list={items}
+                list={forumPosts.map((post) => ({
+                  name: post.content,
+                  link: `/kinderen/forum/${post.slug}`,
+                }))}
               />
             </Grid>
             <Grid item xs={12} md={4}>
@@ -119,14 +141,14 @@ export default function Search() {
               />
             </Grid>
             <Grid item xs={12} md={4}>
-              <BriefItem
-                imgSrc="https://picsum.photos/920/180"
-                title="Brief voor alle kinderen"
-                category="Thema"
-                content="Lieve jij. Deze brief is speciaal voor jou: voor kinderen van wie de
-              ouders uit elkaar gaan of al zijn. Wist je dat 86.000 kinderen per
-              jaar horen dat hun ouders gaan scheiden?"
-                fileSrc="https://www.africau.edu/images/default/sample.pdf"
+              <SearchResultItem
+                colorVariant={3}
+                amount={letters.length}
+                resultTitleSuffix={<span>in Brieven</span>}
+                list={letters.map((post) => ({
+                  name: post.title,
+                  link: `/blog/${post.slug}`,
+                }))}
               />
             </Grid>
           </Grid>

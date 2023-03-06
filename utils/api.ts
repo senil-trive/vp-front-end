@@ -131,6 +131,22 @@ export const getCompanyInfo = async () => {
 };
 
 /**
+ * Get a list of all published open letters
+ * @returns
+ */
+export const getLetters = async () => {
+  return await fetch(
+    `${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*.*&filter[status][_eq]=published`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+};
+
+/**
  * Add a letter subscription
  * @param data
  */

@@ -11,6 +11,7 @@ import React from "react";
 import TextItem from "../../../components/content-types/TextItem/TextItem";
 import { parseFileURL } from "../../../utils/parseFileURL";
 import parseImageURL from "../../../utils/parseImageURL";
+import { getLetters } from "../../../utils/api";
 
 interface LettersOverviewPageProps {
   pageData: any;
@@ -29,15 +30,7 @@ export const getServerSideProps = async () => {
       }
     );
 
-    const lettersReq = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*.*&filter[status][_eq]=published`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const lettersReq = await getLetters();
 
     const pageRes = await pageReq.json();
     const lettersRes = await lettersReq.json();

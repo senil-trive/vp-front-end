@@ -12,6 +12,7 @@ export type ForumPostType = {
   homepage_id: string;
   likes: string;
   status: "draft";
+  slug: string;
 };
 
 export type ForumCommentType = {
