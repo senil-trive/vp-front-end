@@ -1,11 +1,10 @@
 import { H1, H3, P } from "../../../components/typography";
-import { Header, Hero } from "../../../components/layout";
 
 import { Container } from "@mui/material";
 import ENDPOINTS from "../../../constants/endpoints";
 import { FAQ } from "../../../types/content-types/FAQ.type";
 import FAQItem from "../../../components/content-types/FAQItem/FAQItem";
-import Head from "next/head";
+import { Hero } from "../../../components/layout";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 
 type VolunteersFAQPageProps = {
@@ -28,7 +27,7 @@ export const getServerSideProps = async () => {
       }
     );
     const faqReq = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/faq_items?fields=*.*.*`,
+      `${ENDPOINTS.COLLECTIONS}/faq_items?fields=*.*.*?filter[status][_eq]=published&filter[type][_eq]=volunteer_faq`,
       {
         method: "GET",
         headers: {

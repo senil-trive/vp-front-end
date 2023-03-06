@@ -1,9 +1,12 @@
 import { H3, H4, P, TitleWithHighlights } from "../../../components/typography";
 
+import Button from "../../../components/buttons/Button";
 import { Container } from "@mui/material";
 import ENDPOINTS from "../../../constants/endpoints";
 import { Hero } from "../../../components/layout";
+import Image from "next/image";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
+import parseImageURL from "../../../utils/parseImageURL";
 
 type VolunteersTrainingPageProps = {
   pageData: any;
@@ -59,7 +62,7 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
                 text={pageData?.page_title}
                 textToHighlight={pageData?.page_title_highlighted}
                 headerElement="h1"
-                color="blue"
+                color="primary"
               />
               <P>{pageData?.page_subtitle}</P>
             </div>
@@ -74,10 +77,28 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
 
               <div className="grid md:grid-cols-2 gap-8 mt-14 mx-auto">
                 <div className="rounded-lg bg-white border-2 border-orange-900 p-6">
+                  {pageData?.training_1_image?.id && (
+                    <Image
+                      className="rounded-lg h-48 object-cover"
+                      src={parseImageURL(pageData?.training_1_image?.id)}
+                      width={500}
+                      height={200}
+                      alt={pageData?.training_1_title}
+                    />
+                  )}
                   <H4 variant="bold">{pageData?.training_1_title}</H4>
                   <P>{pageData?.training_1_description}</P>
                 </div>
                 <div className="rounded-lg bg-white border-2 border-orange-900 p-6">
+                  {pageData?.training_2_image?.id && (
+                    <Image
+                      className="rounded-lg h-48 object-cover"
+                      src={parseImageURL(pageData?.training_2_image?.id)}
+                      width={500}
+                      height={200}
+                      alt={pageData?.training_2_title}
+                    />
+                  )}
                   <H4 variant="bold">{pageData?.training_2_title}</H4>
                   <P>{pageData?.training_2_description}</P>
                 </div>
@@ -106,6 +127,12 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
                   <H4 variant="bold">{pageData?.package_2_title}</H4>
                   <P>{pageData?.package_2_description}</P>
                 </div>
+              </div>
+
+              <div className="flex items-center justify-center mt-11 w-fit mx-auto">
+                <Button variant="primary" href="/vrijwilligerswerk/aanmelden">
+                  Aanmelden als vrijwilliger
+                </Button>
               </div>
             </Container>
           </section>
