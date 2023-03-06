@@ -226,3 +226,69 @@ export const getPostsTotal = async () => {
     }
   );
 };
+
+/**
+ * Gets the Forum overview page details
+ */
+export const getForumOverviewPageData = async () => {
+  return await fetch(
+    `${ENDPOINTS.COLLECTIONS}/forum_overview_page?fields=*.*.*`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+};
+
+/**
+ * Gets a list of forum posts
+ * @param postPerPage the amount of posts to be shown per page
+ * @param page the current paginated page
+ * @param query the search query
+ * @returns
+ */
+export const getForums = async ({
+  postPerPage,
+  page = 1,
+  search,
+  sort,
+}: {
+  postPerPage: number;
+  page?: number;
+  search?: string;
+  sort?: string;
+}) => {
+  let url = `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+
+  if (search) {
+    url = `${url}&search=${search}`;
+  }
+  if (sort) {
+    url = `${url}&sort=${sort}`;
+  }
+
+  return await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+/**
+ * Gets the number of total forum posts
+ * @returns
+ */
+export const getForumTotal = async () => {
+  return await fetch(
+    `${ENDPOINTS.COLLECTIONS}/forum_posts?aggregate[count]=*&filter[status][_eq]=published`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+};
