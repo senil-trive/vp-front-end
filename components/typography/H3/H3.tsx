@@ -1,31 +1,19 @@
 import React, { ReactNode } from "react";
 
 import styled from "styled-components";
+import { ColorType } from "../../../types/colorTypes";
 
 type Props = React.HTMLAttributes<HTMLHeadingElement> & {
   variant?: "bold" | "regular" | "light";
-  color?: "blue" | "black" | "green" | "white";
+  color?: ColorType;
   children: ReactNode;
   style?: React.CSSProperties;
 };
 
-const BaseH3 = styled.h3`
+const BaseH3 = styled.h3<{ color: ColorType }>`
   font-size: 32px;
   line-height: 120%;
-  color: ${({ theme, color }) => {
-    switch (color) {
-      case "blue":
-        return theme.colors.primary;
-      case "green":
-        return theme.colors.secondary;
-      case "black":
-        return theme.colors.black;
-      case "white":
-        return theme.colors.white;
-      default:
-        return theme.colors.black;
-    }
-  }};
+  color: ${({ theme, color }) => theme.colors[color]};
   font-style: normal;
   margin: 12px 0;
 `;

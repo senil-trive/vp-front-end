@@ -8,6 +8,7 @@ import Person from "../Person/Person";
 import ShareIcon from "../../icons/ShareIcon/ShareIcon";
 import MoreIcon from "../../icons/MoreIcon/MoreIcon";
 import { rgba } from "../../../utils/colors";
+import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
 
 type Props = {
   authorType: string;
@@ -79,9 +80,7 @@ export default function ForumComment({
           )}
         </div>
       </header>
-      <div className="content">
-        <P>{title}</P>
-      </div>
+      <div className="content">{parseHTMLtoReact(title)}</div>
       <footer>
         <ShareIcon />
         <MoreIcon />

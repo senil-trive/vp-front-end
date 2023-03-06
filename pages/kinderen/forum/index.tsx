@@ -2,17 +2,16 @@ import { Container, Grid } from "@mui/material";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { CircleSpinner } from "react-spinners-kit";
-import Button from "../../components/buttons/Button";
-import TagList from "../../components/buttons/TagList/TagList";
-import ForumPost from "../../components/content-types/ForumPost/ForumPost";
-import { Hero, Pagination } from "../../components/layout";
-import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
-import { H1, P } from "../../components/typography";
-import ColorSpan from "../../components/typography/ColorSpan/ColorSpan";
-import ENDPOINTS from "../../constants/endpoints";
-import { FEED_TAGS } from "../../constants/mockData";
-import { ForumPostType } from "../../types/forumTypes";
-import { titleToSlug } from "../../utils/url";
+import Button from "../../../components/buttons/Button";
+import TagList from "../../../components/buttons/TagList/TagList";
+import ForumPost from "../../../components/content-types/ForumPost/ForumPost";
+import { Hero, Pagination } from "../../../components/layout";
+import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
+import { H1, P } from "../../../components/typography";
+import ColorSpan from "../../../components/typography/ColorSpan/ColorSpan";
+import ENDPOINTS from "../../../constants/endpoints";
+import { FEED_TAGS } from "../../../constants/mockData";
+import { ForumPostType } from "../../../types/forumTypes";
 
 export default function Forum() {
   const [isLoading, setIsLoading] = useState(false);

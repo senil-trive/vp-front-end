@@ -1,17 +1,17 @@
 import { FaAppStoreIos, FaGooglePlay } from "react-icons/fa";
-import { H1, H3, P } from "../../components/typography";
+import { H1, H3, P } from "../../../components/typography";
 
-import Button from "../../components/buttons/Button";
-import CTAItem from "../../components/content-types/CTAItem/CTAItem";
+import Button from "../../../components/buttons/Button";
+import CTAItem from "../../../components/content-types/CTAItem/CTAItem";
 import { Container } from "@mui/material";
-import ENDPOINTS from "../../constants/endpoints";
-import { FAQ } from "../../types/content-types/FAQ.type";
-import FAQItem from "../../components/content-types/FAQItem/FAQItem";
-import { Hero } from "../../components/layout";
-import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
-import TextItem from "../../components/content-types/TextItem/TextItem";
-import VideoItem from "../../components/content-types/VideoItem/VideoItem";
-import parseImageURL from "../../utils/parseImageURL";
+import ENDPOINTS from "../../../constants/endpoints";
+import { FAQ } from "../../../types/content-types/FAQ.type";
+import FAQItem from "../../../components/content-types/FAQItem/FAQItem";
+import { Hero } from "../../../components/layout";
+import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
+import TextItem from "../../../components/content-types/TextItem/TextItem";
+import VideoItem from "../../../components/content-types/VideoItem/VideoItem";
+import parseImageURL from "../../../utils/parseImageURL";
 
 type BuddyPageProps = {
   pageData: any;
@@ -101,7 +101,7 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
           >
             <Container>
               <div className="flex flex-col items-center justify-center ">
-                <H3 variant="bold" color="blue">
+                <H3 variant="bold" color="primary">
                   {pageData?.cta_section_title}
                 </H3>
                 <P className="max-w-4xl">{pageData?.cta_section_subtitle}</P>
@@ -139,7 +139,7 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
 
             <Container>
               <div className="flex flex-col items-center justify-center my-20 ">
-                <H3 variant="bold" color="blue">
+                <H3 variant="bold" color="primary">
                   {pageData?.cta_section_footer_title}
                 </H3>
                 <P className="max-w-4xl">
@@ -163,7 +163,7 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
           <section className="my-[200px] text-center py-20">
             <Container>
               <div className="flex flex-col items-center justify-center ">
-                <H3 variant="bold" color="blue">
+                <H3 variant="bold" color="primary">
                   {pageData?.stories_section_title}
                 </H3>
                 <P className="max-w-4xl">
@@ -187,7 +187,7 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
             </Container>
           </section>
 
-          <section className="my-[200px] text-center py-20">
+          <section className="my-[200px] text-center py-20" id="faq">
             <Container>
               <div className="flex flex-col items-center justify-center mb-14">
                 <H3 variant="bold" color="black">

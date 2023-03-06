@@ -1,19 +1,19 @@
 import React, { ReactNode } from "react";
 
 import styled from "styled-components";
+import { ColorType } from "../../../types/colorTypes";
 
 type Props = {
   variant?: "bold" | "regular" | "light";
-  color?: "blue" | "black";
+  color?: ColorType;
   children: ReactNode;
   style?: React.CSSProperties;
 };
 
-const BaseH4 = styled.h4`
+const BaseH4 = styled.h4<{ color: ColorType }>`
   font-size: 24px;
   line-height: 115%;
-  color: ${({ theme, color }) =>
-    color === "blue" ? theme.colors.primary : theme.colors.text};
+  color: ${({ theme, color }) => theme.colors[color]};
   font-style: normal;
   margin: 12px 0;
 `;

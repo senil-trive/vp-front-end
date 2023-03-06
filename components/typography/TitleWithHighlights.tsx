@@ -2,12 +2,13 @@ import { H1, H2, H3, H4, H5, H6 } from ".";
 
 import React from "react";
 import { useTheme } from "styled-components";
+import { ColorType } from "../../types/colorTypes";
 
 interface TitleWithHighlightsProps {
   text: string;
-  textToHighlight: string;
+  textToHighlight?: string;
   headerElement: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
-  color: "blue" | "black";
+  color: ColorType;
   highlightColor: "info" | "tertiary";
 }
 
@@ -19,7 +20,7 @@ const TitleWithHighlights: React.FC<TitleWithHighlightsProps> = ({
   highlightColor = "info",
 }) => {
   const theme = useTheme();
-  const parts = text.split(textToHighlight);
+  const parts = textToHighlight ? text.split(textToHighlight) : [text];
 
   const HeaderComponent = () => {
     const Text: React.FC = () => {

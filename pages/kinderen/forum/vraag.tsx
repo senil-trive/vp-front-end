@@ -1,17 +1,17 @@
-import { ColorSpan, H1, P } from "../../components/typography";
-import { Grid, Hero } from "../../components/layout";
+import { ColorSpan, H1, P } from "../../../components/typography";
+import { Grid, Hero } from "../../../components/layout";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { postForum, uploadFile } from "../../utils/api";
+import { postForum, uploadFile } from "../../../utils/api";
 
-import Button from "../../components/buttons/Button";
+import Button from "../../../components/buttons/Button";
 import { Container } from "@mui/system";
-import Dropdown from "../../components/form/Dropdown/Dropdown";
-import { ForumPostType } from "../../types/forumTypes";
-import { GENDERS } from "../../constants/genders";
-import Input from "../../components/form/Input/Input";
-import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
-import Section from "../../components/layout/Section/Section";
-import TextArea from "../../components/form/TextArea/TextArea";
+import Dropdown from "../../../components/form/Dropdown/Dropdown";
+import { ForumPostType } from "../../../types/forumTypes";
+import { GENDERS } from "../../../constants/genders";
+import Input from "../../../components/form/Input/Input";
+import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
+import Section from "../../../components/layout/Section/Section";
+import TextArea from "../../../components/form/TextArea/TextArea";
 import { useState } from "react";
 
 export default function Vraag() {

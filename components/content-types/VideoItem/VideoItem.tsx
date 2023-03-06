@@ -7,7 +7,7 @@ import Tag from "../../buttons/Tag/Tag";
 import styled from "styled-components";
 
 type Props = {
-  title: string;
+  title?: string;
   subtitle?: string;
   src: string;
   poster?: string;
@@ -109,7 +109,7 @@ export default function VideoItem({
             <IconButton Icon={IoIosPlay} />
           </PlayIconWrapper>
           <figcaption>
-            <H3 variant="bold">{title}</H3>
+            {!!title && <H3 variant="bold">{title}</H3>}
             {!!subtitle && <P>{subtitle}</P>}
           </figcaption>
         </>

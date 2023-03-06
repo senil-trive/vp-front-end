@@ -1,6 +1,6 @@
-import { MenuItem } from "../components/layout/Header/Header";
-import ENDPOINTS from "../constants/endpoints";
 import { CompanyInfo } from "../types/componayInfoTypes";
+import ENDPOINTS from "../constants/endpoints";
+import { MenuItem } from "../components/layout/Header/Header";
 
 /**
  * Uploads a file to the backend
@@ -65,13 +65,31 @@ export const postComment = async (
 };
 
 /**
+ * Get all the comments of a post
+ * @param type the type of post
+ * @param post_id
+ * @returns
+ */
+export const getComments = async (type: "forum" | "blog", post_id: string) => {
+  return await fetch(
+    `${ENDPOINTS.COLLECTIONS}/comments?filter[status][_eq]=published&filter[${type}_post][_eq]=${post_id}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+};
+
+/**
  * Get all the menu items used for navigation
  * @returns array or null
  */
 export const getMenuItems = async () => {
   try {
     const res = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/main_nav_items?fields=*.*.*`,
+      `${ENDPOINTS.COLLECTIONS}/main_nav_items?fields=*.*.*&filter[status][_eq]=published`,
       {
         method: "GET",
         headers: {
@@ -124,4 +142,87 @@ export const postLetterSubscription = async (data: any) => {
     },
     body: JSON.stringify(data),
   });
+};
+
+/**
+ * Gets the blog overview page details
+ */
+export const getPostOverviewPageData = async () => {
+  return await fetch(
+    `${ENDPOINTS.COLLECTIONS}/blog_overview_page?fields=*.*.*`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+};
+
+/**
+ * Gets a list of blog posts
+ * @param postPerPage the amount of posts to be shown per page
+ * @param page the current paginated page
+ * @param query the search query
+ * @returns
+ */
+export const getPosts = async ({
+  postPerPage,
+  page = 1,
+  search,
+  sort,
+}: {
+  postPerPage: number;
+  page?: number;
+  search?: string;
+  sort?: string;
+}) => {
+  let url = `${ENDPOINTS.COLLECTIONS}/vlogposts?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+
+  if (search) {
+    url = `${url}&search=${search}`;
+  }
+  if (sort) {
+    url = `${url}&sort=${sort}`;
+  }
+
+  return await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+/**
+ * Get the post detail base on the slug
+ * @param slug the post slug
+ * @returns
+ */
+export const getPostDetail = async (slug: string) => {
+  return await fetch(
+    `${ENDPOINTS.COLLECTIONS}/vlogposts?fields=*.*.*.*&filter[slug][_eq]=${slug}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+};
+
+/**
+ * Gets the number of total blog posts
+ * @returns
+ */
+export const getPostsTotal = async () => {
+  return await fetch(
+    `${ENDPOINTS.COLLECTIONS}/vlogposts?aggregate[count]=*&filter[status][_eq]=published`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
 };

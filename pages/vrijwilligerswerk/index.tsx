@@ -71,7 +71,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
                 text={pageData?.page_title}
                 textToHighlight={pageData?.page_title_highlighted}
                 headerElement="h1"
-                color="blue"
+                color="primary"
               />
               <P>{pageData?.page_subtitle}</P>
 
@@ -112,7 +112,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
           <section className="my-[200px] text-center">
             <Container>
               <div className="flex flex-col items-center justify-center ">
-                <H3 variant="bold" color="blue">
+                <H3 variant="bold" color="primary">
                   {pageData?.usp_section_title}
                 </H3>
                 <P className="max-w-4xl">{pageData?.usp_section_description}</P>
@@ -141,7 +141,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
           >
             <Container>
               <div className="flex flex-col items-center justify-center ">
-                <H3 variant="bold" color="blue">
+                <H3 variant="bold" color="primary">
                   {pageData?.video_section_title}
                 </H3>
                 <P className="max-w-4xl">{pageData?.video_section_subtitle}</P>
@@ -189,7 +189,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
           >
             <Container>
               <div className="flex flex-col items-center justify-center ">
-                <H3 variant="bold" color="blue">
+                <H3 variant="bold" color="primary">
                   {pageData?.cta_section_title}
                 </H3>
                 <P className="max-w-4xl">{pageData?.cta_section_subtitle}</P>

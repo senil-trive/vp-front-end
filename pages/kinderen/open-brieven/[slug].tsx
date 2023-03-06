@@ -4,25 +4,25 @@ import {
   H4,
   P,
   TitleWithHighlights,
-} from "../../components/typography";
+} from "../../../components/typography";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import BreadCrumbs from "../../components/layout/BreadCrumbs/BreadCrumbs";
-import BriefItem from "../../components/content-types/BriefItem/BriefItem";
-import Button from "../../components/buttons/Button";
+import BreadCrumbs from "../../../components/layout/BreadCrumbs/BreadCrumbs";
+import BriefItem from "../../../components/content-types/BriefItem/BriefItem";
+import Button from "../../../components/buttons/Button";
 import { Container } from "@mui/material";
-import ENDPOINTS from "../../constants/endpoints";
+import ENDPOINTS from "../../../constants/endpoints";
 import { FiCheck } from "react-icons/fi";
 import { GetServerSidePropsContext } from "next";
-import { Hero } from "../../components/layout";
-import Input from "../../components/form/Input/Input";
-import { Letter } from "../../types/content-types/Letter.type";
-import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
-import { parseFileURL } from "../../utils/parseFileURL";
-import parseHTMLtoReact from "../../utils/parseHTMLtoReact";
-import parseImageURL from "../../utils/parseImageURL";
-import { postLetterSubscription } from "../../utils/api";
+import { Hero } from "../../../components/layout";
+import Input from "../../../components/form/Input/Input";
+import { Letter } from "../../../types/content-types/Letter.type";
+import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
+import { parseFileURL } from "../../../utils/parseFileURL";
+import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
+import parseImageURL from "../../../utils/parseImageURL";
+import { postLetterSubscription } from "../../../utils/api";
 import { useTheme } from "styled-components";
 
 type Props = {
@@ -31,17 +31,14 @@ type Props = {
 };
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-  const { slug: id } = ctx.query;
+  const { slug } = ctx.query;
 
   try {
     // Get the letters
     const res = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*&filter[slug][_eq]=${id}`,
+      `${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*&filter[slug][_eq]=${slug}`,
       {
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
       }
     );
 
@@ -57,6 +54,12 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
     const { data } = await res.json();
     const { data: letters } = await lettersReq.json();
+
+    if (!data?.[0]) {
+      return {
+        notFound: true,
+      };
+    }
 
     // shuffle letters
     const randomizedLetters = letters
@@ -135,16 +138,18 @@ export default function LetterDetail({ pageData, relatedLetters }: Props) {
               text={pageData?.detail_title}
               textToHighlight={pageData?.detail_title_highlighted}
               headerElement="h1"
-              color="blue"
+              color="primary"
             />
-            <div className="mb-8">{parseHTMLtoReact(pageData?.content)}</div>
+            <div className="mb-8">
+              {pageData?.content && parseHTMLtoReact(pageData?.content)}
+            </div>
           </div>
         </Hero>
 
         <section>
           <Container>
             <div className="flex flex-col items-center justify-center my-20">
-              <H3 variant="bold" color="blue">
+              <H3 variant="bold" color="primary">
                 De hele brief downloaden?
               </H3>
               <P>Vertel ons hoe je heet en hij komt naar je toe!</P>
@@ -196,7 +201,7 @@ export default function LetterDetail({ pageData, relatedLetters }: Props) {
               ) : (
                 <div className="flex flex-col items-center justify-center">
                   <FiCheck size={40} color={theme.colors.secondary} />
-                  <H3 variant="bold" color="blue">
+                  <H3 variant="bold" color="primary">
                     Bedankt! De brief wordt nu gedownload.
                   </H3>
                 </div>
@@ -207,7 +212,7 @@ export default function LetterDetail({ pageData, relatedLetters }: Props) {
         <section>
           <Container>
             <div className="flex flex-col items-center justify-center my-[100px]">
-              <H3 variant="bold" color="blue" style={{ margin: 0 }}>
+              <H3 variant="bold" color="primary" style={{ margin: 0 }}>
                 Meer open brieven
               </H3>
             </div>

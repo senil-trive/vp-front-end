@@ -34,11 +34,15 @@ const StyledLetter = styled(BaseStyle)`
 
 const StyledBlog = styled(BaseStyle)`
   padding: 24px;
+  border-color: ${({ theme }) => theme.colors.primary};
 
   header {
     height: 366px;
-    img {
+    img,
+    video,
+    iframe {
       border-radius: 8px;
+      background-color: ${({ theme }) => theme.colors.grey};
     }
   }
   section {

@@ -3,12 +3,12 @@ import { Grid } from "/components/layout";
 import { H5 } from "/components/typography";
 
 const comment = {
-  user_name: 'Mathijs',
+  user_name: "Mathijs",
   user_age: 18,
   user_type: "Anonamous",
-  date_created:
-  content: 'Vraag van forum post komt hier, dit kan een lange zin zijn? Lorem ipsum dolor sit amet.'
-}
+  content:
+    "Vraag van forum post komt hier, dit kan een lange zin zijn? Lorem ipsum dolor sit amet.",
+};
 
 <Grid container spacing="32px">
   <Grid item md={8}>

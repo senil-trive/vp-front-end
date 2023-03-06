@@ -1,16 +1,16 @@
-import { H3, H4, P, TitleWithHighlights } from "../../components/typography";
+import { H3, H4, P, TitleWithHighlights } from "../../../components/typography";
 
-import BriefItem from "../../components/content-types/BriefItem/BriefItem";
+import BriefItem from "../../../components/content-types/BriefItem/BriefItem";
 import { Container } from "@mui/material";
-import ENDPOINTS from "../../constants/endpoints";
+import ENDPOINTS from "../../../constants/endpoints";
 import { FiChevronsDown } from "react-icons/fi";
-import { Hero } from "../../components/layout";
-import { Letter } from "../../types/content-types/Letter.type";
-import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
+import { Hero } from "../../../components/layout";
+import { Letter } from "../../../types/content-types/Letter.type";
+import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import React from "react";
-import TextItem from "../../components/content-types/TextItem/TextItem";
-import { parseFileURL } from "../../utils/parseFileURL";
-import parseImageURL from "../../utils/parseImageURL";
+import TextItem from "../../../components/content-types/TextItem/TextItem";
+import { parseFileURL } from "../../../utils/parseFileURL";
+import parseImageURL from "../../../utils/parseImageURL";
 
 interface LettersOverviewPageProps {
   pageData: any;
@@ -77,7 +77,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                 text={pageData?.page_title}
                 textToHighlight={pageData?.page_title_highlighted}
                 headerElement="h1"
-                color="blue"
+                color="primary"
               />
               <P>{pageData?.page_subtitle}</P>
             </div>
@@ -122,7 +122,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
           <section>
             <Container>
               <div className="flex flex-col items-center justify-center my-[100px]">
-                <H4 variant="bold" color="blue" style={{ margin: 0 }}>
+                <H4 variant="bold" color="primary" style={{ margin: 0 }}>
                   Meer open brieven
                 </H4>
                 <P>Bekijk ze allemaal</P>
