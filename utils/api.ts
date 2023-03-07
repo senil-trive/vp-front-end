@@ -134,16 +134,37 @@ export const getCompanyInfo = async () => {
  * Get a list of all published open letters
  * @returns
  */
-export const getLetters = async () => {
-  return await fetch(
-    `${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*.*&filter[status][_eq]=published`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+export const getLetters = async ({
+  postPerPage,
+  page = 1,
+  search,
+  sort,
+  filter,
+}: {
+  postPerPage: number;
+  page?: number;
+  search?: string;
+  sort?: string;
+  filter?: string;
+}) => {
+  let url = `${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+
+  if (search) {
+    url = `${url}&search=${search}`;
+  }
+  if (sort) {
+    url = `${url}&sort=${sort}`;
+  }
+  if (filter) {
+    url = `${url}&${filter}`;
+  }
+
+  return await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 };
 
 /**

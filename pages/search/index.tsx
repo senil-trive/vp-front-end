@@ -78,7 +78,10 @@ export default function Search() {
     };
     const getPaginatedLetters = async () => {
       try {
-        const req = await getLetters();
+        const req = await getLetters({
+          postPerPage: POST_PER_PAGE,
+          search: q as string,
+        });
         const res = await req.json();
 
         setLetters(res.data);
