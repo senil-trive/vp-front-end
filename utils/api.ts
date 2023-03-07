@@ -296,7 +296,7 @@ export const getForumOverviewPageData = async () => {
  * @param query the search query
  * @returns
  */
-export const getForums = async ({
+export const getForumPosts = async ({
   postPerPage,
   page = 1,
   search,

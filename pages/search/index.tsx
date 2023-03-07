@@ -10,7 +10,7 @@ import SearchResultItem from "../../components/content-types/SearchResultItem/Se
 import { useRouter } from "next/router";
 import { POST_PER_PAGE } from "../../constants/app-configs";
 import {
-  getForums,
+  getForumPosts,
   getLetters,
   getPosts,
   getPostsTotal,
@@ -65,7 +65,7 @@ export default function Search() {
 
     const getPaginatedForum = async () => {
       try {
-        const req = await getForums({
+        const req = await getForumPosts({
           postPerPage: POST_PER_PAGE,
           search: q as string,
         });

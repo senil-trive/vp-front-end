@@ -19,7 +19,7 @@ import { ForumPostType } from "../../../types/forumTypes";
 import { ForumPageProps } from "../../../types/pageTypes";
 import {
   getForumOverviewPageData,
-  getForums,
+  getForumPosts,
   getForumTotal,
 } from "../../../utils/api";
 
@@ -35,7 +35,7 @@ const forumSortOptions = [
 export const getServerSideProps = async () => {
   try {
     const pageReq = await getForumOverviewPageData();
-    const forumReq = await getForums({ postPerPage: POST_PER_PAGE });
+    const forumReq = await getForumPosts({ postPerPage: POST_PER_PAGE });
     const countReq = await getForumTotal();
 
     const pageRes = await pageReq.json();
@@ -93,15 +93,13 @@ export default function Forum({
     const getPaginatedPost = async () => {
       setIsLoading(true);
       try {
-        const req = await getForums({
+        const req = await getForumPosts({
           postPerPage: POST_PER_PAGE,
           page: currentPage,
           search,
           sort,
         });
         const res = await req.json();
-
-        console.log(res.data);
 
         setPosts(res.data);
       } catch (error) {
@@ -186,7 +184,11 @@ export default function Forum({
         </Container>
 
         {totalPosts / POST_PER_PAGE > 2 && (
-          <Pagination total={Math.ceil(totalPosts / POST_PER_PAGE)} truncated />
+          <Pagination
+            total={Math.ceil(totalPosts / POST_PER_PAGE)}
+            truncated
+            onChange={changePage}
+          />
         )}
       </main>
     </PageWrapper>
