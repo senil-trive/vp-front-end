@@ -103,7 +103,8 @@ export default function Search() {
             <Grid item xs={0} md={2} lg={3} />
             <Grid item xs={12} md={8} lg={6}>
               <H1 style={{ textAlign: "center", padding: "0 24px" }}>
-                {posts.length + forumPosts.length} resultaten gevonden
+                {posts.length + forumPosts.length + letters.length} resultaten
+                gevonden
               </H1>
 
               <P variant="light" style={{ textAlign: "center" }}>
