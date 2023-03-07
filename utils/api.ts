@@ -338,3 +338,29 @@ export const getForumTotal = async () => {
     }
   );
 };
+
+/**
+ * Gets the data for the homepage
+ * @returns
+ */
+export const getHomeData = async () => {
+  return await fetch(`${ENDPOINTS.COLLECTIONS}/home_page?fields=*.*.*`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+/**
+ * Get a list of all categories
+ * @returns
+ */
+export const getCategories = async () => {
+  return await fetch(`${ENDPOINTS.COLLECTIONS}/categories?fields=*.*.*`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};

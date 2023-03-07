@@ -7,8 +7,37 @@ import { FEED_TAGS } from "../constants/mockData";
 import { HomeGrid } from "../components/layout/HomeGrid/HomeGrid";
 import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
 import TagList from "../components/buttons/TagList/TagList";
+import { getCategories, getHomeData } from "../utils/api";
+import { HomePageProps } from "../types/pageTypes";
 
-export default function Home() {
+export const getServerSideProps = async () => {
+  try {
+    const pageReq = await getHomeData();
+    const categoriesReq = await getCategories();
+
+    const pageRes = await pageReq.json();
+    const categoriesRes = await categoriesReq.json();
+
+    return {
+      props: {
+        pageData: pageRes.data,
+        categories: categoriesRes.data,
+      },
+    };
+  } catch (error) {
+    console.log(error);
+
+    return {
+      redirect: {
+        destination: "/500",
+      },
+    };
+  }
+};
+
+export default function Home({ pageData, categories }: HomePageProps) {
+  console.log(categories);
+
   return (
     <PageWrapper
       title="Leeg je hoofd, lucht je hart"
@@ -20,21 +49,10 @@ export default function Home() {
             <Grid item xs={0} md={2} lg={3} />
             <Grid item xs={12} md={8} lg={6}>
               <H1 style={{ textAlign: "center", padding: "0 24px" }}>
-                Ik zit op de{" "}
-                <DisplayDropdown
-                  options={[{ name: "Basisschool", value: "basisschool" }]}
-                />
-                <br />
-                daarnaast kan je mij vinden op de{" "}
-                <DisplayDropdown
-                  options={[{ name: "Manege", value: "manege" }]}
-                />
+                {pageData?.page_title}
               </H1>
 
-              <P variant="light">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-              </P>
+              <P variant="light">{pageData?.page_subtitle}</P>
             </Grid>
             <Grid item xs={0} md={2} lg={3} />
           </Grid>
@@ -44,7 +62,7 @@ export default function Home() {
         <Container>
           <Grid container style={{ marginBottom: "32px" }}>
             <Grid item xs={12}>
-              <TagList tags={FEED_TAGS} />
+              <TagList tags={categories.map((cat) => cat.name)} />
             </Grid>
           </Grid>
         </Container>

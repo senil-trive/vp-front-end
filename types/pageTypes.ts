@@ -1,5 +1,14 @@
+import { CategoryType } from "./categoryTypes";
 import { BlogType } from "./content-types/Blog.type";
 import { ForumPostType } from "./forumTypes";
+
+export type HomePageProps = {
+  pageData?: {
+    page_title: string;
+    page_subtitle: string;
+  };
+  categories: CategoryType[];
+};
 
 export type BlogPageProps = {
   pageData?: {
