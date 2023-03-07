@@ -6,8 +6,8 @@ import Dropdown from "../Dropdown/Dropdown";
 const defaultSortOptions = [
   { name: "Titel (a-z)", value: "title" },
   { name: "Titel (z-a)", value: "-title" },
-  { name: "Autheur (oplopend)", value: "author" },
-  { name: "Autheur (aflopend)", value: "-author" },
+  { name: "Autheur (a-z)", value: "author" },
+  { name: "Autheur (z-a)", value: "-author" },
   { name: "Datum (oud-nieuw)", value: "date_created" },
   { name: "Datum (nieuw-oud)", value: "-date_created" },
 ];

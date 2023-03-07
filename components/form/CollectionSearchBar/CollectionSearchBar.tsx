@@ -6,7 +6,7 @@ import { P } from "../../typography";
 import SearchBar from "../SearchBar/SearchBar";
 
 type Props = {
-  quote: string;
+  quote?: string;
   searchLabel?: string;
   onSearch: (x: string) => void;
 };

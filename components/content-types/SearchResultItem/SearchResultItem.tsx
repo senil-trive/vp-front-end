@@ -8,7 +8,7 @@ type Props = {
   amount: number;
 
   /** The color of the result block */
-  colorVariant?: 1 | 2;
+  colorVariant?: 1 | 2 | 3;
 
   /** The text that will be appended to the result title */
   resultTitleSuffix?: ReactNode;
@@ -31,6 +31,8 @@ const Wrapper = styled.div<{ colorVariant: number }>`
           return theme.colors.primary;
         case 2:
           return theme.colors.info;
+        case 3:
+          return theme.colors.secondary;
 
         default:
           return theme.colors.primary;
@@ -44,12 +46,14 @@ const Wrapper = styled.div<{ colorVariant: number }>`
   ul {
     padding: 24px;
     gap: 12px;
-    background: ${({ colorVariant }) => {
+    background: ${({ theme, colorVariant }) => {
       switch (colorVariant) {
         case 1:
           return "rgba(0, 110, 247, 0.05)";
         case 2:
           return "rgba(255, 151, 29, 0.025)";
+        case 3:
+          return "rgba(63, 199, 180, 0.025)";
 
         default:
           return "rgba(0, 110, 247, 0.05)";
@@ -69,6 +73,8 @@ const Wrapper = styled.div<{ colorVariant: number }>`
             return theme.colors.primary;
           case 2:
             return theme.colors.info;
+          case 3:
+            return theme.colors.secondary;
 
           default:
             return theme.colors.primary;

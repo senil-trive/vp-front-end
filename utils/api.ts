@@ -2,6 +2,23 @@ import { CompanyInfo } from "../types/componayInfoTypes";
 import ENDPOINTS from "../constants/endpoints";
 import { MenuItem } from "../components/layout/Header/Header";
 
+type DirectusParams = {
+  /** The amount of items that will be fetched, set -1 to retrieve all */
+  postPerPage: number;
+
+  /** If post per page is set, you can use this param to paginate */
+  page?: number;
+
+  /** Value that will be search in all the valid fields */
+  search?: string;
+
+  /** Syntax to use is field for ascending or -field for descending */
+  sort?: string;
+
+  /** Syntax to use is filter[field][operator]=value example: filter[id][_eq]=1 */
+  filter?: string;
+};
+
 /**
  * Uploads a file to the backend
  * @param file
@@ -131,6 +148,37 @@ export const getCompanyInfo = async () => {
 };
 
 /**
+ * Get a list of all published open letters
+ * @returns
+ */
+export const getLetters = async ({
+  postPerPage,
+  page = 1,
+  search,
+  sort,
+  filter,
+}: DirectusParams) => {
+  let url = `${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+
+  if (search) {
+    url = `${url}&search=${search}`;
+  }
+  if (sort) {
+    url = `${url}&sort=${sort}`;
+  }
+  if (filter) {
+    url = `${url}&${filter}`;
+  }
+
+  return await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+/**
  * Add a letter subscription
  * @param data
  */
@@ -171,12 +219,8 @@ export const getPosts = async ({
   page = 1,
   search,
   sort,
-}: {
-  postPerPage: number;
-  page?: number;
-  search?: string;
-  sort?: string;
-}) => {
+  filter,
+}: DirectusParams) => {
   let url = `${ENDPOINTS.COLLECTIONS}/vlogposts?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
 
   if (search) {
@@ -184,6 +228,9 @@ export const getPosts = async ({
   }
   if (sort) {
     url = `${url}&sort=${sort}`;
+  }
+  if (filter) {
+    url = `${url}&${filter}`;
   }
 
   return await fetch(url, {
@@ -218,6 +265,71 @@ export const getPostDetail = async (slug: string) => {
 export const getPostsTotal = async () => {
   return await fetch(
     `${ENDPOINTS.COLLECTIONS}/vlogposts?aggregate[count]=*&filter[status][_eq]=published`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+};
+
+/**
+ * Gets the Forum overview page details
+ */
+export const getForumOverviewPageData = async () => {
+  return await fetch(
+    `${ENDPOINTS.COLLECTIONS}/forum_overview_page?fields=*.*.*`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+};
+
+/**
+ * Gets a list of forum posts
+ * @param postPerPage the amount of posts to be shown per page
+ * @param page the current paginated page
+ * @param query the search query
+ * @returns
+ */
+export const getForumPosts = async ({
+  postPerPage,
+  page = 1,
+  search,
+  sort,
+  filter,
+}: DirectusParams) => {
+  let url = `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+
+  if (search) {
+    url = `${url}&search=${search}`;
+  }
+  if (sort) {
+    url = `${url}&sort=${sort}`;
+  }
+  if (filter) {
+    url = `${url}&${filter}`;
+  }
+
+  return await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+/**
+ * Gets the number of total forum posts
+ * @returns
+ */
+export const getForumTotal = async () => {
+  return await fetch(
+    `${ENDPOINTS.COLLECTIONS}/forum_posts?aggregate[count]=*&filter[status][_eq]=published`,
     {
       method: "GET",
       headers: {

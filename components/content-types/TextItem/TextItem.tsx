@@ -1,4 +1,4 @@
-import { ANDROID_APP_URL, IOS_APP_URL } from "../../../constants/app-urls";
+import { ANDROID_APP_URL, IOS_APP_URL } from "../../../constants/app-configs";
 import Button, { ButtonVariant } from "../../buttons/Button";
 import { FaAppStoreIos, FaGooglePlay } from "react-icons/fa";
 import { H3, TitleWithHighlights } from "../../typography";
