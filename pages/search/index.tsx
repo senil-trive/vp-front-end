@@ -102,7 +102,10 @@ export default function Search() {
           <Grid container>
             <Grid item xs={0} md={2} lg={3} />
             <Grid item xs={12} md={8} lg={6}>
-              <H1 style={{ textAlign: "center", padding: "0 24px" }}>
+              <H1
+                variant="bold"
+                style={{ textAlign: "center", padding: "0 24px" }}
+              >
                 {posts.length + forumPosts.length + letters.length} resultaten
                 gevonden
               </H1>
