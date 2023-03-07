@@ -1,10 +1,4 @@
-import {
-  H2,
-  H3,
-  H4,
-  P,
-  TitleWithHighlights,
-} from "../../../components/typography";
+import { H3, P, TitleWithHighlights } from "../../../components/typography";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 

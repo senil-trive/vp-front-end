@@ -3,7 +3,7 @@ import React, { ReactNode } from "react";
 import styled from "styled-components";
 
 type Variant = {
-  variant?: "brief" | "blog" | "vlog";
+  variant?: "brief" | "blog" | "vlog" | "story";
 };
 
 type Props = Variant & {
@@ -30,6 +30,11 @@ const StyledPost = styled(BaseStyle)`
 
 const StyledLetter = styled(BaseStyle)`
   border-color: ${({ theme }) => theme.colors.info};
+`;
+
+const StyledStory = styled(BaseStyle)`
+  border-color: ${({ theme }) => theme.colors.info};
+  padding: 24px;
 `;
 
 const StyledBlog = styled(BaseStyle)`
@@ -63,6 +68,8 @@ const CardWrapper = ({
 
     case "brief":
       return <StyledLetter>{children}</StyledLetter>;
+    case "story":
+      return <StyledStory>{children}</StyledStory>;
 
     default:
       return <StyledPost>{children}</StyledPost>;

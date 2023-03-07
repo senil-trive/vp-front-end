@@ -9,7 +9,6 @@ import { Letter } from "../../../types/content-types/Letter.type";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import React from "react";
 import TextItem from "../../../components/content-types/TextItem/TextItem";
-import { parseFileURL } from "../../../utils/parseFileURL";
 import parseImageURL from "../../../utils/parseImageURL";
 import { getLetters } from "../../../utils/api";
 import { POST_PER_PAGE } from "../../../constants/app-configs";

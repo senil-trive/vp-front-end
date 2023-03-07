@@ -1,19 +1,19 @@
-import { H1, H3, P, TitleWithHighlights } from "../../../components/typography";
-import { Header, Hero } from "../../../components/layout";
+import { P, TitleWithHighlights } from "../../../components/typography";
 
 import { Container } from "@mui/material";
 import ENDPOINTS from "../../../constants/endpoints";
-
+import { Hero } from "../../../components/layout";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
+import StoryItem from "../../../components/content-types/StoryItem/StoryItem";
+import { VolunteerStory } from "../../../types/content-types/VolunteerStory.type";
 
 type VolunteersStoriesPageProps = {
   pageData: any;
+  storiesData: any;
   error?: boolean;
 };
 
 export const getServerSideProps = async () => {
-  // fetch page data from API
-
   try {
     const pageReq = await fetch(
       `${ENDPOINTS.COLLECTIONS}/volunteers_stories_page?fields=*.*.*`,
@@ -25,17 +25,23 @@ export const getServerSideProps = async () => {
       }
     );
 
-    const pageRes = await pageReq.json();
+    const lettersReq = await fetch(
+      `${ENDPOINTS.COLLECTIONS}/volunteers_stories?fields=*.*.*&filter[status][_eq]=published`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
-    if (!pageRes?.data) {
-      return {
-        notFound: true,
-      };
-    }
+    const pageRes = await pageReq.json();
+    const lettersRes = await lettersReq.json();
 
     return {
       props: {
         pageData: pageRes.data,
+        storiesData: lettersRes.data,
       },
     };
   } catch (error) {
@@ -51,6 +57,7 @@ export const getServerSideProps = async () => {
 
 const VolunteersFAQPage: React.FC<VolunteersStoriesPageProps> = ({
   pageData,
+  storiesData,
 }) => {
   return (
     <div>
@@ -72,9 +79,20 @@ const VolunteersFAQPage: React.FC<VolunteersStoriesPageProps> = ({
             </div>
           </Hero>
 
-          {/* <section className="my-[200px] text-center py-20">
-            
-          </section> */}
+          <Container maxWidth="xl">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-20">
+              {storiesData.map((story: VolunteerStory) => (
+                <StoryItem
+                  key={story.id}
+                  title={story.title}
+                  description={story.description}
+                  image={story.image}
+                  slug={story.slug}
+                  volunteer_name={story.volunteer_name}
+                />
+              ))}
+            </div>
+          </Container>
         </main>
       </PageWrapper>
     </div>
