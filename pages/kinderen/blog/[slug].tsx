@@ -1,20 +1,20 @@
-import { H3, P, TitleWithHighlights } from "../../components/typography";
-import React from "react";
+import { H3, P, TitleWithHighlights } from "../../../components/typography";
 
-import BreadCrumbs from "../../components/layout/BreadCrumbs/BreadCrumbs";
+import { BlogDetailPageProps } from "../../../types/pageTypes";
+import BlogItem from "../../../components/content-types/BlogItem/BlogItem";
+import BreadCrumbs from "../../../components/layout/BreadCrumbs/BreadCrumbs";
+import CommentForm from "../../../components/form/CommentForm/CommentForm";
 import { Container } from "@mui/material";
 import { GetServerSidePropsContext } from "next";
-import { Hero } from "../../components/layout";
-import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
-import parseHTMLtoReact from "../../utils/parseHTMLtoReact";
-import parseImageURL from "../../utils/parseImageURL";
-import { getPostDetail } from "../../utils/api";
-import { BlogDetailPageProps } from "../../types/pageTypes";
-import BlogItem from "../../components/content-types/BlogItem/BlogItem";
-import Tag from "../../components/buttons/Tag/Tag";
+import { Hero } from "../../../components/layout";
 import Image from "next/image";
-import YoutubePlayer from "../../components/media/YoutubePlayer";
-import CommentForm from "../../components/form/CommentForm/CommentForm";
+import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
+import React from "react";
+import Tag from "../../../components/buttons/Tag/Tag";
+import YoutubePlayer from "../../../components/media/YoutubePlayer";
+import { getPostDetail } from "../../../utils/api";
+import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
+import parseImageURL from "../../../utils/parseImageURL";
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const { slug } = ctx.query;

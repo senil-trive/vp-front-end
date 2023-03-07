@@ -1,22 +1,23 @@
 import { Container, Grid } from "@mui/material";
-import Link from "next/link";
+import { H1, P } from "../../../components/typography";
+import { Hero, Pagination } from "../../../components/layout";
 import React, { useEffect, useState } from "react";
-import { useTheme } from "styled-components";
-import TagList from "../../components/buttons/TagList/TagList";
-import BlogItem from "../../components/content-types/BlogItem/BlogItem";
-import CollectionSearchBar from "../../components/form/CollectionSearchBar/CollectionSearchBar";
-import SortBar from "../../components/form/SortBar/SortBar";
-import { Hero, Pagination } from "../../components/layout";
-import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
-import { H1, P } from "../../components/typography";
-import { FEED_TAGS } from "../../constants/mockData";
-import { BlogPageProps } from "../../types/pageTypes";
 import {
   getPostOverviewPageData,
   getPosts,
   getPostsTotal,
-} from "../../utils/api";
-import parseImageURL from "../../utils/parseImageURL";
+} from "../../../utils/api";
+
+import BlogItem from "../../../components/content-types/BlogItem/BlogItem";
+import { BlogPageProps } from "../../../types/pageTypes";
+import CollectionSearchBar from "../../../components/form/CollectionSearchBar/CollectionSearchBar";
+import { FEED_TAGS } from "../../../constants/mockData";
+import Link from "next/link";
+import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
+import SortBar from "../../../components/form/SortBar/SortBar";
+import TagList from "../../../components/buttons/TagList/TagList";
+import parseImageURL from "../../../utils/parseImageURL";
+import { useTheme } from "styled-components";
 
 const postPerPage = 9;
 export const getServerSideProps = async () => {
