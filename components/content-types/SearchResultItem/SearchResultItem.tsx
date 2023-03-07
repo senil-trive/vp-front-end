@@ -1,7 +1,8 @@
-import Link from "next/link";
 import React, { ReactNode } from "react";
-import styled from "styled-components";
+
+import { BsArrowRight } from "react-icons/bs";
 import { P } from "../../typography";
+import styled from "styled-components";
 
 type Props = {
   /** The amount of search results found */
@@ -101,10 +102,13 @@ export default function SearchResultItem({
         </P>
       </section>
 
-      <ul>
+      <ul className="list-disc">
         {list.map((item) => (
           <li key={item.link}>
-            <a href={item.link}>{item.name}</a>
+            <a href={item.link} className="flex items-center">
+              {item.name}
+              <BsArrowRight className="ml-2" />
+            </a>
           </li>
         ))}
       </ul>

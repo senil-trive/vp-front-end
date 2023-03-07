@@ -1,23 +1,23 @@
 import { Container, Grid } from "@mui/material";
 import { H1, P } from "../../components/typography";
-
-import BriefItem from "../../components/content-types/BriefItem/BriefItem";
-import { Hero } from "../../components/layout";
-import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import React, { useEffect, useState } from "react";
-import SearchBar from "../../components/form/SearchBar/SearchBar";
-import SearchResultItem from "../../components/content-types/SearchResultItem/SearchResultItem";
-import { useRouter } from "next/router";
-import { POST_PER_PAGE } from "../../constants/app-configs";
 import {
   getForumPosts,
   getLetters,
   getPosts,
   getPostsTotal,
 } from "../../utils/api";
+
 import { BlogType } from "../../types/content-types/Blog.type";
+import BriefItem from "../../components/content-types/BriefItem/BriefItem";
 import { ForumPostType } from "../../types/forumTypes";
+import { Hero } from "../../components/layout";
 import { Letter } from "../../types/content-types/Letter.type";
+import { POST_PER_PAGE } from "../../constants/app-configs";
+import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
+import SearchBar from "../../components/form/SearchBar/SearchBar";
+import SearchResultItem from "../../components/content-types/SearchResultItem/SearchResultItem";
+import { useRouter } from "next/router";
 
 // export const getServerSideProps = async () => {
 // try {
@@ -121,7 +121,7 @@ export default function Search() {
       </Hero>
 
       <main style={{ marginBottom: "80px" }}>
-        <Container>
+        <Container maxWidth="xl">
           <Grid container spacing={"22px"}>
             <Grid item xs={12} md={4}>
               <SearchResultItem
