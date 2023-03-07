@@ -102,16 +102,18 @@ export default function SearchResultItem({
         </P>
       </section>
 
-      <ul className="list-disc">
-        {list.map((item) => (
-          <li key={item.link}>
-            <a href={item.link} className="flex items-center">
-              {item.name}
-              <BsArrowRight className="ml-2" />
-            </a>
-          </li>
-        ))}
-      </ul>
+      {list.length > 0 && (
+        <ul className="list-disc">
+          {list.map((item) => (
+            <li key={item.link}>
+              <a href={item.link} className="flex items-center">
+                {item.name}
+                <BsArrowRight className="ml-2" />
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
     </Wrapper>
   );
 }
