@@ -30,7 +30,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   try {
     // Get the letters
     const res = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*&filter[slug][_eq]=${slug}`,
+      `${ENDPOINTS.COLLECTIONS}/open_letters?filter[slug][_eq]=${slug}&fields=*.*&`,
       {
         method: "GET",
       }
@@ -87,16 +87,15 @@ export default function LetterDetail({ pageData, relatedLetters }: Props) {
     formState: { errors },
   } = useForm<any>();
 
-  const watchFields = watch(["user_name", "user_email"]);
+  const watchFields = watch(["user_name", "user_city"]);
 
   const submitForm = async (data: any) => {
     setIsLoading(true);
 
     try {
       const body = {
-        user_email: data.user_email,
         user_name: data.user_name,
-        subscribed_to_newsletter: data.subscribe_to_newsletter,
+        user_city: data.user_city,
         letter: {
           id: pageData.id,
         },
@@ -164,23 +163,12 @@ export default function LetterDetail({ pageData, relatedLetters }: Props) {
                   />
 
                   <Input
-                    label="Email adres"
-                    placeholder="Vul je email adres in"
-                    type="email"
-                    name="user_email"
+                    label="Woonplaats"
+                    placeholder="Vul je woonplaats in"
+                    type="text"
+                    name="user_city"
                     register={register}
                   />
-
-                  <label className={`flex gap-4`}>
-                    <input
-                      type="checkbox"
-                      {...register("subscribe_to_newsletter")}
-                    />
-                    <span style={{ color: theme.colors.primary }}>
-                      Ja, ik wil graag maandelijks tips & inspiratie via de mail
-                      ontvangen
-                    </span>
-                  </label>
 
                   <Button
                     loading={isLoading}

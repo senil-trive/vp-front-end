@@ -1,8 +1,9 @@
 import React, { ReactNode, useRef, useState } from "react";
 import styled, { css, useTheme } from "styled-components";
-import { ColorType } from "../../../types/colorTypes";
+
 import ChevronDownFilled from "../../icons/ChevronDownFilled/ChevronDownFilled";
 import ChevronUpFilled from "../../icons/ChevronUpFilled/ChevronUpFilled";
+import { ColorType } from "../../../types/colorTypes";
 import IconWrapper from "../../icons/IconWrapper/IconWrapper";
 import ImportantCircle from "../../icons/ImportantCircle/ImportantCircle";
 import { P } from "../../typography";
@@ -164,7 +165,7 @@ export default function Dropdown({
   label,
   disabled,
   helperText,
-  placeholder = "Select",
+  placeholder = "Kies een optie",
   hasError = false,
   register,
   name,

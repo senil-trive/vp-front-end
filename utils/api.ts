@@ -1,6 +1,7 @@
 import { CompanyInfo } from "../types/componayInfoTypes";
 import ENDPOINTS from "../constants/endpoints";
 import { MenuItem } from "../components/layout/Header/Header";
+import { VolunteerRequestType } from "../types/volunteerRequestTypes";
 
 type DirectusParams = {
   /** The amount of items that will be fetched, set -1 to retrieve all */
@@ -337,4 +338,20 @@ export const getForumTotal = async () => {
       },
     }
   );
+};
+
+/**
+ * Add a volunteer application
+ * @param data
+ */
+export const postVolunteerApplication = async (data: VolunteerRequestType) => {
+  await fetch(`${ENDPOINTS.COLLECTIONS}/volunteer_signup_requests`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      ...data,
+    }),
+  });
 };
