@@ -11,6 +11,8 @@ import React from "react";
 import TextItem from "../../../components/content-types/TextItem/TextItem";
 import { parseFileURL } from "../../../utils/parseFileURL";
 import parseImageURL from "../../../utils/parseImageURL";
+import { getLetters } from "../../../utils/api";
+import { POST_PER_PAGE } from "../../../constants/app-configs";
 
 interface LettersOverviewPageProps {
   pageData: any;
@@ -29,17 +31,12 @@ export const getServerSideProps = async () => {
       }
     );
 
-    const lettersReq = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*.*&filter[status][_eq]=published`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-
     const pageRes = await pageReq.json();
+    const lettersReq = await getLetters({
+      postPerPage: POST_PER_PAGE,
+      filter: `filter[id][_neq]=${pageRes?.data?.highlighted_letter?.id}`,
+    });
+
     const lettersRes = await lettersReq.json();
 
     return {
@@ -131,21 +128,16 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
             </Container>
             <Container maxWidth="xl">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-20">
-                {lettersData
-                  .filter(
-                    (letter: Letter) =>
-                      letter.id !== pageData?.highlighted_letter?.id
-                  )
-                  .map((letter: Letter) => (
-                    <BriefItem
-                      key={letter.id}
-                      title={letter.title}
-                      titleHighlighted={letter.title_highlighted}
-                      content={letter.description}
-                      imgSrc={parseImageURL(letter.image?.id)}
-                      fileSrc={`/open-brieven/${letter.slug}`}
-                    />
-                  ))}
+                {lettersData.map((letter: Letter) => (
+                  <BriefItem
+                    key={letter.id}
+                    title={letter.title}
+                    titleHighlighted={letter.title_highlighted}
+                    content={letter.description}
+                    imgSrc={parseImageURL(letter.image?.id)}
+                    fileSrc={`/open-brieven/${letter.slug}`}
+                  />
+                ))}
               </div>
             </Container>
           </section>

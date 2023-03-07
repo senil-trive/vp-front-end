@@ -1,4 +1,5 @@
 import { BlogType } from "./content-types/Blog.type";
+import { ForumPostType } from "./forumTypes";
 
 export type BlogPageProps = {
   pageData?: {
@@ -12,4 +13,19 @@ export type BlogPageProps = {
 
 export type BlogDetailPageProps = {
   pageData?: BlogType;
+};
+
+export type ForumPageProps = {
+  pageData?: {
+    page_title: string;
+    page_subtitle: string;
+    submit_question_button_label: string;
+    chat_button_label: string;
+  };
+  forumData: ForumPostType[];
+  totalPosts: number;
+};
+
+export type ForumDetailPageProps = {
+  pageData?: ForumPostType;
 };
