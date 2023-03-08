@@ -12,12 +12,13 @@ import BriefItem from "../../content-types/BriefItem/BriefItem";
 import ForumPost from "../../content-types/ForumPost/ForumPost";
 import InstagramPost from "../../content-types/InstagramPost/InstagramPost";
 import VideoItem from "../../content-types/VideoItem/VideoItem";
+import { VideoPropsType } from "../../content-types/VideoItem/VideoItem.types";
 import { HomeGridWrapper } from "./HomeGrid.styled";
 
 export type FeedItem = {
   type: "letter" | "blog" | "forum" | "video" | "instagram" | "tiktok";
   cols?: number;
-  content: Letter | BlogType | ForumPostType | {};
+  content: Letter | BlogType | ForumPostType | VideoPropsType | {};
 };
 
 type Props = {
@@ -43,13 +44,14 @@ export function HomeGrid({ feed = [] }: Props) {
 
               switch (item.type) {
                 case "video":
+                  const videoContent = content as VideoPropsType;
                   return (
                     <XBlock key={index} width={2}>
                       <div className="grid-item">
                         <VideoItem
-                          title="Video titel komt hier"
-                          src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                          subtitle="Hier komt een omschrijvende tekst"
+                          title={videoContent.title}
+                          src={videoContent.src}
+                          subtitle={videoContent.subtitle}
                         />
                       </div>
                     </XBlock>
@@ -106,14 +108,14 @@ export function HomeGrid({ feed = [] }: Props) {
                           author={blogContent.author}
                           content={blogContent.content}
                           postDate={new Date(blogContent.date_created)}
-                          // category={blogContent.categories[0].categories_id?.name}
-
+                          category={blogContent.categories[0].name}
                           title={blogContent.title}
                         />
                       </div>
                     </XBlock>
                   );
                 case "instagram":
+                  // TODO: replace with CMS content
                   return (
                     <XBlock key={index}>
                       <div className="grid-item">
@@ -122,6 +124,7 @@ export function HomeGrid({ feed = [] }: Props) {
                     </XBlock>
                   );
                 case "tiktok":
+                  // TODO: replace with CMS content
                   return (
                     <XBlock key={index}>
                       <div className="grid-item">

@@ -45,10 +45,24 @@ const generateFeed = ({
 
   // TODO: replace with real video content
   // Add video item at the very beginning
-  res.splice(0, 0, { type: "video", content: { title: "video-2" } });
+  res.splice(0, 0, {
+    type: "video",
+    content: {
+      title: "Video 1",
+      subtitle: "Hier komt een omschrijvende tekst",
+      src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+    },
+  });
 
   // Add a video item to 4th place
-  res.splice(4, 0, { type: "video", content: { title: "video-2" } });
+  res.splice(3, 0, {
+    type: "video",
+    content: {
+      title: "Video 2",
+      subtitle: "Hier komt een omschrijvende tekst",
+      src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+    },
+  });
 
   return res;
 };
