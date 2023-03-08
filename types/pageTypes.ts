@@ -1,5 +1,6 @@
 import { BlogType } from "./content-types/Blog.type";
 import { ForumPostType } from "./forumTypes";
+import { Tag } from "./content-types/Tag.type";
 
 export type BlogPageProps = {
   pageData?: {
@@ -9,6 +10,7 @@ export type BlogPageProps = {
   };
   blogsData: BlogType[];
   totalPosts: number;
+  tags: Tag[];
 };
 
 export type BlogDetailPageProps = {

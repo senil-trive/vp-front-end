@@ -18,6 +18,9 @@ type DirectusParams = {
 
   /** Syntax to use is filter[field][operator]=value example: filter[id][_eq]=1 */
   filter?: string;
+
+  /** Get meta information, like filter_count */
+  meta?: string;
 };
 
 /**
@@ -221,8 +224,9 @@ export const getPosts = async ({
   search,
   sort,
   filter,
+  meta = "total_count",
 }: DirectusParams) => {
-  let url = `${ENDPOINTS.COLLECTIONS}/vlogposts?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+  let url = `${ENDPOINTS.COLLECTIONS}/vlogposts?fields=*.*.*&filter=[status][_eq]=published&limit=${postPerPage}&page=${page}&meta=${meta}`;
 
   if (search) {
     url = `${url}&search=${search}`;
@@ -354,4 +358,19 @@ export const postVolunteerApplication = async (data: VolunteerRequestType) => {
       ...data,
     }),
   });
+};
+
+/**
+ * Gets all available tags
+ */
+export const getContentTags = async () => {
+  return await fetch(
+    `${ENDPOINTS.COLLECTIONS}/categories?filter[status][_eq]=published&fields=*.*.*`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
 };

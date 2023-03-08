@@ -1,9 +1,13 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+
 import Tag from "../Tag/Tag";
+import { Tag as TagType } from "../../../types/content-types/Tag.type";
+import styled from "styled-components";
 
 type Props = {
-  tags: string[];
+  tags: TagType[];
+  selected?: string;
+  onSelect?: (tag: string) => void;
 };
 
 const Wrapper = styled.div`
@@ -12,18 +16,16 @@ const Wrapper = styled.div`
   overflow-x: scroll;
 `;
 
-export default function TagList({ tags }: Props) {
-  const [selected, setSelected] = useState(0);
-
+export default function TagList({ tags, selected, onSelect }: Props) {
   return (
     <Wrapper>
       {tags.map((tag, index) => (
         <Tag
-          isActive={selected === index}
+          isActive={selected === tag.id}
           key={index}
-          onClick={() => setSelected(index)}
+          onClick={() => onSelect?.(tag.id)}
         >
-          {tag}
+          {tag.name}
         </Tag>
       ))}
     </Wrapper>
