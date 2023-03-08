@@ -12,7 +12,6 @@ import BlogItem from "../../../components/content-types/BlogItem/BlogItem";
 import { BlogPageProps } from "../../../types/pageTypes";
 import CollectionSearchBar from "../../../components/form/CollectionSearchBar/CollectionSearchBar";
 import { FEED_TAGS } from "../../../constants/mockData";
-import Link from "next/link";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import SortBar from "../../../components/form/SortBar/SortBar";
 import TagList from "../../../components/buttons/TagList/TagList";
@@ -149,7 +148,7 @@ export default function Forum({
                   author={item.author}
                   content={item.content}
                   postDate={new Date(item.date_created)}
-                  category={item.categories[0].categories_id.name}
+                  category={item.categories?.[0]?.categories_id?.name}
                   title={item.title}
                 />
               </Grid>
