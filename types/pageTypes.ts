@@ -1,3 +1,4 @@
+import { FeedItem } from "../components/layout/HomeGrid/HomeGrid";
 import { CategoryType } from "./categoryTypes";
 import { BlogType } from "./content-types/Blog.type";
 import { ForumPostType } from "./forumTypes";
@@ -8,6 +9,7 @@ export type HomePageProps = {
     page_subtitle: string;
   };
   categories: CategoryType[];
+  feed: FeedItem[];
 };
 
 export type BlogPageProps = {

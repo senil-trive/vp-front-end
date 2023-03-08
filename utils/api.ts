@@ -197,7 +197,7 @@ export const postLetterSubscription = async (data: any) => {
  */
 export const getPostOverviewPageData = async () => {
   return await fetch(
-    `${ENDPOINTS.COLLECTIONS}/blog_overview_page?fields=*.*.*`,
+    `${ENDPOINTS.COLLECTIONS}/blog_overview_page?fields=*.*.*.*`,
     {
       method: "GET",
       headers: {

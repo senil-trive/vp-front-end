@@ -1,5 +1,4 @@
 import { Container, Grid } from "@mui/material";
-import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useTheme } from "styled-components";
 import TagList from "../../components/buttons/TagList/TagList";
@@ -9,6 +8,7 @@ import SortBar from "../../components/form/SortBar/SortBar";
 import { Hero, Pagination } from "../../components/layout";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import { H1, P } from "../../components/typography";
+import { POST_PER_PAGE } from "../../constants/app-configs";
 import { FEED_TAGS } from "../../constants/mockData";
 import { BlogPageProps } from "../../types/pageTypes";
 import {
@@ -18,11 +18,10 @@ import {
 } from "../../utils/api";
 import parseImageURL from "../../utils/parseImageURL";
 
-const postPerPage = 9;
 export const getServerSideProps = async () => {
   try {
     const pageReq = await getPostOverviewPageData();
-    const blogsReq = await getPosts({ postPerPage });
+    const blogsReq = await getPosts({ postPerPage: POST_PER_PAGE });
     const countReq = await getPostsTotal();
 
     const pageRes = await pageReq.json();
@@ -80,7 +79,7 @@ export default function Forum({
     const getPaginatedBlogs = async () => {
       try {
         const req = await getPosts({
-          postPerPage,
+          postPerPage: POST_PER_PAGE,
           page: currentPage,
           search,
           sort,
@@ -156,9 +155,9 @@ export default function Forum({
           </Grid>
         </Container>
 
-        {totalPosts / postPerPage > 2 && posts.length >= postPerPage && (
+        {totalPosts / POST_PER_PAGE > 2 && posts.length >= POST_PER_PAGE && (
           <Pagination
-            total={Math.ceil(totalPosts / postPerPage)}
+            total={Math.ceil(totalPosts / POST_PER_PAGE)}
             truncated
             onChange={changePage}
           />

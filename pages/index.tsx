@@ -2,25 +2,83 @@ import { Grid, Hero } from "../components/layout";
 import { H1, P } from "../components/typography";
 
 import { Container } from "@mui/material";
-import DisplayDropdown from "../components/form/Dropdown/DisplayDropdown";
-import { FEED_TAGS } from "../constants/mockData";
-import { HomeGrid } from "../components/layout/HomeGrid/HomeGrid";
+import { FeedItem, HomeGrid } from "../components/layout/HomeGrid/HomeGrid";
 import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
 import TagList from "../components/buttons/TagList/TagList";
-import { getCategories, getHomeData } from "../utils/api";
+import {
+  getCategories,
+  getForumPosts,
+  getHomeData,
+  getLetters,
+  getPosts,
+} from "../utils/api";
 import { HomePageProps } from "../types/pageTypes";
+import { POST_PER_PAGE } from "../constants/app-configs";
+import { shuffle } from "../utils/feed-utils";
+import { BlogType } from "../types/content-types/Blog.type";
+import { Letter } from "../types/content-types/Letter.type";
+import { ForumPostType } from "../types/forumTypes";
+
+const generateFeed = ({
+  blogs,
+  letters,
+  forum,
+}: {
+  blogs: BlogType[];
+  letters: Letter[];
+  forum: ForumPostType[];
+}) => {
+  let res: FeedItem[] = [];
+
+  blogs?.forEach((item) => {
+    res.push({ type: "blog", content: item });
+  });
+  letters?.forEach((item) => {
+    res.push({ type: "letter", content: item });
+  });
+  forum?.forEach((item) => {
+    res.push({ type: "forum", content: item });
+  });
+
+  // randomize content
+  res = shuffle(res);
+
+  // TODO: replace with real video content
+  // Add video item at the very beginning
+  res.splice(0, 0, { type: "video", content: { title: "video-2" } });
+
+  // Add a video item to 4th place
+  res.splice(4, 0, { type: "video", content: { title: "video-2" } });
+
+  return res;
+};
 
 export const getServerSideProps = async () => {
   try {
     const pageReq = await getHomeData();
+    const blogsReq = await getPosts({ postPerPage: POST_PER_PAGE });
+    const forumReq = await getForumPosts({
+      postPerPage: POST_PER_PAGE,
+    });
+    const lettersReq = await getLetters({
+      postPerPage: POST_PER_PAGE,
+    });
     const categoriesReq = await getCategories();
 
     const pageRes = await pageReq.json();
+    const blogsRes = await blogsReq.json();
+    const forumRes = await forumReq.json();
+    const lettersRes = await lettersReq.json();
     const categoriesRes = await categoriesReq.json();
 
     return {
       props: {
         pageData: pageRes.data,
+        feed: generateFeed({
+          blogs: blogsRes.data,
+          forum: forumRes.data,
+          letters: lettersRes.data,
+        }),
         categories: categoriesRes.data,
       },
     };
@@ -35,9 +93,7 @@ export const getServerSideProps = async () => {
   }
 };
 
-export default function Home({ pageData, categories }: HomePageProps) {
-  console.log(categories);
-
+export default function Home({ pageData, categories, feed }: HomePageProps) {
   return (
     <PageWrapper
       title="Leeg je hoofd, lucht je hart"
@@ -67,7 +123,7 @@ export default function Home({ pageData, categories }: HomePageProps) {
           </Grid>
         </Container>
 
-        <HomeGrid />
+        <HomeGrid feed={feed} />
       </main>
     </PageWrapper>
   );
