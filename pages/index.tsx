@@ -1,10 +1,6 @@
+import { FeedItem, HomeGrid } from "../components/layout/HomeGrid/HomeGrid";
 import { Grid, Hero } from "../components/layout";
 import { H1, P } from "../components/typography";
-
-import { Container } from "@mui/material";
-import { FeedItem, HomeGrid } from "../components/layout/HomeGrid/HomeGrid";
-import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
-import TagList from "../components/buttons/TagList/TagList";
 import {
   getCategories,
   getForumPosts,
@@ -12,12 +8,16 @@ import {
   getLetters,
   getPosts,
 } from "../utils/api";
-import { HomePageProps } from "../types/pageTypes";
-import { POST_PER_PAGE } from "../constants/app-configs";
-import { shuffle } from "../utils/feed-utils";
+
 import { BlogType } from "../types/content-types/Blog.type";
-import { Letter } from "../types/content-types/Letter.type";
+import { Container } from "@mui/material";
 import { ForumPostType } from "../types/forumTypes";
+import { HomePageProps } from "../types/pageTypes";
+import { Letter } from "../types/content-types/Letter.type";
+import { POST_PER_PAGE } from "../constants/app-configs";
+import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
+import TagList from "../components/buttons/TagList/TagList";
+import { shuffle } from "../utils/feed-utils";
 
 const generateFeed = ({
   blogs,
@@ -104,11 +104,16 @@ export default function Home({ pageData, categories, feed }: HomePageProps) {
           <Grid container>
             <Grid item xs={0} md={2} lg={3} />
             <Grid item xs={12} md={8} lg={6}>
-              <H1 style={{ textAlign: "center", padding: "0 24px" }}>
-                {pageData?.page_title}
-              </H1>
+              <div className="text-center">
+                <H1
+                  variant="bold"
+                  style={{ textAlign: "center", padding: "0 24px" }}
+                >
+                  {pageData?.page_title}
+                </H1>
 
-              <P variant="light">{pageData?.page_subtitle}</P>
+                <P variant="light">{pageData?.page_subtitle}</P>
+              </div>
             </Grid>
             <Grid item xs={0} md={2} lg={3} />
           </Grid>
