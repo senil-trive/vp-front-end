@@ -1,20 +1,20 @@
-import { H3, P, TitleWithHighlights } from "../../components/typography";
-import React from "react";
+import { H3, P, TitleWithHighlights } from "../../../components/typography";
 
-import BreadCrumbs from "../../components/layout/BreadCrumbs/BreadCrumbs";
+import { BlogDetailPageProps } from "../../../types/pageTypes";
+import BlogItem from "../../../components/content-types/BlogItem/BlogItem";
+import BreadCrumbs from "../../../components/layout/BreadCrumbs/BreadCrumbs";
+import CommentForm from "../../../components/form/CommentForm/CommentForm";
 import { Container } from "@mui/material";
 import { GetServerSidePropsContext } from "next";
-import { Hero } from "../../components/layout";
-import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
-import parseHTMLtoReact from "../../utils/parseHTMLtoReact";
-import parseImageURL from "../../utils/parseImageURL";
-import { getPostDetail } from "../../utils/api";
-import { BlogDetailPageProps } from "../../types/pageTypes";
-import BlogItem from "../../components/content-types/BlogItem/BlogItem";
-import Tag from "../../components/buttons/Tag/Tag";
+import { Hero } from "../../../components/layout";
 import Image from "next/image";
-import YoutubePlayer from "../../components/media/YoutubePlayer";
-import CommentForm from "../../components/form/CommentForm/CommentForm";
+import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
+import React from "react";
+import Tag from "../../../components/buttons/Tag/Tag";
+import YoutubePlayer from "../../../components/media/YoutubePlayer";
+import { getPostDetail } from "../../../utils/api";
+import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
+import parseImageURL from "../../../utils/parseImageURL";
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const { slug } = ctx.query;
@@ -82,7 +82,7 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
           <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16">
             {pageData?.categories[0] && (
               <Tag variant="dark" size="m">
-                <>{pageData?.categories[0].categories_id.name}</>
+                <>{pageData?.categories[0].name}</>
               </Tag>
             )}
             {pageData?.author && <P>{pageData.author}:</P>}
@@ -135,9 +135,7 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
                     author={post.related_vlogposts_id.author}
                     content={post.related_vlogposts_id.content}
                     postDate={new Date(post.related_vlogposts_id.date_created)}
-                    category={
-                      post.related_vlogposts_id.categories[0].categories_id.name
-                    }
+                    category={post.related_vlogposts_id.categories[0].name}
                     title={post.related_vlogposts_id.title}
                   />
                 ))}

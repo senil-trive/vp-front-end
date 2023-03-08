@@ -30,7 +30,7 @@ export default function PageWrapper({
   return (
     <div>
       <Head>
-        <title>{title} - Voor kinderen met gescheiden ouders</title>
+        <title>{title + " - Voor kinderen met gescheiden ouders"}</title>
         <meta name="description" content={description} />
         <link rel="icon" href="/favicon.ico" />
         <link

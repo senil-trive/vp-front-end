@@ -9,7 +9,9 @@ import SearchResultItem from "../../components/content-types/SearchResultItem/Se
 import { useRouter } from "next/router";
 import { POST_PER_PAGE } from "../../constants/app-configs";
 import { getForumPosts, getLetters, getPosts } from "../../utils/api";
+
 import { BlogType } from "../../types/content-types/Blog.type";
+import BriefItem from "../../components/content-types/BriefItem/BriefItem";
 import { ForumPostType } from "../../types/forumTypes";
 import { Letter } from "../../types/content-types/Letter.type";
 
@@ -74,7 +76,10 @@ export default function Search() {
           <Grid container>
             <Grid item xs={0} md={2} lg={3} />
             <Grid item xs={12} md={8} lg={6}>
-              <H1 style={{ textAlign: "center", padding: "0 24px" }}>
+              <H1
+                variant="bold"
+                style={{ textAlign: "center", padding: "0 24px" }}
+              >
                 {posts.length + forumPosts.length + letters.length} resultaten
                 gevonden
               </H1>
@@ -93,7 +98,7 @@ export default function Search() {
       </Hero>
 
       <main style={{ marginBottom: "80px" }}>
-        <Container>
+        <Container maxWidth="xl">
           <Grid container spacing={"22px"}>
             <Grid item xs={12} md={4}>
               <SearchResultItem

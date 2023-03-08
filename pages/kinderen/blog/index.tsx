@@ -1,22 +1,23 @@
 import { Container, Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useTheme } from "styled-components";
-import TagList from "../../components/buttons/TagList/TagList";
-import BlogItem from "../../components/content-types/BlogItem/BlogItem";
-import CollectionSearchBar from "../../components/form/CollectionSearchBar/CollectionSearchBar";
-import SortBar from "../../components/form/SortBar/SortBar";
-import { Hero, Pagination } from "../../components/layout";
-import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
-import { H1, P } from "../../components/typography";
-import { POST_PER_PAGE } from "../../constants/app-configs";
-import { FEED_TAGS } from "../../constants/mockData";
-import { BlogPageProps } from "../../types/pageTypes";
 import {
   getPostOverviewPageData,
   getPosts,
   getPostsTotal,
-} from "../../utils/api";
-import parseImageURL from "../../utils/parseImageURL";
+} from "../../../utils/api";
+
+import BlogItem from "../../../components/content-types/BlogItem/BlogItem";
+import { BlogPageProps } from "../../../types/pageTypes";
+import CollectionSearchBar from "../../../components/form/CollectionSearchBar/CollectionSearchBar";
+import { FEED_TAGS } from "../../../constants/mockData";
+import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
+import SortBar from "../../../components/form/SortBar/SortBar";
+import TagList from "../../../components/buttons/TagList/TagList";
+import parseImageURL from "../../../utils/parseImageURL";
+import { useTheme } from "styled-components";
+import { POST_PER_PAGE } from "../../../constants/app-configs";
+import { Hero, Pagination } from "../../../components/layout";
+import { H1, P } from "../../../components/typography";
 
 export const getServerSideProps = async () => {
   try {
@@ -147,7 +148,7 @@ export default function Forum({
                   author={item.author}
                   content={item.content}
                   postDate={new Date(item.date_created)}
-                  category={item.categories[0].categories_id.name}
+                  category={item.categories[0].name}
                   title={item.title}
                 />
               </Grid>
