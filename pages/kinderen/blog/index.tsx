@@ -1,15 +1,14 @@
 import { Container, Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import {
+  getContentTags,
   getPostOverviewPageData,
   getPosts,
-  getPostsTotal,
 } from "../../../utils/api";
 
 import BlogItem from "../../../components/content-types/BlogItem/BlogItem";
 import { BlogPageProps } from "../../../types/pageTypes";
 import CollectionSearchBar from "../../../components/form/CollectionSearchBar/CollectionSearchBar";
-import { FEED_TAGS } from "../../../constants/mockData";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import SortBar from "../../../components/form/SortBar/SortBar";
 import TagList from "../../../components/buttons/TagList/TagList";
@@ -22,18 +21,22 @@ import { H1, P } from "../../../components/typography";
 export const getServerSideProps = async () => {
   try {
     const pageReq = await getPostOverviewPageData();
-    const blogsReq = await getPosts({ postPerPage: POST_PER_PAGE });
-    const countReq = await getPostsTotal();
+    const tagsReq = await getContentTags();
+    const blogsReq = await getPosts({
+      postPerPage: POST_PER_PAGE,
+      meta: "filter_count",
+    });
 
     const pageRes = await pageReq.json();
     const blogRes = await blogsReq.json();
-    const countRes = await countReq.json();
+    const tagsRes = await tagsReq.json();
 
     return {
       props: {
         pageData: pageRes.data,
         blogsData: blogRes.data,
-        totalPosts: countRes.data[0].count,
+        totalPosts: blogRes.meta.filter_count,
+        tags: tagsRes.data,
       },
     };
   } catch (error) {
@@ -51,10 +54,13 @@ export default function Forum({
   pageData,
   blogsData,
   totalPosts,
+  tags,
 }: BlogPageProps) {
   const { colors } = useTheme();
   // const { query, push } = useRouter(); // TODO: also the pagination and search through url query
   const [posts, setPosts] = useState(blogsData);
+  const [totalCount, setTotalCount] = useState(totalPosts);
+  const [selectedTag, setSelectedTag] = useState<string>("");
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
@@ -84,17 +90,22 @@ export default function Forum({
           page: currentPage,
           search,
           sort,
+          meta: "filter_count",
+          filter:
+            selectedTag.length > 0
+              ? `filter={"categories": { "categories_id": { "id": { "_eq": "${selectedTag}"}}}}`
+              : ``,
         });
         const res = await req.json();
-
-        setPosts(res.data);
+        setPosts(res.data || []);
+        setTotalCount(res.meta.filter_count || 0);
       } catch (error) {
         console.log(error);
       }
     };
 
     getPaginatedBlogs();
-  }, [currentPage, search, sort]);
+  }, [currentPage, search, sort, selectedTag]);
 
   return (
     <PageWrapper title="Blog en vlog overzicht">
@@ -103,7 +114,10 @@ export default function Forum({
           <Grid container>
             <Grid item xs={0} md={2} lg={3} />
             <Grid item xs={12} md={8} lg={6}>
-              <H1 style={{ textAlign: "center", padding: "0 24px" }}>
+              <H1
+                variant="bold"
+                style={{ textAlign: "center", padding: "0 24px" }}
+              >
                 {pageData?.page_title}
               </H1>
               <P variant="light" style={{ textAlign: "center" }}>
@@ -119,7 +133,13 @@ export default function Forum({
         <Container style={{ marginBottom: 56 }}>
           <Grid container style={{ marginBottom: "32px" }}>
             <Grid item xs={12}>
-              <TagList tags={FEED_TAGS} />
+              <TagList
+                tags={tags}
+                selected={selectedTag}
+                onSelect={(x: string) => {
+                  setSelectedTag(x);
+                }}
+              />
             </Grid>
           </Grid>
         </Container>
@@ -132,7 +152,7 @@ export default function Forum({
           <Grid container spacing={"34px"}>
             <Grid item xs={12} md={9}>
               <P style={{ color: colors.primary }}>
-                {search ? posts.length : totalPosts} blogs en vlogs
+                {totalCount} blogs en vlogs
               </P>
             </Grid>
             <Grid item xs={12} md={3}>
@@ -156,9 +176,9 @@ export default function Forum({
           </Grid>
         </Container>
 
-        {totalPosts / POST_PER_PAGE > 2 && posts.length >= POST_PER_PAGE && (
+        {totalCount / POST_PER_PAGE > 2 && posts.length >= POST_PER_PAGE && (
           <Pagination
-            total={Math.ceil(totalPosts / POST_PER_PAGE)}
+            total={Math.ceil(totalCount / POST_PER_PAGE)}
             truncated
             onChange={changePage}
           />

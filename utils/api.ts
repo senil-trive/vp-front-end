@@ -18,6 +18,9 @@ type DirectusParams = {
 
   /** Syntax to use is filter[field][operator]=value example: filter[id][_eq]=1 */
   filter?: string;
+
+  /** Get meta information, like filter_count */
+  meta?: string;
 };
 
 /**
@@ -221,8 +224,9 @@ export const getPosts = async ({
   search,
   sort,
   filter,
+  meta = "total_count",
 }: DirectusParams) => {
-  let url = `${ENDPOINTS.COLLECTIONS}/vlogposts?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+  let url = `${ENDPOINTS.COLLECTIONS}/vlogposts?fields=*.*.*&filter=[status][_eq]=published&limit=${postPerPage}&page=${page}&meta=${meta}`;
 
   if (search) {
     url = `${url}&search=${search}`;
@@ -294,22 +298,6 @@ export const getPostDetail = async (slug: string) => {
 };
 
 /**
- * Gets the number of total blog posts
- * @returns
- */
-export const getPostsTotal = async () => {
-  return await fetch(
-    `${ENDPOINTS.COLLECTIONS}/vlogposts?aggregate[count]=*&filter[status][_eq]=published`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
-};
-
-/**
  * Gets the Forum overview page details
  */
 export const getForumOverviewPageData = async () => {
@@ -337,8 +325,9 @@ export const getForumPosts = async ({
   search,
   sort,
   filter,
+  meta,
 }: DirectusParams) => {
-  let url = `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+  let url = `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}&meta=${meta}`;
 
   if (search) {
     url = `${url}&search=${search}`;
@@ -359,23 +348,6 @@ export const getForumPosts = async ({
 };
 
 /**
- * Gets the number of total forum posts
- * @returns
- */
-export const getForumTotal = async () => {
-  return await fetch(
-    `${ENDPOINTS.COLLECTIONS}/forum_posts?aggregate[count]=*&filter[status][_eq]=published`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
-};
-
-/**
-<<<<<<< HEAD
  * Gets the data for the homepage
  * @returns
  */
@@ -415,4 +387,19 @@ export const postVolunteerApplication = async (data: VolunteerRequestType) => {
       ...data,
     }),
   });
+};
+
+/**
+ * Gets all available tags
+ */
+export const getContentTags = async () => {
+  return await fetch(
+    `${ENDPOINTS.COLLECTIONS}/categories?filter[status][_eq]=published&fields=*.*.*`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
 };

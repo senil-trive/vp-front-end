@@ -147,7 +147,13 @@ export default function Home({ pageData, categories, feed }: HomePageProps) {
         <Container>
           <Grid container style={{ marginBottom: "32px" }}>
             <Grid item xs={12}>
-              <TagList tags={categories.map((cat) => cat.name)} />
+              <TagList
+                tags={categories.map((cat) => ({
+                  id: cat.id,
+                  name: cat.name,
+                  status: cat.status,
+                }))}
+              />
             </Grid>
           </Grid>
         </Container>
