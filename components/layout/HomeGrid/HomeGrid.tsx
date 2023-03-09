@@ -108,7 +108,9 @@ export function HomeGrid({ feed = [] }: Props) {
                           author={blogContent.author}
                           content={blogContent.content}
                           postDate={new Date(blogContent.date_created)}
-                          category={blogContent.categories[0].name}
+                          category={
+                            blogContent.categories[0]?.categories_id?.name
+                          }
                           title={blogContent.title}
                         />
                       </div>

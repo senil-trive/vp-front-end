@@ -148,7 +148,7 @@ export default function Forum({
                   author={item.author}
                   content={item.content}
                   postDate={new Date(item.date_created)}
-                  category={item.categories[0].name}
+                  category={item.categories?.[0]?.categories_id?.name}
                   title={item.title}
                 />
               </Grid>
