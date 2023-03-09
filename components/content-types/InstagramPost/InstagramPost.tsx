@@ -58,9 +58,10 @@ const StyledPost = styled.article`
 
 export default function InstagramPost({ name, embed_code }: InstaPost) {
   const id = `ig-embed-${uuidv4()}`;
+
   // this regex will parse through the html block looking for a script tag, if it finds one, the value will be the src from the script
-  // example: console.log(src) ---> "https://instagram.embed.js.com"
-  const scriptSRC = embed_code.match(/src="([^"]*)"/)?.[1];
+  // const scriptSRC = embed_code.match(/src="([^"]*)"/)?.[1];
+  const scriptSRC = "https://www.instagram.com/embed.js";
 
   return (
     <StyledPost>
