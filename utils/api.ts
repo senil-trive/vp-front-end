@@ -201,7 +201,7 @@ export const postLetterSubscription = async (data: any) => {
  */
 export const getPostOverviewPageData = async () => {
   return await fetch(
-    `${ENDPOINTS.COLLECTIONS}/blog_overview_page?fields=*.*.*`,
+    `${ENDPOINTS.COLLECTIONS}/blog_overview_page?fields=*.*.*.*`,
     {
       method: "GET",
       headers: {
@@ -247,6 +247,40 @@ export const getPosts = async ({
 };
 
 /**
+ * Gets a list of blog posts
+ * @param postPerPage the amount of posts to be shown per page
+ * @param page the current paginated page
+ * @param query the search query
+ * @returns
+ */
+export const getInstaPosts = async ({
+  postPerPage,
+  page = 1,
+  search,
+  sort,
+  filter,
+}: DirectusParams) => {
+  let url = `${ENDPOINTS.COLLECTIONS}/instagram_embeds?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+
+  if (search) {
+    url = `${url}&search=${search}`;
+  }
+  if (sort) {
+    url = `${url}&sort=${sort}`;
+  }
+  if (filter) {
+    url = `${url}&${filter}`;
+  }
+
+  return await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+/**
  * Get the post detail base on the slug
  * @param slug the post slug
  * @returns
@@ -254,22 +288,6 @@ export const getPosts = async ({
 export const getPostDetail = async (slug: string) => {
   return await fetch(
     `${ENDPOINTS.COLLECTIONS}/vlogposts?fields=*.*.*.*&filter[slug][_eq]=${slug}`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
-};
-
-/**
- * Gets the number of total blog posts
- * @returns
- */
-export const getPostsTotal = async () => {
-  return await fetch(
-    `${ENDPOINTS.COLLECTIONS}/vlogposts?aggregate[count]=*&filter[status][_eq]=published`,
     {
       method: "GET",
       headers: {
@@ -307,8 +325,9 @@ export const getForumPosts = async ({
   search,
   sort,
   filter,
+  meta,
 }: DirectusParams) => {
-  let url = `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+  let url = `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}&meta=${meta}`;
 
   if (search) {
     url = `${url}&search=${search}`;
@@ -329,19 +348,29 @@ export const getForumPosts = async ({
 };
 
 /**
- * Gets the number of total forum posts
+ * Gets the data for the homepage
  * @returns
  */
-export const getForumTotal = async () => {
-  return await fetch(
-    `${ENDPOINTS.COLLECTIONS}/forum_posts?aggregate[count]=*&filter[status][_eq]=published`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+export const getHomeData = async () => {
+  return await fetch(`${ENDPOINTS.COLLECTIONS}/home_page?fields=*.*.*`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+/**
+ * Get a list of all categories
+ * @returns
+ */
+export const getCategories = async () => {
+  return await fetch(`${ENDPOINTS.COLLECTIONS}/categories?fields=*.*.*`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 };
 
 /**

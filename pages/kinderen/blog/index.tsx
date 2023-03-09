@@ -1,6 +1,4 @@
 import { Container, Grid } from "@mui/material";
-import { H1, P } from "../../../components/typography";
-import { Hero, Pagination } from "../../../components/layout";
 import React, { useEffect, useState } from "react";
 import {
   getContentTags,
@@ -16,14 +14,16 @@ import SortBar from "../../../components/form/SortBar/SortBar";
 import TagList from "../../../components/buttons/TagList/TagList";
 import parseImageURL from "../../../utils/parseImageURL";
 import { useTheme } from "styled-components";
+import { POST_PER_PAGE } from "../../../constants/app-configs";
+import { Hero, Pagination } from "../../../components/layout";
+import { H1, P } from "../../../components/typography";
 
-const postPerPage = 9;
 export const getServerSideProps = async () => {
   try {
     const pageReq = await getPostOverviewPageData();
     const tagsReq = await getContentTags();
     const blogsReq = await getPosts({
-      postPerPage,
+      postPerPage: POST_PER_PAGE,
       meta: "filter_count",
     });
 
@@ -86,7 +86,7 @@ export default function Forum({
     const getPaginatedBlogs = async () => {
       try {
         const req = await getPosts({
-          postPerPage,
+          postPerPage: POST_PER_PAGE,
           page: currentPage,
           search,
           sort,
@@ -114,7 +114,10 @@ export default function Forum({
           <Grid container>
             <Grid item xs={0} md={2} lg={3} />
             <Grid item xs={12} md={8} lg={6}>
-              <H1 style={{ textAlign: "center", padding: "0 24px" }}>
+              <H1
+                variant="bold"
+                style={{ textAlign: "center", padding: "0 24px" }}
+              >
                 {pageData?.page_title}
               </H1>
               <P variant="light" style={{ textAlign: "center" }}>
@@ -173,9 +176,9 @@ export default function Forum({
           </Grid>
         </Container>
 
-        {totalPosts / postPerPage > 2 && posts.length >= postPerPage && (
+        {totalCount / POST_PER_PAGE > 2 && posts.length >= POST_PER_PAGE && (
           <Pagination
-            total={Math.ceil(totalPosts / postPerPage)}
+            total={Math.ceil(totalCount / POST_PER_PAGE)}
             truncated
             onChange={changePage}
           />

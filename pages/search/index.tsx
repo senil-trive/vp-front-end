@@ -1,45 +1,19 @@
 import { Container, Grid } from "@mui/material";
 import { H1, P } from "../../components/typography";
+
+import { Hero } from "../../components/layout";
+import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import React, { useEffect, useState } from "react";
-import {
-  getForumPosts,
-  getLetters,
-  getPosts,
-  getPostsTotal,
-} from "../../utils/api";
+import SearchBar from "../../components/form/SearchBar/SearchBar";
+import SearchResultItem from "../../components/content-types/SearchResultItem/SearchResultItem";
+import { useRouter } from "next/router";
+import { POST_PER_PAGE } from "../../constants/app-configs";
+import { getForumPosts, getLetters, getPosts } from "../../utils/api";
 
 import { BlogType } from "../../types/content-types/Blog.type";
 import BriefItem from "../../components/content-types/BriefItem/BriefItem";
 import { ForumPostType } from "../../types/forumTypes";
-import { Hero } from "../../components/layout";
 import { Letter } from "../../types/content-types/Letter.type";
-import { POST_PER_PAGE } from "../../constants/app-configs";
-import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
-import SearchBar from "../../components/form/SearchBar/SearchBar";
-import SearchResultItem from "../../components/content-types/SearchResultItem/SearchResultItem";
-import { useRouter } from "next/router";
-
-// export const getServerSideProps = async () => {
-// try {
-//   const blogsReq = await getPosts({ postPerPage: POST_PER_PAGE });
-//   const countReq = await getPostsTotal();
-//   const blogRes = await blogsReq.json();
-//   const countRes = await countReq.json();
-//   return {
-//     props: {
-//       blogsData: blogRes.data,
-//       totalPosts: countRes.data[0].count,
-//     },
-//   };
-// } catch (error) {
-//   console.log(error);
-//   return {
-//     redirect: {
-//       destination: "/500",
-//     },
-//   };
-// }
-// };
 
 export default function Search() {
   const router = useRouter();
