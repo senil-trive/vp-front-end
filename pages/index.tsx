@@ -5,6 +5,7 @@ import {
   getCategories,
   getForumPosts,
   getHomeData,
+  getInstaPosts,
   getLetters,
   getPosts,
 } from "../utils/api";
@@ -18,15 +19,18 @@ import { POST_PER_PAGE } from "../constants/app-configs";
 import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
 import TagList from "../components/buttons/TagList/TagList";
 import { shuffle } from "../utils/feed-utils";
+import { InstaPost } from "../components/content-types/InstagramPost/InstagramPost";
 
 const generateFeed = ({
   blogs,
   letters,
   forum,
+  instagram,
 }: {
   blogs: BlogType[];
   letters: Letter[];
   forum: ForumPostType[];
+  instagram: InstaPost[];
 }) => {
   let res: FeedItem[] = [];
 
@@ -38,6 +42,9 @@ const generateFeed = ({
   });
   forum?.forEach((item) => {
     res.push({ type: "forum", content: item });
+  });
+  instagram?.forEach((item) => {
+    res.push({ type: "instagram", content: item });
   });
 
   // randomize content
@@ -71,6 +78,7 @@ export const getServerSideProps = async () => {
   try {
     const pageReq = await getHomeData();
     const blogsReq = await getPosts({ postPerPage: POST_PER_PAGE });
+    const instagramReq = await getInstaPosts({ postPerPage: POST_PER_PAGE });
     const forumReq = await getForumPosts({
       postPerPage: POST_PER_PAGE,
     });
@@ -81,6 +89,7 @@ export const getServerSideProps = async () => {
 
     const pageRes = await pageReq.json();
     const blogsRes = await blogsReq.json();
+    const instagramRes = await instagramReq.json();
     const forumRes = await forumReq.json();
     const lettersRes = await lettersReq.json();
     const categoriesRes = await categoriesReq.json();
@@ -92,6 +101,7 @@ export const getServerSideProps = async () => {
           blogs: blogsRes.data,
           forum: forumRes.data,
           letters: lettersRes.data,
+          instagram: instagramRes.data,
         }),
         categories: categoriesRes.data,
       },

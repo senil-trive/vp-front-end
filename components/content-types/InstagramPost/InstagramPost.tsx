@@ -3,8 +3,9 @@ import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 import Script from "next/script";
 
-type Props = {
-  embedCode: string;
+export type InstaPost = {
+  name?: string;
+  embed_code: string;
 };
 
 const StyledPost = styled.article`
@@ -55,17 +56,17 @@ const StyledPost = styled.article`
   }
 `;
 
-export default function InstagramPost({ embedCode }: Props) {
+export default function InstagramPost({ name, embed_code }: InstaPost) {
   const id = `ig-embed-${uuidv4()}`;
   // this regex will parse through the html block looking for a script tag, if it finds one, the value will be the src from the script
   // example: console.log(src) ---> "https://instagram.embed.js.com"
-  const scriptSRC = embedCode.match(/src="([^"]*)"/)?.[1];
+  const scriptSRC = embed_code.match(/src="([^"]*)"/)?.[1];
 
   return (
     <StyledPost>
       <div
         dangerouslySetInnerHTML={{
-          __html: embedCode,
+          __html: embed_code,
         }}
       />
       {scriptSRC && <Script src={scriptSRC} id={id} />}

@@ -10,7 +10,9 @@ import parseImageURL from "../../../utils/parseImageURL";
 import BlogItem from "../../content-types/BlogItem/BlogItem";
 import BriefItem from "../../content-types/BriefItem/BriefItem";
 import ForumPost from "../../content-types/ForumPost/ForumPost";
-import InstagramPost from "../../content-types/InstagramPost/InstagramPost";
+import InstagramPost, {
+  InstaPost,
+} from "../../content-types/InstagramPost/InstagramPost";
 import VideoItem from "../../content-types/VideoItem/VideoItem";
 import { VideoPropsType } from "../../content-types/VideoItem/VideoItem.types";
 import { HomeGridWrapper } from "./HomeGrid.styled";
@@ -117,11 +119,12 @@ export function HomeGrid({ feed = [] }: Props) {
                     </XBlock>
                   );
                 case "instagram":
-                  // TODO: replace with CMS content
+                  const instaContent = content as InstaPost;
+
                   return (
                     <XBlock key={index}>
                       <div className="grid-item">
-                        <InstagramPost embedCode={INSTA_EMBED_POST} />
+                        <InstagramPost embed_code={instaContent.embed_code} />
                       </div>
                     </XBlock>
                   );
@@ -130,7 +133,7 @@ export function HomeGrid({ feed = [] }: Props) {
                   return (
                     <XBlock key={index}>
                       <div className="grid-item">
-                        <InstagramPost embedCode={INSTA_EMBED_POST} />
+                        <InstagramPost embed_code={INSTA_EMBED_POST} />
                       </div>
                     </XBlock>
                   );
