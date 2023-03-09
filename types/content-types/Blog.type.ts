@@ -6,7 +6,7 @@ import { ContentStatus } from "./Status.type";
 
 export type BlogType = {
   author: string;
-  categories: { categories_id: CategoryType }[];
+  categories: { categories_id?: CategoryType }[];
   content?: string;
   date_created: string;
   date_updated: string;

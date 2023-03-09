@@ -82,7 +82,7 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
           <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16">
             {pageData?.categories[0] && (
               <Tag variant="dark" size="m">
-                <>{pageData?.categories[0].categories_id.name}</>
+                <>{pageData?.categories[0]?.categories_id?.name}</>
               </Tag>
             )}
             {pageData?.author && <P>{pageData.author}:</P>}
@@ -136,7 +136,8 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
                     content={post.related_vlogposts_id.content}
                     postDate={new Date(post.related_vlogposts_id.date_created)}
                     category={
-                      post.related_vlogposts_id.categories[0].categories_id.name
+                      post.related_vlogposts_id.categories[0]?.categories_id
+                        ?.name
                     }
                     title={post.related_vlogposts_id.title}
                   />

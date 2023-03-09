@@ -198,7 +198,7 @@ export const postLetterSubscription = async (data: any) => {
  */
 export const getPostOverviewPageData = async () => {
   return await fetch(
-    `${ENDPOINTS.COLLECTIONS}/blog_overview_page?fields=*.*.*`,
+    `${ENDPOINTS.COLLECTIONS}/blog_overview_page?fields=*.*.*.*`,
     {
       method: "GET",
       headers: {
@@ -223,6 +223,40 @@ export const getPosts = async ({
   filter,
 }: DirectusParams) => {
   let url = `${ENDPOINTS.COLLECTIONS}/vlogposts?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+
+  if (search) {
+    url = `${url}&search=${search}`;
+  }
+  if (sort) {
+    url = `${url}&sort=${sort}`;
+  }
+  if (filter) {
+    url = `${url}&${filter}`;
+  }
+
+  return await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+/**
+ * Gets a list of blog posts
+ * @param postPerPage the amount of posts to be shown per page
+ * @param page the current paginated page
+ * @param query the search query
+ * @returns
+ */
+export const getInstaPosts = async ({
+  postPerPage,
+  page = 1,
+  search,
+  sort,
+  filter,
+}: DirectusParams) => {
+  let url = `${ENDPOINTS.COLLECTIONS}/instagram_embeds?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
 
   if (search) {
     url = `${url}&search=${search}`;
@@ -338,6 +372,33 @@ export const getForumTotal = async () => {
       },
     }
   );
+};
+
+/**
+<<<<<<< HEAD
+ * Gets the data for the homepage
+ * @returns
+ */
+export const getHomeData = async () => {
+  return await fetch(`${ENDPOINTS.COLLECTIONS}/home_page?fields=*.*.*`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+/**
+ * Get a list of all categories
+ * @returns
+ */
+export const getCategories = async () => {
+  return await fetch(`${ENDPOINTS.COLLECTIONS}/categories?fields=*.*.*`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 };
 
 /**

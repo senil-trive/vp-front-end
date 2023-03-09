@@ -3,15 +3,8 @@ import React, { useRef, useState } from "react";
 
 import IconButton from "../../buttons/IconButton/IconButton";
 import { IoIosPlay } from "react-icons/io";
-import Tag from "../../buttons/Tag/Tag";
 import styled from "styled-components";
-
-type Props = {
-  title?: string;
-  subtitle?: string;
-  src: string;
-  poster?: string;
-};
+import { VideoPropsType } from "./VideoItem.types";
 
 const StyledFigure = styled.figure`
   background: #b8b8b8;
@@ -69,7 +62,7 @@ export default function VideoItem({
   subtitle,
   poster,
   src = placeholderUrl,
-}: Props) {
+}: VideoPropsType) {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const videoRef = useRef() as React.MutableRefObject<HTMLVideoElement>;
