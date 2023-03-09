@@ -11,16 +11,12 @@ import SortBar from "../../../components/form/SortBar/SortBar";
 import { Hero, Pagination } from "../../../components/layout";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import { H1, P } from "../../../components/typography";
-import ColorSpan from "../../../components/typography/ColorSpan/ColorSpan";
 import { POST_PER_PAGE } from "../../../constants/app-configs";
-import ENDPOINTS from "../../../constants/endpoints";
-import { FEED_TAGS } from "../../../constants/mockData";
-import { ForumPostType } from "../../../types/forumTypes";
 import { ForumPageProps } from "../../../types/pageTypes";
 import {
+  getContentTags,
   getForumOverviewPageData,
   getForumPosts,
-  getForumTotal,
 } from "../../../utils/api";
 
 const forumSortOptions = [
@@ -35,18 +31,22 @@ const forumSortOptions = [
 export const getServerSideProps = async () => {
   try {
     const pageReq = await getForumOverviewPageData();
-    const forumReq = await getForumPosts({ postPerPage: POST_PER_PAGE });
-    const countReq = await getForumTotal();
+    const tagsReq = await getContentTags();
+    const forumReq = await getForumPosts({
+      postPerPage: POST_PER_PAGE,
+      meta: "filter_count",
+    });
 
     const pageRes = await pageReq.json();
     const forumRes = await forumReq.json();
-    const countRes = await countReq.json();
+    const tagsRes = await tagsReq.json();
 
     return {
       props: {
         pageData: pageRes.data,
         forumData: forumRes.data,
-        totalPosts: countRes.data[0].count,
+        totalPosts: forumRes.meta.filter_count,
+        tags: tagsRes.data,
       },
     };
   } catch (error) {
@@ -64,10 +64,14 @@ export default function Forum({
   pageData,
   forumData,
   totalPosts,
+  tags,
 }: ForumPageProps) {
   const { colors } = useTheme();
+
+  const [posts, setPosts] = useState(forumData);
   const [isLoading, setIsLoading] = useState(false);
-  const [posts, setPosts] = useState<ForumPostType[]>(forumData);
+  const [totalCount, setTotalCount] = useState(totalPosts);
+  const [selectedTag, setSelectedTag] = useState<string>("");
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
@@ -98,10 +102,16 @@ export default function Forum({
           page: currentPage,
           search,
           sort,
+          meta: "filter_count",
+          filter:
+            selectedTag.length > 0
+              ? `filter={"categories": { "categories_id": { "id": { "_eq": "${selectedTag}"}}}}`
+              : ``,
         });
         const res = await req.json();
 
         setPosts(res.data);
+        setTotalCount(res.meta.filter_count || 0);
       } catch (error) {
         console.log(error);
       }
@@ -110,7 +120,7 @@ export default function Forum({
     };
 
     getPaginatedPost();
-  }, [currentPage, search, sort]);
+  }, [currentPage, search, sort, selectedTag]);
 
   return (
     <PageWrapper title="Forum overzicht">
@@ -119,7 +129,10 @@ export default function Forum({
           <Grid container>
             <Grid item xs={0} md={2} lg={3} />
             <Grid item xs={12} md={8} lg={6}>
-              <H1 style={{ textAlign: "center", padding: "0 24px" }}>
+              <H1
+                variant="bold"
+                style={{ textAlign: "center", padding: "0 24px" }}
+              >
                 {pageData?.page_title}
               </H1>
               <P variant="light">{pageData?.page_subtitle}</P>
@@ -142,7 +155,13 @@ export default function Forum({
         <Container style={{ marginBottom: 56 }}>
           <Grid container style={{ marginBottom: "32px" }}>
             <Grid item xs={12}>
-              <TagList tags={FEED_TAGS} />
+              <TagList
+                tags={tags}
+                selected={selectedTag}
+                onSelect={(x: string) => {
+                  setSelectedTag(x);
+                }}
+              />
             </Grid>
           </Grid>
         </Container>
@@ -157,7 +176,7 @@ export default function Forum({
               <>
                 <Grid item xs={12} md={9}>
                   <P style={{ color: colors.primary }}>
-                    {search ? posts.length : totalPosts} forum post
+                    {totalCount} forum post
                   </P>
                 </Grid>
                 <Grid item xs={12} md={3}>
@@ -183,9 +202,9 @@ export default function Forum({
           </Grid>
         </Container>
 
-        {totalPosts / POST_PER_PAGE > 2 && (
+        {totalCount / POST_PER_PAGE > 2 && (
           <Pagination
-            total={Math.ceil(totalPosts / POST_PER_PAGE)}
+            total={Math.ceil(totalCount / POST_PER_PAGE)}
             truncated
             onChange={changePage}
           />
