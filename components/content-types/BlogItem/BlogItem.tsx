@@ -1,7 +1,6 @@
-import { H3, P, TitleWithHighlights } from "../../typography";
+import { H4, P } from "../../typography";
 
 import Button from "../../buttons/Button";
-/* eslint-disable @next/next/no-img-element */
 import Card from "../../card/Card";
 import CardFooter from "../../card/CardFooter/CardFooter";
 import CardHeader from "../../card/CardHeader/CardHeader";
@@ -88,7 +87,7 @@ export default function BlogItem({
     <Card variant={type}>
       {generateMediaItem()}
       <CardFooter>
-        <H3>{title}</H3>
+        <H4 variant="bold">{title}</H4>
 
         <P style={{ marginBottom: 56, marginTop: 12 }}>
           {content ? truncate(content, 200) : ""}
