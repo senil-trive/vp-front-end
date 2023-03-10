@@ -12,10 +12,37 @@ type Props = {
 };
 
 const StyledWrapper = styled.div`
-  padding: 15px 41px;
+  padding: 15px 0;
   background-color: ${({ theme }) => theme.colors.secondary};
+
   p {
     color: ${({ theme }) => theme.colors.white};
+  }
+
+  .search-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    p {
+      width: 100%;
+    }
+    > div {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+
+  @media ${({ theme }) => theme.devices.laptop} {
+    .search-wrapper {
+      p {
+        width: initial;
+      }
+
+      > div {
+        margin-left: 12px;
+      }
+    }
   }
 `;
 
@@ -26,19 +53,22 @@ export default function CollectionSearchBar({
 }: Props) {
   return (
     <StyledWrapper>
-      <Grid container className="flex items-center justify-between flex-wrap">
-        <Grid item xs={12} md={8}>
-          <P variant="italic" style={{ fontWeight: 300 }}>
-            <q>{quote}</q>
-          </P>
+      <Container>
+        <Grid container className="flex items-center justify-between flex-wrap">
+          <Grid item xs={12} md={8}>
+            <P variant="italic" style={{ fontWeight: 300 }}>
+              <q>{quote}</q>
+            </P>
+          </Grid>
+          <Grid item xs={12} md={4} className="search-wrapper">
+            <SearchBar
+              iconColor="tertiary"
+              placeholder={searchLabel}
+              onSearch={onSearch}
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={4} className="flex justify-end">
-          <P variant="light" style={{ marginRight: 32 }}>
-            {searchLabel}
-          </P>
-          <SearchBar onSearch={onSearch} />
-        </Grid>
-      </Grid>
+      </Container>
     </StyledWrapper>
   );
 }

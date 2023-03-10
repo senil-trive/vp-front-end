@@ -6,17 +6,16 @@ import {
   getPosts,
 } from "../../../utils/api";
 
-import BlogItem from "../../../components/content-types/BlogItem/BlogItem";
 import { BlogPageProps } from "../../../types/pageTypes";
 import CollectionSearchBar from "../../../components/form/CollectionSearchBar/CollectionSearchBar";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import SortBar from "../../../components/form/SortBar/SortBar";
 import TagList from "../../../components/buttons/TagList/TagList";
-import parseImageURL from "../../../utils/parseImageURL";
 import { useTheme } from "styled-components";
 import { POST_PER_PAGE } from "../../../constants/app-configs";
 import { Hero, Pagination } from "../../../components/layout";
-import { H1, P } from "../../../components/typography";
+import { H1, P, TitleWithHighlights } from "../../../components/typography";
+import { MasonryGrid } from "../../../components/layout/MasonryGrid/MasonryGrid";
 
 export const getServerSideProps = async () => {
   try {
@@ -114,12 +113,11 @@ export default function Forum({
           <Grid container>
             <Grid item xs={0} md={2} lg={3} />
             <Grid item xs={12} md={8} lg={6}>
-              <H1
-                variant="bold"
+              <TitleWithHighlights
+                text={pageData?.page_title ?? ""}
                 style={{ textAlign: "center", padding: "0 24px" }}
-              >
-                {pageData?.page_title}
-              </H1>
+                textToHighlight={["Blog", "Vlogs"]}
+              />
               <P variant="light" style={{ textAlign: "center" }}>
                 {pageData?.page_subtitle}
               </P>
@@ -130,51 +128,36 @@ export default function Forum({
       </Hero>
 
       <main style={{ marginBottom: "80px" }}>
-        <Container style={{ marginBottom: 56 }}>
-          <Grid container style={{ marginBottom: "32px" }}>
-            <Grid item xs={12}>
-              <TagList
-                tags={tags}
-                selected={selectedTag}
-                onSelect={(x: string) => {
-                  setSelectedTag(x);
-                }}
-              />
-            </Grid>
-          </Grid>
-        </Container>
+        <TagList
+          tags={tags}
+          selected={selectedTag}
+          onSelect={(x: string) => {
+            setSelectedTag(x);
+          }}
+        />
 
         <CollectionSearchBar
           quote={pageData?.search_bar_quote ?? ""}
           onSearch={handleSearch}
         />
-        <Container style={{ margin: "56px auto" }}>
-          <Grid container spacing={"34px"}>
-            <Grid item xs={12} md={9}>
-              <P style={{ color: colors.primary }}>
-                {totalCount} blogs en vlogs
-              </P>
-            </Grid>
-            <Grid item xs={12} md={3}>
-              <SortBar onSort={handleSort} />
-            </Grid>
-            {posts.map((item, index) => (
-              <Grid key={index} item xs={12} md={4}>
-                <BlogItem
-                  mediaSrc={item?.image?.id ? parseImageURL(item.image.id) : ""}
-                  embedSrc={item.youtube_embed}
-                  link={`blog/${item.slug}`}
-                  type={item.type}
-                  author={item.author}
-                  content={item.content}
-                  postDate={new Date(item.date_created)}
-                  category={item.categories?.[0]?.categories_id?.name}
-                  title={item.title}
-                />
+
+        <div style={{ margin: "56px auto" }}>
+          <Container style={{ marginBottom: "38px" }}>
+            <Grid container spacing={"31px"}>
+              <Grid item xs={12} md={9}>
+                <P style={{ color: colors.primary }}>
+                  {totalCount} blogs en vlogs
+                </P>
               </Grid>
-            ))}
-          </Grid>
-        </Container>
+              <Grid item xs={12} md={3}>
+                <SortBar onSort={handleSort} />
+              </Grid>
+            </Grid>
+          </Container>
+          <MasonryGrid
+            feed={posts.map((item) => ({ type: "blog", content: item }))}
+          />
+        </div>
 
         {totalCount / POST_PER_PAGE > 2 && posts.length >= POST_PER_PAGE && (
           <Pagination

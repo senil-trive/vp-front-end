@@ -281,6 +281,40 @@ export const getInstaPosts = async ({
 };
 
 /**
+ * Gets a list of blog posts
+ * @param postPerPage the amount of posts to be shown per page
+ * @param page the current paginated page
+ * @param query the search query
+ * @returns
+ */
+export const getTikTokPosts = async ({
+  postPerPage,
+  page = 1,
+  search,
+  sort,
+  filter,
+}: DirectusParams) => {
+  let url = `${ENDPOINTS.COLLECTIONS}/tiktok_embed?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+
+  if (search) {
+    url = `${url}&search=${search}`;
+  }
+  if (sort) {
+    url = `${url}&sort=${sort}`;
+  }
+  if (filter) {
+    url = `${url}&${filter}`;
+  }
+
+  return await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+/**
  * Get the post detail base on the slug
  * @param slug the post slug
  * @returns

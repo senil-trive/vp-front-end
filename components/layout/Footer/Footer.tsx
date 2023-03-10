@@ -140,27 +140,57 @@ export default function Footer() {
               <H3 variant="bold">Socials</H3>
               {!!companyInfo?.instagram_url && (
                 <P>
-                  <a href={companyInfo.instagram_url}>Instagram</a>
+                  <a
+                    href={companyInfo.instagram_url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Instagram
+                  </a>
                 </P>
               )}
               {!!companyInfo?.twitter_url && (
                 <P>
-                  <a href={companyInfo.twitter_url}>Twitter</a>
+                  <a
+                    href={companyInfo.twitter_url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Twitter
+                  </a>
                 </P>
               )}
               {!!companyInfo?.linkedin_url && (
                 <P>
-                  <a href={companyInfo.linkedin_url}>Linkedin</a>
+                  <a
+                    href={companyInfo.linkedin_url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Linkedin
+                  </a>
                 </P>
               )}
               {!!companyInfo?.facebook_url && (
                 <P>
-                  <a href={companyInfo.facebook_url}>Facebook</a>
+                  <a
+                    href={companyInfo.facebook_url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Facebook
+                  </a>
                 </P>
               )}
               {!!companyInfo?.tiktok_url && (
                 <P>
-                  <a href={companyInfo.tiktok_url}>Tiktok</a>
+                  <a
+                    href={companyInfo.tiktok_url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Tiktok
+                  </a>
                 </P>
               )}
             </Grid>

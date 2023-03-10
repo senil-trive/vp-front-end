@@ -3,89 +3,107 @@ import { H1, H2, H3, H4, H5, H6 } from ".";
 import React from "react";
 import { useTheme } from "styled-components";
 import { ColorType } from "../../types/colorTypes";
+import parseHTMLtoReact from "../../utils/parseHTMLtoReact";
 
 interface TitleWithHighlightsProps {
   text: string;
-  textToHighlight?: string;
-  headerElement: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
-  color: ColorType;
-  highlightColor: "info" | "tertiary";
+  textToHighlight?: string | string[];
+  headerElement?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+  color?: ColorType;
+  highlightColor?: "info" | "tertiary";
+  style?: React.CSSProperties;
+}
+
+function regexReplace(
+  text: string,
+  searchString: string,
+  highlightColor: string
+) {
+  const regex = new RegExp(`${searchString}`, "gi");
+
+  return text.replace(
+    regex,
+    `<span
+        className="font-heading"
+        style="color: ${highlightColor}; fontWeight: bold" }}
+      >
+        $&
+      </span>`
+  );
 }
 
 const TitleWithHighlights: React.FC<TitleWithHighlightsProps> = ({
   text,
   textToHighlight,
-  headerElement,
+  headerElement = "h1",
   color = "black",
   highlightColor = "info",
+  style,
 }) => {
   const theme = useTheme();
-  const parts = textToHighlight ? text.split(textToHighlight) : [text];
+  let newText = text;
 
-  const HeaderComponent = () => {
-    const Text: React.FC = () => {
-      return (
-        <>
-          {parts[0]}{" "}
-          <span
-            className="font-heading"
-            style={{ color: theme.colors[highlightColor], fontWeight: "bold" }}
-          >
-            {textToHighlight}
-          </span>
-          {parts[1]}
-        </>
+  if (textToHighlight && Array.isArray(textToHighlight)) {
+    textToHighlight.forEach((highlight) => {
+      newText = regexReplace(
+        newText,
+        highlight ?? "",
+        theme.colors[highlightColor]
       );
-    };
+    });
+  } else {
+    newText = regexReplace(
+      newText,
+      textToHighlight ?? "",
+      theme.colors[highlightColor]
+    );
+  }
 
-    switch (headerElement) {
-      case "h1":
-        return (
-          <H1 color={color} variant="bold">
-            <Text />
-          </H1>
-        );
-      case "h2":
-        return (
-          <H2 color={color} variant="bold">
-            <Text />
-          </H2>
-        );
-      case "h3":
-        return (
-          <H3 color={color} variant="bold">
-            <Text />
-          </H3>
-        );
-      case "h4":
-        return (
-          <H4 color={color} variant="bold">
-            <Text />
-          </H4>
-        );
-      case "h5":
-        return (
-          <H5 color={color} variant="bold">
-            <Text />
-          </H5>
-        );
-      case "h6":
-        return (
-          <H6 color={color} variant="bold">
-            <Text />
-          </H6>
-        );
+  switch (headerElement) {
+    case "h1":
+      return (
+        <H1 color={color} variant="bold" style={style}>
+          <>{parseHTMLtoReact(newText)}</>
+        </H1>
+      );
+    case "h2":
+      return (
+        <H2 color={color} variant="bold" style={style}>
+          <>{parseHTMLtoReact(newText)}</>
+        </H2>
+      );
+    case "h3":
+      return (
+        <H3 color={color} variant="bold" style={style}>
+          <>{parseHTMLtoReact(newText)}</>
+        </H3>
+      );
+    case "h4":
+      return (
+        <H4 color={color} variant="bold" style={style}>
+          <>{parseHTMLtoReact(newText)}</>
+        </H4>
+      );
+    case "h5":
+      return (
+        <H5 color={color} variant="bold" style={style}>
+          <>{parseHTMLtoReact(newText)}</>
+        </H5>
+      );
+    case "h6":
+      return (
+        <H6 color={color} variant="bold" style={style}>
+          <>{parseHTMLtoReact(newText)}</>
+        </H6>
+      );
 
-      default:
-        return (
-          <H1 color={color} variant="bold">
-            <Text />
-          </H1>
-        );
-    }
-  };
-
-  return <HeaderComponent />;
+    default:
+      return (
+        <H1 color={color} variant="bold" style={style}>
+          <>{parseHTMLtoReact(newText)}</>
+        </H1>
+      );
+  }
 };
 
 export default TitleWithHighlights;

@@ -1,4 +1,7 @@
-import { FeedItem, HomeGrid } from "../components/layout/HomeGrid/HomeGrid";
+import {
+  FeedItem,
+  MasonryGrid,
+} from "../components/layout/MasonryGrid/MasonryGrid";
 import { Grid, Hero } from "../components/layout";
 import { H1, P } from "../components/typography";
 import {
@@ -6,6 +9,7 @@ import {
   getForumPosts,
   getHomeData,
   getInstaPosts,
+  getTikTokPosts,
   getLetters,
   getPosts,
 } from "../utils/api";
@@ -20,17 +24,20 @@ import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
 import TagList from "../components/buttons/TagList/TagList";
 import { shuffle } from "../utils/feed-utils";
 import { InstaPost } from "../components/content-types/InstagramPost/InstagramPost";
+import { TikTokPostProps } from "../components/content-types/TikTokPost/TikTokPost";
 
 const generateFeed = ({
   blogs,
   letters,
   forum,
   instagram,
+  tiktok,
 }: {
   blogs: BlogType[];
   letters: Letter[];
   forum: ForumPostType[];
   instagram: InstaPost[];
+  tiktok: TikTokPostProps[];
 }) => {
   let res: FeedItem[] = [];
 
@@ -45,6 +52,9 @@ const generateFeed = ({
   });
   instagram?.forEach((item) => {
     res.push({ type: "instagram", content: item });
+  });
+  tiktok?.forEach((item) => {
+    res.push({ type: "tiktok", content: item });
   });
 
   // randomize content
@@ -62,7 +72,7 @@ const generateFeed = ({
   });
 
   // Add a video item to 4th place
-  res.splice(3, 0, {
+  res.splice(5, 0, {
     type: "video",
     content: {
       title: "Video 2",
@@ -79,6 +89,7 @@ export const getServerSideProps = async () => {
     const pageReq = await getHomeData();
     const blogsReq = await getPosts({ postPerPage: POST_PER_PAGE });
     const instagramReq = await getInstaPosts({ postPerPage: POST_PER_PAGE });
+    const tiktokReq = await getTikTokPosts({ postPerPage: POST_PER_PAGE });
     const forumReq = await getForumPosts({
       postPerPage: POST_PER_PAGE,
     });
@@ -90,6 +101,7 @@ export const getServerSideProps = async () => {
     const pageRes = await pageReq.json();
     const blogsRes = await blogsReq.json();
     const instagramRes = await instagramReq.json();
+    const tiktokRes = await tiktokReq.json();
     const forumRes = await forumReq.json();
     const lettersRes = await lettersReq.json();
     const categoriesRes = await categoriesReq.json();
@@ -102,6 +114,7 @@ export const getServerSideProps = async () => {
           forum: forumRes.data,
           letters: lettersRes.data,
           instagram: instagramRes.data,
+          tiktok: tiktokRes.data,
         }),
         categories: categoriesRes.data,
       },
@@ -158,7 +171,7 @@ export default function Home({ pageData, categories, feed }: HomePageProps) {
           </Grid>
         </Container>
 
-        <HomeGrid feed={feed} />
+        <MasonryGrid feed={feed} />
       </main>
     </PageWrapper>
   );

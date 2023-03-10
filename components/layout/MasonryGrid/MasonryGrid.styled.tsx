@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const HomeGridWrapper = styled.div`
+export const MasonryGridWrapper = styled.div`
   margin-bottom: 32px;
 
   .grid-item {
