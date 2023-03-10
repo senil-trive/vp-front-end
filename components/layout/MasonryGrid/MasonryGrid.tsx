@@ -12,6 +12,9 @@ import ForumPost from "../../content-types/ForumPost/ForumPost";
 import InstagramPost, {
   InstaPost,
 } from "../../content-types/InstagramPost/InstagramPost";
+import TikTokPost, {
+  TikTokPostProps,
+} from "../../content-types/TikTokPost/TikTokPost";
 import VideoItem from "../../content-types/VideoItem/VideoItem";
 import { VideoPropsType } from "../../content-types/VideoItem/VideoItem.types";
 import { MasonryGridWrapper } from "./MasonryGrid.styled";
@@ -19,7 +22,7 @@ import { MasonryGridWrapper } from "./MasonryGrid.styled";
 export type FeedItem = {
   type: "letter" | "blog" | "forum" | "video" | "instagram" | "tiktok";
   cols?: number;
-  content: Letter | BlogType | ForumPostType | VideoPropsType | {};
+  content: Letter | BlogType | ForumPostType | VideoPropsType | TikTokPostProps;
 };
 
 type Props = {
@@ -139,10 +142,11 @@ export function MasonryGrid({ feed = [] }: Props) {
                 );
               case "tiktok":
                 // TODO: replace with CMS content
+                const tiktokContent = content as TikTokPostProps;
                 return (
                   <XBlock key={index}>
                     <div className="grid-item">
-                      <InstagramPost embed_code={INSTA_EMBED_POST} />
+                      <TikTokPost embed_code={tiktokContent.embed_code} />
                     </div>
                   </XBlock>
                 );
