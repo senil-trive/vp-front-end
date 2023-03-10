@@ -45,7 +45,7 @@ export function MasonryGrid({ feed = [] }: Props) {
 
   return (
     <MasonryGridWrapper>
-      <Container>
+      <Container style={{ padding: " 0 13px" }}>
         <XMasonry maxColumns={3} targetBlockWidth={1200 / 3}>
           {feed.map((item, index) => {
             const { content } = item;
