@@ -95,7 +95,7 @@ export default function BlogItem({
 
         <div className="flex items-center justify-between pb-[56px]">
           <P variant="bold">{author}</P>
-          <P>{format(postDate, "dd/mm/yyyy")}</P>
+          <P variant="light">{format(postDate, "dd/mm/yyyy")}</P>
         </div>
         <Button variant="secondary" href={link}>
           {type == "vlog" ? "Vlog bekijken" : "Blog lezen"}
