@@ -92,7 +92,7 @@ export default function Forum({
           meta: "filter_count",
           filter:
             selectedTag.length > 0
-              ? `filter[categories][categories_id][id][_eq]=${selectedTag}`
+              ? `filter={"categories": { "categories_id": { "id": { "_eq": "${selectedTag}"}}}}`
               : ``,
         });
         const res = await req.json();

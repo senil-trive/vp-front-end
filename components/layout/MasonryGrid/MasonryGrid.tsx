@@ -38,7 +38,9 @@ export function MasonryGrid({ feed = [] }: Props) {
   if (loading) {
     return (
       <MasonryGridWrapper>
-        <Container>{loading && <p>loading...</p>}</Container>
+        <Container>
+          <p>loading...</p>
+        </Container>
       </MasonryGridWrapper>
     );
   }
@@ -101,8 +103,6 @@ export function MasonryGrid({ feed = [] }: Props) {
 
               case "blog":
                 const blogContent = content as BlogType;
-
-                console.log(blogContent);
 
                 return (
                   <XBlock key={index}>
