@@ -93,7 +93,7 @@ export default function Forum({
           meta: "filter_count",
           filter:
             selectedTag.length > 0
-              ? `filter={"categories": { "categories_id": { "id": { "_eq": "${selectedTag}"}}}}`
+              ? `filter[categories][categories_id][id][_eq]=${selectedTag}`
               : ``,
         });
         const res = await req.json();
@@ -130,19 +130,13 @@ export default function Forum({
       </Hero>
 
       <main style={{ marginBottom: "80px" }}>
-        <Container style={{ marginBottom: 21 }}>
-          <Grid container>
-            <Grid item xs={12}>
-              <TagList
-                tags={tags}
-                selected={selectedTag}
-                onSelect={(x: string) => {
-                  setSelectedTag(x);
-                }}
-              />
-            </Grid>
-          </Grid>
-        </Container>
+        <TagList
+          tags={tags}
+          selected={selectedTag}
+          onSelect={(x: string) => {
+            setSelectedTag(x);
+          }}
+        />
 
         <CollectionSearchBar
           quote={pageData?.search_bar_quote ?? ""}
