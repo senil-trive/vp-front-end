@@ -1,4 +1,4 @@
-import { FeedItem } from "../components/layout/HomeGrid/HomeGrid";
+import { FeedItem } from "../components/layout/MasonryGrid/MasonryGrid";
 import { CategoryType } from "./categoryTypes";
 import { BlogType } from "./content-types/Blog.type";
 import { ForumPostType } from "./forumTypes";

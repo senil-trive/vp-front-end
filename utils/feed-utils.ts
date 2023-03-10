@@ -1,4 +1,4 @@
-import { FeedItem } from "../components/layout/HomeGrid/HomeGrid";
+import { FeedItem } from "../components/layout/MasonryGrid/MasonryGrid";
 
 /**
  * Randomizes the order of the feed

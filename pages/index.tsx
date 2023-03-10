@@ -1,4 +1,7 @@
-import { FeedItem, HomeGrid } from "../components/layout/HomeGrid/HomeGrid";
+import {
+  FeedItem,
+  MasonryGrid,
+} from "../components/layout/MasonryGrid/MasonryGrid";
 import { Grid, Hero } from "../components/layout";
 import { H1, P } from "../components/typography";
 import {
@@ -158,7 +161,7 @@ export default function Home({ pageData, categories, feed }: HomePageProps) {
           </Grid>
         </Container>
 
-        <HomeGrid feed={feed} />
+        <MasonryGrid feed={feed} />
       </main>
     </PageWrapper>
   );
