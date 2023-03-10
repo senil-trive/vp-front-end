@@ -11,6 +11,7 @@ import { truncate } from "../../../utils/truncate";
 import { format } from "date-fns";
 import YoutubePlayer from "../../media/YoutubePlayer";
 import Image from "next/image";
+import { useTheme } from "styled-components";
 
 type Props = {
   type: "blog" | "vlog";
@@ -36,6 +37,8 @@ export default function BlogItem({
   author,
   postDate,
 }: Props) {
+  const { colors } = useTheme();
+
   const generateMediaItem = () => {
     let Child = null;
 
@@ -68,7 +71,12 @@ export default function BlogItem({
         <>
           {Child}
           {!!category && (
-            <Tag variant="dark" size="m" position="bl">
+            <Tag
+              variant="dark"
+              size="m"
+              position="bl"
+              style={{ backgroundColor: colors.info, borderColor: colors.info }}
+            >
               <>{category}</>
             </Tag>
           )}
