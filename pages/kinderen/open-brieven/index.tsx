@@ -110,7 +110,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                   imageAlt={pageData?.highlighted_letter?.title}
                   showButton={true}
                   buttonLabel={"Download de brief"}
-                  buttonURL={`/open-brieven/${pageData?.highlighted_letter?.slug}`}
+                  buttonURL={`/kinderen/open-brieven/${pageData?.highlighted_letter?.slug}`}
                 />
               )}
             </Container>
@@ -134,7 +134,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                     titleHighlighted={letter.title_highlighted}
                     content={letter.description}
                     imgSrc={parseImageURL(letter.image?.id)}
-                    fileSrc={`/open-brieven/${letter.slug}`}
+                    fileSrc={`/kinderen/open-brieven/${letter.slug}`}
                   />
                 ))}
               </div>

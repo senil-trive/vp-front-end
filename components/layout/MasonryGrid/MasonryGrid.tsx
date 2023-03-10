@@ -78,7 +78,7 @@ export function MasonryGrid({ feed = [] }: Props) {
                         titleHighlighted={letterContent.title_highlighted}
                         content={letterContent.description}
                         imgSrc={parseImageURL(letterContent?.image?.id)}
-                        fileSrc={`/open-brieven/${letterContent.slug}`}
+                        fileSrc={`/kinderen/open-brieven/${letterContent.slug}`}
                       />
                     </div>
                   </XBlock>
@@ -114,7 +114,7 @@ export function MasonryGrid({ feed = [] }: Props) {
                             : ""
                         }
                         embedSrc={blogContent.youtube_embed}
-                        link={`blog/${blogContent.slug}`}
+                        link={`/kinderen/blog/${blogContent.slug}`}
                         type={blogContent.type}
                         author={blogContent.author}
                         content={blogContent.content}

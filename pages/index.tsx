@@ -65,7 +65,7 @@ const generateFeed = ({
   });
 
   // Add a video item to 4th place
-  res.splice(3, 0, {
+  res.splice(5, 0, {
     type: "video",
     content: {
       title: "Video 2",
