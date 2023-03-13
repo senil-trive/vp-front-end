@@ -56,7 +56,6 @@ export default function Forum({
   tags,
 }: BlogPageProps) {
   const { colors } = useTheme();
-  // const { query, push } = useRouter(); // TODO: also the pagination and search through url query
   const [posts, setPosts] = useState(blogsData);
   const [totalCount, setTotalCount] = useState(totalPosts);
   const [selectedTag, setSelectedTag] = useState<string>("");
