@@ -152,6 +152,18 @@ export const getCompanyInfo = async () => {
 };
 
 /**
+ * Gets the home page details
+ */
+export const getHomePageData = async () => {
+  return await fetch(`${ENDPOINTS.COLLECTIONS}/home_page?fields=*.*.*`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+/**
  * Get a list of all published open letters
  * @returns
  */

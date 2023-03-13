@@ -1,9 +1,9 @@
 import { H1, H2, H3, H4, H5, H6 } from ".";
 
-import React from "react";
-import { useTheme } from "styled-components";
 import { ColorType } from "../../types/colorTypes";
+import React from "react";
 import parseHTMLtoReact from "../../utils/parseHTMLtoReact";
+import { useTheme } from "styled-components";
 
 interface TitleWithHighlightsProps {
   text: string;

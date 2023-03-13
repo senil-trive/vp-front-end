@@ -9,22 +9,22 @@ import {
   getForumPosts,
   getHomeData,
   getInstaPosts,
-  getTikTokPosts,
   getLetters,
   getPosts,
+  getTikTokPosts,
 } from "../utils/api";
 
 import { BlogType } from "../types/content-types/Blog.type";
 import { Container } from "@mui/material";
 import { ForumPostType } from "../types/forumTypes";
 import { HomePageProps } from "../types/pageTypes";
+import { InstaPost } from "../components/content-types/InstagramPost/InstagramPost";
 import { Letter } from "../types/content-types/Letter.type";
 import { POST_PER_PAGE } from "../constants/app-configs";
 import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
 import TagList from "../components/buttons/TagList/TagList";
-import { shuffle } from "../utils/feed-utils";
-import { InstaPost } from "../components/content-types/InstagramPost/InstagramPost";
 import { TikTokPostProps } from "../components/content-types/TikTokPost/TikTokPost";
+import { shuffle } from "../utils/feed-utils";
 
 const generateFeed = ({
   blogs,
@@ -133,7 +133,7 @@ export const getServerSideProps = async () => {
 export default function Home({ pageData, categories, feed }: HomePageProps) {
   return (
     <PageWrapper
-      title="Leeg je hoofd, lucht je hart"
+      title={pageData?.page_title}
       description="Praten, lachen, klagen of huilen omdat je ouders uit elkaar zijn kan hier bij Villa Pinedo. Stel jouw vragen aan anderen die begrijpen wat jij meemaakt en deel wat er in jouw hoofd en hart omgaat."
     >
       <Hero>
@@ -157,7 +157,7 @@ export default function Home({ pageData, categories, feed }: HomePageProps) {
         </Container>
       </Hero>
       <main>
-        <Container>
+        <Container maxWidth="xl">
           <Grid container style={{ marginBottom: "32px" }}>
             <Grid item xs={12}>
               <TagList

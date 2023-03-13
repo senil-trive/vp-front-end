@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
+import { Container } from "@mui/system";
+import styled from "styled-components";
 
 import Tag from "../Tag/Tag";
 import { Tag as TagType } from "../../../types/content-types/Tag.type";
-import styled from "styled-components";
-import { Container } from "@mui/system";
 import { useVerticalScrollHint } from "../../../utils/scroll";
 
 type Props = {
@@ -14,12 +14,13 @@ type Props = {
 
 const Wrapper = styled.div`
   position: relative;
+  margin: auto;
 
   .inner {
     display: flex;
     gap: 16px;
     overflow-x: auto;
-
+    justify-content: center;
     .scroll-indicator {
       position: absolute;
       top: 0;
@@ -60,7 +61,7 @@ export default function TagList({ tags, selected, onSelect }: Props) {
   const containerRef = useVerticalScrollHint();
 
   return (
-    <Container style={{ marginBottom: 21 }}>
+    <Container maxWidth="xl" style={{ margin: "0 auto 21px" }}>
       <Wrapper>
         <div ref={containerRef} className="inner scrolling-right">
           <div className="scroll-indicator indicator-left" />

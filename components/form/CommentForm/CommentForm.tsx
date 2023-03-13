@@ -1,18 +1,19 @@
 import { Container, Grid } from "@mui/material";
+import { H3, H4, P } from "../../typography";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { FiCheck } from "react-icons/fi";
-import { useTheme } from "styled-components";
-import { GENDERS } from "../../../constants/genders";
-import { ForumCommentType } from "../../../types/forumTypes";
-import { postComment } from "../../../utils/api";
+
 import Button from "../../buttons/Button";
-import ForumComment from "../../content-types/ForumComment/ForumComment";
-import Section from "../../layout/Section/Section";
-import { H3, H4, P } from "../../typography";
 import Dropdown from "../Dropdown/Dropdown";
+import { FiCheck } from "react-icons/fi";
+import ForumComment from "../../content-types/ForumComment/ForumComment";
+import { ForumCommentType } from "../../../types/forumTypes";
+import { GENDERS } from "../../../constants/genders";
 import Input from "../Input/Input";
+import Section from "../../layout/Section/Section";
 import TextArea from "../TextArea/TextArea";
+import { postComment } from "../../../utils/api";
+import { useTheme } from "styled-components";
 
 type Props = {
   type?: "forum" | "blog";
@@ -78,7 +79,7 @@ export default function CommentForm({
               <ForumComment
                 author={comment.user_name}
                 age={comment.user_age}
-                authorType={"Anonamous"}
+                authorType={"Anonymous"}
                 postDate={new Date(comment.date_created)}
                 title={comment.content}
               />

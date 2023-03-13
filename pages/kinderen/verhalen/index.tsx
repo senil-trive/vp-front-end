@@ -8,14 +8,14 @@ import {
 
 import { BlogPageProps } from "../../../types/pageTypes";
 import CollectionSearchBar from "../../../components/form/CollectionSearchBar/CollectionSearchBar";
+import { MasonryGrid } from "../../../components/layout/MasonryGrid/MasonryGrid";
+import { POST_PER_PAGE } from "../../../constants/app-configs";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import SortBar from "../../../components/form/SortBar/SortBar";
 import TagList from "../../../components/buttons/TagList/TagList";
 import { useTheme } from "styled-components";
-import { POST_PER_PAGE } from "../../../constants/app-configs";
 import { Hero, Pagination } from "../../../components/layout";
 import { H1, P, TitleWithHighlights } from "../../../components/typography";
-import { MasonryGrid } from "../../../components/layout/MasonryGrid/MasonryGrid";
 import { useCallbackOnReachedBottom } from "../../../utils/scroll";
 
 export const getServerSideProps = async () => {

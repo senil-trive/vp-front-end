@@ -1,23 +1,24 @@
-import { Container } from "@mui/material";
-import React, { useEffect, useState } from "react";
-import { XMasonry, XBlock } from "react-xmasonry";
-import { INSTA_EMBED_POST } from "../../../constants/mockData";
-import { BlogType } from "../../../types/content-types/Blog.type";
-import { Letter } from "../../../types/content-types/Letter.type";
-import { ForumPostType } from "../../../types/forumTypes";
-import parseImageURL from "../../../utils/parseImageURL";
-import BlogItem from "../../content-types/BlogItem/BlogItem";
-import BriefItem from "../../content-types/BriefItem/BriefItem";
-import ForumPost from "../../content-types/ForumPost/ForumPost";
 import InstagramPost, {
   InstaPost,
 } from "../../content-types/InstagramPost/InstagramPost";
+import React, { useEffect, useState } from "react";
 import TikTokPost, {
   TikTokPostProps,
 } from "../../content-types/TikTokPost/TikTokPost";
+import { XBlock, XMasonry } from "react-xmasonry";
+
+import BlogItem from "../../content-types/BlogItem/BlogItem";
+import { BlogType } from "../../../types/content-types/Blog.type";
+import BriefItem from "../../content-types/BriefItem/BriefItem";
+import { Container } from "@mui/material";
+import ForumPost from "../../content-types/ForumPost/ForumPost";
+import { ForumPostType } from "../../../types/forumTypes";
+import { INSTA_EMBED_POST } from "../../../constants/mockData";
+import { Letter } from "../../../types/content-types/Letter.type";
+import { MasonryGridWrapper } from "./MasonryGrid.styled";
 import VideoItem from "../../content-types/VideoItem/VideoItem";
 import { VideoPropsType } from "../../content-types/VideoItem/VideoItem.types";
-import { MasonryGridWrapper } from "./MasonryGrid.styled";
+import parseImageURL from "../../../utils/parseImageURL";
 
 export type FeedItem = {
   type: "letter" | "blog" | "forum" | "video" | "instagram" | "tiktok";
@@ -50,8 +51,8 @@ export function MasonryGrid({ feed = [] }: Props) {
 
   return (
     <MasonryGridWrapper>
-      <Container style={{ padding: " 0 13px" }}>
-        <XMasonry maxColumns={3} targetBlockWidth={1200 / 3}>
+      <Container maxWidth="xl" style={{ padding: " 0 13px" }}>
+        <XMasonry maxColumns={3} targetBlockWidth={1500 / 3} responsive>
           {feed.map((item, index) => {
             const { content } = item;
 
@@ -95,7 +96,7 @@ export function MasonryGrid({ feed = [] }: Props) {
                         author={forumContent.user_name}
                         age={forumContent.user_age}
                         likes={Number(forumContent.likes)}
-                        authorType={"Anonamous"}
+                        authorType={"Anonymous"}
                         postDate={new Date(forumContent.date_created)}
                         tags={[]}
                         title={forumContent.content}
@@ -117,7 +118,7 @@ export function MasonryGrid({ feed = [] }: Props) {
                             : ""
                         }
                         embedSrc={blogContent.youtube_embed}
-                        link={`/kinderen/blog/${blogContent.slug}`}
+                        link={`/kinderen/verhalen/${blogContent.slug}`}
                         type={blogContent.type}
                         author={blogContent.author}
                         content={blogContent.content}

@@ -169,7 +169,7 @@ export default function DisplayDropdown({
           ))}
         </select>
         <div className={`selectBox ${isOpen ? "open" : ""}`}>
-          <span>{selected?.name ?? placeholder}</span>
+          <span className="font-heading">{selected?.name ?? placeholder}</span>
           {!isOpen ? <ChevronDown /> : <ChevronUp />}
         </div>
         {isOpen && (

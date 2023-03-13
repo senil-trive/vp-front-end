@@ -66,7 +66,7 @@ export default function Vraag() {
               <P variant="light">
                 Heb jij een vraag over de scheiding? Stel ‘m hier! De Buddy’s en
                 andere kinderen met gescheiden ouders geven jou tips en
-                beantwoorden je vraag.
+                beantwoorden al jouw vragen.
               </P>
             </Grid>
             <Grid item xs={0} md={2} lg={3} />

@@ -1,9 +1,9 @@
 import { DefaultTheme } from "styled-components";
 
 export const COLORS = {
-  primary: "#006EF7", // Blue
-  secondary: "#3FC7B4", // Green
-  tertiary: "#FE517E", // Pink
+  primary: "#3FC7B4", // Teal
+  secondary: "#FE517E", // Crimson
+  tertiary: "#006EF7", // Blue
   text: "#150F2F", // Black
   white: "#fff", // White
   black: "#150F2F", // Black
