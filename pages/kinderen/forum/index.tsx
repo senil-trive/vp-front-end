@@ -1,23 +1,24 @@
 import { Container, Grid } from "@mui/material";
-import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import { CircleSpinner } from "react-spinners-kit";
-import { useTheme } from "styled-components";
-import Button from "../../../components/buttons/Button";
-import TagList from "../../../components/buttons/TagList/TagList";
-import ForumPost from "../../../components/content-types/ForumPost/ForumPost";
-import CollectionSearchBar from "../../../components/form/CollectionSearchBar/CollectionSearchBar";
-import SortBar from "../../../components/form/SortBar/SortBar";
-import { Hero, Pagination } from "../../../components/layout";
-import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import { H1, P } from "../../../components/typography";
-import { POST_PER_PAGE } from "../../../constants/app-configs";
-import { ForumPageProps } from "../../../types/pageTypes";
+import { Hero, Pagination } from "../../../components/layout";
+import React, { useEffect, useState } from "react";
 import {
   getContentTags,
   getForumOverviewPageData,
   getForumPosts,
 } from "../../../utils/api";
+
+import Button from "../../../components/buttons/Button";
+import { CircleSpinner } from "react-spinners-kit";
+import CollectionSearchBar from "../../../components/form/CollectionSearchBar/CollectionSearchBar";
+import { ForumPageProps } from "../../../types/pageTypes";
+import ForumPost from "../../../components/content-types/ForumPost/ForumPost";
+import Link from "next/link";
+import { POST_PER_PAGE } from "../../../constants/app-configs";
+import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
+import SortBar from "../../../components/form/SortBar/SortBar";
+import TagList from "../../../components/buttons/TagList/TagList";
+import { useTheme } from "styled-components";
 
 const forumSortOptions = [
   { name: "Titel (a-z)", value: "content" },
@@ -189,7 +190,7 @@ export default function Forum({
                         author={item.user_name}
                         age={item.user_age}
                         likes={Number(item.likes)}
-                        authorType={"Anonamous"}
+                        authorType={"Anonymous"}
                         postDate={new Date(item.date_created)}
                         tags={[]}
                         title={item.content}

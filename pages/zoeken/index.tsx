@@ -1,18 +1,17 @@
 import { Container, Grid } from "@mui/material";
 import { H1, P } from "../../components/typography";
-
-import { Hero } from "../../components/layout";
-import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import React, { useEffect, useState } from "react";
-import SearchBar from "../../components/form/SearchBar/SearchBar";
-import SearchResultItem from "../../components/content-types/SearchResultItem/SearchResultItem";
-import { useRouter } from "next/router";
-import { POST_PER_PAGE } from "../../constants/app-configs";
 import { getForumPosts, getLetters, getPosts } from "../../utils/api";
 
 import { BlogType } from "../../types/content-types/Blog.type";
 import { ForumPostType } from "../../types/forumTypes";
+import { Hero } from "../../components/layout";
 import { Letter } from "../../types/content-types/Letter.type";
+import { POST_PER_PAGE } from "../../constants/app-configs";
+import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
+import SearchBar from "../../components/form/SearchBar/SearchBar";
+import SearchResultItem from "../../components/content-types/SearchResultItem/SearchResultItem";
+import { useRouter } from "next/router";
 
 export default function Search() {
   const router = useRouter();
@@ -116,7 +115,7 @@ export default function Search() {
                 resultTitleSuffix={<span>in Blogs en Vlogs</span>}
                 list={posts.map((post) => ({
                   name: post.title,
-                  link: `/blog/${post.slug}`,
+                  link: `/verhalen/${post.slug}`,
                 }))}
               />
             </Grid>
@@ -127,7 +126,7 @@ export default function Search() {
                 resultTitleSuffix={<span>in Brieven</span>}
                 list={letters.map((post) => ({
                   name: post.title,
-                  link: `/blog/${post.slug}`,
+                  link: `/verhalen/${post.slug}`,
                 }))}
               />
             </Grid>

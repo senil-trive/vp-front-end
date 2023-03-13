@@ -7,6 +7,7 @@ import { slugToTitle, titleToSlug } from "../../../utils/url";
 
 import BreadCrumbs from "../../../components/layout/BreadCrumbs/BreadCrumbs";
 import Button from "../../../components/buttons/Button";
+import CommentForm from "../../../components/form/CommentForm/CommentForm";
 import Dropdown from "../../../components/form/Dropdown/Dropdown";
 import ENDPOINTS from "../../../constants/endpoints";
 import ForumComment from "../../../components/content-types/ForumComment/ForumComment";
@@ -19,7 +20,6 @@ import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import Section from "../../../components/layout/Section/Section";
 import TextArea from "../../../components/form/TextArea/TextArea";
 import { postComment } from "../../../utils/api";
-import CommentForm from "../../../components/form/CommentForm/CommentForm";
 
 type Props = {
   pageData: ForumPostType;
@@ -77,7 +77,7 @@ export default function ForumDetail({ slug, pageData }: Props) {
               author={pageData.user_name}
               age={pageData.user_age}
               likes={Number(pageData.likes)}
-              authorType={"Anonamous"}
+              authorType={"Anonymous"}
               postDate={new Date(pageData.date_created)}
               tags={[]}
               title={pageData.content}

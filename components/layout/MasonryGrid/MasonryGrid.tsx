@@ -96,7 +96,7 @@ export function MasonryGrid({ feed = [] }: Props) {
                         author={forumContent.user_name}
                         age={forumContent.user_age}
                         likes={Number(forumContent.likes)}
-                        authorType={"Anonamous"}
+                        authorType={"Anonymous"}
                         postDate={new Date(forumContent.date_created)}
                         tags={[]}
                         title={forumContent.content}
@@ -118,7 +118,7 @@ export function MasonryGrid({ feed = [] }: Props) {
                             : ""
                         }
                         embedSrc={blogContent.youtube_embed}
-                        link={`/kinderen/blog/${blogContent.slug}`}
+                        link={`/kinderen/verhalen/${blogContent.slug}`}
                         type={blogContent.type}
                         author={blogContent.author}
                         content={blogContent.content}

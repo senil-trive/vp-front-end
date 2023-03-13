@@ -130,7 +130,7 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
                         : ""
                     }
                     embedSrc={post.related_vlogposts_id.youtube_embed}
-                    link={`blog/${post.related_vlogposts_id.id}`}
+                    link={`verhalen/${post.related_vlogposts_id.id}`}
                     type={post.related_vlogposts_id.type}
                     author={post.related_vlogposts_id.author}
                     content={post.related_vlogposts_id.content}
