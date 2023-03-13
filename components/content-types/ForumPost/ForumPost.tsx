@@ -7,6 +7,7 @@ import IconButton from "../../buttons/IconButton/IconButton";
 import { P } from "../../typography";
 import Tag from "../../buttons/Tag/Tag";
 import HeartIcon from "../../icons/HeartIcon/HeartIcon";
+import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
 
 type Props = {
   authorType: string;
@@ -31,7 +32,7 @@ const StyledForumPost = styled.article`
     display: flex;
     align-items: center;
     gap: 30px;
-    margin-bottom: 32px;
+    margin-bottom: 30px;
   }
 
   .content {
@@ -74,34 +75,43 @@ export default function ForumPost({
       <header>
         <IconButton wrapperSize={64} wrapperColor="#E0E0E0" Icon={IoMdPerson} />
         <div>
-          <P variant="bold">{authorType}</P>
-          <P variant="helper" style={{ color: colors.tertiary }}>
+          <P style={{ margin: 0, color: colors.info, fontWeight: 500 }}>
+            {authorType}
+          </P>
+          <P style={{ margin: 0, fontWeight: 300 }}>
             {author}, {age} jaar
           </P>
         </div>
       </header>
       <div className="content">
-        <div className="flex">
-          {tags.map((item, index) => (
-            <Tag key={index} size="m">
-              {item}
-            </Tag>
-          ))}
-        </div>
-        <P>{title}</P>
+        {tags.length > 0 && (
+          <div className="flex">
+            {tags.map((item, index) => (
+              <Tag key={index} size="m">
+                {item}
+              </Tag>
+            ))}
+          </div>
+        )}
+        <P style={{ margin: 0 }}>{parseHTMLtoReact(title)}</P>
       </div>
       <footer>
         <div className="likes">
           {likes > 0 && (
             <>
-              <HeartIcon color="black" />
-              <P variant="helper">{likes}</P>
+              <HeartIcon color={colors.info} />
+              <P style={{ color: colors.info }} variant="helper">
+                {likes}
+              </P>
             </>
           )}
         </div>
         <div>
           {postDate && (
-            <P variant="helper" style={{ textAlign: "right", color: "#555" }}>
+            <P
+              variant="helper"
+              style={{ textAlign: "right", color: colors.info }}
+            >
               Geplaatst op {format(postDate, "dd/mm/yyyy")}
             </P>
           )}
