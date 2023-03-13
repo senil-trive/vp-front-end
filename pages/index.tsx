@@ -70,8 +70,6 @@ export default function Home({
 
   useCallbackWhenReachedBottom(async () => {
     if (posts.length < totalPosts) {
-      console.log({ currentPage, len: posts.length, totalPosts });
-
       setIsLoading(true);
 
       try {
