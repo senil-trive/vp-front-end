@@ -10,6 +10,7 @@ export type HomePageProps = {
     page_subtitle: string;
   };
   categories: CategoryType[];
+  totalPosts: number;
   feed: FeedItem[];
 };
 

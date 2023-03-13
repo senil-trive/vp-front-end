@@ -14,8 +14,8 @@ import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import SortBar from "../../../components/form/SortBar/SortBar";
 import TagList from "../../../components/buttons/TagList/TagList";
 import { useTheme } from "styled-components";
-import { Hero, Pagination } from "../../../components/layout";
-import { H1, P, TitleWithHighlights } from "../../../components/typography";
+import { Hero } from "../../../components/layout";
+import { P, TitleWithHighlights } from "../../../components/typography";
 import { useCallbackWhenReachedBottom } from "../../../utils/scroll";
 
 export const getServerSideProps = async () => {

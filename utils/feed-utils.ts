@@ -1,4 +1,17 @@
+import { InstaPost } from "../components/content-types/InstagramPost/InstagramPost";
+import { TikTokPostProps } from "../components/content-types/TikTokPost/TikTokPost";
 import { FeedItem } from "../components/layout/MasonryGrid/MasonryGrid";
+import { POST_PER_PAGE } from "../constants/app-configs";
+import { BlogType } from "../types/content-types/Blog.type";
+import { Letter } from "../types/content-types/Letter.type";
+import { ForumPostType } from "../types/forumTypes";
+import {
+  getForumPosts,
+  getInstaPosts,
+  getLetters,
+  getPosts,
+  getTikTokPosts,
+} from "./api";
 
 /**
  * Randomizes the order of the feed
@@ -23,6 +36,74 @@ export function shuffle(array: FeedItem[]) {
 
   return array;
 }
+
+/**
+ * Generates an array of feed items
+ * @param feedItems array of all the collection items to be displayed in the feed
+ * @returns
+ */
+export const generateFeed = (
+  {
+    blogs,
+    letters,
+    forum,
+    instagram,
+    tiktok,
+  }: {
+    blogs: BlogType[];
+    letters: Letter[];
+    forum: ForumPostType[];
+    instagram: InstaPost[];
+    tiktok: TikTokPostProps[];
+  },
+  addFirstVideos: boolean = false
+) => {
+  let res: FeedItem[] = [];
+
+  blogs?.forEach((item) => {
+    res.push({ type: "blog", content: item });
+  });
+  letters?.forEach((item) => {
+    res.push({ type: "letter", content: item });
+  });
+  forum?.forEach((item) => {
+    res.push({ type: "forum", content: item });
+  });
+  instagram?.forEach((item) => {
+    res.push({ type: "instagram", content: item });
+  });
+  tiktok?.forEach((item) => {
+    res.push({ type: "tiktok", content: item });
+  });
+
+  // randomize content
+  res = shuffle(res);
+
+  if (addFirstVideos) {
+    // TODO: replace with real video content
+    // Add video item at the very beginning
+    res.splice(0, 0, {
+      type: "video",
+      content: {
+        title: "Video 1",
+        subtitle: "Hier komt een omschrijvende tekst",
+        src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      },
+    });
+
+    // Add a video item to 4th place
+    res.splice(5, 0, {
+      type: "video",
+      content: {
+        title: "Video 2",
+        subtitle: "Hier komt een omschrijvende tekst",
+        src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      },
+    });
+  }
+
+  return res;
+};
 
 // WIP: If we plan on replacing the Masonry on HomeGrid
 // We can take a look at the codes below
