@@ -2,13 +2,25 @@ import { debounce } from "@mui/material";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 type Scrolloptions = {
+  /** An page height offset */
   offset?: number;
+
+  /** The time to wait before calling the function */
   waitTime?: number;
+
+  /** The class name that will be given to the element when the user is scrolling to the left */
   scrollingLeftClassName?: string;
+
+  /** The class name that will be given to the element when the user is scrolling to the right */
   scrollingRightClassName?: string;
 };
 
-export const useCallbackOnReachedBottom = (
+/**
+ * A hook that calls a function when it reaches the end of the page
+ * @param callback the callback
+ * @param options options to alter the offset of the page and the debounce value
+ */
+export const useCallbackWhenReachedBottom = (
   callback: () => void,
   options: Scrolloptions = {
     offset: 650,

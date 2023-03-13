@@ -16,7 +16,7 @@ import TagList from "../../../components/buttons/TagList/TagList";
 import { useTheme } from "styled-components";
 import { Hero, Pagination } from "../../../components/layout";
 import { H1, P, TitleWithHighlights } from "../../../components/typography";
-import { useCallbackOnReachedBottom } from "../../../utils/scroll";
+import { useCallbackWhenReachedBottom } from "../../../utils/scroll";
 
 export const getServerSideProps = async () => {
   try {
@@ -66,7 +66,7 @@ export default function Forum({
   const [isLoading, setIsLoading] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
-  useCallbackOnReachedBottom(async () => {
+  useCallbackWhenReachedBottom(async () => {
     if (posts.length < totalCount) {
       setIsLoading(true);
       try {
