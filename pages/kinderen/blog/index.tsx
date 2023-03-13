@@ -69,7 +69,6 @@ export default function Forum({
   useCallbackOnReachedBottom(async () => {
     if (posts.length < totalCount) {
       setIsLoading(true);
-      console.log(currentPage);
       try {
         const req = await getPosts({
           postPerPage: POST_PER_PAGE,
@@ -84,9 +83,7 @@ export default function Forum({
         });
         const res = await req.json();
 
-        const newPost = [...posts, ...(res.data || [])];
-
-        setPosts(newPost);
+        setPosts([...posts, ...(res.data || [])]);
         setIsLoading(false);
       } catch (error) {
         console.log(error);
