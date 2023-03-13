@@ -31,13 +31,13 @@ export default function SearchBar({
 
   const handleSearch: React.ChangeEventHandler<HTMLInputElement> = (x) => {
     if (onSearch) return onSearch(x.target.value);
-    return router.push(`/search?q=${x.target.value}`);
+    return router.push(`/zoeken?q=${x.target.value}`);
   };
 
   const debouncedSearch = debounce(handleSearch, waitTime);
 
   useEffect(() => {
-    if (router.pathname === "/search" && router.query.q) {
+    if (router.pathname === "/zoeken" && router.query.q) {
       setVal(router.query.q as string);
     }
   }, [router.query, router.pathname]);

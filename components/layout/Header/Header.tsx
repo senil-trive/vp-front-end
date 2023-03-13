@@ -126,7 +126,7 @@ export default function Header() {
           <div>
             {!isLoading && (
               <div className="flex items-center gap-[24px]">
-                <Link href="/search">
+                <Link href="/zoeken">
                   <SearchIcon />
                 </Link>
                 <button

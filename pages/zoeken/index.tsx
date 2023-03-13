@@ -11,7 +11,6 @@ import { POST_PER_PAGE } from "../../constants/app-configs";
 import { getForumPosts, getLetters, getPosts } from "../../utils/api";
 
 import { BlogType } from "../../types/content-types/Blog.type";
-import BriefItem from "../../components/content-types/BriefItem/BriefItem";
 import { ForumPostType } from "../../types/forumTypes";
 import { Letter } from "../../types/content-types/Letter.type";
 
