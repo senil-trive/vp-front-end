@@ -33,10 +33,10 @@ export const useCallbackOnReachedBottom = (
 };
 
 /**
- * A hook to add hints to the sides of a vertical scrollable item
+ * A hook to add hints to the sides of a horizontal scrollable item
  * @returns an array of 2 items, first item being the ref object and second is the scrollhandler
  */
-export function useVerticalScrollHint(
+export function useHorizontalScrollHints(
   options: Scrolloptions = {
     scrollingLeftClassName: "scrolling-left",
     scrollingRightClassName: "scrolling-right",

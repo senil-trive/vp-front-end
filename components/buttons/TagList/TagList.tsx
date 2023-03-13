@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import Tag from "../Tag/Tag";
 import { Tag as TagType } from "../../../types/content-types/Tag.type";
-import { useVerticalScrollHint } from "../../../utils/scroll";
+import { useHorizontalScrollHints } from "../../../utils/scroll";
 
 type Props = {
   tags: TagType[];
@@ -58,7 +58,7 @@ const Wrapper = styled.div`
 `;
 
 export default function TagList({ tags, selected, onSelect }: Props) {
-  const containerRef = useVerticalScrollHint();
+  const containerRef = useHorizontalScrollHints();
 
   return (
     <Container maxWidth="xl" style={{ margin: "0 auto 21px" }}>
