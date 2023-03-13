@@ -93,7 +93,8 @@ export default function ForumPost({
             ))}
           </div>
         )}
-        <P style={{ margin: 0 }}>{parseHTMLtoReact(title)}</P>
+
+        {parseHTMLtoReact(title)}
       </div>
       <footer>
         <div className="likes">
