@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 
+import { Container } from "@mui/system";
 import Tag from "../Tag/Tag";
 import { Tag as TagType } from "../../../types/content-types/Tag.type";
 import styled from "styled-components";
-import { Container } from "@mui/system";
 
 type Props = {
   tags: TagType[];
@@ -13,12 +13,13 @@ type Props = {
 
 const Wrapper = styled.div`
   position: relative;
+  margin: auto;
 
   .inner {
     display: flex;
     gap: 16px;
     overflow-x: auto;
-
+    justify-content: center;
     .scroll-indicator {
       position: absolute;
       top: 0;
@@ -84,7 +85,7 @@ export default function TagList({ tags, selected, onSelect }: Props) {
   }, []);
 
   return (
-    <Container style={{ marginBottom: 21 }}>
+    <Container maxWidth="xl" style={{ margin: "0 auto 21px" }}>
       <Wrapper>
         <div
           ref={containerRef}
