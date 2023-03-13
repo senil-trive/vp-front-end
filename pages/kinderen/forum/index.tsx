@@ -136,10 +136,12 @@ export default function Forum({
               >
                 {pageData?.page_title}
               </H1>
-              <P variant="light">{pageData?.page_subtitle}</P>
+              <P variant="light" className="text-center">
+                {pageData?.page_subtitle}
+              </P>
 
               <div style={{ display: "flex", gap: 32 }}>
-                <Button href="/forum/vraag">
+                <Button href="/kinderen/forum/vraag">
                   {pageData?.submit_question_button_label}
                 </Button>
                 <Button filled={false} onClick={() => console.log("clicked")}>
