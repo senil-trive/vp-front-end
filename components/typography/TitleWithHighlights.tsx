@@ -25,7 +25,7 @@ function regexReplace(
     regex,
     `<span
         className="font-heading"
-        style="color: ${highlightColor}; fontWeight: bold" }}
+        style="color: ${highlightColor}; fontWeight: bold"
       >
         $&
       </span>`

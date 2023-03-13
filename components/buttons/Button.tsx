@@ -27,6 +27,9 @@ type Props = {
 
   /** Callback */
   onClick?: () => void;
+
+  /** Additional styling */
+  style?: React.CSSProperties;
 };
 
 const Style = css<Props>`

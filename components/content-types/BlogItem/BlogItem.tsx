@@ -86,18 +86,27 @@ export default function BlogItem({
   return (
     <Card variant={type}>
       {generateMediaItem()}
-      <CardFooter>
-        <H4 variant="bold">{title}</H4>
-
-        <P style={{ marginBottom: 56, marginTop: 12 }}>
-          {content ? truncate(content, 200) : ""}
-        </P>
-
-        <div className="flex items-center justify-between pb-[56px]">
-          <P variant="bold">{author}</P>
-          <P variant="light">{format(postDate, "dd/mm/yyyy")}</P>
+      <CardFooter style={{ padding: "24px 0 0 0" }}>
+        <div className="flex items-center justify-between pb-[30px]">
+          <P color="info" style={{ margin: 0 }} variant="helper">
+            {author}
+          </P>
+          <P style={{ margin: 0 }} variant="helper">
+            {format(postDate, "dd/mm/yyyy")}
+          </P>
         </div>
-        <Button variant="secondary" href={link}>
+
+        <H4 style={{ margin: 0 }} variant="bold">
+          {title}
+        </H4>
+
+        {!!content && (
+          <P style={{ marginBottom: 30, marginTop: 12 }}>
+            {content ? truncate(content, 200) : ""}
+          </P>
+        )}
+
+        <Button style={{ marginTop: 56 }} variant="secondary" href={link}>
           {type == "vlog" ? "Vlog bekijken" : "Blog lezen"}
         </Button>
       </CardFooter>

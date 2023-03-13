@@ -226,8 +226,11 @@ export const getPosts = async ({
   filter,
   meta = "total_count",
 }: DirectusParams) => {
-  let url = `${ENDPOINTS.COLLECTIONS}/vlogposts?fields=*.*.*&filter=[status][_eq]=published&limit=${postPerPage}&page=${page}&meta=${meta}`;
+  let url = `${ENDPOINTS.COLLECTIONS}/vlogposts?fields=*.*.*&filter=[status][_eq]=published&limit=${postPerPage}&page=${page}`;
 
+  if (meta) {
+    url = `${url}&meta=${meta}`;
+  }
   if (search) {
     url = `${url}&search=${search}`;
   }
@@ -361,8 +364,11 @@ export const getForumPosts = async ({
   filter,
   meta,
 }: DirectusParams) => {
-  let url = `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}&meta=${meta}`;
+  let url = `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
 
+  if (meta) {
+    url = `${url}&meta=${meta}`;
+  }
   if (search) {
     url = `${url}&search=${search}`;
   }
