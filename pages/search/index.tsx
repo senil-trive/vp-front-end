@@ -31,8 +31,6 @@ export default function Search() {
         });
         const res = await req.json();
 
-        console.log(res.data);
-
         setPosts(res.data);
       } catch (error) {
         console.log(error);
