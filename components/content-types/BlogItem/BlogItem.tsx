@@ -88,7 +88,7 @@ export default function BlogItem({
       {generateMediaItem()}
       <CardFooter style={{ padding: "24px 0 0 0" }}>
         <div className="flex items-center justify-between pb-[30px]">
-          <P style={{ margin: 0, color: colors.info }} variant="helper">
+          <P color="info" style={{ margin: 0 }} variant="helper">
             {author}
           </P>
           <P style={{ margin: 0 }} variant="helper">

@@ -39,7 +39,6 @@ const StyledHelperText = styled(BaseP)`
   font-weight: 400;
   font-size: 12px;
   line-height: 140%;
-  color: #000000;
 `;
 
 export default function P({

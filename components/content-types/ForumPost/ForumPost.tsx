@@ -75,7 +75,7 @@ export default function ForumPost({
       <header>
         <IconButton wrapperSize={64} wrapperColor="#E0E0E0" Icon={IoMdPerson} />
         <div>
-          <P style={{ margin: 0, color: colors.info, fontWeight: 500 }}>
+          <P color="info" style={{ margin: 0, fontWeight: 500 }}>
             {authorType}
           </P>
           <P style={{ margin: 0, fontWeight: 300 }}>
@@ -101,7 +101,7 @@ export default function ForumPost({
           {likes > 0 && (
             <>
               <HeartIcon color={colors.info} />
-              <P style={{ color: colors.info }} variant="helper">
+              <P color="info" variant="helper">
                 {likes}
               </P>
             </>
@@ -109,10 +109,7 @@ export default function ForumPost({
         </div>
         <div>
           {postDate && (
-            <P
-              variant="helper"
-              style={{ textAlign: "right", color: colors.info }}
-            >
+            <P variant="helper" color="info" style={{ textAlign: "right" }}>
               Geplaatst op {format(postDate, "dd/mm/yyyy")}
             </P>
           )}
