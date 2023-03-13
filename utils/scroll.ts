@@ -1,12 +1,47 @@
-import { useCallback, useEffect, useRef } from "react";
+import { debounce } from "@mui/material";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-export const useReachedBottom = () => {};
+type Scrolloptions = {
+  offset?: number;
+  waitTime?: number;
+  scrollingLeftClassName?: string;
+  scrollingRightClassName?: string;
+};
+
+export const useCallbackOnReachedBottom = (
+  callback: () => void,
+  options: Scrolloptions = {
+    offset: 650,
+    waitTime: 300,
+  }
+) => {
+  const handleCallback = useCallback(() => {
+    const scrollSource = window.innerHeight + window.scrollY;
+    const scrollTarget = document.body.offsetHeight - (options.offset ?? 0);
+
+    if (scrollSource >= scrollTarget) {
+      callback();
+    }
+  }, [callback, options.offset]);
+
+  // Debounce the trigger
+  const debouncedCallback = debounce(handleCallback, options.waitTime);
+
+  useEffect(() => {
+    window.onscroll = debouncedCallback;
+  }, [debouncedCallback, handleCallback]);
+};
 
 /**
  * A hook to add hints to the sides of a vertical scrollable item
  * @returns an array of 2 items, first item being the ref object and second is the scrollhandler
  */
-export function useVerticalScrollHint(): React.RefObject<HTMLDivElement> {
+export function useVerticalScrollHint(
+  options: Scrolloptions = {
+    scrollingLeftClassName: "scrolling-left",
+    scrollingRightClassName: "scrolling-right",
+  }
+): React.RefObject<HTMLDivElement> {
   const elementRef = useRef<HTMLDivElement>(null);
 
   const handleScroll = useCallback(() => {
@@ -15,19 +50,23 @@ export function useVerticalScrollHint(): React.RefObject<HTMLDivElement> {
     const scrollWidth = elementRef?.current?.scrollWidth;
 
     if (newScrollLeft === 0) {
-      elementRef?.current?.classList.remove("scrolling-left");
+      elementRef?.current?.classList.remove(
+        options.scrollingLeftClassName ?? ""
+      );
     } else if (
       newScrollLeft &&
       scrollWidth &&
       width &&
       newScrollLeft >= scrollWidth - width
     ) {
-      elementRef?.current?.classList.remove("scrolling-right");
+      elementRef?.current?.classList.remove(
+        options.scrollingRightClassName ?? ""
+      );
     } else {
-      elementRef?.current?.classList.add("scrolling-right");
-      elementRef?.current?.classList.add("scrolling-left");
+      elementRef?.current?.classList.add(options.scrollingRightClassName ?? "");
+      elementRef?.current?.classList.add(options.scrollingLeftClassName ?? "");
     }
-  }, []);
+  }, [options.scrollingLeftClassName, options.scrollingRightClassName]);
 
   useEffect(() => {
     const el = elementRef.current;

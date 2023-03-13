@@ -1,4 +1,4 @@
-import { Container, Grid } from "@mui/material";
+import { CircularProgress, Container, Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import {
   getContentTags,
@@ -16,6 +16,7 @@ import { POST_PER_PAGE } from "../../../constants/app-configs";
 import { Hero, Pagination } from "../../../components/layout";
 import { H1, P, TitleWithHighlights } from "../../../components/typography";
 import { MasonryGrid } from "../../../components/layout/MasonryGrid/MasonryGrid";
+import { useCallbackOnReachedBottom } from "../../../utils/scroll";
 
 export const getServerSideProps = async () => {
   try {
@@ -62,14 +63,40 @@ export default function Forum({
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
 
-  const changePage = (index: number) => {
-    if (index <= 1) {
-      setCurrentPage(1);
+  useCallbackOnReachedBottom(async () => {
+    if (posts.length < totalCount) {
+      setIsLoading(true);
+      console.log(currentPage);
+      try {
+        const req = await getPosts({
+          postPerPage: POST_PER_PAGE,
+          page: currentPage + 1,
+          search,
+          sort,
+          meta: "filter_count",
+          filter:
+            selectedTag.length > 0
+              ? `filter={"categories": { "categories_id": { "id": { "_eq": "${selectedTag}"}}}}`
+              : ``,
+        });
+        const res = await req.json();
+
+        const newPost = [...posts, ...(res.data || [])];
+
+        setPosts(newPost);
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+
+      setCurrentPage((page) => page + 1);
     } else {
-      setCurrentPage(index);
+      setIsEnd(true);
     }
-  };
+  });
 
   const handleSearch = (x: string) => {
     setSearch(x);
@@ -85,7 +112,7 @@ export default function Forum({
       try {
         const req = await getPosts({
           postPerPage: POST_PER_PAGE,
-          page: currentPage,
+          // page: currentPage,
           search,
           sort,
           meta: "filter_count",
@@ -103,7 +130,7 @@ export default function Forum({
     };
 
     getPaginatedBlogs();
-  }, [currentPage, search, sort, selectedTag]);
+  }, [search, sort, selectedTag]);
 
   return (
     <PageWrapper title="Blog en vlog overzicht">
@@ -158,13 +185,10 @@ export default function Forum({
           />
         </div>
 
-        {totalCount / POST_PER_PAGE > 2 && posts.length >= POST_PER_PAGE && (
-          <Pagination
-            total={Math.ceil(totalCount / POST_PER_PAGE)}
-            truncated
-            onChange={changePage}
-          />
-        )}
+        <div className="flex items-center justify-center">
+          {isLoading && <CircularProgress size={"30px"} />}
+          {isEnd && <P color="info">Geen posts meer om te tonen</P>}
+        </div>
       </main>
     </PageWrapper>
   );
