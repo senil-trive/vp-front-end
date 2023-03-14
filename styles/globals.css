@@ -26,6 +26,7 @@ h5,
 h6,
 .font-heading {
   font-family: "Fjalla One", sans-serif !important;
+  text-transform: uppercase;
 }
 
 a {

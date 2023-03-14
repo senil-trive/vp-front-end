@@ -5,8 +5,11 @@ declare module "styled-components" {
     name: string;
     colors: {
       primary: string;
+      primaryTransparent: string;
       secondary: string;
+      secondaryTransparent: string;
       tertiary: string;
+      tertiaryTransparent: string;
       text: string;
       white: string;
       grey: string;
@@ -14,10 +17,15 @@ declare module "styled-components" {
       error: string;
       success: string;
       info: string;
+      infoTransparent: string;
       infoReversed: string;
     };
     shadows: {
       sm: string;
+    };
+    fonts: {
+      primary: string;
+      secondary: string;
     };
     fontSizes: {
       h1: {

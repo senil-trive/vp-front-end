@@ -57,7 +57,7 @@ export default function BriefItem({
           {truncate(content, 200)}
         </P>
 
-        <Button variant="secondary" href={fileSrc}>
+        <Button variant="tertiary" href={fileSrc}>
           Download brief
         </Button>
       </CardFooter>
