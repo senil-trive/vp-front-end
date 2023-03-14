@@ -1,25 +1,14 @@
 import { Container, Grid } from "@mui/material";
-import { ForumCommentType, ForumPostType } from "../../../types/forumTypes";
-import { H2, H4, P } from "../../../components/typography";
-import React, { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
 import { slugToTitle, titleToSlug } from "../../../utils/url";
 
 import BreadCrumbs from "../../../components/layout/BreadCrumbs/BreadCrumbs";
-import Button from "../../../components/buttons/Button";
 import CommentForm from "../../../components/form/CommentForm/CommentForm";
-import Dropdown from "../../../components/form/Dropdown/Dropdown";
 import ENDPOINTS from "../../../constants/endpoints";
-import ForumComment from "../../../components/content-types/ForumComment/ForumComment";
 import ForumPost from "../../../components/content-types/ForumPost/ForumPost";
-import { GENDERS } from "../../../constants/genders";
+import { ForumPostType } from "../../../types/forumTypes";
 import { GetServerSidePropsContext } from "next";
-import { Hero } from "../../../components/layout";
-import Input from "../../../components/form/Input/Input";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
-import Section from "../../../components/layout/Section/Section";
-import TextArea from "../../../components/form/TextArea/TextArea";
-import { postComment } from "../../../utils/api";
+import React from "react";
 
 type Props = {
   pageData: ForumPostType;
@@ -27,12 +16,12 @@ type Props = {
 };
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-  const { slug: id } = ctx.query;
+  const { slug } = ctx.query;
 
   try {
     // Get the posts
     const res = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=*.*&filter[id][_eq]=${id}`,
+      `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=*.*&filter[slug][_eq]=${slug}`,
       {
         method: "GET",
         headers: {
@@ -74,11 +63,12 @@ export default function ForumDetail({ slug, pageData }: Props) {
           <Grid item xs={0} md={2} lg={2} />
           <Grid item xs={12} md={8} lg={8}>
             <ForumPost
-              author={pageData.user_name}
+              gender={pageData.user_gender}
               age={pageData.user_age}
               likes={Number(pageData.likes)}
-              authorType={"Anonymous"}
+              authorType={pageData.user_name}
               postDate={new Date(pageData.date_created)}
+              truncateContent={false}
               tags={[]}
               title={pageData.content}
             />

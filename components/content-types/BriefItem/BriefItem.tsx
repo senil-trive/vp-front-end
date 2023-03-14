@@ -59,7 +59,7 @@ export default function BriefItem({
           </P>
         </div>
 
-        <Button variant="secondary" href={fileSrc}>
+        <Button variant="tertiary" href={fileSrc}>
           Download brief
         </Button>
       </CardFooter>

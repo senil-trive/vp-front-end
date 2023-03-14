@@ -104,10 +104,13 @@ export function MasonryGrid({ feed = [] }: Props) {
                   <XBlock key={index} width={item.width}>
                     <div className="grid-item">
                       <ForumPost
-                        author={forumContent.user_name}
+                        showButton
+                        buttonUrl={`/kinderen/forum/${forumContent.slug}`}
+                        truncateContent
+                        gender={forumContent.user_gender}
                         age={forumContent.user_age}
                         likes={Number(forumContent.likes)}
-                        authorType={"Anonymous"}
+                        authorType={forumContent.user_name}
                         postDate={new Date(forumContent.date_created)}
                         tags={[]}
                         title={forumContent.content}
