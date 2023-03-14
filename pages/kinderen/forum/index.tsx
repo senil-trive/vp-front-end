@@ -141,7 +141,7 @@ export default function Forum({
               </P>
 
               <div style={{ display: "flex", gap: 32 }}>
-                <Button href="/kinderen/forum/vraag">
+                <Button href="/kinderen/forum/stel-een-vraag">
                   {pageData?.submit_question_button_label}
                 </Button>
                 <Button filled={false} onClick={() => console.log("clicked")}>

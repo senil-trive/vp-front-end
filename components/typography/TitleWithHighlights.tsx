@@ -51,7 +51,7 @@ const TitleWithHighlights: React.FC<TitleWithHighlightsProps> = ({
         theme.colors[highlightColor]
       );
     });
-  } else {
+  } else if (textToHighlight) {
     newText = regexReplace(
       newText,
       textToHighlight ?? "",
