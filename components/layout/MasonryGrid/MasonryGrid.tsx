@@ -13,15 +13,26 @@ import BriefItem from "../../content-types/BriefItem/BriefItem";
 import { Container } from "@mui/material";
 import ForumPost from "../../content-types/ForumPost/ForumPost";
 import { ForumPostType } from "../../../types/forumTypes";
-import { INSTA_EMBED_POST } from "../../../constants/mockData";
 import { Letter } from "../../../types/content-types/Letter.type";
 import { MasonryGridWrapper } from "./MasonryGrid.styled";
 import VideoItem from "../../content-types/VideoItem/VideoItem";
 import { VideoPropsType } from "../../content-types/VideoItem/VideoItem.types";
 import parseImageURL from "../../../utils/parseImageURL";
+import ChatExampleItem from "../../content-types/ChatExampleItem/ChatExampleItem";
+
+export type FeedType =
+  | "forum"
+  | "instagram"
+  | "tiktok"
+  | "video"
+  | "letter"
+  | "chat"
+  | "blog";
 
 export type FeedItem = {
-  type: "letter" | "blog" | "forum" | "video" | "instagram" | "tiktok";
+  id: string;
+  width: 1 | 2 | 3 | number;
+  type: FeedType;
   cols?: number;
   content: Letter | BlogType | ForumPostType | VideoPropsType | TikTokPostProps;
 };
@@ -52,7 +63,7 @@ export function MasonryGrid({ feed = [] }: Props) {
   return (
     <MasonryGridWrapper>
       <Container maxWidth="xl" style={{ padding: " 0 13px" }}>
-        <XMasonry maxColumns={3} targetBlockWidth={1500 / 3} responsive>
+        <XMasonry maxColumns={12} targetBlockWidth={1500 / 12} responsive>
           {feed.map((item, index) => {
             const { content } = item;
 
@@ -60,7 +71,7 @@ export function MasonryGrid({ feed = [] }: Props) {
               case "video":
                 const videoContent = content as VideoPropsType;
                 return (
-                  <XBlock key={index} width={2}>
+                  <XBlock key={index} width={item.width}>
                     <div className="grid-item">
                       <VideoItem
                         title={videoContent.title}
@@ -74,7 +85,7 @@ export function MasonryGrid({ feed = [] }: Props) {
               case "letter":
                 const letterContent = content as Letter;
                 return (
-                  <XBlock key={index}>
+                  <XBlock key={index} width={item.width}>
                     <div className="grid-item">
                       <BriefItem
                         key={letterContent.id}
@@ -90,7 +101,7 @@ export function MasonryGrid({ feed = [] }: Props) {
               case "forum":
                 const forumContent = content as ForumPostType;
                 return (
-                  <XBlock key={index}>
+                  <XBlock key={index} width={item.width}>
                     <div className="grid-item">
                       <ForumPost
                         author={forumContent.user_name}
@@ -109,7 +120,7 @@ export function MasonryGrid({ feed = [] }: Props) {
                 const blogContent = content as BlogType;
 
                 return (
-                  <XBlock key={index}>
+                  <XBlock key={index} width={item.width}>
                     <div className="grid-item">
                       <BlogItem
                         mediaSrc={
@@ -135,7 +146,7 @@ export function MasonryGrid({ feed = [] }: Props) {
                 const instaContent = content as InstaPost;
 
                 return (
-                  <XBlock key={index}>
+                  <XBlock key={index} width={item.width}>
                     <div className="grid-item">
                       <InstagramPost embed_code={instaContent.embed_code} />
                     </div>
@@ -145,9 +156,19 @@ export function MasonryGrid({ feed = [] }: Props) {
                 // TODO: replace with CMS content
                 const tiktokContent = content as TikTokPostProps;
                 return (
-                  <XBlock key={index}>
+                  <XBlock key={index} width={item.width}>
                     <div className="grid-item">
                       <TikTokPost embed_code={tiktokContent.embed_code} />
+                    </div>
+                  </XBlock>
+                );
+              case "chat":
+                // TODO: replace with CMS content
+                const chatContent = content as VideoPropsType;
+                return (
+                  <XBlock key={index} width={item.width}>
+                    <div className="grid-item">
+                      <ChatExampleItem />
                     </div>
                   </XBlock>
                 );

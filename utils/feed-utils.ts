@@ -1,17 +1,14 @@
+import { v4 as uuidv4 } from "uuid";
+
 import { InstaPost } from "../components/content-types/InstagramPost/InstagramPost";
 import { TikTokPostProps } from "../components/content-types/TikTokPost/TikTokPost";
-import { FeedItem } from "../components/layout/MasonryGrid/MasonryGrid";
-import { POST_PER_PAGE } from "../constants/app-configs";
+import {
+  FeedItem,
+  FeedType,
+} from "../components/layout/MasonryGrid/MasonryGrid";
 import { BlogType } from "../types/content-types/Blog.type";
 import { Letter } from "../types/content-types/Letter.type";
 import { ForumPostType } from "../types/forumTypes";
-import {
-  getForumPosts,
-  getInstaPosts,
-  getLetters,
-  getPosts,
-  getTikTokPosts,
-} from "./api";
 
 /**
  * Randomizes the order of the feed
@@ -37,12 +34,25 @@ export function shuffle(array: FeedItem[]) {
   return array;
 }
 
+export function moveArrayObject(
+  feed: FeedItem[],
+  item: FeedItem,
+  newIndex: number
+) {
+  const itemIndex = feed.findIndex((feedItem) => feedItem.id === item.id);
+  const arrayItem = feed.splice(itemIndex, 1)[0];
+
+  feed.splice(newIndex, 0, arrayItem);
+
+  return feed;
+}
+
 /**
  * Generates an array of feed items
  * @param feedItems array of all the collection items to be displayed in the feed
  * @returns
  */
-export const generateFeed = (
+export const generateFeedTiles = (
   {
     blogs,
     letters,
@@ -58,48 +68,93 @@ export const generateFeed = (
   },
   addFirstVideos: boolean = false
 ) => {
-  let res: FeedItem[] = [];
+  const blogFeedItem: FeedItem[] = blogs?.map((item) => ({
+    id: `blog-${uuidv4()}`,
+    width: 4,
+    type: "blog",
+    content: item,
+  }));
+  const letterFeedItem: FeedItem[] = letters?.map((item) => ({
+    id: `letter-${uuidv4()}`,
+    width: 4,
+    type: "letter",
+    content: item,
+  }));
+  const forumFeedItem: FeedItem[] = forum?.map((item) => ({
+    id: `forum-${uuidv4()}`,
+    width: 4,
+    type: "forum",
+    content: item,
+  }));
+  const instagramFeedItem: FeedItem[] = instagram?.map((item) => ({
+    id: `instagram-${uuidv4()}`,
+    width: 4,
+    type: "instagram",
+    content: item,
+  }));
+  const tiktokFeedItem: FeedItem[] = tiktok?.map((item) => ({
+    id: `tiktok-${uuidv4()}`,
+    width: 4,
+    type: "tiktok",
+    content: item,
+  }));
 
-  blogs?.forEach((item) => {
-    res.push({ type: "blog", content: item });
-  });
-  letters?.forEach((item) => {
-    res.push({ type: "letter", content: item });
-  });
-  forum?.forEach((item) => {
-    res.push({ type: "forum", content: item });
-  });
-  instagram?.forEach((item) => {
-    res.push({ type: "instagram", content: item });
-  });
-  tiktok?.forEach((item) => {
-    res.push({ type: "tiktok", content: item });
-  });
+  // Buddy examples
+  const chatExampleFeedItem: FeedItem[] = addFirstVideos
+    ? ["1", "2"].map((item) => ({
+        id: `tiktok-${uuidv4()}`,
+        width: 4,
+        type: "chat",
+        content: {
+          title: item,
+          src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        },
+      }))
+    : [];
+
+  // TODO: replace with real video content
+  const videoFeedItem: FeedItem[] = addFirstVideos
+    ? ["Video 2", "Video 2"].map((item) => ({
+        id: `video-${uuidv4()}`,
+        type: "video",
+        width: 8,
+        content: {
+          title: item,
+          subtitle: "Hier komt een omschrijvende tekst",
+          src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+        },
+      }))
+    : [];
+
+  let res: FeedItem[] = [];
+  res = res
+    .concat(blogFeedItem)
+    .concat(letterFeedItem)
+    .concat(forumFeedItem)
+    .concat(instagramFeedItem)
+    .concat(tiktokFeedItem)
+    .concat(chatExampleFeedItem)
+    .concat(videoFeedItem);
 
   // randomize content
   res = shuffle(res);
 
   if (addFirstVideos) {
-    // TODO: replace with real video content
-    // Add video item at the very beginning
-    res.splice(0, 0, {
-      type: "video",
-      content: {
-        title: "Video 1",
-        subtitle: "Hier komt een omschrijvende tekst",
-        src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-      },
-    });
+    const firsLetter = letterFeedItem[0];
+    firsLetter.width = 6;
+    const firstInsta = instagramFeedItem[0];
+    firstInsta.width = 3;
+    const firstForum = forumFeedItem[0];
+    firstForum.width = 3;
 
-    // Add a video item to 4th place
-    res.splice(5, 0, {
-      type: "video",
-      content: {
-        title: "Video 2",
-        subtitle: "Hier komt een omschrijvende tekst",
-        src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-      },
-    });
+    // change the items for the first part of the list
+    res = moveArrayObject(res, videoFeedItem[0], 0);
+    res = moveArrayObject(res, chatExampleFeedItem[0], 1);
+    res = moveArrayObject(res, firstInsta, 2);
+    res = moveArrayObject(res, firsLetter, 3);
+    res = moveArrayObject(res, firstForum, 4);
+    res = moveArrayObject(res, chatExampleFeedItem[1], 5);
+    res = moveArrayObject(res, videoFeedItem[1], 6);
   }
 
   return res;

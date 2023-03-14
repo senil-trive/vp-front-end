@@ -28,6 +28,12 @@ const StyledForumPost = styled.article`
   position: relative;
   z-index: 1;
 
+  /* TODO: required for the home grid */
+  min-height: 624px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   header {
     display: flex;
     align-items: center;
@@ -72,29 +78,35 @@ export default function ForumPost({
 
   return (
     <StyledForumPost>
-      <header>
-        <IconButton wrapperSize={64} wrapperColor="#E0E0E0" Icon={IoMdPerson} />
-        <div>
-          <P color="info" style={{ margin: 0, fontWeight: 500 }}>
-            {authorType}
-          </P>
-          <P style={{ margin: 0, fontWeight: 300 }}>
-            {author}, {age} jaar
-          </P>
-        </div>
-      </header>
-      <div className="content">
-        {tags.length > 0 && (
-          <div className="flex">
-            {tags.map((item, index) => (
-              <Tag key={index} size="m">
-                {item}
-              </Tag>
-            ))}
+      <div>
+        <header>
+          <IconButton
+            wrapperSize={64}
+            wrapperColor="#E0E0E0"
+            Icon={IoMdPerson}
+          />
+          <div>
+            <P color="info" style={{ margin: 0, fontWeight: 500 }}>
+              {authorType}
+            </P>
+            <P style={{ margin: 0, fontWeight: 300 }}>
+              {author}, {age} jaar
+            </P>
           </div>
-        )}
+        </header>
+        <div className="content">
+          {tags.length > 0 && (
+            <div className="flex">
+              {tags.map((item, index) => (
+                <Tag key={index} size="m">
+                  {item}
+                </Tag>
+              ))}
+            </div>
+          )}
 
-        {parseHTMLtoReact(title)}
+          {parseHTMLtoReact(title)}
+        </div>
       </div>
       <footer>
         <div className="likes">

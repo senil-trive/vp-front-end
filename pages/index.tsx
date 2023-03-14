@@ -7,7 +7,7 @@ import { CircularProgress, Container } from "@mui/material";
 import { HomePageProps } from "../types/pageTypes";
 import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
 import TagList from "../components/buttons/TagList/TagList";
-import { generateFeed } from "../utils/feed-utils";
+import { generateFeedTiles } from "../utils/feed-utils";
 import { useState } from "react";
 import { useCallbackWhenReachedBottom } from "../utils/scroll";
 
@@ -26,7 +26,7 @@ export const getServerSideProps = async () => {
     return {
       props: {
         pageData: pageRes.data,
-        feed: generateFeed(
+        feed: generateFeedTiles(
           {
             blogs: blogsRes.data,
             forum: forumRes.data,
@@ -84,7 +84,7 @@ export default function Home({
                 : ``,
           });
 
-        const res = generateFeed({
+        const res = generateFeedTiles({
           blogs: blogsRes.data,
           forum: forumRes.data,
           letters: lettersRes.data,
