@@ -11,7 +11,7 @@ const moduleExports = {
   async redirects() {
     return [
       /**
-       * Redirects to the blogs and vlog
+       * Redirects for blogs and vlog
        */
       {
         source: "/blog/:path*",
@@ -26,6 +26,19 @@ const moduleExports = {
       {
         source: "/in-de-media/:path*",
         destination: "/kinderen/verhalen/:path*",
+        permanent: false,
+      },
+      /**
+       * Redirects for forum
+       */
+      {
+        source: "/forum/",
+        destination: "/kinderen/forum/",
+        permanent: false,
+      },
+      {
+        source: "/forum/:path*",
+        destination: "/kinderen/forum/:path*",
         permanent: false,
       },
     ];
