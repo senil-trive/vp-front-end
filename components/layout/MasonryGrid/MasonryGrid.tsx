@@ -13,7 +13,6 @@ import BriefItem from "../../content-types/BriefItem/BriefItem";
 import { Container } from "@mui/material";
 import ForumPost from "../../content-types/ForumPost/ForumPost";
 import { ForumPostType } from "../../../types/forumTypes";
-import { INSTA_EMBED_POST } from "../../../constants/mockData";
 import { Letter } from "../../../types/content-types/Letter.type";
 import { MasonryGridWrapper } from "./MasonryGrid.styled";
 import VideoItem from "../../content-types/VideoItem/VideoItem";
@@ -93,10 +92,13 @@ export function MasonryGrid({ feed = [] }: Props) {
                   <XBlock key={index}>
                     <div className="grid-item">
                       <ForumPost
-                        author={forumContent.user_name}
+                        showButton
+                        buttonUrl={`/kinderen/forum/${forumContent.slug}`}
+                        truncateContent
+                        gender={forumContent.user_gender}
                         age={forumContent.user_age}
                         likes={Number(forumContent.likes)}
-                        authorType={"Anonymous"}
+                        authorType={forumContent.user_name}
                         postDate={new Date(forumContent.date_created)}
                         tags={[]}
                         title={forumContent.content}

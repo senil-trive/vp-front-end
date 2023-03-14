@@ -38,11 +38,13 @@ const Style = css<Props>`
   border-radius: 12px;
   padding: 16px;
   border: none;
-  font-weight: 400;
+  font-weight: bold;
+  font-family: ${({ theme }) => theme.fonts.primary};
   font-size: ${({ theme }) => theme.fontSizes.p.mobile};
   color: ${({ theme }) => theme.colors.white};
   line-height: 160%;
   text-align: center;
+  text-transform: uppercase;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};

@@ -1,13 +1,13 @@
 import styled, { useTheme } from "styled-components";
 
+import { BsPatchQuestionFill } from "react-icons/bs";
+import Button from "../../buttons/Button";
 import HeartIcon from "../../icons/HeartIcon/HeartIcon";
 import IconButton from "../../buttons/IconButton/IconButton";
-import { IoMdPerson } from "react-icons/io";
 import { P } from "../../typography";
 import React from "react";
 import Tag from "../../buttons/Tag/Tag";
-import { format } from "date-fns";
-import { parseDateRelative } from "../../../utils/parseDate";
+import { parseDate } from "../../../utils/parseDate";
 import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
 import { truncate } from "../../../utils/truncate";
 
@@ -17,6 +17,8 @@ type Props = {
   age: string;
   title: string;
   truncateContent?: boolean;
+  showButton?: boolean;
+  buttonUrl?: string;
   tags: string[];
   likes: number;
   postDate?: Date;
@@ -24,12 +26,13 @@ type Props = {
 
 const StyledForumPost = styled.article`
   background: #ffffff;
-  border: 1px solid ${({ theme }) => theme.colors.primary};
+  /* border: 1px solid ${({ theme }) => theme.colors.primary}; */
   border-radius: 8px;
   padding: 24px;
   overflow: hidden;
   position: relative;
   z-index: 1;
+  background: rgba(0, 110, 247, 0.05);
 
   header {
     display: flex;
@@ -64,12 +67,13 @@ const StyledForumPost = styled.article`
 
 export default function ForumPost({
   title,
-  gender,
   age,
   likes = 0,
   authorType,
   postDate,
-  truncateContent = false,
+  truncateContent = true,
+  showButton = false,
+  buttonUrl = "",
   tags = [],
 }: Props) {
   const { colors } = useTheme();
@@ -77,14 +81,19 @@ export default function ForumPost({
   return (
     <StyledForumPost>
       <header>
-        <IconButton wrapperSize={64} wrapperColor="#E0E0E0" Icon={IoMdPerson} />
+        <IconButton
+          wrapperSize={64}
+          wrapperColor="white"
+          iconColor={colors.info}
+          Icon={BsPatchQuestionFill}
+        />
         <div>
           <P color="info" style={{ margin: 0, fontWeight: 500 }}>
             {authorType}
           </P>
 
           <P style={{ margin: 0, fontWeight: 300 }}>
-            {gender}, {age?.includes("jaar") ? age : `${age} jaar`}
+            {age?.includes("jaar") ? age : `${age} jaar`}
           </P>
         </div>
       </header>
@@ -100,7 +109,7 @@ export default function ForumPost({
         )}
 
         {truncateContent
-          ? parseHTMLtoReact(truncate(title, 200))
+          ? parseHTMLtoReact(truncate(title, 180))
           : parseHTMLtoReact(title)}
       </div>
       <footer>
@@ -117,11 +126,22 @@ export default function ForumPost({
         <div>
           {postDate && (
             <P variant="helper" color="info" style={{ textAlign: "right" }}>
-              Geplaatst op {parseDateRelative(postDate)}
+              Geplaatst op {parseDate(postDate)}
             </P>
           )}
         </div>
       </footer>
+      {showButton && (
+        <Button
+          style={{
+            margin: "1rem auto",
+          }}
+          variant="info"
+          href={buttonUrl}
+        >
+          Vraag bekijken
+        </Button>
+      )}
     </StyledForumPost>
   );
 }

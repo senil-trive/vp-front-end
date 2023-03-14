@@ -68,6 +68,7 @@ export default function ForumDetail({ slug, pageData }: Props) {
               likes={Number(pageData.likes)}
               authorType={pageData.user_name}
               postDate={new Date(pageData.date_created)}
+              truncateContent={false}
               tags={[]}
               title={pageData.content}
             />

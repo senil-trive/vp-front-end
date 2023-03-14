@@ -2,8 +2,11 @@ import { DefaultTheme } from "styled-components";
 
 export const COLORS = {
   primary: "#3FC7B4", // Teal
+  primaryTransparent: "rgba(63, 199, 180, 0.025)", // Teal
   secondary: "#FE517E", // Crimson
+  secondaryTransparent: "rgba(255, 151, 29, 0.025)", // Crimson
   tertiary: "#006EF7", // Blue
+  tertiaryTransparent: "rgba(0, 110, 247, 0.05)", // Blue
   text: "#150F2F", // Black
   white: "#fff", // White
   black: "#150F2F", // Black
@@ -11,6 +14,7 @@ export const COLORS = {
   error: "#FF3333", // Error red
   success: "#06D6A0", // Success
   info: "#FF971D", // Orange
+  infoTransparent: "rgba(255, 151, 29, 0.7)", // Orange
   infoReversed: "#FF971D", // Orange
 };
 
@@ -18,6 +22,11 @@ export const SHADOWS = {
   sm: "0px 0px 10px rgba(0, 0, 0, 0.1)",
   cardDefault: "0px 4px 25px 0px rgba(0, 0, 0, 0.1)",
   cardHover: "0px 4px 25px 0px rgba(0, 0, 0, 0.2)",
+};
+
+export const FONTS = {
+  primary: "Fjalla One",
+  secondary: "Avenir Next Cyr",
 };
 
 export const FONT_SIZES = {
@@ -79,6 +88,7 @@ export const DEFAULT_THEME: DefaultTheme = {
   name: "default",
   colors: COLORS,
   shadows: SHADOWS,
+  fonts: FONTS,
   fontSizes: FONT_SIZES,
   breakpoints: BREAKPOINTS,
   devices: DEVICES,

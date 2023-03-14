@@ -7,5 +7,10 @@ export function parseDateRelative(date: Date) {
 
 export function parseDateWithTime(date: string) {
   if (!date) return;
-  return format(new Date(date), "dd/MM/yyy hh:mm:ss");
+  return format(new Date(date), "dd-MM-yyy hh:mm:ss");
+}
+
+export function parseDate(date: Date) {
+  if (!date) return;
+  return format(date, "dd-MM-yyy");
 }
