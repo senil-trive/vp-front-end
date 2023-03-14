@@ -8,6 +8,28 @@ const moduleExports = {
   images: {
     domains: ["admin.villapinedo.nl", "randomuser.me"],
   },
+  async redirects() {
+    return [
+      /**
+       * Redirects to the blogs and vlog
+       */
+      {
+        source: "/blog/:path*",
+        destination: "/kinderen/verhalen/:path*",
+        permanent: false,
+      },
+      {
+        source: "/filmpjes/:path*",
+        destination: "/kinderen/verhalen/:path*",
+        permanent: false,
+      },
+      {
+        source: "/in-de-media/:path*",
+        destination: "/kinderen/verhalen/:path*",
+        permanent: false,
+      },
+    ];
+  },
 };
 
 if (!process.env.LOCAL) {
