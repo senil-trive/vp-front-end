@@ -111,6 +111,14 @@ export default function Vraag() {
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <Input
+                        label="Woonplaats"
+                        type="text"
+                        name="user_location"
+                        register={register}
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <Input
                         label="Upload bestand"
                         type="file"
                         name="attachment_image"
