@@ -1,121 +1,47 @@
-import {
-  FeedItem,
-  MasonryGrid,
-} from "../components/layout/MasonryGrid/MasonryGrid";
+import { MasonryGrid } from "../components/layout/MasonryGrid/MasonryGrid";
 import { Grid, Hero } from "../components/layout";
 import { H1, P } from "../components/typography";
-import {
-  getCategories,
-  getForumPosts,
-  getHomeData,
-  getInstaPosts,
-  getLetters,
-  getPosts,
-  getTikTokPosts,
-} from "../utils/api";
+import { getContentTags, getFeed, getHomeData } from "../utils/api";
 
-import { BlogType } from "../types/content-types/Blog.type";
-import { Container } from "@mui/material";
-import { ForumPostType } from "../types/forumTypes";
+import { CircularProgress, Container } from "@mui/material";
 import { HomePageProps } from "../types/pageTypes";
-import { InstaPost } from "../components/content-types/InstagramPost/InstagramPost";
-import { Letter } from "../types/content-types/Letter.type";
-import { POST_PER_PAGE } from "../constants/app-configs";
 import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
 import TagList from "../components/buttons/TagList/TagList";
-import { TikTokPostProps } from "../components/content-types/TikTokPost/TikTokPost";
-import { shuffle } from "../utils/feed-utils";
+import { generateFeed } from "../utils/feed-utils";
+import { useState } from "react";
+import { useCallbackWhenReachedBottom } from "../utils/scroll";
 
-const generateFeed = ({
-  blogs,
-  letters,
-  forum,
-  instagram,
-  tiktok,
-}: {
-  blogs: BlogType[];
-  letters: Letter[];
-  forum: ForumPostType[];
-  instagram: InstaPost[];
-  tiktok: TikTokPostProps[];
-}) => {
-  let res: FeedItem[] = [];
-
-  blogs?.forEach((item) => {
-    res.push({ type: "blog", content: item });
-  });
-  letters?.forEach((item) => {
-    res.push({ type: "letter", content: item });
-  });
-  forum?.forEach((item) => {
-    res.push({ type: "forum", content: item });
-  });
-  instagram?.forEach((item) => {
-    res.push({ type: "instagram", content: item });
-  });
-  tiktok?.forEach((item) => {
-    res.push({ type: "tiktok", content: item });
-  });
-
-  // randomize content
-  res = shuffle(res);
-
-  // TODO: replace with real video content
-  // Add video item at the very beginning
-  res.splice(0, 0, {
-    type: "video",
-    content: {
-      title: "Video 1",
-      subtitle: "Hier komt een omschrijvende tekst",
-      src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-    },
-  });
-
-  // Add a video item to 4th place
-  res.splice(5, 0, {
-    type: "video",
-    content: {
-      title: "Video 2",
-      subtitle: "Hier komt een omschrijvende tekst",
-      src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-    },
-  });
-
-  return res;
-};
-
+const POST_PER_PAGE = 6;
 export const getServerSideProps = async () => {
   try {
     const pageReq = await getHomeData();
-    const blogsReq = await getPosts({ postPerPage: POST_PER_PAGE });
-    const instagramReq = await getInstaPosts({ postPerPage: POST_PER_PAGE });
-    const tiktokReq = await getTikTokPosts({ postPerPage: POST_PER_PAGE });
-    const forumReq = await getForumPosts({
-      postPerPage: POST_PER_PAGE,
-    });
-    const lettersReq = await getLetters({
-      postPerPage: POST_PER_PAGE,
-    });
-    const categoriesReq = await getCategories();
+    const categoriesReq = await getContentTags();
 
     const pageRes = await pageReq.json();
-    const blogsRes = await blogsReq.json();
-    const instagramRes = await instagramReq.json();
-    const tiktokRes = await tiktokReq.json();
-    const forumRes = await forumReq.json();
-    const lettersRes = await lettersReq.json();
     const categoriesRes = await categoriesReq.json();
+
+    const { blogsRes, instagramRes, tiktokRes, forumRes, lettersRes } =
+      await getFeed({ postPerPage: POST_PER_PAGE, meta: "filter_count" });
 
     return {
       props: {
         pageData: pageRes.data,
-        feed: generateFeed({
-          blogs: blogsRes.data,
-          forum: forumRes.data,
-          letters: lettersRes.data,
-          instagram: instagramRes.data,
-          tiktok: tiktokRes.data,
-        }),
+        feed: generateFeed(
+          {
+            blogs: blogsRes.data,
+            forum: forumRes.data,
+            letters: lettersRes.data,
+            instagram: instagramRes.data,
+            tiktok: tiktokRes.data,
+          },
+          true
+        ),
+        totalPosts:
+          blogsRes.meta.filter_count +
+            forumRes.meta.filter_count +
+            lettersRes.meta.filter_count +
+            instagramRes.meta.filter_count +
+            tiktokRes.meta.filter_count || 0,
         categories: categoriesRes.data,
       },
     };
@@ -130,7 +56,53 @@ export const getServerSideProps = async () => {
   }
 };
 
-export default function Home({ pageData, categories, feed }: HomePageProps) {
+export default function Home({
+  pageData,
+  categories,
+  feed,
+  totalPosts,
+}: HomePageProps) {
+  const [selectedTag, setSelectedTag] = useState<string>("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [posts, setPosts] = useState(feed);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
+
+  useCallbackWhenReachedBottom(async () => {
+    if (posts.length < totalPosts) {
+      setIsLoading(true);
+
+      try {
+        const { blogsRes, instagramRes, tiktokRes, forumRes, lettersRes } =
+          await getFeed({
+            postPerPage: POST_PER_PAGE,
+            page: currentPage + 1,
+            meta: "filter_count",
+            filter:
+              selectedTag.length > 0
+                ? `filter={"categories": { "categories_id": { "id": { "_eq": "${selectedTag}"}}}}`
+                : ``,
+          });
+
+        const res = generateFeed({
+          blogs: blogsRes.data,
+          forum: forumRes.data,
+          letters: lettersRes.data,
+          instagram: instagramRes.data,
+          tiktok: tiktokRes.data,
+        });
+
+        setPosts([...posts, ...res]);
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+      setCurrentPage((page) => page + 1);
+    } else {
+      setIsEnd(true);
+    }
+  });
+
   return (
     <PageWrapper
       title={pageData?.page_title}
@@ -156,7 +128,7 @@ export default function Home({ pageData, categories, feed }: HomePageProps) {
           </Grid>
         </Container>
       </Hero>
-      <main>
+      <main style={{ marginBottom: "80px" }}>
         <Container maxWidth="xl">
           <Grid container style={{ marginBottom: "32px" }}>
             <Grid item xs={12}>
@@ -166,12 +138,21 @@ export default function Home({ pageData, categories, feed }: HomePageProps) {
                   name: cat.name,
                   status: cat.status,
                 }))}
+                selected={selectedTag}
+                onSelect={(x: string) => {
+                  setSelectedTag(x);
+                }}
               />
             </Grid>
           </Grid>
         </Container>
 
-        <MasonryGrid feed={feed} />
+        <MasonryGrid feed={posts} />
+
+        <div className="flex items-center justify-center">
+          {isLoading && <CircularProgress size={"30px"} />}
+          {isEnd && <P color="info">Geen posts meer om te tonen</P>}
+        </div>
       </main>
     </PageWrapper>
   );

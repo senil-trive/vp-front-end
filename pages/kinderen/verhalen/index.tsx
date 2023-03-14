@@ -1,6 +1,4 @@
-import { Container, Grid } from "@mui/material";
-import { H1, P, TitleWithHighlights } from "../../../components/typography";
-import { Hero, Pagination } from "../../../components/layout";
+import { CircularProgress, Container, Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import {
   getContentTags,
@@ -16,6 +14,9 @@ import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import SortBar from "../../../components/form/SortBar/SortBar";
 import TagList from "../../../components/buttons/TagList/TagList";
 import { useTheme } from "styled-components";
+import { Hero } from "../../../components/layout";
+import { P, TitleWithHighlights } from "../../../components/typography";
+import { useCallbackWhenReachedBottom } from "../../../utils/scroll";
 
 export const getServerSideProps = async () => {
   try {
@@ -56,21 +57,43 @@ export default function Forum({
   tags,
 }: BlogPageProps) {
   const { colors } = useTheme();
-  // const { query, push } = useRouter(); // TODO: also the pagination and search through url query
   const [posts, setPosts] = useState(blogsData);
   const [totalCount, setTotalCount] = useState(totalPosts);
   const [selectedTag, setSelectedTag] = useState<string>("");
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+  const [isEnd, setIsEnd] = useState(false);
 
-  const changePage = (index: number) => {
-    if (index <= 1) {
-      setCurrentPage(1);
+  useCallbackWhenReachedBottom(async () => {
+    if (posts.length < totalCount) {
+      setIsLoading(true);
+      try {
+        const req = await getPosts({
+          postPerPage: POST_PER_PAGE,
+          page: currentPage + 1,
+          search,
+          sort,
+          meta: "filter_count",
+          filter:
+            selectedTag.length > 0
+              ? `filter={"categories": { "categories_id": { "id": { "_eq": "${selectedTag}"}}}}`
+              : ``,
+        });
+        const res = await req.json();
+
+        setPosts([...posts, ...(res.data || [])]);
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+
+      setCurrentPage((page) => page + 1);
     } else {
-      setCurrentPage(index);
+      setIsEnd(true);
     }
-  };
+  });
 
   const handleSearch = (x: string) => {
     setSearch(x);
@@ -86,7 +109,7 @@ export default function Forum({
       try {
         const req = await getPosts({
           postPerPage: POST_PER_PAGE,
-          page: currentPage,
+          // page: currentPage,
           search,
           sort,
           meta: "filter_count",
@@ -104,7 +127,7 @@ export default function Forum({
     };
 
     getPaginatedBlogs();
-  }, [currentPage, search, sort, selectedTag]);
+  }, [search, sort, selectedTag]);
 
   return (
     <PageWrapper title="Blog en vlog overzicht">
@@ -159,13 +182,10 @@ export default function Forum({
           />
         </div>
 
-        {totalCount / POST_PER_PAGE > 2 && posts.length >= POST_PER_PAGE && (
-          <Pagination
-            total={Math.ceil(totalCount / POST_PER_PAGE)}
-            truncated
-            onChange={changePage}
-          />
-        )}
+        <div className="flex items-center justify-center">
+          {isLoading && <CircularProgress size={"30px"} />}
+          {isEnd && <P color="info">Geen posts meer om te tonen</P>}
+        </div>
       </main>
     </PageWrapper>
   );

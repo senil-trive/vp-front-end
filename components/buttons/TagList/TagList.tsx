@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
-
+import React from "react";
 import { Container } from "@mui/system";
+import styled from "styled-components";
+
 import Tag from "../Tag/Tag";
 import { Tag as TagType } from "../../../types/content-types/Tag.type";
-import styled from "styled-components";
+import { useHorizontalScrollHints } from "../../../utils/scroll";
 
 type Props = {
   tags: TagType[];
@@ -56,42 +57,13 @@ const Wrapper = styled.div`
   }
 `;
 
-type DirectionType = "left" | "right" | "";
 export default function TagList({ tags, selected, onSelect }: Props) {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const handleScroll = () => {
-    const newScrollLeft = containerRef?.current?.scrollLeft;
-    const width = containerRef?.current?.getBoundingClientRect().width;
-    const scrollWidth = containerRef?.current?.scrollWidth;
-
-    if (newScrollLeft === 0) {
-      containerRef?.current?.classList.remove("scrolling-left");
-    } else if (
-      newScrollLeft &&
-      scrollWidth &&
-      width &&
-      newScrollLeft >= scrollWidth - width
-    ) {
-      containerRef?.current?.classList.remove("scrolling-right");
-    } else {
-      containerRef?.current?.classList.add("scrolling-right");
-      containerRef?.current?.classList.add("scrolling-left");
-    }
-  };
-
-  useEffect(() => {
-    handleScroll();
-  }, []);
+  const containerRef = useHorizontalScrollHints();
 
   return (
     <Container maxWidth="xl" style={{ margin: "0 auto 21px" }}>
       <Wrapper>
-        <div
-          ref={containerRef}
-          className="inner scrolling-right"
-          onScroll={handleScroll}
-        >
+        <div ref={containerRef} className="inner scrolling-right">
           <div className="scroll-indicator indicator-left" />
           {tags.map((tag, index) => (
             <Tag

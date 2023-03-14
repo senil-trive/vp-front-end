@@ -2,6 +2,12 @@ import { CompanyInfo } from "../types/componayInfoTypes";
 import ENDPOINTS from "../constants/endpoints";
 import { MenuItem } from "../components/layout/Header/Header";
 import { VolunteerRequestType } from "../types/volunteerRequestTypes";
+import { POST_PER_PAGE } from "../constants/app-configs";
+import { BlogType } from "../types/content-types/Blog.type";
+import { Letter } from "../types/content-types/Letter.type";
+import { ForumPostType } from "../types/forumTypes";
+import { InstaPost } from "../components/content-types/InstagramPost/InstagramPost";
+import { TikTokPostProps } from "../components/content-types/TikTokPost/TikTokPost";
 
 type DirectusParams = {
   /** The amount of items that will be fetched, set -1 to retrieve all */
@@ -173,9 +179,13 @@ export const getLetters = async ({
   search,
   sort,
   filter,
+  meta = "total_count",
 }: DirectusParams) => {
   let url = `${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
 
+  if (meta) {
+    url = `${url}&meta=${meta}`;
+  }
   if (search) {
     url = `${url}&search=${search}`;
   }
@@ -274,9 +284,13 @@ export const getInstaPosts = async ({
   search,
   sort,
   filter,
+  meta = "total_count",
 }: DirectusParams) => {
   let url = `${ENDPOINTS.COLLECTIONS}/instagram_embeds?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
 
+  if (meta) {
+    url = `${url}&meta=${meta}`;
+  }
   if (search) {
     url = `${url}&search=${search}`;
   }
@@ -308,9 +322,13 @@ export const getTikTokPosts = async ({
   search,
   sort,
   filter,
+  meta = "total_count",
 }: DirectusParams) => {
   let url = `${ENDPOINTS.COLLECTIONS}/tiktok_embed?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
 
+  if (meta) {
+    url = `${url}&meta=${meta}`;
+  }
   if (search) {
     url = `${url}&search=${search}`;
   }
@@ -413,19 +431,6 @@ export const getHomeData = async () => {
 };
 
 /**
- * Get a list of all categories
- * @returns
- */
-export const getCategories = async () => {
-  return await fetch(`${ENDPOINTS.COLLECTIONS}/categories?fields=*.*.*`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-};
-
-/**
  * Add a volunteer application
  * @param data
  */
@@ -454,4 +459,47 @@ export const getContentTags = async () => {
       },
     }
   );
+};
+
+export const getFeed = async ({
+  postPerPage = POST_PER_PAGE,
+  page = 1,
+  meta = "total_count",
+}: DirectusParams) => {
+  const [blogsReq, instagramReq, tiktokReq, forumReq, lettersReq] =
+    await Promise.all([
+      getPosts({
+        postPerPage,
+        page,
+        meta,
+      }),
+      getInstaPosts({
+        postPerPage,
+        page,
+        meta,
+      }),
+      getTikTokPosts({
+        postPerPage,
+        page,
+        meta,
+      }),
+      getForumPosts({
+        postPerPage,
+        page,
+        meta,
+      }),
+      getLetters({
+        postPerPage,
+        page,
+        meta,
+      }),
+    ]);
+
+  return {
+    blogsRes: await blogsReq.json(),
+    instagramRes: await instagramReq.json(),
+    tiktokRes: await tiktokReq.json(),
+    forumRes: await forumReq.json(),
+    lettersRes: await lettersReq.json(),
+  };
 };
