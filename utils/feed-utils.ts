@@ -114,7 +114,7 @@ export const generateFeedTiles = (
 
   // TODO: replace with real video content
   const videoFeedItem: FeedItem[] = addFirstVideos
-    ? ["Video 2", "Video 2"].map((item) => ({
+    ? ["Video 1", "Video 2"].map((item) => ({
         id: `video-${uuidv4()}`,
         type: "video",
         width: 8,

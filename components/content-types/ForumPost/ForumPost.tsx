@@ -119,26 +119,27 @@ export default function ForumPost({
             ? parseHTMLtoReact(truncate(title, 180))
             : parseHTMLtoReact(title)}
         </div>
-      </div>
-      <footer>
-        <div className="likes">
-          {likes > 0 && (
-            <>
-              <HeartIcon color={colors.info} />
-              <P color="info" variant="helper">
-                {likes}
+
+        <footer>
+          <div className="likes">
+            {likes > 0 && (
+              <>
+                <HeartIcon color={colors.info} />
+                <P color="info" variant="helper">
+                  {likes}
+                </P>
+              </>
+            )}
+          </div>
+          <div>
+            {postDate && (
+              <P variant="helper" color="info" style={{ textAlign: "right" }}>
+                Geplaatst op {parseDate(postDate)}
               </P>
-            </>
-          )}
-        </div>
-        <div>
-          {postDate && (
-            <P variant="helper" color="info" style={{ textAlign: "right" }}>
-              Geplaatst op {parseDate(postDate)}
-            </P>
-          )}
-        </div>
-      </footer>
+            )}
+          </div>
+        </footer>
+      </div>
       {showButton && (
         <Button
           style={{
