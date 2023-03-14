@@ -23,8 +23,8 @@ import { useTheme } from "styled-components";
 const forumSortOptions = [
   { name: "Titel (a-z)", value: "content" },
   { name: "Titel (z-a)", value: "-content" },
-  { name: "Autheur (a-z)", value: "user_name" },
-  { name: "Autheur (z-a)", value: "-user_name" },
+  { name: "Auteur (a-z)", value: "user_name" },
+  { name: "Auteur (z-a)", value: "-user_name" },
   { name: "Datum (oud-nieuw)", value: "date_created" },
   { name: "Datum (nieuw-oud)", value: "-date_created" },
 ];
@@ -178,21 +178,20 @@ export default function Forum({
             ) : (
               <>
                 <Grid item xs={12} md={9}>
-                  <P style={{ color: colors.primary }}>
-                    {totalCount} forum post
-                  </P>
+                  <P style={{ color: colors.primary }}>{totalCount} vragen</P>
                 </Grid>
                 <Grid item xs={12} md={3}>
                   <SortBar sortOptions={forumSortOptions} onSort={handleSort} />
                 </Grid>
                 {posts.map((item, index) => (
                   <Grid key={index} item xs={12} md={4}>
-                    <Link href={`forum/${item.id}`}>
+                    <Link href={`forum/${item.slug}`}>
                       <ForumPost
-                        author={item.user_name}
+                        truncateContent
+                        gender={item.user_gender}
                         age={item.user_age}
                         likes={Number(item.likes)}
-                        authorType={"Anonymous"}
+                        authorType={item.user_name}
                         postDate={new Date(item.date_created)}
                         tags={[]}
                         title={item.content}

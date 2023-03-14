@@ -1,19 +1,22 @@
-import React from "react";
 import styled, { useTheme } from "styled-components";
-import { IoMdPerson } from "react-icons/io";
-import { format } from "date-fns";
 
-import IconButton from "../../buttons/IconButton/IconButton";
-import { P } from "../../typography";
-import Tag from "../../buttons/Tag/Tag";
 import HeartIcon from "../../icons/HeartIcon/HeartIcon";
+import IconButton from "../../buttons/IconButton/IconButton";
+import { IoMdPerson } from "react-icons/io";
+import { P } from "../../typography";
+import React from "react";
+import Tag from "../../buttons/Tag/Tag";
+import { format } from "date-fns";
+import { parseDateRelative } from "../../../utils/parseDate";
 import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
+import { truncate } from "../../../utils/truncate";
 
 type Props = {
   authorType: string;
-  author: string;
-  age: number;
+  gender: string;
+  age: string;
   title: string;
+  truncateContent?: boolean;
   tags: string[];
   likes: number;
   postDate?: Date;
@@ -61,11 +64,12 @@ const StyledForumPost = styled.article`
 
 export default function ForumPost({
   title,
-  author,
+  gender,
   age,
   likes = 0,
   authorType,
   postDate,
+  truncateContent = false,
   tags = [],
 }: Props) {
   const { colors } = useTheme();
@@ -78,8 +82,9 @@ export default function ForumPost({
           <P color="info" style={{ margin: 0, fontWeight: 500 }}>
             {authorType}
           </P>
+
           <P style={{ margin: 0, fontWeight: 300 }}>
-            {author}, {age} jaar
+            {gender}, {age?.includes("jaar") ? age : `${age} jaar`}
           </P>
         </div>
       </header>
@@ -94,7 +99,9 @@ export default function ForumPost({
           </div>
         )}
 
-        {parseHTMLtoReact(title)}
+        {truncateContent
+          ? parseHTMLtoReact(truncate(title, 200))
+          : parseHTMLtoReact(title)}
       </div>
       <footer>
         <div className="likes">
@@ -110,7 +117,7 @@ export default function ForumPost({
         <div>
           {postDate && (
             <P variant="helper" color="info" style={{ textAlign: "right" }}>
-              Geplaatst op {format(postDate, "dd/mm/yyyy")}
+              Geplaatst op {parseDateRelative(postDate)}
             </P>
           )}
         </div>

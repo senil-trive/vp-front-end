@@ -1,13 +1,13 @@
-import { debounce } from "@mui/material";
-import React from "react";
-import ListIcon from "../../icons/ListIcon/ListIcon";
 import Dropdown from "../Dropdown/Dropdown";
+import ListIcon from "../../icons/ListIcon/ListIcon";
+import React from "react";
+import { debounce } from "@mui/material";
 
 const defaultSortOptions = [
   { name: "Titel (a-z)", value: "title" },
   { name: "Titel (z-a)", value: "-title" },
-  { name: "Autheur (a-z)", value: "author" },
-  { name: "Autheur (z-a)", value: "-author" },
+  { name: "Auteur (a-z)", value: "author" },
+  { name: "Auteur (z-a)", value: "-author" },
   { name: "Datum (oud-nieuw)", value: "date_created" },
   { name: "Datum (nieuw-oud)", value: "-date_created" },
 ];
