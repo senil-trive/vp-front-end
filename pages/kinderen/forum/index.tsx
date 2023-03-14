@@ -178,14 +178,14 @@ export default function Forum({
             ) : (
               <>
                 <Grid item xs={12} md={9}>
-                  <P style={{ color: colors.primary }}>{totalCount} vragen</P>
+                  <P color="primary">{totalCount} vragen</P>
                 </Grid>
                 <Grid item xs={12} md={3}>
                   <SortBar sortOptions={forumSortOptions} onSort={handleSort} />
                 </Grid>
                 {posts.map((item, index) => (
                   <Grid key={index} item xs={12} md={4}>
-                    <Link href={`forum/${item.slug}`}>
+                    <Link href={`/kinderen/forum/${item.slug}`}>
                       <ForumPost
                         truncateContent
                         gender={item.user_gender}
