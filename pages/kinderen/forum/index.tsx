@@ -154,19 +154,13 @@ export default function Forum({
       </Hero>
 
       <main style={{ marginBottom: "80px" }}>
-        <Container style={{ marginBottom: 56 }}>
-          <Grid container style={{ marginBottom: "32px" }}>
-            <Grid item xs={12}>
-              <TagList
-                tags={tags}
-                selected={selectedTag}
-                onSelect={(x: string) => {
-                  setSelectedTag(x);
-                }}
-              />
-            </Grid>
-          </Grid>
-        </Container>
+        <TagList
+          tags={tags}
+          selected={selectedTag}
+          onSelect={(x: string) => {
+            setSelectedTag(x);
+          }}
+        />
 
         <CollectionSearchBar onSearch={handleSearch} />
 
