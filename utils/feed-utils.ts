@@ -107,7 +107,7 @@ export const generateFeedTiles = (
         type: "chat",
         content: {
           title: item,
-          src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+          src: "",
         },
       }))
     : [];

@@ -8,7 +8,7 @@ import { HomePageProps } from "../types/pageTypes";
 import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
 import TagList from "../components/buttons/TagList/TagList";
 import { generateFeedTiles } from "../utils/feed-utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCallbackWhenReachedBottom } from "../utils/scroll";
 
 const POST_PER_PAGE = 6;
@@ -68,40 +68,60 @@ export default function Home({
   const [isLoading, setIsLoading] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
-  useCallbackWhenReachedBottom(async () => {
-    if (posts.length < totalPosts) {
-      setIsLoading(true);
+  const getAllFeedItem = async (append = true) => {
+    setIsLoading(true);
 
-      try {
-        const { blogsRes, instagramRes, tiktokRes, forumRes, lettersRes } =
-          await getFeed({
-            postPerPage: POST_PER_PAGE,
-            page: currentPage + 1,
-            meta: "filter_count",
-            filter:
-              selectedTag.length > 0
-                ? `filter={"categories": { "categories_id": { "id": { "_eq": "${selectedTag}"}}}}`
-                : ``,
-          });
-
-        const res = generateFeedTiles({
-          blogs: blogsRes.data,
-          forum: forumRes.data,
-          letters: lettersRes.data,
-          instagram: instagramRes.data,
-          tiktok: tiktokRes.data,
+    try {
+      const { blogsRes, instagramRes, tiktokRes, forumRes, lettersRes } =
+        await getFeed({
+          postPerPage: POST_PER_PAGE,
+          page: currentPage + 1,
+          meta: "filter_count",
+          filter:
+            selectedTag.length > 0
+              ? `filter={"categories": { "categories_id": { "id": { "_eq": "${selectedTag}"}}}}`
+              : ``,
         });
 
+      const res = generateFeedTiles(
+        {
+          blogs: blogsRes?.data ?? [],
+          forum: forumRes?.data ?? [],
+          letters: lettersRes?.data ?? [],
+          instagram: instagramRes?.data ?? [],
+          tiktok: tiktokRes?.data ?? [],
+        },
+        // generated first tiles only when its the first load
+        false
+      );
+
+      if (append) {
         setPosts([...posts, ...res]);
-        setIsLoading(false);
-      } catch (error) {
-        console.log(error);
+      } else {
+        setPosts(res);
       }
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useCallbackWhenReachedBottom(async () => {
+    if (posts.length < totalPosts && !selectedTag) {
+      getAllFeedItem();
       setCurrentPage((page) => page + 1);
     } else {
       setIsEnd(true);
     }
   });
+
+  useEffect(() => {
+    console.log(selectedTag);
+
+    if (selectedTag) {
+      getAllFeedItem(false);
+    }
+  }, [selectedTag]);
 
   return (
     <PageWrapper
@@ -151,7 +171,11 @@ export default function Home({
 
         <div className="flex items-center justify-center">
           {isLoading && <CircularProgress size={"30px"} />}
-          {isEnd && <P color="info">Geen posts meer om te tonen</P>}
+          {isEnd && (
+            <P color="info">
+              Geen posts {posts.length <= 0 ? "" : "meer"} om te tonen
+            </P>
+          )}
         </div>
       </main>
     </PageWrapper>

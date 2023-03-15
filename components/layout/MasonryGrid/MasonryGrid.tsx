@@ -60,6 +60,8 @@ export function MasonryGrid({ feed = [] }: Props) {
     );
   }
 
+  console.log({ loading });
+
   return (
     <MasonryGridWrapper>
       <Container maxWidth="xl" style={{ padding: " 0 13px" }}>

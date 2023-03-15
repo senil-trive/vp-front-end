@@ -6,6 +6,7 @@ import hexToRgba from "hex-to-rgba";
 import Button from "../../buttons/Button";
 import IconButton from "../../buttons/IconButton/IconButton";
 import { P } from "../../typography";
+import UserAvatar from "../../icons/UserAvatar/UserAvatar";
 
 const StyledForumPost = styled.article`
   background: ${({ theme }) => hexToRgba(theme.colors.success, 0.1)};
@@ -57,10 +58,10 @@ export default function ChatExampleItem() {
     <StyledForumPost>
       <div>
         <header>
-          <IconButton
-            wrapperSize={64}
-            wrapperColor="#E0E0E0"
-            Icon={IoMdPerson}
+          <UserAvatar
+            size="md"
+            alt="villa pinedo"
+            src="/android-chrome-192x192.png"
           />
           <div>
             <P color="success" style={{ margin: 0, fontWeight: 500 }}>
@@ -72,11 +73,7 @@ export default function ChatExampleItem() {
         <div className="content"></div>
       </div>
       <footer>
-        <Button
-          variant="success"
-          style={{ backgroundColor: "#3FC7B4" }}
-          href="/vrijwilligerswerk/buddy-programma"
-        >
+        <Button variant="success" href="/vrijwilligerswerk/buddy-programma">
           Nu Chatten
         </Button>
       </footer>

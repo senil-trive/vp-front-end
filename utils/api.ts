@@ -464,6 +464,7 @@ export const getContentTags = async () => {
 export const getFeed = async ({
   postPerPage = POST_PER_PAGE,
   page = 1,
+  filter,
   meta = "total_count",
 }: DirectusParams) => {
   const [blogsReq, instagramReq, tiktokReq, forumReq, lettersReq] =
@@ -472,25 +473,30 @@ export const getFeed = async ({
         postPerPage,
         page,
         meta,
+        filter,
       }),
       getInstaPosts({
         postPerPage,
         page,
+        filter,
         meta,
       }),
       getTikTokPosts({
         postPerPage,
         page,
+        filter,
         meta,
       }),
       getForumPosts({
         postPerPage,
         page,
+        filter,
         meta,
       }),
       getLetters({
         postPerPage,
         page,
+        filter,
         meta,
       }),
     ]);
