@@ -1,4 +1,5 @@
 import { CircularProgress, Container, Grid } from "@mui/material";
+import { P, TitleWithHighlights } from "../../../components/typography";
 import React, { useEffect, useState } from "react";
 import {
   getContentTags,
@@ -8,15 +9,14 @@ import {
 
 import { BlogPageProps } from "../../../types/pageTypes";
 import CollectionSearchBar from "../../../components/form/CollectionSearchBar/CollectionSearchBar";
+import { Hero } from "../../../components/layout";
 import { MasonryGrid } from "../../../components/layout/MasonryGrid/MasonryGrid";
 import { POST_PER_PAGE } from "../../../constants/app-configs";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import SortBar from "../../../components/form/SortBar/SortBar";
 import TagList from "../../../components/buttons/TagList/TagList";
-import { useTheme } from "styled-components";
-import { Hero } from "../../../components/layout";
-import { P, TitleWithHighlights } from "../../../components/typography";
 import { useCallbackWhenReachedBottom } from "../../../utils/scroll";
+import { useTheme } from "styled-components";
 
 export const getServerSideProps = async () => {
   try {
@@ -155,7 +155,11 @@ export default function Forum({
           tags={tags}
           selected={selectedTag}
           onSelect={(x: string) => {
-            setSelectedTag(x);
+            if (x === selectedTag) {
+              setSelectedTag("");
+            } else {
+              setSelectedTag(x);
+            }
           }}
         />
 
