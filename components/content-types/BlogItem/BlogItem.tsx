@@ -4,12 +4,13 @@ import Button from "../../buttons/Button";
 import Card from "../../card/Card";
 import CardFooter from "../../card/CardFooter/CardFooter";
 import CardHeader from "../../card/CardHeader/CardHeader";
+import Image from "next/image";
 import React from "react";
 import Tag from "../../buttons/Tag/Tag";
-import { truncate } from "../../../utils/truncate";
-import { format } from "date-fns";
 import YoutubePlayer from "../../media/YoutubePlayer";
-import Image from "next/image";
+import { format } from "date-fns";
+import { parseDate } from "../../../utils/parseDate";
+import { truncate } from "../../../utils/truncate";
 import { useTheme } from "styled-components";
 
 type Props = {
@@ -92,7 +93,7 @@ export default function BlogItem({
             {author}
           </P>
           <P style={{ margin: 0 }} variant="helper">
-            {format(postDate, "dd/mm/yyyy")}
+            {parseDate(postDate)}
           </P>
         </div>
 
