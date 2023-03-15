@@ -5,5 +5,6 @@ export const MasonryGridWrapper = styled.div`
 
   .grid-item {
     margin: 11px;
+    height: 100%;
   }
 `;

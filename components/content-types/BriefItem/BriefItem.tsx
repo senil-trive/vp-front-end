@@ -45,17 +45,19 @@ export default function BriefItem({
         </>
       </CardHeader>
       <CardFooter>
-        <TitleWithHighlights
-          color="black"
-          highlightColor="tertiary"
-          text={title}
-          textToHighlight={titleHighlighted ?? "    "}
-          headerElement="h3"
-        />
+        <div>
+          <TitleWithHighlights
+            color="black"
+            highlightColor="tertiary"
+            text={title}
+            textToHighlight={titleHighlighted ?? "    "}
+            headerElement="h3"
+          />
 
-        <P style={{ marginBottom: 56, marginTop: 12 }}>
-          {truncate(content, 200)}
-        </P>
+          <P style={{ marginBottom: 56, marginTop: 12 }}>
+            {truncate(content, 200)}
+          </P>
+        </div>
 
         <Button variant="tertiary" href={fileSrc}>
           Download brief

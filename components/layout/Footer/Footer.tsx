@@ -57,16 +57,18 @@ export default function Footer() {
   };
 
   useEffect(() => {
+    const getData = async () => {
+      const data = await getCompanyInfo();
+      if (data) {
+        setCompanyInfo(data);
+      }
+      setIsLoading(false);
+    };
+
     if (!companyInfo && isLoading) {
-      (async () => {
-        const data = await getCompanyInfo();
-        if (data) {
-          setCompanyInfo(data);
-        }
-        setIsLoading(false);
-      })();
+      getData();
     }
-  }, []);
+  }, [companyInfo, isLoading]);
 
   return (
     <StyledFooter>

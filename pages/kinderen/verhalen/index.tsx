@@ -1,12 +1,13 @@
 import { CircularProgress, Container, Grid } from "@mui/material";
 import { P, TitleWithHighlights } from "../../../components/typography";
 import React, { useEffect, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+
 import {
   getContentTags,
   getPostOverviewPageData,
   getPosts,
 } from "../../../utils/api";
-
 import { BlogPageProps } from "../../../types/pageTypes";
 import CollectionSearchBar from "../../../components/form/CollectionSearchBar/CollectionSearchBar";
 import { Hero } from "../../../components/layout";
@@ -182,7 +183,12 @@ export default function Forum({
             </Grid>
           </Container>
           <MasonryGrid
-            feed={posts.map((item) => ({ type: "blog", content: item }))}
+            feed={posts.map((item) => ({
+              id: `blog-${uuidv4()}`,
+              type: "blog",
+              width: 4,
+              content: item,
+            }))}
           />
         </div>
 

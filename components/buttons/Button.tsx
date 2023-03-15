@@ -7,6 +7,7 @@ export type ButtonVariant =
   | "primary"
   | "secondary"
   | "tertiary"
+  | "success"
   | "link"
   | "info"
   | "infoReversed";
@@ -65,6 +66,13 @@ const Style = css<Props>`
       case "tertiary":
         return css`
           background: ${({ theme }) => theme.colors.tertiary};
+          &:hover {
+            box-shadow: inset -8px -8px 24px rgba(0, 0, 0, 0.3);
+          }
+        `;
+      case "success":
+        return css`
+          background: ${({ theme }) => theme.colors.success};
           &:hover {
             box-shadow: inset -8px -8px 24px rgba(0, 0, 0, 0.3);
           }

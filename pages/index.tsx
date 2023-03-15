@@ -7,8 +7,8 @@ import { CircularProgress, Container } from "@mui/material";
 import { HomePageProps } from "../types/pageTypes";
 import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
 import TagList from "../components/buttons/TagList/TagList";
-import { generateFeed } from "../utils/feed-utils";
-import { useState } from "react";
+import { generateFeedTiles } from "../utils/feed-utils";
+import { useCallback, useEffect, useState } from "react";
 import { useCallbackWhenReachedBottom } from "../utils/scroll";
 
 const POST_PER_PAGE = 6;
@@ -26,7 +26,7 @@ export const getServerSideProps = async () => {
     return {
       props: {
         pageData: pageRes.data,
-        feed: generateFeed(
+        feed: generateFeedTiles(
           {
             blogs: blogsRes.data,
             forum: forumRes.data,
@@ -68,8 +68,8 @@ export default function Home({
   const [isLoading, setIsLoading] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
-  useCallbackWhenReachedBottom(async () => {
-    if (posts.length < totalPosts) {
+  const getAllFeedItem = useCallback(
+    async (append = true) => {
       setIsLoading(true);
 
       try {
@@ -84,24 +84,45 @@ export default function Home({
                 : ``,
           });
 
-        const res = generateFeed({
-          blogs: blogsRes.data,
-          forum: forumRes.data,
-          letters: lettersRes.data,
-          instagram: instagramRes.data,
-          tiktok: tiktokRes.data,
-        });
+        const res = generateFeedTiles(
+          {
+            blogs: blogsRes?.data ?? [],
+            forum: forumRes?.data ?? [],
+            letters: lettersRes?.data ?? [],
+            instagram: instagramRes?.data ?? [],
+            tiktok: tiktokRes?.data ?? [],
+          },
+          // generated first tiles only when its the first load
+          false
+        );
 
-        setPosts([...posts, ...res]);
+        if (append) {
+          setPosts([...posts, ...res]);
+        } else {
+          setPosts(res);
+        }
         setIsLoading(false);
       } catch (error) {
         console.log(error);
       }
+    },
+    [currentPage, posts, selectedTag]
+  );
+
+  useCallbackWhenReachedBottom(async () => {
+    if (posts.length < totalPosts && !selectedTag) {
+      getAllFeedItem();
       setCurrentPage((page) => page + 1);
     } else {
       setIsEnd(true);
     }
   });
+
+  useEffect(() => {
+    if (selectedTag) {
+      getAllFeedItem(false);
+    }
+  }, [getAllFeedItem, selectedTag]);
 
   return (
     <PageWrapper
@@ -151,7 +172,11 @@ export default function Home({
 
         <div className="flex items-center justify-center">
           {isLoading && <CircularProgress size={"30px"} />}
-          {isEnd && <P color="info">Geen posts meer om te tonen</P>}
+          {isEnd && (
+            <P color="info">
+              Geen posts {posts.length <= 0 ? "" : "meer"} om te tonen
+            </P>
+          )}
         </div>
       </main>
     </PageWrapper>

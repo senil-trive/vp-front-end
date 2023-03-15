@@ -21,6 +21,7 @@ type Props = {
   buttonUrl?: string;
   tags: string[];
   likes: number;
+  fullHeight?: boolean;
   postDate?: Date;
 };
 
@@ -33,6 +34,11 @@ const StyledForumPost = styled.article`
   position: relative;
   z-index: 1;
   background: rgba(0, 110, 247, 0.05);
+
+  /* TODO: required for the home grid */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   header {
     display: flex;
@@ -74,63 +80,67 @@ export default function ForumPost({
   truncateContent = true,
   showButton = false,
   buttonUrl = "",
+  fullHeight = false,
   tags = [],
 }: Props) {
   const { colors } = useTheme();
 
   return (
-    <StyledForumPost>
-      <header>
-        <IconButton
-          wrapperSize={64}
-          wrapperColor="white"
-          iconColor={colors.info}
-          Icon={BsPatchQuestionFill}
-        />
-        <div>
-          <P color="info" style={{ margin: 0, fontWeight: 500 }}>
-            {authorType}
-          </P>
-
-          <P style={{ margin: 0, fontWeight: 300 }}>
-            {age?.includes("jaar") ? age : `${age} jaar`}
-          </P>
-        </div>
-      </header>
-      <div className="content">
-        {tags.length > 0 && (
-          <div className="flex">
-            {tags.map((item, index) => (
-              <Tag key={index} size="m">
-                {item}
-              </Tag>
-            ))}
-          </div>
-        )}
-
-        {truncateContent
-          ? parseHTMLtoReact(truncate(title, 180))
-          : parseHTMLtoReact(title)}
-      </div>
-      <footer>
-        <div className="likes">
-          {likes > 0 && (
-            <>
-              <HeartIcon color={colors.info} />
-              <P color="info" variant="helper">
-                {likes}
-              </P>
-            </>
-          )}
-        </div>
-        <div>
-          {postDate && (
-            <P variant="helper" color="info" style={{ textAlign: "right" }}>
-              Geplaatst op {parseDate(postDate)}
+    <StyledForumPost style={{ minHeight: fullHeight ? "624px" : "" }}>
+      <div>
+        <header>
+          <IconButton
+            wrapperSize={64}
+            wrapperColor="white"
+            iconColor={colors.info}
+            Icon={BsPatchQuestionFill}
+          />
+          <div>
+            <P color="info" style={{ margin: 0, fontWeight: 500 }}>
+              {authorType}
             </P>
+
+            <P style={{ margin: 0, fontWeight: 300 }}>
+              {age?.includes("jaar") ? age : `${age} jaar`}
+            </P>
+          </div>
+        </header>
+        <div className="content">
+          {tags.length > 0 && (
+            <div className="flex">
+              {tags.map((item, index) => (
+                <Tag key={index} size="m">
+                  {item}
+                </Tag>
+              ))}
+            </div>
           )}
+
+          {truncateContent
+            ? parseHTMLtoReact(truncate(title, 180))
+            : parseHTMLtoReact(title)}
         </div>
-      </footer>
+
+        <footer>
+          <div className="likes">
+            {likes > 0 && (
+              <>
+                <HeartIcon color={colors.info} />
+                <P color="info" variant="helper">
+                  {likes}
+                </P>
+              </>
+            )}
+          </div>
+          <div>
+            {postDate && (
+              <P variant="helper" color="info" style={{ textAlign: "right" }}>
+                Geplaatst op {parseDate(postDate)}
+              </P>
+            )}
+          </div>
+        </footer>
+      </div>
       {showButton && (
         <Button
           style={{

@@ -30,6 +30,18 @@ const StyledPost = styled(BaseStyle)`
 
 const StyledLetter = styled(BaseStyle)`
   border-color: ${({ theme }) => theme.colors.info};
+
+  // TODO: this is required to make the home grid rows the same size
+  min-height: 624px;
+  display: flex;
+  flex-direction: column;
+
+  footer {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 `;
 
 const StyledStory = styled(BaseStyle)`
