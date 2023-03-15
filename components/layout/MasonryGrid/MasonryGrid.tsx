@@ -38,10 +38,11 @@ export type FeedItem = {
 };
 
 type Props = {
+  fullHeightItems?: boolean;
   feed: FeedItem[];
 };
 
-export function MasonryGrid({ feed = [] }: Props) {
+export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -107,6 +108,7 @@ export function MasonryGrid({ feed = [] }: Props) {
                     <div className="grid-item">
                       <ForumPost
                         showButton
+                        fullHeight={fullHeightItems}
                         buttonUrl={`/kinderen/forum/${forumContent.slug}`}
                         truncateContent
                         gender={forumContent.user_gender}

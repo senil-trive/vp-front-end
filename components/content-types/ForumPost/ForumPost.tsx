@@ -21,6 +21,7 @@ type Props = {
   buttonUrl?: string;
   tags: string[];
   likes: number;
+  fullHeight?: boolean;
   postDate?: Date;
 };
 
@@ -35,7 +36,6 @@ const StyledForumPost = styled.article`
   background: rgba(0, 110, 247, 0.05);
 
   /* TODO: required for the home grid */
-  min-height: 624px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -80,12 +80,13 @@ export default function ForumPost({
   truncateContent = true,
   showButton = false,
   buttonUrl = "",
+  fullHeight = false,
   tags = [],
 }: Props) {
   const { colors } = useTheme();
 
   return (
-    <StyledForumPost>
+    <StyledForumPost style={{ minHeight: fullHeight ? "624px" : "" }}>
       <div>
         <header>
           <IconButton

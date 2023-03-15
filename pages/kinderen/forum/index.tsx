@@ -188,6 +188,7 @@ export default function Forum({
                     <Link href={`/kinderen/forum/${item.slug}`}>
                       <ForumPost
                         truncateContent
+                        fullHeight={false}
                         gender={item.user_gender}
                         age={item.user_age}
                         likes={Number(item.likes)}

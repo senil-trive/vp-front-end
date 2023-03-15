@@ -34,11 +34,14 @@ export function shuffle(array: FeedItem[]) {
   return array;
 }
 
-export function moveArrayObject(
-  feed: FeedItem[],
-  item: FeedItem,
-  newIndex: number
-) {
+/**
+ * Moves a item position in an array
+ * @param feed an object array
+ * @param item an item (must have an id)
+ * @param newIndex the new position in the array where the item should be moved to
+ * @returns
+ */
+export function moveArrayObject(feed: any[], item: any, newIndex: number) {
   const itemIndex = feed.findIndex((feedItem) => feedItem.id === item.id);
   const arrayItem = feed.splice(itemIndex, 1)[0];
 
