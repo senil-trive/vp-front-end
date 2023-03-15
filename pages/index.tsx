@@ -8,7 +8,7 @@ import { HomePageProps } from "../types/pageTypes";
 import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
 import TagList from "../components/buttons/TagList/TagList";
 import { generateFeedTiles } from "../utils/feed-utils";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useCallbackWhenReachedBottom } from "../utils/scroll";
 
 const POST_PER_PAGE = 6;
@@ -68,43 +68,46 @@ export default function Home({
   const [isLoading, setIsLoading] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
-  const getAllFeedItem = async (append = true) => {
-    setIsLoading(true);
+  const getAllFeedItem = useCallback(
+    async (append = true) => {
+      setIsLoading(true);
 
-    try {
-      const { blogsRes, instagramRes, tiktokRes, forumRes, lettersRes } =
-        await getFeed({
-          postPerPage: POST_PER_PAGE,
-          page: currentPage + 1,
-          meta: "filter_count",
-          filter:
-            selectedTag.length > 0
-              ? `filter={"categories": { "categories_id": { "id": { "_eq": "${selectedTag}"}}}}`
-              : ``,
-        });
+      try {
+        const { blogsRes, instagramRes, tiktokRes, forumRes, lettersRes } =
+          await getFeed({
+            postPerPage: POST_PER_PAGE,
+            page: currentPage + 1,
+            meta: "filter_count",
+            filter:
+              selectedTag.length > 0
+                ? `filter={"categories": { "categories_id": { "id": { "_eq": "${selectedTag}"}}}}`
+                : ``,
+          });
 
-      const res = generateFeedTiles(
-        {
-          blogs: blogsRes?.data ?? [],
-          forum: forumRes?.data ?? [],
-          letters: lettersRes?.data ?? [],
-          instagram: instagramRes?.data ?? [],
-          tiktok: tiktokRes?.data ?? [],
-        },
-        // generated first tiles only when its the first load
-        false
-      );
+        const res = generateFeedTiles(
+          {
+            blogs: blogsRes?.data ?? [],
+            forum: forumRes?.data ?? [],
+            letters: lettersRes?.data ?? [],
+            instagram: instagramRes?.data ?? [],
+            tiktok: tiktokRes?.data ?? [],
+          },
+          // generated first tiles only when its the first load
+          false
+        );
 
-      if (append) {
-        setPosts([...posts, ...res]);
-      } else {
-        setPosts(res);
+        if (append) {
+          setPosts([...posts, ...res]);
+        } else {
+          setPosts(res);
+        }
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
       }
-      setIsLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    },
+    [currentPage, posts, selectedTag]
+  );
 
   useCallbackWhenReachedBottom(async () => {
     if (posts.length < totalPosts && !selectedTag) {
@@ -116,12 +119,10 @@ export default function Home({
   });
 
   useEffect(() => {
-    console.log(selectedTag);
-
     if (selectedTag) {
       getAllFeedItem(false);
     }
-  }, [selectedTag]);
+  }, [getAllFeedItem, selectedTag]);
 
   return (
     <PageWrapper

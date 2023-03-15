@@ -61,8 +61,6 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
     );
   }
 
-  console.log({ loading });
-
   return (
     <MasonryGridWrapper>
       <Container maxWidth="xl" style={{ padding: " 0 13px" }}>

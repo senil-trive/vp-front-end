@@ -2,10 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import { InstaPost } from "../components/content-types/InstagramPost/InstagramPost";
 import { TikTokPostProps } from "../components/content-types/TikTokPost/TikTokPost";
-import {
-  FeedItem,
-  FeedType,
-} from "../components/layout/MasonryGrid/MasonryGrid";
+import { FeedItem } from "../components/layout/MasonryGrid/MasonryGrid";
 import { BlogType } from "../types/content-types/Blog.type";
 import { Letter } from "../types/content-types/Letter.type";
 import { ForumPostType } from "../types/forumTypes";
@@ -53,6 +50,7 @@ export function moveArrayObject(feed: any[], item: any, newIndex: number) {
 /**
  * Generates an array of feed items
  * @param feedItems array of all the collection items to be displayed in the feed
+ * @param fixedFirstItems Show a fixed layout for the first items
  * @returns
  */
 export const generateFeedTiles = (
@@ -69,7 +67,7 @@ export const generateFeedTiles = (
     instagram: InstaPost[];
     tiktok: TikTokPostProps[];
   },
-  addFirstVideos: boolean = false
+  fixedFirstItems: boolean = false
 ) => {
   const blogFeedItem: FeedItem[] = blogs?.map((item) => ({
     id: `blog-${uuidv4()}`,
@@ -103,7 +101,7 @@ export const generateFeedTiles = (
   }));
 
   // Buddy examples
-  const chatExampleFeedItem: FeedItem[] = addFirstVideos
+  const chatExampleFeedItem: FeedItem[] = fixedFirstItems
     ? ["1", "2"].map((item) => ({
         id: `tiktok-${uuidv4()}`,
         width: 4,
@@ -116,7 +114,7 @@ export const generateFeedTiles = (
     : [];
 
   // TODO: replace with real video content
-  const videoFeedItem: FeedItem[] = addFirstVideos
+  const videoFeedItem: FeedItem[] = fixedFirstItems
     ? ["Video 1", "Video 2"].map((item) => ({
         id: `video-${uuidv4()}`,
         type: "video",
@@ -142,7 +140,7 @@ export const generateFeedTiles = (
   // randomize content
   res = shuffle(res);
 
-  if (addFirstVideos) {
+  if (fixedFirstItems) {
     const firsLetter = letterFeedItem[0];
     firsLetter.width = 6;
     const firstInsta = instagramFeedItem[0];
