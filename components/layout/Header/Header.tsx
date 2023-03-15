@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import CloseIcon from "../../icons/CloseIcon/CloseIcon";
 import HeaderNav from "./HeaderNav/HeaderNav";
@@ -11,6 +11,7 @@ import SearchBar from "../../form/SearchBar/SearchBar";
 import SearchIcon from "../../icons/SearchIcon/SearchIcon";
 import { getMenuItems } from "../../../utils/api";
 import styled from "styled-components";
+import { useOnClickOutsideEl } from "../../../utils/eventHandlers";
 
 export type MenuItem = {
   id: string;
@@ -76,6 +77,13 @@ export default function Header() {
   const [selected, setSelected] = useState<MenuItem | undefined>(undefined);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const elRef = useRef(null);
+
+  useOnClickOutsideEl(elRef, () => {
+    setSelected(undefined);
+    setMobileMenuOpen(false);
+  });
+
   const toggleMenu = (menu: MenuItem) => {
     if (selected?.id === menu.id) {
       return setSelected(() => undefined);
@@ -85,19 +93,21 @@ export default function Header() {
   };
 
   useEffect(() => {
+    const getData = async () => {
+      const data = await getMenuItems();
+      if (data) {
+        setMenuItems(data);
+      }
+      setIsLoading(false);
+    };
+
     if (menuItems.length === 0 && isLoading) {
-      (async () => {
-        const data = await getMenuItems();
-        if (data) {
-          setMenuItems(data);
-        }
-        setIsLoading(false);
-      })();
+      getData();
     }
   }, [isLoading, menuItems]);
 
   return (
-    <StyledHeader>
+    <StyledHeader ref={elRef}>
       <div className="desktop-menu">
         <div className="inner">
           <div>

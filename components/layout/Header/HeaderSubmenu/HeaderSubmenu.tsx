@@ -1,10 +1,11 @@
-import React, { useMemo } from "react";
+import React from "react";
 
 import { ChildMenuItem } from "../Header";
 import { Container } from "@mui/system";
 import { P } from "../../../typography";
 import styled from "styled-components";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 type Props = {
   categories: ChildMenuItem[];
@@ -77,12 +78,12 @@ export default function HeaderSubmenu({ categories }: Props) {
             >
               {category.children.map((item) => (
                 <li key={item.link}>
-                  <a
+                  <Link
                     className={router.asPath === item.link ? "active" : ""}
                     href={item.link}
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useState } from "react";
 import styled from "styled-components";
 import { MENU_COLS } from "../../../../constants/mockData";
@@ -14,7 +15,7 @@ type Props = {
 
 const Wrapper = styled.div`
   flex: 1;
-  padding: 32px 64px;
+  padding: 32px;
   background-color: ${({ theme }) => theme.colors.white};
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -26,10 +27,12 @@ const Wrapper = styled.div`
   top: calc(100% + 5px);
   z-index: 999;
   right: 5px;
+  width: calc(100% - 10px);
 
   ul {
     list-style: none;
     padding: 0;
+    width: 100%;
   }
 
   > ul {
@@ -85,7 +88,7 @@ export default function HeaderSubmenuMobile({
   };
 
   return (
-    <Wrapper>
+    <Wrapper id="header-submenu-mobile">
       <ul>
         {menuCols.map((menu, index) => (
           <li
@@ -105,7 +108,7 @@ export default function HeaderSubmenuMobile({
                   {category.children.map((item) => (
                     <li key={item.link}>
                       <P>
-                        <a href={item.link}>{item.name}</a>
+                        <Link href={item.link}>{item.name}</Link>
                       </P>
                     </li>
                   ))}
