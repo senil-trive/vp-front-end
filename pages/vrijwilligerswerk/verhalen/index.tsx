@@ -80,7 +80,7 @@ const VolunteersFAQPage: React.FC<VolunteersStoriesPageProps> = ({
           </Hero>
 
           <Container maxWidth="xl">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-20">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-[80px]">
               {storiesData.map((story: VolunteerStory) => (
                 <StoryItem
                   key={story.id}

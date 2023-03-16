@@ -17,6 +17,8 @@ import USPItem from "../../components/content-types/USPItem/USPItem";
 import VideoItem from "../../components/content-types/VideoItem/VideoItem";
 import parseImageURL from "../../utils/parseImageURL";
 import { useRouter } from "next/router";
+import FAQList from "../../components/content-types/FAQList/FAQList";
+import { useTheme } from "styled-components";
 
 type VolunteersPageProps = {
   pageData: any;
@@ -57,6 +59,8 @@ export const getServerSideProps = async () => {
 
 const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
   const router = useRouter();
+  const { colors } = useTheme();
+
   return (
     <div>
       <PageWrapper
@@ -248,35 +252,23 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
               />
             </Container>
           </section>
-          <section className="my-[200px] text-center py-20">
-            <Container>
-              <div className="flex flex-col items-center justify-center mb-14">
-                <H3 variant="bold" color="black">
-                  {pageData?.faq_section_title}
-                </H3>
-              </div>
-            </Container>
 
-            <Container maxWidth="xl">
-              <div className="flex flex-col gap-8">
-                {pageData?.faq_items?.map((faq: FAQ) => (
-                  <FAQItem
-                    key={faq.id}
-                    title={faq.title}
-                    description={faq.description}
-                  />
-                ))}
-              </div>
-              <div className="flex justify-center mt-14">
-                <Button
-                  variant="link"
-                  onClick={() => router.push("/vrijwilligerswerk/faq")}
-                >
-                  Meer lezen
-                </Button>
-              </div>
-            </Container>
-          </section>
+          <FAQList
+            title={pageData?.faq_section_title}
+            items={pageData?.faq_items}
+          />
+
+          <Container maxWidth="xl" style={{ marginBottom: 80 }}>
+            <div className="flex justify-center mt-14">
+              <Button
+                variant="link"
+                style={{ color: colors.info }}
+                onClick={() => router.push("/vrijwilligerswerk/faq")}
+              >
+                Meer lezen
+              </Button>
+            </div>
+          </Container>
         </main>
       </PageWrapper>
     </div>

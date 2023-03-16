@@ -1,4 +1,9 @@
-import { ColorSpan, H1, P } from "../../../components/typography";
+import {
+  ColorSpan,
+  H1,
+  P,
+  TitleWithHighlights,
+} from "../../../components/typography";
 import { Grid, Hero } from "../../../components/layout";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { postForum, uploadFile } from "../../../utils/api";
@@ -54,15 +59,17 @@ export default function Vraag() {
 
   return (
     <PageWrapper title="Vraag Insturen">
-      <Hero>
+      <Hero style={{ padding: "80px 0" }}>
         <Container>
           <Grid container style={{ marginBottom: 65 }}>
             <Grid item xs={0} md={2} lg={3} />
             <Grid item xs={12} md={8} lg={6}>
-              <H1 style={{ textAlign: "center", padding: "0 24px" }}>
-                Stel je
-                <ColorSpan variant="info"> vraag</ColorSpan>
-              </H1>
+              <TitleWithHighlights
+                text="Stel je vraag"
+                textToHighlight={"vraag"}
+                highlightColor="info"
+                style={{ textAlign: "center" }}
+              />
               <P variant="light">
                 Heb jij een vraag over de scheiding? Stel ‘m hier! De Buddy’s en
                 andere kinderen met gescheiden ouders geven jou tips en
@@ -71,7 +78,7 @@ export default function Vraag() {
             </Grid>
             <Grid item xs={0} md={2} lg={3} />
           </Grid>
-          <main style={{ paddingBottom: 100 }}>
+          <main>
             <Container>
               <Section>
                 <form onSubmit={handleSubmit(onSubmit)}>
