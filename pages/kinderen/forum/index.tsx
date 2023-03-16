@@ -18,7 +18,6 @@ import { POST_PER_PAGE } from "../../../constants/app-configs";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import SortBar from "../../../components/form/SortBar/SortBar";
 import TagList from "../../../components/buttons/TagList/TagList";
-import { useTheme } from "styled-components";
 
 const forumSortOptions = [
   { name: "Titel (a-z)", value: "content" },
@@ -67,8 +66,6 @@ export default function Forum({
   totalPosts,
   tags,
 }: ForumPageProps) {
-  const { colors } = useTheme();
-
   const [posts, setPosts] = useState(forumData);
   const [isLoading, setIsLoading] = useState(false);
   const [totalCount, setTotalCount] = useState(totalPosts);

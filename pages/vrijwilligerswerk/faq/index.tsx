@@ -74,7 +74,7 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
             </div>
           </Hero>
 
-          <section className="my-[200px] text-center py-20">
+          <section className="my-[80px] text-center py-20">
             <Container>
               <div className="flex flex-col items-center justify-center mb-14">
                 <H3 variant="bold" color="black">
