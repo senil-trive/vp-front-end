@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { PaginationWrapper } from "./Pagination.styled";
+
 import { PaginationProps } from "./Pagination.types";
+import { PaginationWrapper } from "./Pagination.styled";
 
 const getRange = (start: number, end: number) => {
   const length = end - start + 1;
@@ -124,7 +125,7 @@ export default function Pagination({
 
   return (
     <PaginationWrapper>
-      <button onClick={handlePrev}>Prev</button>
+      <button onClick={handlePrev}>Vorige</button>
       <nav>
         <ol>
           {pages.map((page, index) => (
@@ -139,7 +140,7 @@ export default function Pagination({
           ))}
         </ol>
       </nav>
-      <button onClick={handleNext}>Next</button>
+      <button onClick={handleNext}>Volgende</button>
     </PaginationWrapper>
   );
 }
