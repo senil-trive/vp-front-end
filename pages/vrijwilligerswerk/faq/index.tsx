@@ -6,6 +6,7 @@ import { FAQ } from "../../../types/content-types/FAQ.type";
 import FAQItem from "../../../components/content-types/FAQItem/FAQItem";
 import { Hero } from "../../../components/layout";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
+import { getFaqOverviewData, getFaqs } from "../../../utils/api";
 
 type VolunteersFAQPageProps = {
   pageData: any;
@@ -17,24 +18,8 @@ export const getServerSideProps = async () => {
   // fetch page data from API
 
   try {
-    const pageReq = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/faq_overview_page?fields=*.*.*`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    const faqReq = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/faq_items?fields=*.*.*?filter[status][_eq]=published&filter[type][_eq]=volunteer_faq`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const pageReq = await getFaqOverviewData();
+    const faqReq = await getFaqs({ postPerPage: 7 });
 
     const pageRes = await pageReq.json();
     const faqRes = await faqReq.json();
