@@ -5,6 +5,7 @@ import { Grid } from "../";
 type Props = {
   center?: boolean;
   children: ReactNode;
+  style?: React.CSSProperties;
 };
 
 const Wrapper = styled.div<{ center: boolean }>`
@@ -55,9 +56,9 @@ const Wrapper = styled.div<{ center: boolean }>`
   }
 `;
 
-export default function Hero({ children, center = false }: Props) {
+export default function Hero({ children, center = false, style }: Props) {
   return (
-    <Wrapper center={center}>
+    <Wrapper center={center} style={style}>
       <Grid container style={{ height: "100%" }}>
         <Grid item xs={12}>
           <div className="inner">{children}</div>

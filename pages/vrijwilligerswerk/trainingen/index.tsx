@@ -68,7 +68,7 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
             </div>
           </Hero>
 
-          <section className="my-[200px]">
+          <section className="my-[80px]">
             <Container>
               <div className="text-center">
                 <H3 variant="bold">{pageData?.basic_training_block_title}</H3>
@@ -107,7 +107,7 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
           </section>
 
           <section
-            className="my-[200px] text-center py-20"
+            className="mt-[80px] text-center py-[80px]"
             style={{
               backgroundColor: "rgba(0, 110, 247, 0.05)",
             }}
