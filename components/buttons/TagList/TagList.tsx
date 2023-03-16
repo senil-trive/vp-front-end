@@ -1,9 +1,8 @@
-import React from "react";
 import { Container } from "@mui/system";
-import styled from "styled-components";
-
+import React from "react";
 import Tag from "../Tag/Tag";
 import { Tag as TagType } from "../../../types/content-types/Tag.type";
+import styled from "styled-components";
 import { useHorizontalScrollHints } from "../../../utils/scroll";
 
 type Props = {
@@ -14,6 +13,9 @@ type Props = {
 
 const Wrapper = styled.div`
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   .inner {
     display: flex;
@@ -59,9 +61,12 @@ const Wrapper = styled.div`
 export default function TagList({ tags, selected, onSelect }: Props) {
   const containerRef = useHorizontalScrollHints();
   return (
-    <Container maxWidth="xl" style={{ margin: "21px 0" }}>
+    <Container maxWidth="xl" style={{ margin: "21px auto" }}>
       <Wrapper>
-        <div ref={containerRef} className="inner scrolling-right">
+        <div
+          ref={containerRef}
+          className="flex items-center justify-center inner scrolling-right"
+        >
           <div className="scroll-indicator indicator-left" />
           {tags.map((tag, index) => (
             <Tag
