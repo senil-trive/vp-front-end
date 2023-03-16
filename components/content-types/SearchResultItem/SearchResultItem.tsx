@@ -106,7 +106,7 @@ export default function SearchResultItem({
         <ul className="list-disc">
           {list.map((item) => (
             <li key={item.link}>
-              <a href={item.link} className="flex items-center">
+              <a href={item.link} className="flex items-center hover:underline">
                 {item.name}
                 <BsArrowRight className="ml-2" />
               </a>

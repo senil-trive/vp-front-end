@@ -124,14 +124,14 @@ export default function Vraag() {
                         register={register}
                       />
                     </Grid>
-                    <Grid item xs={12} md={6}>
+                    {/* <Grid item xs={12} md={6}>
                       <Input
                         label="Upload bestand"
                         type="file"
                         name="attachment_image"
                         register={register}
                       />
-                    </Grid>
+                    </Grid> */}
                     <Grid item xs={12}>
                       <TextArea
                         label="Bericht *"

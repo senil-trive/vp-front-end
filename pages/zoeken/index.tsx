@@ -11,6 +11,7 @@ import { POST_PER_PAGE } from "../../constants/app-configs";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import SearchBar from "../../components/form/SearchBar/SearchBar";
 import SearchResultItem from "../../components/content-types/SearchResultItem/SearchResultItem";
+import { truncate } from "../../utils/truncate";
 import { useRouter } from "next/router";
 
 export default function Search() {
@@ -103,7 +104,7 @@ export default function Search() {
                 amount={forumPosts.length}
                 resultTitleSuffix={<span>in ons Forum</span>}
                 list={forumPosts.map((post) => ({
-                  name: post.content,
+                  name: truncate(post.content, 120),
                   link: `/kinderen/forum/${post.slug}`,
                 }))}
               />
