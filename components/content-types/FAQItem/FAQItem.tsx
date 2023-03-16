@@ -2,45 +2,70 @@ import { FiMinus, FiPlus } from "react-icons/fi";
 import { H3, P } from "../../typography";
 
 import { FAQ } from "../../../types/content-types/FAQ.type";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
-import { useTheme } from "styled-components";
+import styled, { useTheme } from "styled-components";
 
-interface FAQItemProps extends Partial<FAQ> {}
+interface FAQItemProps extends Partial<FAQ> {
+  isSelected: boolean;
+  onSelect: (id: string) => void;
+}
 
-const FAQItem: React.FC<FAQItemProps> = ({ title, description }) => {
-  const [open, setOpen] = React.useState<boolean>(false);
+const StyleFaq = styled.div`
+  .description {
+    transition: 0.3s ease-in-out;
+    max-height: 1px;
+    opacity: 0;
+    overflow: hidden;
+
+    &.visible {
+      opacity: 1;
+      max-height: 999px;
+    }
+  }
+`;
+
+const FAQItem: React.FC<FAQItemProps> = ({
+  id,
+  isSelected = false,
+  title,
+  description,
+  onSelect,
+}) => {
   const theme = useTheme();
+
+  const handelSelect = () => {
+    onSelect(id ?? "");
+  };
+
   return (
-    <div
-      className={`p-[48px] rounded-lg ${
-        open ? "bg-[#006ef7]/5" : "bg-[#3fc7b4]/5"
+    <StyleFaq
+      className={`cursor-pointer p-[48px] rounded-lg ${
+        isSelected ? "bg-[#006ef7]/5" : "bg-[#3fc7b4]/5"
       } hover:bg-[#006ef7]/5`}
+      onClick={handelSelect}
     >
-      <div
-        className="flex items-center justify-between cursor-pointer text-left"
-        onClick={() => setOpen(!open)}
-      >
-        <H3 variant="bold" color={open ? "primary" : "secondary"}>
+      <div className="flex items-center justify-between  text-left">
+        <H3 variant="bold" color={isSelected ? "primary" : "secondary"}>
           {title}
         </H3>
         <button
-          onClick={() => setOpen(!open)}
+          onClick={handelSelect}
           className="flex items-center justify-center w-8 h-8"
         >
-          {open ? (
+          {isSelected ? (
             <FiMinus color={theme.colors.primary} size={25} />
           ) : (
             <FiPlus size={25} color={theme.colors.secondary} />
           )}
         </button>
       </div>
-      {open && (
-        <div className="mt-4 text-left">
-          {parseHTMLtoReact(description ?? "")}
-        </div>
-      )}
-    </div>
+      <div
+        className={`description mt-4 text-left ${isSelected ? "visible" : ""}`}
+      >
+        {parseHTMLtoReact(description ?? "")}
+      </div>
+    </StyleFaq>
   );
 };
 

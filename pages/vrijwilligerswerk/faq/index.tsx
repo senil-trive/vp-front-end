@@ -9,13 +9,17 @@ import { getFaqOverviewData, getFaqs } from "../../../utils/api";
 import { useState } from "react";
 import { VolunteersFAQPageProps } from "../../../types/pageTypes";
 import Button from "../../../components/buttons/Button";
+import FAQList from "../../../components/content-types/FAQList/FAQList";
 
-const POST_PER_PAGE = 6;
+const POST_PER_PAGE = 7;
 
 export const getServerSideProps = async () => {
   try {
     const pageReq = await getFaqOverviewData();
-    const faqReq = await getFaqs({ postPerPage: POST_PER_PAGE });
+    const faqReq = await getFaqs({
+      postPerPage: POST_PER_PAGE,
+      meta: "filter_count",
+    });
 
     const pageRes = await pageReq.json();
     const faqRes = await faqReq.json();
@@ -24,7 +28,7 @@ export const getServerSideProps = async () => {
       props: {
         pageData: pageRes.data,
         faqData: faqRes.data,
-        totalFaqs: faqRes?.meta?.total_count ?? 0,
+        totalFaqs: faqRes?.meta?.filter_count ?? 0,
       },
     };
   } catch (error) {
@@ -47,6 +51,9 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
   const [totalCount, setTotalCount] = useState(totalFaqs);
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+
+  const showMoreButton =
+    totalCount > items.length && totalCount > POST_PER_PAGE;
 
   const getPaginatedPost = async () => {
     setIsLoading(true);
@@ -86,39 +93,13 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
             </div>
           </Hero>
 
-          <section
-            className="mt-[80px] text-center"
-            style={{ marginBottom: totalCount > items.length ? 56 : 80 }}
-          >
-            <Container>
-              <div className="flex flex-col items-center justify-center mb-14">
-                <H3 variant="bold" color="black">
-                  Meest gestelde vragen
-                </H3>
-              </div>
-            </Container>
-
-            <Container>
-              <div className="flex flex-col gap-8">
-                {items?.map((faq: FAQ) => (
-                  <FAQItem
-                    key={faq.id}
-                    title={faq.title}
-                    description={faq.description}
-                  />
-                ))}
-              </div>
-            </Container>
-            <div className="flex items-center justify-center">
-              {isLoading && <CircularProgress size={"30px"} />}
-            </div>
-          </section>
-
-          {totalCount > items.length && (
-            <Container style={{ marginBottom: 80 }}>
-              <Button onClick={changePage}>Meer laden</Button>
-            </Container>
-          )}
+          <FAQList
+            title="Meest gestelde vragen"
+            items={items}
+            isLoading={isLoading}
+            showLoadMore={showMoreButton}
+            onLoadMore={changePage}
+          />
         </main>
       </PageWrapper>
     </div>
