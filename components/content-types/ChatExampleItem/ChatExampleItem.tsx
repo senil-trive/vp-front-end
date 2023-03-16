@@ -1,10 +1,8 @@
 import React from "react";
-import { IoMdPerson } from "react-icons/io";
 import styled from "styled-components";
 import hexToRgba from "hex-to-rgba";
 
 import Button from "../../buttons/Button";
-import IconButton from "../../buttons/IconButton/IconButton";
 import { P } from "../../typography";
 import UserAvatar from "../../icons/UserAvatar/UserAvatar";
 

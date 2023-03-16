@@ -150,23 +150,19 @@ export default function Home({
         </Container>
       </Hero>
       <main style={{ marginBottom: "80px" }}>
-        <Container maxWidth="xl">
-          <Grid container style={{ marginBottom: "32px" }}>
-            <Grid item xs={12}>
-              <TagList
-                tags={categories.map((cat) => ({
-                  id: cat.id,
-                  name: cat.name,
-                  status: cat.status,
-                }))}
-                selected={selectedTag}
-                onSelect={(x: string) => {
-                  setSelectedTag(x);
-                }}
-              />
-            </Grid>
-          </Grid>
-        </Container>
+        <div style={{ marginBottom: 32 }}>
+          <TagList
+            tags={categories.map((cat) => ({
+              id: cat.id,
+              name: cat.name,
+              status: cat.status,
+            }))}
+            selected={selectedTag}
+            onSelect={(x: string) => {
+              setSelectedTag(x);
+            }}
+          />
+        </div>
 
         <MasonryGrid feed={posts} />
 
