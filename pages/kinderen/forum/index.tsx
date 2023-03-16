@@ -108,8 +108,6 @@ export default function Forum({
         });
         const res = await req.json();
 
-        console.log({ res });
-
         setPosts(res.data ?? []);
         setTotalCount(res?.meta?.filter_count || 0);
       } catch (error) {
