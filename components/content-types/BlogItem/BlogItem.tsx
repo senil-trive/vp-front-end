@@ -8,7 +8,6 @@ import Image from "next/image";
 import React from "react";
 import Tag from "../../buttons/Tag/Tag";
 import YoutubePlayer from "../../media/YoutubePlayer";
-import { format } from "date-fns";
 import { parseDate } from "../../../utils/parseDate";
 import { truncate } from "../../../utils/truncate";
 import { useTheme } from "styled-components";

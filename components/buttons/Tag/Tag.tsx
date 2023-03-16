@@ -1,6 +1,7 @@
-import { type } from "os";
 import React, { ReactNode } from "react";
 import styled, { css } from "styled-components";
+
+import { type } from "os";
 
 type Variant = { variant?: "light" | "dark" };
 type Position = { position?: "tl" | "tr" | "bl" | "br" };

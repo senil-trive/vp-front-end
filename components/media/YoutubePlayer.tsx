@@ -1,5 +1,6 @@
-import getVideoID from "get-video-id";
 import React, { memo } from "react";
+
+import getVideoID from "get-video-id";
 import styled from "styled-components";
 
 type YoutubeProps = {

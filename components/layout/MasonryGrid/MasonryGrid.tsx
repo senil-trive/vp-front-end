@@ -10,6 +10,7 @@ import { XBlock, XMasonry } from "react-xmasonry";
 import BlogItem from "../../content-types/BlogItem/BlogItem";
 import { BlogType } from "../../../types/content-types/Blog.type";
 import BriefItem from "../../content-types/BriefItem/BriefItem";
+import ChatExampleItem from "../../content-types/ChatExampleItem/ChatExampleItem";
 import { Container } from "@mui/material";
 import ForumPost from "../../content-types/ForumPost/ForumPost";
 import { ForumPostType } from "../../../types/forumTypes";
@@ -18,7 +19,6 @@ import { MasonryGridWrapper } from "./MasonryGrid.styled";
 import VideoItem from "../../content-types/VideoItem/VideoItem";
 import { VideoPropsType } from "../../content-types/VideoItem/VideoItem.types";
 import parseImageURL from "../../../utils/parseImageURL";
-import ChatExampleItem from "../../content-types/ChatExampleItem/ChatExampleItem";
 
 export type FeedType =
   | "forum"
