@@ -61,8 +61,6 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
   const router = useRouter();
   const { colors } = useTheme();
 
-  console.log(pageData);
-
   return (
     <div>
       <PageWrapper
