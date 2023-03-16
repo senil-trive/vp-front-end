@@ -509,3 +509,58 @@ export const getFeed = async ({
     lettersRes: await lettersReq.json(),
   };
 };
+
+/**
+ * Gets a list of faq items
+ * @param postPerPage the amount of items to be shown per page
+ * @param page the current paginated page
+ * @param query the search query
+ * @returns
+ */
+export const getFaqs = async ({
+  postPerPage,
+  page = 1,
+  search,
+  sort,
+  filter,
+  meta = "total_count",
+  type = "volunteer_faq",
+}: DirectusParams & { type?: string }) => {
+  let url = `${ENDPOINTS.COLLECTIONS}/faq_items?fields=*.*.*?filter[status][_eq]=published&filter[type][_eq]=${type}&limit=${postPerPage}&page=${page}`;
+
+  if (meta) {
+    url = `${url}&meta=${meta}`;
+  }
+  if (search) {
+    url = `${url}&search=${search}`;
+  }
+  if (sort) {
+    url = `${url}&sort=${sort}`;
+  }
+  if (filter) {
+    url = `${url}&${filter}`;
+  }
+
+  return await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+/**
+ * Gets the data for the faq overview page
+ * @returns
+ */
+export const getFaqOverviewData = async () => {
+  return await fetch(
+    `${ENDPOINTS.COLLECTIONS}/faq_overview_page?fields=*.*.*`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+};

@@ -3,6 +3,7 @@ import { CategoryType } from "./categoryTypes";
 import { BlogType } from "./content-types/Blog.type";
 import { ForumPostType } from "./forumTypes";
 import { Tag } from "./content-types/Tag.type";
+import { FAQ } from "./content-types/FAQ.type";
 
 export type HomePageProps = {
   pageData?: {
@@ -43,4 +44,11 @@ export type ForumPageProps = {
 
 export type ForumDetailPageProps = {
   pageData?: ForumPostType;
+};
+
+export type VolunteersFAQPageProps = {
+  pageData: any;
+  faqData: FAQ[];
+  totalFaqs: number;
+  error?: boolean;
 };

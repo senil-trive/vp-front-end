@@ -102,7 +102,7 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
             </div>
           </Hero>
 
-          <Container className="mb-10">
+          <Container className="my-[80px]">
             <Section>
               {!isSubmitted ? (
                 <form onSubmit={handleSubmit(submitForm)}>
