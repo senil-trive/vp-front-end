@@ -20,19 +20,13 @@ const Wrapper = styled.div`
     flex: 1;
     gap: 16px;
     overflow-x: auto;
-    /* justify-content: center; */
 
-    .tag {
-      /* margin-right: 16px;
-      display: block; */
-    }
     .scroll-indicator {
       position: absolute;
       top: 0;
       height: 100%;
       width: 100px;
       opacity: 0;
-      /* transition: opacity 0.3s ease-in-out; */
       pointer-events: none;
 
       &.indicator-left {
