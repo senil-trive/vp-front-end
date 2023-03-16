@@ -7,12 +7,12 @@ import { Container } from "@mui/material";
 import ENDPOINTS from "../../../constants/endpoints";
 import { FAQ } from "../../../types/content-types/FAQ.type";
 import FAQItem from "../../../components/content-types/FAQItem/FAQItem";
+import FAQList from "../../../components/content-types/FAQList/FAQList";
 import { Hero } from "../../../components/layout";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import TextItem from "../../../components/content-types/TextItem/TextItem";
 import VideoItem from "../../../components/content-types/VideoItem/VideoItem";
 import parseImageURL from "../../../utils/parseImageURL";
-import FAQList from "../../../components/content-types/FAQList/FAQList";
 
 type BuddyPageProps = {
   pageData: any;
@@ -114,26 +114,18 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                 <CTAItem
                   title={pageData?.cta_block_1_title}
                   description={pageData?.cta_block_1_description}
-                  imageURL={parseImageURL(pageData?.cta_block_1_image?.id)}
-                  imageAlt={pageData?.cta_block_1_title}
                 />
                 <CTAItem
                   title={pageData?.cta_block_2_title}
                   description={pageData?.cta_block_2_description}
-                  imageURL={parseImageURL(pageData?.cta_block_2_image?.id)}
-                  imageAlt={pageData?.cta_block_2_title}
                 />
                 <CTAItem
                   title={pageData?.cta_block_3_title}
                   description={pageData?.cta_block_3_description}
-                  imageURL={parseImageURL(pageData?.cta_block_3_image?.id)}
-                  imageAlt={pageData?.cta_block_3_title}
                 />
                 <CTAItem
                   title={pageData?.cta_block_4_title}
                   description={pageData?.cta_block_4_description}
-                  imageURL={parseImageURL(pageData?.cta_block_4_image?.id)}
-                  imageAlt={pageData?.cta_block_4_title}
                 />
               </div>
             </Container>
