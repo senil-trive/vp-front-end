@@ -14,20 +14,19 @@ type Props = {
 
 const Wrapper = styled.div`
   position: relative;
-  margin: auto;
 
   .inner {
     display: flex;
+    flex: 1;
     gap: 16px;
     overflow-x: auto;
-    justify-content: center;
+
     .scroll-indicator {
       position: absolute;
       top: 0;
       height: 100%;
       width: 100px;
       opacity: 0;
-      /* transition: opacity 0.3s ease-in-out; */
       pointer-events: none;
 
       &.indicator-left {
@@ -59,16 +58,15 @@ const Wrapper = styled.div`
 
 export default function TagList({ tags, selected, onSelect }: Props) {
   const containerRef = useHorizontalScrollHints();
-
   return (
-    <Container maxWidth="xl" style={{ margin: "0 auto 21px" }}>
+    <Container maxWidth="xl" style={{ margin: "21px 0" }}>
       <Wrapper>
         <div ref={containerRef} className="inner scrolling-right">
           <div className="scroll-indicator indicator-left" />
           {tags.map((tag, index) => (
             <Tag
               key={index}
-              className="card-wrapper"
+              className="tag"
               isActive={selected === tag.id}
               onClick={() => onSelect?.(tag.id)}
             >

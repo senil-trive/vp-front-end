@@ -1,15 +1,14 @@
 import styled, { useTheme } from "styled-components";
 
-import { BsPatchQuestionFill } from "react-icons/bs";
 import Button from "../../buttons/Button";
 import HeartIcon from "../../icons/HeartIcon/HeartIcon";
-import IconButton from "../../buttons/IconButton/IconButton";
 import { P } from "../../typography";
 import React from "react";
 import Tag from "../../buttons/Tag/Tag";
 import { parseDate } from "../../../utils/parseDate";
 import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
 import { truncate } from "../../../utils/truncate";
+import UserAvatar from "../../icons/UserAvatar/UserAvatar";
 
 type Props = {
   authorType: string;
@@ -89,11 +88,10 @@ export default function ForumPost({
     <StyledForumPost style={{ minHeight: fullHeight ? "624px" : "" }}>
       <div>
         <header>
-          <IconButton
-            wrapperSize={64}
-            wrapperColor="white"
-            iconColor={colors.info}
-            Icon={BsPatchQuestionFill}
+          <UserAvatar
+            size="md"
+            alt="villa pinedo"
+            src="/android-chrome-192x192.png"
           />
           <div>
             <P color="info" style={{ margin: 0, fontWeight: 500 }}>

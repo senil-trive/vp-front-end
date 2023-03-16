@@ -1,24 +1,23 @@
 import { Container, Grid } from "@mui/material";
 import { H1, P } from "../../../components/typography";
-import { Hero, Pagination } from "../../../components/layout";
 import React, { useEffect, useState } from "react";
+import { CircleSpinner } from "react-spinners-kit";
+import Link from "next/link";
+
+import { Hero, Pagination } from "../../../components/layout";
 import {
   getContentTags,
   getForumOverviewPageData,
   getForumPosts,
 } from "../../../utils/api";
-
 import Button from "../../../components/buttons/Button";
-import { CircleSpinner } from "react-spinners-kit";
 import CollectionSearchBar from "../../../components/form/CollectionSearchBar/CollectionSearchBar";
 import { ForumPageProps } from "../../../types/pageTypes";
 import ForumPost from "../../../components/content-types/ForumPost/ForumPost";
-import Link from "next/link";
 import { POST_PER_PAGE } from "../../../constants/app-configs";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import SortBar from "../../../components/form/SortBar/SortBar";
 import TagList from "../../../components/buttons/TagList/TagList";
-import { useTheme } from "styled-components";
 
 const forumSortOptions = [
   { name: "Titel (a-z)", value: "content" },
@@ -67,8 +66,6 @@ export default function Forum({
   totalPosts,
   tags,
 }: ForumPageProps) {
-  const { colors } = useTheme();
-
   const [posts, setPosts] = useState(forumData);
   const [isLoading, setIsLoading] = useState(false);
   const [totalCount, setTotalCount] = useState(totalPosts);
@@ -106,13 +103,13 @@ export default function Forum({
           meta: "filter_count",
           filter:
             selectedTag.length > 0
-              ? `filter={"categories": { "categories_id": { "id": { "_eq": "${selectedTag}"}}}}`
+              ? `filter[categories][categories_id][id][_eq]=${selectedTag}`
               : ``,
         });
         const res = await req.json();
 
-        setPosts(res.data);
-        setTotalCount(res.meta.filter_count || 0);
+        setPosts(res.data ?? []);
+        setTotalCount(res?.meta?.filter_count || 0);
       } catch (error) {
         console.log(error);
       }
@@ -155,19 +152,13 @@ export default function Forum({
       </Hero>
 
       <main style={{ marginBottom: "80px" }}>
-        <Container style={{ marginBottom: 56 }}>
-          <Grid container style={{ marginBottom: "32px" }}>
-            <Grid item xs={12}>
-              <TagList
-                tags={tags}
-                selected={selectedTag}
-                onSelect={(x: string) => {
-                  setSelectedTag(x);
-                }}
-              />
-            </Grid>
-          </Grid>
-        </Container>
+        <TagList
+          tags={tags}
+          selected={selectedTag}
+          onSelect={(x: string) => {
+            setSelectedTag(x);
+          }}
+        />
 
         <CollectionSearchBar onSearch={handleSearch} />
 
@@ -178,7 +169,9 @@ export default function Forum({
             ) : (
               <>
                 <Grid item xs={12} md={9}>
-                  <P color="primary">{totalCount} vragen</P>
+                  <P color="primary">
+                    {totalCount} {totalCount === 1 ? "vraag" : "vragen"}
+                  </P>
                 </Grid>
                 <Grid item xs={12} md={3}>
                   <SortBar sortOptions={forumSortOptions} onSort={handleSort} />
