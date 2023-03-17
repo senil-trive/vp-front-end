@@ -80,14 +80,14 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
                 <div className="rounded-lg bg-white border-2 border-orange-900 p-6">
                   {pageData?.training_1_video?.id ? (
                     <video
-                      className="rounded-lg h-[300px] w-full object-cover"
+                      className="rounded-lg h-[256px] w-full object-cover mb-[40px]"
                       src={parseVideoURL(pageData?.training_1_video?.id)}
                       controls
                       poster={parseImageURL(pageData?.training_1_image?.id)}
                     ></video>
                   ) : pageData?.training_1_image?.id ? (
                     <Image
-                      className="rounded-lg h-[300px] object-cover"
+                      className="rounded-lg h-[256px] object-cover mb-[40px]"
                       src={parseImageURL(pageData?.training_1_image?.id)}
                       width={500}
                       height={300}
@@ -101,14 +101,14 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
                 <div className="rounded-lg bg-white border-2 border-orange-900 p-6">
                   {pageData?.training_2_video?.id ? (
                     <video
-                      className="rounded-lg h-[300px] w-full object-cover"
+                      className="rounded-lg h-[256px] w-full object-cover mb-[40px]"
                       src={parseVideoURL(pageData?.training_2_video?.id)}
                       controls
                       poster={parseImageURL(pageData?.training_2_image?.id)}
                     ></video>
                   ) : pageData?.training_2_image?.id ? (
                     <Image
-                      className="rounded-lg h-[300px] object-cover"
+                      className="rounded-lg h-[256px] object-cover mb-[40px]"
                       src={parseImageURL(pageData?.training_2_image?.id)}
                       width={500}
                       height={300}
