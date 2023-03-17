@@ -82,7 +82,6 @@ const InputWrapper = styled.div<InputStateType>`
     input {
       border: none;
       width: 100%;
-      border-radius: 8px;
 
       font-weight: 400;
       font-size: 18px;
@@ -187,6 +186,7 @@ export default function Input({
           type={type}
           placeholder={placeholder}
           onChange={(e) => onChange?.(e)}
+          defaultValue={defaultValue}
           {...formRegister}
           {...rest}
         />

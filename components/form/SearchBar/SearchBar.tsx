@@ -1,6 +1,6 @@
 import { debounce } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useTheme } from "styled-components";
 import { ColorType } from "../../../types/colorTypes";
 import SearchIcon from "../../icons/SearchIcon/SearchIcon";
@@ -27,26 +27,42 @@ export default function SearchBar({
 }: Props) {
   const { colors } = useTheme();
   const router = useRouter();
+
   const [val, setVal] = useState("");
 
-  const handleSearch: React.ChangeEventHandler<HTMLInputElement> = (x) => {
-    if (onSearch) return onSearch(x.target.value);
-    return router.push(`/zoeken?q=${x.target.value}`);
-  };
+  const handleSearch = useCallback(
+    (x: React.ChangeEvent<HTMLInputElement> | string) => {
+      const newVal = typeof x === "object" ? x.target.value : x;
+
+      if (onSearch) {
+        return onSearch(newVal);
+      }
+      return router.push(`/zoeken?q=${newVal}`);
+    },
+    [onSearch, router]
+  );
 
   const debouncedSearch = debounce(handleSearch, waitTime);
 
   useEffect(() => {
-    if (router.pathname === "/zoeken" && router.query.q) {
-      setVal(router.query.q as string);
+    const query = router?.query?.q as string;
+
+    if (
+      router.isReady &&
+      router.pathname === "/zoeken" &&
+      query &&
+      query !== val
+    ) {
+      setVal(query);
+      handleSearch(query);
     }
-  }, [router.query, router.pathname]);
+  }, [handleSearch, router.isReady, router.pathname, router?.query?.q, val]);
 
   return (
     <Input
       iconLeft={<SearchIcon color={colors[iconColor]} />}
       placeholder={placeholder}
-      defaultValue={val}
+      defaultValue={val as string}
       onChange={debouncedSearch}
       borderColor="grey"
     />
