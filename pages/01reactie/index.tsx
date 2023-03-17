@@ -54,7 +54,7 @@ export const getServerSideProps = async () => {
   }
 };
 
-export default function ZeroResponesPage({
+export default function ZeroResponsesPage({
   forumData,
   totalPosts,
 }: ZeroResponsesPageProps) {
