@@ -5,8 +5,6 @@ import Button from "../../../components/buttons/Button";
 import CTAItem from "../../../components/content-types/CTAItem/CTAItem";
 import { Container } from "@mui/material";
 import ENDPOINTS from "../../../constants/endpoints";
-import { FAQ } from "../../../types/content-types/FAQ.type";
-import FAQItem from "../../../components/content-types/FAQItem/FAQItem";
 import FAQList from "../../../components/content-types/FAQList/FAQList";
 import { Hero } from "../../../components/layout";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
