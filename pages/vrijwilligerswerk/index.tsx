@@ -3,8 +3,7 @@ import CTAItem from "../../components/content-types/CTAItem/CTAItem";
 import { Container } from "@mui/material";
 import ContentCarousel from "../../components/carousels/ContentCarousel";
 import ENDPOINTS from "../../constants/endpoints";
-import { FAQ } from "../../types/content-types/FAQ.type";
-import FAQItem from "../../components/content-types/FAQItem/FAQItem";
+import FAQList from "../../components/content-types/FAQList/FAQList";
 import { H3 } from "../../components/typography";
 import { Hero } from "../../components/layout";
 import P from "../../components/typography/P/P";
@@ -17,7 +16,6 @@ import USPItem from "../../components/content-types/USPItem/USPItem";
 import VideoItem from "../../components/content-types/VideoItem/VideoItem";
 import parseImageURL from "../../utils/parseImageURL";
 import { useRouter } from "next/router";
-import FAQList from "../../components/content-types/FAQList/FAQList";
 import { useTheme } from "styled-components";
 
 type VolunteersPageProps = {
@@ -205,10 +203,6 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
                 <CTAItem
                   title={pageData?.cta_section_block_1_title}
                   description={pageData?.cta_section_block_1_subtitle}
-                  imageURL={parseImageURL(
-                    pageData?.cta_section_block_1_image?.id
-                  )}
-                  imageAlt={pageData?.cta_section_block_1_title}
                   buttonLabel={pageData?.cta_section_block_1_button_label}
                   buttonURL={pageData?.cta_section_block_1_button_url}
                   buttonVariant="primary"
@@ -216,10 +210,6 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
                 <CTAItem
                   title={pageData?.cta_section_block_2_title}
                   description={pageData?.cta_section_block_2_subtitle}
-                  imageURL={parseImageURL(
-                    pageData?.cta_section_block_2_image?.id
-                  )}
-                  imageAlt={pageData?.cta_section_block_2_title}
                   buttonLabel={pageData?.cta_section_block_2_button_label}
                   buttonURL={pageData?.cta_section_block_2_button_url}
                   buttonVariant="primary"
