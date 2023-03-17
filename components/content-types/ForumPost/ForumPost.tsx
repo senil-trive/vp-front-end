@@ -25,14 +25,14 @@ type Props = {
 };
 
 const StyledForumPost = styled.article`
-  background: #ffffff;
   /* border: 1px solid ${({ theme }) => theme.colors.primary}; */
   border-radius: 8px;
   padding: 24px;
   overflow: hidden;
   position: relative;
   z-index: 1;
-  background: rgba(0, 110, 247, 0.05);
+  /* background: rgba(0, 110, 247, 0.05); */
+  background-color: #f3f8fe;
 
   /* TODO: required for the home grid */
   display: flex;

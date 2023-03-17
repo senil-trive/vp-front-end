@@ -125,7 +125,7 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
           <section
             className="mt-[80px] text-center py-[80px]"
             style={{
-              backgroundColor: "rgba(0, 110, 247, 0.05)",
+              backgroundColor: "#F3F8FE",
             }}
           >
             <Container>

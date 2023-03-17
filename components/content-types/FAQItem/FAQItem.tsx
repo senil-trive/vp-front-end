@@ -41,8 +41,8 @@ const FAQItem: React.FC<FAQItemProps> = ({
   return (
     <StyleFaq
       className={`cursor-pointer p-[48px] rounded-lg ${
-        isSelected ? "bg-[#006ef7]/5" : "bg-[#3fc7b4]/5"
-      } hover:bg-[#006ef7]/5`}
+        isSelected ? "bg-[#F3F8FE]" : "bg-[#F4FCFB]"
+      } hover:bg-[#F3F8FE]`}
       onClick={handelSelect}
     >
       <div className="flex items-center justify-between  text-left">
