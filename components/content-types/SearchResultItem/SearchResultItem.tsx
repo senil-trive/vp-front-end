@@ -50,14 +50,14 @@ const Wrapper = styled.div<{ colorVariant: number }>`
     background: ${({ theme, colorVariant }) => {
       switch (colorVariant) {
         case 1:
-          return "rgba(0, 110, 247, 0.05)";
+          return "#F3F8FE";
         case 2:
-          return "rgba(255, 151, 29, 0.025)";
+          return "#FFFDF9";
         case 3:
-          return "rgba(63, 199, 180, 0.025)";
+          return "#FAFEFD";
 
         default:
-          return "rgba(0, 110, 247, 0.05)";
+          return "#F3F8FE";
       }
     }};
     border-radius: 8px;
@@ -107,8 +107,8 @@ export default function SearchResultItem({
           {list.map((item) => (
             <li key={item.link}>
               <a href={item.link} className="flex items-center hover:underline">
-                {item.name}
-                <BsArrowRight className="ml-2" />
+                <span>{item.name}</span>
+                <BsArrowRight className="ml-2" style={{ minWidth: 18 }} />
               </a>
             </li>
           ))}
