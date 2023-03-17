@@ -1,19 +1,19 @@
 import { Container, Grid } from "@mui/material";
 import { H1, P } from "../../../components/typography";
-import React, { useEffect, useState } from "react";
-import { CircleSpinner } from "react-spinners-kit";
-import Link from "next/link";
-
 import { Hero, Pagination } from "../../../components/layout";
+import React, { useEffect, useState } from "react";
 import {
   getContentTags,
   getForumOverviewPageData,
   getForumPosts,
 } from "../../../utils/api";
+
 import Button from "../../../components/buttons/Button";
+import { CircleSpinner } from "react-spinners-kit";
 import CollectionSearchBar from "../../../components/form/CollectionSearchBar/CollectionSearchBar";
 import { ForumPageProps } from "../../../types/pageTypes";
 import ForumPost from "../../../components/content-types/ForumPost/ForumPost";
+import Link from "next/link";
 import { POST_PER_PAGE } from "../../../constants/app-configs";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import SortBar from "../../../components/form/SortBar/SortBar";
@@ -141,7 +141,7 @@ export default function Forum({
                 <Button href="/kinderen/forum/stel-een-vraag">
                   {pageData?.submit_question_button_label}
                 </Button>
-                <Button filled={false} onClick={() => console.log("clicked")}>
+                <Button filled={false} href="/kinderen/klets-met-een-buddy">
                   {pageData?.chat_button_label}
                 </Button>
               </div>

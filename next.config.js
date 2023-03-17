@@ -6,7 +6,7 @@ const moduleExports = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["admin.villapinedo.nl", "randomuser.me"],
+    domains: ["admin.villapinedo.nl", "randomuser.me", "picsum.photos"],
   },
   async redirects() {
     return [

@@ -7,6 +7,7 @@ import { Hero } from "../../../components/layout";
 import Image from "next/image";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import parseImageURL from "../../../utils/parseImageURL";
+import parseVideoURL from "../../../utils/parseVideoURL";
 
 type VolunteersTrainingPageProps = {
   pageData: any;
@@ -77,28 +78,43 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
 
               <div className="grid md:grid-cols-2 gap-8 mt-14 mx-auto">
                 <div className="rounded-lg bg-white border-2 border-orange-900 p-6">
-                  {pageData?.training_1_image?.id && (
+                  {pageData?.training_1_video?.id ? (
+                    <video
+                      className="rounded-lg h-[300px] w-full object-cover"
+                      src={parseVideoURL(pageData?.training_1_video?.id)}
+                      controls
+                      poster={parseImageURL(pageData?.training_1_image?.id)}
+                    ></video>
+                  ) : pageData?.training_1_image?.id ? (
                     <Image
-                      className="rounded-lg h-48 object-cover"
+                      className="rounded-lg h-[300px] object-cover"
                       src={parseImageURL(pageData?.training_1_image?.id)}
                       width={500}
-                      height={200}
+                      height={300}
                       alt={pageData?.training_1_title}
                     />
-                  )}
+                  ) : null}
+
                   <H4 variant="bold">{pageData?.training_1_title}</H4>
                   <P>{pageData?.training_1_description}</P>
                 </div>
                 <div className="rounded-lg bg-white border-2 border-orange-900 p-6">
-                  {pageData?.training_2_image?.id && (
+                  {pageData?.training_2_video?.id ? (
+                    <video
+                      className="rounded-lg h-[300px] w-full object-cover"
+                      src={parseVideoURL(pageData?.training_2_video?.id)}
+                      controls
+                      poster={parseImageURL(pageData?.training_2_image?.id)}
+                    ></video>
+                  ) : pageData?.training_2_image?.id ? (
                     <Image
-                      className="rounded-lg h-48 object-cover"
+                      className="rounded-lg h-[300px] object-cover"
                       src={parseImageURL(pageData?.training_2_image?.id)}
                       width={500}
-                      height={200}
+                      height={300}
                       alt={pageData?.training_2_title}
                     />
-                  )}
+                  ) : null}
                   <H4 variant="bold">{pageData?.training_2_title}</H4>
                   <P>{pageData?.training_2_description}</P>
                 </div>
