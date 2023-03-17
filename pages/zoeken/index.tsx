@@ -88,7 +88,7 @@ export default function Search() {
               </P>
 
               <div>
-                <SearchBar currentQuery={q as string} />
+                <SearchBar />
               </div>
             </Grid>
             <Grid item xs={0} md={2} lg={3} />
