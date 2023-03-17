@@ -39,4 +39,4 @@ npm run build ||
 )
 
 # If everything passes... Now we can commit
-echo '✅✅✅✅ Succes! Code is being commited ✅✅✅✅'
+echo '✅✅✅✅ Succes! Code is being committed ✅✅✅✅'

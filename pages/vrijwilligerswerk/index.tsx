@@ -129,7 +129,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
                     title={usp.title}
                     description={usp.description}
                     imageAlt={usp.title}
-                    imageURL={parseImageURL(usp.image?.id)}
+                    imageURL={parseImageURL(usp.image?.id, 200)}
                   />
                 ))}
               </div>

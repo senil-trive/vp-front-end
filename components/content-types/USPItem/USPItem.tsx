@@ -24,7 +24,7 @@ const USPItem: React.FC<USPItemProps> = ({
           alt={imageAlt}
           width={112}
           height={112}
-          className="rounded-full mb-10"
+          className="rounded-full h-[112px] w-[112px] object-cover mb-10"
         />
       ) : (
         <div className="w-[112px] h-[1px12] mb-10" />
