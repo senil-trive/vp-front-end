@@ -11,16 +11,16 @@ import { H3, P } from "../../typography";
 
 const StyledFooter = styled.footer`
   .footer-top {
-    background-color: ${({ theme }) => theme.colors.black};
+    background-color: ${({ theme }) => theme.colors.black.normal};
     padding: 44px 0;
 
     h3,
     p {
-      color: ${({ theme }) => theme.colors.white};
+      color: ${({ theme }) => theme.colors.white.normal};
     }
   }
   .footer-bottom {
-    background: ${({ theme }) => theme.colors.white};
+    background: ${({ theme }) => theme.colors.white.normal};
     padding: 17px 0;
 
     a {
@@ -28,7 +28,7 @@ const StyledFooter = styled.footer`
       font-size: 18px;
       line-height: 160%;
       text-decoration-line: underline;
-      color: #000000;
+      color: ${({ theme }) => theme.colors.text.normal};
     }
   }
 `;

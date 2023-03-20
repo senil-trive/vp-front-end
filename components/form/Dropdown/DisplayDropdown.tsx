@@ -40,7 +40,7 @@ const Wrapper = styled.div`
       align-items: center;
 
       span {
-        color: ${({ theme }) => theme.colors.primary};
+        color: ${({ theme }) => theme.colors.primary.normal};
         font-weight: 700;
         font-size: ${({ theme }) => theme.fontSizes.h1.mobile};
         line-height: 140%;
@@ -50,7 +50,7 @@ const Wrapper = styled.div`
 
       svg {
         path {
-          stroke: ${({ theme }) => theme.colors.info};
+          stroke: ${({ theme }) => theme.colors.info.normal};
         }
       }
 
@@ -87,7 +87,7 @@ const Wrapper = styled.div`
 
         &:hover,
         &.active {
-          background-color: ${({ theme }) => theme.colors.primary};
+          background-color: ${({ theme }) => theme.colors.primary.normal};
           color: white;
           border-radius: 8px;
         }

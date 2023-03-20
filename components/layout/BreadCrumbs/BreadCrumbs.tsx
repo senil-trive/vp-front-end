@@ -21,7 +21,7 @@ const StyledNav = styled.nav`
 
     li {
       a {
-        color: ${({ theme }) => theme.colors.secondary};
+        color: ${({ theme }) => theme.colors.secondary.normal};
       }
 
       &.with-divider {
@@ -29,7 +29,7 @@ const StyledNav = styled.nav`
           content: "/";
           margin-left: 5px;
           margin-right: 5px;
-          color: ${({ theme }) => theme.colors.secondary};
+          color: ${({ theme }) => theme.colors.secondary.normal};
         }
       }
     }

@@ -1,21 +1,81 @@
 import { DefaultTheme } from "styled-components";
 
 export const COLORS = {
-  primary: "#3FC7B4", // Teal
-  primaryTransparent: "rgba(63, 199, 180, 0.025)", // Teal
-  secondary: "#FE517E", // Crimson
-  secondaryTransparent: "rgba(255, 151, 29, 0.025)", // Crimson
-  tertiary: "#006EF7", // Blue
-  tertiaryTransparent: "rgba(0, 110, 247, 0.05)", // Blue
-  text: "#150F2F", // Black
-  white: "#fff", // White
-  black: "#150F2F", // Black
-  grey: "#EDEDED", // Grey
-  error: "#FF3333", // Error red
-  success: "#06D6A0", // Success
-  info: "#FF971D", // Orange
-  infoTransparent: "rgba(255, 151, 29, 0.7)", // Orange
-  infoReversed: "#FF971D", // Orange
+  // Teal
+  primary: {
+    normal: "#3FC7B4",
+    light: "#FAFEFD",
+    transparent: "rgba(63, 199, 180, 0.025)",
+  },
+
+  // Crimson
+  secondary: {
+    normal: "#FE517E",
+    light: "#FE517E",
+    transparent: "rgba(255, 151, 29, 0.025)",
+  },
+
+  // Blue
+  tertiary: {
+    normal: "#006EF7",
+    light: "#F3F8FE",
+    transparent: "rgba(0, 110, 247, 0.05)",
+  },
+
+  // Black
+  text: {
+    normal: "#150F2F",
+    light: "#150F2F",
+    transparent: "#150F2F",
+  },
+
+  // White
+  white: {
+    normal: "#fff",
+    light: "#fff",
+    transparent: "#fff",
+  },
+
+  // Black
+  black: {
+    normal: "#150F2F",
+    light: "#150F2F",
+    transparent: "#150F2F",
+  },
+
+  // Grey
+  grey: {
+    normal: "#EDEDED",
+    light: "#EDEDED",
+    transparent: "#EDEDED",
+  },
+
+  // Error red
+  error: {
+    normal: "#FF3333",
+    light: "#FF3333",
+    transparent: "#FF3333",
+  },
+
+  // Success
+  success: {
+    normal: "#06D6A0",
+    light: "#06D6A0",
+    transparent: "#06D6A0",
+  },
+
+  // Orange
+  info: {
+    normal: "#FF971D",
+    light: "#FFFDF9",
+    transparent: "rgba(255, 151, 29, 0.7)",
+  },
+  // Orange
+  infoReversed: {
+    normal: "#FF971D",
+    light: "#FFFDF9",
+    transparent: "rgba(255, 151, 29, 0.7)",
+  },
 };
 
 export const SHADOWS = {

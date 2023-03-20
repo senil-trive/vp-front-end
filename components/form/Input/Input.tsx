@@ -82,7 +82,6 @@ const InputWrapper = styled.div<InputStateType>`
     input {
       border: none;
       width: 100%;
-      border-radius: 8px;
 
       font-weight: 400;
       font-size: 18px;
@@ -179,7 +178,7 @@ export default function Input({
   return (
     <InputWrapper disabled={disabled} active={active} hasError={hasError}>
       {!!label && <label>{label}</label>}
-      <div style={{ borderColor: colors[borderColor] }}>
+      <div style={{ borderColor: colors[borderColor].normal }}>
         {!!iconLeft && (
           <IconWrapper style={{ marginRight: 10 }}>{iconLeft}</IconWrapper>
         )}
@@ -187,6 +186,7 @@ export default function Input({
           type={type}
           placeholder={placeholder}
           onChange={(e) => onChange?.(e)}
+          defaultValue={defaultValue}
           {...formRegister}
           {...rest}
         />

@@ -23,6 +23,8 @@ export default function Search() {
 
   useEffect(() => {
     const getPaginatedBlogs = async () => {
+      console.log({ q });
+
       try {
         const req = await getPosts({
           postPerPage: POST_PER_PAGE,
@@ -63,10 +65,12 @@ export default function Search() {
       }
     };
 
-    getPaginatedBlogs();
-    getPaginatedForum();
-    getPaginatedLetters();
-  }, [q]);
+    if (router.isReady) {
+      getPaginatedBlogs();
+      getPaginatedForum();
+      getPaginatedLetters();
+    }
+  }, [q, router.isReady]);
 
   return (
     <PageWrapper title="Zoekresultaten">

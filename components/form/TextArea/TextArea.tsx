@@ -163,7 +163,7 @@ export default function TextArea({
       onClick={handleInputFocus}
     >
       {!!label && <label>{label}</label>}
-      <div style={{ borderColor: colors[borderColor] }}>
+      <div style={{ borderColor: colors[borderColor].normal }}>
         <textarea
           rows={7}
           ref={inputRef}

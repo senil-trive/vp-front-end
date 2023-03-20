@@ -29,7 +29,7 @@ const StyledPost = styled(BaseStyle)`
 `;
 
 const StyledLetter = styled(BaseStyle)`
-  border-color: ${({ theme }) => theme.colors.info};
+  border-color: ${({ theme }) => theme.colors.info.normal};
 
   // TODO: this is required to make the home grid rows the same size
   min-height: 624px;
@@ -45,13 +45,13 @@ const StyledLetter = styled(BaseStyle)`
 `;
 
 const StyledStory = styled(BaseStyle)`
-  border-color: ${({ theme }) => theme.colors.info};
+  border-color: ${({ theme }) => theme.colors.info.normal};
   padding: 24px;
 `;
 
 const StyledBlog = styled(BaseStyle)`
   padding: 24px;
-  border-color: ${({ theme }) => theme.colors.primary};
+  border-color: ${({ theme }) => theme.colors.primary.normal};
 
   header {
     height: 366px;
@@ -59,7 +59,7 @@ const StyledBlog = styled(BaseStyle)`
     video,
     iframe {
       border-radius: 8px;
-      background-color: ${({ theme }) => theme.colors.grey};
+      background-color: ${({ theme }) => theme.colors.grey.normal};
     }
   }
   section {

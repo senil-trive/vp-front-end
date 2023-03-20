@@ -13,7 +13,7 @@ type Props = {
 
 const Wrapper = styled.div`
   padding: 24px 0;
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.white.normal};
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   display: flex;
   position: absolute;
@@ -41,12 +41,12 @@ const Wrapper = styled.div`
           font-size: 18px;
           line-height: 160%;
           letter-spacing: 0.02em;
-          color: ${({ theme }) => theme.colors.text};
+          color: ${({ theme }) => theme.colors.text.normal};
           &:hover {
-            color: ${({ theme }) => theme.colors.primary};
+            color: ${({ theme }) => theme.colors.primary.normal};
           }
           &.active {
-            color: ${({ theme }) => theme.colors.primary};
+            color: ${({ theme }) => theme.colors.primary.normal};
             text-decoration: underline;
           }
         }
@@ -54,7 +54,7 @@ const Wrapper = styled.div`
     }
 
     &.with-divider {
-      border-right: 1px solid ${({ theme }) => theme.colors.grey};
+      border-right: 1px solid ${({ theme }) => theme.colors.grey.normal};
     }
   }
 `;
