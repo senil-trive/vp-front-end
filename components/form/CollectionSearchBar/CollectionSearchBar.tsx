@@ -13,10 +13,10 @@ type Props = {
 
 const StyledWrapper = styled.div`
   padding: 15px 0;
-  background-color: ${({ theme }) => theme.colors.secondary};
+  background-color: ${({ theme }) => theme.colors.secondary.normal};
 
   p {
-    color: ${({ theme }) => theme.colors.white};
+    color: ${({ theme }) => theme.colors.white.normal};
   }
 
   .search-wrapper {

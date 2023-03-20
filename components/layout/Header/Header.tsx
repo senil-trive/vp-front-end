@@ -34,7 +34,7 @@ export type GrandChildMenuItem = {
 const StyledHeader = styled.header`
   position: sticky;
   top: 0;
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.white.normal};
   z-index: 500;
 
   .inner {

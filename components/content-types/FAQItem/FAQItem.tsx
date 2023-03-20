@@ -2,7 +2,7 @@ import { FiMinus, FiPlus } from "react-icons/fi";
 import { H3, P } from "../../typography";
 
 import { FAQ } from "../../../types/content-types/FAQ.type";
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
 import styled, { useTheme } from "styled-components";
 
@@ -54,9 +54,9 @@ const FAQItem: React.FC<FAQItemProps> = ({
           className="flex items-center justify-center w-8 h-8"
         >
           {isSelected ? (
-            <FiMinus color={theme.colors.primary} size={25} />
+            <FiMinus color={theme.colors.primary.normal} size={25} />
           ) : (
-            <FiPlus size={25} color={theme.colors.secondary} />
+            <FiPlus size={25} color={theme.colors.secondary.normal} />
           )}
         </button>
       </div>

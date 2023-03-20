@@ -32,7 +32,7 @@ const StyledForumPost = styled.article`
   }
 
   .content {
-    border: 1px solid ${({ theme }) => theme.colors.secondary};
+    border: 1px solid ${({ theme }) => theme.colors.secondary.normal};
     padding: 24px;
     border-radius: 8px;
     margin-bottom: 34px;
@@ -43,7 +43,8 @@ const StyledForumPost = styled.article`
     gap: 28px;
     align-items: center;
     padding-bottom: 14px;
-    border-bottom: 1px solid ${({ theme }) => rgba(theme.colors.primary, 0.2)};
+    border-bottom: 1px solid
+      ${({ theme }) => rgba(theme.colors.primary.normal, 0.2)};
   }
 `;
 
@@ -66,7 +67,7 @@ export default function ForumComment({
           age={age}
           name={author}
           type={authorType}
-          color={accentColor}
+          color={accentColor.normal}
         />
         <div>
           {postDate && (

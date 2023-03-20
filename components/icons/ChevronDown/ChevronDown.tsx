@@ -16,7 +16,7 @@ export default function ChevronDown(props: SVGProps<SVGSVGElement>) {
     >
       <path
         d="m1.492 1 6.22 5.33a1.2 1.2 0 0 0 1.561 0L15.493 1"
-        stroke={colors.info}
+        stroke={colors.info.normal}
         strokeWidth={1.5}
         strokeLinecap="round"
       />

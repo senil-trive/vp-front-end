@@ -25,14 +25,13 @@ type Props = {
 };
 
 const StyledForumPost = styled.article`
-  /* border: 1px solid ${({ theme }) => theme.colors.primary}; */
+  /* border: 1px solid ${({ theme }) => theme.colors.primary.normal}; */
   border-radius: 8px;
   padding: 24px;
   overflow: hidden;
   position: relative;
   z-index: 1;
-  /* background: rgba(0, 110, 247, 0.05); */
-  background-color: #f3f8fe;
+  background-color: ${({ theme }) => theme.colors.tertiary.light};
 
   /* TODO: required for the home grid */
   display: flex;
@@ -123,7 +122,7 @@ export default function ForumPost({
           <div className="likes">
             {likes > 0 && (
               <>
-                <HeartIcon color={colors.info} />
+                <HeartIcon color={colors.info.normal} />
                 <P color="info" variant="helper">
                   {likes}
                 </P>

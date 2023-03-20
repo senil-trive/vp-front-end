@@ -127,7 +127,7 @@ const Wrapper = styled.div<{ hasError: boolean }>`
       color: #000000;
 
       &:hover {
-        background-color: ${({ theme }) => theme.colors.primary};
+        background-color: ${({ theme }) => theme.colors.primary.normal};
         color: ${({ theme }) => theme.colors.white};
       }
     }
@@ -215,7 +215,7 @@ export default function Dropdown({
         </select>
         <div
           className={`selectBox ${isOpen ? "open" : ""}`}
-          style={{ borderColor: colors[borderColor] }}
+          style={{ borderColor: colors[borderColor].normal }}
           onClick={() => setIsOpen((state) => !state)}
         >
           <div className="flex items-center">
@@ -229,7 +229,7 @@ export default function Dropdown({
         {isOpen && (
           <div
             className="selectItems"
-            style={{ borderColor: colors[borderColor] }}
+            style={{ borderColor: colors[borderColor].normal }}
           >
             {options.map((option) => (
               <button key={option.value} onClick={() => handleSelect(option)}>

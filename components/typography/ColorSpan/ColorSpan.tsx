@@ -12,5 +12,5 @@ type Props = {
 export default function ColorSpan({ variant = "secondary", children }: Props) {
   const { colors } = useTheme();
 
-  return <span style={{ color: colors[variant] }}>{children}</span>;
+  return <span style={{ color: colors[variant].normal }}>{children}</span>;
 }

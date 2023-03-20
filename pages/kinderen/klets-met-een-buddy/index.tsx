@@ -11,6 +11,7 @@ import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import TextItem from "../../../components/content-types/TextItem/TextItem";
 import VideoItem from "../../../components/content-types/VideoItem/VideoItem";
 import parseImageURL from "../../../utils/parseImageURL";
+import { useTheme } from "styled-components";
 
 type BuddyPageProps = {
   pageData: any;
@@ -50,6 +51,8 @@ export const getServerSideProps = async () => {
 };
 
 const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
+  const { colors } = useTheme();
+
   return (
     <div>
       <PageWrapper
@@ -95,7 +98,7 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
           <section
             className="my-[80px] text-center py-20"
             style={{
-              backgroundColor: "#F3F8FE",
+              backgroundColor: colors.tertiary.light,
             }}
           >
             <Container>

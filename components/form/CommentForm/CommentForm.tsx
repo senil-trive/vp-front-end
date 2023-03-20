@@ -187,7 +187,7 @@ export default function CommentForm({
             </form>
           ) : (
             <div className="flex flex-col items-center justify-center">
-              <FiCheck size={40} color={colors.secondary} />
+              <FiCheck size={40} color={colors.secondary.normal} />
               <H3 variant="bold" color="primary">
                 Bedankt! Jouw commentaar wordt door ons beoordeeld.
               </H3>

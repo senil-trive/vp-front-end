@@ -60,7 +60,7 @@ export default function SearchBar({
 
   return (
     <Input
-      iconLeft={<SearchIcon color={colors[iconColor]} />}
+      iconLeft={<SearchIcon color={colors[iconColor].normal} />}
       placeholder={placeholder}
       defaultValue={val as string}
       onChange={debouncedSearch}

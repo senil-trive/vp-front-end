@@ -29,14 +29,14 @@ const Wrapper = styled.div<{ colorVariant: number }>`
     color: ${({ theme, colorVariant }) => {
       switch (colorVariant) {
         case 1:
-          return theme.colors.primary;
+          return theme.colors.primary.normal;
         case 2:
-          return theme.colors.info;
+          return theme.colors.info.normal;
         case 3:
-          return theme.colors.secondary;
+          return theme.colors.secondary.normal;
 
         default:
-          return theme.colors.primary;
+          return theme.colors.primary.normal;
       }
     }};
   }
@@ -50,14 +50,14 @@ const Wrapper = styled.div<{ colorVariant: number }>`
     background: ${({ theme, colorVariant }) => {
       switch (colorVariant) {
         case 1:
-          return "#F3F8FE";
+          return theme.colors.tertiary.light;
         case 2:
-          return "#FFFDF9";
+          return theme.colors.info.light;
         case 3:
-          return "#FAFEFD";
+          return theme.colors.primary.light;
 
         default:
-          return "#F3F8FE";
+          return theme.colors.tertiary.light;
       }
     }};
     border-radius: 8px;
@@ -71,14 +71,14 @@ const Wrapper = styled.div<{ colorVariant: number }>`
       color: ${({ theme, colorVariant }) => {
         switch (colorVariant) {
           case 1:
-            return theme.colors.primary;
+            return theme.colors.primary.normal;
           case 2:
-            return theme.colors.info;
+            return theme.colors.info.normal;
           case 3:
-            return theme.colors.secondary;
+            return theme.colors.secondary.normal;
 
           default:
-            return theme.colors.primary;
+            return theme.colors.primary.normal;
         }
       }};
     }

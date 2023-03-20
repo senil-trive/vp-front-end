@@ -182,7 +182,7 @@ export default function LetterDetail({ pageData, relatedLetters }: Props) {
                 </form>
               ) : (
                 <div className="flex flex-col items-center justify-center">
-                  <FiCheck size={40} color={theme.colors.secondary} />
+                  <FiCheck size={40} color={theme.colors.secondary.normal} />
                   <H3 variant="bold" color="primary">
                     Bedankt! De brief wordt nu gedownload.
                   </H3>

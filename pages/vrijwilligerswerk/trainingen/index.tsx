@@ -8,6 +8,7 @@ import Image from "next/image";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import parseImageURL from "../../../utils/parseImageURL";
 import parseVideoURL from "../../../utils/parseVideoURL";
+import { useTheme } from "styled-components";
 
 type VolunteersTrainingPageProps = {
   pageData: any;
@@ -49,6 +50,8 @@ export const getServerSideProps = async () => {
 const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
   pageData,
 }) => {
+  const { colors } = useTheme();
+
   return (
     <div>
       <PageWrapper
@@ -125,7 +128,7 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
           <section
             className="mt-[80px] text-center py-[80px]"
             style={{
-              backgroundColor: "#F3F8FE",
+              backgroundColor: colors.tertiary.light,
             }}
           >
             <Container>

@@ -138,7 +138,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
           <section
             className="my-[80px] text-center py-20"
             style={{
-              backgroundColor: "#F3F8FE",
+              backgroundColor: colors.tertiary.light,
             }}
           >
             <Container>
@@ -186,7 +186,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
           <section
             className="my-[80px] text-center py-20"
             style={{
-              backgroundColor: "#F3F8FE",
+              backgroundColor: colors.tertiary.light,
             }}
           >
             <Container>
@@ -252,7 +252,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
             <div className="flex justify-center mt-14">
               <Button
                 variant="link"
-                style={{ color: colors.info }}
+                style={{ color: colors.info.normal }}
                 onClick={() => router.push("/vrijwilligerswerk/faq")}
               >
                 Meer lezen

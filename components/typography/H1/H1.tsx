@@ -13,7 +13,7 @@ type Props = React.HTMLAttributes<HTMLHeadingElement> & {
 const BaseH1 = styled.h1<{ color: ColorType }>`
   font-size: 32px;
   line-height: 120%;
-  color: ${({ theme, color }) => theme.colors[color]};
+  color: ${({ theme, color }) => theme.colors[color].normal};
   font-style: normal;
   margin: 12px 0;
 

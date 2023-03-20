@@ -178,7 +178,7 @@ export default function Input({
   return (
     <InputWrapper disabled={disabled} active={active} hasError={hasError}>
       {!!label && <label>{label}</label>}
-      <div style={{ borderColor: colors[borderColor] }}>
+      <div style={{ borderColor: colors[borderColor].normal }}>
         {!!iconLeft && (
           <IconWrapper style={{ marginRight: 10 }}>{iconLeft}</IconWrapper>
         )}
