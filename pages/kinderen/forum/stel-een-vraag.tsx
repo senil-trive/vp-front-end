@@ -1,9 +1,4 @@
-import {
-  ColorSpan,
-  H1,
-  P,
-  TitleWithHighlights,
-} from "../../../components/typography";
+import { P, TitleWithHighlights } from "../../../components/typography";
 import { Grid, Hero } from "../../../components/layout";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { postForum, uploadFile } from "../../../utils/api";
