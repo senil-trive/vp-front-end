@@ -156,7 +156,7 @@ export default function LetterDetail({ pageData, relatedLetters }: Props) {
                 >
                   <Input
                     placeholder="Vul je naam in"
-                    label="Naam"
+                    label="Voornaam"
                     name="user_name"
                     register={register}
                     hasError={!!errors.user_name}
