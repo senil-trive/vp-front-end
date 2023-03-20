@@ -7,8 +7,7 @@ const StyledDiv = styled.div<{ color?: string }>`
 
   /* White */
 
-  background: ${({ color }) => color ?? "#ffffff"};
-  /* Grey - 5 */
+  background: ${({ theme, color }) => color ?? theme.colors.white.normal};
 
   border: 1px solid #555555;
   border-radius: 24px;

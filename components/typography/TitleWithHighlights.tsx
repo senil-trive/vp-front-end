@@ -36,7 +36,7 @@ const TitleWithHighlights: React.FC<TitleWithHighlightsProps> = ({
   text,
   textToHighlight,
   headerElement = "h1",
-  color = "black",
+  color = "primary",
   highlightColor = "info",
   style,
 }) => {
@@ -48,14 +48,14 @@ const TitleWithHighlights: React.FC<TitleWithHighlightsProps> = ({
       newText = regexReplace(
         newText,
         highlight ?? "",
-        theme.colors[highlightColor]
+        theme.colors[highlightColor].normal
       );
     });
   } else if (textToHighlight) {
     newText = regexReplace(
       newText,
       textToHighlight ?? "",
-      theme.colors[highlightColor]
+      theme.colors[highlightColor].normal
     );
   }
 

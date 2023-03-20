@@ -3,8 +3,7 @@ import CTAItem from "../../components/content-types/CTAItem/CTAItem";
 import { Container } from "@mui/material";
 import ContentCarousel from "../../components/carousels/ContentCarousel";
 import ENDPOINTS from "../../constants/endpoints";
-import { FAQ } from "../../types/content-types/FAQ.type";
-import FAQItem from "../../components/content-types/FAQItem/FAQItem";
+import FAQList from "../../components/content-types/FAQList/FAQList";
 import { H3 } from "../../components/typography";
 import { Hero } from "../../components/layout";
 import P from "../../components/typography/P/P";
@@ -17,7 +16,6 @@ import USPItem from "../../components/content-types/USPItem/USPItem";
 import VideoItem from "../../components/content-types/VideoItem/VideoItem";
 import parseImageURL from "../../utils/parseImageURL";
 import { useRouter } from "next/router";
-import FAQList from "../../components/content-types/FAQList/FAQList";
 import { useTheme } from "styled-components";
 
 type VolunteersPageProps = {
@@ -94,7 +92,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
           </Hero>
 
           {pageData?.media_section_1 && (
-            <section className="my-[200px]">
+            <section className="my-[80px]">
               <Container>
                 <TextItem
                   rtl={pageData?.media_section_1_rtl}
@@ -113,7 +111,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
             </section>
           )}
 
-          <section className="my-[200px] text-center">
+          <section className="my-[80px] text-center">
             <Container>
               <div className="flex flex-col items-center justify-center ">
                 <H3 variant="bold" color="primary">
@@ -131,16 +129,16 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
                     title={usp.title}
                     description={usp.description}
                     imageAlt={usp.title}
-                    imageURL={parseImageURL(usp.image?.id)}
+                    imageURL={parseImageURL(usp.image?.id, 200)}
                   />
                 ))}
               </div>
             </Container>
           </section>
           <section
-            className="my-[200px] text-center py-20"
+            className="my-[80px] text-center py-20"
             style={{
-              backgroundColor: "rgba(0, 110, 247, 0.05)",
+              backgroundColor: colors.tertiary.light,
             }}
           >
             <Container>
@@ -167,7 +165,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
             </Container>
           </section>
           {pageData?.media_section_2 && (
-            <section className="my-[200px]">
+            <section className="my-[80px]">
               <Container>
                 <TextItem
                   rtl={pageData?.media_section_2_rtl}
@@ -186,9 +184,9 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
             </section>
           )}
           <section
-            className="my-[200px] text-center py-20"
+            className="my-[80px] text-center py-20"
             style={{
-              backgroundColor: "rgba(0, 110, 247, 0.05)",
+              backgroundColor: colors.tertiary.light,
             }}
           >
             <Container>
@@ -205,10 +203,6 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
                 <CTAItem
                   title={pageData?.cta_section_block_1_title}
                   description={pageData?.cta_section_block_1_subtitle}
-                  imageURL={parseImageURL(
-                    pageData?.cta_section_block_1_image?.id
-                  )}
-                  imageAlt={pageData?.cta_section_block_1_title}
                   buttonLabel={pageData?.cta_section_block_1_button_label}
                   buttonURL={pageData?.cta_section_block_1_button_url}
                   buttonVariant="primary"
@@ -216,10 +210,6 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
                 <CTAItem
                   title={pageData?.cta_section_block_2_title}
                   description={pageData?.cta_section_block_2_subtitle}
-                  imageURL={parseImageURL(
-                    pageData?.cta_section_block_2_image?.id
-                  )}
-                  imageAlt={pageData?.cta_section_block_2_title}
                   buttonLabel={pageData?.cta_section_block_2_button_label}
                   buttonURL={pageData?.cta_section_block_2_button_url}
                   buttonVariant="primary"
@@ -227,7 +217,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
               </div>
             </Container>
           </section>
-          <section className="my-[200px] text-center py-20">
+          <section className="my-[80px] text-center py-[20px]">
             <Container>
               <div className="flex flex-col items-center justify-center mb-14">
                 <H3 variant="bold" color="black">
@@ -262,7 +252,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
             <div className="flex justify-center mt-14">
               <Button
                 variant="link"
-                style={{ color: colors.info }}
+                style={{ color: colors.info.normal }}
                 onClick={() => router.push("/vrijwilligerswerk/faq")}
               >
                 Meer lezen

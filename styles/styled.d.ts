@@ -1,24 +1,25 @@
 import "styled-components";
 
+type ColorType = {
+  normal: string;
+  light: string;
+  transparent: string;
+};
 declare module "styled-components" {
   export interface DefaultTheme {
     name: string;
     colors: {
-      primary: string;
-      primaryTransparent: string;
-      secondary: string;
-      secondaryTransparent: string;
-      tertiary: string;
-      tertiaryTransparent: string;
-      text: string;
-      white: string;
-      grey: string;
-      black: string;
-      error: string;
-      success: string;
-      info: string;
-      infoTransparent: string;
-      infoReversed: string;
+      primary: ColorType;
+      secondary: ColorType;
+      tertiary: ColorType;
+      text: ColorType;
+      white: ColorType;
+      grey: ColorType;
+      black: ColorType;
+      error: ColorType;
+      success: ColorType;
+      info: ColorType;
+      infoReversed: ColorType;
     };
     shadows: {
       sm: string;

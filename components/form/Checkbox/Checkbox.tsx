@@ -21,7 +21,7 @@ const Wrapper = styled.div<{ hasError: boolean }>`
     width: 18px;
     height: 18px;
     background: ${({ theme }) => theme.colors.white};
-    border: 1px solid ${({ theme }) => theme.colors.primary};
+    border: 1px solid ${({ theme }) => theme.colors.primary.normal};
     border-radius: 4px;
     margin-right: 16px;
     position: relative;
@@ -38,7 +38,7 @@ const Wrapper = styled.div<{ hasError: boolean }>`
     }
 
     &.checked {
-      background-color: ${({ theme }) => theme.colors.primary};
+      background-color: ${({ theme }) => theme.colors.primary.normal};
     }
   }
 

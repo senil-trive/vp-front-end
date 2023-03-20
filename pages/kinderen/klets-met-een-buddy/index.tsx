@@ -1,18 +1,17 @@
 import { FaAppStoreIos, FaGooglePlay } from "react-icons/fa";
-import { H1, H3, P } from "../../../components/typography";
+import { H1, H3, P, TitleWithHighlights } from "../../../components/typography";
 
 import Button from "../../../components/buttons/Button";
 import CTAItem from "../../../components/content-types/CTAItem/CTAItem";
 import { Container } from "@mui/material";
 import ENDPOINTS from "../../../constants/endpoints";
-import { FAQ } from "../../../types/content-types/FAQ.type";
-import FAQItem from "../../../components/content-types/FAQItem/FAQItem";
+import FAQList from "../../../components/content-types/FAQList/FAQList";
 import { Hero } from "../../../components/layout";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import TextItem from "../../../components/content-types/TextItem/TextItem";
 import VideoItem from "../../../components/content-types/VideoItem/VideoItem";
 import parseImageURL from "../../../utils/parseImageURL";
-import FAQList from "../../../components/content-types/FAQList/FAQList";
+import { useTheme } from "styled-components";
 
 type BuddyPageProps = {
   pageData: any;
@@ -52,6 +51,8 @@ export const getServerSideProps = async () => {
 };
 
 const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
+  const { colors } = useTheme();
+
   return (
     <div>
       <PageWrapper
@@ -61,7 +62,10 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
         <main>
           <Hero>
             <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16">
-              <H1 variant="bold">{pageData?.page_title}</H1>
+              <TitleWithHighlights
+                text={pageData?.page_title ?? ""}
+                textToHighlight="buddy aanvragen"
+              />
               <P>{pageData?.page_subtitle}</P>
               <div className="flex gap-4 mt-14 w-[80%]">
                 <Button onClick={() => alert("Pizza: 🍕")}>
@@ -95,9 +99,9 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
           ))}
 
           <section
-            className="my-[200px] text-center py-20"
+            className="my-[80px] text-center py-20"
             style={{
-              backgroundColor: "rgba(0, 110, 247, 0.05)",
+              backgroundColor: colors.tertiary.light,
             }}
           >
             <Container>
@@ -114,26 +118,18 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                 <CTAItem
                   title={pageData?.cta_block_1_title}
                   description={pageData?.cta_block_1_description}
-                  imageURL={parseImageURL(pageData?.cta_block_1_image?.id)}
-                  imageAlt={pageData?.cta_block_1_title}
                 />
                 <CTAItem
                   title={pageData?.cta_block_2_title}
                   description={pageData?.cta_block_2_description}
-                  imageURL={parseImageURL(pageData?.cta_block_2_image?.id)}
-                  imageAlt={pageData?.cta_block_2_title}
                 />
                 <CTAItem
                   title={pageData?.cta_block_3_title}
                   description={pageData?.cta_block_3_description}
-                  imageURL={parseImageURL(pageData?.cta_block_3_image?.id)}
-                  imageAlt={pageData?.cta_block_3_title}
                 />
                 <CTAItem
                   title={pageData?.cta_block_4_title}
                   description={pageData?.cta_block_4_description}
-                  imageURL={parseImageURL(pageData?.cta_block_4_image?.id)}
-                  imageAlt={pageData?.cta_block_4_title}
                 />
               </div>
             </Container>
@@ -161,7 +157,7 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
             </Container>
           </section>
 
-          <section className="my-[200px] text-center py-20">
+          <section className="my-[80px] text-center">
             <Container>
               <div className="flex flex-col items-center justify-center ">
                 <H3 variant="bold" color="primary">

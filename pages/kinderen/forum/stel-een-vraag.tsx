@@ -1,9 +1,4 @@
-import {
-  ColorSpan,
-  H1,
-  P,
-  TitleWithHighlights,
-} from "../../../components/typography";
+import { P, TitleWithHighlights } from "../../../components/typography";
 import { Grid, Hero } from "../../../components/layout";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { postForum, uploadFile } from "../../../utils/api";
@@ -124,14 +119,14 @@ export default function Vraag() {
                         register={register}
                       />
                     </Grid>
-                    <Grid item xs={12} md={6}>
+                    {/* <Grid item xs={12} md={6}>
                       <Input
                         label="Upload bestand"
                         type="file"
                         name="attachment_image"
                         register={register}
                       />
-                    </Grid>
+                    </Grid> */}
                     <Grid item xs={12}>
                       <TextArea
                         label="Bericht *"

@@ -1,14 +1,10 @@
-import { H1, H3, P } from "../../../components/typography";
+import { useState } from "react";
 
-import { CircularProgress, Container } from "@mui/material";
-import { FAQ } from "../../../types/content-types/FAQ.type";
-import FAQItem from "../../../components/content-types/FAQItem/FAQItem";
+import { P, TitleWithHighlights } from "../../../components/typography";
 import { Hero } from "../../../components/layout";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import { getFaqOverviewData, getFaqs } from "../../../utils/api";
-import { useState } from "react";
 import { VolunteersFAQPageProps } from "../../../types/pageTypes";
-import Button from "../../../components/buttons/Button";
 import FAQList from "../../../components/content-types/FAQList/FAQList";
 
 const POST_PER_PAGE = 7;
@@ -88,7 +84,10 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
         <main>
           <Hero>
             <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16">
-              <H1 variant="bold">{pageData?.page_title}</H1>
+              <TitleWithHighlights
+                text={pageData?.page_title ?? ""}
+                textToHighlight="vrijwilligers"
+              />
               <P>{pageData?.page_subtitle}</P>
             </div>
           </Hero>

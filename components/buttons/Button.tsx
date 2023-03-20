@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import styled, { css } from "styled-components";
+import styled, { css, useTheme } from "styled-components";
 
 import { CircleSpinner } from "react-spinners-kit";
 
@@ -42,7 +42,7 @@ const Style = css<Props>`
   font-weight: bold;
   font-family: ${({ theme }) => theme.fonts.primary};
   font-size: ${({ theme }) => theme.fontSizes.p.mobile};
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.white.normal};
   line-height: 160%;
   text-align: center;
   text-transform: uppercase;
@@ -58,43 +58,52 @@ const Style = css<Props>`
     switch (variant) {
       case "secondary":
         return css`
-          background: ${({ theme }) => theme.colors.secondary};
+          background: ${({ theme }) => theme.colors.secondary.normal};
+          border: 2px solid ${({ theme }) => theme.colors.secondary.normal};
           &:hover {
-            box-shadow: inset -8px -8px 24px rgba(0, 0, 0, 0.3);
+            background-color: transparent;
+            color: ${({ theme }) => theme.colors.secondary.normal};
+            /* box-shadow: inset -8px -8px 24px rgba(0, 0, 0, 0.3); */
           }
         `;
       case "tertiary":
         return css`
-          background: ${({ theme }) => theme.colors.tertiary};
+          background: ${({ theme }) => theme.colors.tertiary.normal};
+          border: 2px solid ${({ theme }) => theme.colors.tertiary.normal};
           &:hover {
-            box-shadow: inset -8px -8px 24px rgba(0, 0, 0, 0.3);
+            background-color: transparent;
+            color: ${({ theme }) => theme.colors.tertiary.normal};
+            /* box-shadow: inset -8px -8px 24px rgba(0, 0, 0, 0.3); */
           }
         `;
       case "success":
         return css`
-          background: ${({ theme }) => theme.colors.success};
+          background: ${({ theme }) => theme.colors.success.normal};
+          border: 2px solid ${({ theme }) => theme.colors.success.normal};
           &:hover {
-            box-shadow: inset -8px -8px 24px rgba(0, 0, 0, 0.3);
+            background-color: transparent;
+            color: ${({ theme }) => theme.colors.success.normal};
+            /* box-shadow: inset -8px -8px 24px rgba(0, 0, 0, 0.3); */
           }
         `;
 
       case "info":
         return css`
-          background: ${({ theme }) => theme.colors.info};
+          background: ${({ theme }) => theme.colors.info.normal};
           color: #fff;
-          border: 2px solid ${({ theme }) => theme.colors.info};
+          border: 2px solid ${({ theme }) => theme.colors.info.normal};
           &:hover {
             background: transparent;
-            color: ${({ theme }) => theme.colors.info};
+            color: ${({ theme }) => theme.colors.info.normal};
           }
         `;
       case "infoReversed":
         return css`
           background: transparent;
-          color: ${({ theme }) => theme.colors.info};
-          border: 2px solid ${({ theme }) => theme.colors.info};
+          color: ${({ theme }) => theme.colors.info.normal};
+          border: 2px solid ${({ theme }) => theme.colors.info.normal};
           &:hover {
-            background: ${({ theme }) => theme.colors.info};
+            background: ${({ theme }) => theme.colors.info.normal};
             color: #ffffff;
           }
         `;
@@ -109,18 +118,21 @@ const Style = css<Props>`
           max-width: initial;
           width: initial;
           &:hover {
-            color: ${({ theme }) => theme.colors.primary};
+            color: ${({ theme }) => theme.colors.primary.normal};
           }
         `;
 
       default:
         return css`
-          background: ${({ theme }) => theme.colors.primary};
+          background: ${({ theme }) => theme.colors.primary.normal};
           color: #ffffff;
+          border: 2px solid ${({ theme }) => theme.colors.primary};
 
           &:hover {
+            background-color: transparent;
+            color: ${({ theme }) => theme.colors.primary};
             /* background: ${({ theme }) => theme.colors.black}; */
-            box-shadow: inset -8px -8px 24px rgba(0, 0, 0, 0.3);
+            /* box-shadow: inset -8px -8px 24px rgba(0, 0, 0, 0.3); */
           }
         `;
     }
@@ -132,7 +144,7 @@ const Style = css<Props>`
     variant !== "link" &&
     css`
       background-color: white;
-      color: ${({ theme }) => theme.colors[variant]};
+      color: ${({ theme }) => theme.colors[variant].normal};
       border: 2px solid;
     `}
   
@@ -163,6 +175,8 @@ export default function Button({
   href,
   ...rest
 }: Props) {
+  const { colors } = useTheme();
+
   if (href) {
     return (
       <StyledLink
@@ -173,7 +187,7 @@ export default function Button({
         filled={filled}
         {...rest}
       >
-        {loading && <CircleSpinner size={20} color="#fff" />}
+        {loading && <CircleSpinner size={20} color={colors.white.normal} />}
         {children}
       </StyledLink>
     );
@@ -187,7 +201,7 @@ export default function Button({
       filled={filled}
       {...rest}
     >
-      {loading && <CircleSpinner size={20} color="#fff" />}
+      {loading && <CircleSpinner size={20} color={colors.white.normal} />}
       {children}
     </StyledButton>
   );

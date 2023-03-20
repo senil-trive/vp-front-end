@@ -1,23 +1,17 @@
-import { Container, Grid } from "@mui/material";
-import { P, TitleWithHighlights } from "../../../components/typography";
-import { Hero, Pagination } from "../../../components/layout";
-import React, { useEffect, useState } from "react";
-import {
-  getContentTags,
-  getForumOverviewPageData,
-  getForumPosts,
-} from "../../../utils/api";
+import { Grid, Hero, Pagination } from "../../components/layout";
+import { H1, P } from "../../components/typography";
+import { useEffect, useState } from "react";
 
-import Button from "../../../components/buttons/Button";
 import { CircleSpinner } from "react-spinners-kit";
-import CollectionSearchBar from "../../../components/form/CollectionSearchBar/CollectionSearchBar";
-import { ForumPageProps } from "../../../types/pageTypes";
-import ForumPost from "../../../components/content-types/ForumPost/ForumPost";
+import CollectionSearchBar from "../../components/form/CollectionSearchBar/CollectionSearchBar";
+import { Container } from "@mui/system";
+import ForumPost from "../../components/content-types/ForumPost/ForumPost";
+import { ForumPostType } from "../../types/forumTypes";
 import Link from "next/link";
-import { POST_PER_PAGE } from "../../../constants/app-configs";
-import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
-import SortBar from "../../../components/form/SortBar/SortBar";
-import TagList from "../../../components/buttons/TagList/TagList";
+import { POST_PER_PAGE } from "../../constants/app-configs";
+import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
+import SortBar from "../../components/form/SortBar/SortBar";
+import { getForumPosts } from "../../utils/api";
 
 const forumSortOptions = [
   { name: "Titel (a-z)", value: "content" },
@@ -28,25 +22,25 @@ const forumSortOptions = [
   { name: "Datum (nieuw-oud)", value: "-date_created" },
 ];
 
+interface ZeroResponsesPageProps {
+  forumData: ForumPostType[];
+  totalPosts: number;
+}
+
 export const getServerSideProps = async () => {
   try {
-    const pageReq = await getForumOverviewPageData();
-    const tagsReq = await getContentTags();
     const forumReq = await getForumPosts({
       postPerPage: POST_PER_PAGE,
       meta: "filter_count",
+      filter: `filter[count(comments)][_lte]=1`,
     });
 
-    const pageRes = await pageReq.json();
     const forumRes = await forumReq.json();
-    const tagsRes = await tagsReq.json();
 
     return {
       props: {
-        pageData: pageRes.data,
         forumData: forumRes.data,
         totalPosts: forumRes.meta.filter_count,
-        tags: tagsRes.data,
       },
     };
   } catch (error) {
@@ -60,12 +54,10 @@ export const getServerSideProps = async () => {
   }
 };
 
-export default function Forum({
-  pageData,
+export default function ZeroResponsesPage({
   forumData,
   totalPosts,
-  tags,
-}: ForumPageProps) {
+}: ZeroResponsesPageProps) {
   const [posts, setPosts] = useState(forumData);
   const [isLoading, setIsLoading] = useState(false);
   const [totalCount, setTotalCount] = useState(totalPosts);
@@ -103,8 +95,8 @@ export default function Forum({
           meta: "filter_count",
           filter:
             selectedTag.length > 0
-              ? `filter[categories][categories_id][id][_eq]=${selectedTag}`
-              : ``,
+              ? `filter[categories][categories_id][id][_eq]=${selectedTag}&filter[count(comments)][_lte]=1`
+              : `filter[count(comments)][_lte]=1`,
         });
         const res = await req.json();
 
@@ -121,28 +113,21 @@ export default function Forum({
   }, [currentPage, search, sort, selectedTag]);
 
   return (
-    <PageWrapper title="Forum overzicht">
+    <PageWrapper title="0-1 Reacties">
       <Hero>
         <Container>
           <Grid container>
             <Grid item xs={0} md={2} lg={3} />
             <Grid item xs={12} md={8} lg={6}>
-              <TitleWithHighlights
-                text={pageData?.page_title ?? ""}
+              <H1
+                variant="bold"
                 style={{ textAlign: "center", padding: "0 24px" }}
-              />
+              >
+                Vragen met 0 reacties
+              </H1>
               <P variant="light" className="text-center">
-                {pageData?.page_subtitle}
+                Hier vind je alle vragen met 1 of 0 reacties.
               </P>
-
-              <div style={{ display: "flex", gap: 32 }}>
-                <Button href="/kinderen/forum/stel-een-vraag">
-                  {pageData?.submit_question_button_label}
-                </Button>
-                <Button filled={false} href="/kinderen/klets-met-een-buddy">
-                  {pageData?.chat_button_label}
-                </Button>
-              </div>
             </Grid>
             <Grid item xs={0} md={2} lg={3} />
           </Grid>
@@ -150,14 +135,6 @@ export default function Forum({
       </Hero>
 
       <main style={{ marginBottom: "80px" }}>
-        <TagList
-          tags={tags}
-          selected={selectedTag}
-          onSelect={(x: string) => {
-            setSelectedTag(x);
-          }}
-        />
-
         <CollectionSearchBar onSearch={handleSearch} />
 
         <Container style={{ margin: "56px auto" }}>

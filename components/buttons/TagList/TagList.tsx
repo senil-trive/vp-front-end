@@ -74,6 +74,7 @@ export default function TagList({ tags, selected, onSelect }: Props) {
               className="tag"
               isActive={selected === tag.id}
               onClick={() => onSelect?.(tag.id)}
+              style={{ backgroundColor: "white" }}
             >
               {tag.name}
             </Tag>
