@@ -32,7 +32,6 @@ const StyledForumPost = styled.article`
     > div {
       display: flex;
       gap: 8px;
-      margin-bottom: 30px;
     }
   }
 
