@@ -59,22 +59,31 @@ const Style = css<Props>`
       case "secondary":
         return css`
           background: ${({ theme }) => theme.colors.secondary.normal};
+          border: 2px solid ${({ theme }) => theme.colors.secondary.normal};
           &:hover {
-            box-shadow: inset -8px -8px 24px rgba(0, 0, 0, 0.3);
+            background-color: transparent;
+            color: ${({ theme }) => theme.colors.secondary.normal};
+            /* box-shadow: inset -8px -8px 24px rgba(0, 0, 0, 0.3); */
           }
         `;
       case "tertiary":
         return css`
           background: ${({ theme }) => theme.colors.tertiary.normal};
+          border: 2px solid ${({ theme }) => theme.colors.tertiary.normal};
           &:hover {
-            box-shadow: inset -8px -8px 24px rgba(0, 0, 0, 0.3);
+            background-color: transparent;
+            color: ${({ theme }) => theme.colors.tertiary.normal};
+            /* box-shadow: inset -8px -8px 24px rgba(0, 0, 0, 0.3); */
           }
         `;
       case "success":
         return css`
           background: ${({ theme }) => theme.colors.success.normal};
+          border: 2px solid ${({ theme }) => theme.colors.success.normal};
           &:hover {
-            box-shadow: inset -8px -8px 24px rgba(0, 0, 0, 0.3);
+            background-color: transparent;
+            color: ${({ theme }) => theme.colors.success.normal};
+            /* box-shadow: inset -8px -8px 24px rgba(0, 0, 0, 0.3); */
           }
         `;
 
@@ -117,10 +126,13 @@ const Style = css<Props>`
         return css`
           background: ${({ theme }) => theme.colors.primary.normal};
           color: #ffffff;
+          border: 2px solid ${({ theme }) => theme.colors.primary};
 
           &:hover {
+            background-color: transparent;
+            color: ${({ theme }) => theme.colors.primary};
             /* background: ${({ theme }) => theme.colors.black}; */
-            box-shadow: inset -8px -8px 24px rgba(0, 0, 0, 0.3);
+            /* box-shadow: inset -8px -8px 24px rgba(0, 0, 0, 0.3); */
           }
         `;
     }
