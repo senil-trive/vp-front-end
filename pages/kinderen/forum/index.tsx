@@ -1,5 +1,5 @@
 import { Container, Grid } from "@mui/material";
-import { H1, P } from "../../../components/typography";
+import { P, TitleWithHighlights } from "../../../components/typography";
 import { Hero, Pagination } from "../../../components/layout";
 import React, { useEffect, useState } from "react";
 import {
@@ -127,12 +127,10 @@ export default function Forum({
           <Grid container>
             <Grid item xs={0} md={2} lg={3} />
             <Grid item xs={12} md={8} lg={6}>
-              <H1
-                variant="bold"
+              <TitleWithHighlights
+                text={pageData?.page_title ?? ""}
                 style={{ textAlign: "center", padding: "0 24px" }}
-              >
-                {pageData?.page_title}
-              </H1>
+              />
               <P variant="light" className="text-center">
                 {pageData?.page_subtitle}
               </P>
