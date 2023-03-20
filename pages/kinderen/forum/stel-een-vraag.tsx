@@ -67,7 +67,6 @@ export default function Vraag() {
               <TitleWithHighlights
                 text="Stel je vraag"
                 textToHighlight={"vraag"}
-                color="primary"
                 highlightColor="info"
                 style={{ textAlign: "center" }}
               />
