@@ -89,27 +89,40 @@ export default function LetterDetail({ pageData, relatedLetters }: Props) {
 
   const watchFields = watch(["user_name", "user_city"]);
 
+  const downloadFile = () => {
+    window.open(parseFileURL(pageData.downloadable_document?.id), "_blank");
+  };
+
   const submitForm = async (data: any) => {
     setIsLoading(true);
 
-    try {
-      const body = {
-        user_name: data.user_name,
-        user_city: data.user_city,
-        letter: {
-          id: pageData.id,
-        },
-      };
-      await postLetterSubscription(body);
+    if (pageData?.requires_signup) {
+      try {
+        const body = {
+          user_name: data?.user_name,
+          user_city: data?.user_city,
+          letter: {
+            id: pageData.id,
+          },
+        };
+        await postLetterSubscription(body);
+        setIsSubmitted(true);
+
+        // download downloadable document
+        if (pageData?.downloadable_document?.id) {
+          downloadFile();
+        }
+      } catch (error) {
+        console.log(error);
+        setIsSubmitted(false);
+      }
+    } else {
       setIsSubmitted(true);
 
       // download downloadable document
       if (pageData?.downloadable_document?.id) {
-        window.open(parseFileURL(pageData.downloadable_document?.id), "_blank");
+        downloadFile();
       }
-    } catch (error) {
-      console.log(error);
-      setIsSubmitted(false);
     }
 
     setIsLoading(false);
@@ -140,56 +153,77 @@ export default function LetterDetail({ pageData, relatedLetters }: Props) {
         </Hero>
 
         <section>
-          <Container>
-            <div className="flex flex-col items-center justify-center my-20">
-              <H3 variant="bold" color="primary">
-                De hele brief downloaden?
-              </H3>
-              <P>Vertel ons hoe je heet en hij komt naar je toe!</P>
-            </div>
+          {pageData?.requires_signup ? (
+            <Container>
+              <div className="flex flex-col items-center justify-center my-20">
+                <H3 variant="bold" color="primary">
+                  De hele brief downloaden?
+                </H3>
+                <P>Vertel ons hoe je heet en hij komt naar je toe!</P>
+              </div>
 
-            <div className="bg-blue-100 p-12 rounded-lg max-w-[850px] mx-auto">
-              {!isSubmitted ? (
-                <form
-                  onSubmit={handleSubmit(onSubmit)}
-                  className="flex flex-col gap-10"
-                >
-                  <Input
-                    placeholder="Vul je naam in"
-                    label="Voornaam"
-                    name="user_name"
-                    register={register}
-                    hasError={!!errors.user_name}
-                  />
-
-                  <Input
-                    label="Woonplaats"
-                    placeholder="Vul je woonplaats in"
-                    type="text"
-                    name="user_city"
-                    register={register}
-                  />
-
-                  <Button
-                    loading={isLoading}
-                    disabled={
-                      watchFields[0]?.length === 0 ||
-                      watchFields[1]?.length === 0
-                    }
+              <div className="bg-blue-100 p-12 rounded-lg max-w-[850px] mx-auto">
+                {!isSubmitted ? (
+                  <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className="flex flex-col gap-10"
                   >
-                    Verzenden
-                  </Button>
-                </form>
-              ) : (
-                <div className="flex flex-col items-center justify-center">
-                  <FiCheck size={40} color={theme.colors.secondary.normal} />
-                  <H3 variant="bold" color="primary">
-                    Bedankt! De brief wordt nu gedownload.
-                  </H3>
-                </div>
-              )}
-            </div>
-          </Container>
+                    <Input
+                      placeholder="Vul je naam in"
+                      label="Voornaam"
+                      name="user_name"
+                      register={register}
+                      hasError={!!errors.user_name}
+                    />
+
+                    <Input
+                      label="Woonplaats"
+                      placeholder="Vul je woonplaats in"
+                      type="text"
+                      name="user_city"
+                      register={register}
+                    />
+
+                    <Button
+                      loading={isLoading}
+                      disabled={
+                        watchFields[0]?.length === 0 ||
+                        watchFields[1]?.length === 0
+                      }
+                    >
+                      Verzenden
+                    </Button>
+                  </form>
+                ) : (
+                  <div className="flex flex-col items-center justify-center">
+                    <FiCheck size={40} color={theme.colors.secondary.normal} />
+                    <H3 variant="bold" color="primary">
+                      Bedankt! De brief wordt nu gedownload.
+                    </H3>
+                  </div>
+                )}
+              </div>
+            </Container>
+          ) : (
+            <Container>
+              <div className="flex flex-col items-center justify-center ">
+                <H3 variant="bold" color="primary">
+                  Download de brief
+                </H3>
+
+                <Button
+                  style={{
+                    maxWidth: "30rem",
+                    margin: "2rem auto",
+                  }}
+                  loading={isLoading}
+                  onClick={() => submitForm(null)}
+                >
+                  Downloaden
+                </Button>
+              </div>
+            </Container>
+          )}
         </section>
         <section>
           <Container>
