@@ -64,7 +64,7 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
               <TitleWithHighlights
                 highlightColor="info"
                 text={pageData?.page_title}
-                textToHighlight={pageData?.page_title_highlighted}
+                textToHighlight="vrijwilligers"
                 headerElement="h1"
                 color="primary"
               />

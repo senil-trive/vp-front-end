@@ -1,5 +1,5 @@
 import { FaAppStoreIos, FaGooglePlay } from "react-icons/fa";
-import { H1, H3, P } from "../../../components/typography";
+import { H1, H3, P, TitleWithHighlights } from "../../../components/typography";
 
 import Button from "../../../components/buttons/Button";
 import CTAItem from "../../../components/content-types/CTAItem/CTAItem";
@@ -62,7 +62,10 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
         <main>
           <Hero>
             <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16">
-              <H1 variant="bold">{pageData?.page_title}</H1>
+              <TitleWithHighlights
+                text={pageData?.page_title ?? ""}
+                textToHighlight="buddy aanvragen"
+              />
               <P>{pageData?.page_subtitle}</P>
               <div className="flex gap-4 mt-14 w-[80%]">
                 <Button onClick={() => alert("Pizza: 🍕")}>

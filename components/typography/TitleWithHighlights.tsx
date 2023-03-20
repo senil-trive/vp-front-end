@@ -36,7 +36,7 @@ const TitleWithHighlights: React.FC<TitleWithHighlightsProps> = ({
   text,
   textToHighlight,
   headerElement = "h1",
-  color = "black",
+  color = "primary",
   highlightColor = "info",
   style,
 }) => {
