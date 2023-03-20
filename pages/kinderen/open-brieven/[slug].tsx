@@ -184,6 +184,12 @@ export default function LetterDetail({ pageData, relatedLetters }: Props) {
                       register={register}
                     />
 
+                    <P className="text-center">
+                      Wij vragen je voornaam en woonplaats zodat wij kunnen zien
+                      in welke gemeenten de brief het meest wordt gedownload. Je
+                      gegevens worden niet gedeeld met anderen.
+                    </P>
+
                     <Button
                       loading={isLoading}
                       disabled={
