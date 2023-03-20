@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 
 import Head from "next/head";
 import dynamic from "next/dynamic";
+import styled from "styled-components";
 
 const DynamicHeader = dynamic(() => import("../Header/Header"), {
   loading: () => <>Loading...</>,
@@ -16,6 +17,36 @@ type Props = {
   children: ReactNode;
 };
 
+const StyledWrapper = styled.div`
+  @media ${({ theme }) => theme.devices.laptop} {
+    &:before {
+      content: "";
+      background: url("/Hero-bg-left.png");
+      background-repeat: repeat-y;
+      background-size: 377px, 407px, auto;
+      height: 100%;
+      width: 377px;
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: -1;
+    }
+    &:after {
+      content: "";
+      background: url("/Hero-bg-right.png");
+      background-repeat: repeat-y;
+      background-position: right;
+      background-size: 377px, 407px, auto;
+      height: 100%;
+      width: 377px;
+      position: fixed;
+      right: 0;
+      top: 0;
+      z-index: -1;
+    }
+  }
+`;
+
 const defaultValues = {
   title: "Villa Pinedo",
   description:
@@ -28,7 +59,7 @@ export default function PageWrapper({
   children,
 }: Props) {
   return (
-    <div>
+    <StyledWrapper>
       <Head>
         <title>{title + " - Voor kinderen met gescheiden ouders"}</title>
         <meta name="description" content={description} />
@@ -61,6 +92,6 @@ export default function PageWrapper({
       {children}
 
       <DynamicFooter />
-    </div>
+    </StyledWrapper>
   );
 }

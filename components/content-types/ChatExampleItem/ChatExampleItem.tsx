@@ -7,7 +7,7 @@ import { P } from "../../typography";
 import UserAvatar from "../../icons/UserAvatar/UserAvatar";
 
 const StyledForumPost = styled.article`
-  background: ${({ theme }) => hexToRgba(theme.colors.success, 0.1)};
+  background: #ecfaf6;
   border-radius: 8px;
   padding: 24px;
   overflow: hidden;

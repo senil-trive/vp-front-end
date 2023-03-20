@@ -92,7 +92,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
           </Hero>
 
           {pageData?.media_section_1 && (
-            <section className="my-[200px]">
+            <section className="my-[80px]">
               <Container>
                 <TextItem
                   rtl={pageData?.media_section_1_rtl}
@@ -111,7 +111,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
             </section>
           )}
 
-          <section className="my-[200px] text-center">
+          <section className="my-[80px] text-center">
             <Container>
               <div className="flex flex-col items-center justify-center ">
                 <H3 variant="bold" color="primary">
@@ -136,9 +136,9 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
             </Container>
           </section>
           <section
-            className="my-[200px] text-center py-20"
+            className="my-[80px] text-center py-20"
             style={{
-              backgroundColor: "rgba(0, 110, 247, 0.05)",
+              backgroundColor: colors.tertiary.light,
             }}
           >
             <Container>
@@ -165,7 +165,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
             </Container>
           </section>
           {pageData?.media_section_2 && (
-            <section className="my-[200px]">
+            <section className="my-[80px]">
               <Container>
                 <TextItem
                   rtl={pageData?.media_section_2_rtl}
@@ -184,9 +184,9 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
             </section>
           )}
           <section
-            className="my-[200px] text-center py-20"
+            className="my-[80px] text-center py-20"
             style={{
-              backgroundColor: "rgba(0, 110, 247, 0.05)",
+              backgroundColor: colors.tertiary.light,
             }}
           >
             <Container>
@@ -217,7 +217,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
               </div>
             </Container>
           </section>
-          <section className="my-[200px] text-center py-20">
+          <section className="my-[80px] text-center py-[20px]">
             <Container>
               <div className="flex flex-col items-center justify-center mb-14">
                 <H3 variant="bold" color="black">
@@ -252,7 +252,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
             <div className="flex justify-center mt-14">
               <Button
                 variant="link"
-                style={{ color: colors.info }}
+                style={{ color: colors.info.normal }}
                 onClick={() => router.push("/vrijwilligerswerk/faq")}
               >
                 Meer lezen

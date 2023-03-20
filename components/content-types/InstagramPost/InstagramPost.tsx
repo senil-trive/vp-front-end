@@ -9,12 +9,12 @@ export type InstaPost = {
 };
 
 const StyledPost = styled.article`
-  background: ${({ theme }) => theme.colors.white};
+  background: ${({ theme }) => theme.colors.white.normal};
   border-radius: 8px;
   overflow: hidden;
   width: 100%;
   height: 624px;
-  border: 1px solid ${({ theme }) => theme.colors.tertiary};
+  border: 1px solid ${({ theme }) => theme.colors.tertiary.normal};
 
   > div {
     height: 100%;

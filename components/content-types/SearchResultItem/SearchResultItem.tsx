@@ -29,14 +29,14 @@ const Wrapper = styled.div<{ colorVariant: number }>`
     color: ${({ theme, colorVariant }) => {
       switch (colorVariant) {
         case 1:
-          return theme.colors.primary;
+          return theme.colors.primary.normal;
         case 2:
-          return theme.colors.info;
+          return theme.colors.info.normal;
         case 3:
-          return theme.colors.secondary;
+          return theme.colors.secondary.normal;
 
         default:
-          return theme.colors.primary;
+          return theme.colors.primary.normal;
       }
     }};
   }
@@ -50,14 +50,14 @@ const Wrapper = styled.div<{ colorVariant: number }>`
     background: ${({ theme, colorVariant }) => {
       switch (colorVariant) {
         case 1:
-          return "rgba(0, 110, 247, 0.05)";
+          return theme.colors.tertiary.light;
         case 2:
-          return "rgba(255, 151, 29, 0.025)";
+          return theme.colors.info.light;
         case 3:
-          return "rgba(63, 199, 180, 0.025)";
+          return theme.colors.primary.light;
 
         default:
-          return "rgba(0, 110, 247, 0.05)";
+          return theme.colors.tertiary.light;
       }
     }};
     border-radius: 8px;
@@ -71,14 +71,14 @@ const Wrapper = styled.div<{ colorVariant: number }>`
       color: ${({ theme, colorVariant }) => {
         switch (colorVariant) {
           case 1:
-            return theme.colors.primary;
+            return theme.colors.primary.normal;
           case 2:
-            return theme.colors.info;
+            return theme.colors.info.normal;
           case 3:
-            return theme.colors.secondary;
+            return theme.colors.secondary.normal;
 
           default:
-            return theme.colors.primary;
+            return theme.colors.primary.normal;
         }
       }};
     }
@@ -107,8 +107,8 @@ export default function SearchResultItem({
           {list.map((item) => (
             <li key={item.link}>
               <a href={item.link} className="flex items-center hover:underline">
-                {item.name}
-                <BsArrowRight className="ml-2" />
+                <span>{item.name}</span>
+                <BsArrowRight className="ml-2" style={{ minWidth: 18 }} />
               </a>
             </li>
           ))}

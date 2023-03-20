@@ -27,7 +27,7 @@ const Wrapper = styled.div<{ center: boolean }>`
     align-items: center;
   }
 
-  @media ${({ theme }) => theme.devices.laptop} {
+  /* @media ${({ theme }) => theme.devices.laptop} {
     &:before {
       content: "";
       background: url("/Hero-bg-left.png");
@@ -53,7 +53,7 @@ const Wrapper = styled.div<{ center: boolean }>`
       top: 0;
       z-index: -1;
     }
-  }
+  } */
 `;
 
 export default function Hero({ children, center = false, style }: Props) {

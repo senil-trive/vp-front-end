@@ -13,7 +13,7 @@ type Props = {
 const BaseH4 = styled.h4<{ color: ColorType }>`
   font-size: 24px;
   line-height: 115%;
-  color: ${({ theme, color }) => theme.colors[color]};
+  color: ${({ theme, color }) => theme.colors[color].normal};
   font-style: normal;
   margin: 12px 0;
 `;

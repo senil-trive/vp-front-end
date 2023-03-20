@@ -173,7 +173,7 @@ export default function Forum({
           <Container style={{ marginBottom: "38px" }}>
             <Grid container spacing={"31px"}>
               <Grid item xs={12} md={9}>
-                <P style={{ color: colors.primary }}>
+                <P style={{ color: colors.primary.normal }}>
                   {totalCount} blogs en vlogs
                 </P>
               </Grid>

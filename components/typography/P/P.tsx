@@ -13,7 +13,7 @@ const BaseP = styled.p<{ color: ColorType }>`
   font-style: normal;
   font-size: 16px;
   line-height: 140%;
-  color: ${({ theme, color }) => theme.colors[color]};
+  color: ${({ theme, color }) => theme.colors[color].normal};
   margin: 12px 0;
 
   @media ${({ theme }) => theme.devices.tablet} {

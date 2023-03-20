@@ -60,7 +60,7 @@ const Wrapper = styled.div`
 
     .selected {
       .header p {
-        color: ${({ theme }) => theme.colors.primary};
+        color: ${({ theme }) => theme.colors.primary.normal};
       }
       .items {
         max-height: 99px;

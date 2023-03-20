@@ -24,10 +24,10 @@ type Props = React.HTMLAttributes<HTMLSpanElement> &
 
 const BaseTag = styled.span<Variant & Position & { isActive: boolean }>`
   background: ${({ variant, theme }) =>
-    variant === "light" ? "transparent" : theme.colors.primary};
+    variant === "light" ? "transparent" : theme.colors.primary.normal};
   border-radius: 8px;
   color: ${({ variant, theme }) =>
-    variant === "light" ? theme.colors.primary : "white"};
+    variant === "light" ? theme.colors.primary.normal : "white"};
   border: 1px solid;
   font-weight: 300;
   line-height: 160%;
@@ -36,16 +36,16 @@ const BaseTag = styled.span<Variant & Position & { isActive: boolean }>`
 
   &:hover {
     background: ${({ variant, theme }) =>
-      variant === "light" ? "transparent" : theme.colors.tertiary};
+      variant === "light" ? "transparent" : theme.colors.tertiary.normal};
     color: ${({ variant, theme }) =>
-      variant === "light" ? theme.colors.tertiary : "white"};
+      variant === "light" ? theme.colors.tertiary.normal : "white"};
   }
 
   ${({ isActive }) =>
     isActive &&
     css`
-      background-color: ${({ theme }) => theme.colors.info};
-      color: ${({ theme }) => theme.colors.white};
+      background-color: ${({ theme }) => theme.colors.info.normal};
+      color: ${({ theme }) => theme.colors.white.normal};
     `}
 
   ${({ position }) => {

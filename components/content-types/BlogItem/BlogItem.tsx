@@ -74,7 +74,10 @@ export default function BlogItem({
               variant="dark"
               size="m"
               position="bl"
-              style={{ backgroundColor: colors.info, borderColor: colors.info }}
+              style={{
+                backgroundColor: colors.info.normal,
+                borderColor: colors.info.normal,
+              }}
             >
               <>{category}</>
             </Tag>
