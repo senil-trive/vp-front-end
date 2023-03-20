@@ -9,6 +9,7 @@ import { Letter } from "../types/content-types/Letter.type";
 import { VideoType } from "../types/content-types/Video.type";
 import { ForumPostType } from "../types/forumTypes";
 import parseImageURL from "./parseImageURL";
+import parseVideoURL from "./parseVideoURL";
 
 /**
  * Randomizes the order of the feed
@@ -112,7 +113,7 @@ export const generateFeedTiles = (
       title: item.title,
       subtitle: item.subtitle,
       poster: parseImageURL(item.video_cover_image?.id) ?? "",
-      src: item.video_file?.url ?? "",
+      src: parseVideoURL(item.video_file?.id),
     },
   }));
 
