@@ -1,9 +1,8 @@
-import React from "react";
 import { Container } from "@mui/system";
-import styled from "styled-components";
-
+import React from "react";
 import Tag from "../Tag/Tag";
 import { Tag as TagType } from "../../../types/content-types/Tag.type";
+import styled from "styled-components";
 import { useHorizontalScrollHints } from "../../../utils/scroll";
 
 type Props = {
@@ -17,9 +16,19 @@ const Wrapper = styled.div`
 
   .inner {
     display: flex;
-    flex: 1;
     gap: 16px;
     overflow-x: auto;
+    width: 100%;
+
+    .tag {
+      &:first-of-type {
+        margin-left: auto;
+      }
+
+      &:last-of-type {
+        margin-right: auto;
+      }
+    }
 
     .scroll-indicator {
       position: absolute;
@@ -47,6 +56,10 @@ const Wrapper = styled.div`
       }
     }
 
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
     &.scrolling-left .indicator-left {
       opacity: 1;
     }
@@ -59,7 +72,7 @@ const Wrapper = styled.div`
 export default function TagList({ tags, selected, onSelect }: Props) {
   const containerRef = useHorizontalScrollHints();
   return (
-    <Container maxWidth="xl" style={{ margin: "21px 0" }}>
+    <Container maxWidth="xl" style={{ margin: "21px auto" }}>
       <Wrapper>
         <div ref={containerRef} className="inner scrolling-right">
           <div className="scroll-indicator indicator-left" />
