@@ -13,15 +13,22 @@ type Props = {
 
 const Wrapper = styled.div`
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
   .inner {
     display: flex;
-    flex: 1;
     gap: 16px;
     overflow-x: auto;
+    width: 100%;
+
+    .tag {
+      &:first-of-type {
+        margin-left: auto;
+      }
+
+      &:last-of-type {
+        margin-right: auto;
+      }
+    }
 
     .scroll-indicator {
       position: absolute;
@@ -49,6 +56,10 @@ const Wrapper = styled.div`
       }
     }
 
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
     &.scrolling-left .indicator-left {
       opacity: 1;
     }
@@ -63,10 +74,7 @@ export default function TagList({ tags, selected, onSelect }: Props) {
   return (
     <Container maxWidth="xl" style={{ margin: "21px auto" }}>
       <Wrapper>
-        <div
-          ref={containerRef}
-          className="flex items-center justify-center inner scrolling-right"
-        >
+        <div ref={containerRef} className="inner scrolling-right">
           <div className="scroll-indicator indicator-left" />
           {tags.map((tag, index) => (
             <Tag
