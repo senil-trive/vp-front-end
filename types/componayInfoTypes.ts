@@ -1,10 +1,10 @@
 import { PublicationType } from "./content-types/Publication.type";
-import { ImageType } from "./fileTypes";
+import { ImageFileType } from "./fileTypes";
 
 export type CompanyInfo = {
   id: string;
-  company_logo_black: ImageType;
-  company_logo_white: ImageType;
+  company_logo_black: ImageFileType;
+  company_logo_white: ImageFileType;
   company_name: string;
   company_address: string;
   company_zipcode: string;

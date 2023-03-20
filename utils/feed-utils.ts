@@ -2,10 +2,13 @@ import { v4 as uuidv4 } from "uuid";
 
 import { InstaPost } from "../components/content-types/InstagramPost/InstagramPost";
 import { TikTokPostProps } from "../components/content-types/TikTokPost/TikTokPost";
+import { VideoPropsType } from "../components/content-types/VideoItem/VideoItem.types";
 import { FeedItem } from "../components/layout/MasonryGrid/MasonryGrid";
 import { BlogType } from "../types/content-types/Blog.type";
 import { Letter } from "../types/content-types/Letter.type";
+import { VideoType } from "../types/content-types/Video.type";
 import { ForumPostType } from "../types/forumTypes";
+import parseImageURL from "./parseImageURL";
 
 /**
  * Randomizes the order of the feed
@@ -60,12 +63,14 @@ export const generateFeedTiles = (
     forum,
     instagram,
     tiktok,
+    videos,
   }: {
     blogs: BlogType[];
     letters: Letter[];
     forum: ForumPostType[];
     instagram: InstaPost[];
     tiktok: TikTokPostProps[];
+    videos: VideoType[];
   },
   fixedFirstItems: boolean = false
 ) => {
@@ -99,6 +104,17 @@ export const generateFeedTiles = (
     type: "tiktok",
     content: item,
   }));
+  const videosFeedItem: FeedItem[] = videos?.map((item) => ({
+    id: `video-${uuidv4()}`,
+    width: 8,
+    type: "video",
+    content: {
+      title: item.title,
+      subtitle: item.subtitle,
+      poster: parseImageURL(item.video_cover_image?.id) ?? "",
+      src: item.video_file?.url ?? "",
+    },
+  }));
 
   // Buddy examples
   const chatExampleFeedItem: FeedItem[] = fixedFirstItems
@@ -113,20 +129,6 @@ export const generateFeedTiles = (
       }))
     : [];
 
-  // TODO: replace with real video content
-  const videoFeedItem: FeedItem[] = fixedFirstItems
-    ? ["Video 1", "Video 2"].map((item) => ({
-        id: `video-${uuidv4()}`,
-        type: "video",
-        width: 8,
-        content: {
-          title: item,
-          subtitle: "Hier komt een omschrijvende tekst",
-          src: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-        },
-      }))
-    : [];
-
   let res: FeedItem[] = [];
   res = res
     .concat(blogFeedItem)
@@ -135,7 +137,7 @@ export const generateFeedTiles = (
     .concat(instagramFeedItem)
     .concat(tiktokFeedItem)
     .concat(chatExampleFeedItem)
-    .concat(videoFeedItem);
+    .concat(videosFeedItem);
 
   // randomize content
   res = shuffle(res);
@@ -149,13 +151,13 @@ export const generateFeedTiles = (
     firstForum.width = 3;
 
     // change the items for the first part of the list
-    res = moveArrayObject(res, videoFeedItem[0], 0);
+    res = moveArrayObject(res, videosFeedItem[0], 0);
     res = moveArrayObject(res, chatExampleFeedItem[0], 1);
     res = moveArrayObject(res, firstInsta, 2);
     res = moveArrayObject(res, firsLetter, 3);
     res = moveArrayObject(res, firstForum, 4);
     res = moveArrayObject(res, chatExampleFeedItem[1], 5);
-    res = moveArrayObject(res, videoFeedItem[1], 6);
+    res = moveArrayObject(res, videosFeedItem[1], 6);
   }
 
   return res;

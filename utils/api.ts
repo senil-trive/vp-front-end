@@ -348,6 +348,44 @@ export const getTikTokPosts = async ({
 };
 
 /**
+ * Gets a list of blog posts
+ * @param postPerPage the amount of posts to be shown per page
+ * @param page the current paginated page
+ * @param query the search query
+ * @returns
+ */
+export const getVideoItems = async ({
+  postPerPage,
+  page = 1,
+  search,
+  sort,
+  filter,
+  meta = "total_count",
+}: DirectusParams) => {
+  let url = `${ENDPOINTS.COLLECTIONS}/video_items?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+
+  if (meta) {
+    url = `${url}&meta=${meta}`;
+  }
+  if (search) {
+    url = `${url}&search=${search}`;
+  }
+  if (sort) {
+    url = `${url}&sort=${sort}`;
+  }
+  if (filter) {
+    url = `${url}&${filter}`;
+  }
+
+  return await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+/**
  * Get the post detail base on the slug
  * @param slug the post slug
  * @returns
@@ -467,7 +505,7 @@ export const getFeed = async ({
   filter,
   meta = "total_count",
 }: DirectusParams) => {
-  const [blogsReq, instagramReq, tiktokReq, forumReq, lettersReq] =
+  const [blogsReq, instagramReq, tiktokReq, forumReq, lettersReq, videosReq] =
     await Promise.all([
       getPosts({
         postPerPage,
@@ -499,6 +537,12 @@ export const getFeed = async ({
         filter,
         meta,
       }),
+      getVideoItems({
+        postPerPage,
+        page,
+        filter,
+        meta,
+      }),
     ]);
 
   return {
@@ -507,6 +551,7 @@ export const getFeed = async ({
     tiktokRes: await tiktokReq.json(),
     forumRes: await forumReq.json(),
     lettersRes: await lettersReq.json(),
+    videosRes: await videosReq.json(),
   };
 };
 

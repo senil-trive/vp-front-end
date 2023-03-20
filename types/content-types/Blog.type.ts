@@ -1,5 +1,5 @@
 import { CategoryType } from "../categoryTypes";
-import { ImageType, VideoType } from "../fileTypes";
+import { ImageFileType, VideoFileType } from "../fileTypes";
 import { ForumCommentType } from "../forumTypes";
 import { UserType } from "../userTypes";
 import { ContentStatus } from "./Status.type";
@@ -14,13 +14,13 @@ export type BlogType = {
   homepage_id?: string;
   id: string;
   slug: string;
-  image: ImageType;
+  image: ImageFileType;
   status: ContentStatus;
   title: string;
   type: "blog" | "vlog";
   user_created: UserType;
   user_updated: UserType;
-  video?: VideoType;
+  video?: VideoFileType;
   youtube_embed: string;
   comments: ForumCommentType[];
   related: {
