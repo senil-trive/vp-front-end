@@ -13,4 +13,5 @@ export type Letter = {
   categories: any[];
   downloadable_document: any;
   image: any;
+  requires_signup: Boolean;
 };
