@@ -65,7 +65,7 @@ export default function VideoItem({
 }: VideoPropsType) {
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const videoRef = useRef() as React.MutableRefObject<HTMLVideoElement>;
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const handlePlayPause = () => {
     const player = videoRef.current;

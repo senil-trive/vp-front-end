@@ -75,6 +75,7 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
                   <XBlock key={index} width={item.width}>
                     <div className="grid-item">
                       <VideoItem
+                        poster={videoContent.poster}
                         title={videoContent.title}
                         src={videoContent.src}
                         subtitle={videoContent.subtitle}

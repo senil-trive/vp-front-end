@@ -1,4 +1,4 @@
-export type ImageType = {
+export type ImageFileType = {
   charset?: string;
   description?: string;
   duration?: number;
@@ -21,7 +21,7 @@ export type ImageType = {
   width: number;
 };
 
-export type VideoType = {
+export type VideoFileType = {
   charset?: string;
   description?: string;
   duration?: number;

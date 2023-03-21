@@ -20,8 +20,14 @@ export const getServerSideProps = async () => {
     const pageRes = await pageReq.json();
     const categoriesRes = await categoriesReq.json();
 
-    const { blogsRes, instagramRes, tiktokRes, forumRes, lettersRes } =
-      await getFeed({ postPerPage: POST_PER_PAGE, meta: "filter_count" });
+    const {
+      blogsRes,
+      instagramRes,
+      tiktokRes,
+      forumRes,
+      lettersRes,
+      videosRes,
+    } = await getFeed({ postPerPage: POST_PER_PAGE, meta: "filter_count" });
 
     return {
       props: {
@@ -33,6 +39,7 @@ export const getServerSideProps = async () => {
             letters: lettersRes.data,
             instagram: instagramRes.data,
             tiktok: tiktokRes.data,
+            videos: videosRes.data,
           },
           true
         ),
@@ -41,6 +48,7 @@ export const getServerSideProps = async () => {
             forumRes.meta.filter_count +
             lettersRes.meta.filter_count +
             instagramRes.meta.filter_count +
+            videosRes.meta.filter_count +
             tiktokRes.meta.filter_count || 0,
         categories: categoriesRes.data,
       },
@@ -73,16 +81,22 @@ export default function Home({
       setIsLoading(true);
 
       try {
-        const { blogsRes, instagramRes, tiktokRes, forumRes, lettersRes } =
-          await getFeed({
-            postPerPage: POST_PER_PAGE,
-            page: currentPage + 1,
-            meta: "filter_count",
-            filter:
-              selectedTag.length > 0
-                ? `filter={"categories": { "categories_id": { "id": { "_eq": "${selectedTag}"}}}}`
-                : ``,
-          });
+        const {
+          blogsRes,
+          instagramRes,
+          tiktokRes,
+          forumRes,
+          lettersRes,
+          videosRes,
+        } = await getFeed({
+          postPerPage: POST_PER_PAGE,
+          page: currentPage + 1,
+          meta: "filter_count",
+          filter:
+            selectedTag.length > 0
+              ? `filter={"categories": { "categories_id": { "id": { "_eq": "${selectedTag}"}}}}`
+              : ``,
+        });
 
         const res = generateFeedTiles(
           {
@@ -91,6 +105,7 @@ export default function Home({
             letters: lettersRes?.data ?? [],
             instagram: instagramRes?.data ?? [],
             tiktok: tiktokRes?.data ?? [],
+            videos: videosRes?.data ?? [],
           },
           // generated first tiles only when its the first load
           false
