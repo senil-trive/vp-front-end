@@ -2,7 +2,6 @@ import { v4 as uuidv4 } from "uuid";
 
 import { InstaPost } from "../components/content-types/InstagramPost/InstagramPost";
 import { TikTokPostProps } from "../components/content-types/TikTokPost/TikTokPost";
-import { VideoPropsType } from "../components/content-types/VideoItem/VideoItem.types";
 import { FeedItem } from "../components/layout/MasonryGrid/MasonryGrid";
 import { BlogType } from "../types/content-types/Blog.type";
 import { Letter } from "../types/content-types/Letter.type";

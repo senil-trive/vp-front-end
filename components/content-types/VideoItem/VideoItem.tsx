@@ -63,8 +63,6 @@ export default function VideoItem({
   poster,
   src = placeholderUrl,
 }: VideoPropsType) {
-  console.log(src);
-
   const [isPlaying, setIsPlaying] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement>(null);
