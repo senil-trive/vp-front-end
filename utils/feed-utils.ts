@@ -35,7 +35,7 @@ export function shuffle(array: FeedItem[]) {
 }
 
 /**
- * Moves a item position in an array
+ * Moves an item position in an array
  * @param feed an object array
  * @param item an item (must have an id)
  * @param newIndex the new position in the array where the item should be moved to
