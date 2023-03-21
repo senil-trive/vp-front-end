@@ -93,7 +93,7 @@ export default function ForumPost({
             src="/android-chrome-192x192.png"
           />
           <div>
-            <P color="info" style={{ margin: 0, fontWeight: 500 }}>
+            <P color="primary" style={{ margin: 0, fontWeight: 500 }}>
               {authorType}
             </P>
 
@@ -123,7 +123,7 @@ export default function ForumPost({
             {likes > 0 && (
               <>
                 <HeartIcon color={colors.info.normal} />
-                <P color="info" variant="helper">
+                <P color="primary" variant="helper">
                   {likes}
                 </P>
               </>
@@ -131,7 +131,11 @@ export default function ForumPost({
           </div>
           <div>
             {postDate && (
-              <P variant="helper" color="info" style={{ textAlign: "right" }}>
+              <P
+                variant="helper"
+                color="primary"
+                style={{ textAlign: "right" }}
+              >
                 Geplaatst op {parseDate(postDate)}
               </P>
             )}

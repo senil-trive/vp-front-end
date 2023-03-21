@@ -2,8 +2,9 @@ import * as React from "react";
 import { SVGProps } from "react";
 
 import { useTheme } from "styled-components";
+import { IconProps } from "../../../types/iconTypes";
 
-export default function ChevronDown(props: SVGProps<SVGSVGElement>) {
+export default function ChevronDown({ color = "info", ...props }: IconProps) {
   const { colors } = useTheme();
 
   return (
@@ -16,7 +17,7 @@ export default function ChevronDown(props: SVGProps<SVGSVGElement>) {
     >
       <path
         d="m1.492 1 6.22 5.33a1.2 1.2 0 0 0 1.561 0L15.493 1"
-        stroke={colors.info.normal}
+        stroke={colors[color].normal}
         strokeWidth={1.5}
         strokeLinecap="round"
       />

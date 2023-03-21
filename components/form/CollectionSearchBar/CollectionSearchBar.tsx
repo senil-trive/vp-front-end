@@ -62,7 +62,7 @@ export default function CollectionSearchBar({
           </Grid>
           <Grid item xs={12} md={4} className="search-wrapper">
             <SearchBar
-              iconColor="tertiary"
+              iconColor="secondary"
               placeholder={searchLabel}
               onSearch={onSearch}
             />

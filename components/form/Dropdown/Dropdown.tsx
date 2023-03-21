@@ -224,7 +224,13 @@ export default function Dropdown({
             )}
             <span>{selected?.name || placeholder}</span>
           </div>
-          <span>{!isOpen ? <ChevronDownFilled /> : <ChevronUpFilled />}</span>
+          <span>
+            {!isOpen ? (
+              <ChevronDownFilled color={borderColor} />
+            ) : (
+              <ChevronUpFilled color={borderColor} />
+            )}
+          </span>
         </div>
         {isOpen && (
           <div
