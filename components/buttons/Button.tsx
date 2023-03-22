@@ -126,11 +126,11 @@ const Style = css<Props>`
         return css`
           background: ${({ theme }) => theme.colors.primary.normal};
           color: #ffffff;
-          border: 2px solid ${({ theme }) => theme.colors.primary};
+          border: 2px solid ${({ theme }) => theme.colors.primary.normal};
 
           &:hover {
             background-color: transparent;
-            color: ${({ theme }) => theme.colors.primary};
+            color: ${({ theme }) => theme.colors.primary.normal};
             /* background: ${({ theme }) => theme.colors.black}; */
             /* box-shadow: inset -8px -8px 24px rgba(0, 0, 0, 0.3); */
           }

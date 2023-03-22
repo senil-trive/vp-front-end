@@ -138,7 +138,7 @@ export default function ChatExampleItem() {
       </div>
       <footer>
         <Button variant="success" href="/vrijwilligerswerk/buddy-programma">
-          Nu Chatten
+          Ook chatten met een Buddy? Meld je aan
         </Button>
       </footer>
     </StyledForumPost>

@@ -47,6 +47,7 @@ const StyledForumPost = styled.article`
 
   .content {
     margin-bottom: 30px;
+    font-size: ${({ theme }) => theme.fontSizes.p.desktop};
     > div {
       display: flex;
       gap: 8px;
@@ -67,6 +68,12 @@ const StyledForumPost = styled.article`
       margin: 0;
     }
   }
+
+  @media ${({ theme }) => theme.breakpoints.tablet} {
+    .content {
+      font-size: ${({ theme }) => theme.fontSizes.p.mobile};
+    }
+  }
 `;
 
 export default function ForumPost({
@@ -83,6 +90,16 @@ export default function ForumPost({
 }: Props) {
   const { colors } = useTheme();
 
+  const generateContent = () => {
+    if (fullHeight && truncateContent) {
+      return parseHTMLtoReact(truncate(title, 500));
+    } else if (truncateContent) {
+      return parseHTMLtoReact(truncate(title, 180));
+    }
+
+    return parseHTMLtoReact(title);
+  };
+
   return (
     <StyledForumPost style={{ minHeight: fullHeight ? "624px" : "" }}>
       <div>
@@ -93,7 +110,7 @@ export default function ForumPost({
             src="/android-chrome-192x192.png"
           />
           <div>
-            <P color="info" style={{ margin: 0, fontWeight: 500 }}>
+            <P color="primary" style={{ margin: 0, fontWeight: 500 }}>
               {authorType}
             </P>
 
@@ -113,9 +130,7 @@ export default function ForumPost({
             </div>
           )}
 
-          {truncateContent
-            ? parseHTMLtoReact(truncate(title, 180))
-            : parseHTMLtoReact(title)}
+          {generateContent()}
         </div>
 
         <footer>
@@ -123,7 +138,7 @@ export default function ForumPost({
             {likes > 0 && (
               <>
                 <HeartIcon color={colors.info.normal} />
-                <P color="info" variant="helper">
+                <P color="primary" variant="helper">
                   {likes}
                 </P>
               </>
@@ -131,7 +146,11 @@ export default function ForumPost({
           </div>
           <div>
             {postDate && (
-              <P variant="helper" color="info" style={{ textAlign: "right" }}>
+              <P
+                variant="helper"
+                color="primary"
+                style={{ textAlign: "right" }}
+              >
                 Geplaatst op {parseDate(postDate)}
               </P>
             )}

@@ -1,8 +1,11 @@
 import * as React from "react";
-import { SVGProps } from "react";
 import { useTheme } from "styled-components";
+import { IconProps } from "../../../types/iconTypes";
 
-export default function ChevronDownFilled(props: SVGProps<SVGSVGElement>) {
+export default function ChevronDownFilled({
+  color = "info",
+  ...props
+}: IconProps) {
   const { colors } = useTheme();
 
   return (
@@ -15,7 +18,7 @@ export default function ChevronDownFilled(props: SVGProps<SVGSVGElement>) {
     >
       <path
         d="M8.892 11.434a1 1 0 0 1-1.6 0L.287 2.1a1 1 0 0 1 .8-1.6h14.011a1 1 0 0 1 .8 1.6l-7.006 9.334Z"
-        fill={colors.info.normal}
+        fill={colors[color].normal}
       />
     </svg>
   );
