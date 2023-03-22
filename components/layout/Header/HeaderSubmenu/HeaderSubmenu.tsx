@@ -29,6 +29,8 @@ const Wrapper = styled.div`
 
     p {
       margin-bottom: 16px;
+      font-family: ${({ theme }) => theme.fonts.primary};
+      text-transform: uppercase;
     }
 
     ul {

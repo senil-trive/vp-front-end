@@ -71,6 +71,9 @@ const Wrapper = styled.div`
 
 export default function TagList({ tags, selected, onSelect }: Props) {
   const containerRef = useHorizontalScrollHints();
+
+  const isSelected = (id: string) => selected === id;
+
   return (
     <Container maxWidth="xl" style={{ margin: "21px auto" }}>
       <Wrapper>
@@ -80,9 +83,11 @@ export default function TagList({ tags, selected, onSelect }: Props) {
             <Tag
               key={index}
               className="tag"
-              isActive={selected === tag.id}
-              onClick={() => onSelect?.(tag.id)}
-              style={{ backgroundColor: "white" }}
+              isActive={isSelected(tag.id)}
+              onClick={() => onSelect?.(isSelected(tag.id) ? "" : tag.id)}
+              style={{
+                backgroundColor: isSelected(tag.id) ? "" : "white",
+              }}
             >
               {tag.name}
             </Tag>
