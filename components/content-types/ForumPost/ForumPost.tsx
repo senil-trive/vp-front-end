@@ -47,6 +47,7 @@ const StyledForumPost = styled.article`
 
   .content {
     margin-bottom: 30px;
+    font-size: ${({ theme }) => theme.fontSizes.p.desktop};
     > div {
       display: flex;
       gap: 8px;
@@ -67,6 +68,12 @@ const StyledForumPost = styled.article`
       margin: 0;
     }
   }
+
+  @media ${({ theme }) => theme.breakpoints.tablet} {
+    .content {
+      font-size: ${({ theme }) => theme.fontSizes.p.mobile};
+    }
+  }
 `;
 
 export default function ForumPost({
@@ -85,7 +92,7 @@ export default function ForumPost({
 
   const generateContent = () => {
     if (fullHeight && truncateContent) {
-      return parseHTMLtoReact(truncate(title, 300));
+      return parseHTMLtoReact(truncate(title, 500));
     } else if (truncateContent) {
       return parseHTMLtoReact(truncate(title, 180));
     }
