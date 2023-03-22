@@ -83,6 +83,16 @@ export default function ForumPost({
 }: Props) {
   const { colors } = useTheme();
 
+  const generateContent = () => {
+    if (fullHeight && truncateContent) {
+      return parseHTMLtoReact(truncate(title, 300));
+    } else if (truncateContent) {
+      return parseHTMLtoReact(truncate(title, 180));
+    }
+
+    return parseHTMLtoReact(title);
+  };
+
   return (
     <StyledForumPost style={{ minHeight: fullHeight ? "624px" : "" }}>
       <div>
@@ -113,9 +123,7 @@ export default function ForumPost({
             </div>
           )}
 
-          {truncateContent
-            ? parseHTMLtoReact(truncate(title, 180))
-            : parseHTMLtoReact(title)}
+          {generateContent()}
         </div>
 
         <footer>
