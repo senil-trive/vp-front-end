@@ -26,9 +26,7 @@ const Wrapper = styled.div`
 
 export default function CookieBanner() {
   const cookieName = process.env.NEXT_PUBLIC_COOKIE_NAME ?? "vp-cookie-consent";
-  const [cookies, setCookie, removeCookie] = useCookies([cookieName]);
-
-  console.log(cookies);
+  const [cookies, setCookie] = useCookies([cookieName]);
 
   return (
     <Modal
