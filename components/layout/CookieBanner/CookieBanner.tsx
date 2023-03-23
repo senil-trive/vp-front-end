@@ -1,5 +1,6 @@
 import { Modal } from "@mui/material";
 import Link from "next/link";
+import { useCookies } from "react-cookie";
 import CookieConsent from "react-cookie-consent";
 import styled, { useTheme } from "styled-components";
 import Button from "../../buttons/Button";
@@ -24,9 +25,14 @@ const Wrapper = styled.div`
 `;
 
 export default function CookieBanner() {
+  const cookieName = process.env.NEXT_PUBLIC_COOKIE_NAME ?? "vp-cookie-consent";
+  const [cookies, setCookie, removeCookie] = useCookies([cookieName]);
+
+  console.log(cookies);
+
   return (
     <Modal
-      open={true}
+      open={!cookies["vp-cookie-consent"]}
       style={{
         display: "flex",
         alignItems: "center",
@@ -74,7 +80,7 @@ export default function CookieBanner() {
         <P>
           Meer informatie staat op de{" "}
           <Link style={{ textDecoration: "underline" }} href="/cookies">
-            cookies-pagina
+            cookies
           </Link>{" "}
           en{" "}
           <Link
@@ -83,11 +89,18 @@ export default function CookieBanner() {
           >
             privacy verklaring
           </Link>{" "}
-          van Villa Pinedo.
+          pagina van Villa Pinedo.
         </P>
         <footer>
-          <Button variant="infoReversed">Liever Niet</Button>
-          <Button variant="primary">Accepteren</Button>
+          <Button
+            variant="infoReversed"
+            onClick={() => setCookie(cookieName, false)}
+          >
+            Liever Niet
+          </Button>
+          <Button variant="primary" onClick={() => setCookie(cookieName, true)}>
+            Accepteren
+          </Button>
         </footer>
       </Wrapper>
     </Modal>

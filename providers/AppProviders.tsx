@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+import { CookiesProvider } from "react-cookie";
 import { ThemeProvider } from "styled-components";
 import CookieBanner from "../components/layout/CookieBanner/CookieBanner";
 import { DEFAULT_THEME } from "../styles/theme";
@@ -9,9 +10,11 @@ type Props = {
 
 export default function AppProviders({ children }: Props) {
   return (
-    <ThemeProvider theme={DEFAULT_THEME}>
-      {children}
-      <CookieBanner />
-    </ThemeProvider>
+    <CookiesProvider>
+      <ThemeProvider theme={DEFAULT_THEME}>
+        {children}
+        <CookieBanner />
+      </ThemeProvider>
+    </CookiesProvider>
   );
 }
