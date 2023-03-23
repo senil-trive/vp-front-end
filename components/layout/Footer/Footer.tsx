@@ -1,11 +1,13 @@
 import { Grid } from "@mui/material";
 import { Container } from "@mui/system";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import styled, { useTheme } from "styled-components";
 import { CompanyInfo } from "../../../types/componayInfoTypes";
 import { getCompanyInfo } from "../../../utils/api";
 import parseImageURL from "../../../utils/parseImageURL";
+import { isInternalLink } from "../../../utils/url";
 import { H3, P } from "../../typography";
 
 const StyledFooter = styled.footer`
@@ -32,8 +34,25 @@ const StyledFooter = styled.footer`
   }
 `;
 
+const AppLink = ({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) => {
+  if (isInternalLink(href)) {
+    return <Link href={href}>{children}</Link>;
+  }
+
+  return (
+    <a href={href} target="_blank" rel="noreferrer">
+      {children}
+    </a>
+  );
+};
+
 export default function Footer() {
-  const { devices } = useTheme();
   const [isLoading, setIsLoading] = useState(true);
   const [companyInfo, setCompanyInfo] = useState<CompanyInfo | null>(null);
 
@@ -128,24 +147,26 @@ export default function Footer() {
               <H3 variant="bold">{companyInfo?.important_links_title}</H3>
               {companyInfo?.important_links?.map?.((item, index) => (
                 <P key={`${item.id}-${index}`}>
-                  <a href={item.link}>{item.name}</a>
+                  <AppLink href={item.link}>{item.name}</AppLink>
                 </P>
               ))}
               {!!companyInfo?.privacy_url && (
                 <P>
-                  <a href={companyInfo.privacy_url}>Privacyverklaring</a>
+                  <AppLink href={companyInfo.privacy_url}>
+                    Privacyverklaring
+                  </AppLink>
                 </P>
               )}
               {!!companyInfo?.terms_condition_url && (
                 <P>
-                  <a href={companyInfo.terms_condition_url}>
+                  <AppLink href={companyInfo.terms_condition_url}>
                     Terms & Conditions
-                  </a>
+                  </AppLink>
                 </P>
               )}
               {!!companyInfo?.cookies_url && (
                 <P>
-                  <a href={companyInfo.cookies_url}>Cookies</a>
+                  <AppLink href={companyInfo.cookies_url}>Cookies</AppLink>
                 </P>
               )}
             </Grid>
@@ -153,85 +174,33 @@ export default function Footer() {
               <H3 variant="bold">Socials</H3>
               {!!companyInfo?.instagram_url && (
                 <P>
-                  <a
-                    href={companyInfo.instagram_url}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Instagram
-                  </a>
+                  <AppLink href={companyInfo.instagram_url}>Instagram</AppLink>
                 </P>
               )}
               {!!companyInfo?.twitter_url && (
                 <P>
-                  <a
-                    href={companyInfo.twitter_url}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Twitter
-                  </a>
+                  <AppLink href={companyInfo.twitter_url}>Twitter</AppLink>
                 </P>
               )}
               {!!companyInfo?.linkedin_url && (
                 <P>
-                  <a
-                    href={companyInfo.linkedin_url}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Linkedin
-                  </a>
+                  <AppLink href={companyInfo.linkedin_url}>Linkedin</AppLink>
                 </P>
               )}
               {!!companyInfo?.facebook_url && (
                 <P>
-                  <a
-                    href={companyInfo.facebook_url}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Facebook
-                  </a>
+                  <AppLink href={companyInfo.facebook_url}>Facebook</AppLink>
                 </P>
               )}
               {!!companyInfo?.tiktok_url && (
                 <P>
-                  <a
-                    href={companyInfo.tiktok_url}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Tiktok
-                  </a>
+                  <AppLink href={companyInfo.tiktok_url}>Tiktok</AppLink>
                 </P>
               )}
             </Grid>
           </Grid>
         </Container>
       </div>
-      {/* <div className="footer-bottom">
-        <Container>
-          <Grid container>
-            <Grid item xs={12} md={4} />
-            <Grid item xs={12} md={3}>
-              {!!companyInfo?.privacy_url && (
-                <a href={companyInfo.privacy_url}>Privacyverklaring</a>
-              )}
-            </Grid>
-            <Grid item xs={12} md={3}>
-              {!!companyInfo?.terms_condition_url && (
-                <a href={companyInfo.terms_condition_url}>Terms & Conditions</a>
-              )}
-            </Grid>
-            <Grid item xs={12} md={2}>
-              {!!companyInfo?.cookies_url && (
-                <a href={companyInfo.cookies_url}>Cookies</a>
-              )}
-            </Grid>
-          </Grid>
-        </Container>
-      </div> */}
     </StyledFooter>
   );
 }

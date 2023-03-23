@@ -18,6 +18,18 @@ type Props = {
 };
 
 const StyledWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .page-content {
+    flex: 1 0 auto;
+  }
+
+  footer {
+    flex-shrink: 0;
+  }
+
   @media ${({ theme }) => theme.devices.laptop} {
     &:before {
       content: "";
@@ -89,7 +101,7 @@ export default function PageWrapper({
 
       <DynamicHeader />
 
-      {children}
+      <div className="page-content">{children}</div>
 
       <DynamicFooter />
     </StyledWrapper>

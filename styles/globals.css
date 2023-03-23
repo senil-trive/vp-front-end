@@ -13,9 +13,12 @@
 @import "swiper/css/pagination";
 
 html,
-body {
+body,
+#__next,
+#__next > div {
   padding: 0;
   margin: 0;
+  height: 100%;
 }
 
 h1,
