@@ -1,12 +1,13 @@
-import { Grid, useMediaQuery } from "@mui/material";
+import { Grid } from "@mui/material";
 import { Container } from "@mui/system";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import styled, { useTheme } from "styled-components";
 import { CompanyInfo } from "../../../types/componayInfoTypes";
 import { getCompanyInfo } from "../../../utils/api";
 import parseImageURL from "../../../utils/parseImageURL";
-import Logo from "../../icons/Logo/Logo";
+import { isInternalLink } from "../../../utils/url";
 import { H3, P } from "../../typography";
 
 const StyledFooter = styled.footer`
@@ -33,9 +34,25 @@ const StyledFooter = styled.footer`
   }
 `;
 
+const AppLink = ({
+  href,
+  children,
+}: {
+  href: string;
+  children: React.ReactNode;
+}) => {
+  if (isInternalLink(href)) {
+    return <Link href={href}>{children}</Link>;
+  }
+
+  return (
+    <a href={href} target="_blank" rel="noreferrer">
+      {children}
+    </a>
+  );
+};
+
 export default function Footer() {
-  const { devices } = useTheme();
-  const isLaptop = useMediaQuery(`${devices.laptop}`);
   const [isLoading, setIsLoading] = useState(true);
   const [companyInfo, setCompanyInfo] = useState<CompanyInfo | null>(null);
 
@@ -46,13 +63,13 @@ export default function Footer() {
         <Image
           src={logoUrl}
           alt={companyInfo.company_name}
-          width={116.16}
-          height={38.06}
+          width={177}
+          height={88}
           className="object-cover"
         />
       );
     } else {
-      return <Logo variant="light" />;
+      return null;
     }
   };
 
@@ -77,14 +94,6 @@ export default function Footer() {
           <Grid container spacing={"24px"}>
             <Grid item xs={12} md={3}>
               <div className="mb-[50px]">{generateLogo()}</div>
-              <P
-                style={{
-                  textAlign: isLaptop ? "center" : "left",
-                  marginBottom: "50px",
-                }}
-              >
-                We komen voor in:
-              </P>
               <Grid container>
                 {companyInfo?.external_publications?.map?.((publication) => {
                   if (!publication?.external_publications_id?.logo_white) {
@@ -96,8 +105,12 @@ export default function Footer() {
                       xs={4}
                       key={publication.external_publications_id.id}
                     >
-                      <div
+                      <a
+                        href={publication.external_publications_id.link}
+                        target="_blank"
+                        rel="noreferrer"
                         style={{
+                          display: "inline-block",
                           height: "49.5px",
                           width: "100%",
                           minWidth: "54px",
@@ -113,7 +126,7 @@ export default function Footer() {
                           fill
                           className="object-contain"
                         />
-                      </div>
+                      </a>
                     </Grid>
                   );
                 })}
@@ -134,88 +147,55 @@ export default function Footer() {
               <H3 variant="bold">{companyInfo?.important_links_title}</H3>
               {companyInfo?.important_links?.map?.((item, index) => (
                 <P key={`${item.id}-${index}`}>
-                  <a href={item.link}>{item.name}</a>
+                  <AppLink href={item.link}>{item.name}</AppLink>
                 </P>
               ))}
+              {!!companyInfo?.privacy_url && (
+                <P>
+                  <AppLink href={companyInfo.privacy_url}>
+                    Privacyverklaring
+                  </AppLink>
+                </P>
+              )}
+              {!!companyInfo?.terms_condition_url && (
+                <P>
+                  <AppLink href={companyInfo.terms_condition_url}>
+                    Terms & Conditions
+                  </AppLink>
+                </P>
+              )}
+              {!!companyInfo?.cookies_url && (
+                <P>
+                  <AppLink href={companyInfo.cookies_url}>Cookies</AppLink>
+                </P>
+              )}
             </Grid>
             <Grid item xs={12} md={3}>
               <H3 variant="bold">Socials</H3>
               {!!companyInfo?.instagram_url && (
                 <P>
-                  <a
-                    href={companyInfo.instagram_url}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Instagram
-                  </a>
+                  <AppLink href={companyInfo.instagram_url}>Instagram</AppLink>
                 </P>
               )}
               {!!companyInfo?.twitter_url && (
                 <P>
-                  <a
-                    href={companyInfo.twitter_url}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Twitter
-                  </a>
+                  <AppLink href={companyInfo.twitter_url}>Twitter</AppLink>
                 </P>
               )}
               {!!companyInfo?.linkedin_url && (
                 <P>
-                  <a
-                    href={companyInfo.linkedin_url}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Linkedin
-                  </a>
+                  <AppLink href={companyInfo.linkedin_url}>Linkedin</AppLink>
                 </P>
               )}
               {!!companyInfo?.facebook_url && (
                 <P>
-                  <a
-                    href={companyInfo.facebook_url}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Facebook
-                  </a>
+                  <AppLink href={companyInfo.facebook_url}>Facebook</AppLink>
                 </P>
               )}
               {!!companyInfo?.tiktok_url && (
                 <P>
-                  <a
-                    href={companyInfo.tiktok_url}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Tiktok
-                  </a>
+                  <AppLink href={companyInfo.tiktok_url}>Tiktok</AppLink>
                 </P>
-              )}
-            </Grid>
-          </Grid>
-        </Container>
-      </div>
-      <div className="footer-bottom">
-        <Container>
-          <Grid container>
-            <Grid item xs={12} md={4} />
-            <Grid item xs={12} md={3}>
-              {!!companyInfo?.privacy_url && (
-                <a href={companyInfo.privacy_url}>Privacyverklaring</a>
-              )}
-            </Grid>
-            <Grid item xs={12} md={3}>
-              {!!companyInfo?.terms_condition_url && (
-                <a href={companyInfo.terms_condition_url}>Terms & Conditions</a>
-              )}
-            </Grid>
-            <Grid item xs={12} md={2}>
-              {!!companyInfo?.cookies_url && (
-                <a href={companyInfo.cookies_url}>Cookies</a>
               )}
             </Grid>
           </Grid>

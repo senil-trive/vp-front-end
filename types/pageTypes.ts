@@ -4,6 +4,7 @@ import { BlogType } from "./content-types/Blog.type";
 import { ForumPostType } from "./forumTypes";
 import { Tag } from "./content-types/Tag.type";
 import { FAQ } from "./content-types/FAQ.type";
+import { ImageFileType } from "./fileTypes";
 
 export type HomePageProps = {
   pageData?: {
@@ -51,4 +52,19 @@ export type VolunteersFAQPageProps = {
   faqData: FAQ[];
   totalFaqs: number;
   error?: boolean;
+};
+
+export type TheBookPageProps = {
+  pageData?: {
+    page_title: string;
+    page_subtitle: string;
+    page_title_highlighted: [{ value: string }];
+
+    media_section_1_title: string;
+    media_section_1_title_highlighted: [{ value: string }];
+    media_section_1_description: string;
+    media_section_1_image: ImageFileType;
+    media_section_1_button_label: string;
+    media_section_1_button_url: string;
+  };
 };

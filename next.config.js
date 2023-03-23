@@ -6,7 +6,12 @@ const moduleExports = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["admin.villapinedo.nl", "randomuser.me", "picsum.photos"],
+    domains: [
+      "admin.villapinedo.nl",
+      "randomuser.me",
+      "picsum.photos",
+      "www.villapinedo.nl",
+    ],
   },
   async redirects() {
     return [
@@ -164,9 +169,8 @@ const moduleExports = {
        * Redirect for boek
        */
       {
-        source: "/boek-je-hoeft-het-niet-alleen-te-doen/",
-        destination:
-          "https://www.bol.com/nl/p/je-hoeft-het-niet-alleen-te-doen/9300000016554829/?bltgh=vIRmuVSPRfHepjrkXPpE-Q.2_9.10.ProductTitle",
+        source: "/boek-je-hoeft-het-niet-alleen-te-doen",
+        destination: "/kinderen/boek-je-hoeft-het-niet-alleen-te-doen",
         permanent: false,
       },
     ];

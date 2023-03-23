@@ -1,5 +1,4 @@
 import { Container, Grid } from "@mui/material";
-import { slugToTitle, titleToSlug } from "../../../utils/url";
 
 import BreadCrumbs from "../../../components/layout/BreadCrumbs/BreadCrumbs";
 import CommentForm from "../../../components/form/CommentForm/CommentForm";
@@ -12,7 +11,6 @@ import React from "react";
 
 type Props = {
   pageData: ForumPostType;
-  slug: string;
 };
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
@@ -41,7 +39,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
     return {
       props: {
-        slug: titleToSlug(data[0].content),
         pageData: data[0] ?? null,
       },
     };
@@ -54,9 +51,9 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   }
 };
 
-export default function ForumDetail({ slug, pageData }: Props) {
+export default function ForumDetail({ pageData }: Props) {
   return (
-    <PageWrapper title={slugToTitle(slug as string)}>
+    <PageWrapper title={pageData.slug}>
       <BreadCrumbs />
       <Container>
         <Grid container>

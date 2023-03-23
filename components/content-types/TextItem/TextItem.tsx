@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 
 interface TextItemProps {
   title: string;
-  titleHighlighted: string;
+  titleHighlighted?: string | string[];
   content: string;
   imageURL?: string;
   imageAlt: string;
@@ -20,6 +20,7 @@ interface TextItemProps {
   buttonURL?: string;
   buttonVariant?: ButtonVariant;
   rtl?: boolean;
+  borderImg?: boolean;
 }
 
 const TextItem: React.FC<TextItemProps> = ({
@@ -28,11 +29,12 @@ const TextItem: React.FC<TextItemProps> = ({
   content,
   imageURL,
   imageAlt,
-  showAppStoreButtons = false,
-  showButton = false,
   buttonLabel,
   buttonURL,
+  showAppStoreButtons = false,
+  showButton = false,
   buttonVariant = "primary",
+  borderImg = false,
   rtl = false,
 }) => {
   const router = useRouter();
@@ -86,7 +88,7 @@ const TextItem: React.FC<TextItemProps> = ({
               alt={imageAlt}
               width={472}
               height={388}
-              className="rounded-lg w-full object-cover"
+              className={"rounded-lg w-full object-cover "}
             />
           ) : (
             <div className="w-[472px] h-[388px]" />
@@ -100,7 +102,9 @@ const TextItem: React.FC<TextItemProps> = ({
               alt={imageAlt}
               width={472}
               height={388}
-              className="rounded-lg w-full object-cover"
+              className={`rounded-lg w-full object-cover ${
+                borderImg ? "border" : ""
+              }`}
             />
           ) : (
             <div className="w-[472px] h-[388px]" />
