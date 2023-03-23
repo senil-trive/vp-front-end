@@ -469,6 +469,19 @@ export const getHomeData = async () => {
 };
 
 /**
+ * Gets the data for the the book page
+ * @returns
+ */
+export const getTheBookData = async () => {
+  return await fetch(`${ENDPOINTS.COLLECTIONS}/the_book?fields=*.*.*`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
+/**
  * Add a volunteer application
  * @param data
  */
