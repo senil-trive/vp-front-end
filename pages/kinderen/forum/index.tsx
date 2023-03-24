@@ -74,8 +74,6 @@ export default function Forum({
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
 
-  console.log(posts);
-
   const changePage = (index: number) => {
     if (index <= 1) {
       setCurrentPage(1);
