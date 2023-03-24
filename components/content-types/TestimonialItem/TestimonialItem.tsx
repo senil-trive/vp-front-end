@@ -9,7 +9,7 @@ interface TestimonialItemProps {
 
 const TestimonialItem: React.FC<TestimonialItemProps> = ({ data }) => {
   return (
-    <div className="max-w-[440px] min-h-[400px] text-left p-8 bg-slate-200 rounded-lg">
+    <div className="max-w-[440px] min-h-[400px] h-full text-left p-8 bg-slate-200 rounded-lg">
       <H3 variant="bold">{data.title}</H3>
       <P>{data.description}</P>
       <span className="flex justify-between items-center mt-11">
