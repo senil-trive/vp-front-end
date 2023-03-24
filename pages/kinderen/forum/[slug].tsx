@@ -19,7 +19,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   try {
     // Get the posts
     const res = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=*.*&filter[slug][_eq]=${slug}`,
+      `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=*.*.*&filter[slug][_eq]=${slug}`,
       {
         method: "GET",
         headers: {
@@ -66,8 +66,12 @@ export default function ForumDetail({ pageData }: Props) {
               authorType={pageData.user_name}
               postDate={new Date(pageData.date_created)}
               truncateContent={false}
-              tags={[]}
-              title={pageData.content}
+              tags={
+                pageData.categories?.map((cat) => cat.categories_id.name) ?? []
+              }
+              title={pageData.title ?? "Titel moet in CMS worden ingevoerd"}
+              content={pageData.content}
+              fullHeight={false}
             />
           </Grid>
           <Grid item xs={0} md={2} lg={2} />

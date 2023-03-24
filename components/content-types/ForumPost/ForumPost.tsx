@@ -2,7 +2,7 @@ import styled, { useTheme } from "styled-components";
 
 import Button from "../../buttons/Button";
 import HeartIcon from "../../icons/HeartIcon/HeartIcon";
-import { P } from "../../typography";
+import { H4, P } from "../../typography";
 import React from "react";
 import Tag from "../../buttons/Tag/Tag";
 import { parseDate } from "../../../utils/parseDate";
@@ -15,6 +15,7 @@ type Props = {
   gender: string;
   age: string;
   title: string;
+  content: string;
   truncateContent?: boolean;
   showButton?: boolean;
   buttonUrl?: string;
@@ -32,6 +33,7 @@ const StyledForumPost = styled.article`
   position: relative;
   z-index: 1;
   background-color: ${({ theme }) => theme.colors.tertiary.light};
+  height: 100%;
 
   /* TODO: required for the home grid */
   display: flex;
@@ -78,6 +80,7 @@ const StyledForumPost = styled.article`
 
 export default function ForumPost({
   title,
+  content,
   age,
   likes = 0,
   authorType,
@@ -85,66 +88,76 @@ export default function ForumPost({
   truncateContent = true,
   showButton = false,
   buttonUrl = "",
-  fullHeight = false,
+  fullHeight = true,
   tags = [],
 }: Props) {
   const { colors } = useTheme();
 
   const generateContent = () => {
     if (fullHeight && truncateContent) {
-      return parseHTMLtoReact(truncate(title, 500));
+      return parseHTMLtoReact(truncate(content, 500));
     } else if (truncateContent) {
-      return parseHTMLtoReact(truncate(title, 180));
+      return parseHTMLtoReact(truncate(content, 180));
     }
 
-    return parseHTMLtoReact(title);
+    return parseHTMLtoReact(content);
   };
 
   return (
     <StyledForumPost style={{ minHeight: fullHeight ? "624px" : "" }}>
-      <div>
-        <header>
-          <UserAvatar
+      <div className="h-full flex flex-col justify-between">
+        <div>
+          {!!title && (
+            <header>
+              {/* <UserAvatar
             size="md"
             alt="villa pinedo"
             src="/android-chrome-192x192.png"
-          />
-          <div>
-            <P color="primary" style={{ margin: 0, fontWeight: 500 }}>
-              {authorType}
-            </P>
-
-            <P style={{ margin: 0, fontWeight: 300 }}>
-              {age?.includes("jaar") ? age : `${age} jaar`}
-            </P>
-          </div>
-        </header>
-        <div className="content">
-          {tags.length > 0 && (
-            <div className="flex">
-              {tags.map((item, index) => (
-                <Tag key={index} size="m">
-                  {item}
-                </Tag>
-              ))}
-            </div>
+          /> */}
+              <div>
+                <H4
+                  style={{ marginBottom: 0, marginTop: "16px" }}
+                  variant="bold"
+                >
+                  {truncate(title, 75)}
+                </H4>
+              </div>
+            </header>
           )}
+          <div className="content">
+            {tags.length > 0 && (
+              <div className="flex">
+                {tags.map((item, index) => (
+                  <Tag key={index} size="m">
+                    {item}
+                  </Tag>
+                ))}
+              </div>
+            )}
 
-          {generateContent()}
+            {generateContent()}
+          </div>
         </div>
 
         <footer>
-          <div className="likes">
-            {likes > 0 && (
+          {likes > 0 && (
+            <div className="likes mr-4">
               <>
-                <HeartIcon color={colors.info.normal} />
+                <HeartIcon color={colors.primary.normal} />
                 <P color="primary" variant="helper">
                   {likes}
                 </P>
               </>
-            )}
-          </div>
-          <div>
+            </div>
+          )}
+          <div className="flex items-center justify-between w-full">
+            <P
+              variant="helper"
+              color="primary"
+              style={{ margin: 0, fontWeight: 500 }}
+            >
+              {authorType} {age?.includes("jaar") ? age : `${age} jaar`}
+            </P>
             {postDate && (
               <P
                 variant="helper"

@@ -1,3 +1,5 @@
+import { CategoryType } from "./categoryTypes";
+
 export type ForumPostType = {
   id: string;
   date_created: string;
@@ -6,6 +8,7 @@ export type ForumPostType = {
   user_email: string;
   user_age: string;
   user_gender: string;
+  title: string;
   content: string;
   attachment_image: File[];
   comments: ForumCommentType[];
@@ -13,6 +16,7 @@ export type ForumPostType = {
   likes: string;
   status: "draft";
   slug: string;
+  categories?: { categories_id: CategoryType }[];
 };
 
 export type ForumCommentType = {

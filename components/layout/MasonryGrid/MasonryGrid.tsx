@@ -115,8 +115,16 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
                         likes={Number(forumContent.likes)}
                         authorType={forumContent.user_name}
                         postDate={new Date(forumContent.date_created)}
-                        tags={[]}
-                        title={forumContent.content}
+                        tags={
+                          forumContent.categories?.map(
+                            (cat) => cat.categories_id.name
+                          ) ?? []
+                        }
+                        title={
+                          forumContent.title ??
+                          "Titel moet in CMS worden ingevoerd"
+                        }
+                        content={forumContent.content}
                       />
                     </div>
                   </XBlock>
