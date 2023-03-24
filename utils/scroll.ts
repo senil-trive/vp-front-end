@@ -29,10 +29,19 @@ export const useCallbackWhenReachedBottom = (
 ) => {
   const handleCallback = useCallback(() => {
     const scrollSource = window.innerHeight + window.scrollY;
-    const scrollTarget = document.body.offsetHeight - (options.offset ?? 0);
+    const height = Math.max(
+      document.body.scrollHeight,
+      document.body.offsetHeight
+    );
+    const scrollTarget = height - (options.offset ?? 0);
 
-    if (scrollSource >= scrollTarget) {
+    if (
+      scrollSource >= scrollTarget &&
+      !document.body.classList.contains("prevent-scrolling")
+    ) {
+      document.body.classList.add("prevent-scrolling");
       callback();
+      document.body.classList.remove("prevent-scrolling");
     }
   }, [callback, options.offset]);
 
