@@ -185,8 +185,15 @@ export default function Forum({
                         likes={Number(item.likes)}
                         authorType={item.user_name}
                         postDate={new Date(item.date_created)}
-                        tags={[]}
-                        title={item.content}
+                        tags={
+                          item.categories?.map(
+                            (cat) => cat.categories_id.name
+                          ) ?? []
+                        }
+                        title={
+                          item.title ?? "Titel moet in CMS worden ingevoerd"
+                        }
+                        content={item.content}
                       />
                     </Link>
                   </Grid>
