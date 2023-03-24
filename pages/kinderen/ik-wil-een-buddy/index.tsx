@@ -169,7 +169,7 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
             </Container>
 
             {/* TODO: Update the commented code below
-              Villa pinedo doens't any video's yet to fill this
+              Villa Pinedo doesn't any video's yet to fill this
             */}
             {/* <Container>
               <div className="grid md:grid-cols-3 gap-8 mt-14 mx-auto">

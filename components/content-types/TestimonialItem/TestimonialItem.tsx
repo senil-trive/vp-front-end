@@ -11,11 +11,10 @@ interface TestimonialItemProps {
 
 const TestimonialItem: React.FC<TestimonialItemProps> = ({ data }) => {
   const { colors } = useTheme();
-  const postDate = data.date;
 
   return (
     <div
-      className="max-w-[440px] min-h-[400px] h-full text-left p-8 bg-slate-200 rounded-lg flex flex-col justify-between"
+      className="max-w-[440px] min-h-[400px] h-full text-left p-8 rounded-lg flex flex-col justify-between"
       style={{ backgroundColor: colors.tertiary.light }}
     >
       <div>
@@ -27,7 +26,7 @@ const TestimonialItem: React.FC<TestimonialItemProps> = ({ data }) => {
         style={{ color: colors.primary.normal }}
       >
         <i>{data.author}</i>
-        <i>Geplaatst op {parseDate(new Date(postDate))}</i>
+        <i>Geplaatst op {parseDate(new Date(data.date))}</i>
       </span>
     </div>
   );
