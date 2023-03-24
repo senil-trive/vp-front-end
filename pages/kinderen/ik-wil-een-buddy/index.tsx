@@ -1,5 +1,5 @@
 import { FaAppStoreIos, FaGooglePlay } from "react-icons/fa";
-import { H1, H3, P, TitleWithHighlights } from "../../../components/typography";
+import { H3, P, TitleWithHighlights } from "../../../components/typography";
 
 import Button from "../../../components/buttons/Button";
 import CTAItem from "../../../components/content-types/CTAItem/CTAItem";
@@ -9,9 +9,10 @@ import FAQList from "../../../components/content-types/FAQList/FAQList";
 import { Hero } from "../../../components/layout";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import TextItem from "../../../components/content-types/TextItem/TextItem";
-import VideoItem from "../../../components/content-types/VideoItem/VideoItem";
 import parseImageURL from "../../../utils/parseImageURL";
 import { useTheme } from "styled-components";
+import ContentCarousel from "../../../components/carousels/ContentCarousel";
+import { TEMP_QUOTES } from "../../../constants/mockData";
 
 type BuddyPageProps = {
   pageData: any;
@@ -60,21 +61,13 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
         description={pageData?.page_subtitle}
       >
         <main>
-          <Hero>
+          <Hero center>
             <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16">
               <TitleWithHighlights
                 text={pageData?.page_title ?? ""}
                 textToHighlight="buddy aanvragen"
               />
               <P>{pageData?.page_subtitle}</P>
-              <div className="flex gap-4 mt-14 w-[80%]">
-                <Button onClick={() => alert("Pizza: 🍕")}>
-                  {pageData?.header_button_1_label}
-                </Button>
-                <Button variant="info" onClick={() => alert("Pizza: 🍕")}>
-                  {pageData?.header_button_2_label}
-                </Button>
-              </div>
             </div>
           </Hero>
 
@@ -169,7 +162,16 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
               </div>
             </Container>
 
-            <Container>
+            <Container maxWidth="xl">
+              <div className="mt-14">
+                <ContentCarousel slides={TEMP_QUOTES} />
+              </div>
+            </Container>
+
+            {/* TODO: Update the commented code below
+              Villa Pinedo doesn't any video's yet to fill this
+            */}
+            {/* <Container>
               <div className="grid md:grid-cols-3 gap-8 mt-14 mx-auto">
                 {pageData?.featured_stories?.map((video: any) => (
                   <VideoItem
@@ -181,7 +183,7 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                   />
                 ))}
               </div>
-            </Container>
+            </Container> */}
           </section>
 
           <FAQList
