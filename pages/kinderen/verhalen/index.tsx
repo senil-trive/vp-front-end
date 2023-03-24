@@ -167,6 +167,7 @@ export default function Forum({
         <CollectionSearchBar
           quote={pageData?.search_bar_quote ?? ""}
           onSearch={handleSearch}
+          searchLabel="Doorzoek de verhalen"
         />
 
         <div style={{ margin: "56px auto" }}>
@@ -174,7 +175,7 @@ export default function Forum({
             <Grid container spacing={"31px"}>
               <Grid item xs={12} md={9}>
                 <P style={{ color: colors.primary.normal }}>
-                  {totalCount} blogs en vlogs
+                  {totalCount} verhalen
                 </P>
               </Grid>
               <Grid item xs={12} md={3}>
