@@ -49,8 +49,8 @@ const Dark = () => {
     <>
       <Image
         src={"/logo.png"}
-        height={66}
-        width={177}
+        height={100}
+        width={200}
         className={isTablet ? "" : "hidden"}
         alt="Logo Villa pinedo"
       />

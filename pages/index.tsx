@@ -73,12 +73,20 @@ export default function Home({
   const [selectedTag, setSelectedTag] = useState<string>("");
   const [currentPage, setCurrentPage] = useState(1);
   const [posts, setPosts] = useState(feed);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [isEnd, setIsEnd] = useState(false);
 
   const getAllFeedItem = useCallback(
-    async (append = true) => {
+    async ({
+      append = false,
+      selectedTag,
+    }: {
+      append: boolean;
+      selectedTag: string;
+    }) => {
       setIsLoading(true);
+
+      console.log({ nextPage: currentPage + 1 });
 
       try {
         const {
@@ -94,7 +102,7 @@ export default function Home({
           meta: "filter_count",
           filter:
             selectedTag.length > 0
-              ? `filter={"categories": { "categories_id": { "id": { "_eq": "${selectedTag}"}}}}`
+              ? `filter[categories][categories_id][id][_eq]=${selectedTag}`
               : ``,
         });
 
@@ -121,28 +129,33 @@ export default function Home({
         console.log(error);
       }
     },
-    [currentPage, posts, selectedTag]
+    [currentPage, posts]
   );
 
   useCallbackWhenReachedBottom(async () => {
-    if (posts.length < totalPosts && !selectedTag) {
-      getAllFeedItem();
+    if (posts.length < totalPosts && !selectedTag && !isLoading) {
+      getAllFeedItem({ append: true, selectedTag: "" });
       setCurrentPage((page) => page + 1);
-    } else {
+    }
+
+    if (posts.length >= totalPosts) {
       setIsEnd(true);
     }
   });
 
   useEffect(() => {
     if (selectedTag) {
-      getAllFeedItem(false);
+      getAllFeedItem({ append: false, selectedTag });
+    } else {
+      setPosts(feed);
     }
-  }, [getAllFeedItem, selectedTag]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [feed, selectedTag]);
 
   return (
     <PageWrapper
       title={pageData?.page_title}
-      description="Praten, lachen, klagen of huilen omdat je ouders uit elkaar zijn kan hier bij Villa Pinedo. Stel jouw vragen aan anderen die begrijpen wat jij meemaakt en deel wat er in jouw hoofd en hart omgaat."
+      description={pageData?.page_subtitle}
     >
       <Hero center>
         <Container>
