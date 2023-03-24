@@ -15,6 +15,35 @@ import YoutubePlayer from "../../../components/media/YoutubePlayer";
 import { getPostDetail } from "../../../utils/api";
 import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
 import parseImageURL from "../../../utils/parseImageURL";
+import styled from "styled-components";
+
+const StyledBlogContent = styled.article`
+  .content {
+    columns: 1;
+    column-gap: 48px;
+
+    p {
+      margin-bottom: 1.5rem;
+      font-size: ${({ theme }) => theme.fontSizes.p.mobile};
+      strong {
+        margin-bottom: 2rem;
+      }
+    }
+  }
+
+  @media ${({ theme }) => theme.devices.tablet} {
+    .content {
+      p {
+        font-size: ${({ theme }) => theme.fontSizes.p.desktop};
+      }
+    }
+  }
+  @media ${({ theme }) => theme.devices.laptop} {
+    .content {
+      columns: 2;
+    }
+  }
+`;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const { slug } = ctx.query;
@@ -67,7 +96,7 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
     if (!Child) return;
 
     return (
-      <div className="relative border overflow-hidden h-[317px] rounded-[8px]">
+      <div className="relative border overflow-hidden h-[50vh] rounded-[8px]">
         <>{Child}</>
       </div>
     );
@@ -88,7 +117,7 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
             {pageData?.author && <P>{pageData.author}:</P>}
             <TitleWithHighlights
               highlightColor="info"
-              text={`"${pageData?.title}"`}
+              text={`${pageData?.title}`}
               textToHighlight={pageData?.title ?? ""}
               headerElement="h1"
               color="primary"
@@ -97,13 +126,13 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
         </Hero>
 
         <Container>
-          <article>
+          <StyledBlogContent>
             <div>{generateMediaItem()}</div>
 
-            <div className="columns-2 mt-[50px] mb-[90px]">
+            <div className="content mt-[50px] mb-[90px]">
               {parseHTMLtoReact(pageData?.content ?? "")}
             </div>
-          </article>
+          </StyledBlogContent>
 
           {pageData?.id && (
             <CommentForm comments={pageData?.comments} postId={pageData?.id} />
