@@ -152,9 +152,9 @@ export default function TextArea({
     ? register(name, {
         required: required ? "Dit veld is verplicht" : null,
         onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-          console.log(e.target.value.length);
-
-          setCount(e.target.value.length);
+          if (maxLength) {
+            setCount(e.target.value.length);
+          }
         },
       })
     : {};
