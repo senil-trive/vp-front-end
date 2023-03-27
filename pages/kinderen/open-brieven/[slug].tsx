@@ -248,7 +248,7 @@ export default function LetterDetail({ pageData, relatedLetters }: Props) {
                   titleHighlighted={letter.title_highlighted}
                   content={letter.description}
                   imgSrc={parseImageURL(letter.image?.id)}
-                  fileSrc={`/open-brieven/${letter.slug}`}
+                  fileSrc={`/kinderen/open-brieven/${letter.slug}`}
                 />
               ))}
             </div>

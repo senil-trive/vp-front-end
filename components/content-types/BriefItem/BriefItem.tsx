@@ -8,6 +8,7 @@ import CardHeader from "../../card/CardHeader/CardHeader";
 import React from "react";
 import Tag from "../../buttons/Tag/Tag";
 import { truncate } from "../../../utils/truncate";
+import Image from "next/image";
 
 type Props = {
   title: string;
@@ -28,13 +29,13 @@ export default function BriefItem({
 }: Props) {
   return (
     <Card variant="brief">
-      <CardHeader>
+      <CardHeader style={{ height: 262 }}>
         <>
-          {/* TODO: Image element of NextJS doesn't work with Styleguidist */}
-          <img
+          <Image
             className="absolute h-full w-full top-0 left-0 z-0 object-cover"
             src={imgSrc}
             alt={title}
+            fill
           />
 
           {!!category && (
