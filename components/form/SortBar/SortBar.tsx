@@ -32,8 +32,6 @@ export default function SortBar({
   const { register } = useForm();
 
   const handleSort = (x: string) => {
-    console.log({ x });
-
     if (onSort) return onSort(x);
   };
 

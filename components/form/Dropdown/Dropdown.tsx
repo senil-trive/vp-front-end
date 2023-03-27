@@ -207,7 +207,6 @@ export default function Dropdown({
   };
 
   const handleOptionClick = (option: DropdownItem) => {
-    console.log({ formRegister });
     if (!multi) {
       handleSelect(option);
       return;
