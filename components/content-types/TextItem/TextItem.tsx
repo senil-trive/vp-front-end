@@ -40,7 +40,9 @@ const TextItem: React.FC<TextItemProps> = ({
   const router = useRouter();
 
   return (
-    <div className={`grid sm:grid-cols-1 md:grid-cols-2 gap-10 md:gap-[118px]`}>
+    <div
+      className={`grid sm:grid-cols-1 md:grid-cols-2 gap-10 items-center md:gap-[118px]`}
+    >
       {rtl ? (
         <>
           <div>

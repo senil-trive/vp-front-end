@@ -6,12 +6,12 @@ import ENDPOINTS from "../../../constants/endpoints";
 import { FiChevronsDown } from "react-icons/fi";
 import { Hero } from "../../../components/layout";
 import { Letter } from "../../../types/content-types/Letter.type";
+import { POST_PER_PAGE } from "../../../constants/app-configs";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import React from "react";
 import TextItem from "../../../components/content-types/TextItem/TextItem";
-import parseImageURL from "../../../utils/parseImageURL";
 import { getLetters } from "../../../utils/api";
-import { POST_PER_PAGE } from "../../../constants/app-configs";
+import parseImageURL from "../../../utils/parseImageURL";
 
 interface LettersOverviewPageProps {
   pageData: any;
@@ -67,7 +67,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
       >
         <main>
           <Hero>
-            <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16">
+            <div className="flex flex-col items-center justify-center text-center max-w-2xl mt-10 mb-0">
               <TitleWithHighlights
                 highlightColor="info"
                 text={pageData?.page_title}

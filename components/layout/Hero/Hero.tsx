@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 import styled, { css } from "styled-components";
+
 import { Grid } from "../";
 
 type Props = {
@@ -9,7 +10,6 @@ type Props = {
 };
 
 const Wrapper = styled.div<{ center: boolean }>`
-  min-height: 481px;
   padding: 29px 41px 40px 41px;
   position: relative;
 
