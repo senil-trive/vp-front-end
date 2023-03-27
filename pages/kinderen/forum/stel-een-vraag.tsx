@@ -52,14 +52,13 @@ export default function Vraag({ categories }: ForumQuestionPageProps) {
 
     const submitData: any = {
       ...data,
+      categories: data?.categories?.map((cat) => ({
+        categories_id: cat,
+      })),
     };
 
-    submitData.categories = data?.categories?.map((cat) => ({
-      categories_id: cat,
-    }));
-
     try {
-      await postForum(data);
+      await postForum(submitData);
       setIsSubmitted(true);
     } catch (error) {
       setIsSubmitted(false);
