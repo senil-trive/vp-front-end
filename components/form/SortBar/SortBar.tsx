@@ -2,6 +2,7 @@ import Dropdown from "../Dropdown/Dropdown";
 import ListIcon from "../../icons/ListIcon/ListIcon";
 import React from "react";
 import { debounce } from "@mui/material";
+import { useForm } from "react-hook-form";
 
 const defaultSortOptions = [
   { name: "Titel (a-z)", value: "title" },
@@ -28,7 +29,11 @@ export default function SortBar({
   onSort,
   waitTime = 300,
 }: Props) {
+  const { register } = useForm();
+
   const handleSort = (x: string) => {
+    console.log({ x });
+
     if (onSort) return onSort(x);
   };
 
@@ -38,6 +43,7 @@ export default function SortBar({
     <Dropdown
       name="sort"
       placeholder="Sorteer op"
+      register={register}
       onChange={debouncedSort}
       iconLeft={<ListIcon />}
       options={sortOptions}

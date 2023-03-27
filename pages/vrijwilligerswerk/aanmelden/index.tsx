@@ -112,6 +112,7 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
                         label="Voornaam*"
                         required
                         name="first_name"
+                        placeholder="Vul hier je voornaam in"
                         register={register}
                         hasError={!!errors.first_name}
                         helperText={errors.first_name && "Vul je voornaam in"}
@@ -122,6 +123,7 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
                         label="Achternaam*"
                         required
                         name="last_name"
+                        placeholder="Vul hier je achternaam in"
                         register={register}
                         hasError={!!errors.last_name}
                         helperText={errors.last_name && "Vul je achternaam in"}
@@ -133,6 +135,7 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
                         label="Geslacht"
                         name="gender"
                         register={register}
+                        placeholder="Maak een keuze"
                         required
                         hasError={!!errors.gender}
                         helperText={errors.gender && "Maak een keuze"}
@@ -156,6 +159,7 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
                         type="email"
                         required
                         name="email"
+                        placeholder="Vul hier je email adres in"
                         register={register}
                         helperText={errors.email && "Vul je e-mail adres in"}
                       />
@@ -166,6 +170,7 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
                         type="text"
                         required
                         name="city"
+                        placeholder="Vul hier je woonplaats in"
                         register={register}
                         helperText={errors.birthdate && "Vul je woonplaats in"}
                       />
