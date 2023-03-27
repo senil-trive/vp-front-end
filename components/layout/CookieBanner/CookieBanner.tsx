@@ -1,7 +1,6 @@
 import { Modal } from "@mui/material";
 import Link from "next/link";
 import { useCookies } from "react-cookie";
-import CookieConsent from "react-cookie-consent";
 import styled, { useTheme } from "styled-components";
 import Button from "../../buttons/Button";
 import { P, TitleWithHighlights } from "../../typography";
@@ -27,6 +26,8 @@ const Wrapper = styled.div`
 export default function CookieBanner() {
   const cookieName = process.env.NEXT_PUBLIC_COOKIE_NAME ?? "vp-cookie-consent";
   const [cookies, setCookie] = useCookies([cookieName]);
+
+  console.log({ cookieName });
 
   return (
     <Modal
