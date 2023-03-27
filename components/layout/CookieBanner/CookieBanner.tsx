@@ -27,11 +27,9 @@ export default function CookieBanner() {
   const cookieName = process.env.NEXT_PUBLIC_COOKIE_NAME ?? "vp-cookie-consent";
   const [cookies, setCookie] = useCookies([cookieName]);
 
-  console.log({ cookieName });
-
   return (
     <Modal
-      open={!cookies["vp-cookie-consent"]}
+      open={!cookies[cookieName]}
       style={{
         display: "flex",
         alignItems: "center",
