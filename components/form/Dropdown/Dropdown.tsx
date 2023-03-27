@@ -1,175 +1,15 @@
-import React, {
-  ForwardedRef,
-  ReactNode,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import styled, { css, useTheme } from "styled-components";
+import React, { useRef, useState } from "react";
+import { useTheme } from "styled-components";
 
 import ChevronDownFilled from "../../icons/ChevronDownFilled/ChevronDownFilled";
 import ChevronUpFilled from "../../icons/ChevronUpFilled/ChevronUpFilled";
-import { ColorType } from "../../../types/colorTypes";
 import IconWrapper from "../../icons/IconWrapper/IconWrapper";
 import ImportantCircle from "../../icons/ImportantCircle/ImportantCircle";
 import { P } from "../../typography";
 import Tag from "../../buttons/Tag/Tag";
 import { useOnClickOutsideEl } from "../../../utils/eventHandlers";
-
-export type DropdownItem = {
-  /** Name of the dropdown option. */
-  name: string;
-
-  /** Value of the dropdown option. */
-  value: string;
-};
-
-export type DropdownProps = {
-  /** Label of the dropdown field. */
-  label?: string;
-
-  /** React or custom Icon to be placed in front of the input  */
-  iconLeft?: ReactNode;
-
-  /** Options that should be used as dropdown options */
-  options: DropdownItem[];
-
-  /** Small text that will appear under the dropdown field. */
-  helperText?: string;
-
-  /** Placeholder for the dropdown field */
-  placeholder?: string;
-
-  /** Wether the dropdown field should be disabled */
-  disabled?: boolean;
-
-  /** Wether the dropdown field is active */
-  active?: boolean;
-
-  /** Wether the  dropdown field has any error */
-  hasError?: boolean;
-
-  /** Wether the  input field is required */
-  required?: boolean;
-
-  /** Wether to allow multiselect  */
-  multi?: boolean;
-
-  /** Name of the input field. required for submitting the form */
-  name: string;
-
-  /** React hook form register function for error handling */
-  register?: any;
-
-  /** The color of the border */
-  borderColor?: ColorType;
-
-  /** Event called when the dropdown changes */
-  onChange?: (x: string) => void;
-};
-
-const Wrapper = styled.div<{ hasError: boolean }>`
-  display: flex;
-  flex-direction: column;
-  cursor: pointer;
-  position: relative;
-
-  select {
-    position: absolute;
-    left: -999999px;
-  }
-
-  label {
-    margin-bottom: 16px;
-
-    font-weight: 700;
-    font-size: 18px;
-    line-height: 160%;
-    color: #000000;
-  }
-
-  .selectBox {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid;
-    background-color: white;
-    width: 100%;
-    border-radius: 8px;
-
-    display: flex;
-    align-items: center;
-    padding: 10px 16px;
-
-    span {
-      font-weight: 400;
-      font-size: 18px;
-      line-height: 160%;
-    }
-
-    &.open {
-      border-radius: 8px 8px 0 0;
-    }
-  }
-
-  .selectItems {
-    border: 1px solid;
-    border-top-width: 0;
-    background-color: white;
-    width: 100%;
-    border-radius: 0 0 8px 8px;
-    position: absolute;
-    z-index: 999;
-    display: flex;
-    flex-direction: column;
-    padding: 6.18px 0 10px 0;
-
-    button {
-      font-weight: 400;
-      font-size: 18px;
-      line-height: 160%;
-      width: 100%;
-      border: none;
-      outline: 0;
-      text-align: left;
-      background-color: white;
-      padding: 0;
-      padding: 0 16px;
-
-      color: #000000;
-
-      &:hover {
-        background-color: ${({ theme }) => theme.colors.primary.normal};
-        color: ${({ theme }) => theme.colors.white};
-      }
-    }
-  }
-
-  footer {
-    display: flex;
-    align-items: center;
-    margin-top: 13.5px;
-  }
-
-  ${({ hasError }) =>
-    hasError
-      ? css`
-          .selectBox {
-            background-color: rgba(255, 51, 51, 0.1);
-            border-color: #ff3333;
-          }
-
-          footer {
-            svg path {
-              fill: #ff3333;
-            }
-            p {
-              color: #ff3333;
-            }
-          }
-        `
-      : null}
-`;
+import { DropdownWrapper } from "./Dropdown.styled";
+import { DropdownItem, DropdownProps } from "./Dropdown.types";
 
 export default function Dropdown({
   iconLeft,
@@ -272,7 +112,11 @@ export default function Dropdown({
   });
 
   return (
-    <Wrapper hasError={hasError} onClick={handleInputFocus} ref={wrapperRef}>
+    <DropdownWrapper
+      hasError={hasError}
+      onClick={handleInputFocus}
+      ref={wrapperRef}
+    >
       {!!label && <label>{label}</label>}
       <div>
         <select
@@ -355,6 +199,6 @@ export default function Dropdown({
           ))}
         </div>
       )}
-    </Wrapper>
+    </DropdownWrapper>
   );
 }
