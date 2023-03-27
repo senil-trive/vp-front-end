@@ -1,4 +1,10 @@
-import React, { ReactNode, useRef, useState } from "react";
+import React, {
+  ForwardedRef,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import styled, { css, useTheme } from "styled-components";
 
 import ChevronDownFilled from "../../icons/ChevronDownFilled/ChevronDownFilled";
@@ -7,6 +13,8 @@ import { ColorType } from "../../../types/colorTypes";
 import IconWrapper from "../../icons/IconWrapper/IconWrapper";
 import ImportantCircle from "../../icons/ImportantCircle/ImportantCircle";
 import { P } from "../../typography";
+import Tag from "../../buttons/Tag/Tag";
+import { useOnClickOutsideEl } from "../../../utils/eventHandlers";
 
 export type DropdownItem = {
   /** Name of the dropdown option. */
@@ -16,7 +24,7 @@ export type DropdownItem = {
   value: string;
 };
 
-export type Props = {
+export type DropdownProps = {
   /** Label of the dropdown field. */
   label?: string;
 
@@ -44,6 +52,9 @@ export type Props = {
   /** Wether the  input field is required */
   required?: boolean;
 
+  /** Wether to allow multiselect  */
+  multi?: boolean;
+
   /** Name of the input field. required for submitting the form */
   name: string;
 
@@ -64,7 +75,8 @@ const Wrapper = styled.div<{ hasError: boolean }>`
   position: relative;
 
   select {
-    display: none;
+    position: absolute;
+    left: -999999px;
   }
 
   label {
@@ -165,19 +177,24 @@ export default function Dropdown({
   label,
   disabled,
   helperText,
-  placeholder = "Kies een optie",
-  hasError = false,
   register,
   name,
   required,
-  borderColor = "primary",
   onChange,
+  placeholder = "Kies een optie",
+  hasError = false,
+  borderColor = "primary",
+  multi = false,
   ...rest
-}: Props) {
+}: DropdownProps) {
+  const inputRef = useRef<HTMLSelectElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const { colors } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState<DropdownItem | null>(null);
-  const inputRef = useRef<HTMLSelectElement>(null);
+  const [selectedSingle, setSelectedSingle] = useState<DropdownItem | null>(
+    null
+  );
+  const [selectedMulti, setSelectedMulti] = useState<DropdownItem[]>([]);
 
   const formRegister = register
     ? register(name, {
@@ -189,21 +206,82 @@ export default function Dropdown({
     inputRef?.current?.focus();
   };
 
+  const handleOptionClick = (option: DropdownItem) => {
+    console.log({ formRegister });
+    if (!multi) {
+      handleSelect(option);
+      return;
+    }
+
+    handleAddSelectMulti(option);
+  };
+
   const handleSelect = (option: DropdownItem) => {
-    setSelected(option);
+    setSelectedSingle(option);
+
+    if (formRegister) {
+      formRegister?.onChange?.({ target: { name, value: option.value } });
+    }
 
     if (onChange) onChange(option.value);
     setIsOpen(() => false);
   };
 
+  const handleAddSelectMulti = (option: DropdownItem) => {
+    let selectList = [...selectedMulti];
+    const found = selectList.filter((item) => item.value === option.value);
+
+    if (found[0]) {
+      selectList = selectList.filter((item) => item.value !== option.value);
+    } else {
+      selectList.push(option);
+    }
+
+    if (formRegister) {
+      formRegister?.onChange?.({
+        target: {
+          name,
+          value: selectList.map((item) => item.value),
+        },
+      });
+    }
+
+    if (onChange) onChange(option.value);
+    setSelectedMulti(selectList);
+  };
+
+  const handleRemoveItem = (id: string) => {
+    let selectList = [...selectedMulti].filter((item) => item.value !== id);
+
+    setSelectedMulti(selectList);
+  };
+
+  const generateOptionActiveStyle = (option: DropdownItem) => {
+    const found = selectedMulti.filter((item) => item.value === option.value);
+
+    if (multi && found[0]) {
+      return {
+        backgroundColor: colors.primary.normal,
+      } as React.CSSProperties;
+    }
+
+    return {};
+  };
+
+  useOnClickOutsideEl(wrapperRef, () => {
+    setIsOpen(false);
+  });
+
   return (
-    <Wrapper hasError={hasError} onClick={handleInputFocus}>
+    <Wrapper hasError={hasError} onClick={handleInputFocus} ref={wrapperRef}>
       {!!label && <label>{label}</label>}
       <div>
         <select
+          multiple={multi}
           ref={inputRef}
           placeholder={placeholder}
           disabled={disabled}
+          onBlur={() => setIsOpen(() => false)}
           {...formRegister}
           {...rest}
         >
@@ -222,7 +300,11 @@ export default function Dropdown({
             {!!iconLeft && (
               <IconWrapper style={{ marginRight: 10 }}>{iconLeft}</IconWrapper>
             )}
-            <span>{selected?.name || placeholder}</span>
+            {!multi ? (
+              <span>{selectedSingle?.name || placeholder}</span>
+            ) : (
+              <span>{placeholder}</span>
+            )}
           </div>
           <span>
             {!isOpen ? (
@@ -238,7 +320,12 @@ export default function Dropdown({
             style={{ borderColor: colors[borderColor].normal }}
           >
             {options.map((option) => (
-              <button key={option.value} onClick={() => handleSelect(option)}>
+              <button
+                key={option.value}
+                type="button"
+                style={generateOptionActiveStyle(option)}
+                onClick={() => handleOptionClick(option)}
+              >
                 {option.name}
               </button>
             ))}
@@ -255,6 +342,19 @@ export default function Dropdown({
             {helperText}
           </P>
         </footer>
+      )}
+      {selectedMulti.length > 0 && (
+        <div className="flex flex-wrap gap-[8px] mt-[16px]">
+          {selectedMulti.map((item, index) => (
+            <Tag
+              key={index}
+              size="m"
+              onClick={() => handleRemoveItem(item.value)}
+            >
+              {item.name}
+            </Tag>
+          ))}
+        </div>
       )}
     </Wrapper>
   );

@@ -1,4 +1,4 @@
-import React, { ReactNode, useRef } from "react";
+import React, { ReactNode, useRef, useState } from "react";
 import styled, { css, useTheme } from "styled-components";
 import { ColorType } from "../../../types/colorTypes";
 import { InputStateType, InputType } from "../../../types/formTypes";
@@ -36,6 +36,9 @@ type Props = {
 
   /** The color of the border */
   borderColor?: ColorType;
+
+  /** The maximum amount of characters */
+  maxLength?: number;
 };
 
 const Wrapper = styled.div<InputStateType>`
@@ -139,13 +142,20 @@ export default function TextArea({
   required,
   borderColor = "primary",
   name,
+  maxLength,
   ...rest
 }: Props) {
+  const [count, setCount] = useState(0);
   const { colors } = useTheme();
 
   const formRegister = register
     ? register(name, {
         required: required ? "Dit veld is verplicht" : null,
+        onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+          console.log(e.target.value.length);
+
+          setCount(e.target.value.length);
+        },
       })
     : {};
 
@@ -162,13 +172,23 @@ export default function TextArea({
       active={active}
       onClick={handleInputFocus}
     >
-      {!!label && <label>{label}</label>}
+      {(!!label || !!maxLength) && (
+        <label className="flex justify-between">
+          <span>{!!label && label}</span>
+          {!!maxLength && (
+            <small className="font-normal ">
+              {count} / {maxLength} tekens
+            </small>
+          )}
+        </label>
+      )}
       <div style={{ borderColor: colors[borderColor].normal }}>
         <textarea
           rows={7}
           ref={inputRef}
           placeholder={placeholder}
           disabled={disabled}
+          maxLength={maxLength}
           {...formRegister}
           {...rest}
         />

@@ -164,8 +164,9 @@ export default function CommentForm({
                 </Grid>
                 <Grid item xs={12}>
                   <TextArea
-                    label="Bericht *"
+                    label="Schrijf hier je vraag of bericht *"
                     name="content"
+                    placeholder="Schrijf hier je vraag of bericht"
                     required
                     register={register}
                     hasError={!!errors.content}

@@ -26,7 +26,7 @@ const TestimonialItem: React.FC<TestimonialItemProps> = ({ data }) => {
         style={{ color: colors.primary.normal }}
       >
         <i>{data.author}</i>
-        <i>Geplaatst op {parseDate(new Date(data.date))}</i>
+        {data.date && <i>Geplaatst op {parseDate(new Date(data.date))}</i>}
       </span>
     </div>
   );
