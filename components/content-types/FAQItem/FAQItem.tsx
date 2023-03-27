@@ -1,10 +1,10 @@
 import { FiMinus, FiPlus } from "react-icons/fi";
 import { H3, P } from "../../typography";
+import styled, { useTheme } from "styled-components";
 
 import { FAQ } from "../../../types/content-types/FAQ.type";
 import React from "react";
 import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
-import styled, { useTheme } from "styled-components";
 
 interface FAQItemProps extends Partial<FAQ> {
   isSelected: boolean;
@@ -40,7 +40,7 @@ const FAQItem: React.FC<FAQItemProps> = ({
 
   return (
     <StyleFaq
-      className={`cursor-pointer p-[48px] rounded-lg ${
+      className={`cursor-pointer p-[32px] rounded-lg ${
         isSelected ? "bg-[#F3F8FE]" : "bg-[#F4FCFB]"
       } hover:bg-[#F3F8FE]`}
       onClick={handelSelect}

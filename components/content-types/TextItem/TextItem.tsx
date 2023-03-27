@@ -125,10 +125,7 @@ const TextItem: React.FC<TextItemProps> = ({
 
             {showButton && buttonURL && buttonLabel && (
               <div className="w-80 mb-12">
-                <Button
-                  variant={buttonVariant}
-                  onClick={() => router.push(buttonURL)}
-                >
+                <Button variant={buttonVariant} href={buttonURL}>
                   {buttonLabel}
                 </Button>
               </div>
