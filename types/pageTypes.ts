@@ -68,3 +68,7 @@ export type TheBookPageProps = {
     media_section_1_button_url: string;
   };
 };
+
+export type ForumQuestionPageProps = {
+  categories: CategoryType[];
+};
