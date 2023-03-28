@@ -51,6 +51,7 @@ const StyledHeader = styled.header`
     > div {
       display: flex;
       align-items: center;
+      background-color: white;
     }
   }
 
