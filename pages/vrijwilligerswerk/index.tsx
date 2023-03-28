@@ -78,12 +78,12 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
               <P>{pageData?.page_subtitle}</P>
 
               <div className="flex gap-4 mt-14 w-[90%]">
-                <Button onClick={() => alert("Pizza: 🍕")}>
+                <Button href="/vrijwilligerswerk/aanmelden">
                   {pageData?.signup_button_label}
                 </Button>
                 <Button
                   variant="infoReversed"
-                  onClick={() => alert("Pizza: 🍕")}
+                  href="/vrijwilligerswerk/trainingen"
                 >
                   {pageData?.about_button_label}
                 </Button>
@@ -92,7 +92,12 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
           </Hero>
 
           {pageData?.media_section_1 && (
-            <section className="my-[80px]">
+            <section
+              className="my-[80px]"
+              style={{
+                backgroundColor: colors.white.transparent,
+              }}
+            >
               <Container>
                 <TextItem
                   rtl={pageData?.media_section_1_rtl}
@@ -106,12 +111,18 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
                   buttonLabel={pageData?.media_section_1?.button_label}
                   buttonURL={pageData?.media_section_1?.button_url}
                   buttonVariant="primary"
+                  showButton={pageData?.media_section_1?.show_button}
                 />
               </Container>
             </section>
           )}
 
-          <section className="my-[80px] text-center">
+          <section
+            className="my-[80px] text-center"
+            style={{
+              backgroundColor: colors.white.transparent,
+            }}
+          >
             <Container>
               <div className="flex flex-col items-center justify-center ">
                 <H3 variant="bold" color="primary">
@@ -121,51 +132,64 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
               </div>
             </Container>
 
-            <Container maxWidth="xl">
-              <div className="grid md:grid-cols-4 gap-8 mt-14 mx-auto">
+            <Container>
+              <div className="grid md:grid-cols-4 items-start gap-8 mt-14 mx-auto">
                 {pageData?.usps?.map((usp: any) => (
                   <USPItem
                     key={usp.id}
                     title={usp.title}
                     description={usp.description}
                     imageAlt={usp.title}
-                    imageURL={parseImageURL(usp.image?.id, 200)}
+                    imageURL={
+                      usp.image?.id && parseImageURL(usp.image?.id, 200)
+                    }
                   />
                 ))}
               </div>
             </Container>
           </section>
-          <section
-            className="my-[80px] text-center py-20"
-            style={{
-              backgroundColor: colors.tertiary.light,
-            }}
-          >
-            <Container>
-              <div className="flex flex-col items-center justify-center ">
-                <H3 variant="bold" color="primary">
-                  {pageData?.video_section_title}
-                </H3>
-                <P className="max-w-4xl">{pageData?.video_section_subtitle}</P>
-              </div>
-            </Container>
 
-            <Container maxWidth="xl">
-              <div className="grid md:grid-cols-3 gap-8 mt-14 mx-auto">
-                {pageData?.video_items?.map((video: any) => (
-                  <VideoItem
-                    title={video.title}
-                    subtitle={video.subtitle}
-                    src={video.video_file?.url}
-                    key={video.id}
-                    poster={parseImageURL(video.video_cover_image?.id)}
-                  />
-                ))}
-              </div>
-            </Container>
-          </section>
+          {pageData?.video_items?.length > 0 && (
+            <section
+              className="my-[80px] text-center py-20"
+              style={{
+                backgroundColor: colors.tertiary.light,
+              }}
+            >
+              <Container>
+                <div className="flex flex-col items-center justify-center ">
+                  <H3 variant="bold" color="primary">
+                    {pageData?.video_section_title}
+                  </H3>
+                  <P className="max-w-4xl">
+                    {pageData?.video_section_subtitle}
+                  </P>
+                </div>
+              </Container>
+
+              <Container>
+                <div className="grid md:grid-cols-3 gap-8 mt-14 mx-auto">
+                  {pageData?.video_items?.map((video: any) => (
+                    <VideoItem
+                      title={video.title}
+                      subtitle={video.subtitle}
+                      src={video.video_file?.url}
+                      key={video.id}
+                      poster={parseImageURL(video.video_cover_image?.id)}
+                    />
+                  ))}
+                </div>
+              </Container>
+            </section>
+          )}
+
           {pageData?.media_section_2 && (
-            <section className="my-[80px]">
+            <section
+              className="my-[80px]"
+              style={{
+                backgroundColor: colors.white.transparent,
+              }}
+            >
               <Container>
                 <TextItem
                   rtl={pageData?.media_section_2_rtl}
@@ -179,6 +203,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
                   buttonLabel={pageData?.media_section_2?.button_label}
                   buttonURL={pageData?.media_section_2?.button_url}
                   buttonVariant="info"
+                  showButton={pageData?.media_section_2?.show_button}
                 />
               </Container>
             </section>
@@ -198,8 +223,8 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
               </div>
             </Container>
 
-            <Container maxWidth="xl">
-              <div className="grid md:grid-cols-2 gap-8 mt-14 mx-auto">
+            <Container>
+              <div className="grid md:grid-cols-2 gap-8 mt-14 mx-auto max-w-4xl">
                 <CTAItem
                   title={pageData?.cta_section_block_1_title}
                   description={pageData?.cta_section_block_1_subtitle}
@@ -217,19 +242,27 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
               </div>
             </Container>
           </section>
-          <section className="my-[80px] text-center py-[20px]">
+          <section
+            className="my-[80px] text-center py-[20px]"
+            style={{
+              backgroundColor: colors.white.transparent,
+            }}
+          >
             <Container>
               <div className="flex flex-col items-center justify-center mb-14">
-                <H3 variant="bold" color="black">
-                  {pageData?.testimonials_section_title}
-                </H3>
+                <TitleWithHighlights
+                  text={pageData?.testimonials_section_title}
+                  headerElement="h3"
+                  color="secondary"
+                />
+
                 <P className="max-w-4xl">
                   {pageData?.testimonials_section_subtitle}
                 </P>
               </div>
             </Container>
 
-            <Container maxWidth="xl">
+            <Container>
               <ContentCarousel
                 slides={pageData?.testimonials?.map(
                   (testimonial: Testimonial) => ({
@@ -241,19 +274,33 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
                 )}
               />
             </Container>
+            <Container style={{ marginBottom: 80 }}>
+              <div className="flex justify-center mt-14">
+                <Button
+                  variant="secondary"
+                  style={{
+                    maxWidth: 200,
+                  }}
+                  href="/vrijwilligerswerk/aanmelden"
+                >
+                  Aanmelden
+                </Button>
+              </div>
+            </Container>
           </section>
 
           <FAQList
+            containerWidth="lg"
             title={pageData?.faq_section_title}
             items={pageData?.faq_items}
           />
 
-          <Container maxWidth="xl" style={{ marginBottom: 80 }}>
+          <Container style={{ marginBottom: 80 }}>
             <div className="flex justify-center mt-14">
               <Button
                 variant="link"
                 style={{ color: colors.info.normal }}
-                onClick={() => router.push("/vrijwilligerswerk/faq")}
+                href="/vrijwilligerswerk/faq"
               >
                 Meer lezen
               </Button>

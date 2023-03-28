@@ -18,7 +18,9 @@ const TestimonialItem: React.FC<TestimonialItemProps> = ({ data }) => {
       style={{ backgroundColor: colors.tertiary.light }}
     >
       <div>
-        <H3 variant="bold">{data.title}</H3>
+        <H3 variant="bold" color="secondary">
+          {data.title}
+        </H3>
         <P>{data.description}</P>
       </div>
       <span
@@ -26,7 +28,11 @@ const TestimonialItem: React.FC<TestimonialItemProps> = ({ data }) => {
         style={{ color: colors.primary.normal }}
       >
         <i>{data.author}</i>
-        {data.date && <i>Geplaatst op {parseDate(new Date(data.date))}</i>}
+        {data.date && (
+          <i style={{ color: colors.secondary.light }}>
+            Geplaatst op {parseDate(new Date(data.date))}
+          </i>
+        )}
       </span>
     </div>
   );

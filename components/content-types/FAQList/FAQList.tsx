@@ -1,13 +1,14 @@
+import Button from "../../buttons/Button";
 import { CircularProgress } from "@mui/material";
 import { Container } from "@mui/system";
-import React from "react";
 import { FAQ } from "../../../types/content-types/FAQ.type";
-import Button from "../../buttons/Button";
-import { H3 } from "../../typography";
 import FAQItem from "../FAQItem/FAQItem";
+import { H3 } from "../../typography";
+import React from "react";
 
 type Props = {
   title?: string;
+  containerWidth?: "sm" | "md" | "lg" | "xl" | undefined;
   showLoadMore?: boolean;
   items: FAQ[];
   isLoading?: boolean;
@@ -20,6 +21,7 @@ export default function FAQList({
   items = [],
   isLoading = false,
   onLoadMore,
+  containerWidth = "xl",
 }: Props) {
   const [selected, setSelected] = React.useState<string>(items[0]?.id ?? "");
 
@@ -34,7 +36,7 @@ export default function FAQList({
         style={{ marginBottom: showLoadMore ? 56 : 80 }}
       >
         {!!title && (
-          <Container maxWidth="xl">
+          <Container maxWidth={containerWidth}>
             <div className="flex flex-col items-center justify-center mb-14">
               <H3 variant="bold" color="black">
                 {title}
@@ -43,7 +45,7 @@ export default function FAQList({
           </Container>
         )}
 
-        <Container maxWidth="xl">
+        <Container maxWidth={containerWidth}>
           <div className="flex flex-col gap-8">
             {items?.map((faq: FAQ) => (
               <FAQItem
