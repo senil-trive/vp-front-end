@@ -40,7 +40,7 @@ const StyledWrapper = styled.div`
       }
 
       > div {
-        margin-left: 12px;
+        /* margin-left: 12px; */
       }
     }
   }
@@ -55,12 +55,12 @@ export default function CollectionSearchBar({
     <StyledWrapper>
       <Container>
         <Grid container className="flex items-center justify-between flex-wrap">
-          <Grid item xs={12} md={8}>
+          {/* <Grid item xs={12} md={8}>
             <P variant="italic" style={{ fontWeight: 300 }}>
               <q>{quote}</q>
             </P>
-          </Grid>
-          <Grid item xs={12} md={4} className="search-wrapper">
+          </Grid> */}
+          <Grid item xs={12} className="search-wrapper">
             <SearchBar
               iconColor="secondary"
               placeholder={searchLabel}
