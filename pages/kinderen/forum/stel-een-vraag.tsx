@@ -263,7 +263,7 @@ export default function Vraag({ categories }: ForumQuestionPageProps) {
                           textDecoration: "underline",
                           color: COLORS.primary.normal,
                         }}
-                        href={"/forum"}
+                        href={"/kinderen/forum"}
                       >
                         Klik dan hier.
                       </Link>
@@ -279,7 +279,7 @@ export default function Vraag({ categories }: ForumQuestionPageProps) {
                         href={"/kinderen/ik-wil-een-buddy"}
                       >
                         Vraag dan een buddy aan.
-                      </Link>
+                      </Link>{" "}
                       Een Buddy is iemand, die net als jij, ook gescheiden
                       ouders heeft.
                     </P>
