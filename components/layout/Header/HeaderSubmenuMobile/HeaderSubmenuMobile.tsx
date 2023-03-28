@@ -1,11 +1,12 @@
-import Link from "next/link";
 import React, { useState } from "react";
-import styled from "styled-components";
-import { MENU_COLS } from "../../../../constants/mockData";
+
 import ChevronDown from "../../../icons/ChevronDown/ChevronDown";
 import ChevronUp from "../../../icons/ChevronUp/ChevronUp";
-import { P } from "../../../typography";
+import Link from "next/link";
+import { MENU_COLS } from "../../../../constants/mockData";
 import { MenuItem } from "../Header";
+import { P } from "../../../typography";
+import styled from "styled-components";
 
 type Props = {
   selected?: MenuItem;
@@ -16,7 +17,7 @@ type Props = {
 const Wrapper = styled.div`
   flex: 1;
   padding: 32px;
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: white;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   display: flex;
   border-radius: 8px;
