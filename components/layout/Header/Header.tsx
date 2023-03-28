@@ -45,7 +45,7 @@ const StyledHeader = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 41px;
+    padding: 0 41px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 
     > div {
