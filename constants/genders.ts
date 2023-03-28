@@ -1,5 +1,5 @@
 export const GENDERS = [
-  { name: "Man", value: "m" },
-  { name: "Vrouw", value: "v" },
+  { name: "Jongen", value: "m" },
+  { name: "Meisje", value: "v" },
   { name: "Zeg ik liever niet", value: "o" },
 ];
