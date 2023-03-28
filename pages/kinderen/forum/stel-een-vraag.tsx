@@ -1,21 +1,23 @@
-import { H2, P, TitleWithHighlights } from "../../../components/typography";
 import { Grid, Hero } from "../../../components/layout";
+import { H2, P, TitleWithHighlights } from "../../../components/typography";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { getContentTags, postForum, uploadFile } from "../../../utils/api";
 
 import Button from "../../../components/buttons/Button";
+import { COLORS } from "../../../styles/theme";
 import { Container } from "@mui/system";
+import { Divider } from "@mui/material";
 import Dropdown from "../../../components/form/Dropdown/Dropdown";
 import { ForumPostType } from "../../../types/forumTypes";
+import { ForumQuestionPageProps } from "../../../types/pageTypes";
 import { GENDERS } from "../../../constants/genders";
 import Input from "../../../components/form/Input/Input";
+import Link from "next/link";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import Section from "../../../components/layout/Section/Section";
 import TextArea from "../../../components/form/TextArea/TextArea";
-import { useState } from "react";
-import { ForumQuestionPageProps } from "../../../types/pageTypes";
-import { Divider } from "@mui/material";
 import TextList from "../../../components/typography/TextList/TextList";
+import { useState } from "react";
 
 export const getServerSideProps = async () => {
   try {
@@ -250,20 +252,36 @@ export default function Vraag({ categories }: ForumQuestionPageProps) {
                       Bedankt voor het stellen van je vraag!
                     </H2>
                     <P>
-                      Binnen twee dagen krijg je antwoord met tips en advies en
-                      komen je vraag en de antwoorden op de website te staan. Je
-                      krijgt hierover een mail zodat je niet steeds zelf hoeft
-                      te checken of je vraag en antwoorden al online staan.
-                    </P>
-                    <P>
-                      Heb jij tips voor andere kinderen van gescheiden ouders?
-                      Klik dan hier.
+                      Bedankt voor het stellen van je vraag! Binnen twee dagen
+                      krijg je antwoord met tips en advies en komen je vraag en
+                      de antwoorden op de website te staan. Je krijgt hierover
+                      een mail zodat je niet steeds zelf hoeft te checken of je
+                      vraag en antwoorden al online staan. Heb jij tips voor
+                      andere kinderen van gescheiden ouders?{" "}
+                      <Link
+                        style={{
+                          textDecoration: "underline",
+                          color: COLORS.primary.normal,
+                        }}
+                        href={"/forum"}
+                      >
+                        Klik dan hier.
+                      </Link>
                     </P>
                     <P>
                       Heb je meer vragen over de scheiding van je ouders en wil
-                      je liever voor langere tijd met iemand chatten? Vraag dan
-                      een Buddy aan. Een Buddy is iemand, die net als jij, ook
-                      gescheiden ouders heef
+                      je liever voor langere tijd met iemand chatten?{" "}
+                      <Link
+                        style={{
+                          textDecoration: "underline",
+                          color: COLORS.primary.normal,
+                        }}
+                        href={"/kinderen/ik-wil-een-buddy"}
+                      >
+                        Vraag dan een buddy aan.
+                      </Link>
+                      Een Buddy is iemand, die net als jij, ook gescheiden
+                      ouders heeft.
                     </P>
                   </div>
                 )}
