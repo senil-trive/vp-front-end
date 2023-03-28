@@ -1,11 +1,10 @@
-import React from "react";
-
 import { ChildMenuItem } from "../Header";
 import { Container } from "@mui/system";
+import Link from "next/link";
 import { P } from "../../../typography";
+import React from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
-import Link from "next/link";
 
 type Props = {
   categories: ChildMenuItem[];
@@ -78,16 +77,18 @@ export default function HeaderSubmenu({ categories }: Props) {
                 category.children.length > 4 ? "grid-cols-2" : "grid-cols-1"
               }`}
             >
-              {category.children.map((item) => (
-                <li key={item.link}>
-                  <Link
-                    className={router.asPath === item.link ? "active" : ""}
-                    href={item.link}
-                  >
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
+              {category.children
+                .filter((item) => item.status === "published")
+                .map((item) => (
+                  <li key={item.link}>
+                    <Link
+                      className={router.asPath === item.link ? "active" : ""}
+                      href={item.link}
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
             </ul>
           </section>
         ))}

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import CloseIcon from "../../icons/CloseIcon/CloseIcon";
+import { ContentStatus } from "../../../types/content-types/Status.type";
 import HeaderNav from "./HeaderNav/HeaderNav";
 import HeaderSubmenu from "./HeaderSubmenu/HeaderSubmenu";
 import HeaderSubmenuMobile from "./HeaderSubmenuMobile/HeaderSubmenuMobile";
@@ -16,18 +17,21 @@ import { useOnClickOutsideEl } from "../../../utils/eventHandlers";
 export type MenuItem = {
   id: string;
   name: string;
+  status?: ContentStatus;
   children: ChildMenuItem[];
 };
 
 export type ChildMenuItem = {
   id: string;
   name: string;
+  status?: ContentStatus;
   children: GrandChildMenuItem[];
 };
 
 export type GrandChildMenuItem = {
   id: string;
   name: string;
+  status?: ContentStatus;
   link: string;
 };
 

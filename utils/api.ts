@@ -1,13 +1,13 @@
+import { BlogType } from "../types/content-types/Blog.type";
 import { CompanyInfo } from "../types/componayInfoTypes";
 import ENDPOINTS from "../constants/endpoints";
-import { MenuItem } from "../components/layout/Header/Header";
-import { VolunteerRequestType } from "../types/volunteerRequestTypes";
-import { POST_PER_PAGE } from "../constants/app-configs";
-import { BlogType } from "../types/content-types/Blog.type";
-import { Letter } from "../types/content-types/Letter.type";
 import { ForumPostType } from "../types/forumTypes";
 import { InstaPost } from "../components/content-types/InstagramPost/InstagramPost";
+import { Letter } from "../types/content-types/Letter.type";
+import { MenuItem } from "../components/layout/Header/Header";
+import { POST_PER_PAGE } from "../constants/app-configs";
 import { TikTokPostProps } from "../components/content-types/TikTokPost/TikTokPost";
+import { VolunteerRequestType } from "../types/volunteerRequestTypes";
 
 type DirectusParams = {
   /** The amount of items that will be fetched, set -1 to retrieve all */
