@@ -55,7 +55,7 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
     return (
       <MasonryGridWrapper>
         <Container>
-          <p>loading...</p>
+          <p>Laden...</p>
         </Container>
       </MasonryGridWrapper>
     );

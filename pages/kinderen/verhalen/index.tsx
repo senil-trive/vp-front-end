@@ -1,13 +1,12 @@
 import { CircularProgress, Container, Grid } from "@mui/material";
 import { P, TitleWithHighlights } from "../../../components/typography";
 import React, { useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-
 import {
   getContentTags,
   getPostOverviewPageData,
   getPosts,
 } from "../../../utils/api";
+
 import { BlogPageProps } from "../../../types/pageTypes";
 import CollectionSearchBar from "../../../components/form/CollectionSearchBar/CollectionSearchBar";
 import { Hero } from "../../../components/layout";
@@ -18,6 +17,7 @@ import SortBar from "../../../components/form/SortBar/SortBar";
 import TagList from "../../../components/buttons/TagList/TagList";
 import { useCallbackWhenReachedBottom } from "../../../utils/scroll";
 import { useTheme } from "styled-components";
+import { v4 as uuidv4 } from "uuid";
 
 export const getServerSideProps = async () => {
   try {
@@ -195,7 +195,11 @@ export default function Forum({
 
         <div className="flex items-center justify-center">
           {isLoading && <CircularProgress size={"30px"} />}
-          {isEnd && <P color="info">Geen posts meer om te tonen</P>}
+          {isEnd && (
+            <P style={{ marginLeft: "1rem" }} color="info">
+              Geen posts meer om te tonen
+            </P>
+          )}
         </div>
       </main>
     </PageWrapper>
