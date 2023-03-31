@@ -62,8 +62,18 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
   return (
     <div>
       <PageWrapper
-        title={pageData?.page_title}
-        description={pageData?.page_subtitle}
+        seo={{
+          title: pageData?.seo_title
+            ? pageData?.seo_title
+            : pageData?.page_title,
+          description: pageData?.seo_description
+            ? pageData?.seo_description
+            : pageData?.page_subtitle,
+          canonical: "https://www.villapinedo.nl/kinderen/open-brieven",
+          image: pageData?.seo_image
+            ? parseImageURL(pageData?.seo_image?.id)
+            : "",
+        }}
       >
         <main>
           <Hero>

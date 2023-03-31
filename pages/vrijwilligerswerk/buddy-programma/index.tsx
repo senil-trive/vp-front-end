@@ -53,8 +53,19 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
   return (
     <div>
       <PageWrapper
-        title={pageData?.page_title}
-        description={pageData?.page_subtitle}
+        seo={{
+          title: pageData?.seo_title
+            ? pageData?.seo_title
+            : pageData?.page_title,
+          description: pageData?.seo_description
+            ? pageData?.seo_description
+            : pageData?.page_subtitle,
+          canonical:
+            "https://www.villapinedo.nl/vrijwilligerswerk/buddy-programma",
+          image: pageData?.seo_image
+            ? parseImageURL(pageData?.seo_image?.id)
+            : "",
+        }}
       >
         <main>
           <Hero>

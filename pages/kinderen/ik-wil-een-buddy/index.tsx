@@ -4,15 +4,15 @@ import { H3, P, TitleWithHighlights } from "../../../components/typography";
 import Button from "../../../components/buttons/Button";
 import CTAItem from "../../../components/content-types/CTAItem/CTAItem";
 import { Container } from "@mui/material";
+import ContentCarousel from "../../../components/carousels/ContentCarousel";
 import ENDPOINTS from "../../../constants/endpoints";
 import FAQList from "../../../components/content-types/FAQList/FAQList";
 import { Hero } from "../../../components/layout";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
+import { TEMP_QUOTES } from "../../../constants/mockData";
 import TextItem from "../../../components/content-types/TextItem/TextItem";
 import parseImageURL from "../../../utils/parseImageURL";
 import { useTheme } from "styled-components";
-import ContentCarousel from "../../../components/carousels/ContentCarousel";
-import { TEMP_QUOTES } from "../../../constants/mockData";
 
 type BuddyPageProps = {
   pageData: any;
@@ -57,8 +57,18 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
   return (
     <div>
       <PageWrapper
-        title={pageData?.page_title}
-        description={pageData?.page_subtitle}
+        seo={{
+          title: pageData?.seo_title
+            ? pageData?.seo_title
+            : pageData?.page_title,
+          description: pageData?.seo_description
+            ? pageData?.seo_description
+            : pageData?.page_subtitle,
+          canonical: "https://www.villapinedo.nl/kinderen/ik-wil-een-buddy/",
+          image: pageData?.seo_image
+            ? parseImageURL(pageData?.seo_image?.id)
+            : "",
+        }}
       >
         <main>
           <Hero center>

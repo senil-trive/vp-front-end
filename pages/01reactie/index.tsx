@@ -113,7 +113,14 @@ export default function ZeroResponsesPage({
   }, [currentPage, search, sort, selectedTag]);
 
   return (
-    <PageWrapper title="0-1 Reacties">
+    <PageWrapper
+      seo={{
+        title: "Vragen met 0 of 1 reactie(s)",
+        description:
+          "Hier vind je alle vragen met 1 of 0 reacties. Beantwoord ze en help andere kinderen!",
+        canonical: "https://www.villapinedo.nl/01reactie",
+      }}
+    >
       <Hero>
         <Container>
           <Grid container>

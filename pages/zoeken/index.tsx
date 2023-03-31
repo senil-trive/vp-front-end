@@ -73,7 +73,13 @@ export default function Search() {
   }, [q, router.isReady]);
 
   return (
-    <PageWrapper title="Zoekresultaten">
+    <PageWrapper
+      seo={{
+        title: "Zoeken",
+        description: "Zoek hier naar blogs, forum posts en brieven.",
+        canonical: "https://www.villapinedo.nl/zoeken",
+      }}
+    >
       <Hero>
         <Container>
           <Grid container>

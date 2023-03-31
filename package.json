@@ -39,6 +39,7 @@
     "html-react-parser": "^3.0.9",
     "lodash.debounce": "^4.0.8",
     "next": "13.0.6",
+    "next-seo": "^5.15.0",
     "react": "18.2.0",
     "react-cookie": "^4.1.1",
     "react-dom": "18.2.0",

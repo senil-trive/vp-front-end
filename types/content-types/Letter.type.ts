@@ -2,6 +2,8 @@ import { ContentStatus } from "./Status.type";
 
 export type Letter = {
   id: string;
+  date_created: string;
+  date_updated: string;
   slug: string;
   status: ContentStatus;
   title: string;

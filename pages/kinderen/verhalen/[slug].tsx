@@ -103,7 +103,24 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
   };
 
   return (
-    <PageWrapper title={pageData?.title}>
+    <PageWrapper
+      seo={{
+        title: pageData?.title,
+        description:
+          pageData?.content && pageData?.content?.length > 160
+            ? pageData?.content?.slice(0, 160)
+            : "",
+        canonical: `https://www.villapinedo.nl/kinderen/forum/${pageData?.slug}`,
+        og: {
+          type: "article",
+          article: {
+            publishedTime: pageData?.date_created,
+            modifiedTime: pageData?.date_updated,
+            authors: [pageData?.author ?? ""],
+          },
+        },
+      }}
+    >
       <BreadCrumbs />
 
       <main style={{ marginBottom: "80px" }}>

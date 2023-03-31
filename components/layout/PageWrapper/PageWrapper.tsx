@@ -1,6 +1,8 @@
 import React, { ReactNode } from "react";
 
 import Head from "next/head";
+import { NextSeo } from "next-seo";
+import { OpenGraph } from "next-seo/lib/types";
 import dynamic from "next/dynamic";
 import styled from "styled-components";
 
@@ -10,12 +12,6 @@ const DynamicHeader = dynamic(() => import("../Header/Header"), {
 const DynamicFooter = dynamic(() => import("../Footer/Footer"), {
   loading: () => <>Loading...</>,
 });
-
-type Props = {
-  title?: string;
-  description?: string;
-  children: ReactNode;
-};
 
 const StyledWrapper = styled.div`
   display: flex;
@@ -63,18 +59,73 @@ const defaultValues = {
   title: "Villa Pinedo",
   description:
     "Praten, lachen, klagen of huilen omdat je ouders gescheiden zijn kan bij Villa Pinedo op het forum of 1 op 1 met een Buddy. Je hoeft het niet alleen te doen.",
+  canonical: "https://www.villapinedo.nl",
+  image: "",
+  ogtype: "website",
+  oglocale: "nl_NL",
+  ogurl: "https://www.villapinedo.nl",
+};
+
+type SEOProps = {
+  title: string | undefined;
+  description: string | undefined;
+  canonical: string | undefined;
+  image?: string;
+  og?: {
+    type?: OpenGraph["type"];
+    locale?: OpenGraph["locale"];
+    url?: OpenGraph["url"];
+    article?: OpenGraph["article"];
+  };
+};
+
+type Props = {
+  seo: SEOProps;
+  children: ReactNode;
 };
 
 export default function PageWrapper({
-  title = defaultValues.title,
-  description = defaultValues.description,
   children,
+  seo = {
+    title: "Villa Pinedo",
+    description: defaultValues.description,
+    canonical: defaultValues.canonical,
+    image: defaultValues.image,
+    og: {
+      type: defaultValues.ogtype,
+      locale: defaultValues.oglocale,
+      url: defaultValues.ogurl,
+    },
+  },
 }: Props) {
   return (
     <StyledWrapper>
+      <NextSeo
+        title={`${seo.title} | ${defaultValues.title}`}
+        description={seo.description}
+        canonical={seo.canonical}
+        openGraph={{
+          title: seo.title,
+          description: seo.description,
+
+          images: seo.image
+            ? [
+                {
+                  url: seo.image,
+                  width: 800,
+                  height: 600,
+                  alt: "Villa Pinedo",
+                },
+              ]
+            : undefined,
+          type: seo.og?.type,
+          locale: seo.og?.locale,
+          url: seo.og?.url || seo.canonical,
+          site_name: "Villa Pinedo",
+          article: seo.og?.article,
+        }}
+      />
       <Head>
-        <title>{title + " - Voor kinderen met gescheiden ouders"}</title>
-        <meta name="description" content={description} />
         <link rel="icon" href="/favicon.ico" />
         <link
           rel="apple-touch-icon"

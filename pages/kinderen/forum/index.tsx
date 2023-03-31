@@ -1,6 +1,6 @@
 import { Container, Grid } from "@mui/material";
-import { P, TitleWithHighlights } from "../../../components/typography";
 import { Hero, Pagination } from "../../../components/layout";
+import { P, TitleWithHighlights } from "../../../components/typography";
 import React, { useEffect, useState } from "react";
 import {
   getContentTags,
@@ -18,6 +18,7 @@ import { POST_PER_PAGE } from "../../../constants/app-configs";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import SortBar from "../../../components/form/SortBar/SortBar";
 import TagList from "../../../components/buttons/TagList/TagList";
+import parseImageURL from "../../../utils/parseImageURL";
 
 const forumSortOptions = [
   { name: "Titel (a-z)", value: "content" },
@@ -120,8 +121,20 @@ export default function Forum({
     getPaginatedPost();
   }, [currentPage, search, sort, selectedTag]);
 
+  console.log(pageData);
   return (
-    <PageWrapper title="Forum overzicht">
+    <PageWrapper
+      seo={{
+        title: pageData?.seo_title ? pageData?.seo_title : pageData?.page_title,
+        description: pageData?.seo_description
+          ? pageData?.seo_description
+          : pageData?.page_subtitle,
+        canonical: "https://www.villapinedo.nl/kinderen/forum",
+        image: pageData?.seo_image
+          ? parseImageURL(pageData?.seo_image?.id)
+          : "",
+      }}
+    >
       <Hero>
         <Container>
           <Grid container>

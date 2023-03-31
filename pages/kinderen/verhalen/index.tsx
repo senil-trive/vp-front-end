@@ -15,6 +15,7 @@ import { POST_PER_PAGE } from "../../../constants/app-configs";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import SortBar from "../../../components/form/SortBar/SortBar";
 import TagList from "../../../components/buttons/TagList/TagList";
+import parseImageURL from "../../../utils/parseImageURL";
 import { useCallbackWhenReachedBottom } from "../../../utils/scroll";
 import { useTheme } from "styled-components";
 import { v4 as uuidv4 } from "uuid";
@@ -131,7 +132,18 @@ export default function Forum({
   }, [search, sort, selectedTag]);
 
   return (
-    <PageWrapper title="Blog en vlog overzicht">
+    <PageWrapper
+      seo={{
+        title: pageData?.seo_title ? pageData?.seo_title : pageData?.page_title,
+        description: pageData?.seo_description
+          ? pageData?.seo_description
+          : pageData?.page_subtitle,
+        canonical: "https://www.villapinedo.nl/kinderen/verhalen",
+        image: pageData?.seo_image
+          ? parseImageURL(pageData?.seo_image?.id)
+          : "",
+      }}
+    >
       <Hero center>
         <Container>
           <Grid container>
