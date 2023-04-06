@@ -4,17 +4,18 @@ import React from "react";
 import { IoMdPerson } from "react-icons/io";
 import styled from "styled-components";
 import { COLORS } from "../../../styles/theme";
+import { ColorType } from "../../../types/colorTypes";
 import IconButton from "../../buttons/IconButton/IconButton";
 import UserAvatar from "../../icons/UserAvatar/UserAvatar";
 import { P } from "../../typography";
 
 type Props = {
-  age: number;
+  age?: string;
   name: string;
   avatar?: string;
   size?: "sm" | "md";
   type: string;
-  color: string;
+  color: ColorType;
 };
 
 const StyledWrapper = styled.div`
@@ -39,25 +40,18 @@ export default function Person({
 }: Props) {
   return (
     <StyledWrapper>
-      <div className="profile-img">
-        {avatar ? (
+      {avatar && (
+        <div className="profile-img">
           <UserAvatar src={avatar} alt={name} size={size} />
-        ) : (
-          <IconButton
-            wrapperSize={size === "md" ? 64 : 32}
-            iconSize={size === "md" ? 32 : 16}
-            wrapperColor="#E0E0E0"
-            Icon={IoMdPerson}
-          />
-        )}
-      </div>
+        </div>
+      )}
       <div className="profile-meta">
-        <P variant="bold" style={{ color }}>
-          {type}
+        <P variant="bold" color={color}>
+          {name}
         </P>
-        <P>
-          {name} {age ? age + ", jaar" : ""}
-        </P>
+        {age && (
+          <P color={color}>{age.includes("jaar") ? age : `${age} jaar`} </P>
+        )}
       </div>
     </StyledWrapper>
   );

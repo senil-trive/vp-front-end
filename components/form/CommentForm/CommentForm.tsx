@@ -71,23 +71,21 @@ export default function CommentForm({
           </H4>
         </Grid>
       </Grid>
-      <Grid container>
-        {comments.map((comment) => (
-          <>
-            <Grid item xs={0} md={2} lg={2} />
-            <Grid item xs={12} md={8} lg={8}>
-              <ForumComment
-                author={comment.user_name}
-                age={comment.user_age}
-                authorType={"Anonymous"}
-                postDate={new Date(comment.date_created)}
-                title={comment.content}
-              />
-            </Grid>
-            <Grid item xs={0} md={2} lg={2} />
-          </>
-        ))}
-      </Grid>
+      {comments.map((comment) => (
+        <Grid container key={comment.id}>
+          <Grid item xs={0} md={2} lg={2} />
+          <Grid item xs={12} md={8} lg={8}>
+            <ForumComment
+              author={comment.user_name}
+              age={comment.user_age}
+              authorType={"Anonymous"}
+              postDate={new Date(comment.date_created)}
+              title={comment.content}
+            />
+          </Grid>
+          <Grid item xs={0} md={2} lg={2} />
+        </Grid>
+      ))}
 
       {!isSubmitted && (
         <Grid

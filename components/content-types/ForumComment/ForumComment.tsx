@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { useTheme } from "styled-components";
+import styled from "styled-components";
 import { formatDistance } from "date-fns";
 import { nl } from "date-fns/locale";
 
@@ -13,10 +13,9 @@ import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
 type Props = {
   authorType: string;
   author: string;
-  age: number;
+  age: string;
   title: string;
   postDate?: Date;
-  profileImage?: string;
 };
 
 const StyledForumPost = styled.article`
@@ -28,7 +27,6 @@ const StyledForumPost = styled.article`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 20px;
   }
 
   .content {
@@ -36,6 +34,7 @@ const StyledForumPost = styled.article`
     padding: 24px;
     border-radius: 8px;
     margin-bottom: 34px;
+    background-color: white;
   }
 
   footer {
@@ -54,21 +53,11 @@ export default function ForumComment({
   age,
   authorType,
   postDate,
-  profileImage = "https://randomuser.me/api/portraits/lego/2.jpg",
 }: Props) {
-  const { colors } = useTheme();
-  const accentColor = colors.secondary;
-
   return (
     <StyledForumPost>
       <header>
-        <Person
-          avatar={profileImage}
-          age={age}
-          name={author}
-          type={authorType}
-          color={accentColor.normal}
-        />
+        <Person age={age} name={author} type={authorType} color="secondary" />
         <div>
           {postDate && (
             <P variant="helper" style={{ textAlign: "right", color: "#555" }}>

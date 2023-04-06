@@ -18,6 +18,8 @@ build
 # misc
 .DS_Store
 *.pem
+utils/server/*.json
+pages/csv
 
 # debug
 npm-debug.log*

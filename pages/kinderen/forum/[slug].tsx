@@ -62,7 +62,6 @@ export default function ForumDetail({ pageData }: Props) {
             <ForumPost
               gender={pageData.user_gender}
               age={pageData.user_age}
-              likes={Number(pageData.likes)}
               authorType={pageData.user_name}
               postDate={new Date(pageData.date_created)}
               truncateContent={false}
@@ -71,6 +70,7 @@ export default function ForumDetail({ pageData }: Props) {
               }
               title={pageData.title ?? "Titel moet in CMS worden ingevoerd"}
               content={pageData.content}
+              comments={pageData.comments.length}
               fullHeight={false}
             />
           </Grid>

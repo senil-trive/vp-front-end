@@ -112,7 +112,6 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
                         truncateContent
                         gender={forumContent.user_gender}
                         age={forumContent.user_age}
-                        likes={Number(forumContent.likes)}
                         authorType={forumContent.user_name}
                         postDate={new Date(forumContent.date_created)}
                         tags={
@@ -124,6 +123,7 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
                           forumContent.title ??
                           "Titel moet in CMS worden ingevoerd"
                         }
+                        comments={forumContent.comments.length}
                         content={forumContent.content}
                       />
                     </div>
