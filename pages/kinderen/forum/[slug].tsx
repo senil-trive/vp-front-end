@@ -4,13 +4,15 @@ import BreadCrumbs from "../../../components/layout/BreadCrumbs/BreadCrumbs";
 import CommentForm from "../../../components/form/CommentForm/CommentForm";
 import ENDPOINTS from "../../../constants/endpoints";
 import ForumPost from "../../../components/content-types/ForumPost/ForumPost";
-import { ForumPostType } from "../../../types/forumTypes";
+import { ForumCommentType, ForumPostType } from "../../../types/forumTypes";
 import { GetServerSidePropsContext } from "next";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import React from "react";
+import { getComments } from "../../../utils/api";
 
 type Props = {
   pageData: ForumPostType;
+  comments: ForumCommentType[];
 };
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
@@ -19,7 +21,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   try {
     // Get the posts
     const res = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=*.*.*&filter[slug][_eq]=${slug}`,
+      `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=*.*&filter[slug][_eq]=${slug}`,
       {
         method: "GET",
         headers: {
@@ -36,10 +38,13 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
         permanent: false,
       };
     }
+    const commentReq = await getComments("forum", data[0].id);
+    const commmentRes = await commentReq.json();
 
     return {
       props: {
         pageData: data[0] ?? null,
+        comments: commmentRes.data ?? null,
       },
     };
   } catch (error) {
@@ -51,7 +56,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   }
 };
 
-export default function ForumDetail({ pageData }: Props) {
+export default function ForumDetail({ pageData, comments = [] }: Props) {
   return (
     <PageWrapper title={pageData.slug}>
       <BreadCrumbs />
@@ -70,7 +75,7 @@ export default function ForumDetail({ pageData }: Props) {
               }
               title={pageData.title ?? "Titel moet in CMS worden ingevoerd"}
               content={pageData.content}
-              comments={pageData.comments.length}
+              comments={comments.length}
               fullHeight={false}
             />
           </Grid>
@@ -81,7 +86,7 @@ export default function ForumDetail({ pageData }: Props) {
       <main style={{ marginBottom: "80px" }}>
         <CommentForm
           type="forum"
-          comments={pageData.comments}
+          comments={comments}
           preText="De Buddy’s beantwoorden alle vragen. Zij zaten in eenzelfde situatie
           als jij en hebben dus heel veel wijze raad. Maar niet alleen
           Budd's weten hoe het voelt om gescheiden ouders te hebben, jij

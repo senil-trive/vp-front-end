@@ -17,6 +17,7 @@ type Props = {
   title: string;
   postDate?: Date;
   isReplyComment?: boolean;
+  onReply?: () => void;
 };
 
 const StyledForumPost = styled.article<{ isReplyComment: boolean }>`
@@ -42,11 +43,9 @@ const StyledForumPost = styled.article<{ isReplyComment: boolean }>`
     display: flex;
     gap: 28px;
     align-items: center;
-    /* justify-content: flex-end; */
+    justify-content: flex-end;
     margin-top: 24px;
     padding-top: 12px;
-    border-top: 1px solid
-      ${({ theme }) => rgba(theme.colors.primary.normal, 0.2)};
   }
 
   ${({ isReplyComment }) => {
@@ -55,9 +54,6 @@ const StyledForumPost = styled.article<{ isReplyComment: boolean }>`
     return css`
       margin-top: -24px;
       padding-left: 34px;
-
-      border-bottom: 1px solid
-        ${({ theme }) => rgba(theme.colors.primary.normal, 0.2)};
     `;
   }}
 `;
@@ -68,8 +64,15 @@ export default function ForumComment({
   age,
   postDate,
   isReplyComment = false,
+  onReply,
 }: Props) {
   const { colors } = useTheme();
+
+  const handleReply = () => {
+    if (onReply) {
+      onReply();
+    }
+  };
 
   return (
     <StyledForumPost isReplyComment={isReplyComment}>
@@ -90,7 +93,7 @@ export default function ForumComment({
       <div className="content">
         {parseHTMLtoReact(title)}
         <footer>
-          <button>
+          <button onClick={handleReply}>
             <FiMessageCircle size={24} color={colors.secondary.normal} />
           </button>
           {/* <MoreIcon /> */}
