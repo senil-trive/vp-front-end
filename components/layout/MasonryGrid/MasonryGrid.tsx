@@ -124,6 +124,7 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
                           forumContent.title ??
                           "Titel moet in CMS worden ingevoerd"
                         }
+                        comments={forumContent.comments.length}
                         content={forumContent.content}
                       />
                     </div>

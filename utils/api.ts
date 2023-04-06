@@ -67,6 +67,19 @@ export const postForum = async (data: any) => {
     }),
   });
 };
+/**
+ * Add a forum post with comments
+ * @param data
+ */
+export const postForumWithComments = async (data: any) => {
+  return await fetch(`${ENDPOINTS.COLLECTIONS}/forum_posts`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+};
 
 /**
  * Add a comment

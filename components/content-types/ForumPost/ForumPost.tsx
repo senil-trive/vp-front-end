@@ -9,6 +9,7 @@ import { parseDate } from "../../../utils/parseDate";
 import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
 import { truncate } from "../../../utils/truncate";
 import UserAvatar from "../../icons/UserAvatar/UserAvatar";
+import { FiMessageCircle } from "react-icons/fi";
 
 type Props = {
   authorType: string;
@@ -20,7 +21,8 @@ type Props = {
   showButton?: boolean;
   buttonUrl?: string;
   tags: string[];
-  likes: number;
+  likes?: number;
+  comments?: number;
   fullHeight?: boolean;
   postDate?: Date;
 };
@@ -83,6 +85,7 @@ export default function ForumPost({
   content,
   age,
   likes = 0,
+  comments = 0,
   authorType,
   postDate,
   truncateContent = true,
@@ -140,23 +143,23 @@ export default function ForumPost({
         </div>
 
         <footer>
-          {likes > 0 && (
+          <div>
             <div className="likes mr-4">
               <>
-                <HeartIcon color={colors.primary.normal} />
+                <FiMessageCircle color={colors.primary.normal} />
                 <P color="primary" variant="helper">
-                  {likes}
+                  {comments}
                 </P>
               </>
             </div>
-          )}
+          </div>
           <div className="flex items-center justify-between w-full">
             <P
               variant="helper"
               color="primary"
               style={{ margin: 0, fontWeight: 500 }}
             >
-              {authorType} {age?.includes("jaar") ? age : `${age} jaar`}
+              {authorType}, {age?.includes("jaar") ? age : `${age} jaar`}
             </P>
             {postDate && (
               <P
@@ -164,7 +167,7 @@ export default function ForumPost({
                 color="primary"
                 style={{ textAlign: "right" }}
               >
-                Geplaatst op {parseDate(postDate)}
+                {parseDate(postDate)}
               </P>
             )}
           </div>

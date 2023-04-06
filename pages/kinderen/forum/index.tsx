@@ -193,6 +193,7 @@ export default function Forum({
                         title={
                           item.title ?? "Titel moet in CMS worden ingevoerd"
                         }
+                        comments={item.comments.length}
                         content={item.content}
                       />
                     </Link>

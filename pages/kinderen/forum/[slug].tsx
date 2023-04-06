@@ -71,6 +71,7 @@ export default function ForumDetail({ pageData }: Props) {
               }
               title={pageData.title ?? "Titel moet in CMS worden ingevoerd"}
               content={pageData.content}
+              comments={pageData.comments.length}
               fullHeight={false}
             />
           </Grid>
