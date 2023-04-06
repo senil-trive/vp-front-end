@@ -1,4 +1,5 @@
 import { CategoryType } from "./categoryTypes";
+import { ContentStatus } from "./content-types/Status.type";
 
 export type ForumPostType = {
   id: string;
@@ -31,5 +32,7 @@ export type ForumCommentType = {
   // attachment_image: File[];
   forum_post?: string;
   blog_post?: string;
-  status: "draft";
+  status: ContentStatus;
+  child_comments: ForumCommentType[];
+  parent_comment: ForumCommentType;
 };

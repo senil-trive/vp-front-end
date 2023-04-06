@@ -112,7 +112,7 @@ export const postComment = async (
  */
 export const getComments = async (type: "forum" | "blog", post_id: string) => {
   return await fetch(
-    `${ENDPOINTS.COLLECTIONS}/comments?filter[status][_eq]=published&filter[${type}_post][_eq]=${post_id}`,
+    `${ENDPOINTS.COLLECTIONS}/comments?fields=*.*.*&filter[status][_eq]=published&filter[${type}_post][_eq]=${post_id}`,
     {
       method: "GET",
       headers: {
