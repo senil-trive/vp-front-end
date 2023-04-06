@@ -1,11 +1,6 @@
-import { ValueOf } from "next/dist/shared/lib/constants";
-import Image from "next/image";
 import React from "react";
-import { IoMdPerson } from "react-icons/io";
 import styled from "styled-components";
-import { COLORS } from "../../../styles/theme";
 import { ColorType } from "../../../types/colorTypes";
-import IconButton from "../../buttons/IconButton/IconButton";
 import UserAvatar from "../../icons/UserAvatar/UserAvatar";
 import { P } from "../../typography";
 
@@ -14,7 +9,6 @@ type Props = {
   name: string;
   avatar?: string;
   size?: "sm" | "md";
-  type: string;
   color: ColorType;
 };
 
@@ -36,7 +30,6 @@ export default function Person({
   size = "sm",
   color,
   avatar,
-  type,
 }: Props) {
   return (
     <StyledWrapper>

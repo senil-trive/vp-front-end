@@ -32,4 +32,6 @@ export type ForumCommentType = {
   forum_post?: string;
   blog_post?: string;
   status: "draft";
+  child_comment: ForumCommentType;
+  parent_comment: ForumCommentType[];
 };

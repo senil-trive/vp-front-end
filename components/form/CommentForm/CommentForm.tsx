@@ -61,6 +61,8 @@ export default function CommentForm({
     submitForm(data);
   };
 
+  console.log(comments);
+
   return (
     <Container>
       <Grid container style={{ margin: "70px 0" }}>
@@ -78,10 +80,19 @@ export default function CommentForm({
             <ForumComment
               author={comment.user_name}
               age={comment.user_age}
-              authorType={"Anonymous"}
               postDate={new Date(comment.date_created)}
               title={comment.content}
             />
+
+            {comment.child_comment && (
+              <ForumComment
+                isReplyComment
+                author={comment.child_comment.user_name}
+                age={comment.child_comment.user_age}
+                postDate={new Date(comment.child_comment.date_created)}
+                title={comment.child_comment.content}
+              />
+            )}
           </Grid>
           <Grid item xs={0} md={2} lg={2} />
         </Grid>
