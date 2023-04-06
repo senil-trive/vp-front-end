@@ -159,7 +159,6 @@ export default function ZeroResponsesPage({
                         fullHeight={false}
                         gender={item.user_gender}
                         age={item.user_age}
-                        likes={Number(item.likes)}
                         authorType={item.user_name}
                         postDate={new Date(item.date_created)}
                         tags={

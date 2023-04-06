@@ -1,14 +1,12 @@
 import styled, { useTheme } from "styled-components";
 
 import Button from "../../buttons/Button";
-import HeartIcon from "../../icons/HeartIcon/HeartIcon";
 import { H4, P } from "../../typography";
 import React from "react";
 import Tag from "../../buttons/Tag/Tag";
 import { parseDate } from "../../../utils/parseDate";
 import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
 import { truncate } from "../../../utils/truncate";
-import UserAvatar from "../../icons/UserAvatar/UserAvatar";
 import { FiMessageCircle } from "react-icons/fi";
 
 type Props = {
@@ -21,7 +19,6 @@ type Props = {
   showButton?: boolean;
   buttonUrl?: string;
   tags: string[];
-  likes?: number;
   comments?: number;
   fullHeight?: boolean;
   postDate?: Date;
@@ -64,7 +61,7 @@ const StyledForumPost = styled.article`
     justify-content: space-between;
     align-items: center;
 
-    .likes {
+    .icon-wrapper {
       display: flex;
       gap: 5.55px;
     }
@@ -84,7 +81,6 @@ export default function ForumPost({
   title,
   content,
   age,
-  likes = 0,
   comments = 0,
   authorType,
   postDate,
@@ -144,7 +140,7 @@ export default function ForumPost({
 
         <footer>
           <div>
-            <div className="likes mr-4">
+            <div className="icon-wrapper mr-4">
               <>
                 <FiMessageCircle color={colors.primary.normal} />
                 <P color="primary" variant="helper">

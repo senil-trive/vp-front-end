@@ -62,7 +62,6 @@ export default function ForumDetail({ pageData }: Props) {
             <ForumPost
               gender={pageData.user_gender}
               age={pageData.user_age}
-              likes={Number(pageData.likes)}
               authorType={pageData.user_name}
               postDate={new Date(pageData.date_created)}
               truncateContent={false}
