@@ -19,3 +19,17 @@ export const isInternalLink = (url: string): boolean => {
 
   return internalUrlRegex.test(url);
 };
+
+/**
+ * Transforms a string into a slug
+ * @param str string
+ * @returns string
+ */
+export const slugify = (str: string) => {
+  return str
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, "")
+    .replace(/[\s_-]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+};
