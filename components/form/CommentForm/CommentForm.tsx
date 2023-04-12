@@ -29,11 +29,13 @@ const SubmitForm = ({
   replyId,
   isSubmitted,
   onIsSubmit,
+  paddingSize = "md",
 }: {
   type: "forum" | "blog";
   postId: string;
   replyId?: string;
   isSubmitted: boolean;
+  paddingSize?: "sm" | "md";
   onIsSubmit: (x: boolean) => void;
 }) => {
   const { colors } = useTheme();
@@ -69,7 +71,7 @@ const SubmitForm = ({
   };
 
   return (
-    <Section>
+    <Section paddingSize={paddingSize}>
       {!isSubmitted ? (
         <form onSubmit={handleSubmit(onSubmit)}>
           <Grid container spacing="33px">
@@ -203,6 +205,7 @@ export default function CommentForm({
                   }
                 >
                   <SubmitForm
+                    paddingSize="sm"
                     postId={postId}
                     replyId={comment.id}
                     isSubmitted={isSubmitted}
@@ -232,6 +235,7 @@ export default function CommentForm({
                         }
                       >
                         <SubmitForm
+                          paddingSize="sm"
                           postId={postId}
                           replyId={child.id}
                           isSubmitted={isSubmitted && replyId === child.id}
@@ -260,6 +264,7 @@ export default function CommentForm({
                               }
                             >
                               <SubmitForm
+                                paddingSize="sm"
                                 postId={postId}
                                 replyId={grandChild.id}
                                 isSubmitted={
@@ -298,7 +303,7 @@ export default function CommentForm({
       <div
         className={
           isOpen
-            ? "overflow-hidden max-h-[999px]"
+            ? "overflow-hidden max-h-[9999px]"
             : "overflow-hidden max-h-[0px]"
         }
       >
