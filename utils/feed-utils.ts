@@ -37,7 +37,7 @@ export function shuffle(array: FeedItem[]) {
     // And swap it with the current element.
     currentElement = array[max];
     if (currentElement.type === "video" && isEven(index)) {
-      // ensure videos are placed in a odd index
+      // ensure videos are placed on a even index
       max++;
     } else {
       array[max] = array[index];
