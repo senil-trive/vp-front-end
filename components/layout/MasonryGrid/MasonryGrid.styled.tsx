@@ -44,7 +44,10 @@ export const MasonryGridWrapper = styled.div`
           width: calc(50% - 22px);
         }
         &.grid-item-w-8 {
-          width: calc(100% - 22px);
+          width: calc(50% - 22px);
+          &:first-of-type {
+            width: calc(100% - 22px);
+          }
         }
       }
     }
@@ -63,6 +66,9 @@ export const MasonryGridWrapper = styled.div`
         }
         &.grid-item-w-8 {
           width: calc(${(100 / 12) * 8}% - 22px);
+          &:first-of-type {
+            width: calc(${(100 / 12) * 8}% - 22px);
+          }
         }
       }
     }

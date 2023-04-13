@@ -72,7 +72,7 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
                 const videoContent = content as VideoPropsType;
                 return (
                   <div
-                    className={`grid-item grid-item-w-${item.width}`}
+                    className={`grid-item grid-item-w-${item.width} `}
                     key={index}
                   >
                     <VideoItem
@@ -150,7 +150,9 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
                       link={`/kinderen/verhalen/${blogContent.slug}`}
                       type={blogContent.type}
                       author={blogContent.author}
-                      content={blogContent.content}
+                      content={
+                        blogContent.type === "blog" ? blogContent.content : ""
+                      }
                       postDate={new Date(blogContent.date_created)}
                       category={blogContent.categories[0]?.categories_id?.name}
                       title={blogContent.title}

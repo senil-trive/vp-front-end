@@ -11,24 +11,38 @@ import parseImageURL from "./parseImageURL";
 import parseVideoURL from "./parseVideoURL";
 
 /**
+ * Checks if a number is even or odds
+ * @param num number to check
+ * @returns true or false
+ */
+export function isEven(num: number) {
+  return num % 2 === 0;
+}
+
+/**
  * Randomizes the order of the feed
  * @param array the feed array
  * @returns
  */
 export function shuffle(array: FeedItem[]) {
-  let m = array.length;
-  let t;
-  let i;
+  let max = array.length;
+  let currentElement;
+  let index;
 
   // While there remain elements to shuffle…
-  while (m) {
+  while (max) {
     // Pick a remaining element…
-    i = Math.floor(Math.random() * m--);
+    index = Math.floor(Math.random() * max--);
 
     // And swap it with the current element.
-    t = array[m];
-    array[m] = array[i];
-    array[i] = t;
+    currentElement = array[max];
+    if (currentElement.type === "video" && isEven(index)) {
+      // ensure videos are placed in a odd index
+      max++;
+    } else {
+      array[max] = array[index];
+      array[index] = currentElement;
+    }
   }
 
   return array;
