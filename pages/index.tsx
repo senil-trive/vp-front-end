@@ -1,14 +1,15 @@
-import { MasonryGrid } from "../components/layout/MasonryGrid/MasonryGrid";
+import { CircularProgress, Container } from "@mui/material";
 import { Grid, Hero } from "../components/layout";
 import { P, TitleWithHighlights } from "../components/typography";
 import { getContentTags, getFeed, getHomeData } from "../utils/api";
+import { useCallback, useEffect, useState } from "react";
 
-import { CircularProgress, Container } from "@mui/material";
 import { HomePageProps } from "../types/pageTypes";
+import { MasonryGrid } from "../components/layout/MasonryGrid/MasonryGrid";
 import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
 import TagList from "../components/buttons/TagList/TagList";
 import { generateFeedTiles } from "../utils/feed-utils";
-import { useCallback, useEffect, useState } from "react";
+import parseImageURL from "../utils/parseImageURL";
 import { useCallbackWhenReachedBottom } from "../utils/scroll";
 
 const POST_PER_PAGE = 6;
@@ -154,8 +155,14 @@ export default function Home({
 
   return (
     <PageWrapper
-      title={pageData?.page_title}
-      description={pageData?.page_subtitle}
+      seo={{
+        title: pageData?.seo_title,
+        description: pageData?.seo_title,
+        canonical: "https://www.villapinedo.nl",
+        image: pageData?.seo_image
+          ? parseImageURL(pageData?.seo_image?.id)
+          : undefined,
+      }}
     >
       <Hero center>
         <Container>

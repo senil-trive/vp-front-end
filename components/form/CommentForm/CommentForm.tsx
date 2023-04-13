@@ -135,7 +135,7 @@ const SubmitForm = ({
               <Button loading={isLoading} disabled={isSubmitted}>
                 {isLoading && "bezig..."}
                 {isSubmitted && "Verzonden"}
-                {!isLoading && !isSubmitted && "Commentaar plaatsen"}
+                {!isLoading && !isSubmitted && "Reactie plaatsen"}
               </Button>
             </Grid>
           </Grid>
@@ -144,7 +144,7 @@ const SubmitForm = ({
         <div className="flex flex-col items-center justify-center">
           <FiCheck size={40} color={colors.secondary.normal} />
           <H3 variant="bold" color="primary">
-            Bedankt! Jouw commentaar wordt door ons beoordeeld.
+            Bedankt! Jouw reactie wordt door ons beoordeeld.
           </H3>
         </div>
       )}
@@ -294,7 +294,7 @@ export default function CommentForm({
         >
           <Grid item xs={4}>
             <Button onClick={() => setIsOpen((open) => !open)}>
-              Commentaar toevoegen
+              Reactie toevoegen
             </Button>
           </Grid>
         </Grid>

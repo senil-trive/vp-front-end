@@ -1,11 +1,19 @@
-import React from "react";
+import { H1, P } from "../components/typography";
+
 import BreadCrumbs from "../components/layout/BreadCrumbs/BreadCrumbs";
 import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
-import { H1, P } from "../components/typography";
+import React from "react";
 
 const ErrorPage = () => {
   return (
-    <PageWrapper>
+    <PageWrapper
+      seo={{
+        title: "Oeps! Er is een fout opgetreden.",
+        description:
+          "Er is iets misgegaan bij het opvragen van de pagina. Probeer het later opnieuw.",
+        canonical: "https://www.villapinedo.nl/500",
+      }}
+    >
       <BreadCrumbs />
 
       <main style={{ marginBottom: "80px" }}>

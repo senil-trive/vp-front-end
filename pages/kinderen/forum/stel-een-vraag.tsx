@@ -72,7 +72,15 @@ export default function Vraag({ categories }: ForumQuestionPageProps) {
   };
 
   return (
-    <PageWrapper title="Vraag Insturen">
+    <PageWrapper
+      seo={{
+        title: "Stel een vraag | Villa Pinedo",
+        description:
+          "Stel je vraag aan de Buddy's en andere kinderen met gescheiden ouders",
+
+        canonical: "https://www.villapinedo.nl/kinderen/forum/stel-een-vraag",
+      }}
+    >
       <Hero style={{ padding: "80px 0" }}>
         <Container>
           <Grid container style={{ marginBottom: 65 }}>

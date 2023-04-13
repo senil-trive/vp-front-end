@@ -1,13 +1,14 @@
+import { P, TitleWithHighlights } from "../../../components/typography";
+
 import { Container } from "@mui/system";
-import React from "react";
-import { useTheme } from "styled-components";
-import TextItem from "../../../components/content-types/TextItem/TextItem";
 import { Hero } from "../../../components/layout";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
-import { P, TitleWithHighlights } from "../../../components/typography";
+import React from "react";
+import TextItem from "../../../components/content-types/TextItem/TextItem";
 import { TheBookPageProps } from "../../../types/pageTypes";
 import { getTheBookData } from "../../../utils/api";
 import parseImageURL from "../../../utils/parseImageURL";
+import { useTheme } from "styled-components";
 
 export const getServerSideProps = async () => {
   try {
@@ -36,7 +37,21 @@ export default function BookPage({ pageData }: TheBookPageProps) {
 
   return (
     <div>
-      <PageWrapper title={pageData?.page_title}>
+      <PageWrapper
+        seo={{
+          title: pageData?.seo_title
+            ? pageData?.seo_title
+            : pageData?.page_title,
+          description: pageData?.seo_description
+            ? pageData?.seo_description
+            : pageData?.page_subtitle,
+          canonical:
+            "https://www.villapinedo.nl/kinderen/boek-je-hoeft-het-niet-alleen-te-doen/",
+          image: pageData?.seo_image
+            ? parseImageURL(pageData?.seo_image?.id)
+            : "",
+        }}
+      >
         <main>
           <Hero>
             <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16">

@@ -1,11 +1,19 @@
-import React from "react";
+import { H1, P } from "../components/typography";
+
 import BreadCrumbs from "../components/layout/BreadCrumbs/BreadCrumbs";
 import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
-import { H1, P } from "../components/typography";
+import React from "react";
 
 const NotFoundPage = () => {
   return (
-    <PageWrapper>
+    <PageWrapper
+      seo={{
+        title: "Oeps! Deze pagina bestaat niet.",
+        description:
+          "Helaas hebben we de opgevraagde pagina niet kunnen vinden.",
+        canonical: "https://www.villapinedo.nl/404",
+      }}
+    >
       <BreadCrumbs />
 
       <main style={{ marginBottom: "80px" }}>

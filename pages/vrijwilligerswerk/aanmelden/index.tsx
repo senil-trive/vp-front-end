@@ -10,6 +10,7 @@ import Input from "../../../components/form/Input/Input";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import Section from "../../../components/layout/Section/Section";
 import { VolunteerRequestType } from "../../../types/volunteerRequestTypes";
+import parseImageURL from "../../../utils/parseImageURL";
 import { postVolunteerApplication } from "../../../utils/api";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -85,8 +86,19 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
   return (
     <div>
       <PageWrapper
-        title={pageData?.page_title}
-        description={pageData?.page_subtitle}
+        seo={{
+          title: pageData?.seo_title
+            ? pageData?.seo_title
+            : pageData?.page_title,
+          description: pageData?.seo_description
+            ? pageData?.seo_description
+            : pageData?.page_subtitle,
+          canonical:
+            "https://www.villapinedo.nl/vrijwilligerswerk/buddy-programma",
+          image: pageData?.seo_image
+            ? parseImageURL(pageData?.seo_image?.id)
+            : "",
+        }}
       >
         <main>
           <Hero>

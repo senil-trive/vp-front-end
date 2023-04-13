@@ -1,11 +1,12 @@
-import { useState } from "react";
-
 import { P, TitleWithHighlights } from "../../../components/typography";
+import { getFaqOverviewData, getFaqs } from "../../../utils/api";
+
+import FAQList from "../../../components/content-types/FAQList/FAQList";
 import { Hero } from "../../../components/layout";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
-import { getFaqOverviewData, getFaqs } from "../../../utils/api";
 import { VolunteersFAQPageProps } from "../../../types/pageTypes";
-import FAQList from "../../../components/content-types/FAQList/FAQList";
+import parseImageURL from "../../../utils/parseImageURL";
+import { useState } from "react";
 
 const POST_PER_PAGE = 7;
 
@@ -78,8 +79,18 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
   return (
     <div>
       <PageWrapper
-        title={pageData?.page_title}
-        description={pageData?.page_subtitle}
+        seo={{
+          title: pageData?.seo_title
+            ? pageData?.seo_title
+            : pageData?.page_title,
+          description: pageData?.seo_description
+            ? pageData?.seo_description
+            : pageData?.page_subtitle,
+          canonical: "https://www.villapinedo.nl/vrijwilligerswerk",
+          image: pageData?.seo_image
+            ? parseImageURL(pageData?.seo_image?.id)
+            : "",
+        }}
       >
         <main>
           <Hero>

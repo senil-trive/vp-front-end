@@ -1,14 +1,22 @@
-import { Container } from "@mui/system";
-import React from "react";
-import { Hero } from "../layout";
-import BreadCrumbs from "../layout/BreadCrumbs/BreadCrumbs";
-import PageWrapper from "../layout/PageWrapper/PageWrapper";
 import { H1, P, TitleWithHighlights } from "../typography";
+
+import BreadCrumbs from "../layout/BreadCrumbs/BreadCrumbs";
+import { Container } from "@mui/system";
+import { Hero } from "../layout";
+import PageWrapper from "../layout/PageWrapper/PageWrapper";
+import React from "react";
 import TextList from "../typography/TextList/TextList";
 
 const CookiesPage = () => {
   return (
-    <PageWrapper>
+    <PageWrapper
+      seo={{
+        title: "Cookies",
+        description:
+          "Vrijwel elke website maakt gebruik van cookies. Villa Pinedo ook. Waarom gebruiken wij cookies?",
+        canonical: "https://www.villapinedo.nl/cookies",
+      }}
+    >
       <BreadCrumbs />
 
       <main style={{ marginBottom: "80px" }}>
