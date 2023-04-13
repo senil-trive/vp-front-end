@@ -6,3 +6,6 @@ package-lock.json
 public
 
 docs
+
+utils/server/*.json
+pages/csv

@@ -7,24 +7,28 @@ type Props = {
 
   /** Content to be shown */
   children: ReactNode;
+
+  paddingSize?: "sm" | "md";
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ paddingSize: "sm" | "md" }>`
   border-radius: 8px;
-  padding: 24px;
+  padding: ${({ paddingSize }) => (paddingSize === "md" ? "24px" : "12px")};
 
   @media ${({ theme }) => theme.devices.tablet} {
-    padding: 51px 90px;
+    padding: ${({ paddingSize }) =>
+      paddingSize === "md" ? "51px 90px" : "24px"};
   }
 `;
 
 export default function Section({
   backgroundColor = "#e5f0fe",
+  paddingSize = "md",
   children,
   ...rest
 }: Props) {
   return (
-    <Wrapper style={{ backgroundColor }} {...rest}>
+    <Wrapper paddingSize={paddingSize} style={{ backgroundColor }} {...rest}>
       <div>{children}</div>
     </Wrapper>
   );

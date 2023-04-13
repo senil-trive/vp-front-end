@@ -23,8 +23,6 @@ export default function Search() {
 
   useEffect(() => {
     const getPaginatedBlogs = async () => {
-      console.log({ q });
-
       try {
         const req = await getPosts({
           postPerPage: POST_PER_PAGE,

@@ -18,6 +18,7 @@ import Section from "../../../components/layout/Section/Section";
 import TextArea from "../../../components/form/TextArea/TextArea";
 import TextList from "../../../components/typography/TextList/TextList";
 import { useState } from "react";
+import { slugify } from "../../../utils/url";
 
 export const getServerSideProps = async () => {
   try {
@@ -54,6 +55,7 @@ export default function Vraag({ categories }: ForumQuestionPageProps) {
 
     const submitData: any = {
       ...data,
+      slug: slugify(data.title),
       categories: data?.categories?.map((cat) => ({
         categories_id: cat,
       })),

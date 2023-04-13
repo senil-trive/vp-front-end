@@ -67,6 +67,19 @@ export const postForum = async (data: any) => {
     }),
   });
 };
+/**
+ * Add a forum post with comments
+ * @param data
+ */
+export const postForumWithComments = async (data: any) => {
+  return await fetch(`${ENDPOINTS.COLLECTIONS}/forum_posts`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+};
 
 /**
  * Add a comment
@@ -99,7 +112,7 @@ export const postComment = async (
  */
 export const getComments = async (type: "forum" | "blog", post_id: string) => {
   return await fetch(
-    `${ENDPOINTS.COLLECTIONS}/comments?filter[status][_eq]=published&filter[${type}_post][_eq]=${post_id}`,
+    `${ENDPOINTS.COLLECTIONS}/comments?fields=*.*.*&filter[status][_eq]=published&filter[${type}_post][_eq]=${post_id}`,
     {
       method: "GET",
       headers: {

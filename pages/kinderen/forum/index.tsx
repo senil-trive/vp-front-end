@@ -195,7 +195,6 @@ export default function Forum({
                         fullHeight={false}
                         gender={item.user_gender}
                         age={item.user_age}
-                        likes={Number(item.likes)}
                         authorType={item.user_name}
                         postDate={new Date(item.date_created)}
                         tags={
@@ -206,6 +205,7 @@ export default function Forum({
                         title={
                           item.title ?? "Titel moet in CMS worden ingevoerd"
                         }
+                        comments={item.comments.length}
                         content={item.content}
                       />
                     </Link>
