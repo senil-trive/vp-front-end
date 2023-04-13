@@ -89,6 +89,7 @@ export default function BlogItem({
   return (
     <Card variant={type}>
       {generateMediaItem()}
+
       <CardFooter style={{ padding: "24px 0 0 0" }}>
         <div className="flex items-center justify-between pb-[30px]">
           <P color="info" style={{ margin: 0 }} variant="helper">
@@ -100,18 +101,20 @@ export default function BlogItem({
         </div>
 
         <H4 style={{ margin: 0 }} variant="bold">
-          {title}
+          {truncate(title, 35)}
         </H4>
 
-        {!!content && (
-          <P style={{ marginBottom: 30, marginTop: 12 }}>
-            {content ? truncate(content, 200) : ""}
-          </P>
-        )}
+        <div style={{ overflowY: "auto", height: 120 }}>
+          {!!content && (
+            <P style={{ marginBottom: 30, marginTop: 12 }}>
+              {content ? truncate(content, 200) : ""}
+            </P>
+          )}
 
-        <Button style={{ marginTop: 56 }} variant="secondary" href={link}>
-          {type == "vlog" ? "Vlog bekijken" : "Blog lezen"}
-        </Button>
+          <Button style={{ marginTop: 56 }} variant="secondary" href={link}>
+            {type == "vlog" ? "Vlog bekijken" : "Blog lezen"}
+          </Button>
+        </div>
       </CardFooter>
     </Card>
   );

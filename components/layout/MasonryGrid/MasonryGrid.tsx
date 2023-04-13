@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 import TikTokPost, {
   TikTokPostProps,
 } from "../../content-types/TikTokPost/TikTokPost";
-import { XBlock, XMasonry } from "react-xmasonry";
 
 import BlogItem from "../../content-types/BlogItem/BlogItem";
 import { BlogType } from "../../../types/content-types/Blog.type";
@@ -64,7 +63,7 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
   return (
     <MasonryGridWrapper>
       <Container maxWidth="xl" style={{ padding: " 0 13px" }}>
-        <XMasonry maxColumns={12} targetBlockWidth={1500 / 12} responsive>
+        <div id="mason-grid" className="mason-grid">
           {feed.map((item, index) => {
             const { content } = item;
 
@@ -72,126 +71,133 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
               case "video":
                 const videoContent = content as VideoPropsType;
                 return (
-                  <XBlock key={index} width={item.width}>
-                    <div className="grid-item">
-                      <VideoItem
-                        poster={videoContent.poster}
-                        title={videoContent.title}
-                        src={videoContent.src}
-                        subtitle={videoContent.subtitle}
-                      />
-                    </div>
-                  </XBlock>
+                  <div
+                    className={`grid-item grid-item-w-${item.width} `}
+                    key={index}
+                  >
+                    <VideoItem
+                      poster={videoContent.poster}
+                      title={videoContent.title}
+                      src={videoContent.src}
+                      subtitle={videoContent.subtitle}
+                    />
+                  </div>
                 );
 
               case "letter":
                 const letterContent = content as Letter;
                 return (
-                  <XBlock key={index} width={item.width}>
-                    <div className="grid-item">
-                      <BriefItem
-                        key={letterContent.id}
-                        title={letterContent.title}
-                        titleHighlighted={letterContent.title_highlighted}
-                        content={letterContent.description}
-                        imgSrc={parseImageURL(letterContent?.image?.id)}
-                        fileSrc={`/kinderen/open-brieven/${letterContent.slug}`}
-                      />
-                    </div>
-                  </XBlock>
+                  <div
+                    className={`grid-item grid-item-w-${item.width}`}
+                    key={index}
+                  >
+                    <BriefItem
+                      key={letterContent.id}
+                      title={letterContent.title}
+                      titleHighlighted={letterContent.title_highlighted}
+                      content={letterContent.description}
+                      imgSrc={parseImageURL(letterContent?.image?.id)}
+                      fileSrc={`/kinderen/open-brieven/${letterContent.slug}`}
+                    />
+                  </div>
                 );
               case "forum":
                 const forumContent = content as ForumPostType;
                 return (
-                  <XBlock key={index} width={item.width}>
-                    <div className="grid-item">
-                      <ForumPost
-                        showButton
-                        fullHeight={fullHeightItems}
-                        buttonUrl={`/kinderen/forum/${forumContent.slug}`}
-                        truncateContent
-                        gender={forumContent.user_gender}
-                        age={forumContent.user_age}
-                        authorType={forumContent.user_name}
-                        postDate={new Date(forumContent.date_created)}
-                        tags={
-                          forumContent.categories?.map(
-                            (cat) => cat.categories_id.name
-                          ) ?? []
-                        }
-                        title={
-                          forumContent.title ??
-                          "Titel moet in CMS worden ingevoerd"
-                        }
-                        comments={forumContent.comments.length}
-                        content={forumContent.content}
-                      />
-                    </div>
-                  </XBlock>
+                  <div
+                    className={`grid-item grid-item-w-${item.width}`}
+                    key={index}
+                  >
+                    <ForumPost
+                      showButton
+                      fullHeight={fullHeightItems}
+                      buttonUrl={`/kinderen/forum/${forumContent.slug}`}
+                      truncateContent
+                      gender={forumContent.user_gender}
+                      age={forumContent.user_age}
+                      authorType={forumContent.user_name}
+                      postDate={new Date(forumContent.date_created)}
+                      tags={
+                        forumContent.categories?.map(
+                          (cat) => cat.categories_id.name
+                        ) ?? []
+                      }
+                      title={
+                        forumContent.title ??
+                        "Titel moet in CMS worden ingevoerd"
+                      }
+                      comments={forumContent.comments.length}
+                      content={forumContent.content}
+                    />
+                  </div>
                 );
 
               case "blog":
                 const blogContent = content as BlogType;
 
                 return (
-                  <XBlock key={index} width={item.width}>
-                    <div className="grid-item">
-                      <BlogItem
-                        mediaSrc={
-                          blogContent.image?.id
-                            ? parseImageURL(blogContent.image.id)
-                            : ""
-                        }
-                        embedSrc={blogContent.youtube_embed}
-                        link={`/kinderen/verhalen/${blogContent.slug}`}
-                        type={blogContent.type}
-                        author={blogContent.author}
-                        content={blogContent.content}
-                        postDate={new Date(blogContent.date_created)}
-                        category={
-                          blogContent.categories[0]?.categories_id?.name
-                        }
-                        title={blogContent.title}
-                      />
-                    </div>
-                  </XBlock>
+                  <div
+                    className={`grid-item grid-item-w-${item.width}`}
+                    key={index}
+                  >
+                    <BlogItem
+                      mediaSrc={
+                        blogContent.image?.id
+                          ? parseImageURL(blogContent.image.id)
+                          : ""
+                      }
+                      embedSrc={blogContent.youtube_embed}
+                      link={`/kinderen/verhalen/${blogContent.slug}`}
+                      type={blogContent.type}
+                      author={blogContent.author}
+                      content={
+                        blogContent.type === "blog" ? blogContent.content : ""
+                      }
+                      postDate={new Date(blogContent.date_created)}
+                      category={blogContent.categories[0]?.categories_id?.name}
+                      title={blogContent.title}
+                    />
+                  </div>
                 );
               case "instagram":
                 const instaContent = content as InstaPost;
 
                 return (
-                  <XBlock key={index} width={item.width}>
-                    <div className="grid-item">
-                      <InstagramPost embed_code={instaContent.embed_code} />
-                    </div>
-                  </XBlock>
+                  <div
+                    className={`grid-item grid-item-w-${item.width}`}
+                    key={index}
+                  >
+                    <InstagramPost embed_code={instaContent.embed_code} />
+                  </div>
                 );
               case "tiktok":
                 // TODO: replace with CMS content
                 const tiktokContent = content as TikTokPostProps;
                 return (
-                  <XBlock key={index} width={item.width}>
-                    <div className="grid-item">
-                      <TikTokPost embed_code={tiktokContent.embed_code} />
-                    </div>
-                  </XBlock>
+                  <div
+                    className={`grid-item grid-item-w-${item.width}`}
+                    key={index}
+                  >
+                    <TikTokPost embed_code={tiktokContent.embed_code} />
+                  </div>
                 );
               case "chat":
                 // TODO: replace with CMS content
                 const chatContent = content as VideoPropsType;
                 return (
-                  <XBlock key={index} width={item.width}>
-                    <div className="grid-item">
-                      <ChatExampleItem />
-                    </div>
-                  </XBlock>
+                  <div
+                    className={`grid-item grid-item-w-${item.width}`}
+                    key={index}
+                  >
+                    <ChatExampleItem />
+                  </div>
                 );
 
               default:
                 return null;
             }
           })}
-        </XMasonry>
+        </div>
       </Container>
     </MasonryGridWrapper>
   );
