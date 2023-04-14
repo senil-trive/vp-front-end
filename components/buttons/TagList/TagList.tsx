@@ -97,7 +97,7 @@ export default function TagList({
   return (
     <Container maxWidth="xl" style={{ margin: "21px auto" }}>
       <Wrapper>
-        <div style={{ width: 200, padding: "0 20px" }}>{prefix}</div>
+        <div style={{ display: "block", padding: "0 20px" }}>{prefix}</div>
         <div className="outer">
           <div ref={containerRef} className="inner scrolling-right">
             <div className="scroll-indicator indicator-left" />
