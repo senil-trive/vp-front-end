@@ -12,6 +12,7 @@ import { generateFeedTiles } from "../utils/feed-utils";
 import parseImageURL from "../utils/parseImageURL";
 import { useCallbackWhenReachedBottom } from "../utils/scroll";
 import ChevronRight from "../components/icons/ChevronRight/ChevronRight";
+import TextWithHighlights from "../components/typography/TextWithHighlights";
 
 const POST_PER_PAGE = 6;
 export const getServerSideProps = async () => {
@@ -188,9 +189,12 @@ export default function Home({
                   style={{ textAlign: "center" }}
                 />
 
-                <P color="white" variant="light">
-                  {pageData?.page_subtitle}
-                </P>
+                <TextWithHighlights
+                  color="white"
+                  variant="light"
+                  text={pageData?.page_subtitle ?? ""}
+                  textToHighlight={pageData?.highlight_words ?? []}
+                />
               </div>
             </Grid>
             <Grid item xs={0} md={2} lg={3} />
