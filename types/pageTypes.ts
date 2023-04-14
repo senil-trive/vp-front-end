@@ -29,6 +29,7 @@ export type BlogPageProps = {
     seo_title: string;
     seo_description: string;
     seo_image: ImageFileType;
+    hero_image: ImageFileType;
   };
   blogsData: BlogType[];
   totalPosts: number;
