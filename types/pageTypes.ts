@@ -13,6 +13,8 @@ export type HomePageProps = {
     seo_title: string;
     seo_description: string;
     seo_image: ImageFileType;
+    hero_image: ImageFileType;
+    highlight_words: { word: string; color: string }[];
   };
   categories: CategoryType[];
   totalPosts: number;
