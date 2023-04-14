@@ -64,7 +64,7 @@ export default function SearchBar({
       placeholder={placeholder}
       defaultValue={val as string}
       onChange={debouncedSearch}
-      borderColor="grey"
+      borderColor="primary"
     />
   );
 }

@@ -1,6 +1,6 @@
 import { CircularProgress, Container } from "@mui/material";
 import { Grid, Hero } from "../components/layout";
-import { P, TitleWithHighlights } from "../components/typography";
+import { H4, P, TitleWithHighlights } from "../components/typography";
 import { getContentTags, getFeed, getHomeData } from "../utils/api";
 import { useCallback, useEffect, useState } from "react";
 
@@ -11,6 +11,8 @@ import TagList from "../components/buttons/TagList/TagList";
 import { generateFeedTiles } from "../utils/feed-utils";
 import parseImageURL from "../utils/parseImageURL";
 import { useCallbackWhenReachedBottom } from "../utils/scroll";
+import ChevronRight from "../components/icons/ChevronRight/ChevronRight";
+import TextWithHighlights from "../components/typography/TextWithHighlights";
 
 const POST_PER_PAGE = 6;
 export const getServerSideProps = async () => {
@@ -164,7 +166,18 @@ export default function Home({
           : undefined,
       }}
     >
-      <Hero center>
+      <Hero
+        center
+        imageUrl={
+          pageData?.hero_image?.id
+            ? parseImageURL(pageData?.hero_image?.id)
+            : ""
+        }
+        style={{
+          minHeight: 649,
+          position: "relative",
+        }}
+      >
         <Container>
           <Grid container>
             <Grid item xs={0} md={2} lg={3} />
@@ -172,10 +185,16 @@ export default function Home({
               <div className="text-center">
                 <TitleWithHighlights
                   text={pageData?.page_title ?? ""}
+                  color="white"
                   style={{ textAlign: "center" }}
                 />
 
-                <P variant="light">{pageData?.page_subtitle}</P>
+                <TextWithHighlights
+                  color="white"
+                  variant="light"
+                  text={pageData?.page_subtitle ?? ""}
+                  textToHighlight={pageData?.highlight_words ?? []}
+                />
               </div>
             </Grid>
             <Grid item xs={0} md={2} lg={3} />
@@ -183,7 +202,12 @@ export default function Home({
         </Container>
       </Hero>
       <main style={{ marginBottom: "80px" }}>
-        <div style={{ marginBottom: 32 }}>
+        <div
+          style={{
+            marginBottom: 32,
+            transform: "translateY(calc(-50% - 24px))",
+          }}
+        >
           <TagList
             tags={categories.map((cat) => ({
               id: cat.id,
@@ -191,6 +215,8 @@ export default function Home({
               status: cat.status,
             }))}
             selected={selectedTag}
+            prefix={<H4>Onderwerp 👉</H4>}
+            suffix={<ChevronRight />}
             onSelect={(x: string) => {
               setSelectedTag(x);
             }}

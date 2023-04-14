@@ -1,5 +1,5 @@
 import { Container, Grid } from "@mui/material";
-import { H1, P } from "../../components/typography";
+import { H1, H4, P, TitleWithHighlights } from "../../components/typography";
 import React, { useEffect, useState } from "react";
 import { getForumPosts, getLetters, getPosts } from "../../utils/api";
 
@@ -13,6 +13,9 @@ import SearchBar from "../../components/form/SearchBar/SearchBar";
 import SearchResultItem from "../../components/content-types/SearchResultItem/SearchResultItem";
 import { truncate } from "../../utils/truncate";
 import { useRouter } from "next/router";
+import parseImageURL from "../../utils/parseImageURL";
+import TextWithHighlights from "../../components/typography/TextWithHighlights";
+import SearchBarWrapper from "../../components/form/SearchBar/SearchBarWrapper";
 
 export default function Search() {
   const router = useRouter();
@@ -78,25 +81,32 @@ export default function Search() {
         canonical: "https://www.villapinedo.nl/zoeken",
       }}
     >
-      <Hero>
+      <Hero
+        imageUrl={parseImageURL("874097af-edba-4bac-81b3-53cfcf5c7797")}
+        center
+        style={{
+          minHeight: 649,
+          position: "relative",
+        }}
+      >
         <Container>
           <Grid container>
             <Grid item xs={0} md={2} lg={3} />
             <Grid item xs={12} md={8} lg={6}>
-              <H1
-                variant="bold"
-                style={{ textAlign: "center", padding: "0 24px" }}
-              >
-                {posts.length + forumPosts.length + letters.length} resultaten
-                gevonden
-              </H1>
-
-              <P variant="light" style={{ textAlign: "center" }}>
-                Je hebt gezocht op `{q}`
-              </P>
-
-              <div>
-                <SearchBar />
+              <div className="text-center">
+                <TitleWithHighlights
+                  text={`${
+                    posts.length + forumPosts.length + letters.length
+                  } resultaten gevonden`}
+                  color="white"
+                  style={{ textAlign: "center" }}
+                />
+                <TextWithHighlights
+                  color="white"
+                  variant="light"
+                  text={`Je hebt gezocht op "${q}"`}
+                  textToHighlight={{ word: `"${q}"`, color: "#3FC7B4" }}
+                />
               </div>
             </Grid>
             <Grid item xs={0} md={2} lg={3} />
@@ -105,6 +115,14 @@ export default function Search() {
       </Hero>
 
       <main style={{ marginBottom: "80px" }}>
+        <div
+          style={{
+            marginBottom: 32,
+            transform: "translateY(calc(-50% - 24px))",
+          }}
+        >
+          <SearchBarWrapper prefix={<H4>Gebruik een ander zoekwoord 👉</H4>} />
+        </div>
         <Container maxWidth="xl">
           <Grid container spacing={"22px"}>
             <Grid item xs={12} md={4}>

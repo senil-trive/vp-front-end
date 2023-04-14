@@ -13,6 +13,8 @@ export type HomePageProps = {
     seo_title: string;
     seo_description: string;
     seo_image: ImageFileType;
+    hero_image: ImageFileType;
+    highlight_words: { word: string; color: string }[];
   };
   categories: CategoryType[];
   totalPosts: number;
@@ -27,6 +29,7 @@ export type BlogPageProps = {
     seo_title: string;
     seo_description: string;
     seo_image: ImageFileType;
+    hero_image: ImageFileType;
   };
   blogsData: BlogType[];
   totalPosts: number;
@@ -45,6 +48,7 @@ export type ForumPageProps = {
     chat_button_label: string;
     seo_title: string;
     seo_description: string;
+    hero_image: ImageFileType;
     seo_image: ImageFileType;
   };
   forumData: ForumPostType[];

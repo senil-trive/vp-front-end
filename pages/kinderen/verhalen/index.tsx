@@ -1,5 +1,5 @@
 import { CircularProgress, Container, Grid } from "@mui/material";
-import { P, TitleWithHighlights } from "../../../components/typography";
+import { H4, P, TitleWithHighlights } from "../../../components/typography";
 import React, { useEffect, useState } from "react";
 import {
   getContentTags,
@@ -19,6 +19,7 @@ import parseImageURL from "../../../utils/parseImageURL";
 import { useCallbackWhenReachedBottom } from "../../../utils/scroll";
 import { useTheme } from "styled-components";
 import { v4 as uuidv4 } from "uuid";
+import ChevronRight from "../../../components/icons/ChevronRight/ChevronRight";
 
 export const getServerSideProps = async () => {
   try {
@@ -144,7 +145,18 @@ export default function Forum({
           : "",
       }}
     >
-      <Hero center>
+      <Hero
+        center
+        imageUrl={
+          pageData?.hero_image?.id
+            ? parseImageURL(pageData?.hero_image?.id)
+            : ""
+        }
+        style={{
+          minHeight: 649,
+          position: "relative",
+        }}
+      >
         <Container>
           <Grid container>
             <Grid item xs={0} md={2} lg={3} />
@@ -152,9 +164,10 @@ export default function Forum({
               <TitleWithHighlights
                 text={pageData?.page_title ?? ""}
                 style={{ textAlign: "center", padding: "0 24px" }}
+                color="white"
                 textToHighlight={["Blog", "Vlogs"]}
               />
-              <P variant="light" style={{ textAlign: "center" }}>
+              <P color="white" variant="light" style={{ textAlign: "center" }}>
                 {pageData?.page_subtitle}
               </P>
             </Grid>
@@ -164,17 +177,26 @@ export default function Forum({
       </Hero>
 
       <main style={{ marginBottom: "80px" }}>
-        <TagList
-          tags={tags}
-          selected={selectedTag}
-          onSelect={(x: string) => {
-            if (x === selectedTag) {
-              setSelectedTag("");
-            } else {
-              setSelectedTag(x);
-            }
+        <div
+          style={{
+            marginBottom: 32,
+            transform: "translateY(calc(-50% - 24px))",
           }}
-        />
+        >
+          <TagList
+            tags={tags}
+            selected={selectedTag}
+            prefix={<H4>Onderwerp 👉</H4>}
+            suffix={<ChevronRight />}
+            onSelect={(x: string) => {
+              if (x === selectedTag) {
+                setSelectedTag("");
+              } else {
+                setSelectedTag(x);
+              }
+            }}
+          />
+        </div>
 
         <CollectionSearchBar
           quote={pageData?.search_bar_quote ?? ""}
