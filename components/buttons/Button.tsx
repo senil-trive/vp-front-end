@@ -10,6 +10,7 @@ export type ButtonVariant =
   | "success"
   | "link"
   | "info"
+  | "white"
   | "infoReversed";
 
 type Props = {
@@ -143,7 +144,7 @@ const Style = css<Props>`
     variant &&
     variant !== "link" &&
     css`
-      background-color: white;
+      background-color: transparent;
       color: ${({ theme }) => theme.colors[variant].normal};
       border: 2px solid;
     `}

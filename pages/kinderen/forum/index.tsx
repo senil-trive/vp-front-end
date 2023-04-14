@@ -1,6 +1,6 @@
 import { Container, Grid } from "@mui/material";
 import { Hero, Pagination } from "../../../components/layout";
-import { P, TitleWithHighlights } from "../../../components/typography";
+import { H4, P, TitleWithHighlights } from "../../../components/typography";
 import React, { useEffect, useState } from "react";
 import {
   getContentTags,
@@ -19,6 +19,7 @@ import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import SortBar from "../../../components/form/SortBar/SortBar";
 import TagList from "../../../components/buttons/TagList/TagList";
 import parseImageURL from "../../../utils/parseImageURL";
+import ChevronRight from "../../../components/icons/ChevronRight/ChevronRight";
 
 const forumSortOptions = [
   { name: "Titel (a-z)", value: "content" },
@@ -135,16 +136,28 @@ export default function Forum({
           : "",
       }}
     >
-      <Hero>
+      <Hero
+        center
+        imageUrl={
+          pageData?.hero_image?.id
+            ? parseImageURL(pageData?.hero_image?.id)
+            : ""
+        }
+        style={{
+          minHeight: 649,
+          position: "relative",
+        }}
+      >
         <Container>
           <Grid container>
             <Grid item xs={0} md={2} lg={3} />
             <Grid item xs={12} md={8} lg={6}>
               <TitleWithHighlights
                 text={pageData?.page_title ?? ""}
+                color="white"
                 style={{ textAlign: "center", padding: "0 24px" }}
               />
-              <P variant="light" className="text-center">
+              <P color="white" variant="light" className="text-center">
                 {pageData?.page_subtitle}
               </P>
 
@@ -152,7 +165,11 @@ export default function Forum({
                 <Button href="/kinderen/forum/stel-een-vraag">
                   {pageData?.submit_question_button_label}
                 </Button>
-                <Button filled={false} href="/kinderen/klets-met-een-buddy">
+                <Button
+                  variant="white"
+                  filled={false}
+                  href="/kinderen/klets-met-een-buddy"
+                >
                   {pageData?.chat_button_label}
                 </Button>
               </div>
@@ -163,13 +180,22 @@ export default function Forum({
       </Hero>
 
       <main style={{ marginBottom: "80px" }}>
-        <TagList
-          tags={tags}
-          selected={selectedTag}
-          onSelect={(x: string) => {
-            setSelectedTag(x);
+        <div
+          style={{
+            marginBottom: 32,
+            transform: "translateY(calc(-50% - 24px))",
           }}
-        />
+        >
+          <TagList
+            tags={tags}
+            selected={selectedTag}
+            prefix={<H4>Onderwerp 👉</H4>}
+            suffix={<ChevronRight />}
+            onSelect={(x: string) => {
+              setSelectedTag(x);
+            }}
+          />
+        </div>
 
         <CollectionSearchBar onSearch={handleSearch} />
 

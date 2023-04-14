@@ -47,6 +47,7 @@ export type ForumPageProps = {
     chat_button_label: string;
     seo_title: string;
     seo_description: string;
+    hero_image: ImageFileType;
     seo_image: ImageFileType;
   };
   forumData: ForumPostType[];
