@@ -124,6 +124,10 @@ export default function PageWrapper({
           site_name: "Villa Pinedo",
           article: seo.og?.article,
         }}
+        twitter={{
+          handle: "@VillaPinedo",
+          cardType: "summary_large_image",
+        }}
       />
       <Head>
         <link rel="icon" href="/favicon.ico" />
@@ -148,6 +152,8 @@ export default function PageWrapper({
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#006ef7" />
         <meta name="msapplication-TileColor" content="#ffffff" />
         <meta name="theme-color" content="#ffffff"></meta>
+        <meta name="robots" content="index, follow"></meta>
+        <meta charSet="UTF-8"></meta>
       </Head>
 
       <DynamicHeader />
