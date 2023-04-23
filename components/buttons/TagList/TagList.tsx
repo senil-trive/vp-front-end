@@ -14,7 +14,7 @@ type Props = {
 };
 
 const Wrapper = styled.div`
-  background-color: white;
+  background-color:#EBFFFC;
   display: flex;
   border-radius: 8px;
   align-items: center;
@@ -63,8 +63,8 @@ const Wrapper = styled.div`
           right: 0;
           background: linear-gradient(
             to left,
-            rgba(255, 255, 255, 1) 0%,
-            rgba(255, 255, 255, 0) 100%
+            rgba(235, 255, 252, 1) 10%,
+            rgba(235, 255, 252, 0) 100%
           );
         }
       }
@@ -108,7 +108,9 @@ export default function TagList({
                 isActive={isSelected(tag.id)}
                 onClick={() => onSelect?.(isSelected(tag.id) ? "" : tag.id)}
                 style={{
-                  backgroundColor: isSelected(tag.id) ? "" : "white",
+                  backgroundColor: isSelected(tag.id) ? "#3FC7B4" : "transparent",
+                  color: '#150F2F',
+                  border: '1px solid #3FC7B4',
                 }}
               >
                 {tag.name}

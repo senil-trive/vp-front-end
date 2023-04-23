@@ -12,6 +12,13 @@
 @import "swiper/css/free-mode";
 @import "swiper/css/pagination";
 
+
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+
 html,
 body,
 #__next,
@@ -89,3 +96,18 @@ p {
 .prevent-scrolling {
   overflow-y: hidden;
 }
+
+
+/* Home page chat box */
+
+.chat_btn a{
+  background-color: #fff;
+  color:rgba(255, 151, 29, 1);
+  font-weight: 400;
+  border:2px solid #fff;
+}
+
+.chat_btn a:hover{
+  color:#fff
+}
+/* Home page chat box */

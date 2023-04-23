@@ -7,7 +7,7 @@ import { P } from "../../typography";
 import UserAvatar from "../../icons/UserAvatar/UserAvatar";
 
 const StyledForumPost = styled.article`
-  background: #ecfaf6;
+  background: rgba(255, 151, 29, 1);
   border-radius: 8px;
   padding: 24px;
   overflow: hidden;
@@ -97,6 +97,7 @@ function ChatBubble({
         style={{
           textAlign: isLeft ? "left" : "right",
           margin: 0,
+          color:'#fff',
           fontWeight: 500,
         }}
       >
@@ -118,10 +119,10 @@ export default function ChatExampleItem() {
             src="/android-chrome-192x192.png"
           />
           <div>
-            <P color="success" style={{ margin: 0, fontWeight: 500 }}>
+            <P color="success" style={{ margin: 0, fontWeight: 700, color: '#fff' }}>
               Buddy
             </P>
-            <P style={{ margin: 0, fontWeight: 300 }}>Robin, 18 jaar</P>
+            <P style={{ margin: 0, fontWeight: 300, color: '#fff' }}>Robin, 18 jaar</P>
           </div>
         </header>
         <div className="flex flex-col content max-h-[390px] overflow-y-auto">
@@ -136,7 +137,7 @@ export default function ChatExampleItem() {
           ))}
         </div>
       </div>
-      <footer>
+      <footer className="chat_btn">
         <Button variant="success" href="/vrijwilligerswerk/buddy-programma">
           Ook chatten met een Buddy? Meld je aan
         </Button>
