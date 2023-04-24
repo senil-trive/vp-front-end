@@ -76,7 +76,7 @@ const TitleWithHighlights: React.FC<TitleWithHighlightsProps> = ({
       );
     case "h3":
       return (
-        <H3 color={color} variant="bold" style={style}>
+        <H3 color={color} variant="bold" style={style} className={className}>
           <>{parseHTMLtoReact(newText)}</>
         </H3>
       );
