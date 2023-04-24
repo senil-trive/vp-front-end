@@ -5,9 +5,26 @@ import hexToRgba from "hex-to-rgba";
 import Button from "../../buttons/Button";
 import { P } from "../../typography";
 import UserAvatar from "../../icons/UserAvatar/UserAvatar";
+import bg from "../../../public/chatBg.png";
 
 const StyledForumPost = styled.article`
-  background: rgba(255, 151, 29, 1);
+  &:before {
+    content: " ";
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.25;
+    background: url("/chatBg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    z-index: 1;
+  }
+
+  background-color: rgba(255, 151, 29, 1);
   border-radius: 8px;
   padding: 24px;
   overflow: hidden;
@@ -29,6 +46,7 @@ const StyledForumPost = styled.article`
 
   .content {
     margin-bottom: 30px;
+    z-index: 5;
     > div {
       display: flex;
       gap: 8px;
@@ -39,7 +57,7 @@ const StyledForumPost = styled.article`
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    z-index: 5;
     .likes {
       display: flex;
       gap: 5.55px;
@@ -97,7 +115,7 @@ function ChatBubble({
         style={{
           textAlign: isLeft ? "left" : "right",
           margin: 0,
-          color:'#fff',
+          color: "#fff",
           fontWeight: 500,
         }}
       >
@@ -119,10 +137,15 @@ export default function ChatExampleItem() {
             src="/android-chrome-192x192.png"
           />
           <div>
-            <P color="success" style={{ margin: 0, fontWeight: 700, color: '#fff' }}>
+            <P
+              color="success"
+              style={{ margin: 0, fontWeight: 700, color: "#fff" }}
+            >
               Buddy
             </P>
-            <P style={{ margin: 0, fontWeight: 300, color: '#fff' }}>Robin, 18 jaar</P>
+            <P style={{ margin: 0, fontWeight: 300, color: "#fff" }}>
+              Robin, 18 jaar
+            </P>
           </div>
         </header>
         <div className="flex flex-col content max-h-[390px] overflow-y-auto">
