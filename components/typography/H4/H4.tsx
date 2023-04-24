@@ -16,6 +16,7 @@ const BaseH4 = styled.h4<{ color: ColorType }>`
   color: ${({ theme, color }) => theme.colors[color].normal};
   font-style: normal;
   margin: 12px 0;
+  
 `;
 
 const StyledH4Bold = styled(BaseH4)`

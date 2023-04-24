@@ -45,14 +45,16 @@ export default function BriefItem({
           )}
         </>
       </CardHeader>
-      <CardFooter>
+      <CardFooter className="bg-[#3FC7B4]">
         <div>
           <TitleWithHighlights
-            color="black"
+            color="white"
             highlightColor="tertiary"
             text={title}
-            textToHighlight={titleHighlighted ?? "    "}
+            //textToHighlight={titleHighlighted ?? "    "}
             headerElement="h3"
+            className="font-normal"
+
           />
 
           <P style={{ marginBottom: 56, marginTop: 12 }}>

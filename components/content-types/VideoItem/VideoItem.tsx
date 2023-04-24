@@ -102,8 +102,9 @@ export default function VideoItem({
             <IconButton Icon={IoIosPlay} />
           </PlayIconWrapper>
           <figcaption>
-            {!!title && <H3 variant="bold">{title}</H3>}
-            {!!subtitle && <P>{subtitle}</P>}
+            {!!title && <H3>{title}</H3>}
+            {!!subtitle && <P className="text-[18px]">{subtitle}</P>}
+         
           </figcaption>
         </>
       )}
