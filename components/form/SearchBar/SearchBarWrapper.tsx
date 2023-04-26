@@ -13,7 +13,7 @@ type Props = {
 };
 
 const Wrapper = styled.div`
-  background-color: white;
+  background-color: #ebfffc;
   display: flex;
   border-radius: 8px;
   align-items: center;

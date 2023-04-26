@@ -91,25 +91,40 @@ export default function Search() {
       >
         <Container>
           <Grid container>
-            <Grid item xs={0} md={2} lg={3} />
-            <Grid item xs={12} md={8} lg={6}>
+            {/* <Grid item xs={0} md={2} lg={3} /> */}
+            <Grid item xs={12} md={8} lg={12}>
               <div className="text-center">
                 <TitleWithHighlights
                   text={`${
                     posts.length + forumPosts.length + letters.length
                   } resultaten gevonden`}
                   color="white"
-                  style={{ textAlign: "center" }}
+                  style={{
+                    // textAlign: "center",
+                    fontFamily: "Fjalla One",
+                    fontStyle: `normal`,
+                    fontWeight: `400`,
+                    fontSize: `80px`,
+                    lineHeight: `118%`,
+                    marginBottom: `50px`,
+                  }}
                 />
                 <TextWithHighlights
                   color="white"
                   variant="light"
+                  style={{
+                    fontFamily: "Avenir",
+                    fontStyle: `normal`,
+                    fontWeight: `500`,
+                    fontSize: `28px`,
+                    lineHeight: `120.5%`,
+                  }}
                   text={`Je hebt gezocht op "${q}"`}
                   textToHighlight={{ word: `"${q}"`, color: "#3FC7B4" }}
                 />
               </div>
             </Grid>
-            <Grid item xs={0} md={2} lg={3} />
+            {/* <Grid item xs={0} md={2} lg={3} /> */}
           </Grid>
         </Container>
       </Hero>
@@ -121,14 +136,14 @@ export default function Search() {
             transform: "translateY(calc(-50% - 24px))",
           }}
         >
-          <SearchBarWrapper prefix={<H4>Gebruik een ander zoekwoord 👉</H4>} />
+          <SearchBarWrapper prefix={<H4>Gebruik een ander zoekwoord 👉🏾</H4>} />
         </div>
         <Container maxWidth="xl">
           <Grid container spacing={"22px"}>
             <Grid item xs={12} md={4}>
               <SearchResultItem
                 amount={forumPosts.length}
-                resultTitleSuffix={<span>in ons Forum</span>}
+                resultTitleSuffix={` in ons Forum`}
                 list={forumPosts.map((post) => ({
                   name: truncate(post.content, 120),
                   link: `/kinderen/forum/${post.slug}`,
@@ -139,7 +154,7 @@ export default function Search() {
               <SearchResultItem
                 colorVariant={2}
                 amount={posts.length}
-                resultTitleSuffix={<span>in Blogs en Vlogs</span>}
+                resultTitleSuffix={` in Blogs en Vlogs`}
                 list={posts.map((post) => ({
                   name: post.title,
                   link: `/verhalen/${post.slug}`,
@@ -150,7 +165,7 @@ export default function Search() {
               <SearchResultItem
                 colorVariant={3}
                 amount={letters.length}
-                resultTitleSuffix={<span>in Brieven</span>}
+                resultTitleSuffix={` in Brieven`}
                 list={letters.map((post) => ({
                   name: post.title,
                   link: `/verhalen/${post.slug}`,
