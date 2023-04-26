@@ -149,7 +149,7 @@ const StyledFooter = styled.footer`
     margin-bottom: 50px;
 
     @media all and (min-width:1200px){
-      width:auto !important;
+      width:294px !important;
     }
   }
 
