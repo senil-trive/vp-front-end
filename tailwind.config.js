@@ -24,6 +24,9 @@ module.exports = {
         },
       },
     },
+    fontFamily: {
+      avenir: ["Avenir", "sans-serif"],
+    },
   },
   plugins: [],
   important: true,

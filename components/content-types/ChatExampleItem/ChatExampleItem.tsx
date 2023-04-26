@@ -121,7 +121,9 @@ function ChatBubble({
       >
         {from}
       </P>
-      <div className="bg-white p-[12px] w-fit rounded-[8px]">{children}</div>
+      <div className="bg-white p-3 w-fit rounded-lg font-light text-[#150F2F] font-[Avenir]">
+        {children}
+      </div>
     </div>
   );
 }
@@ -129,7 +131,7 @@ function ChatBubble({
 export default function ChatExampleItem() {
   return (
     <StyledForumPost>
-      <div>
+      <div className="z-10">
         <header>
           <UserAvatar
             size="md"

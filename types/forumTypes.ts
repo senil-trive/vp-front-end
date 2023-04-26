@@ -18,6 +18,7 @@ export type ForumPostType = {
   status: "draft";
   slug: string;
   categories?: { categories_id: CategoryType }[];
+  user_image?: { id: string };
 };
 
 export type ForumCommentType = {

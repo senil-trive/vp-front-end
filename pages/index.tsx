@@ -14,8 +14,6 @@ import { useCallbackWhenReachedBottom } from "../utils/scroll";
 import ChevronRight from "../components/icons/ChevronRight/ChevronRight";
 import TextWithHighlights from "../components/typography/TextWithHighlights";
 
-
-
 const POST_PER_PAGE = 6;
 export const getServerSideProps = async () => {
   try {
@@ -184,16 +182,15 @@ export default function Home({
           <Grid container>
             <Grid item xs={0} md={2} />
             <Grid item xs={12} md={8}>
-             <div className="text-center">
-               <TitleWithHighlights
-                 text={pageData?.page_title ?? ""}
-                 color="white"
-                 className="sm:text-[46px] lg:text-[80px] font-light"
-                 style={{
-                   textAlign: "center",
-                 }}
-               />
-         
+              <div className="text-center">
+                <TitleWithHighlights
+                  text={pageData?.page_title ?? ""}
+                  color="white"
+                  className="sm:text-[46px] lg:text-[80px] font-light"
+                  style={{
+                    textAlign: "center",
+                  }}
+                />
 
                 <TextWithHighlights
                   color="white"
@@ -222,15 +219,25 @@ export default function Home({
               status: cat.status,
             }))}
             selected={selectedTag}
-            prefix={<H4 
-              style={{
-                whiteSpace: 'nowrap',
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: '5px',
-              }}>Onderwerp <span style={{
-                marginTop: '-6px',
-              }}>👉</span></H4>}
+            prefix={
+              <H4
+                style={{
+                  whiteSpace: "nowrap",
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: "5px",
+                }}
+              >
+                Onderwerp{" "}
+                <span
+                  style={{
+                    marginTop: "-6px",
+                  }}
+                >
+                  👉🏾
+                </span>
+              </H4>
+            }
             suffix={<ChevronRight />}
             onSelect={(x: string) => {
               setSelectedTag(x);

@@ -16,4 +16,5 @@ export type Letter = {
   downloadable_document: any;
   image: any;
   requires_signup: Boolean;
+  bg_color: string;
 };

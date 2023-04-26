@@ -5,7 +5,7 @@ import Button from "../../buttons/Button";
 import Card from "../../card/Card";
 import CardFooter from "../../card/CardFooter/CardFooter";
 import CardHeader from "../../card/CardHeader/CardHeader";
-import React from "react";
+import React, { useState } from "react";
 import Tag from "../../buttons/Tag/Tag";
 import { truncate } from "../../../utils/truncate";
 import Image from "next/image";
@@ -17,6 +17,7 @@ type Props = {
   fileSrc: string;
   category?: string;
   content: string;
+  bg: string;
 };
 
 export default function BriefItem({
@@ -26,7 +27,9 @@ export default function BriefItem({
   titleHighlighted,
   category,
   content,
+  bg,
 }: Props) {
+  const [hovering, setHovering] = useState<boolean>(false);
   return (
     <Card variant="brief">
       <CardHeader style={{ height: 262 }}>
@@ -45,24 +48,52 @@ export default function BriefItem({
           )}
         </>
       </CardHeader>
-      <CardFooter className="bg-[#3FC7B4]">
+      <CardFooter
+        className={`group bg-[${bg}] hover:bg-white`}
+        onMouseEnter={() => setHovering(true)}
+        onMouseLeave={() => setHovering(false)}
+        style={
+          hovering
+            ? {
+                background: `white`,
+              }
+            : {
+                background: bg,
+              }
+        }
+      >
         <div>
           <TitleWithHighlights
             color="white"
             highlightColor="tertiary"
-            text={title}
-            //textToHighlight={titleHighlighted ?? "    "}
+            text={title + " ✍🏽"}
+            textToHighlight={titleHighlighted ?? "    "}
             headerElement="h3"
-            className="font-normal"
-
+            className="transition group-hover:text-black"
           />
 
-          <P style={{ marginBottom: 56, marginTop: 12 }}>
+          <P
+            className="transition text-white group-hover:text-black"
+            style={{ marginBottom: 56, marginTop: 12 }}
+          >
             {truncate(content, 200)}
           </P>
         </div>
-
-        <Button variant="tertiary" href={fileSrc}>
+        <Button
+          href={fileSrc}
+          style={
+            hovering
+              ? {
+                  background: bg,
+                  color: `white`,
+                }
+              : {
+                  background: `white`,
+                  color: bg,
+                }
+          }
+          // variant="tertiary"
+        >
           Download brief
         </Button>
       </CardFooter>

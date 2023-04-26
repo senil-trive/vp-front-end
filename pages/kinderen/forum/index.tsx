@@ -189,15 +189,25 @@ export default function Forum({
           <TagList
             tags={tags}
             selected={selectedTag}
-            prefix={<H4 
-              style={{
-                whiteSpace: 'nowrap',
-                display: 'flex',
-                alignItems: 'flex-start',
-                gap: '5px',
-              }}>Onderwerp <span style={{
-                marginTop: '-6px',
-              }}>👉</span></H4>}
+            prefix={
+              <H4
+                style={{
+                  whiteSpace: "nowrap",
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: "5px",
+                }}
+              >
+                Onderwerp{" "}
+                <span
+                  style={{
+                    marginTop: "-6px",
+                  }}
+                >
+                  👉🏾
+                </span>
+              </H4>
+            }
             suffix={<ChevronRight />}
             onSelect={(x: string) => {
               setSelectedTag(x);
@@ -229,6 +239,7 @@ export default function Forum({
                         fullHeight={false}
                         gender={item.user_gender}
                         age={item.user_age}
+                        image={item.user_image.id}
                         authorType={item.user_name}
                         postDate={new Date(item.date_created)}
                         tags={

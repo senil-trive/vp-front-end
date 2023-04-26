@@ -73,7 +73,7 @@ export default function BlogItem({
             <Tag
               variant="dark"
               size="m"
-              position="bl"
+              position="blNew"
               style={{
                 backgroundColor: colors.info.normal,
                 borderColor: colors.info.normal,
@@ -90,31 +90,25 @@ export default function BlogItem({
     <Card variant={type}>
       {generateMediaItem()}
 
-      <CardFooter style={{ padding: "24px 0 0 0" }}>
-        <div className="flex items-center justify-between pb-[30px]">
-          <P color="info" style={{ margin: 0 }} variant="helper">
-            {author}
-          </P>
-          <P style={{ margin: 0 }} variant="helper">
-            {parseDate(postDate)}
-          </P>
-        </div>
-
-        <H4 style={{ margin: 0 }} variant="bold">
-          {truncate(title, 35)}
+      <CardFooter>
+        <H4 className="text-4xl" style={{ margin: 0 }} variant="bold">
+          {truncate(title, 23)}
         </H4>
 
-        <div style={{ overflowY: "auto", height: 120 }}>
+        <div style={{ overflowY: "auto", height: 90 }}>
           {!!content && (
             <P style={{ marginBottom: 30, marginTop: 12 }}>
               {content ? truncate(content, 200) : ""}
             </P>
           )}
-
-          <Button style={{ marginTop: 56 }} variant="secondary" href={link}>
-            {type == "vlog" ? "Vlog bekijken" : "Blog lezen"}
-          </Button>
         </div>
+        <div className="flex items-center justify-between">
+          <p className="text-lg font-avenir">{author}</p>
+          <p className="italic font-light font-avenir">{parseDate(postDate)}</p>
+        </div>
+        <Button style={{ marginTop: 56 }} variant="secondary" href={link}>
+          {type == "vlog" ? "Vlog bekijken" : "Blog lezen"}
+        </Button>
       </CardFooter>
     </Card>
   );

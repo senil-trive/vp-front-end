@@ -32,6 +32,7 @@ type Props = {
 
   /** Additional styling */
   style?: React.CSSProperties;
+  className?: string;
 };
 
 const Style = css<Props>`
@@ -125,13 +126,13 @@ const Style = css<Props>`
 
       default:
         return css`
-          background: ${({ theme }) => theme.colors.primary.normal};
-          color: #ffffff;
-          border: 2px solid ${({ theme }) => theme.colors.primary.normal};
+          // background: ${({ theme }) => theme.colors.primary.normal};
+          // color: #ffffff;
+          // border: 2px solid ${({ theme }) => theme.colors.primary.normal};
 
           &:hover {
-            background-color: transparent;
-            color: ${({ theme }) => theme.colors.primary.normal};
+            // background-color: transparent;
+            // color: ${({ theme }) => theme.colors.primary.normal};
             /* background: ${({ theme }) => theme.colors.black}; */
             /* box-shadow: inset -8px -8px 24px rgba(0, 0, 0, 0.3); */
           }
@@ -174,6 +175,7 @@ export default function Button({
   disabled = false,
   loading = false,
   href,
+  className,
   ...rest
 }: Props) {
   const { colors } = useTheme();
@@ -186,6 +188,7 @@ export default function Button({
         onClick={onClick}
         variant={variant}
         filled={filled}
+        className={className}
         {...rest}
       >
         {loading && <CircleSpinner size={20} color={colors.white.normal} />}
@@ -200,6 +203,7 @@ export default function Button({
       onClick={onClick}
       variant={variant}
       filled={filled}
+      className={className}
       {...rest}
     >
       {loading && <CircleSpinner size={20} color={colors.white.normal} />}

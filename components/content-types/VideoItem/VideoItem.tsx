@@ -104,7 +104,6 @@ export default function VideoItem({
           <figcaption>
             {!!title && <H3>{title}</H3>}
             {!!subtitle && <P className="text-[18px]">{subtitle}</P>}
-         
           </figcaption>
         </>
       )}

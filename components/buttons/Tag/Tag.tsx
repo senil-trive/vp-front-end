@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 import { type } from "os";
 
 type Variant = { variant?: "light" | "dark" };
-type Position = { position?: "tl" | "tr" | "bl" | "br" };
+type Position = { position?: "tl" | "tr" | "bl" | "br" | "blNew" };
 
 type Props = React.HTMLAttributes<HTMLSpanElement> &
   Variant &
@@ -74,6 +74,16 @@ const BaseTag = styled.span<Variant & Position & { isActive: boolean }>`
         return css`
           position: absolute;
           bottom: 24px;
+          left: 24px;
+        `;
+      case "blNew":
+        return css`
+          background: ${({ theme }) =>
+            theme.colors.secondary.normal} !important;
+          border-color: ${({ theme }) =>
+            theme.colors.secondary.normal} !important;
+          position: absolute;
+          bottom: 13px;
           left: 24px;
         `;
 

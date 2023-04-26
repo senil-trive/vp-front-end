@@ -8,6 +8,7 @@ type Props = {
   color?: ColorType;
   children: ReactNode;
   style?: React.CSSProperties;
+  className?: string;
 };
 
 const BaseH4 = styled.h4<{ color: ColorType }>`
@@ -16,7 +17,7 @@ const BaseH4 = styled.h4<{ color: ColorType }>`
   color: ${({ theme, color }) => theme.colors[color].normal};
   font-style: normal;
   margin: 12px 0;
-  
+  font-family: "Fjalla One";
 `;
 
 const StyledH4Bold = styled(BaseH4)`

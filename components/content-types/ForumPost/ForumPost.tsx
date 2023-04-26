@@ -7,7 +7,8 @@ import Tag from "../../buttons/Tag/Tag";
 import { parseDate } from "../../../utils/parseDate";
 import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
 import { truncate } from "../../../utils/truncate";
-import { FiMessageCircle } from "react-icons/fi";
+import { FiHeart } from "react-icons/fi";
+import UserAvatar from "../../icons/UserAvatar/UserAvatar";
 
 type Props = {
   authorType: string;
@@ -22,6 +23,7 @@ type Props = {
   comments?: number;
   fullHeight?: boolean;
   postDate?: Date;
+  image: string;
 };
 
 const StyledForumPost = styled.article`
@@ -31,8 +33,56 @@ const StyledForumPost = styled.article`
   overflow: hidden;
   position: relative;
   z-index: 1;
-  background-color: ${({ theme }) => theme.colors.tertiary.light};
+  background-color: ${({ theme }) => theme.colors.secondary.normal};
   height: 100%;
+
+  // a {
+  //   background: white;
+  //   color: ${({ theme }) => theme.colors.secondary.normal};
+  //   border: 0;
+  // }
+
+  &:hover {
+    --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px -4px rgb(0 0 0 / 0.1) !important;
+    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color),
+      0 4px 6px -4px var(--tw-shadow-color) !important;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+      var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+
+    background-color: white;
+    // a {
+    //   background-color: ${({ theme }) => theme.colors.secondary.normal};
+    //   border: 0;
+    //   color: white;
+    // }
+    header {
+      p,
+      h4 {
+        color: ${({ theme }) => theme.colors.text.normal};
+      }
+    }
+    .content {
+      color: ${({ theme }) => theme.colors.text.normal};
+      .forum-tags {
+        span {
+          background: ${({ theme }) => theme.colors.secondary.normal};
+          border: none;
+          color: white;
+          font-weight: 400;
+          font-size: 18px;
+          font-family: "Fjalla One";
+        }
+      }
+    }
+    footer {
+      color: ${({ theme }) => theme.colors.text.normal};
+
+      .geplaatst {
+        color: ${({ theme }) => theme.colors.text.normal};
+      }
+    }
+  }
 
   /* TODO: required for the home grid */
   display: flex;
@@ -44,15 +94,31 @@ const StyledForumPost = styled.article`
     align-items: center;
     gap: 30px;
     margin-bottom: 30px;
+    p,
+    h4 {
+      color: white;
+    }
   }
 
   .content {
     margin-bottom: 30px;
     font-size: ${({ theme }) => theme.fontSizes.p.desktop};
+    font-family: "Avenir";
+    color: white;
     > div {
       display: flex;
       gap: 8px;
       margin-bottom: 30px;
+    }
+    .forum-tags {
+      span {
+        background: white;
+        border: none;
+        color: ${({ theme }) => theme.colors.secondary.normal};
+        font-weight: 400;
+        font-size: 18px;
+        font-family: "Fjalla One";
+      }
     }
   }
 
@@ -60,9 +126,13 @@ const StyledForumPost = styled.article`
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    color: white;
+    .geplaatst {
+      color: white;
+    }
     .icon-wrapper {
       display: flex;
+      align-items: center;
       gap: 5.55px;
     }
     p {
@@ -89,6 +159,7 @@ export default function ForumPost({
   buttonUrl = "",
   fullHeight = true,
   tags = [],
+  image,
 }: Props) {
   const { colors } = useTheme();
 
@@ -101,18 +172,17 @@ export default function ForumPost({
 
     return parseHTMLtoReact(content);
   };
-
+  // console.log(`FORUM content :::`, image);
   return (
     <StyledForumPost style={{ minHeight: fullHeight ? "624px" : "" }}>
-      <div className="h-full flex flex-col justify-between">
+      <a
+        href={buttonUrl}
+        className="transition h-full flex flex-col justify-between "
+      >
         <div>
-          {!!title && (
+          {/* {!!title && (
             <header>
-              {/* <UserAvatar
-            size="md"
-            alt="villa pinedo"
-            src="/android-chrome-192x192.png"
-          /> */}
+              <UserAvatar size="md" alt="villa pinedo" src={image} />
               <div>
                 <H4
                   style={{ marginBottom: 0, marginTop: "16px" }}
@@ -122,10 +192,19 @@ export default function ForumPost({
                 </H4>
               </div>
             </header>
-          )}
+          )} */}
+          <header>
+            <UserAvatar size="md" alt="villa pinedo" src={image} />
+            <div>
+              <p className="font-avenir font-extrabold text-lg">Buddy</p>
+              <p>
+                {authorType}, {age?.includes("jaar") ? age : `${age} jaar`}
+              </p>
+            </div>
+          </header>
           <div className="content">
             {tags.length > 0 && (
-              <div className="flex">
+              <div className="flex flex-wrap forum-tags">
                 {tags.map((item, index) => (
                   <Tag key={index} size="m">
                     {item}
@@ -141,35 +220,27 @@ export default function ForumPost({
         <footer>
           <div>
             <div className="icon-wrapper mr-4">
-              <>
-                <FiMessageCircle color={colors.primary.normal} />
-                <P color="primary" variant="helper">
-                  {comments}
-                </P>
-              </>
+              <FiHeart size={24} />
+              <p className="font-avenir font-light text-lg">{comments}</p>
             </div>
           </div>
-          <div className="flex items-center justify-between w-full">
-            <P
-              variant="helper"
-              color="primary"
-              style={{ margin: 0, fontWeight: 500 }}
-            >
-              {authorType}, {age?.includes("jaar") ? age : `${age} jaar`}
-            </P>
+          <div>
             {postDate && (
-              <P
-                variant="helper"
-                color="primary"
-                style={{ textAlign: "right" }}
-              >
-                {parseDate(postDate)}
-              </P>
+              // <P
+              //   // variant="helper"
+              //   color="primary"
+              //   style={{ textAlign: "right" }}
+              //   className=""
+              // >
+              // </P>
+              <p className="geplaatst font-avenir font-light text-lg italic text-right">
+                Geplaatst op {parseDate(postDate)}
+              </p>
             )}
           </div>
         </footer>
-      </div>
-      {showButton && (
+      </a>
+      {/* {showButton && (
         <Button
           style={{
             margin: "1rem auto",
@@ -179,7 +250,7 @@ export default function ForumPost({
         >
           Vraag bekijken
         </Button>
-      )}
+      )} */}
     </StyledForumPost>
   );
 }
