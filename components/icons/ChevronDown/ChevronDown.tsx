@@ -4,7 +4,11 @@ import { SVGProps } from "react";
 import { useTheme } from "styled-components";
 import { IconProps } from "../../../types/iconTypes";
 
-export default function ChevronDown({ color = "info", ...props }: IconProps) {
+export default function ChevronDown({
+  color = "info",
+  stroke = `#3FC7B4`,
+  ...props
+}: IconProps) {
   const { colors } = useTheme();
 
   return (
@@ -17,7 +21,7 @@ export default function ChevronDown({ color = "info", ...props }: IconProps) {
     >
       <path
         d="m1.492 1 6.22 5.33a1.2 1.2 0 0 0 1.561 0L15.493 1"
-        stroke='#3FC7B4'
+        stroke={stroke}
         strokeWidth={1.5}
         strokeLinecap="round"
       />

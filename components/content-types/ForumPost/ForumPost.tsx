@@ -9,6 +9,7 @@ import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
 import { truncate } from "../../../utils/truncate";
 import { FiHeart } from "react-icons/fi";
 import UserAvatar from "../../icons/UserAvatar/UserAvatar";
+import parseImageURL from "../../../utils/parseImageURL";
 
 type Props = {
   authorType: string;
@@ -23,17 +24,22 @@ type Props = {
   comments?: number;
   fullHeight?: boolean;
   postDate?: Date;
-  image: string;
+  image: any;
 };
 
-const StyledForumPost = styled.article`
+type styledProps = {
+  showButton?: boolean;
+};
+
+const StyledForumPost = styled.article<styledProps>`
   /* border: 1px solid ${({ theme }) => theme.colors.primary.normal}; */
   border-radius: 8px;
   padding: 24px;
   overflow: hidden;
   position: relative;
   z-index: 1;
-  background-color: ${({ theme }) => theme.colors.secondary.normal};
+  background-color: ${({ theme, showButton }: any) =>
+    showButton ? theme.colors.secondary.normal : theme.colors.primary.normal};
   height: 100%;
 
   // a {
@@ -173,12 +179,19 @@ export default function ForumPost({
     return parseHTMLtoReact(content);
   };
   // console.log(`FORUM content :::`, image);
+
+  const ComponentTag = showButton ? "a" : "div";
+  const props = showButton ? { href: buttonUrl } : {};
   return (
-    <StyledForumPost style={{ minHeight: fullHeight ? "624px" : "" }}>
-      <a
+    <StyledForumPost
+      showButton={showButton}
+      style={{ minHeight: fullHeight ? "624px" : "" }}
+    >
+      {/* <a
         href={buttonUrl}
         className="transition h-full flex flex-col justify-between "
-      >
+      > */}
+      <ComponentTag {...props}>
         <div>
           {/* {!!title && (
             <header>
@@ -194,7 +207,11 @@ export default function ForumPost({
             </header>
           )} */}
           <header>
-            <UserAvatar size="md" alt="villa pinedo" src={image} />
+            <UserAvatar
+              size="md"
+              alt="villa pinedo"
+              src={parseImageURL(image)}
+            />
             <div>
               <p className="font-avenir font-extrabold text-lg">Buddy</p>
               <p>
@@ -239,7 +256,8 @@ export default function ForumPost({
             )}
           </div>
         </footer>
-      </a>
+        {/* </a> */}
+      </ComponentTag>
       {/* {showButton && (
         <Button
           style={{

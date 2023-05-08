@@ -215,7 +215,7 @@ export default function Forum({
           />
         </div>
 
-        <CollectionSearchBar onSearch={handleSearch} />
+        {/* <CollectionSearchBar onSearch={handleSearch} /> */}
 
         <Container style={{ margin: "56px auto" }}>
           <Grid container spacing={"34px"}>
@@ -239,7 +239,7 @@ export default function Forum({
                         fullHeight={false}
                         gender={item.user_gender}
                         age={item.user_age}
-                        image={item.user_image.id}
+                        image={item.user_image?.id || "asad"}
                         authorType={item.user_name}
                         postDate={new Date(item.date_created)}
                         tags={

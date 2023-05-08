@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { getPathFromUrl } from "../../../utils/url";
+import { FiChevronRight } from "react-icons/fi";
 
 type Breadcrumb = {
   /** Breadcrumb title. Example: 'blog-entries' */
@@ -11,6 +12,12 @@ type Breadcrumb = {
   /** The URL which the breadcrumb points to. Example: 'blog/blog-entries' */
   href: string;
 };
+
+const Icon = styled(FiChevronRight)`
+  margin-left: 5px;
+  margin-right: 5px;
+  font-weight: 600;
+`;
 
 const StyledNav = styled.nav`
   width: 100%;
@@ -21,16 +28,15 @@ const StyledNav = styled.nav`
 
     li {
       a {
-        color: ${({ theme }) => theme.colors.secondary.normal};
+        // color: ${({ theme }) => theme.colors.secondary.normal};
+      }
+      &:last-child {
+        a {
+          font-weight: 600;
+        }
       }
 
-      &.with-divider {
-        &::after {
-          content: "/";
-          margin-left: 5px;
-          margin-right: 5px;
-          color: ${({ theme }) => theme.colors.secondary.normal};
-        }
+ 
       }
     }
   }
@@ -67,19 +73,29 @@ export default function BreadCrumbs() {
     <StyledNav>
       <ol>
         <li className="with-divider">
-          <Link href="/">home</Link>
+          <Link href="/" className="font-avenir flex items-center">
+            Home
+            <FiChevronRight
+              style={{ stroke: "black", strokeWidth: "4" }}
+              className="mx-2"
+            />
+          </Link>
         </li>
         {breadcrumbs?.map((breadcrumb, i) => {
           if (!breadcrumb || breadcrumb.breadcrumb.length === 0) {
             return;
           }
           return (
-            <li
-              key={breadcrumb.href}
-              className={i < breadcrumbs.length - 1 ? "with-divider" : ""}
-            >
-              <Link href={breadcrumb.href}>
+            <li key={breadcrumb.href}>
+              <Link
+                href={breadcrumb.href}
+                className="flex items-center font-avenir capitalize"
+              >
                 {convertBreadcrumb(breadcrumb.breadcrumb)}
+                <FiChevronRight
+                  style={{ stroke: "black", strokeWidth: "4" }}
+                  className={i < breadcrumbs.length - 1 ? "mx-2" : "hidden"}
+                />
               </Link>
             </li>
           );

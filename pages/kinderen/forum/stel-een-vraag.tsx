@@ -19,6 +19,8 @@ import TextArea from "../../../components/form/TextArea/TextArea";
 import TextList from "../../../components/typography/TextList/TextList";
 import { useState } from "react";
 import { slugify } from "../../../utils/url";
+import styled from "styled-components";
+import parseImageURL from "../../../utils/parseImageURL";
 
 export const getServerSideProps = async () => {
   try {
@@ -71,6 +73,46 @@ export default function Vraag({ categories }: ForumQuestionPageProps) {
     setIsLoading(false);
   };
 
+  const StyledForm = styled.div`
+    &:before {
+      content: " ";
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0px;
+      width: 100%;
+      height: 100%;
+      opacity: 0.25;
+      background: url("/chatBg.png");
+      // background-size: cover;
+      // background-repeat: no-repeat;
+      background-position: center center;
+      z-index: 1;
+    }
+
+    background-color: rgba(255, 151, 29, 1);
+    border-radius: 8px;
+    padding: 32px;
+
+    label {
+      font-family: "Avenir";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 160%;
+      color: white;
+    }
+
+    form {
+      position: relative;
+      z-index: 2;
+      div,
+      .selectBox {
+        border: none;
+      }
+    }
+  `;
+
   return (
     <PageWrapper
       seo={{
@@ -81,126 +123,166 @@ export default function Vraag({ categories }: ForumQuestionPageProps) {
         canonical: "https://www.villapinedo.nl/kinderen/forum/stel-een-vraag",
       }}
     >
-      <Hero style={{ padding: "80px 0" }}>
-        <Container>
-          <Grid container style={{ marginBottom: 65 }}>
-            <Grid item xs={0} md={2} lg={3} />
-            <Grid item xs={12} md={8} lg={6}>
-              <TitleWithHighlights
-                text="Stel je vraag"
-                textToHighlight={"vraag"}
-                highlightColor="info"
-                style={{ textAlign: "center" }}
-              />
-              <P variant="light" style={{ textAlign: "center" }}>
-                Heb jij een vraag over de scheiding? Stel ‘m hier! De Buddy’s en
-                andere kinderen met gescheiden ouders geven jou tips en
-                beantwoorden al jouw vragen.
-              </P>
-            </Grid>
-            <Grid item xs={0} md={2} lg={3} />
+      <Hero
+        center
+        imageUrl={parseImageURL(`09a49205-a072-4c2d-9ac1-641c2a1985a9`)}
+        style={{
+          minHeight: 649,
+          position: "relative",
+        }}
+      >
+        <Grid container style={{ marginBottom: 65 }}>
+          <Grid item xs={0} md={2} lg={3} />
+          <Grid
+            item
+            xs={12}
+            md={8}
+            lg={6}
+            className="flex flex-col items-center"
+          >
+            <TitleWithHighlights
+              text="Stel je vraag"
+              highlightColor="info"
+              style={{
+                textAlign: "center",
+                fontFamily: "Fjalla One",
+                fontStyle: "normal",
+                fontWeight: "400",
+                fontSize: "64px",
+                lineHeight: "140%",
+                color: `white`,
+              }}
+            />
+            <P
+              style={{
+                textAlign: "center",
+                fontFamily: "Avenir",
+                fontStyle: "normal",
+                fontWeight: `300`,
+                fontSize: `18px`,
+                lineHeight: `160%`,
+                color: `white`,
+              }}
+            >
+              Heb jij een vraag over de scheiding? Stel ‘m hier! De Buddy’s en
+              andere kinderen met gescheiden ouders geven jou tips en
+              beantwoorden al jouw vragen.
+            </P>
+            <Button
+              variant="infoReversed"
+              className="border-white text-white w-96 mt-5"
+            >
+              Lees hier de vragen van anderen
+            </Button>
           </Grid>
-          <main>
-            <Container>
-              <Section>
-                {!isSubmitted ? (
-                  <form onSubmit={handleSubmit(submitForm)}>
-                    <Grid container spacing="33px">
-                      <Grid item xs={12}>
-                        <Input
-                          label="Titel"
-                          name="title"
-                          placeholder="Vul hier een titel in"
-                          register={register}
-                          hasError={!!errors.title}
-                        />
-                      </Grid>
-                      <Grid item xs={12} md={6}>
-                        <Input
-                          label="Voornaam"
-                          name="user_name"
-                          placeholder="Vul hier je voornaam in"
-                          register={register}
-                          hasError={!!errors.user_name}
-                        />
-                      </Grid>
-                      <Grid item xs={12} md={6}>
-                        <Input
-                          label="Leeftijd"
-                          type="number"
-                          name="user_age"
-                          placeholder="Vul hier je leeftijd in"
-                          register={register}
-                        />
-                      </Grid>
-                      <Grid item xs={12}>
-                        <Input
-                          label="Email adres"
-                          type="email"
-                          placeholder="Vul hier je email in"
-                          name="user_email"
-                          register={register}
-                        />
-                      </Grid>
+          <Grid item xs={0} md={2} lg={3} />
+        </Grid>
+      </Hero>
+      <Container>
+        <main>
+          <Container
+            className="relative"
+            style={{
+              marginBottom: 32,
+              transform: "translateY(-75px)",
+            }}
+          >
+            <StyledForm>
+              {!isSubmitted ? (
+                <form onSubmit={handleSubmit(submitForm)}>
+                  <Grid container spacing="33px">
+                    <Grid item xs={12}></Grid>
+                    <Grid item xs={12} md={4}>
+                      <Input
+                        label="Voornaam"
+                        name="user_name"
+                        placeholder="Vul hier je voornaam in"
+                        register={register}
+                        hasError={!!errors.user_name}
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                      <Input
+                        label="Leeftijd"
+                        type="number"
+                        name="user_age"
+                        placeholder="Vul hier je leeftijd in"
+                        register={register}
+                      />
+                    </Grid>
+                    <Grid item md={4} xs={12}>
+                      <Input
+                        label="Email adres"
+                        type="email"
+                        placeholder="Vul hier je email in"
+                        name="user_email"
+                        register={register}
+                      />
+                    </Grid>
 
-                      <Grid item xs={12} md={6}>
-                        <Dropdown
-                          options={GENDERS}
-                          label="Geslacht"
-                          placeholder="Maak een keuze"
-                          name="user_gender"
-                          register={register}
-                        />
-                      </Grid>
-                      <Grid item xs={12} md={6}>
-                        <Input
-                          label="Woonplaats"
-                          type="text"
-                          placeholder="Vul hier je woonplaats in"
-                          name="user_location"
-                          register={register}
-                        />
-                      </Grid>
-                      <Grid item xs={12}>
-                        <Dropdown
-                          label="Wat houdt je bezig?"
-                          placeholder="Maak een keuze"
-                          name="categories"
-                          register={register}
-                          multi
-                          options={categories.map((item) => ({
-                            name: item.name,
-                            value: item.id,
-                          }))}
-                        />
-                      </Grid>
-                      <Grid item xs={12}>
-                        <TextArea
-                          label="Schrijf hier je vraag of bericht *"
-                          name="content"
-                          placeholder="Schrijf hier je vraag of bericht"
-                          required
-                          register={register}
-                          hasError={!!errors.content}
-                          maxLength={1500}
-                          helperText={
-                            !!errors.content ? "Dit veld is verplicht" : ""
-                          }
-                        />
-                      </Grid>
+                    <Grid item xs={12} md={6}>
+                      <Dropdown
+                        options={GENDERS}
+                        label="Geslacht"
+                        placeholder="Maak een keuze"
+                        name="user_gender"
+                        register={register}
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                      <Input
+                        label="Woonplaats"
+                        type="text"
+                        placeholder="Vul hier je woonplaats in"
+                        name="user_location"
+                        register={register}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Dropdown
+                        label="Wat houdt je bezig?"
+                        placeholder="Maak een keuze"
+                        name="categories"
+                        register={register}
+                        multi
+                        options={categories.map((item) => ({
+                          name: item.name,
+                          value: item.id,
+                        }))}
+                      />
+                    </Grid>
+                    <Grid item xs={12}>
+                      <TextArea
+                        label="Schrijf hier je vraag of bericht *"
+                        name="content"
+                        placeholder="Schrijf hier je vraag of bericht"
+                        required
+                        register={register}
+                        hasError={!!errors.content}
+                        maxLength={1500}
+                        helperText={
+                          !!errors.content ? "Dit veld is verplicht" : ""
+                        }
+                      />
+                    </Grid>
 
-                      <Grid item xs={12}>
+                    {/* <Grid item xs={12}>
                         <P variant="light">* Verplichte velden</P>
-                      </Grid>
-                      <Grid item xs={12} md={4}>
-                        <Button loading={isLoading}>
-                          {isLoading && "bezig..."}
-                          {isSubmitted && "Verzonden"}
-                          {!isLoading && !isSubmitted && "Vraag insturen"}
-                        </Button>
-                      </Grid>
+                      </Grid> */}
+                    <Grid item xs={12} md={12}>
+                      <Button
+                        className="bg-white text-orange-700 font-normal w-full"
+                        loading={isLoading}
+                      >
+                        {isLoading && "bezig..."}
+                        {isSubmitted && "Verzonden"}
+                        {!isLoading &&
+                          !isSubmitted &&
+                          "ja, ik wil mijn vraag plaatsen"}
+                      </Button>
+                    </Grid>
 
-                      <div className="py-[30px]">
+                    {/* <div className="py-[30px]">
                         <Divider variant="middle" className="my-[48px]" />
                         <Container>
                           <P>Houd je aan de volgende regels:</P>
@@ -253,53 +335,50 @@ export default function Vraag({ categories }: ForumQuestionPageProps) {
                             </li>
                           </TextList>
                         </Container>
-                      </div>
-                    </Grid>
-                  </form>
-                ) : (
-                  <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16 mx-auto">
-                    <H2 variant="bold">
-                      Bedankt voor het stellen van je vraag!
-                    </H2>
-                    <P>
-                      Bedankt voor het stellen van je vraag! Binnen twee dagen
-                      krijg je antwoord met tips en advies en komen je vraag en
-                      de antwoorden op de website te staan. Je krijgt hierover
-                      een mail zodat je niet steeds zelf hoeft te checken of je
-                      vraag en antwoorden al online staan. Heb jij tips voor
-                      andere kinderen van gescheiden ouders?{" "}
-                      <Link
-                        style={{
-                          textDecoration: "underline",
-                          color: COLORS.primary.normal,
-                        }}
-                        href={"/kinderen/forum"}
-                      >
-                        Klik dan hier.
-                      </Link>
-                    </P>
-                    <P>
-                      Heb je meer vragen over de scheiding van je ouders en wil
-                      je liever voor langere tijd met iemand chatten?{" "}
-                      <Link
-                        style={{
-                          textDecoration: "underline",
-                          color: COLORS.primary.normal,
-                        }}
-                        href={"/kinderen/ik-wil-een-buddy"}
-                      >
-                        Vraag dan een buddy aan.
-                      </Link>{" "}
-                      Een Buddy is iemand, die net als jij, ook gescheiden
-                      ouders heeft.
-                    </P>
-                  </div>
-                )}
-              </Section>
-            </Container>
-          </main>
-        </Container>
-      </Hero>
+                      </div> */}
+                  </Grid>
+                </form>
+              ) : (
+                <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16 mx-auto">
+                  <H2 variant="bold">Bedankt voor het stellen van je vraag!</H2>
+                  <P>
+                    Bedankt voor het stellen van je vraag! Binnen twee dagen
+                    krijg je antwoord met tips en advies en komen je vraag en de
+                    antwoorden op de website te staan. Je krijgt hierover een
+                    mail zodat je niet steeds zelf hoeft te checken of je vraag
+                    en antwoorden al online staan. Heb jij tips voor andere
+                    kinderen van gescheiden ouders?{" "}
+                    <Link
+                      style={{
+                        textDecoration: "underline",
+                        color: COLORS.primary.normal,
+                      }}
+                      href={"/kinderen/forum"}
+                    >
+                      Klik dan hier.
+                    </Link>
+                  </P>
+                  <P>
+                    Heb je meer vragen over de scheiding van je ouders en wil je
+                    liever voor langere tijd met iemand chatten?{" "}
+                    <Link
+                      style={{
+                        textDecoration: "underline",
+                        color: COLORS.primary.normal,
+                      }}
+                      href={"/kinderen/ik-wil-een-buddy"}
+                    >
+                      Vraag dan een buddy aan.
+                    </Link>{" "}
+                    Een Buddy is iemand, die net als jij, ook gescheiden ouders
+                    heeft.
+                  </P>
+                </div>
+              )}
+            </StyledForm>
+          </Container>
+        </main>
+      </Container>
     </PageWrapper>
   );
 }

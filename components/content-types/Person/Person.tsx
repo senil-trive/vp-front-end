@@ -9,7 +9,7 @@ type Props = {
   name: string;
   avatar?: string;
   size?: "sm" | "md";
-  color: ColorType;
+  color?: ColorType;
 };
 
 const StyledWrapper = styled.div`
@@ -40,8 +40,9 @@ export default function Person({
       )}
       <div className="profile-meta">
         <P variant="bold" color={color}>
-          {name}
+          Buddy
         </P>
+        {name}
         {age && (
           <P color={color}>{age.includes("jaar") ? age : `${age} jaar`} </P>
         )}

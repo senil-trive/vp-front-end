@@ -2,25 +2,44 @@ import { ChildMenuItem } from "../Header";
 import { Container } from "@mui/system";
 import Link from "next/link";
 import { P } from "../../../typography";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { useRouter } from "next/router";
 
 type Props = {
   categories: ChildMenuItem[];
+  selected: string;
 };
 
-const Wrapper = styled.div`
+const Wrapper: any = styled.div`
   padding: 24px 0;
-  background-color: ${({ theme }) => theme.colors.white.normal};
+  background-color: #ebfffc;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   display: flex;
   position: absolute;
   z-index: 999;
-  width: 100%;
+  // width: 100%;
   max-width: 1440px;
   border-radius: 8px;
-  top: calc(100% + 5px);
+  top: calc(100% + 25px);
+  right: ${(props: any) =>
+    props.selected === "Kinderen"
+      ? "calc(100% - 350px)"
+      : props.selected === "Vrijwilligers"
+      ? "calc(100% - 480px)"
+      : ""};
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: calc(100% - 50px);
+    border-style: solid;
+    border-width: 10px 10px 10px 10px;
+    border-color: #ebfffc;
+    border-radius: 4px 0;
+    transform: rotate(45deg);
+  }
 
   section {
     /* flex: 1; */
@@ -30,6 +49,11 @@ const Wrapper = styled.div`
       margin-bottom: 16px;
       font-family: ${({ theme }) => theme.fonts.primary};
       text-transform: uppercase;
+      font-family: "Fjalla One";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 26px;
+      line-height: 120%;
     }
 
     ul {
@@ -37,14 +61,27 @@ const Wrapper = styled.div`
       padding: 0;
 
       li {
+        &:not(:last-child) {
+          padding-bottom: 15px;
+        }
+        width: 200px;
         a {
+          font-family: "Avenir";
           font-weight: 300;
           font-size: 18px;
           line-height: 160%;
           letter-spacing: 0.02em;
           color: ${({ theme }) => theme.colors.text.normal};
+          white-space: nowrap;
           &:hover {
-            color: ${({ theme }) => theme.colors.primary.normal};
+            background-color: ${({ theme }) => theme.colors.primary.normal};
+            padding: 12px;
+            margin: -12px;
+            border-radius: 8px;
+            color: white;
+            &:after {
+              content: "  👉🏽";
+            }
           }
           &.active {
             color: ${({ theme }) => theme.colors.primary.normal};
@@ -60,38 +97,48 @@ const Wrapper = styled.div`
   }
 `;
 
-export default function HeaderSubmenu({ categories }: Props) {
+export default function HeaderSubmenu({ categories, selected }: Props) {
   const router = useRouter();
+
+  // const [index, setIndex] = useState<string>(0);
 
   return (
     <Container maxWidth="xl">
-      <Wrapper>
-        {categories.map((category, index) => (
-          <section
-            key={index}
-            className={index < categories.length - 1 ? "with-divider" : ""}
-          >
-            <P variant="bold">{category.name}</P>
-            <ul
-              className={`grid gap-x-6 ${
-                category.children.length > 4 ? "grid-cols-2" : "grid-cols-1"
-              }`}
-            >
-              {category.children
-                .filter((item) => item.status === "published")
-                .map((item) => (
-                  <li key={item.link}>
-                    <Link
-                      className={router.asPath === item.link ? "active" : ""}
-                      href={item.link}
-                    >
-                      {item.name}
-                    </Link>
-                  </li>
-                ))}
-            </ul>
-          </section>
-        ))}
+      <Wrapper selected={selected}>
+        {categories.map((category, index) => {
+          if (category.status === "published") {
+            return (
+              <section
+                key={index}
+                className={index < categories.length - 1 ? "with-divider" : ""}
+              >
+                <P variant="bold">{category.name}</P>
+                <ul
+                  className={`grid gap-x-6 ${
+                    category.children.length > 4 ? "grid-cols-2" : "grid-cols-1"
+                  }`}
+                >
+                  {category.children
+                    .filter((item) => item.status === "published")
+                    .map((item) => (
+                      <li key={item.link}>
+                        <Link
+                          className={
+                            router.asPath === item.link ? "active" : ""
+                          }
+                          href={item.link}
+                        >
+                          {item.name}
+                        </Link>
+                      </li>
+                    ))}
+                </ul>
+              </section>
+            );
+          } else {
+            return null;
+          }
+        })}
       </Wrapper>
     </Container>
   );

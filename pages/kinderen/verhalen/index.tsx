@@ -215,12 +215,12 @@ export default function Forum({
             }}
           />
         </div>
-
+        {/* 
         <CollectionSearchBar
           quote={pageData?.search_bar_quote ?? ""}
           onSearch={handleSearch}
           searchLabel="Doorzoek de verhalen"
-        />
+        /> */}
 
         <div style={{ margin: "56px auto" }}>
           <Container style={{ marginBottom: "38px" }}>

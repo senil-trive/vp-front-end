@@ -131,7 +131,12 @@ export default function Header() {
             <SearchBar />
           </div>
         </div>
-        {selected && <HeaderSubmenu categories={selected?.children} />}
+        {selected && (
+          <HeaderSubmenu
+            selected={selected?.name}
+            categories={selected?.children}
+          />
+        )}
       </div>
       <div className="mobile-menu">
         <div className="inner">

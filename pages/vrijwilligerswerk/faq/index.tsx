@@ -49,6 +49,7 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
+  console.log(`faq data :::`, pageData);
   const showMoreButton =
     totalCount > items.length && totalCount > POST_PER_PAGE;
 
@@ -93,18 +94,37 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
         }}
       >
         <main>
-          <Hero>
+          <Hero imageUrl={parseImageURL(pageData?.background_image.id)}>
             <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16">
               <TitleWithHighlights
                 text={pageData?.page_title ?? ""}
                 textToHighlight="vrijwilligers"
+                headerElement="h1"
+                style={{
+                  fontFamily: "Fjalla One",
+                  fontStyle: `normal`,
+                  fontWeight: `400`,
+                  fontSize: `64px`,
+                  lineHeight: `140%`,
+                  color: `white`,
+                }}
               />
-              <P>{pageData?.page_subtitle}</P>
+              <P
+                style={{
+                  fontStyle: `normal`,
+                  fontWeight: `300`,
+                  fontSize: `18px`,
+                  lineHeight: `160%`,
+                  color: `white`,
+                }}
+                className="font-avenir"
+              >
+                {pageData?.page_subtitle}
+              </P>
             </div>
           </Hero>
 
           <FAQList
-            title="Meest gestelde vragen"
             items={items}
             isLoading={isLoading}
             showLoadMore={showMoreButton}
