@@ -178,6 +178,7 @@ export default function ZeroResponsesPage({
                         }
                         comments={item.comments.length}
                         content={item.content}
+                        image={item.user_image}
                       />
                     </Link>
                   </Grid>

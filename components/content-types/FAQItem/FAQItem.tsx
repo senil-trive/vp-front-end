@@ -40,28 +40,27 @@ const FAQItem: React.FC<FAQItemProps> = ({
 
   return (
     <StyleFaq
-      className={`cursor-pointer p-[32px] rounded-lg ${
-        isSelected ? "bg-[#F3F8FE]" : "bg-[#F4FCFB]"
-      } hover:bg-[#F3F8FE]`}
+      className={`cursor-pointer pl-[61px] p-[42px] rounded-lg ${
+        isSelected ? "bg-[#3FC7B4]" : "bg-[#EBFFFC]"
+      } hover:bg-[#3FC7B4]`}
       onClick={handelSelect}
     >
       <div className="flex items-center justify-between  text-left">
-        <H3 variant="bold" color={isSelected ? "primary" : "secondary"}>
-          {title}
-        </H3>
+        <H3 color={isSelected ? "white" : "black"}>{title}</H3>
         <button
           onClick={handelSelect}
           className="flex items-center justify-center w-8 h-8"
         >
           {isSelected ? (
-            <FiMinus color={theme.colors.primary.normal} size={25} />
+            <FiMinus color={`white`} size={42} />
           ) : (
-            <FiPlus size={25} color={theme.colors.secondary.normal} />
+            <FiPlus color={`black`} size={42} />
           )}
         </button>
       </div>
+
       <div
-        className={`description mt-4 text-left ${isSelected ? "visible" : ""}`}
+        className={`description  text-left ${isSelected ? "visible mt-4" : ""}`}
       >
         {parseHTMLtoReact(description ?? "")}
       </div>

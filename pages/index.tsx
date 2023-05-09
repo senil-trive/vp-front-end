@@ -180,24 +180,28 @@ export default function Home({
       >
         <Container>
           <Grid container>
-            <Grid item xs={0} md={2} lg={3} />
-            <Grid item xs={12} md={8} lg={6}>
+            <Grid item xs={0} md={2} />
+            <Grid item xs={12} md={8}>
               <div className="text-center">
                 <TitleWithHighlights
                   text={pageData?.page_title ?? ""}
                   color="white"
-                  style={{ textAlign: "center" }}
+                  className="sm:text-[46px] lg:text-[80px] font-light"
+                  style={{
+                    textAlign: "center",
+                  }}
                 />
 
                 <TextWithHighlights
                   color="white"
                   variant="light"
+                  className="sm:text-[18px]  lg:text-[28px] "
                   text={pageData?.page_subtitle ?? ""}
                   textToHighlight={pageData?.highlight_words ?? []}
                 />
               </div>
             </Grid>
-            <Grid item xs={0} md={2} lg={3} />
+            <Grid item xs={0} md={2} />
           </Grid>
         </Container>
       </Hero>
@@ -215,7 +219,25 @@ export default function Home({
               status: cat.status,
             }))}
             selected={selectedTag}
-            prefix={<H4>Onderwerp 👉</H4>}
+            prefix={
+              <H4
+                style={{
+                  whiteSpace: "nowrap",
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: "5px",
+                }}
+              >
+                Onderwerp{" "}
+                <span
+                  style={{
+                    marginTop: "-6px",
+                  }}
+                >
+                  👉🏾
+                </span>
+              </H4>
+            }
             suffix={<ChevronRight />}
             onSelect={(x: string) => {
               setSelectedTag(x);

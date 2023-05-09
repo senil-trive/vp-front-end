@@ -14,7 +14,7 @@ const StyledPost = styled.article`
   overflow: hidden;
   width: 100%;
   height: 624px;
-  border: 1px solid ${({ theme }) => theme.colors.tertiary.normal};
+  // border: 1px solid ${({ theme }) => theme.colors.tertiary.normal};
 
   > div {
     height: 100%;

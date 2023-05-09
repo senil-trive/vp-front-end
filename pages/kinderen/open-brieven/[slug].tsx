@@ -147,7 +147,7 @@ export default function LetterDetail({ pageData, relatedLetters }: Props) {
             publishedTime: pageData.date_created,
             modifiedTime: pageData.date_updated,
             authors: ["Villa Pinedo"],
-            tags: pageData.categories?.map((cat) => cat.categories_id.name),
+            tags: pageData.categories?.map((cat) => cat.categories_id?.name),
           },
         },
       }}

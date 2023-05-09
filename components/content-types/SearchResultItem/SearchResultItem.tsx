@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 
-import { BsArrowRight } from "react-icons/bs";
+import { BsChevronRight } from "react-icons/bs";
 import { P } from "../../typography";
 import styled from "styled-components";
 
@@ -22,65 +22,52 @@ type Props = {
 };
 
 const Wrapper = styled.div<{ colorVariant: number }>`
+  border-radius: 8px;
+  .summary {
+    font-family: "Fjalla One";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 120%;
+    color: white;
+    margin-bottom: 15px;
+  }
   height: 100%;
 
-  .summary {
-    font-weight: 800;
-    color: ${({ theme, colorVariant }) => {
-      switch (colorVariant) {
-        case 1:
-          return theme.colors.primary.normal;
-        case 2:
-          return theme.colors.info.normal;
-        case 3:
-          return theme.colors.secondary.normal;
-
-        default:
-          return theme.colors.primary.normal;
-      }
-    }};
-  }
   .category {
     text-transform: capitalize;
   }
 
-  ul {
-    padding: 24px;
-    gap: 12px;
-    background: ${({ theme, colorVariant }) => {
-      switch (colorVariant) {
-        case 1:
-          return theme.colors.tertiary.light;
-        case 2:
-          return theme.colors.info.light;
-        case 3:
-          return theme.colors.primary.light;
+  background: ${({ theme, colorVariant }) => {
+    switch (colorVariant) {
+      case 1:
+        return theme.colors.tertiary.normal;
+      case 2:
+        return theme.colors.secondary.normal;
+      case 3:
+        return theme.colors.primary.normal;
 
-        default:
-          return theme.colors.tertiary.light;
-      }
-    }};
+      default:
+        return theme.colors.tertiary.light;
+    }
+  }};
+  padding: 50px;
+  ul {
+    gap: 12px;
     border-radius: 8px;
-    padding-inline-start: 40px;
+    // padding-inline-start: 40px;
 
     li {
-      font-weight: 300;
+      a {
+        span {
+          font-family: "Avenir";
+        }
+      }
+      font-weight: 500;
       font-size: 18px;
       line-height: 160%;
-
-      color: ${({ theme, colorVariant }) => {
-        switch (colorVariant) {
-          case 1:
-            return theme.colors.primary.normal;
-          case 2:
-            return theme.colors.info.normal;
-          case 3:
-            return theme.colors.secondary.normal;
-
-          default:
-            return theme.colors.primary.normal;
-        }
-      }};
+      margin-bottom: 15px;
+      color: #ffff;
     }
   }
 `;
@@ -94,21 +81,22 @@ export default function SearchResultItem({
   return (
     <Wrapper colorVariant={colorVariant}>
       <section>
-        <P variant="light">
-          <span className="summary">
-            {amount} {amount === 1 ? "Resultaat" : "Resultaten"}
-          </span>{" "}
+        <p className="summary uppercase">
+          {amount} {amount === 1 ? "Resultaat" : "Resultaten"}
           {resultTitleSuffix}
-        </P>
+        </p>
       </section>
 
       {list.length > 0 && (
-        <ul className="list-disc">
+        <ul className="list-disc list-none">
           {list.map((item) => (
             <li key={item.link}>
               <a href={item.link} className="flex items-center hover:underline">
                 <span>{item.name}</span>
-                <BsArrowRight className="ml-2" style={{ minWidth: 18 }} />
+                <BsChevronRight
+                  className="ml-2 font-extrabold"
+                  style={{ minWidth: 18 }}
+                />
               </a>
             </li>
           ))}

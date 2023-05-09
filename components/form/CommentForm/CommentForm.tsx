@@ -1,5 +1,5 @@
 import { Container, Grid } from "@mui/material";
-import { H3, H4, P } from "../../typography";
+import { H3, H2, P } from "../../typography";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
@@ -13,7 +13,7 @@ import Input from "../Input/Input";
 import Section from "../../layout/Section/Section";
 import TextArea from "../TextArea/TextArea";
 import { postComment } from "../../../utils/api";
-import { useTheme } from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { rgba } from "../../../utils/colors";
 
 type Props = {
@@ -70,84 +70,128 @@ const SubmitForm = ({
     submitForm(data);
   };
 
-  return (
-    <Section paddingSize={paddingSize}>
-      {!isSubmitted ? (
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Grid container spacing="33px">
-            <Grid item xs={12} md={6}>
-              <Input
-                label="Voornaam"
-                name="user_name"
-                register={register}
-                hasError={!!errors.user_name}
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Input
-                label="Leeftijd"
-                type="number"
-                name="user_age"
-                register={register}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Input
-                label="Email adres"
-                type="email"
-                name="user_email"
-                register={register}
-              />
-            </Grid>
+  const StyledForm = styled.div`
+    &:before {
+      content: " ";
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0px;
+      width: 100%;
+      height: 100%;
+      opacity: 0.25;
+      background: url("/chatBg.png");
+      // background-size: cover;
+      // background-repeat: no-repeat;
+      background-position: center center;
+      z-index: 1;
+    }
 
-            <Grid item xs={12} md={6}>
-              <Dropdown
-                options={GENDERS}
-                label="Geslacht"
-                name="user_gender"
-                register={register}
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              {/* <Input
+    background-color: rgba(255, 151, 29, 1);
+    border-radius: 8px;
+    padding: 32px;
+
+    label {
+      font-family: "Avenir";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 160%;
+      color: white;
+    }
+
+    form {
+      position: relative;
+      z-index: 2;
+      div,
+      .selectBox {
+        border: none;
+      }
+    }
+  `;
+
+  return (
+    <Section backgroundColor="white" paddingSize={paddingSize}>
+      <div className="relative">
+        <StyledForm>
+          {!isSubmitted ? (
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <Grid container spacing="33px">
+                <Grid item xs={12} md={6}>
+                  <Input
+                    label="Voornaam"
+                    name="user_name"
+                    register={register}
+                    hasError={!!errors.user_name}
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Input
+                    label="Leeftijd"
+                    type="number"
+                    name="user_age"
+                    register={register}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Input
+                    label="Email adres"
+                    type="email"
+                    name="user_email"
+                    register={register}
+                  />
+                </Grid>
+
+                <Grid item xs={12} md={6}>
+                  <Dropdown
+                    options={GENDERS}
+                    label="Geslacht"
+                    name="user_gender"
+                    register={register}
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  {/* <Input
                 label="Upload bestand"
                 type="file"
                 name="attachment_image"
                 register={register}
               /> */}
-            </Grid>
-            <Grid item xs={12}>
-              <TextArea
-                label="Schrijf hier je vraag of bericht *"
-                name="content"
-                placeholder="Schrijf hier je vraag of bericht"
-                required
-                register={register}
-                hasError={!!errors.content}
-                helperText={!!errors.content ? "Dit veld is verplicht" : ""}
-              />
-            </Grid>
+                </Grid>
+                <Grid item xs={12}>
+                  <TextArea
+                    label="Schrijf hier je vraag of bericht *"
+                    name="content"
+                    placeholder="Schrijf hier je vraag of bericht"
+                    required
+                    register={register}
+                    hasError={!!errors.content}
+                    helperText={!!errors.content ? "Dit veld is verplicht" : ""}
+                  />
+                </Grid>
 
-            <Grid item xs={12}>
-              <P variant="light">* Verplichte velden</P>
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Button loading={isLoading} disabled={isSubmitted}>
-                {isLoading && "bezig..."}
-                {isSubmitted && "Verzonden"}
-                {!isLoading && !isSubmitted && "Reactie plaatsen"}
-              </Button>
-            </Grid>
-          </Grid>
-        </form>
-      ) : (
-        <div className="flex flex-col items-center justify-center">
-          <FiCheck size={40} color={colors.secondary.normal} />
-          <H3 variant="bold" color="primary">
-            Bedankt! Jouw reactie wordt door ons beoordeeld.
-          </H3>
-        </div>
-      )}
+                <Grid item xs={12}>
+                  <P variant="light">* Verplichte velden</P>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <Button loading={isLoading} disabled={isSubmitted}>
+                    {isLoading && "bezig..."}
+                    {isSubmitted && "Verzonden"}
+                    {!isLoading && !isSubmitted && "Reactie plaatsen"}
+                  </Button>
+                </Grid>
+              </Grid>
+            </form>
+          ) : (
+            <div className="flex flex-col items-center justify-center">
+              {/* <FiCheck size={40} color={colors.secondary.normal} /> */}
+              <H3 variant="bold" color="white">
+                Bedankt! Jouw reactie wordt door ons beoordeeld.
+              </H3>
+            </div>
+          )}
+        </StyledForm>
+      </div>
     </Section>
   );
 };
@@ -172,9 +216,7 @@ export default function CommentForm({
       <Grid container style={{ margin: "70px 0" }}>
         <Grid item xs={0} md={2} lg={2} />
         <Grid item xs={12} md={8} lg={8}>
-          <H4 variant="bold" color="tertiary">
-            Reacties ({comments.length})
-          </H4>
+          <H2>Reacties ({comments.length})</H2>
         </Grid>
       </Grid>
       {comments

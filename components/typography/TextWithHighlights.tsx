@@ -12,19 +12,21 @@ interface TextWithHighlightsProps {
   color?: ColorType;
   variant?: "bold" | "regular" | "light" | "italic" | "helper";
   style?: React.CSSProperties;
+  className?: string
 }
 
 function regexReplace(
   text: string,
   searchString: string,
-  highlightColor: string
+  highlightColor: string,
+
 ) {
   const regex = new RegExp(`${searchString}`, "gi");
 
   return text.replace(
     regex,
     `<span
-        className="font-heading p-[15px] rounded-[8px] font-bold mx-[10px] text-white"
+        className="font-heading p-[15px] rounded-[8px] font-normal mx-[10px] text-white"
         style="backgroundColor: ${highlightColor}; line-height: 1;"
       >
         $&
@@ -38,6 +40,7 @@ const TextWithHighlights: React.FC<TextWithHighlightsProps> = ({
   variant = "light",
   color = "primary",
   style,
+  className,
 }) => {
   let newText = text;
 
@@ -54,7 +57,7 @@ const TextWithHighlights: React.FC<TextWithHighlightsProps> = ({
   }
 
   return (
-    <P color={color} variant={variant} style={style}>
+    <P color={color} variant={variant} style={style} className={className}>
       <>{parseHTMLtoReact(newText)}</>
     </P>
   );

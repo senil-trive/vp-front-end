@@ -1,17 +1,17 @@
-import { H3, H4, P, TitleWithHighlights } from "../../../components/typography";
+import React from "react";
 
+import { H3, H4, P, TitleWithHighlights } from "../../../components/typography";
 import BriefItem from "../../../components/content-types/BriefItem/BriefItem";
-import { Container } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import ENDPOINTS from "../../../constants/endpoints";
 import { FiChevronsDown } from "react-icons/fi";
 import { Hero } from "../../../components/layout";
 import { Letter } from "../../../types/content-types/Letter.type";
 import { POST_PER_PAGE } from "../../../constants/app-configs";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
-import React from "react";
-import TextItem from "../../../components/content-types/TextItem/TextItem";
 import { getLetters } from "../../../utils/api";
 import parseImageURL from "../../../utils/parseImageURL";
+import { FaChevronDown } from "react-icons/fa";
 
 interface LettersOverviewPageProps {
   pageData: any;
@@ -59,6 +59,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
   pageData,
   lettersData,
 }) => {
+  console.log(`letters data :::`, pageData);
   return (
     <div>
       <PageWrapper
@@ -76,20 +77,46 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
         }}
       >
         <main>
-          <Hero>
-            <div className="flex flex-col items-center justify-center text-center max-w-2xl mt-10 mb-0">
+          <Hero
+            center
+            imageUrl={parseImageURL(`84086671-92b0-463f-bef1-1ea98a9b6c34`)}
+            style={{
+              minHeight: 649,
+              position: "relative",
+            }}
+          >
+            <div className="flex flex-col items-center justify-center text-center max-w-2xl  mb-0">
               <TitleWithHighlights
                 highlightColor="info"
                 text={pageData?.page_title}
-                textToHighlight={pageData?.page_title_highlighted}
+                // textToHighlight={pageData?.page_title_highlighted}
                 headerElement="h1"
-                color="primary"
+                color="white"
+                style={{
+                  fontFamily: "Fjalla One",
+                  fontStyle: `normal`,
+                  fontWeight: `400`,
+                  fontSize: `64px`,
+                  lineHeight: `140%`,
+                }}
               />
-              <P>{pageData?.page_subtitle}</P>
+              <P
+                style={{
+                  textAlign: "center",
+                  fontFamily: "Avenir",
+                  fontStyle: "normal",
+                  fontWeight: `300`,
+                  fontSize: `18px`,
+                  lineHeight: `160%`,
+                  color: `white`,
+                }}
+              >
+                {pageData?.page_subtitle}
+              </P>
             </div>
           </Hero>
 
-          <section className="my-20">
+          {/* <section className="my-20">
             <Container>
               <div
                 style={{
@@ -104,35 +131,60 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                 <P color="white">{pageData?.intro_description}</P>
               </div>
             </Container>
-          </section>
-          <section className="my-20">
-            <Container>
-              {pageData?.highlighted_letter && (
-                <TextItem
-                  title={pageData?.highlighted_letter?.title}
-                  titleHighlighted={
-                    pageData?.highlighted_letter?.title_highlighted
-                  }
-                  content={pageData?.highlighted_letter?.description}
-                  imageURL={parseImageURL(
-                    pageData?.highlighted_letter?.image?.id
+          </section> */}
+          <section className="mb-20 -translate-y-24">
+            <Container maxWidth={`xl`}>
+              <Grid spacing={`32px`} container>
+                <Grid item xs={12} md={6} lg={6}>
+                  {pageData?.intro_title && (
+                    <BriefItem
+                      key={`a23y2u0`}
+                      title={pageData?.intro_title}
+                      content={pageData?.intro_description}
+                      imgSrc={parseImageURL(
+                        `422e656a-7c18-41a3-b702-b07b17b00736`
+                      )}
+                      fileSrc={`/kinderen/open-brieven/${pageData?.highlighted_letter?.slug}`}
+                      bg={`#FE517E`}
+                    />
                   )}
-                  imageAlt={pageData?.highlighted_letter?.title}
-                  showButton={true}
-                  buttonLabel={"Download de brief"}
-                  buttonURL={`/kinderen/open-brieven/${pageData?.highlighted_letter?.slug}`}
-                />
-              )}
+                </Grid>
+                <Grid item xs={12} md={6} lg={6}>
+                  {pageData?.highlighted_letter && (
+                    <BriefItem
+                      key={`a23y2u0`}
+                      title={pageData?.highlighted_letter?.title}
+                      content={pageData?.highlighted_letter?.description}
+                      imgSrc={parseImageURL(
+                        pageData?.highlighted_letter?.image?.id
+                      )}
+                      fileSrc={`/kinderen/open-brieven/${pageData?.highlighted_letter?.slug}`}
+                      bg={`#006EF7`}
+                    />
+                  )}
+                </Grid>
+              </Grid>
             </Container>
           </section>
           <section>
             <Container>
               <div className="flex flex-col items-center justify-center my-[100px]">
-                <H4 variant="bold" color="primary" style={{ margin: 0 }}>
-                  Meer open brieven
+                <H4
+                  style={{
+                    margin: 0,
+                    fontFamily: "Fjalla One",
+                    fontStyle: `normal`,
+                    fontWeight: `400`,
+                    fontSize: `18px`,
+                    lineHeight: `150%`,
+                    textAlign: `center`,
+                  }}
+                >
+                  Meer open brieven, bekijk <br /> ze allemaal!
                 </H4>
-                <P>Bekijk ze allemaal</P>
-                <FiChevronsDown className="text-2xl text-orange-500" />
+                <div className="mt-7 text-2xl p-3 rounded-full bg-[#FE517E] text-white">
+                  <FaChevronDown stroke="white" color="white" />
+                </div>
               </div>
             </Container>
             <Container maxWidth="xl">
@@ -141,10 +193,12 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                   <BriefItem
                     key={letter.id}
                     title={letter.title}
-                    titleHighlighted={letter.title_highlighted}
+                    // titleHighlighted={letter.title_highlighted}
                     content={letter.description}
                     imgSrc={parseImageURL(letter.image?.id)}
                     fileSrc={`/kinderen/open-brieven/${letter.slug}`}
+                    bg={letter.bg_color}
+                    imgHeight={180}
                   />
                 ))}
               </div>

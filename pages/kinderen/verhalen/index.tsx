@@ -186,7 +186,25 @@ export default function Forum({
           <TagList
             tags={tags}
             selected={selectedTag}
-            prefix={<H4>Onderwerp 👉</H4>}
+            prefix={
+              <H4
+                style={{
+                  whiteSpace: "nowrap",
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: "5px",
+                }}
+              >
+                Onderwerp{" "}
+                <span
+                  style={{
+                    marginTop: "-6px",
+                  }}
+                >
+                  👉🏾
+                </span>
+              </H4>
+            }
             suffix={<ChevronRight />}
             onSelect={(x: string) => {
               if (x === selectedTag) {
@@ -197,12 +215,12 @@ export default function Forum({
             }}
           />
         </div>
-
+        {/* 
         <CollectionSearchBar
           quote={pageData?.search_bar_quote ?? ""}
           onSearch={handleSearch}
           searchLabel="Doorzoek de verhalen"
-        />
+        /> */}
 
         <div style={{ margin: "56px auto" }}>
           <Container style={{ marginBottom: "38px" }}>

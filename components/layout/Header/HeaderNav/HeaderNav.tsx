@@ -30,7 +30,7 @@ const StyledNav = styled.nav`
       &.selected {
         font-weight: 700;
         p {
-          color: ${({ theme }) => theme.colors.primary.normal};
+          color: black;
         }
       }
     }

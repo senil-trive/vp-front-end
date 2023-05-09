@@ -67,6 +67,7 @@ export type VolunteersFAQPageProps = {
     seo_title: string;
     seo_description: string;
     seo_image: ImageFileType;
+    background_image: ImageFileType;
   };
   faqData: FAQ[];
   totalFaqs: number;

@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import TikTokPost, {
   TikTokPostProps,
 } from "../../content-types/TikTokPost/TikTokPost";
-
+import { motion, Variants } from "framer-motion";
 import BlogItem from "../../content-types/BlogItem/BlogItem";
 import { BlogType } from "../../../types/content-types/Blog.type";
 import BriefItem from "../../content-types/BriefItem/BriefItem";
@@ -44,6 +44,22 @@ type Props = {
 export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
   const [loading, setLoading] = useState(true);
 
+  const cardVariants: Variants = {
+    offscreen: {
+      y: 300,
+    },
+    onscreen: {
+      y: 0,
+      // rotate: -10,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        bounce: 0.5,
+        duration: 0.8,
+      },
+    },
+  };
+
   useEffect(() => {
     if (feed.length > 0) {
       setLoading(false);
@@ -71,9 +87,13 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
               case "video":
                 const videoContent = content as VideoPropsType;
                 return (
-                  <div
-                    className={`grid-item grid-item-w-${item.width} `}
+                  <motion.div
+                    className={`grid-item grid-item-w-${item.width}`}
                     key={index}
+                    variants={cardVariants}
+                    initial="offscreen"
+                    whileInView="onscreen"
+                    viewport={{ once: true, amount: 0.1 }}
                   >
                     <VideoItem
                       poster={videoContent.poster}
@@ -81,32 +101,40 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
                       src={videoContent.src}
                       subtitle={videoContent.subtitle}
                     />
-                  </div>
+                  </motion.div>
                 );
 
               case "letter":
                 const letterContent = content as Letter;
                 return (
-                  <div
+                  <motion.div
                     className={`grid-item grid-item-w-${item.width}`}
                     key={index}
+                    variants={cardVariants}
+                    initial="offscreen"
+                    whileInView="onscreen"
+                    viewport={{ once: true, amount: 0.1 }}
                   >
                     <BriefItem
                       key={letterContent.id}
                       title={letterContent.title}
-                      titleHighlighted={letterContent.title_highlighted}
+                      bg={letterContent.bg_color}
                       content={letterContent.description}
                       imgSrc={parseImageURL(letterContent?.image?.id)}
                       fileSrc={`/kinderen/open-brieven/${letterContent.slug}`}
                     />
-                  </div>
+                  </motion.div>
                 );
               case "forum":
                 const forumContent = content as ForumPostType;
                 return (
-                  <div
+                  <motion.div
                     className={`grid-item grid-item-w-${item.width}`}
                     key={index}
+                    variants={cardVariants}
+                    initial="offscreen"
+                    whileInView="onscreen"
+                    viewport={{ once: true, amount: 0.1 }}
                   >
                     <ForumPost
                       showButton
@@ -114,6 +142,7 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
                       buttonUrl={`/kinderen/forum/${forumContent.slug}`}
                       truncateContent
                       gender={forumContent.user_gender}
+                      image={parseImageURL(forumContent?.user_image?.id)}
                       age={forumContent.user_age}
                       authorType={forumContent.user_name}
                       postDate={new Date(forumContent.date_created)}
@@ -129,16 +158,20 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
                       comments={forumContent.comments.length}
                       content={forumContent.content}
                     />
-                  </div>
+                  </motion.div>
                 );
 
               case "blog":
                 const blogContent = content as BlogType;
 
                 return (
-                  <div
+                  <motion.div
                     className={`grid-item grid-item-w-${item.width}`}
                     key={index}
+                    variants={cardVariants}
+                    initial="offscreen"
+                    whileInView="onscreen"
+                    viewport={{ once: true, amount: 0.1 }}
                   >
                     <BlogItem
                       mediaSrc={
@@ -150,47 +183,57 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
                       link={`/kinderen/verhalen/${blogContent.slug}`}
                       type={blogContent.type}
                       author={blogContent.author}
-                      content={
-                        blogContent.type === "blog" ? blogContent.content : ""
-                      }
+                      content={blogContent.content}
                       postDate={new Date(blogContent.date_created)}
                       category={blogContent.categories[0]?.categories_id?.name}
                       title={blogContent.title}
                     />
-                  </div>
+                  </motion.div>
                 );
               case "instagram":
                 const instaContent = content as InstaPost;
 
                 return (
-                  <div
+                  <motion.div
                     className={`grid-item grid-item-w-${item.width}`}
                     key={index}
+                    variants={cardVariants}
+                    initial="offscreen"
+                    whileInView="onscreen"
+                    viewport={{ once: true, amount: 0.1 }}
                   >
                     <InstagramPost embed_code={instaContent.embed_code} />
-                  </div>
+                  </motion.div>
                 );
               case "tiktok":
                 // TODO: replace with CMS content
                 const tiktokContent = content as TikTokPostProps;
                 return (
-                  <div
+                  <motion.div
                     className={`grid-item grid-item-w-${item.width}`}
                     key={index}
+                    variants={cardVariants}
+                    initial="offscreen"
+                    whileInView="onscreen"
+                    viewport={{ once: true, amount: 0.1 }}
                   >
                     <TikTokPost embed_code={tiktokContent.embed_code} />
-                  </div>
+                  </motion.div>
                 );
               case "chat":
                 // TODO: replace with CMS content
                 const chatContent = content as VideoPropsType;
                 return (
-                  <div
+                  <motion.div
                     className={`grid-item grid-item-w-${item.width}`}
                     key={index}
+                    variants={cardVariants}
+                    initial="offscreen"
+                    whileInView="onscreen"
+                    viewport={{ once: true, amount: 0.1 }}
                   >
                     <ChatExampleItem />
-                  </div>
+                  </motion.div>
                 );
 
               default:

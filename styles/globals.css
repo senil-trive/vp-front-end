@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,700;1,400&display=swap");
-@import url("https://fonts.cdnfonts.com/css/avenir");
-@import url("https://fonts.cdnfonts.com/css/avenir-next-cyr");
+/* @import url("https://fonts.cdnfonts.com/css/avenir");
+@import url("https://fonts.cdnfonts.com/css/avenir-next-cyr"); */
 @import url("https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap");
 
 @import "tailwindcss/tailwind.css";
@@ -11,6 +11,17 @@
 @import "swiper/css";
 @import "swiper/css/free-mode";
 @import "swiper/css/pagination";
+
+@font-face {
+  font-family: "Avenir";
+  src: url("../fonts/avenir/avenir.otf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
 
 html,
 body,
@@ -89,3 +100,17 @@ p {
 .prevent-scrolling {
   overflow-y: hidden;
 }
+
+/* Home page chat box */
+
+.chat_btn a {
+  background-color: #fff;
+  color: rgba(255, 151, 29, 1);
+  font-weight: 400;
+  border: 2px solid #fff;
+}
+
+.chat_btn a:hover {
+  color: #fff;
+}
+/* Home page chat box */

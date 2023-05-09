@@ -12,6 +12,7 @@ interface TitleWithHighlightsProps {
   color?: ColorType;
   highlightColor?: "info" | "tertiary";
   style?: React.CSSProperties;
+  className?: string
 }
 
 function regexReplace(
@@ -39,6 +40,7 @@ const TitleWithHighlights: React.FC<TitleWithHighlightsProps> = ({
   color = "primary",
   highlightColor = "info",
   style,
+  className,
 }) => {
   const theme = useTheme();
   let newText = text;
@@ -62,7 +64,7 @@ const TitleWithHighlights: React.FC<TitleWithHighlightsProps> = ({
   switch (headerElement) {
     case "h1":
       return (
-        <H1 color={color} variant="bold" style={style}>
+        <H1 color={color} variant="bold" style={style} className={className}>
           <>{parseHTMLtoReact(newText)}</>
         </H1>
       );
@@ -74,7 +76,7 @@ const TitleWithHighlights: React.FC<TitleWithHighlightsProps> = ({
       );
     case "h3":
       return (
-        <H3 color={color} variant="bold" style={style}>
+        <H3 color={color} variant="bold" style={style} className={className}>
           <>{parseHTMLtoReact(newText)}</>
         </H3>
       );

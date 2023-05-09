@@ -10,6 +10,7 @@ import Person from "../Person/Person";
 import { rgba } from "../../../utils/colors";
 import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
 import { FiMessageCircle } from "react-icons/fi";
+import ReplyIcon from "../../icons/ReplyIcon";
 
 type Props = {
   author: string;
@@ -32,11 +33,10 @@ const StyledForumPost = styled.article<{ isReplyComment: boolean }>`
   }
 
   .content {
-    border: 1px solid ${({ theme }) => theme.colors.secondary.normal};
     padding: 24px;
     border-radius: 8px;
     margin-bottom: 34px;
-    background-color: white;
+    background-color: #ebfffc;
   }
 
   footer {
@@ -77,10 +77,14 @@ export default function ForumComment({
   return (
     <StyledForumPost isReplyComment={isReplyComment}>
       <header>
-        <Person age={age} name={author} color="secondary" />
+        <Person age={age} name={author} />
         <div>
           {postDate && (
-            <P variant="helper" style={{ textAlign: "right", color: "#555" }}>
+            <P
+              variant="helper"
+              style={{ textAlign: "right", color: "#150F2F" }}
+              className="text-base font-avenir italic"
+            >
               {formatDistance(postDate, new Date(), {
                 includeSeconds: false,
                 addSuffix: true,
@@ -92,9 +96,11 @@ export default function ForumComment({
       </header>
       <div className="content">
         {parseHTMLtoReact(title)}
-        <footer>
-          <button onClick={handleReply}>
-            <FiMessageCircle size={24} color={colors.secondary.normal} />
+        <footer className="bg-white -mx-6 -mb-6 justify-start">
+          <button className="flex mt-8" onClick={handleReply}>
+            <ReplyIcon />
+            <span className="ml-2 font-avenir text-lg font-light">Reageer</span>
+            {/* <FiMessageCircle size={24} color={colors.secondary.normal} /> */}
           </button>
           {/* <MoreIcon /> */}
         </footer>

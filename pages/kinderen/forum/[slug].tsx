@@ -93,6 +93,7 @@ export default function ForumDetail({ pageData, comments = [] }: Props) {
               content={pageData.content}
               comments={comments.length}
               fullHeight={false}
+              image={pageData.attachment_image}
             />
           </Grid>
           <Grid item xs={0} md={2} lg={2} />
