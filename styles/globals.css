@@ -14,7 +14,8 @@
 
 @font-face {
   font-family: "Avenir";
-  src: url("../fonts/avenir/avenir.otf");
+  /* src: url("../fonts/avenir/avenir.otf"); */
+  src: url("../fonts/avenir/avenir_next.ttf");
   font-weight: normal;
   font-style: normal;
 }
