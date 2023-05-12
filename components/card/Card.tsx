@@ -86,6 +86,10 @@ const StyledBlog = styled(BaseStyle)`
       color: white;
     }
     a {
+      border: none;
+      font-weight: 400;
+      font-size: 18px;
+      font-family: "Fjalla One";
       background: white;
       color: ${({ theme }) => theme.colors.secondary.normal};
     }

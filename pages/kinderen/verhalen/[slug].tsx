@@ -83,14 +83,16 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
         />
       );
     } else if (pageData?.image?.id) {
-      Child = (
-        <Image
-          className="absolute h-full w-full top-0 left-0 z-0 object-cover"
-          src={parseImageURL(pageData?.image.id)}
-          alt={pageData.title}
-          fill
-        />
-      );
+      console.log(pageData);
+      return parseImageURL(pageData?.image.id);
+      // Child = (
+      //   <Image
+      //     className="absolute h-full w-full top-0 left-0 z-0 object-cover"
+      //     src={parseImageURL(pageData?.image.id)}
+      //     alt={pageData.title}
+      //     fill
+      //   />
+      // );
     }
 
     if (!Child) return;
@@ -121,30 +123,71 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
         },
       }}
     >
-      <BreadCrumbs />
+      {/* <BreadCrumbs /> */}
 
       <main style={{ marginBottom: "80px" }}>
-        <Hero>
-          <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16">
-            {pageData?.categories[0] && (
-              <Tag variant="dark" size="m">
-                <>{pageData?.categories[0]?.categories_id?.name}</>
-              </Tag>
-            )}
-            {pageData?.author && <P>{pageData.author}:</P>}
-            <TitleWithHighlights
-              highlightColor="info"
-              text={`${pageData?.title}`}
-              textToHighlight={pageData?.title ?? ""}
-              headerElement="h1"
-              color="primary"
-            />
-          </div>
-        </Hero>
+        {pageData?.image?.id ? (
+          <Hero
+            center
+            imageUrl={`${generateMediaItem()}`}
+            style={{
+              minHeight: 649,
+              position: "relative",
+            }}
+          >
+            <div className="flex flex-col items-center justify-center text-center max-w-2xl  mb-0">
+              <TitleWithHighlights
+                highlightColor="info"
+                text={`${pageData?.title}`}
+                // textToHighlight={pageData?.page_title_highlighted}
+                headerElement="h1"
+                color="white"
+                style={{
+                  fontFamily: "Fjalla One",
+                  fontStyle: `normal`,
+                  fontWeight: `400`,
+                  fontSize: `64px`,
+                  lineHeight: `140%`,
+                }}
+              />
+              <P
+                style={{
+                  textAlign: "center",
+                  fontFamily: "Avenir",
+                  fontStyle: "normal",
+                  fontWeight: `300`,
+                  fontSize: `18px`,
+                  lineHeight: `160%`,
+                  color: `white`,
+                }}
+              >
+                {/* {pageData?.page_subtitle} */}
+              </P>
+            </div>
+          </Hero>
+        ) : (
+          <Hero>
+            <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16">
+              {pageData?.categories[0] && (
+                <Tag variant="dark" size="m">
+                  <>{pageData?.categories[0]?.categories_id?.name}</>
+                </Tag>
+              )}
+              {pageData?.author && <P>{pageData.author}:</P>}
+              <TitleWithHighlights
+                highlightColor="info"
+                text={`${pageData?.title}`}
+                textToHighlight={pageData?.title ?? ""}
+                headerElement="h1"
+                color="primary"
+              />
+            </div>
+          </Hero>
+        )}
 
         <Container>
           <StyledBlogContent>
-            <div>{generateMediaItem()}</div>
+            {!pageData?.image?.id && <div>{generateMediaItem()}</div>}
 
             <div className="content mt-[50px] mb-[90px]">
               {parseHTMLtoReact(pageData?.content ?? "")}
