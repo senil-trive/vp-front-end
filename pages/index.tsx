@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 
 import { HomePageProps } from "../types/pageTypes";
 import { MasonryGrid } from "../components/layout/MasonryGrid/MasonryGrid";
-import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
+import PageWrapper from "../components/layout/PageWrapper/PageWrappernew";
 import TagList from "../components/buttons/TagList/TagList";
 import { generateFeedTiles } from "../utils/feed-utils";
 import parseImageURL from "../utils/parseImageURL";
@@ -157,7 +157,7 @@ export default function Home({
 
   return (
     <PageWrapper
-    homepage={true}
+      homepage={true}
       seo={{
         title: pageData?.seo_title,
         description: pageData?.seo_title,
@@ -166,7 +166,6 @@ export default function Home({
           ? parseImageURL(pageData?.seo_image?.id)
           : undefined,
       }}
-    
     >
       <Hero
         center

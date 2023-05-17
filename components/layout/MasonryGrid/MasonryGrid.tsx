@@ -45,19 +45,19 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
   const [loading, setLoading] = useState(true);
 
   const cardVariants: Variants = {
-    offscreen: {
-      y: 100,
-    },
-    onscreen: {
-      y: 0,
-      // rotate: -10,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        bounce: 0.1,
-        duration: 0.4,
-      },
-    },
+    // offscreen: {
+    //   y: 100,
+    // },
+    // onscreen: {
+    //   y: 0,
+    //   // rotate: -10,
+    //   transition: {
+    //     type: "spring",
+    //     stiffness: 100,
+    //     fade: 0.1,
+    //     duration: 0.5,
+    //   },
+    // },
   };
 
   useEffect(() => {

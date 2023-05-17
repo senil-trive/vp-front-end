@@ -133,9 +133,9 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
             </Container>
           </section> */}
           <section className="mb-20 -translate-y-24">
-            <Container maxWidth={`xl`} >
+            <Container maxWidth={`xl`}>
               <Grid spacing={`32px`} container>
-                <Grid item xs={12} md={6} lg={6} >
+                <Grid item xs={12} md={6} lg={6}>
                   {pageData?.intro_title && (
                     <BriefItem
                       key={`a23y2u0`}

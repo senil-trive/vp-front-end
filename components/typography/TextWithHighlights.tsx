@@ -12,14 +12,13 @@ interface TextWithHighlightsProps {
   color?: ColorType;
   variant?: "bold" | "regular" | "light" | "italic" | "helper";
   style?: React.CSSProperties;
-  className?: string
+  className?: string;
 }
 
 function regexReplace(
   text: string,
   searchString: string,
-  highlightColor: string,
-
+  highlightColor: string
 ) {
   const regex = new RegExp(`${searchString}`, "gi");
 

@@ -12,7 +12,7 @@ interface TitleWithHighlightsProps {
   color?: ColorType;
   highlightColor?: "info" | "tertiary";
   style?: React.CSSProperties;
-  className?: string
+  className?: string;
 }
 
 function regexReplace(
@@ -50,14 +50,16 @@ const TitleWithHighlights: React.FC<TitleWithHighlightsProps> = ({
       newText = regexReplace(
         newText,
         highlight ?? "",
-        theme.colors[highlightColor].normal
+        "#fe517e"
+        // theme.colors[highlightColor].normal
       );
     });
   } else if (textToHighlight) {
     newText = regexReplace(
       newText,
       textToHighlight ?? "",
-      theme.colors[highlightColor].normal
+      "#fe517e"
+      // theme.colors[highlightColor].normal
     );
   }
 

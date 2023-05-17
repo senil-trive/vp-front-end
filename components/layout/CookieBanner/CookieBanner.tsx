@@ -90,7 +90,8 @@ export default function CookieBanner() {
         </P>
         <footer>
           <Button
-            variant="infoReversed"
+          
+            variant="secondary"
             onClick={() => setCookie(cookieName, false)}
           >
             Liever Niet

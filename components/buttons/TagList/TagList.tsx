@@ -14,7 +14,7 @@ type Props = {
 };
 
 const Wrapper = styled.div`
-  background-color:#EBFFFC;
+  background-color: #ebfffc;
   display: flex;
   border-radius: 8px;
   align-items: center;
@@ -108,9 +108,11 @@ export default function TagList({
                 isActive={isSelected(tag.id)}
                 onClick={() => onSelect?.(isSelected(tag.id) ? "" : tag.id)}
                 style={{
-                  backgroundColor: isSelected(tag.id) ? "#3FC7B4" : "transparent",
-                  color: '#150F2F',
-                  border: '1px solid #3FC7B4',
+                  backgroundColor: isSelected(tag.id)
+                    ? "#3FC7B4"
+                    : "transparent",
+                  color: "#150F2F",
+                  border: "1px solid #3FC7B4",
                 }}
               >
                 {tag.name}
