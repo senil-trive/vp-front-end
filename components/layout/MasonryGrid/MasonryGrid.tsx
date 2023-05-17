@@ -46,7 +46,7 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
 
   const cardVariants: Variants = {
     offscreen: {
-      y: 300,
+      y: 100,
     },
     onscreen: {
       y: 0,
@@ -54,8 +54,8 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
       transition: {
         type: "spring",
         stiffness: 100,
-        bounce: 0.5,
-        duration: 0.8,
+        bounce: 0.1,
+        duration: 0.4,
       },
     },
   };

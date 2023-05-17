@@ -176,10 +176,10 @@ export default function Forum({
         </Container>
       </Hero>
 
-      <main style={{ marginBottom: "80px" }}>
+      <main style={{ marginBottom: "0px" }}>
         <div
           style={{
-            marginBottom: 32,
+            marginBottom: -40,
             transform: "translateY(calc(-50% - 24px))",
           }}
         >
@@ -222,9 +222,9 @@ export default function Forum({
           searchLabel="Doorzoek de verhalen"
         /> */}
 
-        <div style={{ margin: "56px auto" }}>
+        <div style={{ margin: "0px auto" }}>
           <Container style={{ marginBottom: "38px" }}>
-            <Grid container spacing={"31px"}>
+            <Grid container>
               <Grid item xs={12} md={9}>
                 <P style={{ color: colors.primary.normal }}>
                   {totalCount} verhalen

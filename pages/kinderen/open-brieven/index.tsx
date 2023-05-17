@@ -133,9 +133,9 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
             </Container>
           </section> */}
           <section className="mb-20 -translate-y-24">
-            <Container maxWidth={`xl`}>
+            <Container maxWidth={`xl`} >
               <Grid spacing={`32px`} container>
-                <Grid item xs={12} md={6} lg={6}>
+                <Grid item xs={12} md={6} lg={6} >
                   {pageData?.intro_title && (
                     <BriefItem
                       key={`a23y2u0`}
@@ -187,7 +187,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                 </div>
               </div>
             </Container>
-            <Container maxWidth="xl">
+            <Container maxWidth="xl" className="open-brieven-font">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-20">
                 {lettersData.map((letter: Letter) => (
                   <BriefItem

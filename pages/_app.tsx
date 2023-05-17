@@ -13,6 +13,9 @@ const openSans = Open_Sans({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
+
+  console.log(process.env.NEXT_PUBLIC_MAINTENANCE,"ugvghhggh");
+  
   if (process.env.NEXT_PUBLIC_MAINTENANCE === "true") {
     return <MaintenanceModal />;
   }

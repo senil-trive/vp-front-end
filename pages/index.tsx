@@ -157,6 +157,7 @@ export default function Home({
 
   return (
     <PageWrapper
+    homepage={true}
       seo={{
         title: pageData?.seo_title,
         description: pageData?.seo_title,
@@ -165,6 +166,7 @@ export default function Home({
           ? parseImageURL(pageData?.seo_image?.id)
           : undefined,
       }}
+    
     >
       <Hero
         center

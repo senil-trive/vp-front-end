@@ -78,14 +78,17 @@ type SEOProps = {
     article?: OpenGraph["article"];
   };
 };
+type isHomepage=boolean |false
 
 type Props = {
   seo: SEOProps;
   children: ReactNode;
+  homepage:isHomepage;
 };
 
 export default function PageWrapper({
   children,
+  homepage,
   seo = {
     title: "Villa Pinedo",
     description: defaultValues.description,
@@ -160,7 +163,7 @@ export default function PageWrapper({
 
       <div className="page-content">{children}</div>
 
-      <DynamicFooter />
+    {!homepage && <DynamicFooter />}
     </StyledWrapper>
   );
 }

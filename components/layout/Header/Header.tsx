@@ -113,7 +113,7 @@ export default function Header() {
 
   return (
     <StyledHeader ref={elRef}>
-      <div className="desktop-menu">
+      <div className="desktop-menu new-menu">
         <div className="inner">
           <div>
             <Link href="/">
