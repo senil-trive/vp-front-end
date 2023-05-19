@@ -29,15 +29,10 @@ export function shuffle(array: FeedItem[]) {
   let currentElement;
   let index;
 
-  // While there remain elements to shuffle…
   while (max) {
-    // Pick a remaining element…
     index = Math.floor(Math.random() * max--);
-
-    // And swap it with the current element.
     currentElement = array[max];
-    if (currentElement.type === "video" && isEven(index)) {
-      // ensure videos are placed on a even index
+    if (currentElement && currentElement.type === "video" && isEven(index)) {
       max++;
     } else {
       array[max] = array[index];
@@ -72,107 +67,72 @@ export function moveArrayObject(feed: any[], item: any, newIndex: number) {
  */
 export const generateFeedTiles = (
   {
-    blogs,
-    letters,
-    forum,
-    instagram,
-    tiktok,
-    videos,
+    blogs = [],
+    letters = [],
+    forum = [],
+    instagram = [],
+    tiktok = [],
+    videos = [],
   }: {
-    blogs: BlogType[];
-    letters: Letter[];
-    forum: ForumPostType[];
-    instagram: InstaPost[];
-    tiktok: TikTokPostProps[];
-    videos: VideoType[];
+    blogs?: BlogType[];
+    letters?: Letter[];
+    forum?: ForumPostType[];
+    instagram?: InstaPost[];
+    tiktok?: TikTokPostProps[];
+    videos?: VideoType[];
   },
-  fixedFirstItems: boolean = false
+  fixedFirstItems = false
 ) => {
-  const blogFeedItem: FeedItem[] = blogs?.map((item) => ({
+  const blogFeedItem: FeedItem[] = blogs.map((item) => ({
     id: `blog-${uuidv4()}`,
     width: 4,
     type: "blog",
     content: item,
   }));
-  const letterFeedItem: FeedItem[] = letters?.map((item) => ({
+  const letterFeedItem: FeedItem[] = letters.map((item) => ({
     id: `letter-${uuidv4()}`,
     width: 4,
     type: "letter",
     content: item,
   }));
-  const forumFeedItem: FeedItem[] = forum?.map((item) => ({
+  const forumFeedItem: FeedItem[] = forum.map((item) => ({
     id: `forum-${uuidv4()}`,
     width: 4,
     type: "forum",
     content: item,
   }));
-  const instagramFeedItem: FeedItem[] = instagram?.map((item) => ({
+  const instagramFeedItem: FeedItem[] = instagram.map((item) => ({
     id: `instagram-${uuidv4()}`,
     width: 4,
     type: "instagram",
     content: item,
   }));
-  const tiktokFeedItem: FeedItem[] = tiktok?.map((item) => ({
+  const tiktokFeedItem: FeedItem[] = tiktok.map((item) => ({
     id: `tiktok-${uuidv4()}`,
     width: 4,
     type: "tiktok",
     content: item,
   }));
-  const videosFeedItem: FeedItem[] = videos?.map((item) => ({
+  const videosFeedItem: FeedItem[] = videos.map((item) => ({
     id: `video-${uuidv4()}`,
     width: 8,
     type: "video",
     content: {
-      title: item.title,
-      subtitle: item.subtitle,
-      poster: parseImageURL(item.video_cover_image?.id) ?? "",
-      src: parseVideoURL(item.video_file?.id),
+      title: item?.title || "",
+      subtitle: item?.subtitle || "",
+      poster: parseImageURL(item?.video_cover_image?.id) || "",
+      src: parseVideoURL(item?.video_file?.id),
     },
   }));
 
-  // Buddy examples
-  const chatExampleFeedItem: FeedItem[] = fixedFirstItems
-    ? ["1", "2"].map((item) => ({
-        id: `tiktok-${uuidv4()}`,
-        width: 4,
-        type: "chat",
-        content: {
-          title: item,
-          src: "",
-        },
-      }))
-    : [];
+  const feedItems: FeedItem[] = [
+    ...blogFeedItem,
+    ...letterFeedItem,
+    ...forumFeedItem,
+    ...instagramFeedItem,
+    ...tiktokFeedItem,
+    ...videosFeedItem,
+  ];
 
-  let res: FeedItem[] = [];
-  res = res
-    .concat(blogFeedItem)
-    .concat(letterFeedItem)
-    .concat(forumFeedItem)
-    .concat(instagramFeedItem)
-    .concat(tiktokFeedItem)
-    .concat(chatExampleFeedItem)
-    .concat(videosFeedItem);
-
-  // randomize content
-  res = shuffle(res);
-
-  if (fixedFirstItems) {
-    const firsLetter = letterFeedItem[0];
-    firsLetter.width = 6;
-    const firstInsta = instagramFeedItem[0];
-    firstInsta.width = 3;
-    const firstForum = forumFeedItem[0];
-    firstForum.width = 3;
-
-    // change the items for the first part of the list
-    res = moveArrayObject(res, videosFeedItem[0], 0);
-    res = moveArrayObject(res, chatExampleFeedItem[0], 1);
-    res = moveArrayObject(res, firstInsta, 2);
-    res = moveArrayObject(res, firsLetter, 3);
-    res = moveArrayObject(res, firstForum, 4);
-    res = moveArrayObject(res, chatExampleFeedItem[1], 5);
-    res = moveArrayObject(res, videosFeedItem[1], 6);
-  }
-
-  return res;
+  return feedItems;
 };

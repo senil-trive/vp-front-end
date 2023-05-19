@@ -47,12 +47,13 @@ export const getServerSideProps = async () => {
           true
         ),
         totalPosts:
-          blogsRes.meta.filter_count +
-            forumRes.meta.filter_count +
-            lettersRes.meta.filter_count +
-            instagramRes.meta.filter_count +
-            videosRes.meta.filter_count +
-            tiktokRes.meta.filter_count || 0,
+          blogsRes.meta.filter_count ||
+          0 + forumRes.meta.filter_count ||
+          0 + lettersRes.meta.filter_count ||
+          0 + instagramRes.meta.filter_count ||
+          0 + videosRes.meta.filter_count ||
+          0 + tiktokRes.meta.filter_count ||
+          0,
         categories: categoriesRes.data,
       },
     };
