@@ -141,7 +141,9 @@ export default function Header() {
       <div className="mobile-menu">
         <div className="inner">
           <div>
-            <Logo />
+            <Link href="/">
+              <Logo />
+            </Link>
           </div>
           <div>
             {!isLoading && (

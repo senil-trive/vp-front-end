@@ -47,12 +47,12 @@ export const getServerSideProps = async () => {
           true
         ),
         totalPosts:
-          blogsRes.meta.filter_count ||
-          0 + forumRes.meta.filter_count ||
-          0 + lettersRes.meta.filter_count ||
-          0 + instagramRes.meta.filter_count ||
-          0 + videosRes.meta.filter_count ||
-          0 + tiktokRes.meta.filter_count ||
+          blogsRes.meta?.filter_count ||
+          0 + forumRes.meta?.filter_count ||
+          0 + lettersRes.meta?.filter_count ||
+          0 + instagramRes.meta?.filter_count ||
+          0 + videosRes.meta?.filter_count ||
+          0 + tiktokRes.meta?.filter_count ||
           0,
         categories: categoriesRes.data,
       },
@@ -170,6 +170,7 @@ export default function Home({
     >
       <Hero
         center
+        homePage={true}
         imageUrl={
           pageData?.hero_image?.id
             ? parseImageURL(pageData?.hero_image?.id)

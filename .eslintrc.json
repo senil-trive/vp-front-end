@@ -4,5 +4,6 @@
     "react": {
       "version": "latest"
     }
-  }
+  },
+  "root":true
 }

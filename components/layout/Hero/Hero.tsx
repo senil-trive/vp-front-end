@@ -8,9 +8,15 @@ type Props = {
   children: ReactNode;
   style?: React.CSSProperties;
   imageUrl?: string;
+  showTags?: boolean;
+  homePage?: boolean;
 };
-
-const Wrapper = styled.div<{ center: boolean; bgn?: string }>`
+const Wrapper = styled.div<{
+  center: boolean;
+  bgn?: string;
+  showTags?: boolean;
+  homePage?: boolean;
+}>`
   padding: 29px 41px 40px 41px;
   position: relative;
 
@@ -20,14 +26,16 @@ const Wrapper = styled.div<{ center: boolean; bgn?: string }>`
       display: flex;
       align-items: center;
     `}
-
-  ${({ bgn }) =>
+  ${({ bgn, homePage }) =>
     bgn &&
     css`
       background-image: url(${bgn});
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
+      @media (max-width: 767px) {
+        background-image: url(${homePage ? "/Header.png" : bgn});
+      }
     `}
 
   .inner {
@@ -36,19 +44,41 @@ const Wrapper = styled.div<{ center: boolean; bgn?: string }>`
     justify-content: center;
     align-items: center;
   }
+  @media (max-width: 767px) {
+    ${({ showTags }) =>
+      showTags
+        ? css`
+            min-height: inherit !important;
+            height: 512px;
+          `
+        : css`
+            min-height: inherit !important;
+            height: 464px;
+          `};
+    padding: 29px 10px 40px 10px;
+  }
 `;
 
 export default function Hero({
   children,
   center = false,
   imageUrl,
+  homePage,
   style,
+  showTags,
 }: Props) {
+  console.log(showTags);
   return (
-    <Wrapper bgn={imageUrl} center={center} style={style}>
+    <Wrapper
+      bgn={imageUrl}
+      center={center}
+      style={style}
+      showTags={showTags}
+      homePage={homePage}
+    >
       <Grid container style={{ height: "100%" }}>
         <Grid item xs={12}>
-          <div className="inner">{children}</div>
+          <div className="inner mt-[-60px] sm:mt-0">{children}</div>
         </Grid>
       </Grid>
     </Wrapper>
