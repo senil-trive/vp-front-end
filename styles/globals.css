@@ -145,12 +145,12 @@ p {
 }
 /* Home page chat box */
 
-.desktop-menu.new-menu .MuiContainer-root > div{
+.desktop-menu.new-menu .MuiContainer-root > div {
   width: 530px;
   max-width: unset;
   right: calc(100% - 532px);
 }
 
-.desktop-menu.new-menu .MuiContainer-root > div:before{
+.desktop-menu.new-menu .MuiContainer-root > div:before {
   left: calc(100% - 100px);
 }

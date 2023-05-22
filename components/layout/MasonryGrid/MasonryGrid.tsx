@@ -44,20 +44,77 @@ type Props = {
 export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
   const [loading, setLoading] = useState(true);
 
+  //1. Adust stiffness ,bounce and duration
+  // const cardVariants: Variants = {
+  //   offscreen: {
+  //     y: 300,
+  //   },
+  //   onscreen: {
+  //     y: 0,
+  //     // rotate: -10,
+  //     transition: {
+  //       type: "spring",
+  //       stiffness: 43,
+  //       bounce: 0.3,
+  //       duration: 0.4,
+  //     },
+  //   },
+  // };
+
+  //2. Add a rotation effect
+  // const cardVariants: Variants = {
+  //   offscreen: {
+  //     y: 300,
+  //     rotate: -10,
+  //   },
+  //   onscreen: {
+  //     y: 0,
+  //     rotate: 0,
+  //     transition: {
+  //       type: "spring",
+  //       stiffness: 43,
+  //       bounce: 0.3,
+  //       duration: 0.4,
+  //     },
+  //   },
+  // };
+
+  //3. Adjust the bounce effect
+  // const cardVariants: Variants = {
+  //   offscreen: {
+  //     y: 300,
+  //     rotate: -10,
+  //   },
+  //   onscreen: {
+  //     y: 0,
+  //     rotate: 0,
+  //     transition: {
+  //       type: "spring",
+  //       stiffness: 200,
+  //       damping: 20,
+  //       duration: 0.4,
+  //     },
+  //   },
+  // };
+
+  //4. Add an opacity animation
   const cardVariants: Variants = {
-    // offscreen: {
-    //   y: 100,
-    // },
-    // onscreen: {
-    //   y: 0,
-    //   // rotate: -10,
-    //   transition: {
-    //     type: "spring",
-    //     stiffness: 100,
-    //     fade: 0.1,
-    //     duration: 0.5,
-    //   },
-    // },
+    offscreen: {
+      y: 300,
+      rotate: -10,
+      opacity: 0,
+    },
+    onscreen: {
+      y: 0,
+      rotate: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 43,
+        bounce: 0.3,
+        duration: 0.4,
+      },
+    },
   };
 
   useEffect(() => {

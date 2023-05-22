@@ -79,11 +79,9 @@ type SEOProps = {
   };
 };
 
-
 type Props = {
   seo: SEOProps;
   children: ReactNode;
-
 };
 
 export default function PageWrapper({
@@ -162,8 +160,6 @@ export default function PageWrapper({
       <DynamicHeader />
 
       <div className="page-content">{children}</div>
-
-
     </StyledWrapper>
   );
 }

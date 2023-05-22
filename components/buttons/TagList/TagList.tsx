@@ -1,9 +1,9 @@
 import { Container } from "@mui/system";
-import React, { ReactNode } from "react";
+import React, { ReactNode, useRef } from "react";
 import Tag from "../Tag/Tag";
 import { Tag as TagType } from "../../../types/content-types/Tag.type";
 import styled from "styled-components";
-import { useHorizontalScrollHints } from "../../../utils/scroll";
+import { handleHorizantalScroll } from "../../../utils/horizontalScroll";
 
 type Props = {
   tags: TagType[];
@@ -20,18 +20,34 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: space-between;
 
+  .right-arrow {
+    display: none;
+    cursor: pointer;
+  }
+  .right-arrow.active {
+    display: block;
+  }
+  .left-arrow {
+    display: none;
+    cursor: pointer;
+    transform: rotate(180deg);
+  }
+  .left-arrow.active {
+    display: block;
+  }
   .outer {
     position: relative;
     overflow: hidden;
-    padding-top: 24px;
-    padding-bottom: 24px;
+    padding: 20px;
 
     .inner {
       display: flex;
       gap: 16px;
       overflow-x: auto;
       width: 100%;
-
+      &.active .scroll-indicator {
+        display: none;
+      }
       .tag {
         &:first-of-type {
           margin-left: auto;
@@ -81,6 +97,39 @@ const Wrapper = styled.div`
       }
     }
   }
+  @media (max-width: 767px) {
+    display: block;
+    padding: 16px;
+    .prefix {
+      padding: 0 !important;
+    }
+    .right-arrow.active {
+      display: none;
+    }
+    .outer {
+      padding: 0;
+    }
+    .left-arrow.active {
+      display: none;
+    }
+    .scroll-indicator {
+      &.indicator-left {
+        left: 0;
+        background: none !important;
+      }
+      &.indicator-right {
+        right: 0;
+        background: none !important;
+      }
+    }
+    .outer .inner {
+      padding: 5px 0;
+    }
+    .hand-icon {
+      transform: rotate(90deg);
+      margin-top: 0px !important;
+    }
+  }
 `;
 
 export default function TagList({
@@ -90,16 +139,34 @@ export default function TagList({
   selected,
   onSelect,
 }: Props) {
-  const containerRef = useHorizontalScrollHints();
-
+  const scrollRef = useRef(null);
+  const leftArrow = useRef(null);
+  const rightArrow = useRef(null);
   const isSelected = (id: string) => selected === id;
-
   return (
     <Container maxWidth="xl" style={{ margin: "21px auto" }}>
       <Wrapper>
-        <div style={{ display: "block", padding: "0 20px" }}>{prefix}</div>
+        <div style={{ display: "block", padding: "0 20px" }} className="prefix">
+          {prefix}
+        </div>
+        <div
+          style={{ width: 94, padding: "0 30px" }}
+          className={"left-arrow"}
+          onClick={() => {
+            handleHorizantalScroll({
+              element: scrollRef.current,
+              step: -100,
+              leftArrow: leftArrow.current,
+              rightArrow: rightArrow.current,
+            });
+          }}
+          id="text"
+          ref={leftArrow}
+        >
+          {suffix}
+        </div>
         <div className="outer">
-          <div ref={containerRef} className="inner scrolling-right">
+          <div ref={scrollRef} className="inner scrolling-right">
             <div className="scroll-indicator indicator-left" />
             {tags.map((tag, index) => (
               <Tag
@@ -121,7 +188,21 @@ export default function TagList({
             <div className="scroll-indicator indicator-right" />
           </div>
         </div>
-        <div style={{ width: 94, padding: "0 30px" }}>{suffix}</div>
+        <div
+          style={{ width: 94, padding: "0 30px" }}
+          className="right-arrow active"
+          onClick={() => {
+            handleHorizantalScroll({
+              element: scrollRef.current,
+              step: 100,
+              rightArrow: rightArrow.current,
+              leftArrow: leftArrow.current,
+            });
+          }}
+          ref={rightArrow}
+        >
+          {suffix}
+        </div>
       </Wrapper>
     </Container>
   );
