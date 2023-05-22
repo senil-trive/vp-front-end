@@ -9,11 +9,13 @@ type Props = {
   style?: React.CSSProperties;
   imageUrl?: string;
   showTags?: boolean;
+  homePage?: boolean;
 };
 const Wrapper = styled.div<{
   center: boolean;
   bgn?: string;
   showTags?: boolean;
+  homePage?: boolean;
 }>`
   padding: 29px 41px 40px 41px;
   position: relative;
@@ -24,7 +26,7 @@ const Wrapper = styled.div<{
       display: flex;
       align-items: center;
     `}
-  ${({ bgn }) =>
+  ${({ bgn, homePage }) =>
     bgn &&
     css`
       background-image: url(${bgn});
@@ -32,7 +34,7 @@ const Wrapper = styled.div<{
       background-repeat: no-repeat;
       background-position: center;
       @media (max-width: 767px) {
-        background-image: url(${"/Header.png"});
+        background-image: url(${homePage ? "/Header.png" : bgn});
       }
     `}
 
@@ -61,12 +63,19 @@ export default function Hero({
   children,
   center = false,
   imageUrl,
+  homePage,
   style,
   showTags,
 }: Props) {
   console.log(showTags);
   return (
-    <Wrapper bgn={imageUrl} center={center} style={style} showTags={showTags}>
+    <Wrapper
+      bgn={imageUrl}
+      center={center}
+      style={style}
+      showTags={showTags}
+      homePage={homePage}
+    >
       <Grid container style={{ height: "100%" }}>
         <Grid item xs={12}>
           <div className="inner mt-[-60px] sm:mt-0">{children}</div>
