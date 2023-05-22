@@ -11,7 +11,7 @@ import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import TextItem from "../../../components/content-types/TextItem/TextItem";
 import VideoItem from "../../../components/content-types/VideoItem/VideoItem";
 import parseImageURL from "../../../utils/parseImageURL";
-import VoulunteerWeek from "../../../components/content-types/VolunteerWeek/VolunteerWeek";
+//import VoulunteerWeek from "../../../components/content-types/VolunteerWeek/VolunteerWeek";
 
 type BuddyPageProps = {
   pageData: any;
@@ -163,7 +163,7 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
             </Container>
           </section>
 
-          <section className="px-[10%]">
+          {/* <section className="px-[10%]">
             <div className="flex justify-between">
               <VoulunteerWeek
                 title="Week1"
@@ -217,7 +217,7 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                 ]}
               />
             </div>
-          </section>
+          </section> */}
           <section className="my-[200px] text-center py-20">
             <Container>
               <div className="flex flex-col items-center justify-center ">

@@ -6,6 +6,6 @@ package-lock.json
 public
 
 docs
-
+.eslintrc.json
 utils/server/*.json
 pages/csv
