@@ -19,8 +19,8 @@ const VolunteerWeek: React.FC<IProps> = ({ title, data }) => {
         <h3 className="">{title}</h3>
         <div>
           <ul>
-            {data.map((volunteer) => (
-              <li>
+            {data.map((volunteer, index) => (
+              <li key={index}>
                 <Input
                   onChange={handleChange}
                   disabled={edit}

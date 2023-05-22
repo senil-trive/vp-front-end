@@ -12,7 +12,6 @@ import TextItem from "../../../components/content-types/TextItem/TextItem";
 import VideoItem from "../../../components/content-types/VideoItem/VideoItem";
 import parseImageURL from "../../../utils/parseImageURL";
 
-
 type BuddyPageProps = {
   pageData: any;
   error?: boolean;
@@ -163,7 +162,6 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
             </Container>
           </section>
 
-          
           <section className="my-[200px] text-center py-20">
             <Container>
               <div className="flex flex-col items-center justify-center ">
