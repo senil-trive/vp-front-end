@@ -299,7 +299,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
             </Container>
           </section>
           <section className="px-[10%]">
-            <div className="flex justify-between">
+            <div className="flex justify-between pb-[50px]">
               <VoulunteerWeek
                 title="Week1"
                 data={[
@@ -308,6 +308,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
                   " Kennismaken met collega’s13",
                   " Kennismaken met collega’s14",
                 ]}
+                id="1"
               />
               <VoulunteerWeek
                 title="Week2"
@@ -317,6 +318,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
                   " Kennismaken met collega’s23",
                   " Kennismaken met collega’s24",
                 ]}
+                id="2"
               />
               <VoulunteerWeek
                 title="Week3"
@@ -326,13 +328,14 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
                   " Kennismaken met collega’s33",
                   " Kennismaken met collega’s34",
                 ]}
+                id="3"
               />
             </div>
-            <div className="w-[100%] h-[88px] bg-[#3FC7B4]/[.1]">
-              <div className="w-[100%] px-[50px] text-red h-[2px]"></div>
+            <div className="w-[100%] h-[88px] bg-[#3FC7B4]/[.1] flex justify-center items-center px-[34px]">
+              <div className="w-[100%] px-[50px] text-red h-[2px] bg-[#3FC7B4]"></div>
             </div>
 
-            <div className="flex justify-around">
+            <div className="flex justify-around pt-[50px]">
               <VoulunteerWeek
                 title="Week4"
                 data={[
@@ -341,6 +344,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
                   " Kennismaken met collega’s43",
                   " Kennismaken met collega’s44",
                 ]}
+                id="4"
               />
               <VoulunteerWeek
                 title="Week5"
@@ -350,6 +354,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
                   " Kennismaken met collega’s3",
                   " Kennismaken met collega’s4",
                 ]}
+                id="5"
               />
             </div>
           </section>

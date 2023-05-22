@@ -80,6 +80,7 @@ export default function Home({
   const [isLoading, setIsLoading] = useState(false);
   const [isEnd, setIsEnd] = useState(false);
 
+  const [showTags, setShowTags] = useState(false);
   const getAllFeedItem = useCallback(
     async ({
       append = false,
@@ -170,7 +171,6 @@ export default function Home({
     >
       <Hero
         center
-        homePage={true}
         imageUrl={
           pageData?.hero_image?.id
             ? parseImageURL(pageData?.hero_image?.id)
@@ -180,16 +180,18 @@ export default function Home({
           minHeight: 649,
           position: "relative",
         }}
+        homePage={true}
+        showTags={showTags}
       >
         <Container>
           <Grid container>
             <Grid item xs={0} md={2} />
             <Grid item xs={12} md={8}>
-              <div className="text-center">
+              <div className="text-left sm:text-center">
                 <TitleWithHighlights
                   text={pageData?.page_title ?? ""}
                   color="white"
-                  className="sm:text-[46px] lg:text-[80px] font-light"
+                  className="text-left leading-[150%] sm:text-[46px] sm:text-center md:leading-[120%] lg:text-[80px] font-light"
                   style={{
                     textAlign: "center",
                   }}
@@ -198,7 +200,7 @@ export default function Home({
                 <TextWithHighlights
                   color="white"
                   variant="light"
-                  className="sm:text-[18px]  lg:text-[28px] "
+                  className="pt-4 sm:text-[18px] sm:pt-0  lg:text-[28px]"
                   text={pageData?.page_subtitle ?? ""}
                   textToHighlight={pageData?.highlight_words ?? []}
                 />
@@ -210,10 +212,35 @@ export default function Home({
       </Hero>
       <main style={{ marginBottom: "80px" }}>
         <div
-          style={{
-            marginBottom: 32,
-            transform: "translateY(calc(-50% - 24px))",
-          }}
+          className={
+            showTags
+              ? "hidden"
+              : "flex justify-center text-center mt-[-34px] relative mb-[100px] md:hidden"
+          }
+          onClick={() => setShowTags(true)}
+        >
+          <div
+            className={
+              "w-[320px] bg-[#3FC7B4] px-[50px] py-[16px] text-white text-[18px] rounded-[12px] cursor-pointer"
+            }
+          >
+            Selecteer onderwerp
+            <span
+              style={{
+                marginTop: "-6px",
+              }}
+              className="hand-icon ml-2"
+            >
+              👉🏾
+            </span>
+          </div>
+        </div>
+        <div
+          className={
+            showTags
+              ? "mt-[-102px] relative mb-[50px] sm:mb-[100px] sm:mt-[-72px] md:block"
+              : "mt-[-122px] relative mb-[50px] sm:mb-[100px] hidden sm:mt-[-72px] md:block"
+          }
         >
           <TagList
             tags={categories.map((cat) => ({
@@ -236,6 +263,7 @@ export default function Home({
                   style={{
                     marginTop: "-6px",
                   }}
+                  className="hand-icon"
                 >
                   👉🏾
                 </span>
