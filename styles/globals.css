@@ -160,3 +160,18 @@ p {
   color: #150f2fd1;
   letter-spacing: 0.5px;
 }
+.desktop-menu.new-menu .MuiContainer-root > div {
+  width: 530px;
+  max-width: unset;
+  right: calc(100% - 532px);
+}
+
+.desktop-menu.new-menu .MuiContainer-root > div:before {
+  left: calc(100% - 100px);
+}
+.with-divider ul li a {
+  font-size: 15px !important;
+}
+.without-divider ul li a {
+  font-size: 15px !important;
+}

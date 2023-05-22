@@ -110,7 +110,11 @@ export default function HeaderSubmenu({ categories, selected }: Props) {
             return (
               <section
                 key={index}
-                className={index < categories.length - 1 ? "with-divider" : ""}
+                className={
+                  index < categories.length - 1
+                    ? "with-divider"
+                    : "without-divider"
+                }
               >
                 <P variant="bold">{category.name}</P>
                 <ul
