@@ -90,7 +90,6 @@ export default function CookieBanner() {
         </P>
         <footer>
           <Button
-          
             variant="secondary"
             onClick={() => setCookie(cookieName, false)}
           >
