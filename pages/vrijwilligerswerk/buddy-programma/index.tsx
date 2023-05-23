@@ -11,7 +11,6 @@ import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import TextItem from "../../../components/content-types/TextItem/TextItem";
 import VideoItem from "../../../components/content-types/VideoItem/VideoItem";
 import parseImageURL from "../../../utils/parseImageURL";
-//import VoulunteerWeek from "../../../components/content-types/VolunteerWeek/VolunteerWeek";
 
 type BuddyPageProps = {
   pageData: any;
@@ -163,61 +162,6 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
             </Container>
           </section>
 
-          {/* <section className="px-[10%]">
-            <div className="flex justify-between">
-              <VoulunteerWeek
-                title="Week1"
-                data={[
-                  " Kennismaken met collega’s12",
-                  " Kennismaken met collega’s12",
-                  " Kennismaken met collega’s13",
-                  " Kennismaken met collega’s14",
-                ]}
-              />
-              <VoulunteerWeek
-                title="Week2"
-                data={[
-                  " Kennismaken met collega’s21",
-                  " Kennismaken met collega’s22",
-                  " Kennismaken met collega’s23",
-                  " Kennismaken met collega’s24",
-                ]}
-              />
-              <VoulunteerWeek
-                title="Week3"
-                data={[
-                  " Kennismaken met collega’s31",
-                  " Kennismaken met collega’s32",
-                  " Kennismaken met collega’s33",
-                  " Kennismaken met collega’s34",
-                ]}
-              />
-            </div>
-            <div className="w-[100%] h-[88px] bg-[#3FC7B4]/[.1]">
-              <div className="w-[100%] px-[50px] text-red h-[2px]"></div>
-            </div>
-
-            <div className="flex justify-around">
-              <VoulunteerWeek
-                title="Week4"
-                data={[
-                  " Kennismaken met collega’s41",
-                  " Kennismaken met collega’s42",
-                  " Kennismaken met collega’s43",
-                  " Kennismaken met collega’s44",
-                ]}
-              />
-              <VoulunteerWeek
-                title="Week5"
-                data={[
-                  " Kennismaken met collega’s1",
-                  " Kennismaken met collega’s2",
-                  " Kennismaken met collega’s3",
-                  " Kennismaken met collega’s4",
-                ]}
-              />
-            </div>
-          </section> */}
           <section className="my-[200px] text-center py-20">
             <Container>
               <div className="flex flex-col items-center justify-center ">
