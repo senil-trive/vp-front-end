@@ -180,7 +180,7 @@ export default function Home({
           minHeight: 649,
           position: "relative",
         }}
-        homePage={true}
+        mbgn={"/Header.png"}
         showTags={showTags}
       >
         <Container>

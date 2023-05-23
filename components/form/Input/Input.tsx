@@ -51,6 +51,7 @@ type Props = {
 
   /** The color of the border */
   borderColor?: ColorType;
+  className?: string;
 };
 
 const InputWrapper = styled.div<InputStateType>`
@@ -164,6 +165,7 @@ export default function Input({
   register,
   required,
   borderColor = "primary",
+  className,
   ...rest
 }: Props) {
   const { colors } = useTheme();
@@ -187,6 +189,7 @@ export default function Input({
           placeholder={placeholder}
           onChange={(e) => onChange?.(e)}
           defaultValue={defaultValue}
+          className={className}
           {...formRegister}
           {...rest}
         />

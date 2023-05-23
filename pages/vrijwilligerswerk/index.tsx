@@ -5,10 +5,10 @@ import ContentCarousel from "../../components/carousels/ContentCarousel";
 import ENDPOINTS from "../../constants/endpoints";
 import FAQList from "../../components/content-types/FAQList/FAQList";
 import { H3 } from "../../components/typography";
-import { Hero } from "../../components/layout";
+import { Footer, Hero } from "../../components/layout";
 import P from "../../components/typography/P/P";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
-import React from "react";
+import React, { useState } from "react";
 import { Testimonial } from "../../types/content-types/Testimonial.type";
 import TextItem from "../../components/content-types/TextItem/TextItem";
 import TitleWithHighlights from "../../components/typography/TitleWithHighlights";
@@ -54,10 +54,48 @@ export const getServerSideProps = async () => {
     };
   }
 };
-
+interface IVolunteerWeek {
+  data: string[];
+  id: string;
+  title: string;
+}
+interface IVolunteerWeekState {
+  week1: IVolunteerWeek;
+  week2: IVolunteerWeek;
+  week3: IVolunteerWeek;
+  week4: IVolunteerWeek;
+  week5: IVolunteerWeek;
+}
 const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
   const router = useRouter();
   const { colors } = useTheme();
+  const [volunteerweek, setVolunteerWeek] = useState<IVolunteerWeekState>({
+    week1: {
+      data: [],
+      id: "",
+      title: "",
+    },
+    week2: {
+      data: [],
+      id: "",
+      title: "",
+    },
+    week3: {
+      data: [],
+      id: "",
+      title: "",
+    },
+    week4: {
+      data: [],
+      id: "",
+      title: "",
+    },
+    week5: {
+      data: [],
+      id: "",
+      title: "",
+    },
+  });
 
   return (
     <div>
@@ -76,7 +114,15 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
         }}
       >
         <main>
-          <Hero>
+          <Hero
+            center
+            imageUrl={"/vrijwilligerswerkheader.png"}
+            style={{
+              minHeight: 649,
+              position: "relative",
+            }}
+            mbgn={"/vrijwilligerswerkheadermobile.png"}
+          >
             <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16">
               <TitleWithHighlights
                 highlightColor="info"
@@ -85,15 +131,20 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
                 headerElement="h1"
                 color="primary"
               />
-              <P>{pageData?.page_subtitle}</P>
+              <P color="white">{pageData?.page_subtitle}</P>
 
-              <div className="flex gap-4 mt-14 w-[90%]">
-                <Button href="/vrijwilligerswerk/aanmelden">
+              <div className="flex gap-4 mt-14 w-[95%] sm:w-[90%]">
+                <Button
+                  variant="success"
+                  href="/vrijwilligerswerk/aanmelden"
+                  className="px-[8px] text-[14px] sm:w-[90%] sm:text-[16px] sm:px-[16px]"
+                >
                   {pageData?.signup_button_label}
                 </Button>
                 <Button
                   variant="infoReversed"
                   href="/vrijwilligerswerk/trainingen"
+                  className="px-[8px] text-[14px] sm:w-[90%] sm:text-[16px] sm:px-[16px]"
                 >
                   {pageData?.about_button_label}
                 </Button>
@@ -103,7 +154,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
 
           {pageData?.media_section_1 && (
             <section
-              className="my-[80px]"
+              className="my-[40px] md:my-[80px]"
               style={{
                 backgroundColor: colors.white.transparent,
               }}
@@ -128,7 +179,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
           )}
 
           <section
-            className="my-[80px] text-center"
+            className="my-[40px] md:my-[80px] text-center"
             style={{
               backgroundColor: colors.white.transparent,
             }}
@@ -161,7 +212,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
 
           {pageData?.video_items?.length > 0 && (
             <section
-              className="my-[80px] text-center py-20"
+              className="my-[80px] md:my-[80px] text-center py-20"
               style={{
                 backgroundColor: colors.tertiary.light,
               }}
@@ -195,7 +246,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
 
           {pageData?.media_section_2 && (
             <section
-              className="my-[80px]"
+              className="my-[80px] md:my-[80px]"
               style={{
                 backgroundColor: colors.white.transparent,
               }}
@@ -219,7 +270,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
             </section>
           )}
           <section
-            className="my-[80px] text-center py-20"
+            className="my-[80px] md:my-[80px] text-center py-20"
             style={{
               backgroundColor: colors.tertiary.light,
             }}
@@ -253,7 +304,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
             </Container>
           </section>
           <section
-            className="my-[80px] text-center py-[20px]"
+            className="my-[40px] md:my-[80px] text-center py-[20px]"
             style={{
               backgroundColor: colors.white.transparent,
             }}
@@ -284,7 +335,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
                 )}
               />
             </Container>
-            <Container style={{ marginBottom: 80 }}>
+            <Container className="my-[40px] md:my-[80px]">
               <div className="flex justify-center mt-14">
                 <Button
                   variant="secondary"
@@ -298,65 +349,73 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
               </div>
             </Container>
           </section>
-          <section className="px-[10%]">
-            <div className="flex justify-between pb-[50px]">
-              <VoulunteerWeek
-                title="Week1"
-                data={[
-                  " Kennismaken met collega’s12",
-                  " Kennismaken met collega’s12",
-                  " Kennismaken met collega’s13",
-                  " Kennismaken met collega’s14",
-                ]}
-                id="1"
-              />
-              <VoulunteerWeek
-                title="Week2"
-                data={[
-                  " Kennismaken met collega’s21",
-                  " Kennismaken met collega’s22",
-                  " Kennismaken met collega’s23",
-                  " Kennismaken met collega’s24",
-                ]}
-                id="2"
-              />
-              <VoulunteerWeek
-                title="Week3"
-                data={[
-                  " Kennismaken met collega’s31",
-                  " Kennismaken met collega’s32",
-                  " Kennismaken met collega’s33",
-                  " Kennismaken met collega’s34",
-                ]}
-                id="3"
-              />
-            </div>
-            <div className="w-[100%] h-[88px] bg-[#3FC7B4]/[.1] flex justify-center items-center px-[34px]">
-              <div className="w-[100%] px-[50px] text-red h-[2px] bg-[#3FC7B4]"></div>
-            </div>
+          <section>
+            <Container>
+              <Container>
+                <div className="flex flex-col items-center justify-center mb-[20px] md:mb-14">
+                  <TitleWithHighlights
+                    text={
+                      "Na je opleiding aan de slag, zo ziet een week van een vrijwilliger eruit?"
+                    }
+                    headerElement="h3"
+                    color="black"
+                  />
+                </div>
+              </Container>
+              <div className="block md:flex justify-between md:pb-[50px] top-block">
+                <VoulunteerWeek
+                  title={volunteerweek?.week1?.title}
+                  data={volunteerweek?.week1?.data}
+                  id={volunteerweek?.week1?.id}
+                  className="top"
+                  name="week1"
+                  volunteerweek={volunteerweek}
+                  setVolunteerWeek={setVolunteerWeek}
+                />
+                <VoulunteerWeek
+                  title={volunteerweek?.week2?.title}
+                  data={volunteerweek?.week2?.data}
+                  id={volunteerweek?.week2?.id}
+                  className="top"
+                  name="week2"
+                  volunteerweek={volunteerweek}
+                  setVolunteerWeek={setVolunteerWeek}
+                />
+                <VoulunteerWeek
+                  title={volunteerweek?.week3?.title}
+                  data={volunteerweek?.week3?.data}
+                  id={volunteerweek?.week3?.id}
+                  className="top"
+                  name="week3"
+                  volunteerweek={volunteerweek}
+                  setVolunteerWeek={setVolunteerWeek}
+                />
+              </div>
+              <div className="hidden md:flex w-[100%] h-[88px] bg-[#3FC7B4]/[.1] justify-center items-center px-[34px]">
+                <div className="w-[100%] px-[50px] text-red h-[2px] bg-[#3FC7B4]"></div>
+              </div>
 
-            <div className="flex justify-around pt-[50px]">
-              <VoulunteerWeek
-                title="Week4"
-                data={[
-                  " Kennismaken met collega’s41",
-                  " Kennismaken met collega’s42",
-                  " Kennismaken met collega’s43",
-                  " Kennismaken met collega’s44",
-                ]}
-                id="4"
-              />
-              <VoulunteerWeek
-                title="Week5"
-                data={[
-                  " Kennismaken met collega’s1",
-                  " Kennismaken met collega’s2",
-                  " Kennismaken met collega’s3",
-                  " Kennismaken met collega’s4",
-                ]}
-                id="5"
-              />
-            </div>
+              <div className="block md:flex justify-around md:pt-[50px] bottom-block">
+                <VoulunteerWeek
+                  title={volunteerweek?.week4?.title}
+                  data={volunteerweek?.week4?.data}
+                  id={volunteerweek?.week4?.id}
+                  className="bottom ml-[100px]"
+                  name="week4"
+                  volunteerweek={volunteerweek}
+                  setVolunteerWeek={setVolunteerWeek}
+                />
+                <VoulunteerWeek
+                  title={volunteerweek?.week5?.title}
+                  data={volunteerweek?.week5?.data}
+                  id={volunteerweek?.week5?.id}
+                  className="bottom mr-[100px]"
+                  name="week5"
+                  volunteerweek={volunteerweek}
+                  setVolunteerWeek={setVolunteerWeek}
+                />
+              </div>
+            </Container>
           </section>
           <FAQList
             containerWidth="lg"
@@ -364,8 +423,11 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
             items={pageData?.faq_items}
           />
 
-          <Container style={{ marginBottom: 80 }}>
-            <div className="flex justify-center mt-14">
+          <Container
+            style={{ marginBottom: 80 }}
+            className="my-[40px] md:my-[80px]"
+          >
+            <div className="mt-[20px] flex justify-center md:mt-14">
               <Button
                 variant="link"
                 style={{ color: colors.info.normal }}
@@ -376,6 +438,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
             </div>
           </Container>
         </main>
+        <Footer />
       </PageWrapper>
     </div>
   );

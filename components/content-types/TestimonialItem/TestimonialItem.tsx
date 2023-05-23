@@ -14,7 +14,7 @@ const TestimonialItem: React.FC<TestimonialItemProps> = ({ data }) => {
 
   return (
     <div
-      className="max-w-[440px] min-h-[400px] h-full text-left p-8 rounded-lg flex flex-col justify-between"
+      className="max-w-[100%] min-h-[300px] md:max-w-[440px] md:min-h-[400px] md:h-full text-left p-8 rounded-lg flex flex-col justify-between"
       style={{ backgroundColor: colors.tertiary.light }}
     >
       <div>
