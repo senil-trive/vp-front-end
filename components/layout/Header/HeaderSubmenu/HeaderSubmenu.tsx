@@ -65,18 +65,19 @@ const Wrapper: any = styled.div`
         &:not(:last-child) {
           padding-bottom: 15px;
         }
+
         width: 200px;
         a {
           font-family: "Avenir";
           font-weight: 300;
           font-size: 18px;
           line-height: 160%;
-           width: 250px;
-            word-break: break-word;
-            white-space: normal;
-           letter-spacing: 0.02em;
+          width: 250px;
+          word-break: break-word;
+          white-space: normal;
+          // letter-spacing: 0.02em;
           color: ${({ theme }) => theme.colors.text.normal};
-          
+
           &:hover {
             background-color: ${({ theme }) => theme.colors.primary.normal};
             padding: 12px;
@@ -114,7 +115,11 @@ export default function HeaderSubmenu({ categories, selected }: Props) {
             return (
               <section
                 key={index}
-                className={index < categories.length - 1 ? "with-divider" : "without-divider"}
+                className={
+                  index < categories.length - 1
+                    ? "with-divider"
+                    : "without-divider"
+                }
               >
                 <P variant="bold">{category.name}</P>
                 <ul
