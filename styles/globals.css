@@ -144,27 +144,6 @@ p {
   background: rgb(63, 199, 180) !important;
   color: #fff !important;
 }
-/* Home page chat box */
-
-.desktop-menu.new-menu .MuiContainer-root > div {
-  width: 530px;
-  max-width: unset;
-  right: calc(100% - 532px);
-}
-
-.desktop-menu.new-menu .MuiContainer-root > div:before {
-  left: calc(100% - 100px);
-}
-
-.desktop-menu.new-menu nav ul li p {
-  color: #150f2fd1;
-  letter-spacing: 0.5px;
-}
-.desktop-menu.new-menu .MuiContainer-root > div {
-  width: 530px;
-  max-width: unset;
-  right: calc(100% - 532px);
-}
 
 .desktop-menu.new-menu .MuiContainer-root > div:before {
   left: calc(100% - 100px);
