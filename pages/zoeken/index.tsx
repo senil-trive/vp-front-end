@@ -96,7 +96,7 @@ export default function Search() {
               <div className="text-center">
                 <TitleWithHighlights
                   text={`${
-                    posts.length + forumPosts.length + letters.length
+                    posts?.length + forumPosts?.length + letters?.length
                   } resultaten gevonden`}
                   color="white"
                   style={{
@@ -142,9 +142,9 @@ export default function Search() {
           <Grid container spacing={"22px"}>
             <Grid item xs={12} md={4}>
               <SearchResultItem
-                amount={forumPosts.length}
+                amount={forumPosts?.length}
                 resultTitleSuffix={` in ons Forum`}
-                list={forumPosts.map((post) => ({
+                list={forumPosts?.map((post) => ({
                   name: truncate(post.content, 120),
                   link: `/kinderen/forum/${post.slug}`,
                 }))}
@@ -153,9 +153,9 @@ export default function Search() {
             <Grid item xs={12} md={4}>
               <SearchResultItem
                 colorVariant={2}
-                amount={posts.length}
+                amount={posts?.length}
                 resultTitleSuffix={` in Blogs en Vlogs`}
-                list={posts.map((post) => ({
+                list={posts?.map((post) => ({
                   name: post.title,
                   link: `/verhalen/${post.slug}`,
                 }))}
@@ -164,9 +164,9 @@ export default function Search() {
             <Grid item xs={12} md={4}>
               <SearchResultItem
                 colorVariant={3}
-                amount={letters.length}
+                amount={letters?.length}
                 resultTitleSuffix={` in Brieven`}
-                list={letters.map((post) => ({
+                list={letters?.map((post) => ({
                   name: post.title,
                   link: `/verhalen/${post.slug}`,
                 }))}

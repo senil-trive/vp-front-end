@@ -17,6 +17,7 @@ const Wrapper: any = styled.div`
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   display: flex;
   position: absolute;
+
   z-index: 999;
   // width: 100%;
   max-width: 1440px;
@@ -24,9 +25,9 @@ const Wrapper: any = styled.div`
   top: calc(100% + 25px);
   right: ${(props: any) =>
     props.selected === "Kinderen"
-      ? "calc(100% - 350px)"
+      ? "calc(100% - 370px)"
       : props.selected === "Vrijwilligers"
-      ? "calc(100% - 480px)"
+      ? "calc(100% - 532px)"
       : ""};
 
   &:before {
@@ -64,15 +65,19 @@ const Wrapper: any = styled.div`
         &:not(:last-child) {
           padding-bottom: 15px;
         }
+
         width: 200px;
         a {
           font-family: "Avenir";
           font-weight: 300;
           font-size: 18px;
           line-height: 160%;
-          letter-spacing: 0.02em;
+          width: 250px;
+          word-break: break-word;
+          white-space: normal;
+          // letter-spacing: 0.02em;
           color: ${({ theme }) => theme.colors.text.normal};
-          white-space: nowrap;
+
           &:hover {
             background-color: ${({ theme }) => theme.colors.primary.normal};
             padding: 12px;
