@@ -99,22 +99,22 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
 
   //4. Add an opacity animation
   const cardVariants: Variants = {
-    // offscreen: {
-    //   y: 300,
-    //   rotate: -10,
-    //   opacity: 0,
-    // },
-    // onscreen: {
-    //   y: 0,
-    //   rotate: 0,
-    //   opacity: 1,
-    //   transition: {
-    //     type: "spring",
-    //     stiffness: 43,
-    //     bounce: 0.3,
-    //     duration: 0.4,
-    //   },
-    // },
+    offscreen: {
+      y: 300,
+      rotate: -10,
+      opacity: 0,
+    },
+    onscreen: {
+      y: 0,
+      rotate: 0,
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: 43,
+        bounce: 0.3,
+        duration: 0.4,
+      },
+    },
   };
 
   useEffect(() => {
