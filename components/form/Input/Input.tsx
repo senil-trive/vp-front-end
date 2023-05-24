@@ -66,7 +66,7 @@ const InputWrapper = styled.div<InputStateType>`
     line-height: 160%;
     /* identical to box height, or 29px */
 
-    color: #000000;
+    color: #fff;
   }
 
   > div {
@@ -83,11 +83,11 @@ const InputWrapper = styled.div<InputStateType>`
       border: none;
       width: 100%;
 
-      font-weight: 400;
+      font-weight: 300;
       font-size: 18px;
       line-height: 160%;
 
-      color: #888888;
+      color: #C7C7C7;
       background-color: transparent;
 
       &:focus {
@@ -178,7 +178,7 @@ export default function Input({
   return (
     <InputWrapper disabled={disabled} active={active} hasError={hasError}>
       {!!label && <label>{label}</label>}
-      <div style={{ borderColor: colors[borderColor].normal }}>
+      <div style={{border:"none" }}>
         {!!iconLeft && (
           <IconWrapper style={{ marginRight: 10 }}>{iconLeft}</IconWrapper>
         )}

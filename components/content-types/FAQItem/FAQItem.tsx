@@ -60,7 +60,7 @@ const FAQItem: React.FC<FAQItemProps> = ({
       </div>
 
       <div
-        className={`description  text-left ${isSelected ? "visible mt-4" : ""}`}
+        className={`description  text-left ${isSelected ? "visible mt-4" : ""}`}  style={{color: "#fff"}}
       >
         {parseHTMLtoReact(description ?? "")}
       </div>
