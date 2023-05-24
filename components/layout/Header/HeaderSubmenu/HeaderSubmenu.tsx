@@ -29,6 +29,9 @@ const Wrapper: any = styled.div`
       : props.selected === "Vrijwilligers"
       ? "calc(100% - 532px)"
       : ""};
+      
+    
+     
 
   &:before {
     content: "";
@@ -56,6 +59,7 @@ const Wrapper: any = styled.div`
       font-size: 26px;
       line-height: 120%;
     }
+
 
     ul {
       list-style: none;
@@ -89,8 +93,14 @@ const Wrapper: any = styled.div`
             }
           }
           &.active {
-            color: ${({ theme }) => theme.colors.primary.normal};
-            text-decoration: underline;
+            background-color: ${({ theme }) => theme.colors.primary.normal};
+            padding: 12px;
+            margin: -12px;
+            border-radius: 8px;
+            color: white;
+            &:after {
+              content: "  👉🏽";
+            }
           }
         }
       }

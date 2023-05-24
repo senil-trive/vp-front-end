@@ -160,6 +160,7 @@ export default function PageWrapper({
       <DynamicHeader />
 
       <div className="page-content">{children}</div>
+       <DynamicFooter />
     </StyledWrapper>
   );
 }

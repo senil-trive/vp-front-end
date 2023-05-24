@@ -85,7 +85,7 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
 
   return (
     <div>
-      <PageWrapper
+      <PageWrapper  
         seo={{
           title: pageData?.seo_title
             ? pageData?.seo_title
@@ -190,7 +190,7 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
 
                     <Grid item xs={12} md={6}>
                       <Grid item xs={12}>
-                        <P variant="light">* Verplichte velden</P>
+                        <P variant="light" style={{color: "#fff"}}>* Verplichte velden</P>
                       </Grid>
                       <Grid item xs={12} md={4}>
                         <Button loading={isLoading} disabled={isSubmitted}>
