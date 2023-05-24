@@ -38,6 +38,9 @@ export default function BlogItem({
 }: Props) {
   const { colors } = useTheme();
 
+  console.log(mediaSrc);
+
+  console.log(embedSrc);
   const generateMediaItem = () => {
     let Child = null;
 

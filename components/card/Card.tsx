@@ -2,8 +2,9 @@ import React, { ReactNode } from "react";
 
 import styled from "styled-components";
 
-type Variant = {
-  variant?: "brief" | "blog" | "vlog" | "story";
+export type Variant = {
+  variant?: "brief" | "blog" | "vlog" | "story" | "primary";
+  className?: string;
 };
 
 type Props = Variant & {
@@ -116,26 +117,48 @@ const StyledBlog = styled(BaseStyle)`
       var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
   }
 `;
-
+const StyledPrimary = styled(BaseStyle)`
+  background-color: #006ef7;
+  &:hover {
+    --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px 1px rgb(0 0 0 / 0.1) !important;
+    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color),
+      0 4px 6px 1px var(--tw-shadow-color) !important;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+      var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+  }
+`;
 const CardWrapper = ({
   variant,
   children,
+  className,
 }: React.PropsWithChildren<Variant>) => {
+  console.log(className);
   switch (variant) {
     case "vlog":
     case "blog":
-      return <StyledBlog>{children}</StyledBlog>;
+      return <StyledBlog className={className}>{children}</StyledBlog>;
 
     case "brief":
       return <StyledLetter>{children}</StyledLetter>;
     case "story":
       return <StyledStory>{children}</StyledStory>;
-
+    case "primary":
+      return <StyledPrimary className={className}>{children}</StyledPrimary>;
     default:
       return <StyledPost>{children}</StyledPost>;
   }
 };
 
-export default function Card({ variant = "brief", children }: Props) {
-  return <CardWrapper variant={variant}>{children}</CardWrapper>;
+export default function Card({
+  className,
+  variant = "brief",
+  children,
+}: Props) {
+  console.log(className, "15");
+  return (
+    <CardWrapper variant={variant} className={className}>
+      {children}
+    </CardWrapper>
+  );
 }

@@ -16,8 +16,10 @@ import USPItem from "../../components/content-types/USPItem/USPItem";
 import VideoItem from "../../components/content-types/VideoItem/VideoItem";
 import parseImageURL from "../../utils/parseImageURL";
 import { useRouter } from "next/router";
-import { useTheme } from "styled-components";
+import styled, { useTheme } from "styled-components";
 import VoulunteerWeek from "../../components/content-types/VolunteerWeek/VolunteerWeek";
+import InfoCard from "../../components/content-types/InfoCard/InfoCard";
+import YoutubePlayer from "../../components/media/YoutubePlayer";
 type VolunteersPageProps = {
   pageData: any;
   error?: boolean;
@@ -66,6 +68,35 @@ interface IVolunteerWeekState {
   week4: IVolunteerWeek;
   week5: IVolunteerWeek;
 }
+const VideoWrapper = styled.section`
+  .video-container figure {
+    width: calc(33.33% - 22px) !important;
+    margin-right: 22px;
+  }
+
+  @media (max-width: 991px) {
+    .video-container figure {
+      height: 500px !important;
+    }
+    .video-container figure > div > div {
+      height: 60px !important;
+      width: 60px !important;
+    }
+    .video-container figcaption h3 {
+      font-size: 23px;
+    }
+    .video-container figcaption p {
+      line-height: 130%;
+    }
+  }
+  @media (max-width: 767px) {
+    .video-container figure {
+      width: 100% !important;
+      height: 350px !important;
+      margin: 20px 0px;
+    }
+  }
+`;
 const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
   const router = useRouter();
   const { colors } = useTheme();
@@ -152,6 +183,46 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
             </div>
           </Hero>
 
+          <section className="mb-[40px] md:mb-[80px]">
+            <Container>
+              <div className="block relative mt-[-80px] md:flex gap-10">
+                <InfoCard
+                  variant="blog"
+                  title="Onze ideale vrijwilliger"
+                  description="is iemand die er zonder oordeel wil zijn voor een kind. Wil jij, tussen alle dingen die jouw agenda vullen door, tijd maken om te chatten met een kind? Geef een kind het gevoel er niet alleen voor te staan."
+                  icon="/handsake.svg"
+                  className="p-[32px] flex-1 hover:bg-[#FE517E] text-[#fff]"
+                >
+                  <div className="flex justify-center  mt-[20px] md:mt-[40px]">
+                    <Button
+                      variant="secondary"
+                      className="w-[100%] bg-[#fff] text-[#FE517E] border-[#fff]"
+                      // href="/vrijwilligerswerk/aanmelden"
+                    >
+                      Aanmelden
+                    </Button>
+                  </div>
+                </InfoCard>
+                <InfoCard
+                  variant="primary"
+                  title="volg onze trainingen"
+                  description="Villa Pinedo is trots en dankbaar voor de jongeren die zich inzetten voor andere kinderen met gescheiden ouders. Daarom investeren wij graag in jou door je meerdere trainingen, masterclasses en inspiratiesessies aan te bieden."
+                  icon="/note.svg"
+                  className="mt-[32px] p-[32px] flex-1 md:mt-[0px]"
+                >
+                  <div className="flex justify-center mt-[20px] md:mt-[40px]">
+                    <Button
+                      variant="secondary"
+                      className="w-[100%] bg-[#fff] text-[#006EF7] border-[#fff]"
+                      // href="/vrijwilligerswerk/aanmelden"
+                    >
+                      Aanmelden
+                    </Button>
+                  </div>
+                </InfoCard>
+              </div>
+            </Container>
+          </section>
           {pageData?.media_section_1 && (
             <section
               className="my-[40px] md:my-[80px]"
@@ -417,6 +488,48 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
               </div>
             </Container>
           </section>
+          <VideoWrapper className="my-[40px] md:my-[80px]">
+            <Container>
+              <div className="flex flex-col items-center justify-center mb-14">
+                <TitleWithHighlights
+                  text={
+                    "Zij gingen jou voor, luister hieronder naar hun verhaal"
+                  }
+                  headerElement="h3"
+                  color="black"
+                />
+
+                <P className="max-w-4xl">
+                  Deze brief is speciaal voor jou: voor kinderen waarvan de
+                  ouders uit elkaar gaan of al zijn. Wist je dat 86.000 kinderen
+                  per jaar horen dat hun ouders gaan scheiden? Dat is superveel,
+                  bijna twee voetbalstadions vol.
+                </P>
+              </div>
+            </Container>
+            <Container>
+              <div className="video-container flex flex-wrap">
+                <VideoItem
+                  title="Wat leer je bij de trainingen?"
+                  poster="/storyposter1.png"
+                  src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                  subtitle="Hier komt een omschrijvende tekst"
+                />
+                <VideoItem
+                  title="Wat leer je bij de trainingen?"
+                  poster="/storyposter2.png"
+                  src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                  subtitle="Hier komt een omschrijvende tekst"
+                />
+                <VideoItem
+                  title="Wat leer je bij de trainingen?"
+                  poster="/storyposter3.png"
+                  src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                  subtitle="Hier komt een omschrijvende tekst"
+                />
+              </div>
+            </Container>
+          </VideoWrapper>
           <FAQList
             containerWidth="lg"
             title={pageData?.faq_section_title}
