@@ -58,6 +58,7 @@ const VolunteerWeek: React.FC<IProps> = ({
   const handleClick = (currentActive: string | null) => {
     if (currentActive !== id) {
       setEdit(false);
+      setActiveId(null);
     }
     setEdit(true);
     setActiveId(id);
@@ -93,7 +94,11 @@ const VolunteerWeek: React.FC<IProps> = ({
     );
     localStorageCheck();
   };
-
+  const handleContentClick = (event: any) => {
+    event.stopPropagation();
+    const parentDiv = event.currentTarget.parentNode;
+    parentDiv.click();
+  };
   return (
     <VolunteerWrapper
       className={`${className} volunteer-week-box border-[5px] border-[#3FC7B4] p-[32px] ${
@@ -115,7 +120,7 @@ const VolunteerWeek: React.FC<IProps> = ({
             alt="Calendar icon for week box"
           />
         </div>
-        <div>
+        <div onClick={handleContentClick}>
           <ul>
             {data !== null &&
               data?.map((volunteer: any, index) => (
