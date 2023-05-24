@@ -88,7 +88,7 @@ const InputWrapper = styled.div<InputStateType>`
       font-size: 18px;
       line-height: 160%;
 
-      color: #C7C7C7;
+      color: #c7c7c7;
       background-color: transparent;
 
       &:focus {

@@ -163,11 +163,24 @@ export default function Forum({
             <Grid item xs={12} md={8} lg={6}>
               <TitleWithHighlights
                 text={pageData?.page_title ?? ""}
-                style={{ textAlign: "center", padding: "0 24px", fontSize: "64px", fontWeight: "400"}}
+                style={{
+                  textAlign: "center",
+                  padding: "0 24px",
+                  fontSize: "64px",
+                  fontWeight: "400",
+                }}
                 color="white"
                 textToHighlight={["Blog", "Vlogs"]}
               />
-              <P color="white" variant="light" style={{ textAlign: "center", fontSize: "18px", fontWeight: "300"  }}>
+              <P
+                color="white"
+                variant="light"
+                style={{
+                  textAlign: "center",
+                  fontSize: "18px",
+                  fontWeight: "300",
+                }}
+              >
                 {pageData?.page_subtitle}
               </P>
             </Grid>

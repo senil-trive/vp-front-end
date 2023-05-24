@@ -29,7 +29,7 @@ const Wrapper = styled.div`
   z-index: 999;
   right: 5px;
   width: calc(100% - 10px);
-  
+
   ul {
     list-style: none;
     padding: 0;

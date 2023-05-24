@@ -44,12 +44,12 @@ export const PaginationWrapper = styled.div`
 
           border-radius: 8px;
           background: white;
-          border: 1px solid #3FC7B4;
+          border: 1px solid #3fc7b4;
           color: #000;
 
           &.active {
             color: white;
-            background:#3FC7B4;
+            background: #3fc7b4;
           }
         }
 

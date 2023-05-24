@@ -29,9 +29,6 @@ const Wrapper: any = styled.div`
       : props.selected === "Vrijwilligers"
       ? "calc(100% - 532px)"
       : ""};
-      
-    
-     
 
   &:before {
     content: "";
@@ -59,7 +56,6 @@ const Wrapper: any = styled.div`
       font-size: 26px;
       line-height: 120%;
     }
-
 
     ul {
       list-style: none;

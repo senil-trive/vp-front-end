@@ -178,10 +178,10 @@ export default function TagList({
                   backgroundColor: isSelected(tag.id)
                     ? "#3FC7B4"
                     : "transparent",
-                  color: isSelected(tag.id)?"#fff": "#150F2F",
+                  color: isSelected(tag.id) ? "#fff" : "#150F2F",
                   border: "1px solid #3FC7B4",
-                 fontSize: "18px",
-                 textTransform: "none"
+                  fontSize: "18px",
+                  textTransform: "none",
                 }}
               >
                 {tag.name}

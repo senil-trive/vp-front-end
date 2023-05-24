@@ -54,11 +54,11 @@ const TextWithHighlights: React.FC<TextWithHighlightsProps> = ({
       textToHighlight.color
     );
   }
-  console.log(newText,"sssffsf")
+  console.log(newText, "sssffsf");
 
   return (
     <P color={color} variant={variant} style={style} className={className}>
-      <>{parseHTMLtoReact(newText.replace(',',""))}</>
+      <>{parseHTMLtoReact(newText.replace(",", ""))}</>
     </P>
   );
 };

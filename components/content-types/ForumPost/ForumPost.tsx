@@ -120,7 +120,7 @@ const StyledForumPost = styled.article<styledProps>`
       span {
         background: white;
         border: none;
-        color:3FC7B4;
+        color: 3FC7B4;
         font-weight: 400;
         font-size: 18px;
         font-family: "Fjalla One";
