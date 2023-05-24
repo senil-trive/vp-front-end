@@ -551,7 +551,6 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
             </div>
           </Container>
         </main>
-        <Footer />
       </PageWrapper>
     </div>
   );
