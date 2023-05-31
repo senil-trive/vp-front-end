@@ -21,7 +21,6 @@ const BaseStyle = styled.article`
     height: 180px;
     position: relative;
   }
-  
 `;
 
 const StyledPost = styled(BaseStyle)`

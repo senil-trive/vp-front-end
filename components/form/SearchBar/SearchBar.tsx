@@ -20,7 +20,7 @@ type Props = {
 };
 
 export default function SearchBar({
-  iconColor = "primary",
+  iconColor = "grey",
   placeholder = "Zoeken...",
   onSearch,
   waitTime = 300,

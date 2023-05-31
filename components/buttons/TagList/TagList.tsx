@@ -180,8 +180,6 @@ export default function TagList({
                     : "transparent",
                   color: isSelected(tag.id) ? "#fff" : "#150F2F",
                   border: "1px solid #3FC7B4",
-                  fontSize: "18px",
-                  textTransform: "none",
                 }}
               >
                 {tag.name}
