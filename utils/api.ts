@@ -174,7 +174,7 @@ export const getCompanyInfo = async () => {
  * Gets the home page details
  */
 export const getHomePageData = async () => {
-  return await fetch(`${ENDPOINTS.COLLECTIONS}/home_page?fields=*.*.*`, {
+  return await fetch(`${ENDPOINTS.COLLECTIONS}/home_page`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -261,7 +261,7 @@ export const getPosts = async ({
   filter,
   meta = "total_count",
 }: DirectusParams) => {
-  let url = `${ENDPOINTS.COLLECTIONS}/vlogposts?fields=*.*.*&filter=[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+  let url = `${ENDPOINTS.COLLECTIONS}/vlogposts?filter=[status][_eq]=published&limit=${postPerPage}&page=${page}`;
 
   if (meta) {
     url = `${url}&meta=${meta}`;
@@ -405,7 +405,7 @@ export const getVideoItems = async ({
  */
 export const getPostDetail = async (slug: string) => {
   return await fetch(
-    `${ENDPOINTS.COLLECTIONS}/vlogposts?fields=*.*.*.*&filter[slug][_eq]=${slug}`,
+    `${ENDPOINTS.COLLECTIONS}/vlogposts?filter[slug][_eq]=${slug}`,
     {
       method: "GET",
       headers: {
@@ -473,7 +473,7 @@ export const getForumPosts = async ({
  * @returns
  */
 export const getHomeData = async () => {
-  return await fetch(`${ENDPOINTS.COLLECTIONS}/home_page?fields=*.*.*`, {
+  return await fetch(`${ENDPOINTS.COLLECTIONS}/home_page`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

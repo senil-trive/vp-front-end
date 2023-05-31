@@ -44,7 +44,7 @@ const Wrapper: any = styled.div`
 
   section {
     /* flex: 1; */
-    padding: 0 30px;
+    padding: 0 22px;
 
     p {
       margin-bottom: 16px;
@@ -80,12 +80,13 @@ const Wrapper: any = styled.div`
 
           &:hover {
             background-color: ${({ theme }) => theme.colors.primary.normal};
-            padding: 12px;
+            padding: 10px;
             margin: -12px;
             border-radius: 8px;
             color: white;
             &:after {
               content: "  👉🏽";
+             
             }
           }
           &.active {

@@ -6,10 +6,11 @@ const SearchIcon = ({ color, ...props }: SVGProps<SVGSVGElement>) => {
   const { colors } = useTheme();
   let strokeColor = color;
 
-  if (!color) {
-    strokeColor = colors.tertiary.normal;
-  }
 
+  if (!color) {
+    strokeColor = colors.secondary.light;
+  }
+  console.log(strokeColor,'strokeColor');
   return (
     <svg
       width={19}
