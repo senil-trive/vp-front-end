@@ -5,6 +5,8 @@ type InfoCard = {
   title: string;
   icon: string;
   description: string;
+  imageUrl?: string;
+  category?: string;
   className?: string;
   children?: React.ReactNode;
 };

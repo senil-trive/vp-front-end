@@ -3,7 +3,7 @@ import React, { ReactNode } from "react";
 import styled from "styled-components";
 
 export type Variant = {
-  variant?: "brief" | "blog" | "vlog" | "story" | "primary";
+  variant?: "brief" | "blog" | "vlog" | "story" | "primary" | "info";
   className?: string;
 };
 
@@ -21,6 +21,7 @@ const BaseStyle = styled.article`
     height: 180px;
     position: relative;
   }
+  
 `;
 
 const StyledPost = styled(BaseStyle)`
@@ -119,6 +120,27 @@ const StyledBlog = styled(BaseStyle)`
 `;
 const StyledPrimary = styled(BaseStyle)`
   background-color: #006ef7;
+  header {
+    height: 294px;
+    img,
+    video,
+    iframe {
+      // border-radius: 8px;
+      // background-color: ${({ theme }) => theme.colors.grey.normal};
+      height: 294px;
+    }
+  }
+  &:hover {
+    --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px 1px rgb(0 0 0 / 0.1) !important;
+    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color),
+      0 4px 6px 1px var(--tw-shadow-color) !important;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+      var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+  }
+`;
+const StyledInfo = styled(BaseStyle)`
+  background-color: #ff971d;
   &:hover {
     --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
       0 4px 6px 1px rgb(0 0 0 / 0.1) !important;
@@ -145,6 +167,8 @@ const CardWrapper = ({
       return <StyledStory>{children}</StyledStory>;
     case "primary":
       return <StyledPrimary className={className}>{children}</StyledPrimary>;
+    case "info":
+      return <StyledInfo className={className}>{children}</StyledInfo>;
     default:
       return <StyledPost>{children}</StyledPost>;
   }

@@ -56,6 +56,10 @@ const Wrapper = styled.div<{
             height: 464px;
           `};
     padding: 29px 10px 40px 10px;
+    .inner {
+      justify-content: left !important;
+      padding: 0 16px;
+    }
   }
 `;
 
