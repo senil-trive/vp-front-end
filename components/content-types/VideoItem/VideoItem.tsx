@@ -62,6 +62,7 @@ export default function VideoItem({
   subtitle,
   poster,
   src = placeholderUrl,
+  className,
 }: VideoPropsType) {
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -88,7 +89,7 @@ export default function VideoItem({
   };
 
   return (
-    <StyledFigure>
+    <StyledFigure className={className}>
       <video
         src={src}
         ref={videoRef}

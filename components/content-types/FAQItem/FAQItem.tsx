@@ -61,6 +61,7 @@ const FAQItem: React.FC<FAQItemProps> = ({
 
       <div
         className={`description  text-left ${isSelected ? "visible mt-4" : ""}`}
+        style={{ color: "#fff" }}
       >
         {parseHTMLtoReact(description ?? "")}
       </div>

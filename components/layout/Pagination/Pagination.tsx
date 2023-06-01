@@ -67,7 +67,7 @@ const pagination = (
     pages = withDots(1, [1, "..."]).concat(pages);
   }
 
-  if (lastPage && lastPage < pageTotal) {
+  if (lastPage && Number(lastPage) < pageTotal) {
     pages = pages.concat(withDots(pageTotal, ["...", pageTotal]));
   }
 

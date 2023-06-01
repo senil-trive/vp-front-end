@@ -1,4 +1,4 @@
-import { H3, H4, P, TitleWithHighlights } from "../../../components/typography";
+import { P, TitleWithHighlights } from "../../../components/typography";
 
 import Button from "../../../components/buttons/Button";
 import { Container } from "@mui/material";
@@ -7,8 +7,16 @@ import { Hero } from "../../../components/layout";
 import Image from "next/image";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import parseImageURL from "../../../utils/parseImageURL";
-import parseVideoURL from "../../../utils/parseVideoURL";
 import { useTheme } from "styled-components";
+import BlogItem from "../../../components/content-types/BlogItem/BlogItem";
+import {
+  PackageWrapper,
+  TrainigenHeroWrapper,
+  TrainigenIdealWrapper,
+  TrainingBlogWrapper,
+} from "../../../styles/Vrjwilligerswerk/TrainigenWrapper.styles";
+import InfoCard from "../../../components/content-types/InfoCard/InfoCard";
+import CommonDetailCard from "../../../components/content-types/CommonDetailCard/CommonDetailCard";
 
 type VolunteersTrainingPageProps = {
   pageData: any;
@@ -20,7 +28,7 @@ export const getServerSideProps = async () => {
 
   try {
     const pageReq = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/volunteer_training_overview_page?fields=*.*.*`,
+      `${ENDPOINTS.COLLECTIONS}/volunteer_training_overview_page`,
       {
         method: "GET",
         headers: {
@@ -30,15 +38,13 @@ export const getServerSideProps = async () => {
     );
 
     const pageRes = await pageReq.json();
-
+    console.log(pageRes, "page");
     return {
       props: {
-        pageData: pageRes.data,
+        pageData: pageRes?.data || null,
       },
     };
   } catch (error) {
-    console.log(error);
-
     return {
       redirect: {
         destination: "/500",
@@ -51,7 +57,7 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
   pageData,
 }) => {
   const { colors } = useTheme();
-
+  console.log(pageData, "page");
   return (
     <div>
       <PageWrapper
@@ -69,102 +75,158 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
         }}
       >
         <main>
-          <Hero>
-            <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16">
-              <TitleWithHighlights
-                highlightColor="info"
-                text={pageData?.page_title}
-                textToHighlight="vrijwilligers"
-                headerElement="h1"
-                color="primary"
-              />
-              <P>{pageData?.page_subtitle}</P>
-            </div>
-          </Hero>
-
-          <section className="my-[80px]">
-            <Container>
-              <div className="text-center">
-                <H3 variant="bold">{pageData?.basic_training_block_title}</H3>
-                <P>{pageData?.basic_training_block_subtitle}</P>
+          <TrainigenHeroWrapper>
+            <Hero
+              center
+              imageUrl={"/trainigenhead.png"}
+              style={{
+                minHeight: 555,
+                position: "relative",
+              }}
+            >
+              <div className="flex flex-col md:items-center md:justify-center md:text-center max-w-2xl mt-[-290px]">
+                <TitleWithHighlights
+                  highlightColor="info"
+                  text={"trainingen voor vrijwilligers"}
+                  headerElement="h1"
+                  color="primary"
+                  className="text-white"
+                />
+                <P className="text-white">
+                  Scheiding van je ouders overleefd? Dan ben je ondertussen een
+                  ervaringsdeskundige. Kinderen die nu in dezelfde situatie
+                  zitten als waar jij in gezeten hebt, vinden het fijn om tips
+                  en adviezen te krijgen van jou. Of gewoon even hun hart te
+                  luchten.
+                </P>
               </div>
+            </Hero>
+          </TrainigenHeroWrapper>
 
-              <div className="grid md:grid-cols-2 gap-8 mt-14 mx-auto">
-                <div className="rounded-lg bg-white border-2 border-orange-900 p-6">
-                  {pageData?.training_1_video?.id ? (
-                    <video
-                      className="rounded-lg h-[256px] w-full object-cover mb-[40px]"
-                      src={parseVideoURL(pageData?.training_1_video?.id)}
-                      controls
-                      poster={parseImageURL(pageData?.training_1_image?.id)}
-                    ></video>
-                  ) : pageData?.training_1_image?.id ? (
-                    <Image
-                      className="rounded-lg h-[256px] object-cover mb-[40px]"
-                      src={parseImageURL(pageData?.training_1_image?.id)}
-                      width={500}
-                      height={300}
-                      alt={pageData?.training_1_title}
-                    />
-                  ) : null}
-
-                  <H4 variant="bold">{pageData?.training_1_title}</H4>
-                  <P>{pageData?.training_1_description}</P>
-                </div>
-                <div className="rounded-lg bg-white border-2 border-orange-900 p-6">
-                  {pageData?.training_2_video?.id ? (
-                    <video
-                      className="rounded-lg h-[256px] w-full object-cover mb-[40px]"
-                      src={parseVideoURL(pageData?.training_2_video?.id)}
-                      controls
-                      poster={parseImageURL(pageData?.training_2_image?.id)}
-                    ></video>
-                  ) : pageData?.training_2_image?.id ? (
-                    <Image
-                      className="rounded-lg h-[256px] object-cover mb-[40px]"
-                      src={parseImageURL(pageData?.training_2_image?.id)}
-                      width={500}
-                      height={300}
-                      alt={pageData?.training_2_title}
-                    />
-                  ) : null}
-                  <H4 variant="bold">{pageData?.training_2_title}</H4>
-                  <P>{pageData?.training_2_description}</P>
-                </div>
+          <TrainingBlogWrapper>
+            <Container>
+              <div className="training-blog">
+                <BlogItem
+                  embedSrc="https://www.youtube.com/embed/98do3PUk4cM"
+                  link={`/kinderen/verhalen/`}
+                  type={"vlog"}
+                  author={"Naam van auteur"}
+                  description={
+                    "Iedereen die binnen Villa Pinedo met vrijwilligerswerk begint, krijgt de basistraining. In deze training leer jij meer over de werkzaamheden die je voor Villa Pinedo zou willen doen. Je leert je eigen ervaringen die je als kind van gescheiden ouders hebt, in te zetten om anderen te helpen."
+                  }
+                  postDate={new Date("01/12/2023")}
+                  category={"Thema"}
+                  title={"basistraining"}
+                  buttonText="training bekijken"
+                />
+                <BlogItem
+                  embedSrc="https://www.youtube.com/embed/98do3PUk4cM"
+                  link={`/kinderen/verhalen/`}
+                  type={"vlog"}
+                  author={"Naam van auteur"}
+                  description={
+                    "Iedereen die binnen Villa Pinedo met vrijwilligerswerk begint, krijgt de basistraining. In deze training leer jij meer over de werkzaamheden die je voor Villa Pinedo zou willen doen. Je leert je eigen ervaringen die je als kind van gescheiden ouders hebt, in te zetten om anderen te helpen."
+                  }
+                  postDate={new Date("01/12/2023")}
+                  category={"Thema"}
+                  title={"verdiepingstraining"}
+                  buttonText="training bekijken"
+                />
               </div>
             </Container>
-          </section>
-
-          <section
-            className="mt-[80px] text-center py-[80px]"
-            style={{
-              backgroundColor: colors.tertiary.light,
-            }}
-          >
+          </TrainingBlogWrapper>
+          <PackageWrapper className="mt-[40px] md:mt-[80px]">
             <Container>
-              <div className="text-center">
-                <H3 variant="bold">{pageData?.package_block_title}</H3>
-                <P>{pageData?.package_block_description}</P>
-              </div>
-
-              <div className="flex flex-col gap-12 mt-12">
-                <div className="rounded-lg bg-white border-2 border-orange-900 p-6">
-                  <H4 variant="bold">{pageData?.package_1_title}</H4>
-                  <P>{pageData?.package_1_description}</P>
-                </div>
-                <div className="rounded-lg bg-white border-2 border-orange-900 p-6">
-                  <H4 variant="bold">{pageData?.package_2_title}</H4>
-                  <P>{pageData?.package_2_description}</P>
-                </div>
-              </div>
-
-              <div className="flex items-center justify-center mt-11 w-fit mx-auto">
-                <Button variant="primary" href="/vrijwilligerswerk/aanmelden">
-                  Aanmelden als vrijwilliger
-                </Button>
+              <div className="flex flex-col items-center justify-center mb-6 md:mb-14">
+                <TitleWithHighlights
+                  text={"ben je al vrijwilliger en zoek je verdieping?"}
+                  headerElement="h3"
+                  color="black"
+                />
+                <P className="max-w-4xl">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                  laboris nisi ut aliquip ex ea commodo consequat
+                </P>
               </div>
             </Container>
-          </section>
+            <Container>
+              <div className="package-container flex flex-wrap">
+                {pageData?.training_packages?.map((item: any) => (
+                  <CommonDetailCard
+                    title={item.title}
+                    description={
+                      <ul>
+                        {item?.training_package_detail?.map((listItem: any) => (
+                          <li key={listItem} className="packagelist-item">
+                            <img
+                              src="/icons8-tick.svg"
+                              alt="packagelist iocns"
+                            />
+                            {listItem?.item}
+                          </li>
+                        ))}
+                      </ul>
+                    }
+                    variant="info"
+                    key={item}
+                    button={item?.view_package_button}
+                    buttonLink={item?.view_package_link}
+                  />
+                ))}
+              </div>
+            </Container>
+          </PackageWrapper>
+          <TrainigenIdealWrapper>
+            <Container>
+              <div className="ideal-container block relative md:flex gap-10">
+                <InfoCard
+                  variant="blog"
+                  title={pageData?.cta_1_title}
+                  description={pageData?.cta_1_description}
+                  icon="/eye.png"
+                  className=" hover:bg-[#FE517E] text-[#fff] h-[100%] flex
+                  flex-col"
+                >
+                  <div className="flex justify-center  mt-[20px] md:mt-[auto]">
+                    <Button
+                      variant="secondary"
+                      className="w-[100%] bg-[#fff] text-[#FE517E] border-[#fff]"
+                      href={pageData?.cta_1_button_url}
+                    >
+                      {pageData?.cta_1_button_label}
+                    </Button>
+                  </div>
+                </InfoCard>
+
+                <InfoCard
+                  variant="primary"
+                  title={pageData?.cta_2_title}
+                  description={pageData?.cta_2_description}
+                  icon="/note.svg"
+                  className="mt-[32px] md:mt-[0px] h-[100%] flex
+                  flex-col"
+                >
+                  <div className="flex justify-center mt-[20px] md:mt-[auto]">
+                    <Button
+                      variant="secondary"
+                      className="w-[100%] bg-[#fff] text-[#006EF7] border-[#fff]"
+                      href={pageData?.cta_2_button_url}
+                    >
+                      {pageData?.cta_2_button_label}
+                    </Button>
+                  </div>
+                </InfoCard>
+              </div>
+            </Container>
+            <Image
+              src={"/trainingfooterhead.png"}
+              className="h-[554px] w-full relative"
+              alt="tarining footer "
+              fill
+            />
+          </TrainigenIdealWrapper>
         </main>
       </PageWrapper>
     </div>

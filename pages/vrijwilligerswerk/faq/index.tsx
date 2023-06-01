@@ -23,8 +23,8 @@ export const getServerSideProps = async () => {
 
     return {
       props: {
-        pageData: pageRes.data,
-        faqData: faqRes.data,
+        pageData: pageRes.data || null,
+        faqData: faqRes.data || null,
         totalFaqs: faqRes?.meta?.filter_count ?? 0,
       },
     };

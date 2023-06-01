@@ -86,12 +86,17 @@ const Wrapper: any = styled.div`
             color: white;
             &:after {
               content: "  👉🏽";
-             
             }
           }
           &.active {
-            color: ${({ theme }) => theme.colors.primary.normal};
-            text-decoration: underline;
+            background-color: ${({ theme }) => theme.colors.primary.normal};
+            padding: 12px;
+            margin: -12px;
+            border-radius: 8px;
+            color: white;
+            &:after {
+              content: "  👉🏽";
+            }
           }
         }
       }

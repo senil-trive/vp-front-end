@@ -146,7 +146,7 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                   {pageData?.cta_section_footer_subtitle}
                 </P>
 
-                <div className="flex gap-8 sm:w-[300px] md:w-[600px]">
+                <div className="flex gap-8 sm:w-[300px] md:w-[600px]  ">
                   <Button href={pageData?.cta_section_footer_ios_url}>
                     <FaAppStoreIos size={25} />
                     App Store

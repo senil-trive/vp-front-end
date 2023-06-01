@@ -77,7 +77,10 @@ export const Caroussel: React.FC<CarousselProps> = ({
       }}
     >
       {slides.map((slide, index) => (
-        <SwiperSlide key={index} className="min-h-[400px] h-auto">
+        <SwiperSlide
+          key={index}
+          className="min-h-[300px] md:min-h-[400px] h-auto"
+        >
           <TestimonialItem data={slide} />
         </SwiperSlide>
       ))}

@@ -47,7 +47,7 @@ const BaseTag = styled.span<Variant & Position & { isActive: boolean }>`
     isActive &&
     css`
       background-color: ${({ theme }) => theme.colors.info.normal};
-      color: ${({ theme }) => theme.colors.white.normal};
+      color: "${({ theme }) => theme.colors.white.normal}";
     `}
 
   ${({ position }) => {

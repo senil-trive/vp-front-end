@@ -161,7 +161,7 @@ export default function PageWrapper({
 
       <DynamicHeader />
 
-      <div className="page-content">{children}</div>
+      <div className="page-content ">{children}</div>
 
       {!homepage && <DynamicFooter />}
     </StyledWrapper>

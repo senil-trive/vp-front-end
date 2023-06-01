@@ -155,20 +155,45 @@ export default function Forum({
               <TitleWithHighlights
                 text={pageData?.page_title ?? ""}
                 color="white"
-                style={{ textAlign: "center", padding: "0 24px" }}
+                style={{
+                  textAlign: "center",
+                  padding: "0 24px",
+                  fontSize: "64px",
+                  fontWeight: "400",
+                }}
               />
-              <P color="white" variant="light" className="text-center">
+              <P
+                color="white"
+                variant="light"
+                style={{
+                  textAlign: "center",
+                  fontSize: "18px",
+                  fontWeight: "300",
+                }}
+              >
                 {pageData?.page_subtitle}
               </P>
 
               <div style={{ display: "flex", gap: 32 }}>
-                <Button href="/kinderen/forum/stel-een-vraag">
+                <Button
+                  href="/kinderen/forum/stel-een-vraag"
+                  style={{
+                    backgroundColor: "#3FC7B4",
+                    fontSize: "18px",
+                    fontWeight: "300",
+                  }}
+                >
                   {pageData?.submit_question_button_label}
                 </Button>
                 <Button
                   variant="white"
                   filled={false}
                   href="/kinderen/klets-met-een-buddy"
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "300",
+                    border: "1px solid #fff",
+                  }}
                 >
                   {pageData?.chat_button_label}
                 </Button>
