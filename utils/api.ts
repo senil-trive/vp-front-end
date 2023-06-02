@@ -174,7 +174,7 @@ export const getCompanyInfo = async () => {
  * Gets the home page details
  */
 export const getHomePageData = async () => {
-  return await fetch(`${ENDPOINTS.COLLECTIONS}/home_page?fields=*.*.*`, {
+  return await fetch(`${ENDPOINTS.COLLECTIONS}/home_page`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -236,7 +236,7 @@ export const postLetterSubscription = async (data: any) => {
  */
 export const getPostOverviewPageData = async () => {
   return await fetch(
-    `${ENDPOINTS.COLLECTIONS}/blog_overview_page?fields=*.*.*.*`,
+    `${ENDPOINTS.COLLECTIONS}/blog_overview_page`,
     {
       method: "GET",
       headers: {
@@ -261,7 +261,7 @@ export const getPosts = async ({
   filter,
   meta = "total_count",
 }: DirectusParams) => {
-  let url = `${ENDPOINTS.COLLECTIONS}/vlogposts?fields=*.*.*&filter=[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+  let url = `${ENDPOINTS.COLLECTIONS}/vlogposts?filter=[status][_eq]=published&limit=${postPerPage}&page=${page}`;
 
   if (meta) {
     url = `${url}&meta=${meta}`;
@@ -405,7 +405,7 @@ export const getVideoItems = async ({
  */
 export const getPostDetail = async (slug: string) => {
   return await fetch(
-    `${ENDPOINTS.COLLECTIONS}/vlogposts?fields=*.*.*.*&filter[slug][_eq]=${slug}`,
+    `${ENDPOINTS.COLLECTIONS}/vlogposts?filter[slug][_eq]=${slug}`,
     {
       method: "GET",
       headers: {
@@ -473,7 +473,7 @@ export const getForumPosts = async ({
  * @returns
  */
 export const getHomeData = async () => {
-  return await fetch(`${ENDPOINTS.COLLECTIONS}/home_page?fields=*.*.*`, {
+  return await fetch(`${ENDPOINTS.COLLECTIONS}/home_page`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -515,7 +515,7 @@ export const postVolunteerApplication = async (data: VolunteerRequestType) => {
  */
 export const getContentTags = async () => {
   return await fetch(
-    `${ENDPOINTS.COLLECTIONS}/categories?filter[status][_eq]=published&fields=*.*.*`,
+    `${ENDPOINTS.COLLECTIONS}/categories?filter[status][_eq]=published`,
     {
       method: "GET",
       headers: {
@@ -597,7 +597,7 @@ export const getFaqs = async ({
   meta = "total_count",
   type = "volunteer_faq",
 }: DirectusParams & { type?: string }) => {
-  let url = `${ENDPOINTS.COLLECTIONS}/faq_items?fields=*.*.*?filter[status][_eq]=published&filter[type][_eq]=${type}&limit=${postPerPage}&page=${page}`;
+  let url = `${ENDPOINTS.COLLECTIONS}/faq_items?filter[status][_eq]=published&filter[type][_eq]=${type}&limit=${postPerPage}&page=${page}`;
 
   if (meta) {
     url = `${url}&meta=${meta}`;
@@ -626,7 +626,7 @@ export const getFaqs = async ({
  */
 export const getFaqOverviewData = async () => {
   return await fetch(
-    `${ENDPOINTS.COLLECTIONS}/faq_overview_page?fields=*.*.*`,
+    `${ENDPOINTS.COLLECTIONS}/faq_overview_page`,
     {
       method: "GET",
       headers: {

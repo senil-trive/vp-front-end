@@ -34,7 +34,7 @@ export const getServerSideProps = async () => {
 
     return {
       props: {
-        pageData: pageRes.data,
+        pageData: pageRes.data|| null,
         feed: generateFeedTiles(
           {
             blogs: blogsRes.data,

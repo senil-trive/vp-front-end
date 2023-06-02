@@ -24,7 +24,7 @@ export const getServerSideProps = async () => {
 
   try {
     const pageReq = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/buddy_page?fields=*.*.*`,
+      `${ENDPOINTS.COLLECTIONS}/buddy_page`,
       {
         method: "GET",
         headers: {
@@ -34,6 +34,7 @@ export const getServerSideProps = async () => {
     );
 
     const pageRes = await pageReq.json();
+console.log(pageRes);
 
     return {
       props: {
@@ -109,7 +110,7 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
           >
             <Container>
               <div className="flex flex-col items-center justify-center ">
-                <H3 variant="bold" color="primary">
+                <H3 variant="bold" color="black">
                   {pageData?.cta_section_title}
                 </H3>
                 <P className="max-w-4xl">{pageData?.cta_section_subtitle}</P>
@@ -139,7 +140,7 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
 
             <Container>
               <div className="flex flex-col items-center justify-center my-20 ">
-                <H3 variant="bold" color="primary">
+                <H3 variant="bold" color="black">
                   {pageData?.cta_section_footer_title}
                 </H3>
                 <P className="max-w-4xl">
@@ -163,7 +164,7 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
           <section className="my-[80px] text-center">
             <Container>
               <div className="flex flex-col items-center justify-center ">
-                <H3 variant="bold" color="primary">
+                <H3 variant="bold" color="black">
                   {pageData?.stories_section_title}
                 </H3>
                 <P className="max-w-4xl">

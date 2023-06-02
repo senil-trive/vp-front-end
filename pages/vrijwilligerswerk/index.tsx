@@ -28,7 +28,7 @@ export const getServerSideProps = async () => {
 
   try {
     const req = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/volunteers_overview_page?fields=*.*.*`,
+      `${ENDPOINTS.COLLECTIONS}/volunteers_overview_page`,
       {
         method: "GET",
         headers: {
@@ -36,12 +36,13 @@ export const getServerSideProps = async () => {
         },
       }
     );
+console.log(req,'heretreyw');
 
     const res = await req.json();
 
     return {
       props: {
-        pageData: res.data,
+        pageData: res.data || null,
       },
     };
   } catch (error) {
@@ -135,7 +136,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
           >
             <Container>
               <div className="flex flex-col items-center justify-center ">
-                <H3 variant="bold" color="primary">
+                <H3 variant="bold" color="black">
                   {pageData?.usp_section_title}
                 </H3>
                 <P className="max-w-4xl">{pageData?.usp_section_description}</P>
@@ -168,7 +169,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
             >
               <Container>
                 <div className="flex flex-col items-center justify-center ">
-                  <H3 variant="bold" color="primary">
+                  <H3 variant="bold" color="black">
                     {pageData?.video_section_title}
                   </H3>
                   <P className="max-w-4xl">
@@ -226,7 +227,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
           >
             <Container>
               <div className="flex flex-col items-center justify-center ">
-                <H3 variant="bold" color="primary">
+                <H3 variant="bold" color="black">
                   {pageData?.cta_section_title}
                 </H3>
                 <P className="max-w-4xl">{pageData?.cta_section_subtitle}</P>
