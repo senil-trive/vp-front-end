@@ -28,7 +28,7 @@ export const getServerSideProps = async () => {
   // fetch page data from API
   try {
     const req = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/volunteers_overview_page`,
+      `${ENDPOINTS.COLLECTIONS}/volunteers_overview_page?fields=faq_items.*,*`,
       {
         method: "GET",
         headers: {
@@ -47,10 +47,11 @@ export const getServerSideProps = async () => {
       }
     );
     const res = await req.json();
+    console.log(res);
     const volunteerweekres = await volunteerweekreq.json();
     return {
       props: {
-        pageData: res.data,
+        pageData: res.data || null,
         volunteerweekwork: volunteerweekres?.data || null,
       },
     };
@@ -84,6 +85,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
   const { colors } = useTheme();
   const [volunteerweek, setVolunteerWeek] = useState(volunteerweekwork);
   console.log(volunteerweek, "vol");
+  console.log(pageData, "pageoverviewpage");
   return (
     <div>
       <PageWrapper
