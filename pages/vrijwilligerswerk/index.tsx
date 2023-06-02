@@ -20,12 +20,12 @@ import {
 } from "../../styles/Vrjwilligerswerk/VrijwilligerWorden.styles";
 type VolunteersPageProps = {
   pageData: any;
+  volunteerweekwork: any;
   error?: boolean;
 };
 
 export const getServerSideProps = async () => {
   // fetch page data from API
-
   try {
     const req = await fetch(
       `${ENDPOINTS.COLLECTIONS}/volunteers_overview_page`,
@@ -37,11 +37,21 @@ export const getServerSideProps = async () => {
       }
     );
 
+    const volunteerweekreq = await fetch(
+      `${ENDPOINTS.COLLECTIONS}/volunteer_week_work`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     const res = await req.json();
-
+    const volunteerweekres = await volunteerweekreq.json();
     return {
       props: {
         pageData: res.data,
+        volunteerweekwork: volunteerweekres?.data || null,
       },
     };
   } catch (error) {
@@ -67,36 +77,13 @@ interface IVolunteerWeekState {
   week5: IVolunteerWeek;
 }
 
-const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
+const VolunteersPage: React.FC<VolunteersPageProps> = ({
+  pageData,
+  volunteerweekwork,
+}) => {
   const { colors } = useTheme();
-  const [volunteerweek, setVolunteerWeek] = useState<IVolunteerWeekState>({
-    week1: {
-      data: [],
-      id: "",
-      title: "",
-    },
-    week2: {
-      data: [],
-      id: "",
-      title: "",
-    },
-    week3: {
-      data: [],
-      id: "",
-      title: "",
-    },
-    week4: {
-      data: [],
-      id: "",
-      title: "",
-    },
-    week5: {
-      data: [],
-      id: "",
-      title: "",
-    },
-  });
-
+  const [volunteerweek, setVolunteerWeek] = useState(volunteerweekwork);
+  console.log(volunteerweek, "vol");
   return (
     <div>
       <PageWrapper
@@ -257,29 +244,29 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
               </Container>
               <div className="block md:flex justify-between md:pb-[50px] top-block">
                 <VoulunteerWeek
-                  title={volunteerweek?.week1?.title}
-                  data={volunteerweek?.week1?.data}
-                  id={volunteerweek?.week1?.id}
+                  title={volunteerweek?.[0].title}
+                  data={volunteerweek?.[0].description_list}
+                  id={volunteerweek?.[0].id}
                   className="top"
                   name="week1"
                   volunteerweek={volunteerweek}
                   setVolunteerWeek={setVolunteerWeek}
                 />
                 <VoulunteerWeek
-                  title={volunteerweek?.week2?.title}
-                  data={volunteerweek?.week2?.data}
-                  id={volunteerweek?.week2?.id}
+                  title={volunteerweek?.[2].title}
+                  data={volunteerweek?.[2].description_list}
+                  id={volunteerweek?.[2].id}
                   className="top"
                   name="week2"
                   volunteerweek={volunteerweek}
                   setVolunteerWeek={setVolunteerWeek}
                 />
                 <VoulunteerWeek
-                  title={volunteerweek?.week3?.title}
-                  data={volunteerweek?.week3?.data}
-                  id={volunteerweek?.week3?.id}
+                  title={volunteerweek?.[4].title}
+                  data={volunteerweek?.[4].description_list}
+                  id={volunteerweek?.[4].id}
                   className="top"
-                  name="week3"
+                  name="week2"
                   volunteerweek={volunteerweek}
                   setVolunteerWeek={setVolunteerWeek}
                 />
@@ -290,18 +277,18 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
 
               <div className="block md:flex justify-around md:pt-[50px] bottom-block">
                 <VoulunteerWeek
-                  title={volunteerweek?.week4?.title}
-                  data={volunteerweek?.week4?.data}
-                  id={volunteerweek?.week4?.id}
+                  title={volunteerweek?.[1]?.title}
+                  data={volunteerweek?.[1]?.description_list}
+                  id={volunteerweek?.[1]?.id}
                   className="bottom ml-[100px]"
                   name="week4"
                   volunteerweek={volunteerweek}
                   setVolunteerWeek={setVolunteerWeek}
                 />
                 <VoulunteerWeek
-                  title={volunteerweek?.week5?.title}
-                  data={volunteerweek?.week5?.data}
-                  id={volunteerweek?.week5?.id}
+                  title={volunteerweek?.[3].title}
+                  data={volunteerweek?.[3].description_list}
+                  id={volunteerweek?.[3].id}
                   className="bottom mr-[100px]"
                   name="week5"
                   volunteerweek={volunteerweek}
