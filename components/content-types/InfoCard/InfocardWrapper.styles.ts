@@ -8,6 +8,9 @@ export const InfoCardWrapper = styled.div`
       height: 180px !important;
     }
   }
+  .footer-content {
+    margin-bottom: 20px;
+  }
   .info-card-footer {
     display: flex;
     flex: 1;

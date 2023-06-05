@@ -33,13 +33,15 @@ export const getServerSideProps = async () => {
     const pageRes = await pageReq.json();
     const blogRes = await blogsReq.json();
     const tagsRes = await tagsReq.json();
-
+    console.log(pageRes, "page");
+    console.log(blogRes, "blog");
+    console.log(tagsRes, "tags");
     return {
       props: {
-        pageData: pageRes.data,
-        blogsData: blogRes.data,
-        totalPosts: blogRes.meta.filter_count,
-        tags: tagsRes.data,
+        pageData: pageRes.data || null,
+        blogsData: blogRes.data || null,
+        totalPosts: blogRes.meta.filter_count || null,
+        tags: tagsRes.data || null,
       },
     };
   } catch (error) {
@@ -150,7 +152,7 @@ export default function Forum({
         imageUrl={
           pageData?.hero_image?.id
             ? parseImageURL(pageData?.hero_image?.id)
-            : ""
+            : "/vrijwilligerswerkheader.png"
         }
         style={{
           minHeight: 649,

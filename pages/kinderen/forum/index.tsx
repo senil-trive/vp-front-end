@@ -42,13 +42,15 @@ export const getServerSideProps = async () => {
     const pageRes = await pageReq.json();
     const forumRes = await forumReq.json();
     const tagsRes = await tagsReq.json();
-
+    console.log(pageRes, "page");
+    console.log(forumRes, "forum");
+    console.log(tagsRes, "tags");
     return {
       props: {
-        pageData: pageRes.data,
-        forumData: forumRes.data,
-        totalPosts: forumRes.meta.filter_count,
-        tags: tagsRes.data,
+        pageData: pageRes.data || null,
+        forumData: forumRes.data || null,
+        totalPosts: forumRes.meta?.filter_count || null,
+        tags: tagsRes.data || null,
       },
     };
   } catch (error) {
@@ -141,7 +143,7 @@ export default function Forum({
         imageUrl={
           pageData?.hero_image?.id
             ? parseImageURL(pageData?.hero_image?.id)
-            : ""
+            : "/vrijwilligerswerkheader.png"
         }
         style={{
           minHeight: 649,
@@ -240,8 +242,6 @@ export default function Forum({
           />
         </div>
 
-        {/* <CollectionSearchBar onSearch={handleSearch} /> */}
-
         <Container style={{ margin: "56px auto" }}>
           <Grid container spacing={"34px"}>
             {isLoading ? (
@@ -269,7 +269,7 @@ export default function Forum({
                         postDate={new Date(item.date_created)}
                         tags={
                           item.categories?.map(
-                            (cat) => cat.categories_id.name
+                            (cat) => cat.categories_id?.name
                           ) ?? []
                         }
                         title={

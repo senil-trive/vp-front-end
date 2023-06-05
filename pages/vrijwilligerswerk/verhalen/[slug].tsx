@@ -24,15 +24,17 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   try {
     // Get the letters
+    //${ENDPOINTS.COLLECTIONS}/volunteers_stories?fields=*.*&filter[slug][_eq]=${slug}
     const res = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/volunteers_stories?fields=*.*&filter[slug][_eq]=${slug}`,
+      `${ENDPOINTS.COLLECTIONS}/volunteers_stories?filter[slug][_eq]=${slug}`,
       {
         method: "GET",
       }
     );
 
+    //${ENDPOINTS.COLLECTIONS}/volunteers_stories?fields=*.*.*&filter[status][_eq]=published
     const storiesReq = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/volunteers_stories?fields=*.*.*&filter[status][_eq]=published`,
+      `${ENDPOINTS.COLLECTIONS}/volunteers_stories?filter[status][_eq]=published`,
       {
         method: "GET",
         headers: {

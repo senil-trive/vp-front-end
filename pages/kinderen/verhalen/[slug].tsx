@@ -52,7 +52,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     // Get the letters
     const pageReq = await getPostDetail(slug as string);
     const { data } = await pageReq.json();
-
     return {
       props: {
         pageData: data[0] ?? null,
@@ -103,7 +102,6 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
       </div>
     );
   };
-
   return (
     <PageWrapper
       seo={{
@@ -212,23 +210,23 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-20">
                 {pageData?.related.map((post) => (
                   <BlogItem
-                    key={post.related_vlogposts_id.id}
+                    key={post.related_vlogposts_id?.id}
                     mediaSrc={
                       post.related_vlogposts_id?.image?.id
                         ? parseImageURL(post.related_vlogposts_id.image.id)
                         : ""
                     }
-                    embedSrc={post.related_vlogposts_id.youtube_embed}
-                    link={`/kinderen/verhalen/${post.related_vlogposts_id.slug}`}
-                    type={post.related_vlogposts_id.type}
-                    author={post.related_vlogposts_id.author}
-                    content={post.related_vlogposts_id.content}
-                    postDate={new Date(post.related_vlogposts_id.date_created)}
+                    embedSrc={post.related_vlogposts_id?.youtube_embed}
+                    link={`/kinderen/verhalen/${post.related_vlogposts_id?.slug}`}
+                    type={post.related_vlogposts_id?.type}
+                    author={post.related_vlogposts_id?.author}
+                    content={post.related_vlogposts_id?.content}
+                    postDate={new Date(post.related_vlogposts_id?.date_created)}
                     category={
-                      post.related_vlogposts_id.categories[0]?.categories_id
+                      post.related_vlogposts_id?.categories?.[0]?.categories_id
                         ?.name
                     }
-                    title={post.related_vlogposts_id.title}
+                    title={post.related_vlogposts_id?.title}
                   />
                 ))}
               </div>
