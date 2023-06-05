@@ -101,27 +101,27 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
               <div className="training-blog">
                 <BlogItem
                   embedSrc="https://www.youtube.com/embed/98do3PUk4cM"
-                  link={`/kinderen/verhalen/`}
+                  // link={`/kinderen/verhalen/`}
+                  link={pageData?.training_1_button_url}
                   type={"vlog"}
-                  author={"Naam van auteur"}
+                  author={pageData?.training_1_author}
                   description={pageData?.training_1_description}
-                  postDate={new Date("01/12/2023")}
+                  postDate={new Date(pageData?.training_1_date)}
                   category={"Thema"}
                   title={pageData?.training_1_title}
-                  buttonText="training bekijken"
+                  buttonText={pageData?.training_1_button_label}
                 />
                 <BlogItem
                   embedSrc="https://www.youtube.com/embed/98do3PUk4cM"
-                  link={`/kinderen/verhalen/`}
+                  // link={`/kinderen/verhalen/`}
+                  link={pageData?.training_2_button_url}
                   type={"vlog"}
-                  author={"Naam van auteur"}
-                  description={
-                    "Iedereen die binnen Villa Pinedo met vrijwilligerswerk begint, krijgt de basistraining. In deze training leer jij meer over de werkzaamheden die je voor Villa Pinedo zou willen doen. Je leert je eigen ervaringen die je als kind van gescheiden ouders hebt, in te zetten om anderen te helpen."
-                  }
-                  postDate={new Date("01/12/2023")}
+                  author={pageData?.training_2_author}
+                  description={pageData?.training_2_description}
+                  postDate={new Date(pageData?.training_2_date)}
                   category={"Thema"}
-                  title={"verdiepingstraining"}
-                  buttonText="training bekijken"
+                  title={pageData?.training_2_title}
+                  buttonText={pageData?.training_2_button_label}
                 />
               </div>
             </Container>
@@ -130,15 +130,12 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
             <Container>
               <div className="flex flex-col items-center justify-center mb-6 md:mb-14">
                 <TitleWithHighlights
-                  text={"ben je al vrijwilliger en zoek je verdieping?"}
+                  text={pageData?.package_block_title}
                   headerElement="h3"
                   color="black"
                 />
                 <P className="max-w-4xl">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat
+                  {pageData?.package_block_description}
                 </P>
               </div>
             </Container>

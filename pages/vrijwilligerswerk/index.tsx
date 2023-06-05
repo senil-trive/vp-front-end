@@ -102,9 +102,9 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
               <TitleWithHighlights
                 highlightColor="info"
                 text={pageData?.page_title}
-                textToHighlight={pageData?.page_title_highlighted}
                 headerElement="h1"
                 color="primary"
+                className="text-[#fff]"
               />
               <P color="white">{pageData?.page_subtitle}</P>
 
@@ -112,14 +112,14 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
                 <Button
                   variant="success"
                   href="/vrijwilligerswerk/aanmelden"
-                  className="px-[8px] bg-[transparent] text-[#06D6A0] hover:bg-[#06D6A0] hover:text-[#fff] text-[14px] sm:w-[90%] sm:text-[16px] sm:px-[16px]"
+                  className="px-[8px] bg-[transparent] border-[#fff] text-[#fff] hover:bg-[#06D6A0] hover:border-none text-[14px] sm:w-[90%] sm:text-[16px] sm:px-[16px]"
                 >
                   {pageData?.signup_button_label}
                 </Button>
                 <Button
                   variant="infoReversed"
                   href="/vrijwilligerswerk/trainingen"
-                  className="px-[8px] text-[14px] sm:w-[90%] sm:text-[16px] sm:px-[16px]"
+                  className="px-[8px] text-[14px] bg-[transparent] border-[#fff] text-[#fff] hover:bg-[#FF971D] hover:border-none sm:w-[90%] sm:text-[16px] sm:px-[16px]"
                 >
                   {pageData?.about_button_label}
                 </Button>

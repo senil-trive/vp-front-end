@@ -71,7 +71,9 @@ const InfoCard: React.FC<InfoCardType> = ({
               />
             </span>
           </div>
-          <P className="text-[#fff]">{description}</P>
+          <P className="text-[#fff] leading-[160%]">
+            <div dangerouslySetInnerHTML={{ __html: description }} />
+          </P>
           {children}
         </div>
       </Card>

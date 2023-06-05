@@ -24,7 +24,7 @@ export const getServerSideProps = async () => {
 
   try {
     const pageReq = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/buddy_page?fields=*.*.*`,
+      `${ENDPOINTS.COLLECTIONS}/buddy_page?fields=featured_faqs.*,featured_stories.*,media_items.*,*`,
       {
         method: "GET",
         headers: {

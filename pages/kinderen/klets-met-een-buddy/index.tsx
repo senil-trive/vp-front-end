@@ -32,7 +32,7 @@ export const getServerSideProps = async () => {
 
   try {
     const pageReq = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/buddy_page?fields=*.*.*`,
+      `${ENDPOINTS.COLLECTIONS}/buddy_page?fields=featured_faqs.*,featured_stories.*,media_items.*,*`,
       {
         method: "GET",
         headers: {
@@ -86,27 +86,28 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
               minHeight: 576,
               position: "relative",
             }}
+            mobileImageHeight={572}
           >
             <div>
               <div className="text-left max-w-2xl mt-[-80px] md:mt-[0px] md:text-center">
                 <TitleWithHighlights
-                  text={"Het online - buddyprogramma"}
+                  text={pageData?.page_title}
                   className="text-[#fff]"
                 />
-                <P>{pageData?.page_subtitle}</P>
+                <P className="text-[#fff]">{pageData?.page_subtitle}</P>
               </div>
               <div className="hidden md:flex">
                 <Button
                   variant="success"
                   className="mr-[31px] mb-[10px] bg-[transparent] text-[#fff] border-[#fff] hover:bg-[#fff] hover:text-[#3FC7B4]"
                 >
-                  ik wil een buddy
+                  {pageData?.header_button_1_label}
                 </Button>
                 <Button
                   variant="success"
                   className="bg-[transparent] text-[#fff] border-[#fff] hover:bg-[#fff] hover:text-[#3FC7B4]"
                 >
-                  zelf buddy worden
+                  {pageData?.header_button_2_label}
                 </Button>
               </div>
             </div>
@@ -115,46 +116,56 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
           <BuddymediaWrapper>
             <Container>
               <div className="block relative mt-[-190px] md:flex gap-10 md:mt-[-80px]">
-                <InfoCard
-                  variant="blog"
-                  imageUrl="/buddymedia.png"
-                  title="Wat is een buddy precies? "
-                  description="Als je ouders bijna uit elkaar gaan, net uit elkaar zijn of al een tijdje gescheiden zijn, heb je misschien behoefte om hierover te praten. Bij Villa Pinedo kan dat. Wij koppelen je aan een Buddy voor een luisterend oor."
-                  icon="/handsake.svg"
-                  category="Thema"
-                  className=" hover:bg-[#FE517E] text-[#fff] h-[100%] flex
+                {pageData?.media_items?.map((item: any, index: number) => {
+                  return (
+                    <>
+                      {index === 0 && (
+                        <InfoCard
+                          variant="blog"
+                          imageUrl="/buddymedia.png"
+                          title={item?.title}
+                          description={item?.description}
+                          icon="/handsake.svg"
+                          category="Thema"
+                          className=" hover:bg-[#FE517E] text-[#fff] h-[100%] flex
                   flex-col"
-                >
-                  <div className="flex justify-center  mt-[20px] md:mt-[auto]">
-                    <Button
-                      variant="secondary"
-                      className="w-[100%] bg-[#fff] text-[#FE517E] border-[#fff]"
-                      // href="/vrijwilligerswerk/aanmelden"
-                    >
-                      bekijken
-                    </Button>
-                  </div>
-                </InfoCard>
-                <InfoCard
-                  variant="primary"
-                  imageUrl="/buddyappmedia.png"
-                  title="wat is de buddy app?"
-                  description="Een Buddy luistert naar wat je te vertellen hebt. Een Buddy oordeelt niet, dus je kunt alles zeggen wat je wilt. Je mag altijd appen. Een Buddy heeft zelf ook gescheiden ouders en kan je helpen met lastige vragen."
-                  category="Thema"
-                  icon="/buddyappicon.png"
-                  className="mt-[32px] md:mt-[0px] h-[100%] flex
+                        >
+                          <div className="flex justify-center  mt-[20px] md:mt-[auto]">
+                            <Button
+                              variant="secondary"
+                              className="w-[100%] bg-[#fff] text-[#FE517E] border-[#fff]"
+                              // href="/vrijwilligerswerk/aanmelden"
+                            >
+                              bekijken
+                            </Button>
+                          </div>
+                        </InfoCard>
+                      )}
+                      {index === 1 && (
+                        <InfoCard
+                          variant="primary"
+                          imageUrl="/buddyappmedia.png"
+                          title={item.title}
+                          description={item?.description}
+                          category="Thema"
+                          icon="/buddyappicon.png"
+                          className="mt-[32px] md:mt-[0px] h-[100%] flex
                   flex-col"
-                >
-                  <div className="flex justify-center mt-[20px] md:mt-[auto]">
-                    <Button
-                      variant="secondary"
-                      className="w-[100%] bg-[#fff] text-[#006EF7] border-[#fff]"
-                      // href="/vrijwilligerswerk/aanmelden"
-                    >
-                      bekijken
-                    </Button>
-                  </div>
-                </InfoCard>
+                        >
+                          <div className="flex justify-center mt-[20px] md:mt-[auto]">
+                            <Button
+                              variant="secondary"
+                              className="w-[100%] bg-[#fff] text-[#006EF7] border-[#fff]"
+                              // href="/vrijwilligerswerk/aanmelden"
+                            >
+                              bekijken
+                            </Button>
+                          </div>
+                        </InfoCard>
+                      )}
+                    </>
+                  );
+                })}
               </div>
             </Container>
           </BuddymediaWrapper>
@@ -246,11 +257,10 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
             </Container>
           </VideoWrapper>
           <FAQList
-            // containerWidth="lg"
+            containerWidth="lg"
             title={pageData?.faq_section_title}
-            items={pageData?.faq_items}
+            items={pageData?.featured_faqs.slice(0, 3)}
           />
-
           <Container
             style={{ marginBottom: 80 }}
             className="my-[40px] md:my-[80px]"

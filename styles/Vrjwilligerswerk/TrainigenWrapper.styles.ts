@@ -28,7 +28,7 @@ export const TrainingBlogWrapper = styled.section`
       margin-top: 34px !important;
     }
     .blog-description p {
-      line-height: 140%;
+      line-height: 160%;
       margin-bottom: 20px;
     }
   }
@@ -48,16 +48,19 @@ export const TrainingBlogWrapper = styled.section`
 export const TrainigenIdealWrapper = styled.section`
   margin-top: 80px;
   .ideal-container {
-    margin-bottom: -150px;
+    margin-bottom: -180px;
     z-index: 1;
   }
   @media (max-width: 767px) {
+    > img {
+      height: 725px !important;
+    }
     .info-card-footer {
       line-height: 160%;
     }
     margin-top: 40px !important;
     .ideal-container {
-      margin-bottom: -431px;
+      margin-bottom: -490px;
     }
   }
 `;
@@ -72,6 +75,17 @@ export const PackageWrapper = styled.section`
     flex-direction: column;
     height: 100%;
   }
+  .package-container {
+    article:last-child {
+      margin-right: 0;
+    }
+    footer {
+      padding: 32px 20px;
+      h3 {
+        font-size: 30px;
+      }
+    }
+  }
   .package-container .card-container footer .title,
   .description {
     color: #fff;
@@ -80,7 +94,7 @@ export const PackageWrapper = styled.section`
     margin-bottom: 20px;
   }
   .package-container .card-container .title {
-    word-break: break-all;
+    word-break: break-word;
   }
   .package-container .card-container footer a {
     margin-top: auto;

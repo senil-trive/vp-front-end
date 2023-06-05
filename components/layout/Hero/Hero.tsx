@@ -55,7 +55,7 @@ const Wrapper = styled.div<{
           `
         : css`
             min-height: inherit !important;
-            height: ${mobileImageHeight}px;
+            height: ${mobileImageHeight || 512}px;
           `};
     padding: 29px 10px 40px 10px;
     .inner {

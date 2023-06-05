@@ -46,7 +46,9 @@ const FAQItem: React.FC<FAQItemProps> = ({
       onClick={handelSelect}
     >
       <div className="flex items-center justify-between  text-left">
-        <H3 color={isSelected ? "white" : "black"}>{title}</H3>
+        <H3 color={isSelected ? "white" : "black"} className="faq-title">
+          {title}
+        </H3>
         <button
           onClick={handelSelect}
           className="flex items-center justify-center w-8 h-8"

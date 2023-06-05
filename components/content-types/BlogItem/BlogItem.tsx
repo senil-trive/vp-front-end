@@ -109,7 +109,7 @@ export default function BlogItem({
             )}
           </div>
         )}
-        <div className="flex items-center justify-between author-date">
+        <div className="flex items-center justify-between author-date mb-[20px] mt-[0]">
           <p className="text-lg font-avenir">{author}</p>
           <p className="italic font-light font-avenir">{parseDate(postDate)}</p>
         </div>

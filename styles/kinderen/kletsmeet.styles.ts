@@ -49,6 +49,8 @@ export const ReflectiveCardWrapper = styled.section`
   @media (max-width: 767px) {
     .container-reflect {
       article {
+        margin-right: 0;
+        margin-bottom: 20px;
         width: 100%;
         h3 {
           font-weight: 400;
