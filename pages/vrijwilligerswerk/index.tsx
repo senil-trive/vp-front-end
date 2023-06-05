@@ -185,6 +185,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
               <div className="people-container flex flex-wrap">
                 {pageData?.usps?.map((usp: any, index: number) => (
                   <CommonDetailCard
+                    key={usp.title}
                     title={usp?.title}
                     description={usp?.description}
                     imageUrl={
