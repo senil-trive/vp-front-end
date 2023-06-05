@@ -16,7 +16,8 @@ const BaseStyle = styled.article`
   // border: 1px solid #555555;
   border-radius: 8px;
   overflow: hidden;
-
+  display: flex !important;
+  flex-direction: column !important;
   header {
     height: 180px;
     position: relative;
@@ -80,6 +81,9 @@ const StyledBlog = styled(BaseStyle)`
   }
   footer {
     padding: 24px !important;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
     p {
       color: white;
     }

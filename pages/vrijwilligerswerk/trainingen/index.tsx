@@ -56,7 +56,6 @@ export const getServerSideProps = async () => {
 const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
   pageData,
 }) => {
-  const { colors } = useTheme();
   console.log(pageData, "page");
   return (
     <div>
@@ -84,21 +83,15 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
                 position: "relative",
               }}
             >
-              <div className="flex flex-col md:items-center md:justify-center md:text-center max-w-2xl mt-[-290px]">
+              <div className="flex flex-col mt-[-290px] md:items-center md:justify-center md:text-center max-w-2xl md:mt-[-80px]">
                 <TitleWithHighlights
                   highlightColor="info"
-                  text={"trainingen voor vrijwilligers"}
+                  text={pageData?.page_title}
                   headerElement="h1"
                   color="primary"
                   className="text-white"
                 />
-                <P className="text-white">
-                  Scheiding van je ouders overleefd? Dan ben je ondertussen een
-                  ervaringsdeskundige. Kinderen die nu in dezelfde situatie
-                  zitten als waar jij in gezeten hebt, vinden het fijn om tips
-                  en adviezen te krijgen van jou. Of gewoon even hun hart te
-                  luchten.
-                </P>
+                <P className="text-white">{pageData?.page_subtitle}</P>
               </div>
             </Hero>
           </TrainigenHeroWrapper>
@@ -111,12 +104,10 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
                   link={`/kinderen/verhalen/`}
                   type={"vlog"}
                   author={"Naam van auteur"}
-                  description={
-                    "Iedereen die binnen Villa Pinedo met vrijwilligerswerk begint, krijgt de basistraining. In deze training leer jij meer over de werkzaamheden die je voor Villa Pinedo zou willen doen. Je leert je eigen ervaringen die je als kind van gescheiden ouders hebt, in te zetten om anderen te helpen."
-                  }
+                  description={pageData?.training_1_description}
                   postDate={new Date("01/12/2023")}
                   category={"Thema"}
-                  title={"basistraining"}
+                  title={pageData?.training_1_title}
                   buttonText="training bekijken"
                 />
                 <BlogItem

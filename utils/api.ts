@@ -152,15 +152,13 @@ export const getMenuItems = async () => {
  */
 export const getCompanyInfo = async () => {
   try {
-    const res = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/general_info?fields=*.*.*`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    // end point ${ENDPOINTS.COLLECTIONS}/general_info?fields=*.*.*
+    const res = await fetch(`${ENDPOINTS.COLLECTIONS}/general_info`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
     const resData = await res.json();
     return resData.data as CompanyInfo;

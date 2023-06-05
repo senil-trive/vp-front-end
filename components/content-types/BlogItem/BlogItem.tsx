@@ -92,7 +92,6 @@ export default function BlogItem({
   return (
     <Card variant={type}>
       {generateMediaItem()}
-
       <CardFooter>
         <H4 className="text-4xl" style={{ margin: 0 }} variant="bold">
           {truncate(title, 23)}
@@ -114,7 +113,7 @@ export default function BlogItem({
           <p className="text-lg font-avenir">{author}</p>
           <p className="italic font-light font-avenir">{parseDate(postDate)}</p>
         </div>
-        <Button style={{ marginTop: 56 }} variant="secondary" href={link}>
+        <Button style={{ marginTop: "auto" }} variant="secondary" href={link}>
           {buttonText
             ? buttonText
             : type == "vlog"

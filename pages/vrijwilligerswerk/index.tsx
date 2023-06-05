@@ -9,7 +9,6 @@ import React, { useState } from "react";
 import TitleWithHighlights from "../../components/typography/TitleWithHighlights";
 import VideoItem from "../../components/content-types/VideoItem/VideoItem";
 import parseImageURL from "../../utils/parseImageURL";
-import { useRouter } from "next/router";
 import { useTheme } from "styled-components";
 import VoulunteerWeek from "../../components/content-types/VolunteerWeek/VolunteerWeek";
 import InfoCard from "../../components/content-types/InfoCard/InfoCard";
@@ -28,7 +27,7 @@ export const getServerSideProps = async () => {
   // fetch page data from API
   try {
     const req = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/volunteers_overview_page?fields=faq_items.*,*`,
+      `${ENDPOINTS.COLLECTIONS}/volunteers_overview_page?fields=faq_items.*,video_items.*,usps.*,*`,
       {
         method: "GET",
         headers: {
@@ -47,7 +46,6 @@ export const getServerSideProps = async () => {
       }
     );
     const res = await req.json();
-    console.log(res);
     const volunteerweekres = await volunteerweekreq.json();
     return {
       props: {
@@ -65,18 +63,6 @@ export const getServerSideProps = async () => {
     };
   }
 };
-interface IVolunteerWeek {
-  data: string[];
-  id: string;
-  title: string;
-}
-interface IVolunteerWeekState {
-  week1: IVolunteerWeek;
-  week2: IVolunteerWeek;
-  week3: IVolunteerWeek;
-  week4: IVolunteerWeek;
-  week5: IVolunteerWeek;
-}
 
 const VolunteersPage: React.FC<VolunteersPageProps> = ({
   pageData,
@@ -84,7 +70,6 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
 }) => {
   const { colors } = useTheme();
   const [volunteerweek, setVolunteerWeek] = useState(volunteerweekwork);
-  console.log(volunteerweek, "vol");
   console.log(pageData, "pageoverviewpage");
   return (
     <div>
@@ -111,8 +96,9 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
               position: "relative",
             }}
             mbgn={"/vrijwilligerswerkheadermobile.png"}
+            mobileImageHeight={740}
           >
-            <div className="flex flex-col md:items-center md:justify-center md:text-center max-w-2xl my-16">
+            <div className="flex flex-col md:items-center md:justify-center md:text-center max-w-2xl md:max-w-3xl my-16">
               <TitleWithHighlights
                 highlightColor="info"
                 text={pageData?.page_title}
@@ -146,8 +132,8 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
               <div className="block relative mt-[-120px] md:mt-[-80px] md:flex gap-10">
                 <InfoCard
                   variant="blog"
-                  title="Onze ideale vrijwilliger"
-                  description="is iemand die er zonder oordeel wil zijn voor een kind. Wil jij, tussen alle dingen die jouw agenda vullen door, tijd maken om te chatten met een kind? Geef een kind het gevoel er niet alleen voor te staan."
+                  title={pageData?.cta_section_block_1_title}
+                  description={pageData?.cta_section_block_1_subtitle}
                   icon="/handsake.svg"
                   className=" hover:bg-[#FE517E] text-[#fff] h-[100%] flex
                   flex-col"
@@ -156,16 +142,16 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
                     <Button
                       variant="secondary"
                       className="w-[100%] bg-[#fff] text-[#FE517E] border-[#fff]"
-                      // href="/vrijwilligerswerk/aanmelden"
+                      href={pageData?.cta_section_block_1_button_url}
                     >
-                      Aanmelden
+                      {pageData?.cta_section_block_1_button_label}
                     </Button>
                   </div>
                 </InfoCard>
                 <InfoCard
                   variant="primary"
-                  title="volg onze trainingen"
-                  description="Villa Pinedo is trots en dankbaar voor de jongeren die zich inzetten voor andere kinderen met gescheiden ouders. Daarom investeren wij graag in jou door je meerdere trainingen, masterclasses en inspiratiesessies aan te bieden."
+                  title={pageData?.cta_section_block_2_title}
+                  description={pageData?.cta_section_block_2_subtitle}
                   icon="/note.svg"
                   className="mt-[32px] md:mt-[0px] h-[100%] flex
                   flex-col"
@@ -174,9 +160,9 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
                     <Button
                       variant="secondary"
                       className="w-[100%] bg-[#fff] text-[#006EF7] border-[#fff]"
-                      // href="/vrijwilligerswerk/aanmelden"
+                      href={pageData?.cta_section_block_2_button_url}
                     >
-                      Aanmelden
+                      {pageData?.cta_section_block_2_button_label}
                     </Button>
                   </div>
                 </InfoCard>
@@ -188,29 +174,32 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
             <Container>
               <div className="flex flex-col items-center justify-center mb-6 md:mb-14">
                 <TitleWithHighlights
-                  text={
-                    "Als vrijwilliger maak jij het verschil bij de jongeren!"
-                  }
+                  text={pageData?.usp_section_title}
                   headerElement="h3"
                   color="black"
                 />
-                <P className="max-w-4xl">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat
-                </P>
+                <P className="max-w-4xl">{pageData?.usp_section_description}</P>
               </div>
             </Container>
             <Container>
               <div className="people-container flex flex-wrap">
-                <CommonDetailCard
-                  title="Een luisterend oor"
-                  description="Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
-                  imageUrl="/diffpeople1.png"
-                  variant="info"
-                />
-                <CommonDetailCard
+                {pageData?.usps?.map((usp: any, index: number) => (
+                  <CommonDetailCard
+                    title={usp?.title}
+                    description={usp?.description}
+                    imageUrl={
+                      index === 0
+                        ? "/diffpeople1.png"
+                        : index === 1
+                        ? "/diffpeople2.png"
+                        : index === 2
+                        ? "/diffpeople3.png"
+                        : "/diffpeople4.png"
+                    }
+                    variant="info"
+                  />
+                ))}
+                {/* <CommonDetailCard
                   title="Een luisterend oor"
                   description="Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
                   imageUrl="/diffpeople2.png"
@@ -227,7 +216,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
                   description="Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
                   imageUrl="/diffpeople4.png"
                   variant="info"
-                />
+                /> */}
               </div>
             </Container>
           </PeopleWrapper>
@@ -236,97 +225,120 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
               <Container className="pl-[0] md:pl-[24px]">
                 <div className="flex flex-col md:items-center md:justify-center mb-[20px] md:mb-14">
                   <TitleWithHighlights
-                    text={
-                      "Na je opleiding aan de slag, zo ziet een week van een vrijwilliger eruit?"
-                    }
+                    text={pageData?.volunteer_week_title}
                     headerElement="h3"
                     color="black"
                   />
                 </div>
               </Container>
-              <div className="block md:flex justify-between md:pb-[50px] top-block">
-                <VoulunteerWeek
-                  title={volunteerweek?.[0].title}
-                  data={volunteerweek?.[0].description_list}
-                  id={volunteerweek?.[0].id}
-                  className="top"
-                  name="week1"
-                  volunteerweek={volunteerweek}
-                  setVolunteerWeek={setVolunteerWeek}
-                />
-                <VoulunteerWeek
-                  title={volunteerweek?.[2].title}
-                  data={volunteerweek?.[2].description_list}
-                  id={volunteerweek?.[2].id}
-                  className="top"
-                  name="week2"
-                  volunteerweek={volunteerweek}
-                  setVolunteerWeek={setVolunteerWeek}
-                />
-                <VoulunteerWeek
-                  title={volunteerweek?.[4].title}
-                  data={volunteerweek?.[4].description_list}
-                  id={volunteerweek?.[4].id}
-                  className="top"
-                  name="week2"
-                  volunteerweek={volunteerweek}
-                  setVolunteerWeek={setVolunteerWeek}
-                />
-              </div>
-              <div className="hidden md:flex w-[100%] h-[88px] bg-[#3FC7B4]/[.1] justify-center items-center px-[34px]">
-                <div className="w-[100%] px-[50px] text-red h-[2px] bg-[#3FC7B4]"></div>
-              </div>
+              {globalThis.innerWidth < 768 ? (
+                <div className="block md:hidden">
+                  {volunteerweek?.map(
+                    (volunteers: any, index: number) =>
+                      index < 5 && (
+                        <VoulunteerWeek
+                          key={volunteers.id}
+                          title={volunteers.title}
+                          data={volunteers.description_list}
+                          id={volunteers.id}
+                          name={`week${index + 1}`}
+                          volunteerweek={volunteerweek}
+                          setVolunteerWeek={setVolunteerWeek}
+                        />
+                      )
+                  )}
+                </div>
+              ) : (
+                <>
+                  <div className="hidden md:flex justify-between md:pb-[50px] top-block">
+                    <VoulunteerWeek
+                      title={volunteerweek?.[0].title}
+                      data={volunteerweek?.[0].description_list}
+                      id={volunteerweek?.[0].id}
+                      className="top"
+                      name="week1"
+                      volunteerweek={volunteerweek}
+                      setVolunteerWeek={setVolunteerWeek}
+                    />
+                    <VoulunteerWeek
+                      title={volunteerweek?.[2].title}
+                      data={volunteerweek?.[2].description_list}
+                      id={volunteerweek?.[2].id}
+                      className="top"
+                      name="week2"
+                      volunteerweek={volunteerweek}
+                      setVolunteerWeek={setVolunteerWeek}
+                    />
+                    <VoulunteerWeek
+                      title={volunteerweek?.[4].title}
+                      data={volunteerweek?.[4].description_list}
+                      id={volunteerweek?.[4].id}
+                      className="top"
+                      name="week2"
+                      volunteerweek={volunteerweek}
+                      setVolunteerWeek={setVolunteerWeek}
+                    />
+                  </div>
+                  <div className="hidden md:flex w-[100%] h-[88px] bg-[#3FC7B4]/[.1] justify-center items-center px-[34px]">
+                    <div className="w-[100%] px-[50px] text-red h-[2px] bg-[#3FC7B4]"></div>
+                  </div>
 
-              <div className="block md:flex justify-around md:pt-[50px] bottom-block">
-                <VoulunteerWeek
-                  title={volunteerweek?.[1]?.title}
-                  data={volunteerweek?.[1]?.description_list}
-                  id={volunteerweek?.[1]?.id}
-                  className="bottom ml-[100px]"
-                  name="week4"
-                  volunteerweek={volunteerweek}
-                  setVolunteerWeek={setVolunteerWeek}
-                />
-                <VoulunteerWeek
-                  title={volunteerweek?.[3].title}
-                  data={volunteerweek?.[3].description_list}
-                  id={volunteerweek?.[3].id}
-                  className="bottom mr-[100px]"
-                  name="week5"
-                  volunteerweek={volunteerweek}
-                  setVolunteerWeek={setVolunteerWeek}
-                />
-              </div>
+                  <div className="hidden md:flex justify-around md:pt-[50px] bottom-block">
+                    <VoulunteerWeek
+                      title={volunteerweek?.[1]?.title}
+                      data={volunteerweek?.[1]?.description_list}
+                      id={volunteerweek?.[1]?.id}
+                      className="bottom ml-[100px]"
+                      name="week4"
+                      volunteerweek={volunteerweek}
+                      setVolunteerWeek={setVolunteerWeek}
+                    />
+                    <VoulunteerWeek
+                      title={volunteerweek?.[3].title}
+                      data={volunteerweek?.[3].description_list}
+                      id={volunteerweek?.[3].id}
+                      className="bottom mr-[100px]"
+                      name="week5"
+                      volunteerweek={volunteerweek}
+                      setVolunteerWeek={setVolunteerWeek}
+                    />
+                  </div>
+                </>
+              )}
             </Container>
           </section>
           <VideoWrapper className="my-[40px] md:my-[80px]">
             <Container>
               <div className="flex flex-col items-center justify-center mb-6 md:mb-14">
                 <TitleWithHighlights
-                  text={
-                    "Zij gingen jou voor, luister hieronder naar hun verhaal"
-                  }
+                  text={pageData?.video_section_title}
                   headerElement="h3"
                   color="black"
                 />
 
-                <P className="max-w-4xl">
-                  Deze brief is speciaal voor jou: voor kinderen waarvan de
-                  ouders uit elkaar gaan of al zijn. Wist je dat 86.000 kinderen
-                  per jaar horen dat hun ouders gaan scheiden? Dat is superveel,
-                  bijna twee voetbalstadions vol.
-                </P>
+                <P className="max-w-4xl">{pageData?.video_section_subtitle}</P>
               </div>
             </Container>
             <Container>
               <div className="video-container flex flex-wrap">
-                <VideoItem
-                  title="Wat leer je bij de trainingen?"
-                  poster="/storyposter1.png"
-                  src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                  subtitle="Hier komt een omschrijvende tekst"
-                />
-                <VideoItem
+                {pageData?.video_items?.map(
+                  (storyvideo: any, index: number) => (
+                    <VideoItem
+                      key={storyvideo?.title}
+                      title={storyvideo?.title}
+                      poster={
+                        index === 0
+                          ? "/storyposter1.png"
+                          : index === 1
+                          ? "/storyposter2.png"
+                          : "/storyposter3.png"
+                      }
+                      src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                      subtitle={storyvideo?.description}
+                    />
+                  )
+                )}
+                {/* <VideoItem
                   title="Wat leer je bij de trainingen?"
                   poster="/storyposter2.png"
                   src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
@@ -337,7 +349,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
                   poster="/storyposter3.png"
                   src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
                   subtitle="Hier komt een omschrijvende tekst"
-                />
+                /> */}
               </div>
             </Container>
           </VideoWrapper>

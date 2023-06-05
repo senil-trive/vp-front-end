@@ -10,12 +10,14 @@ type Props = {
   imageUrl?: string;
   showTags?: boolean;
   mbgn?: string;
+  mobileImageHeight?: number;
 };
 const Wrapper = styled.div<{
   center: boolean;
   bgn?: string;
   showTags?: boolean;
   mbgn?: string;
+  mobileImageHeight?: number;
 }>`
   padding: 29px 41px 40px 41px;
   position: relative;
@@ -45,7 +47,7 @@ const Wrapper = styled.div<{
     align-items: center;
   }
   @media (max-width: 767px) {
-    ${({ showTags }) =>
+    ${({ showTags, mobileImageHeight }) =>
       showTags
         ? css`
             min-height: inherit !important;
@@ -53,7 +55,7 @@ const Wrapper = styled.div<{
           `
         : css`
             min-height: inherit !important;
-            height: 464px;
+            height: ${mobileImageHeight}px;
           `};
     padding: 29px 10px 40px 10px;
     .inner {
@@ -70,6 +72,7 @@ export default function Hero({
   mbgn,
   style,
   showTags,
+  mobileImageHeight,
 }: Props) {
   console.log(showTags);
   return (
@@ -79,6 +82,7 @@ export default function Hero({
       style={style}
       showTags={showTags}
       mbgn={mbgn}
+      mobileImageHeight={mobileImageHeight}
     >
       <Grid container style={{ height: "100%" }}>
         <Grid item xs={12}>
