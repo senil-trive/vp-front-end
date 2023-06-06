@@ -33,9 +33,6 @@ export const getServerSideProps = async () => {
     const pageRes = await pageReq.json();
     const blogRes = await blogsReq.json();
     const tagsRes = await tagsReq.json();
-    console.log(pageRes, "page");
-    console.log(blogRes, "blog");
-    console.log(tagsRes, "tags");
     return {
       props: {
         pageData: pageRes.data || null,

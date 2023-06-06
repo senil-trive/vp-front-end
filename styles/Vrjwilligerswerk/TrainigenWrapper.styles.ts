@@ -82,7 +82,7 @@ export const PackageWrapper = styled.section`
     footer {
       padding: 32px 20px;
       h3 {
-        font-size: 30px;
+        font-size: 32px;
       }
     }
   }

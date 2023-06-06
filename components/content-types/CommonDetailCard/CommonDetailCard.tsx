@@ -31,7 +31,6 @@ const CommonDetailCard = ({
     return <CardHeader>{Child}</CardHeader>;
   };
 
-  console.log(leftIcon, "icon");
   return (
     <Card className="card-container" variant={variant}>
       {generateMediaItem()}

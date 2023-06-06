@@ -59,7 +59,6 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
   pageData,
   lettersData,
 }) => {
-  console.log(`letters data :::`, pageData);
   return (
     <div>
       <PageWrapper

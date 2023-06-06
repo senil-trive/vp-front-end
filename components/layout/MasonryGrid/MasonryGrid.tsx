@@ -141,47 +141,47 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
             const { content } = item;
 
             switch (item.type) {
-              case "video":
-                const videoContent = content as VideoPropsType;
-                return (
-                  <motion.div
-                    className={`grid-item grid-item-w-${item.width}`}
-                    key={index}
-                    variants={cardVariants}
-                    initial="offscreen"
-                    whileInView="onscreen"
-                    viewport={{ once: true, amount: 0.1 }}
-                  >
-                    <VideoItem
-                      poster={videoContent.poster}
-                      title={videoContent.title}
-                      src={videoContent.src}
-                      subtitle={videoContent.subtitle}
-                    />
-                  </motion.div>
-                );
+              // case "video":
+              //   const videoContent = content as VideoPropsType;
+              //   return (
+              //     <motion.div
+              //       className={`grid-item grid-item-w-${item.width}`}
+              //       key={index}
+              //       variants={cardVariants}
+              //       initial="offscreen"
+              //       whileInView="onscreen"
+              //       viewport={{ once: true, amount: 0.1 }}
+              //     >
+              //       <VideoItem
+              //         poster={videoContent.poster}
+              //         title={videoContent.title}
+              //         src={videoContent.src}
+              //         subtitle={videoContent.subtitle}
+              //       />
+              //     </motion.div>
+              //   );
 
-              case "letter":
-                const letterContent = content as Letter;
-                return (
-                  <motion.div
-                    className={`grid-item grid-item-w-${item.width}`}
-                    key={index}
-                    variants={cardVariants}
-                    initial="offscreen"
-                    whileInView="onscreen"
-                    viewport={{ once: true, amount: 0.1 }}
-                  >
-                    <BriefItem
-                      key={letterContent.id}
-                      title={letterContent.title}
-                      bg={letterContent.bg_color}
-                      content={letterContent.description}
-                      imgSrc={parseImageURL(letterContent?.image?.id)}
-                      fileSrc={`/kinderen/open-brieven/${letterContent.slug}`}
-                    />
-                  </motion.div>
-                );
+              // case "letter":
+              //   const letterContent = content as Letter;
+              //   return (
+              //     <motion.div
+              //       className={`grid-item grid-item-w-${item.width}`}
+              //       key={index}
+              //       variants={cardVariants}
+              //       initial="offscreen"
+              //       whileInView="onscreen"
+              //       viewport={{ once: true, amount: 0.1 }}
+              //     >
+              //       <BriefItem
+              //         key={letterContent.id}
+              //         title={letterContent.title}
+              //         bg={letterContent.bg_color}
+              //         content={letterContent.description}
+              //         imgSrc={parseImageURL(letterContent?.image?.id)}
+              //         fileSrc={`/kinderen/open-brieven/${letterContent.slug}`}
+              //       />
+              //     </motion.div>
+              //   );
               case "forum":
                 const forumContent = content as ForumPostType;
                 return (
@@ -218,80 +218,80 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
                   </motion.div>
                 );
 
-              case "blog":
-                const blogContent = content as BlogType;
+              // case "blog":
+              //   const blogContent = content as BlogType;
 
-                return (
-                  <motion.div
-                    className={`grid-item grid-item-w-${item.width}`}
-                    key={index}
-                    variants={cardVariants}
-                    initial="offscreen"
-                    whileInView="onscreen"
-                    viewport={{ once: true, amount: 0.1 }}
-                  >
-                    <BlogItem
-                      mediaSrc={
-                        blogContent.image?.id
-                          ? parseImageURL(blogContent.image.id)
-                          : ""
-                      }
-                      embedSrc={blogContent.youtube_embed}
-                      link={`/kinderen/verhalen/${blogContent.slug}`}
-                      type={blogContent.type}
-                      author={blogContent.author}
-                      content={blogContent.content}
-                      postDate={new Date(blogContent.date_created)}
-                      category={blogContent.categories[0]?.categories_id?.name}
-                      title={blogContent.title}
-                    />
-                  </motion.div>
-                );
-              case "instagram":
-                const instaContent = content as InstaPost;
+              //   return (
+              //     <motion.div
+              //       className={`grid-item grid-item-w-${item.width}`}
+              //       key={index}
+              //       variants={cardVariants}
+              //       initial="offscreen"
+              //       whileInView="onscreen"
+              //       viewport={{ once: true, amount: 0.1 }}
+              //     >
+              //       <BlogItem
+              //         mediaSrc={
+              //           blogContent.image?.id
+              //             ? parseImageURL(blogContent.image.id)
+              //             : ""
+              //         }
+              //         embedSrc={blogContent.youtube_embed}
+              //         link={`/kinderen/verhalen/${blogContent.slug}`}
+              //         type={blogContent.type}
+              //         author={blogContent.author}
+              //         content={blogContent.content}
+              //         postDate={new Date(blogContent.date_created)}
+              //         category={blogContent.categories[0]?.categories_id?.name}
+              //         title={blogContent.title}
+              //       />
+              //     </motion.div>
+              //   );
+              // case "instagram":
+              //   const instaContent = content as InstaPost;
 
-                return (
-                  <motion.div
-                    className={`grid-item grid-item-w-${item.width}`}
-                    key={index}
-                    variants={cardVariants}
-                    initial="offscreen"
-                    whileInView="onscreen"
-                    viewport={{ once: true, amount: 0.1 }}
-                  >
-                    <InstagramPost embed_code={instaContent.embed_code} />
-                  </motion.div>
-                );
-              case "tiktok":
-                // TODO: replace with CMS content
-                const tiktokContent = content as TikTokPostProps;
-                return (
-                  <motion.div
-                    className={`grid-item grid-item-w-${item.width}`}
-                    key={index}
-                    variants={cardVariants}
-                    initial="offscreen"
-                    whileInView="onscreen"
-                    viewport={{ once: true, amount: 0.1 }}
-                  >
-                    <TikTokPost embed_code={tiktokContent.embed_code} />
-                  </motion.div>
-                );
-              case "chat":
-                // TODO: replace with CMS content
-                const chatContent = content as VideoPropsType;
-                return (
-                  <motion.div
-                    className={`grid-item grid-item-w-${item.width}`}
-                    key={index}
-                    variants={cardVariants}
-                    initial="offscreen"
-                    whileInView="onscreen"
-                    viewport={{ once: true, amount: 0.1 }}
-                  >
-                    <ChatExampleItem />
-                  </motion.div>
-                );
+              //   return (
+              //     <motion.div
+              //       className={`grid-item grid-item-w-${item.width}`}
+              //       key={index}
+              //       variants={cardVariants}
+              //       initial="offscreen"
+              //       whileInView="onscreen"
+              //       viewport={{ once: true, amount: 0.1 }}
+              //     >
+              //       <InstagramPost embed_code={instaContent.embed_code} />
+              //     </motion.div>
+              //   );
+              // case "tiktok":
+              //   // TODO: replace with CMS content
+              //   const tiktokContent = content as TikTokPostProps;
+              //   return (
+              //     <motion.div
+              //       className={`grid-item grid-item-w-${item.width}`}
+              //       key={index}
+              //       variants={cardVariants}
+              //       initial="offscreen"
+              //       whileInView="onscreen"
+              //       viewport={{ once: true, amount: 0.1 }}
+              //     >
+              //       <TikTokPost embed_code={tiktokContent.embed_code} />
+              //     </motion.div>
+              //   );
+              // case "chat":
+              //   // TODO: replace with CMS content
+              //   const chatContent = content as VideoPropsType;
+              //   return (
+              //     <motion.div
+              //       className={`grid-item grid-item-w-${item.width}`}
+              //       key={index}
+              //       variants={cardVariants}
+              //       initial="offscreen"
+              //       whileInView="onscreen"
+              //       viewport={{ once: true, amount: 0.1 }}
+              //     >
+              //       <ChatExampleItem />
+              //     </motion.div>
+              //   );
 
               default:
                 return null;

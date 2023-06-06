@@ -80,7 +80,6 @@ const VolunteerWeek: React.FC<IProps> = ({
     }
     document.addEventListener("click", handleClickOutside);
     return () => {
-      console.log("week");
       document.removeEventListener("click", handleClickOutside);
     };
   }, [updatevolunteerweek]);
@@ -89,7 +88,6 @@ const VolunteerWeek: React.FC<IProps> = ({
     if (currentActive !== id) {
       setEdit(false);
       setActiveId(null);
-      console.log("idc");
       // await fetch(
       //   `${ENDPOINTS.COLLECTIONS}/volunteer_week_work/${currentActive}`,
       //   {
@@ -131,7 +129,6 @@ const VolunteerWeek: React.FC<IProps> = ({
     const parentDiv = event.currentTarget.parentNode;
     parentDiv.click();
   };
-  // console.log(updatevolunteerweek);
   return (
     <VolunteerWrapper
       className={`${className} volunteer-week-box border-[5px] border-[#3FC7B4] p-[32px] ${

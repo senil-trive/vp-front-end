@@ -74,7 +74,6 @@ export default function Hero({
   showTags,
   mobileImageHeight,
 }: Props) {
-  console.log(showTags);
   return (
     <Wrapper
       bgn={imageUrl}

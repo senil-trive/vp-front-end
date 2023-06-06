@@ -80,8 +80,6 @@ export default function LetterDetail({ pageData, relatedLetters }: Props) {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const theme = useTheme();
 
-  console.log(pageData);
-
   const {
     register,
     handleSubmit,

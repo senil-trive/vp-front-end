@@ -111,8 +111,9 @@ export const postComment = async (
  * @returns
  */
 export const getComments = async (type: "forum" | "blog", post_id: string) => {
+  //`${ENDPOINTS.COLLECTIONS}/comments?fields=*.*.*&filter[status][_eq]=published&filter[${type}_post][_eq]=${post_id}`
   return await fetch(
-    `${ENDPOINTS.COLLECTIONS}/comments?fields=*.*.*&filter[status][_eq]=published&filter[${type}_post][_eq]=${post_id}`,
+    `${ENDPOINTS.COLLECTIONS}/comments?fields=*&filter[status][_eq]=published&filter[${type}_post][_eq]=${post_id}`,
     {
       method: "GET",
       headers: {
@@ -129,7 +130,7 @@ export const getComments = async (type: "forum" | "blog", post_id: string) => {
 export const getMenuItems = async () => {
   try {
     const res = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/main_nav_items?fields=*.*.*&filter[status][_eq]=published`,
+      `${ENDPOINTS.COLLECTIONS}/main_nav_items?fields=children.*.*.*.*,parent.*,*&filter[status][_eq]=published`,
       {
         method: "GET",
         headers: {
@@ -192,7 +193,8 @@ export const getLetters = async ({
   filter,
   meta = "total_count",
 }: DirectusParams) => {
-  let url = `${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+  //${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}
+  let url = `${ENDPOINTS.COLLECTIONS}/open_letters?fields=*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
 
   if (meta) {
     url = `${url}&meta=${meta}`;
@@ -371,7 +373,8 @@ export const getVideoItems = async ({
   filter,
   meta = "total_count",
 }: DirectusParams) => {
-  let url = `${ENDPOINTS.COLLECTIONS}/video_items?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+  //${ENDPOINTS.COLLECTIONS}/video_items?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}
+  let url = `${ENDPOINTS.COLLECTIONS}/video_items?fields=*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
 
   if (meta) {
     url = `${url}&meta=${meta}`;
@@ -400,7 +403,6 @@ export const getVideoItems = async ({
  * @returns
  */
 export const getPostDetail = async (slug: string) => {
-  console.log(slug, "====forum vrahln");
   return await fetch(
     `${ENDPOINTS.COLLECTIONS}/vlogposts?fields=related.*.*,comments.*.*,categories.*,*&filter[slug][_eq]=${slug}`,
     {
@@ -441,7 +443,7 @@ export const getForumPosts = async ({
   meta,
 }: DirectusParams) => {
   // post forum let url = `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
-  let url = `${ENDPOINTS.COLLECTIONS}/forum_posts?filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+  let url = `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=categories.*,comments.*,*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
 
   if (meta) {
     url = `${url}&meta=${meta}`;

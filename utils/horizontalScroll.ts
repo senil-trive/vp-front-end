@@ -26,9 +26,6 @@ export const handleHorizantalScroll = ({
     leftArrow.classList.add("active");
   }
 
-  console.log(element.scrollLeft, element.offsetWidth);
-
-  console.log(element.scrollWidth);
   if (element.scrollLeft + element.offsetWidth >= element.scrollWidth - 100) {
     rightArrow.classList.remove("active");
     element.classList.add("active");

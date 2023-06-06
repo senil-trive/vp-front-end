@@ -17,6 +17,7 @@ import {
 } from "../../../styles/Vrjwilligerswerk/TrainigenWrapper.styles";
 import InfoCard from "../../../components/content-types/InfoCard/InfoCard";
 import CommonDetailCard from "../../../components/content-types/CommonDetailCard/CommonDetailCard";
+import { ContainerWrapper } from "../../../styles/Vrjwilligerswerk/index.styles";
 
 type VolunteersTrainingPageProps = {
   pageData: any;
@@ -38,7 +39,6 @@ export const getServerSideProps = async () => {
     );
 
     const pageRes = await pageReq.json();
-    console.log(pageRes, "page");
     return {
       props: {
         pageData: pageRes?.data || null,
@@ -56,9 +56,8 @@ export const getServerSideProps = async () => {
 const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
   pageData,
 }) => {
-  console.log(pageData, "page");
   return (
-    <div>
+    <ContainerWrapper className="voluntee">
       <PageWrapper
         seo={{
           title: pageData?.seo_title
@@ -98,7 +97,7 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
 
           <TrainingBlogWrapper>
             <Container>
-              <div className="training-blog">
+              <div className="training-blog md:max-w-[912px] md:mx-auto">
                 <BlogItem
                   embedSrc="https://www.youtube.com/embed/98do3PUk4cM"
                   // link={`/kinderen/verhalen/`}
@@ -217,7 +216,7 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
           </TrainigenIdealWrapper>
         </main>
       </PageWrapper>
-    </div>
+    </ContainerWrapper>
   );
 };
 

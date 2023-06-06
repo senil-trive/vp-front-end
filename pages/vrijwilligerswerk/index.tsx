@@ -17,6 +17,7 @@ import {
   PeopleWrapper,
   VideoWrapper,
 } from "../../styles/Vrjwilligerswerk/VrijwilligerWorden.styles";
+import { ContainerWrapper } from "../../styles/Vrjwilligerswerk/index.styles";
 type VolunteersPageProps = {
   pageData: any;
   volunteerweekwork: any;
@@ -70,9 +71,8 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
 }) => {
   const { colors } = useTheme();
   const [volunteerweek, setVolunteerWeek] = useState(volunteerweekwork);
-  console.log(pageData, "pageoverviewpage");
   return (
-    <div>
+    <ContainerWrapper>
       <PageWrapper
         seo={{
           title: pageData?.seo_title
@@ -200,24 +200,6 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
                     variant="info"
                   />
                 ))}
-                {/* <CommonDetailCard
-                  title="Een luisterend oor"
-                  description="Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
-                  imageUrl="/diffpeople2.png"
-                  variant="info"
-                />
-                <CommonDetailCard
-                  title="Een luisterend oor"
-                  description="Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
-                  imageUrl="/diffpeople3.png"
-                  variant="info"
-                />
-                <CommonDetailCard
-                  title="Een luisterend oor"
-                  description="Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
-                  imageUrl="/diffpeople4.png"
-                  variant="info"
-                /> */}
               </div>
             </Container>
           </PeopleWrapper>
@@ -339,18 +321,6 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
                     />
                   )
                 )}
-                {/* <VideoItem
-                  title="Wat leer je bij de trainingen?"
-                  poster="/storyposter2.png"
-                  src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                  subtitle="Hier komt een omschrijvende tekst"
-                />
-                <VideoItem
-                  title="Wat leer je bij de trainingen?"
-                  poster="/storyposter3.png"
-                  src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                  subtitle="Hier komt een omschrijvende tekst"
-                /> */}
               </div>
             </Container>
           </VideoWrapper>
@@ -377,7 +347,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
           </Container>
         </main>
       </PageWrapper>
-    </div>
+    </ContainerWrapper>
   );
 };
 

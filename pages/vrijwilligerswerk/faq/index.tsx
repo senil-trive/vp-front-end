@@ -48,8 +48,6 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
   const [totalCount, setTotalCount] = useState(totalFaqs);
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-
-  console.log(`faq data :::`, pageData.background_image);
   const showMoreButton =
     totalCount > items.length && totalCount > POST_PER_PAGE;
 

@@ -1,26 +1,26 @@
 import { FaAppStoreIos, FaGooglePlay } from "react-icons/fa";
-import { H3, P, TitleWithHighlights } from "../../../components/typography";
+import { H3, P, TitleWithHighlights } from "../components/typography";
 
-import Button from "../../../components/buttons/Button";
-import CTAItem from "../../../components/content-types/CTAItem/CTAItem";
+import Button from "../components/buttons/Button";
+import CTAItem from "../components/content-types/CTAItem/CTAItem";
 import { Container } from "@mui/material";
-import ContentCarousel from "../../../components/carousels/ContentCarousel";
-import ENDPOINTS from "../../../constants/endpoints";
-import FAQList from "../../../components/content-types/FAQList/FAQList";
-import { Hero } from "../../../components/layout";
-import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
-import { TEMP_QUOTES } from "../../../constants/mockData";
-import TextItem from "../../../components/content-types/TextItem/TextItem";
-import parseImageURL from "../../../utils/parseImageURL";
+import ContentCarousel from "../components/carousels/ContentCarousel";
+import ENDPOINTS from "../constants/endpoints";
+import FAQList from "../components/content-types/FAQList/FAQList";
+import { Hero } from "../components/layout";
+import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
+import { TEMP_QUOTES } from "../constants/mockData";
+import TextItem from "../components/content-types/TextItem/TextItem";
+import parseImageURL from "../utils/parseImageURL";
 import { useTheme } from "styled-components";
 import {
   BuddymediaWrapper,
   ReflectiveCardWrapper,
-} from "../../../styles/kinderen/kletsmeet.styles";
-import InfoCard from "../../../components/content-types/InfoCard/InfoCard";
-import VideoItem from "../../../components/content-types/VideoItem/VideoItem";
-import { VideoWrapper } from "../../../styles/Vrjwilligerswerk/VrijwilligerWorden.styles";
-import CommonDetailCard from "../../../components/content-types/CommonDetailCard/CommonDetailCard";
+} from "../styles/kinderen/kletsmeet.styles";
+import InfoCard from "../components/content-types/InfoCard/InfoCard";
+import VideoItem from "../components/content-types/VideoItem/VideoItem";
+import { VideoWrapper } from "../styles/Vrjwilligerswerk/VrijwilligerWorden.styles";
+import CommonDetailCard from "../components/content-types/CommonDetailCard/CommonDetailCard";
 
 type BuddyPageProps = {
   pageData: any;
@@ -100,16 +100,20 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                 <Button
                   variant="success"
                   className="mr-[31px] mb-[10px] bg-[transparent] text-[#fff] border-[#fff] hover:bg-[#fff] hover:text-[#3FC7B4]"
-                  href={"/kinderen/ik-wil-een-buddy"}
+                  href={pageData?.cta_section_footer_ios_url}
+                  target="_blank"
                 >
-                  {pageData?.header_button_1_label}
+                  <FaAppStoreIos size={25} />
+                  App Store
                 </Button>
                 <Button
                   variant="success"
                   className="bg-[transparent] text-[#fff] border-[#fff] hover:bg-[#fff] hover:text-[#3FC7B4]"
-                  href={"/vrijwilligerswerk/aanmelden"}
+                  href={pageData?.cta_section_footer_android_url}
+                  target="_blank"
                 >
-                  {pageData?.header_button_2_label}
+                  <FaGooglePlay size={25} />
+                  Google Play
                 </Button>
               </div>
             </div>

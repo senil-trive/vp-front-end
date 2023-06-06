@@ -20,6 +20,7 @@ import SortBar from "../../../components/form/SortBar/SortBar";
 import TagList from "../../../components/buttons/TagList/TagList";
 import parseImageURL from "../../../utils/parseImageURL";
 import ChevronRight from "../../../components/icons/ChevronRight/ChevronRight";
+import Image from "next/image";
 
 const forumSortOptions = [
   { name: "Titel (a-z)", value: "content" },
@@ -42,9 +43,6 @@ export const getServerSideProps = async () => {
     const pageRes = await pageReq.json();
     const forumRes = await forumReq.json();
     const tagsRes = await tagsReq.json();
-    console.log(pageRes, "page");
-    console.log(forumRes, "forum");
-    console.log(tagsRes, "tags");
     return {
       props: {
         pageData: pageRes.data || null,
@@ -123,8 +121,6 @@ export default function Forum({
 
     getPaginatedPost();
   }, [currentPage, search, sort, selectedTag]);
-
-  console.log(pageData);
   return (
     <PageWrapper
       seo={{
@@ -152,8 +148,7 @@ export default function Forum({
       >
         <Container>
           <Grid container>
-            <Grid item xs={0} md={2} lg={3} />
-            <Grid item xs={12} md={8} lg={6}>
+            <Grid item xs={12} md={8} className="w-[100%] mx-auto">
               <TitleWithHighlights
                 text={pageData?.page_title ?? ""}
                 color="white"
@@ -201,7 +196,6 @@ export default function Forum({
                 </Button>
               </div>
             </Grid>
-            <Grid item xs={0} md={2} lg={3} />
           </Grid>
         </Container>
       </Hero>
@@ -255,6 +249,17 @@ export default function Forum({
                 </Grid>
                 <Grid item xs={12} md={3}>
                   <SortBar sortOptions={forumSortOptions} onSort={handleSort} />
+                </Grid>
+                <Grid item xs={12} md={8}>
+                  <div className="">
+                    <Image
+                      src="/Imageforum.png"
+                      alt="forum search"
+                      fill
+                      className="relative w-[100%] h-[120px]"
+                    />
+                    <div className="bg-[#FE517E] h-[246px]"></div>
+                  </div>
                 </Grid>
                 {posts.map((item, index) => (
                   <Grid key={index} item xs={12} md={4}>

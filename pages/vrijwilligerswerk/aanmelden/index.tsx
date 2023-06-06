@@ -36,7 +36,6 @@ export const getServerSideProps = async () => {
     );
 
     const pageRes = await pageReq.json();
-    console.log(pageRes, "form");
     if (!pageRes?.data) {
       return {
         notFound: true,
@@ -73,7 +72,6 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
 
   const submitForm = async (data: VolunteerRequestType) => {
     setIsLoading(true);
-    console.log(data);
     try {
       await postVolunteerApplication(data);
       setIsSubmitted(true);

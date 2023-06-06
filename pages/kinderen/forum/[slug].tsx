@@ -21,7 +21,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   try {
     // Get the posts
     const res = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=*.*&filter[slug][_eq]=${slug}`,
+      `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=categories.*,*&filter[slug][_eq]=${slug}`,
       {
         method: "GET",
         headers: {
