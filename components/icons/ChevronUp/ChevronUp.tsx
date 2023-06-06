@@ -3,7 +3,10 @@ import { SVGProps } from "react";
 import { useTheme } from "styled-components";
 import { IconProps } from "../../../types/iconTypes";
 
-export default function ChevronUp({ color = "info", ...props }: IconProps) {
+export default function ChevronUp({
+  color = "secondary",
+  ...props
+}: IconProps) {
   const { colors } = useTheme();
 
   return (

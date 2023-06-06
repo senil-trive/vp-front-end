@@ -223,7 +223,7 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
 
                 return (
                   <motion.div
-                    className={`grid-item grid-item-w-${item.width}`}
+                    className={`grid-item custom_blogs grid-item-w-${item.width}`}
                     key={index}
                     variants={cardVariants}
                     initial="offscreen"

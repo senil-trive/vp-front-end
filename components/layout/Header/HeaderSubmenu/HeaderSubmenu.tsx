@@ -89,8 +89,7 @@ const Wrapper: any = styled.div`
             }
           }
           &.active {
-            color: ${({ theme }) => theme.colors.primary.normal};
-            text-decoration: underline;
+            color: ${({ theme }) => theme.colors.white.normal};
           }
         }
       }
