@@ -205,7 +205,7 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
                       postDate={new Date(forumContent.date_created)}
                       tags={
                         forumContent.categories?.map(
-                          (cat) => cat.categories_id.name
+                          (cat) => cat.categories_id?.name
                         ) ?? []
                       }
                       title={

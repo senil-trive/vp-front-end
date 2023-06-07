@@ -3,4 +3,5 @@ export type VideoPropsType = {
   subtitle?: string;
   src: string;
   poster?: string;
+  className?: string;
 };

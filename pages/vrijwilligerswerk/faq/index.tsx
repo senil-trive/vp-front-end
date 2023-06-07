@@ -23,8 +23,8 @@ export const getServerSideProps = async () => {
 
     return {
       props: {
-        pageData: pageRes.data,
-        faqData: faqRes.data,
+        pageData: pageRes.data || null,
+        faqData: faqRes.data || null,
         totalFaqs: faqRes?.meta?.filter_count ?? 0,
       },
     };
@@ -49,7 +49,7 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
-  console.log(`faq data :::`, pageData);
+  console.log(`faq data :::`, pageData.background_image);
   const showMoreButton =
     totalCount > items.length && totalCount > POST_PER_PAGE;
 
@@ -94,8 +94,8 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
         }}
       >
         <main>
-          <Hero imageUrl={parseImageURL(pageData?.background_image.id)}>
-            <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16">
+          <Hero imageUrl={parseImageURL(pageData?.background_image)}>
+            <div className="flex flex-col md:items-center md:justify-center md:text-center max-w-2xl my-16">
               <TitleWithHighlights
                 text={pageData?.page_title ?? ""}
                 textToHighlight="vrijwilligers"
@@ -104,10 +104,10 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
                   fontFamily: "Fjalla One",
                   fontStyle: `normal`,
                   fontWeight: `400`,
-                  fontSize: `64px`,
                   lineHeight: `140%`,
                   color: `white`,
                 }}
+                className="text-[46px] md:text-[64px]"
               />
               <P
                 style={{
@@ -123,13 +123,15 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
               </P>
             </div>
           </Hero>
-
-          <FAQList
-            items={items}
-            isLoading={isLoading}
-            showLoadMore={showMoreButton}
-            onLoadMore={changePage}
-          />
+          <div className="relative mt-[-134px] md:mt-[0px]">
+            <FAQList
+              items={items}
+              isLoading={isLoading}
+              showLoadMore={showMoreButton}
+              onLoadMore={changePage}
+            />
+          </div>
+          <div></div>
         </main>
       </PageWrapper>
     </div>

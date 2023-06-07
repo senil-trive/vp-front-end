@@ -33,13 +33,15 @@ export const getServerSideProps = async () => {
     const pageRes = await pageReq.json();
     const blogRes = await blogsReq.json();
     const tagsRes = await tagsReq.json();
-
+    console.log(pageRes, "page");
+    console.log(blogRes, "blog");
+    console.log(tagsRes, "tags");
     return {
       props: {
-        pageData: pageRes.data,
-        blogsData: blogRes.data,
-        totalPosts: blogRes.meta.filter_count,
-        tags: tagsRes.data,
+        pageData: pageRes.data || null,
+        blogsData: blogRes.data || null,
+        totalPosts: blogRes.meta.filter_count || null,
+        tags: tagsRes.data || null,
       },
     };
   } catch (error) {
@@ -150,7 +152,7 @@ export default function Forum({
         imageUrl={
           pageData?.hero_image?.id
             ? parseImageURL(pageData?.hero_image?.id)
-            : ""
+            : "/vrijwilligerswerkheader.png"
         }
         style={{
           minHeight: 649,
@@ -163,11 +165,24 @@ export default function Forum({
             <Grid item xs={12} md={8} lg={6}>
               <TitleWithHighlights
                 text={pageData?.page_title ?? ""}
-                style={{ textAlign: "center", padding: "0 24px" }}
+                style={{
+                  textAlign: "center",
+                  padding: "0 24px",
+                  fontSize: "64px",
+                  fontWeight: "400",
+                }}
                 color="white"
                 textToHighlight={["Blog", "Vlogs"]}
               />
-              <P color="white" variant="light" style={{ textAlign: "center" }}>
+              <P
+                color="white"
+                variant="light"
+                style={{
+                  textAlign: "center",
+                  fontSize: "18px",
+                  fontWeight: "300",
+                }}
+              >
                 {pageData?.page_subtitle}
               </P>
             </Grid>

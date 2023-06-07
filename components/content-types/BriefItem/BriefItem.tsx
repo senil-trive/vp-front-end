@@ -70,13 +70,15 @@ export default function BriefItem({
             highlightColor="tertiary"
             text={title + " ✍🏽"}
             // textToHighlight={titleHighlighted ?? "    "}
+
             headerElement="h3"
             className="transition group-hover:text-black"
+            style={{ fontWeight: "400" }}
           />
 
           <P
             className="transition text-white group-hover:text-black"
-            style={{ marginBottom: 56, marginTop: 12 }}
+            style={{ marginBottom: 56, marginTop: 12, fontWeight: "300" }}
           >
             {truncate(content, 200)}
           </P>

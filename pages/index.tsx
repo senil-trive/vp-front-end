@@ -31,10 +31,17 @@ export const getServerSideProps = async () => {
       lettersRes,
       videosRes,
     } = await getFeed({ postPerPage: POST_PER_PAGE, meta: "filter_count" });
-
+    console.log(
+      blogsRes,
+      instagramRes,
+      tiktokRes,
+      forumRes,
+      lettersRes,
+      videosRes
+    );
     return {
       props: {
-        pageData: pageRes.data,
+        pageData: pageRes.data || null,
         feed: generateFeedTiles(
           {
             blogs: blogsRes.data,
@@ -79,7 +86,7 @@ export default function Home({
   const [posts, setPosts] = useState(feed);
   const [isLoading, setIsLoading] = useState(false);
   const [isEnd, setIsEnd] = useState(false);
-
+  console.log(pageData, feed, "feed");
   const [showTags, setShowTags] = useState(false);
   const getAllFeedItem = useCallback(
     async ({
@@ -90,8 +97,6 @@ export default function Home({
       selectedTag: string;
     }) => {
       setIsLoading(true);
-
-      console.log({ nextPage: currentPage + 1 });
 
       try {
         const {
@@ -180,7 +185,7 @@ export default function Home({
           minHeight: 649,
           position: "relative",
         }}
-        homePage={true}
+        mbgn={"/Header.png"}
         showTags={showTags}
       >
         <Container>

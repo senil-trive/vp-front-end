@@ -117,7 +117,7 @@ export default function Dropdown({
       onClick={handleInputFocus}
       ref={wrapperRef}
     >
-      {!!label && <label>{label}</label>}
+      {!!label && <label className="text-[#fff]">{label}</label>}
       <div>
         <select
           multiple={multi}

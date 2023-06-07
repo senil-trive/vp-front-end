@@ -3,7 +3,10 @@ import { SVGProps } from "react";
 import { useTheme } from "styled-components";
 import { IconProps } from "../../../types/iconTypes";
 
-export default function ChevronUp({ color = "info", ...props }: IconProps) {
+export default function ChevronUp({
+  color = "secondary",
+  ...props
+}: IconProps) {
   const { colors } = useTheme();
 
   return (
@@ -16,7 +19,7 @@ export default function ChevronUp({ color = "info", ...props }: IconProps) {
     >
       <path
         d="M15.492 7 9.273 1.67a1.2 1.2 0 0 0-1.562 0L1.492 7"
-        stroke={colors[color].normal}
+        stroke={"pink"}
         strokeWidth={1.5}
         strokeLinecap="round"
       />

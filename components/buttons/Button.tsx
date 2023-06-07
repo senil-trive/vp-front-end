@@ -51,7 +51,10 @@ const Style = css<Props>`
   cursor: pointer;
   transition: all 0.1s ease-in-out;
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
-
+  @media (max-width: 767px) {
+    height: 50px;
+    line-height: 1;
+  }
   &:disabled {
     cursor: not-allowed;
   }

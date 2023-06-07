@@ -51,6 +51,7 @@ type Props = {
 
   /** The color of the border */
   borderColor?: ColorType;
+  className?: string;
 };
 
 const InputWrapper = styled.div<InputStateType>`
@@ -66,7 +67,7 @@ const InputWrapper = styled.div<InputStateType>`
     line-height: 160%;
     /* identical to box height, or 29px */
 
-    color: #000000;
+    color: #fff;
   }
 
   > div {
@@ -83,11 +84,11 @@ const InputWrapper = styled.div<InputStateType>`
       border: none;
       width: 100%;
 
-      font-weight: 400;
+      font-weight: 300;
       font-size: 18px;
       line-height: 160%;
 
-      color: #888888;
+      color: #c7c7c7;
       background-color: transparent;
 
       &:focus {
@@ -164,6 +165,7 @@ export default function Input({
   register,
   required,
   borderColor = "primary",
+  className,
   ...rest
 }: Props) {
   const { colors } = useTheme();
@@ -187,6 +189,7 @@ export default function Input({
           placeholder={placeholder}
           onChange={(e) => onChange?.(e)}
           defaultValue={defaultValue}
+          className={className}
           {...formRegister}
           {...rest}
         />

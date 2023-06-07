@@ -19,10 +19,12 @@ type Props = {
   mediaSrc?: string;
   embedSrc?: string;
   link: string;
+  description?: string;
   category?: string;
   content?: string;
   author: string;
   postDate: Date;
+  buttonText?: string;
 };
 
 export default function BlogItem({
@@ -35,9 +37,10 @@ export default function BlogItem({
   content,
   author,
   postDate,
+  buttonText,
+  description,
 }: Props) {
   const { colors } = useTheme();
-
   const generateMediaItem = () => {
     let Child = null;
 
@@ -89,25 +92,33 @@ export default function BlogItem({
   return (
     <Card variant={type}>
       {generateMediaItem()}
-
       <CardFooter>
         <H4 className="text-4xl" style={{ margin: 0 }} variant="bold">
           {truncate(title, 23)}
         </H4>
-
-        <div style={{ overflowY: "auto", height: 90 }}>
-          {!!content && (
-            <P style={{ marginBottom: 30, marginTop: 12 }}>
-              {content ? truncate(content, 200) : ""}
-            </P>
-          )}
-        </div>
-        <div className="flex items-center justify-between author-date">
+        {!!description ? (
+          <div className="blog-description">
+            <P style={{ marginBottom: 30, marginTop: 12 }}>{description}</P>
+          </div>
+        ) : (
+          <div style={{ overflowY: "auto", height: 90 }}>
+            {!!content && (
+              <P style={{ marginBottom: 30, marginTop: 12 }}>
+                {content ? truncate(content, 200) : ""}
+              </P>
+            )}
+          </div>
+        )}
+        <div className="flex items-center justify-between author-date mb-[20px] mt-[0]">
           <p className="text-lg font-avenir">{author}</p>
           <p className="italic font-light font-avenir">{parseDate(postDate)}</p>
         </div>
-        <Button style={{ marginTop: 56 }} variant="secondary" href={link}>
-          {type == "vlog" ? "Vlog bekijken" : "Blog lezen"}
+        <Button style={{ marginTop: "auto" }} variant="secondary" href={link}>
+          {buttonText
+            ? buttonText
+            : type == "vlog"
+            ? "Vlog bekijken"
+            : "Blog lezen"}
         </Button>
       </CardFooter>
     </Card>

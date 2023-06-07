@@ -149,7 +149,7 @@ p {
   left: calc(100% - 100px);
 }
 .with-divider ul li a {
-  font-size: 15px !important;
+  font-size: 18px !important;
 }
 .without-divider ul li a {
   font-size: 15px !important;

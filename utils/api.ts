@@ -152,15 +152,13 @@ export const getMenuItems = async () => {
  */
 export const getCompanyInfo = async () => {
   try {
-    const res = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/general_info?fields=*.*.*`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    // end point ${ENDPOINTS.COLLECTIONS}/general_info?fields=*.*.*
+    const res = await fetch(`${ENDPOINTS.COLLECTIONS}/general_info`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
     const resData = await res.json();
     return resData.data as CompanyInfo;
@@ -174,7 +172,7 @@ export const getCompanyInfo = async () => {
  * Gets the home page details
  */
 export const getHomePageData = async () => {
-  return await fetch(`${ENDPOINTS.COLLECTIONS}/home_page?fields=*.*.*`, {
+  return await fetch(`${ENDPOINTS.COLLECTIONS}/home_page`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -235,15 +233,13 @@ export const postLetterSubscription = async (data: any) => {
  * Gets the blog overview page details
  */
 export const getPostOverviewPageData = async () => {
-  return await fetch(
-    `${ENDPOINTS.COLLECTIONS}/blog_overview_page?fields=*.*.*.*`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  // blog overview page ${ENDPOINTS.COLLECTIONS}/blog_overview_page?fields=*.*.*.*
+  return await fetch(`${ENDPOINTS.COLLECTIONS}/blog_overview_page`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 };
 
 /**
@@ -261,7 +257,7 @@ export const getPosts = async ({
   filter,
   meta = "total_count",
 }: DirectusParams) => {
-  let url = `${ENDPOINTS.COLLECTIONS}/vlogposts?fields=*.*.*&filter=[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+  let url = `${ENDPOINTS.COLLECTIONS}/vlogposts?filter=[status][_eq]=published&limit=${postPerPage}&page=${page}`;
 
   if (meta) {
     url = `${url}&meta=${meta}`;
@@ -404,8 +400,9 @@ export const getVideoItems = async ({
  * @returns
  */
 export const getPostDetail = async (slug: string) => {
+  console.log(slug, "====forum vrahln");
   return await fetch(
-    `${ENDPOINTS.COLLECTIONS}/vlogposts?fields=*.*.*.*&filter[slug][_eq]=${slug}`,
+    `${ENDPOINTS.COLLECTIONS}/vlogposts?fields=related.*.*,comments.*.*,categories.*,*&filter[slug][_eq]=${slug}`,
     {
       method: "GET",
       headers: {
@@ -419,15 +416,13 @@ export const getPostDetail = async (slug: string) => {
  * Gets the Forum overview page details
  */
 export const getForumOverviewPageData = async () => {
-  return await fetch(
-    `${ENDPOINTS.COLLECTIONS}/forum_overview_page?fields=*.*.*`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  // page forum overiew ${ENDPOINTS.COLLECTIONS}/forum_overview_page?fields=*.*.*
+  return await fetch(`${ENDPOINTS.COLLECTIONS}/forum_overview_page`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 };
 
 /**
@@ -445,7 +440,8 @@ export const getForumPosts = async ({
   filter,
   meta,
 }: DirectusParams) => {
-  let url = `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+  // post forum let url = `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+  let url = `${ENDPOINTS.COLLECTIONS}/forum_posts?filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
 
   if (meta) {
     url = `${url}&meta=${meta}`;
@@ -473,7 +469,7 @@ export const getForumPosts = async ({
  * @returns
  */
 export const getHomeData = async () => {
-  return await fetch(`${ENDPOINTS.COLLECTIONS}/home_page?fields=*.*.*`, {
+  return await fetch(`${ENDPOINTS.COLLECTIONS}/home_page`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -514,8 +510,9 @@ export const postVolunteerApplication = async (data: VolunteerRequestType) => {
  * Gets all available tags
  */
 export const getContentTags = async () => {
+  // content url `${ENDPOINTS.COLLECTIONS}/categories?filter[status][_eq]=published&fields=*.*.*`
   return await fetch(
-    `${ENDPOINTS.COLLECTIONS}/categories?filter[status][_eq]=published&fields=*.*.*`,
+    `${ENDPOINTS.COLLECTIONS}/categories?filter[status][_eq]=published`,
     {
       method: "GET",
       headers: {
@@ -625,13 +622,10 @@ export const getFaqs = async ({
  * @returns
  */
 export const getFaqOverviewData = async () => {
-  return await fetch(
-    `${ENDPOINTS.COLLECTIONS}/faq_overview_page?fields=*.*.*`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  return await fetch(`${ENDPOINTS.COLLECTIONS}/faq_overview_page`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 };
