@@ -50,6 +50,12 @@ export const COLORS = {
     transparent: "#EDEDED",
   },
 
+  darkgrey: {
+    normal: "#888888",
+    light: "#EDEDED",
+    transparent: "#EDEDED",
+  },
+
   // Error red
   error: {
     normal: "#FF3333",

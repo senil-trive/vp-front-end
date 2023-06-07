@@ -223,14 +223,14 @@ export default function Forum({
         /> */}
 
         <div style={{ margin: "0px auto" }}>
-          <Container style={{ marginBottom: "38px" }}>
+          <Container style={{ marginBottom: "38px", maxWidth: "100%" }}>
             <Grid container>
               <Grid item xs={12} md={9}>
-                <P style={{ color: colors.primary.normal }}>
+                <P style={{ color: colors.black.normal }}>
                   {totalCount} verhalen
                 </P>
               </Grid>
-              <Grid item xs={12} md={3}>
+              <Grid item xs={12} md={3} style={{border : "1px solid #3FC7B4", borderRadius: "5px"}}>
                 <SortBar onSort={handleSort} />
               </Grid>
             </Grid>

@@ -84,7 +84,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
                 text={pageData?.page_title}
                 textToHighlight={pageData?.page_title_highlighted}
                 headerElement="h1"
-                color="primary"
+                color="white"
               />
               <P>{pageData?.page_subtitle}</P>
 
@@ -222,7 +222,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({ pageData }) => {
           <section
             className="my-[80px] text-center py-20"
             style={{
-              backgroundColor: colors.tertiary.light,
+              backgroundColor: colors.white.light,
             }}
           >
             <Container>

@@ -90,6 +90,15 @@ const Wrapper: any = styled.div`
           }
           &.active {
             color: ${({ theme }) => theme.colors.white.normal};
+            background-color: ${({ theme }) => theme.colors.primary.normal};
+            padding: 12px;
+            margin: -12px;
+            border-radius: 8px;
+            color: white;
+            &:after {
+              content: "  👉🏽";
+            }
+            
           }
         }
       }
@@ -129,7 +138,7 @@ export default function HeaderSubmenu({ categories, selected }: Props) {
                   {category.children
                     .filter((item) => item.status === "published")
                     .map((item) => (
-                      <li key={item.link}>
+                      <li key={item.link} style={{paddingBottom: '20px'}}>
                         <Link
                           className={
                             router.asPath === item.link ? "active" : ""

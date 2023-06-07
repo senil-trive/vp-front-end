@@ -23,7 +23,7 @@ export default function Dropdown({
   onChange,
   placeholder = "Kies een optie",
   hasError = false,
-  borderColor = "primary",
+  borderColor = "white",
   multi = false,
   ...rest
 }: DropdownProps) {
@@ -136,7 +136,7 @@ export default function Dropdown({
         </select>
         <div
           className={`selectBox ${isOpen ? "open" : ""}`}
-          style={{ borderColor: colors[borderColor].normal }}
+          style={{ borderColor: colors[borderColor].light }}
           onClick={() => setIsOpen((state) => !state)}
         >
           <div className="flex items-center">

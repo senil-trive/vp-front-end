@@ -17,7 +17,7 @@ export const DropdownWrapper = styled.div<{ hasError: boolean }>`
     font-weight: 700;
     font-size: 18px;
     line-height: 160%;
-    color: #000000;
+    color: #fff;
   }
 
   .selectBox {

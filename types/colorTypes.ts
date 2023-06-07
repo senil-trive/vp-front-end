@@ -6,5 +6,6 @@ export type ColorType =
   | "white"
   | "grey"
   | "error"
+  |"darkgrey"
   | "success"
   | "info";

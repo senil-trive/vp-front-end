@@ -95,7 +95,7 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
       >
         <main>
           <Hero imageUrl={parseImageURL(pageData?.background_image.id)}>
-            <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16">
+            <div className="flex flex-col items-center justify-center text-center max-w-4xl my-16">
               <TitleWithHighlights
                 text={pageData?.page_title ?? ""}
                 textToHighlight="vrijwilligers"

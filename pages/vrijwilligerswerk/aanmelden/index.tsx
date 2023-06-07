@@ -105,30 +105,31 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
             <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16">
               <TitleWithHighlights
                 headerElement="h1"
-                color="primary"
+                color="white"
                 highlightColor="info"
                 text={pageData?.page_title}
                 textToHighlight={pageData?.page_title_highlighted}
               />
-              <P>{pageData?.page_subtitle}</P>
+              <P style={{color: '#fff'}}>{pageData?.page_subtitle}</P>
             </div>
           </Hero>
 
-          <Container className="my-[80px]">
+          <Container className="my-[80px]" >
             <Section>
               {!isSubmitted ? (
-                <form onSubmit={handleSubmit(submitForm)}>
+                <form onSubmit={handleSubmit(submitForm)} style={{color : "#fff"}}>
                   <Grid container spacing="33px">
-                    <Grid item xs={12} md={6}>
-                      <Input
+                    <Grid item xs={12} md={6} >
+                      <Input 
                         label="Voornaam*"
                         required
                         name="first_name"
                         placeholder="Vul hier je voornaam in"
                         register={register}
                         hasError={!!errors.first_name}
-                        helperText={errors.first_name && "Vul je voornaam in"}
-                      />
+                        helperText={errors.first_name && "Vul je voornaam in"
+                       } 
+                     />
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <Input
@@ -141,8 +142,8 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
                         helperText={errors.last_name && "Vul je achternaam in"}
                       />
                     </Grid>
-                    <Grid item xs={12} md={6}>
-                      <Dropdown
+                    <Grid item xs={12} md={6} >
+                      <Dropdown 
                         options={GENDERS}
                         label="Geslacht"
                         name="gender"
@@ -150,7 +151,7 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
                         placeholder="Maak een keuze"
                         required
                         hasError={!!errors.gender}
-                        helperText={errors.gender && "Maak een keuze"}
+                        helperText={errors.gender && "Maak een keuze"}  
                       />
                     </Grid>
                     <Grid item xs={12} md={6}>
@@ -178,6 +179,7 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
                     </Grid>
                     <Grid item xs={12} md={6}>
                       <Input
+                        
                         label="Woonplaats*"
                         type="text"
                         required
@@ -188,12 +190,12 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
                       />
                     </Grid>
 
-                    <Grid item xs={12} md={6}>
+                    <Grid item xs={12} md={6} style={{margin:"auto", textAlign: "center"}}>
                       <Grid item xs={12}>
-                        <P variant="light">* Verplichte velden</P>
+                        <P variant="light" style={{color:'#fff'}}>* Verplichte velden</P>
                       </Grid>
-                      <Grid item xs={12} md={4}>
-                        <Button loading={isLoading} disabled={isSubmitted}>
+                      <Grid item xs={12} md={4} style={{maxWidth: "100%"}} >
+                        <Button loading={isLoading} disabled={isSubmitted} style={{backgroundColor: "white", color: "#ff971d", fontSize: "18px", fontWeight: "400"}}>
                           {isLoading && "Bezig..."}
                           {isSubmitted && "Verzonden"}
                           {!isLoading && !isSubmitted && "Versturen"}

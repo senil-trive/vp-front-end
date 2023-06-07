@@ -39,8 +39,8 @@ const VolunteerWeek: React.FC<IProps> = ({ title, data, id }) => {
   };
 
   return (
-    <div
-      className={`volunteer-week-box border-[5px] border-[#3FC7B4] p-[32px] ${
+    <div style={{borderRadius: "5px"}}
+      className={`volunteer-week-box border-[5px] border-[#3FC7B4] p-[32px] borderRadius-[5px] ${
         activeId === id ? "active" : ""
       }`}
       onClick={handleClick}
@@ -48,7 +48,7 @@ const VolunteerWeek: React.FC<IProps> = ({ title, data, id }) => {
     >
       <div>
         <div className="flex items-center">
-          <h3 className="text-[24px] pr-[10px]">{title} </h3>
+          <h3 className="text-[24px] pr-[10px]" style={{ color: "#150F2F" }}>{title} </h3>
 
           <Image
             src="/calendar.svg"
@@ -60,7 +60,7 @@ const VolunteerWeek: React.FC<IProps> = ({ title, data, id }) => {
         <div>
           <ul>
             {data.map((volunteer, index) => (
-              <li key={index} className="pt-2">
+              <li key={index} className="pt-2" style={{ color: "#150F2F" }} >
                 {edit && activeId === id ? (
                   <Input
                     onChange={handleChange}

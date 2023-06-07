@@ -15,6 +15,7 @@ declare module "styled-components" {
       text: ColorType;
       white: ColorType;
       grey: ColorType;
+      darkgrey: ColorType;
       black: ColorType;
       error: ColorType;
       success: ColorType;

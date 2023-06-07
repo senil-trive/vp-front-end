@@ -22,7 +22,7 @@ const Wrapper = styled.div<{ paddingSize: "sm" | "md" }>`
 `;
 
 export default function Section({
-  backgroundColor = "#e5f0fe",
+  backgroundColor = "#FF971D",
   paddingSize = "md",
   children,
   ...rest

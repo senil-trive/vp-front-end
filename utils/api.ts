@@ -153,7 +153,7 @@ export const getMenuItems = async () => {
 export const getCompanyInfo = async () => {
   try {
     const res = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/general_info?fields=*.*.*`,
+      `${ENDPOINTS.COLLECTIONS}/general_info`,
       {
         method: "GET",
         headers: {

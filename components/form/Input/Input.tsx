@@ -66,7 +66,7 @@ const InputWrapper = styled.div<InputStateType>`
     line-height: 160%;
     /* identical to box height, or 29px */
 
-    color: #000000;
+    color: #ffff;
   }
 
   > div {
@@ -149,6 +149,7 @@ const InputWrapper = styled.div<InputStateType>`
 `;
 
 export default function Input({
+  
   iconLeft,
   iconRight,
   type = "text",
@@ -163,7 +164,7 @@ export default function Input({
   onChange,
   register,
   required,
-  borderColor = "primary",
+  borderColor = "white",
   ...rest
 }: Props) {
   const { colors } = useTheme();

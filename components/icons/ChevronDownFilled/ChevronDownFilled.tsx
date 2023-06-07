@@ -12,7 +12,7 @@ export default function ChevronDownFilled({
     <svg
       width={17}
       height={12}
-      fill="black "
+      fill="black"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
