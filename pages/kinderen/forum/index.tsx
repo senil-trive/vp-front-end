@@ -1,4 +1,4 @@
-import { Container, Grid } from "@mui/material";
+import { colors, Container, Grid } from "@mui/material";
 import { Hero, Pagination } from "../../../components/layout";
 import { H4, P, TitleWithHighlights } from "../../../components/typography";
 import React, { useEffect, useState } from "react";
@@ -21,6 +21,8 @@ import TagList from "../../../components/buttons/TagList/TagList";
 import parseImageURL from "../../../utils/parseImageURL";
 import ChevronRight from "../../../components/icons/ChevronRight/ChevronRight";
 import Image from "next/image";
+import Input from "../../../components/form/Input/Input";
+import SearchIcon from "../../../components/icons/SearchIcon/SearchIcon";
 
 const forumSortOptions = [
   { name: "Titel (a-z)", value: "content" },
@@ -84,8 +86,9 @@ export default function Forum({
     }
   };
 
-  const handleSearch = (x: string) => {
-    setSearch(x);
+  const handleSearch = (x: any) => {
+    console.log(x);
+    setSearch(x.target.value);
     setCurrentPage(1);
   };
 
@@ -185,7 +188,7 @@ export default function Forum({
                 <Button
                   variant="white"
                   filled={false}
-                  href="/kinderen/klets-met-een-buddy"
+                  href="/ik-wil-een-buddy"
                   style={{
                     fontSize: "18px",
                     fontWeight: "300",
@@ -238,59 +241,82 @@ export default function Forum({
 
         <Container style={{ margin: "56px auto" }}>
           <Grid container spacing={"34px"}>
-            {isLoading ? (
-              <CircleSpinner size={34} color="#fff" />
-            ) : (
-              <>
-                <Grid item xs={12} md={9}>
-                  <P color="primary">
-                    {totalCount} {totalCount === 1 ? "vraag" : "vragen"}
-                  </P>
-                </Grid>
-                <Grid item xs={12} md={3}>
-                  <SortBar sortOptions={forumSortOptions} onSort={handleSort} />
-                </Grid>
-                <Grid item xs={12} md={8}>
-                  <div className="">
-                    <Image
-                      src="/Imageforum.png"
-                      alt="forum search"
-                      fill
-                      className="relative w-[100%] h-[120px]"
-                    />
-                    <div className="bg-[#FE517E] h-[246px]"></div>
-                  </div>
-                </Grid>
-                {posts.map((item, index) => (
-                  <Grid key={index} item xs={12} md={4}>
-                    <Link href={`/kinderen/forum/${item.slug}`}>
-                      <ForumPost
-                        truncateContent
-                        fullHeight={false}
-                        gender={item.user_gender}
-                        age={item.user_age}
-                        image={item.user_image?.id || "asad"}
-                        authorType={item.user_name}
-                        postDate={new Date(item.date_created)}
-                        tags={
-                          item.categories?.map(
-                            (cat) => cat.categories_id?.name
-                          ) ?? []
-                        }
-                        title={
-                          item.title ?? "Titel moet in CMS worden ingevoerd"
-                        }
-                        comments={item.comments.length}
-                        content={item.content}
+            <>
+              <Grid item xs={12} md={9}>
+                <P color="primary">
+                  {totalCount} {totalCount === 1 ? "vraag" : "vragen"}
+                </P>
+              </Grid>
+              <Grid item xs={12} md={3}>
+                <SortBar sortOptions={forumSortOptions} onSort={handleSort} />
+              </Grid>
+              <Grid item xs={12} md={8}>
+                <div className="flex flex-col h-[100%]">
+                  <Image
+                    src="/Imageforum.png"
+                    alt="forum search"
+                    fill
+                    className="relative w-[100%] h-[120px]"
+                  />
+                  <div className="bg-[#FE517E] h-[246px] p-[32px]">
+                    <div>
+                      <TitleWithHighlights
+                        text={"je hoeft het niet alleen te doen"}
+                        color="white"
+                        className="text-[32px]"
                       />
-                    </Link>
-                  </Grid>
-                ))}
-              </>
-            )}
+                      <div className="md:flex md:items-center">
+                        <div className="w-[180px] text-[18px] text-[#fff]">
+                          Doorzoek het forum:
+                        </div>
+                        <div className="mt-[20px] flex-1 md:mt-[0px]">
+                          <Input
+                            iconLeft={<SearchIcon />}
+                            defaultValue={search}
+                            placeholder={"Zoek in het forum.."}
+                            onChange={handleSearch}
+                            borderColor="primary"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Grid>
+              {isLoading ? (
+                <CircleSpinner size={34} color="#fff" />
+              ) : (
+                <>
+                  {posts.map((item, index) => (
+                    <Grid key={index} item xs={12} md={4}>
+                      <Link href={`/kinderen/forum/${item.slug}`}>
+                        <ForumPost
+                          truncateContent
+                          fullHeight={false}
+                          gender={item.user_gender}
+                          age={item.user_age}
+                          image={item.user_image?.id || "asad"}
+                          authorType={item.user_name}
+                          postDate={new Date(item.date_created)}
+                          tags={
+                            item.categories?.map(
+                              (cat) => cat.categories_id?.name
+                            ) ?? []
+                          }
+                          title={
+                            item.title ?? "Titel moet in CMS worden ingevoerd"
+                          }
+                          comments={item.comments.length}
+                          content={item.content}
+                        />
+                      </Link>
+                    </Grid>
+                  ))}
+                </>
+              )}
+            </>
           </Grid>
         </Container>
-
         {totalCount / POST_PER_PAGE > 2 && (
           <Pagination
             total={Math.ceil(totalCount / POST_PER_PAGE)}
