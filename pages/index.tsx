@@ -165,7 +165,6 @@ export default function Home({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [feed, selectedTag]);
-
   return (
     <PageWrapper
       homepage={true}
@@ -180,11 +179,7 @@ export default function Home({
     >
       <Hero
         center
-        imageUrl={
-          pageData?.hero_image?.id
-            ? parseImageURL(pageData?.hero_image?.id)
-            : ""
-        }
+        imageUrl={parseImageURL(pageData?.hero_image?.id, 1440)}
         style={{
           minHeight: 649,
           position: "relative",
