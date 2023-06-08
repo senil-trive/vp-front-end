@@ -158,7 +158,6 @@ const CardWrapper = ({
   children,
   className,
 }: React.PropsWithChildren<Variant>) => {
-  console.log(className);
   switch (variant) {
     case "vlog":
     case "blog":
@@ -182,7 +181,6 @@ export default function Card({
   variant = "brief",
   children,
 }: Props) {
-  console.log(className, "15");
   return (
     <CardWrapper variant={variant} className={className}>
       {children}

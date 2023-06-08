@@ -31,7 +31,6 @@ const CommonDetailCard = ({
     return <CardHeader>{Child}</CardHeader>;
   };
 
-  console.log(leftIcon, "icon");
   return (
     <Card className="card-container" variant={variant}>
       {generateMediaItem()}
@@ -54,7 +53,11 @@ const CommonDetailCard = ({
         ) : (
           <div className="description">{description}</div>
         )}
-        {button && <Button href={buttonLink}>{button}</Button>}
+        {button && (
+          <Button href={buttonLink} className="text-[18px] font-[400]">
+            {button}
+          </Button>
+        )}
       </CardFooter>
     </Card>
   );

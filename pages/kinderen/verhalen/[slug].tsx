@@ -82,7 +82,6 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
         />
       );
     } else if (pageData?.image?.id) {
-      console.log(pageData);
       return parseImageURL(pageData?.image.id);
       // Child = (
       //   <Image

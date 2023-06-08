@@ -9,6 +9,7 @@ type Props = {
   children: ReactNode;
 
   paddingSize?: "sm" | "md";
+  className?: string;
 };
 
 const Wrapper = styled.div<{ paddingSize: "sm" | "md" }>`
@@ -25,10 +26,16 @@ export default function Section({
   backgroundColor = "#FF971D",
   paddingSize = "md",
   children,
+  className,
   ...rest
 }: Props) {
   return (
-    <Wrapper paddingSize={paddingSize} style={{ backgroundColor }} {...rest}>
+    <Wrapper
+      paddingSize={paddingSize}
+      style={{ backgroundColor }}
+      className={className}
+      {...rest}
+    >
       <div>{children}</div>
     </Wrapper>
   );

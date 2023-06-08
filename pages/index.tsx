@@ -32,12 +32,17 @@ export const getServerSideProps = async () => {
       videosRes,
     } = await getFeed({ postPerPage: POST_PER_PAGE, meta: "filter_count" });
     console.log(
-      blogsRes,
-      instagramRes,
-      tiktokRes,
+      // blogsRes,
+      // "blog",
+      // instagramRes,
+      // "insta",
+      // tiktokRes,
+      // "tiktok",
       forumRes,
-      lettersRes,
-      videosRes
+      "forum"
+      // lettersRes,
+      // "latest",
+      // videosRes
     );
     return {
       props: {
@@ -86,7 +91,6 @@ export default function Home({
   const [posts, setPosts] = useState(feed);
   const [isLoading, setIsLoading] = useState(false);
   const [isEnd, setIsEnd] = useState(false);
-  console.log(pageData, feed, "feed");
   const [showTags, setShowTags] = useState(false);
   const getAllFeedItem = useCallback(
     async ({

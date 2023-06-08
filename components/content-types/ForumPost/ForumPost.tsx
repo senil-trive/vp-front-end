@@ -178,8 +178,6 @@ export default function ForumPost({
 
     return parseHTMLtoReact(content);
   };
-  // console.log(`FORUM content :::`, image);
-
   const ComponentTag = showButton ? "a" : "div";
   const props = showButton ? { href: buttonUrl } : {};
   return (

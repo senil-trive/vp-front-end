@@ -217,7 +217,6 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
                     />
                   </motion.div>
                 );
-
               case "blog":
                 const blogContent = content as BlogType;
 

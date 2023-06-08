@@ -17,6 +17,7 @@ import {
 } from "../../../styles/Vrjwilligerswerk/TrainigenWrapper.styles";
 import InfoCard from "../../../components/content-types/InfoCard/InfoCard";
 import CommonDetailCard from "../../../components/content-types/CommonDetailCard/CommonDetailCard";
+import { ContainerWrapper } from "../../../styles/Vrjwilligerswerk/index.styles";
 
 type VolunteersTrainingPageProps = {
   pageData: any;
@@ -38,7 +39,6 @@ export const getServerSideProps = async () => {
     );
 
     const pageRes = await pageReq.json();
-    console.log(pageRes, "page");
     return {
       props: {
         pageData: pageRes?.data || null,
@@ -56,9 +56,8 @@ export const getServerSideProps = async () => {
 const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
   pageData,
 }) => {
-  console.log(pageData, "page");
   return (
-    <div>
+    <ContainerWrapper className="voluntee">
       <PageWrapper
         seo={{
           title: pageData?.seo_title
@@ -83,22 +82,24 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
                 position: "relative",
               }}
             >
-              <div className="flex flex-col mt-[-290px] md:items-center md:justify-center md:text-center max-w-2xl md:mt-[-80px]">
+              <div className="flex flex-col mt-[-290px] md:items-center md:justify-center md:text-center max-w-4xl md:mt-[-80px]">
                 <TitleWithHighlights
                   highlightColor="info"
                   text={pageData?.page_title}
                   headerElement="h1"
                   color="primary"
-                  className="text-white"
+                  className="text-white text-[46px] p-0 m-0 font-[400] md:leading-[140%] md:text-[64px]"
                 />
-                <P className="text-white">{pageData?.page_subtitle}</P>
+                <P className="text-white text-[18px] leading-[160%] md:text-[20px]">
+                  {pageData?.page_subtitle}
+                </P>
               </div>
             </Hero>
           </TrainigenHeroWrapper>
 
           <TrainingBlogWrapper>
             <Container>
-              <div className="training-blog">
+              <div className="training-blog md:max-w-[912px] md:mx-auto">
                 <BlogItem
                   embedSrc="https://www.youtube.com/embed/98do3PUk4cM"
                   // link={`/kinderen/verhalen/`}
@@ -133,8 +134,9 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
                   text={pageData?.package_block_title}
                   headerElement="h3"
                   color="black"
+                  className="text-[42px] font-[400]"
                 />
-                <P className="max-w-4xl">
+                <P className="max-w-4xl font-[400]">
                   {pageData?.package_block_description}
                 </P>
               </div>
@@ -147,7 +149,10 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
                     description={
                       <ul>
                         {item?.training_package_detail?.map((listItem: any) => (
-                          <li key={listItem} className="packagelist-item">
+                          <li
+                            key={listItem}
+                            className="packagelist-item text-[18px] font-[400]"
+                          >
                             <img
                               src="/icons8-tick.svg"
                               alt="packagelist iocns"
@@ -180,7 +185,7 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
                   <div className="flex justify-center  mt-[20px] md:mt-[auto]">
                     <Button
                       variant="secondary"
-                      className="w-[100%] bg-[#fff] text-[#FE517E] border-[#fff]"
+                      className="w-[100%] text-[18px] font-[400] bg-[#fff] text-[#FE517E] border-[#fff]"
                       href={pageData?.cta_1_button_url}
                     >
                       {pageData?.cta_1_button_label}
@@ -199,7 +204,7 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
                   <div className="flex justify-center mt-[20px] md:mt-[auto]">
                     <Button
                       variant="secondary"
-                      className="w-[100%] bg-[#fff] text-[#006EF7] border-[#fff]"
+                      className="w-[100%] text-[18px] font-[400] bg-[#fff] text-[#006EF7] border-[#fff]"
                       href={pageData?.cta_2_button_url}
                     >
                       {pageData?.cta_2_button_label}
@@ -217,7 +222,7 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
           </TrainigenIdealWrapper>
         </main>
       </PageWrapper>
-    </div>
+    </ContainerWrapper>
   );
 };
 

@@ -36,4 +36,7 @@ export type ForumCommentType = {
   status: ContentStatus;
   child_comments: ForumCommentType[];
   parent_comment: ForumCommentType;
+  residence: string;
+  theme: string;
+  doc_: string;
 };

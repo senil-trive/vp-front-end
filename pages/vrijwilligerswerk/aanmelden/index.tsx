@@ -36,7 +36,6 @@ export const getServerSideProps = async () => {
     );
 
     const pageRes = await pageReq.json();
-    console.log(pageRes, "form");
     if (!pageRes?.data) {
       return {
         notFound: true,
@@ -73,7 +72,6 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
 
   const submitForm = async (data: VolunteerRequestType) => {
     setIsLoading(true);
-    console.log(data);
     try {
       await postVolunteerApplication(data);
       setIsSubmitted(true);
@@ -110,23 +108,23 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
                 minHeight: 555,
                 position: "relative",
               }}
+              mobileImageHeight={564}
             >
-              <div className="flex flex-col items-center justify-center text-center max-w-2xl md:mt-[-80px]">
+              <div className="flex flex-col mt-[-60px] items-center justify-center text-center max-w-2xl md:max-w-4xl md:mt-[-80px]">
                 <TitleWithHighlights
                   headerElement="h1"
                   color="primary"
                   highlightColor="info"
                   text={pageData?.page_title}
-                  className="text-[#fff]"
-                  // textToHighlight={pageData?.page_title_highlighted}
+                  className="text-[#fff] text-[46px] font-[400] md:text-[64px]"
                 />
-                <P className="text-[#fff] md:mt-[-10px]">
+                <P className="text-[#fff] text-[20px] md:text-[18px] md:mt-[-10px]">
                   {pageData?.page_subtitle}
                 </P>
               </div>
             </Hero>
           </TrainigenHeroWrapper>
-          <Container className="mb-[80px] mt-[-140px] relative md:mb-[120px]">
+          <Container className="mb-[80px] mt-[-120px] relative md:mb-[120px]">
             <Section>
               {!isSubmitted ? (
                 <form onSubmit={handleSubmit(submitForm)}>
@@ -213,7 +211,7 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
                         <Button
                           loading={isLoading}
                           disabled={isSubmitted}
-                          className="w-[100] bg-[#fff] text-[#FF971D]"
+                          className="w-[100] bg-[#fff] text-[#FF971D] text-[18px] font-[400]"
                         >
                           {isLoading && "Bezig..."}
                           {isSubmitted && "Verzonden"}

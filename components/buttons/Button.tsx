@@ -33,6 +33,7 @@ type Props = {
   /** Additional styling */
   style?: React.CSSProperties;
   className?: string;
+  target?: string;
 };
 
 const Style = css<Props>`
@@ -179,6 +180,7 @@ export default function Button({
   loading = false,
   href,
   className,
+  target,
   ...rest
 }: Props) {
   const { colors } = useTheme();
@@ -207,6 +209,7 @@ export default function Button({
       variant={variant}
       filled={filled}
       className={className}
+      target={target}
       {...rest}
     >
       {loading && <CircleSpinner size={20} color={colors.white.normal} />}

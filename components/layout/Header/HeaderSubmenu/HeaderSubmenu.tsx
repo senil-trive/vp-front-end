@@ -110,9 +110,7 @@ const Wrapper: any = styled.div`
 
 export default function HeaderSubmenu({ categories, selected }: Props) {
   const router = useRouter();
-
   // const [index, setIndex] = useState<string>(0);
-
   return (
     <Container maxWidth="xl">
       <Wrapper selected={selected}>

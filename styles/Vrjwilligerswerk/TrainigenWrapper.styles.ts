@@ -3,13 +3,16 @@ import styled from "styled-components";
 export const TrainigenHeroWrapper = styled.section`
   @media (max-width: 767px) {
     > div {
-      height: 832px;
+      height: 564px;
     }
   }
 `;
 export const TrainingBlogWrapper = styled.section`
   margin-top: -100px;
   .training-blog {
+    .title {
+      font-weight: 400;
+    }
     position: relative;
     display: flex;
   }
@@ -82,7 +85,7 @@ export const PackageWrapper = styled.section`
     footer {
       padding: 32px 20px;
       h3 {
-        font-size: 30px;
+        font-size: 32px;
       }
     }
   }

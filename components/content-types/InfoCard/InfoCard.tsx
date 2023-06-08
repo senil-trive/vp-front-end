@@ -58,18 +58,19 @@ const InfoCard: React.FC<InfoCardType> = ({
             )}
           </CardHeader>
         )}
-        <div className="info-card-footer p-[20px] md:p-[32px]">
-          <div className="flex item-center">
-            <H2 style={{ color: "#fff", margin: "0px" }}>{title}</H2>
-            <span className="pl-3">
+        <div className="info-card-footer p-[20px] md:py-[32px] md:px-[24px]">
+          <div className="item-center">
+            <H2 style={{ color: "#fff", margin: "0px" }}>
+              {title}
               <Image
                 src={icon}
-                width={40}
-                height={40}
+                width={45}
+                height={45}
                 alt={"Heading icon"}
                 objectFit="contain"
+                className="pl-1 inline"
               />
-            </span>
+            </H2>
           </div>
           {/* <P > */}
           <div

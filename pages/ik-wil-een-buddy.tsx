@@ -1,26 +1,26 @@
 import { FaAppStoreIos, FaGooglePlay } from "react-icons/fa";
-import { H3, P, TitleWithHighlights } from "../../../components/typography";
+import { H3, P, TitleWithHighlights } from "../components/typography";
 
-import Button from "../../../components/buttons/Button";
-import CTAItem from "../../../components/content-types/CTAItem/CTAItem";
+import Button from "../components/buttons/Button";
+import CTAItem from "../components/content-types/CTAItem/CTAItem";
 import { Container } from "@mui/material";
-import ContentCarousel from "../../../components/carousels/ContentCarousel";
-import ENDPOINTS from "../../../constants/endpoints";
-import FAQList from "../../../components/content-types/FAQList/FAQList";
-import { Hero } from "../../../components/layout";
-import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
-import { TEMP_QUOTES } from "../../../constants/mockData";
-import TextItem from "../../../components/content-types/TextItem/TextItem";
-import parseImageURL from "../../../utils/parseImageURL";
+import ContentCarousel from "../components/carousels/ContentCarousel";
+import ENDPOINTS from "../constants/endpoints";
+import FAQList from "../components/content-types/FAQList/FAQList";
+import { Hero } from "../components/layout";
+import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
+import { TEMP_QUOTES } from "../constants/mockData";
+import TextItem from "../components/content-types/TextItem/TextItem";
+import parseImageURL from "../utils/parseImageURL";
 import { useTheme } from "styled-components";
 import {
   BuddymediaWrapper,
   ReflectiveCardWrapper,
-} from "../../../styles/kinderen/kletsmeet.styles";
-import InfoCard from "../../../components/content-types/InfoCard/InfoCard";
-import VideoItem from "../../../components/content-types/VideoItem/VideoItem";
-import { VideoWrapper } from "../../../styles/Vrjwilligerswerk/VrijwilligerWorden.styles";
-import CommonDetailCard from "../../../components/content-types/CommonDetailCard/CommonDetailCard";
+} from "../styles/kinderen/kletsmeet.styles";
+import InfoCard from "../components/content-types/InfoCard/InfoCard";
+import VideoItem from "../components/content-types/VideoItem/VideoItem";
+import { VideoWrapper } from "../styles/Vrjwilligerswerk/VrijwilligerWorden.styles";
+import CommonDetailCard from "../components/content-types/CommonDetailCard/CommonDetailCard";
 
 type BuddyPageProps = {
   pageData: any;
@@ -89,27 +89,33 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
             mobileImageHeight={572}
           >
             <div>
-              <div className="text-left max-w-2xl md:max-w-4xl mt-[-80px] md:mt-[0px] md:text-center">
+              <div className="text-left max-w-2xl md:max-w-4xl mt-[-80px] md:mt-[-120px] md:text-center">
                 <TitleWithHighlights
                   text={pageData?.page_title}
                   className="text-[#fff] text-[46px] font-[400] md:text-[64px]"
                 />
-                <P className="text-[#fff]">{pageData?.page_subtitle}</P>
+                <P className="text-[#fff] text-[20px] leading-[160%] md:text-[18px]">
+                  {pageData?.page_subtitle}
+                </P>
               </div>
-              <div className="hidden md:flex">
+              <div className="hidden md:flex md:mt-[32px]">
                 <Button
                   variant="success"
-                  className="mr-[31px] mb-[10px] bg-[transparent] text-[#fff] border-[#fff] hover:bg-[#fff] hover:text-[#3FC7B4]"
-                  href={"/kinderen/ik-wil-een-buddy"}
+                  className="mr-[31px] mb-[10px] text-[18px] font-[400] bg-[transparent] text-[#fff] border-[#fff] hover:bg-[#fff] hover:text-[#3FC7B4]"
+                  href={pageData?.cta_section_footer_ios_url}
+                  target="_blank"
                 >
-                  {pageData?.header_button_1_label}
+                  <FaAppStoreIos size={25} />
+                  App Store
                 </Button>
                 <Button
                   variant="success"
-                  className="bg-[transparent] text-[#fff] border-[#fff] hover:bg-[#fff] hover:text-[#3FC7B4]"
-                  href={"/vrijwilligerswerk/aanmelden"}
+                  className="bg-[transparent] text-[18px] font-[400] text-[#fff] border-[#fff] hover:bg-[#fff] hover:text-[#3FC7B4]"
+                  href={pageData?.cta_section_footer_android_url}
+                  target="_blank"
                 >
-                  {pageData?.header_button_2_label}
+                  <FaGooglePlay size={25} />
+                  Google Play
                 </Button>
               </div>
             </div>
@@ -135,7 +141,7 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                           <div className="flex justify-center  mt-[20px] md:mt-[auto]">
                             <Button
                               variant="secondary"
-                              className="w-[100%] bg-[#fff] text-[#FE517E] border-[#fff]"
+                              className="w-[100%] text-[18px] font-[400] bg-[#fff] text-[#FE517E] border-[#fff]"
                               // href="/vrijwilligerswerk/aanmelden"
                             >
                               bekijken
@@ -157,7 +163,7 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                           <div className="flex justify-center mt-[20px] md:mt-[auto]">
                             <Button
                               variant="secondary"
-                              className="w-[100%] bg-[#fff] text-[#006EF7] border-[#fff]"
+                              className="w-[100%] text-[18px] font-[400] bg-[#fff] text-[#006EF7] border-[#fff]"
                               // href="/vrijwilligerswerk/aanmelden"
                             >
                               bekijken
@@ -173,13 +179,14 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
           </BuddymediaWrapper>
           <ReflectiveCardWrapper className="mt-[40px] md:mt-[80px]">
             <Container>
-              <div className="flex flex-col md:items-center md:justify-center mb-6 md:mb-14">
+              <div className="flex flex-col text-center md:items-center md:justify-center mb-6 md:mb-14">
                 <TitleWithHighlights
                   text={"ben je al vrijwilliger en zoek je verdieping?"}
                   headerElement="h3"
                   color="black"
+                  className="text-[30px] md:text-[42px] font-[400]"
                 />
-                <P className="max-w-4xl">
+                <P className="max-w-4xl text-[16px] md:text-[18px]">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                   Ut enim ad minim veniam, quis nostrud exercitation ullamco
@@ -225,9 +232,10 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                   }
                   headerElement="h3"
                   color="black"
+                  className="text-[30px] md:text-[42px] font-[400]"
                 />
 
-                <P className="max-w-4xl">
+                <P className="max-w-4xl text-[16px] md:text-[18px]">
                   Deze brief is speciaal voor jou: voor kinderen waarvan de
                   ouders uit elkaar gaan of al zijn. Wist je dat 86.000 kinderen
                   per jaar horen dat hun ouders gaan scheiden? Dat is superveel,

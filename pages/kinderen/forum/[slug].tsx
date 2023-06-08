@@ -21,7 +21,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   try {
     // Get the posts
     const res = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=*.*&filter[slug][_eq]=${slug}`,
+      `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=categories.*.*,*&filter[slug][_eq]=${slug}`,
       {
         method: "GET",
         headers: {
@@ -31,7 +31,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     );
 
     const { data } = await res.json();
-
+    console.log(data);
     if (!data[0]) {
       return {
         redirect: "/forum",
@@ -78,8 +78,8 @@ export default function ForumDetail({ pageData, comments = [] }: Props) {
       <BreadCrumbs />
       <Container>
         <Grid container>
-          <Grid item xs={0} md={2} lg={2} />
-          <Grid item xs={12} md={8} lg={8}>
+          {/* <Grid item xs={0} md={2} lg={2} /> */}
+          <Grid item xs={12} md={10} className="mx-auto">
             <ForumPost
               gender={pageData.user_gender}
               age={pageData.user_age}
@@ -96,7 +96,7 @@ export default function ForumDetail({ pageData, comments = [] }: Props) {
               image={pageData.attachment_image}
             />
           </Grid>
-          <Grid item xs={0} md={2} lg={2} />
+          {/* <Grid item xs={0} md={2} lg={2} /> */}
         </Grid>
       </Container>
 

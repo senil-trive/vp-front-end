@@ -7,6 +7,9 @@ import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import { VolunteersFAQPageProps } from "../../../types/pageTypes";
 import parseImageURL from "../../../utils/parseImageURL";
 import { useState } from "react";
+import Button from "../../../components/buttons/Button";
+import { Container } from "@mui/material";
+import { ContainerWrapper } from "../../../styles/Vrjwilligerswerk/index.styles";
 
 const POST_PER_PAGE = 7;
 
@@ -48,8 +51,6 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
   const [totalCount, setTotalCount] = useState(totalFaqs);
   const [isLoading, setIsLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-
-  console.log(`faq data :::`, pageData.background_image);
   const showMoreButton =
     totalCount > items.length && totalCount > POST_PER_PAGE;
 
@@ -78,7 +79,7 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
   };
 
   return (
-    <div>
+    <ContainerWrapper className="voluntee">
       <PageWrapper
         seo={{
           title: pageData?.seo_title
@@ -94,8 +95,8 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
         }}
       >
         <main>
-          <Hero imageUrl={parseImageURL(pageData?.background_image)}>
-            <div className="flex flex-col md:items-center md:justify-center md:text-center max-w-2xl my-16">
+          <Hero imageUrl={parseImageURL(pageData?.background_image?.id, 1410)}>
+            <div className="flex flex-col max-w-2xl md:items-center md:justify-center md:text-center md:max-w-4xl my-16">
               <TitleWithHighlights
                 text={pageData?.page_title ?? ""}
                 textToHighlight="vrijwilligers"
@@ -104,20 +105,18 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
                   fontFamily: "Fjalla One",
                   fontStyle: `normal`,
                   fontWeight: `400`,
-                  lineHeight: `140%`,
                   color: `white`,
                 }}
-                className="text-[46px] md:text-[64px]"
+                className="text-[46px] md:leading-[140%] md:text-[64px]"
               />
               <P
                 style={{
                   fontStyle: `normal`,
                   fontWeight: `300`,
-                  fontSize: `18px`,
                   lineHeight: `160%`,
                   color: `white`,
                 }}
-                className="font-avenir"
+                className="font-avenir text-[20px] md:text-[18px] md:mt-[-10px]"
               >
                 {pageData?.page_subtitle}
               </P>
@@ -130,11 +129,19 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
               showLoadMore={showMoreButton}
               onLoadMore={changePage}
             />
+            <Container className="mb-[80px]">
+              <Button
+                variant="link"
+                style={{ border: "2px solid" }}
+                className="w-[100%] text-[18px] font-[400] border-[#3FC7B4] text-[#3FC7B4] hover:text-[#fff] hover:bg-[#3FC7B4]"
+              >
+                meer lezen
+              </Button>
+            </Container>
           </div>
-          <div></div>
         </main>
       </PageWrapper>
-    </div>
+    </ContainerWrapper>
   );
 };
 
