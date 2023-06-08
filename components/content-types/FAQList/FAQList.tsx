@@ -38,7 +38,11 @@ export default function FAQList({
         {!!title && (
           <Container maxWidth={containerWidth}>
             <div className="flex flex-col md:items-center md:justify-center mb-[20px]  md:mb-14">
-              <H3 variant="bold" color="black" className="faq-title">
+              <H3
+                variant="bold"
+                color="black"
+                className="faq-title font-[400] md:text-[42px]"
+              >
                 {title}
               </H3>
             </div>

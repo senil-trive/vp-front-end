@@ -98,28 +98,33 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
             mbgn={"/vrijwilligerswerkheadermobile.png"}
             mobileImageHeight={740}
           >
-            <div className="flex flex-col md:items-center md:justify-center md:text-center max-w-2xl md:max-w-3xl my-16">
+            <div className="flex flex-col max-w-3xl md:items-center md:justify-center md:text-center  md:max-w-5xl my-16">
               <TitleWithHighlights
                 highlightColor="info"
                 text={pageData?.page_title}
                 headerElement="h1"
                 color="primary"
-                className="text-[#fff]"
+                className="text-[#fff] font-[400] text-[46px] md:text-[64px]"
               />
-              <P color="white">{pageData?.page_subtitle}</P>
+              <P
+                color="white"
+                className="font-[300] leading-[160%] text-[20px] md:text-[18px]"
+              >
+                {pageData?.page_subtitle}
+              </P>
 
-              <div className="hidden gap-4 mt-14 w-[95%] sm:w-[90%] md:flex">
+              <div className="hidden gap-4 mt-14 w-[69%] md:flex">
                 <Button
                   variant="success"
                   href="/vrijwilligerswerk/aanmelden"
-                  className="px-[8px] bg-[transparent] border-[#fff] text-[#fff] hover:bg-[#06D6A0] hover:border-none text-[14px] sm:w-[90%] sm:text-[16px] sm:px-[16px]"
+                  className="px-[5px]  bg-[transparent] border-[#fff] text-[#fff] hover:bg-[#06D6A0] hover:border-none text-[18px] font-[400]"
                 >
                   {pageData?.signup_button_label}
                 </Button>
                 <Button
                   variant="infoReversed"
                   href="/vrijwilligerswerk/trainingen"
-                  className="px-[8px] text-[14px] bg-[transparent] border-[#fff] text-[#fff] hover:bg-[#FF971D] hover:border-none sm:w-[90%] sm:text-[16px] sm:px-[16px]"
+                  className="px-[5px] text-[18px] font-[400] bg-[transparent] border-[#fff] text-[#fff] hover:bg-[#06D6A0] hover:border-none"
                 >
                   {pageData?.about_button_label}
                 </Button>
@@ -141,7 +146,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
                   <div className="flex justify-center  mt-[20px] md:mt-[auto]">
                     <Button
                       variant="secondary"
-                      className="w-[100%] bg-[#fff] text-[#FE517E] border-[#fff]"
+                      className="w-[100%] bg-[#fff] text-[18px] font-[400] text-[#FE517E] border-[#fff] mt-[20px]"
                       href={pageData?.cta_section_block_1_button_url}
                     >
                       {pageData?.cta_section_block_1_button_label}
@@ -159,7 +164,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
                   <div className="flex justify-center mt-[20px] md:mt-[auto]">
                     <Button
                       variant="secondary"
-                      className="w-[100%] bg-[#fff] text-[#006EF7] border-[#fff]"
+                      className="w-[100%] bg-[#fff] text-[18px] font-[400] text-[#006EF7] border-[#fff]"
                       href={pageData?.cta_section_block_2_button_url}
                     >
                       {pageData?.cta_section_block_2_button_label}
@@ -172,13 +177,16 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
 
           <PeopleWrapper>
             <Container>
-              <div className="flex flex-col items-center justify-center mb-6 md:mb-14">
+              <div className="flex flex-col text-center items-center justify-center mb-6 md:mb-14">
                 <TitleWithHighlights
                   text={pageData?.usp_section_title}
                   headerElement="h3"
                   color="black"
+                  className="text-[42px] font-[400]"
                 />
-                <P className="max-w-4xl">{pageData?.usp_section_description}</P>
+                <P className="max-w-4xl text-[300]">
+                  {pageData?.usp_section_description}
+                </P>
               </div>
             </Container>
             <Container>
@@ -211,6 +219,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
                     text={pageData?.volunteer_week_title}
                     headerElement="h3"
                     color="black"
+                    className="text-[42px] font-[400]"
                   />
                 </div>
               </Container>
@@ -297,9 +306,12 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
                   text={pageData?.video_section_title}
                   headerElement="h3"
                   color="black"
+                  className="text-[42px] font-[400]"
                 />
 
-                <P className="max-w-4xl">{pageData?.video_section_subtitle}</P>
+                <P className="max-w-4xl font-[300]">
+                  {pageData?.video_section_subtitle}
+                </P>
               </div>
             </Container>
             <Container>
@@ -317,7 +329,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
                           : "/storyposter3.png"
                       }
                       src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                      subtitle={storyvideo?.description}
+                      subtitle={storyvideo?.subtitle}
                     />
                   )
                 )}
@@ -339,7 +351,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
                 variant="link"
                 style={{ color: colors.info.normal }}
                 href="/vrijwilligerswerk/faq"
-                className="w-[100%] bg-[#3FC7B4] text-[#fff] no-underline hover:underline"
+                className="w-[100%] text-[18px] font-[400] bg-[#3FC7B4] text-[#fff] no-underline hover:underline"
               >
                 Meer lezen
               </Button>

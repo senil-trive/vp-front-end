@@ -89,10 +89,10 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
             mobileImageHeight={572}
           >
             <div>
-              <div className="text-left max-w-2xl mt-[-80px] md:mt-[0px] md:text-center">
+              <div className="text-left max-w-2xl md:max-w-4xl mt-[-80px] md:mt-[0px] md:text-center">
                 <TitleWithHighlights
                   text={pageData?.page_title}
-                  className="text-[#fff]"
+                  className="text-[#fff] text-[46px] font-[400] md:text-[64px]"
                 />
                 <P className="text-[#fff]">{pageData?.page_subtitle}</P>
               </div>
