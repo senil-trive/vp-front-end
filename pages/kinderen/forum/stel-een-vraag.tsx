@@ -125,7 +125,8 @@ export default function Vraag({ categories }: ForumQuestionPageProps) {
     >
       <Hero
         center
-        imageUrl={parseImageURL(`09a49205-a072-4c2d-9ac1-641c2a1985a9`)}
+        imageUrl={parseImageURL(undefined, 2040)}
+        //imageUrl="/vrijwilligerswerkheader.png"
         style={{
           minHeight: 649,
           position: "relative",

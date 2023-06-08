@@ -27,22 +27,6 @@ const VolunteerWeek: React.FC<IProps> = ({
   const [edit, setEdit] = useState(false);
   const [activeId, setActiveId] = useState<string | null>(null);
   const boxRef = useRef<HTMLDivElement>(null);
-
-  function localStorageCheck() {
-    // const week1 = localStorage.getItem("week1");
-    // const week2 = localStorage.getItem("week2");
-    // const week3 = localStorage.getItem("week3");
-    // const week4 = localStorage.getItem("week4");
-    // const week5 = localStorage.getItem("week5");
-    // setVolunteerWeek({
-    //   ...volunteerweek,
-    //   week1: week1 === null ? null : JSON.parse(week1),
-    //   week2: week2 === null ? null : JSON.parse(week2),
-    //   week3: week3 === null ? null : JSON.parse(week3),
-    //   week4: week4 === null ? null : JSON.parse(week4),
-    //   week5: week5 === null ? null : JSON.parse(week5),
-    // });
-  }
   useEffect(() => {
     async function handleClickOutside(event: MouseEvent) {
       if (boxRef.current && !boxRef.current.contains(event.target as Node)) {
@@ -88,12 +72,6 @@ const VolunteerWeek: React.FC<IProps> = ({
     if (currentActive !== id) {
       setEdit(false);
       setActiveId(null);
-      // await fetch(
-      //   `${ENDPOINTS.COLLECTIONS}/volunteer_week_work/${currentActive}`,
-      //   {
-      //     method: "PATCH",
-      //   }
-      // );
     }
     setEdit(true);
     setActiveId(id);
@@ -141,7 +119,9 @@ const VolunteerWeek: React.FC<IProps> = ({
       <div className="circle hidden md:block"></div>
       <div>
         <div className="flex items-center">
-          <h3 className="week-title text-[24px] pr-[10px]">{title} </h3>
+          <h3 className="week-title text-[26px] font-[400] pr-[10px]">
+            {title}{" "}
+          </h3>
 
           <Image
             src="/calendar.png"
@@ -160,10 +140,12 @@ const VolunteerWeek: React.FC<IProps> = ({
                       onChange={(e) => handleChange(e, index, id)}
                       defaultValue={volunteer?.work}
                       name={`${name}${index}`}
-                      className="input-box"
+                      className="input-box text-[18px] font-[400]"
                     />
                   ) : (
-                    <div>{volunteer?.work}</div>
+                    <div className="text-[18px] font-[400]">
+                      {volunteer?.work}
+                    </div>
                   )}
                 </li>
               ))}

@@ -15,9 +15,11 @@ export const PeopleWrapper = styled.section`
   .card-container .title,
   .description {
     color: #fff;
+    font-weight: 400;
   }
   .card-container .title {
-    font-size: 25px;
+    font-size: 26px;
+    font-weight: 400;
   }
   @media (max-width: 991px) {
     .people-container .card-container {

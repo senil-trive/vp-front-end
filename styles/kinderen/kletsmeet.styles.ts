@@ -13,9 +13,11 @@ export const ReflectiveCardWrapper = styled.section`
         h3,
         p {
           color: #fff;
+          font-size: 18px;
         }
         h3 {
           font-size: 26px;
+          font-weight: 400;
         }
       }
     }
@@ -52,8 +54,10 @@ export const ReflectiveCardWrapper = styled.section`
         margin-right: 0;
         margin-bottom: 20px;
         width: 100%;
+        p {
+          font-size: 16px;
+        }
         h3 {
-          font-weight: 400;
           font-size: 22px !important;
           line-height: 120%;
         }

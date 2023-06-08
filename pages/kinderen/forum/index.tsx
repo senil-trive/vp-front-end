@@ -139,11 +139,7 @@ export default function Forum({
     >
       <Hero
         center
-        imageUrl={
-          pageData?.hero_image?.id
-            ? parseImageURL(pageData?.hero_image?.id)
-            : "/vrijwilligerswerkheader.png"
-        }
+        imageUrl={parseImageURL(pageData?.hero_image?.id, 1400)}
         style={{
           minHeight: 649,
           position: "relative",
