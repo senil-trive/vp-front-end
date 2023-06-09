@@ -157,3 +157,17 @@ p {
 .custom_blogs {
   width: 32% !important;
 }
+
+
+/* ========================08-june-23========================= */
+.blogs-indivi-bg-color article{
+  background-color: #3FC7B4;
+}
+
+.blogs-indivi-bg-color article footer a{
+  color: #3FC7B4;
+}
+
+.blogs-indivi-bg-color article:hover footer a{
+  background: #3FC7B4;
+}

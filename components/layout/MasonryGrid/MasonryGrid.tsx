@@ -223,14 +223,14 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
 
                 return (
                   <motion.div
-                    className={`grid-item custom_blogs grid-item-w-${item.width}`}
+                    className={`grid-item custom_blogs grid-item-w-${item.width} ${ blogContent.image?'blogs-indivi-bg-color':''} `}
                     key={index}
                     variants={cardVariants}
                     initial="offscreen"
                     whileInView="onscreen"
                     viewport={{ once: true, amount: 0.1 }}
                   >
-                    <BlogItem
+                  {<BlogItem
                       mediaSrc={
                         blogContent.image?.id
                           ? parseImageURL(blogContent.image.id)
@@ -244,7 +244,7 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
                       postDate={new Date(blogContent.date_created)}
                       category={blogContent.categories[0]?.categories_id?.name}
                       title={blogContent.title}
-                    />
+                    />}
                   </motion.div>
                 );
               case "instagram":
