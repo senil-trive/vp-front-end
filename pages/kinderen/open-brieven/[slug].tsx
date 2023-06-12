@@ -5,7 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import BreadCrumbs from "../../../components/layout/BreadCrumbs/BreadCrumbs";
 import BriefItem from "../../../components/content-types/BriefItem/BriefItem";
 import Button from "../../../components/buttons/Button";
-import { Container } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import ENDPOINTS from "../../../constants/endpoints";
 import { FiCheck } from "react-icons/fi";
 import { GetServerSidePropsContext } from "next";
@@ -18,6 +18,7 @@ import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
 import parseImageURL from "../../../utils/parseImageURL";
 import { postLetterSubscription } from "../../../utils/api";
 import { useTheme } from "styled-components";
+import LetterForm from "../../../components/form/LetterForm/LetterForm";
 
 type Props = {
   pageData: Letter;
@@ -29,15 +30,16 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   try {
     // Get the letters
+    // ${ENDPOINTS.COLLECTIONS}/open_letters?filter[slug][_eq]=${slug}&fields=*.*&
     const res = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/open_letters?filter[slug][_eq]=${slug}&fields=*.*&`,
+      `${ENDPOINTS.COLLECTIONS}/open_letters?filter[slug][_eq]=${slug}&fields=*&`,
       {
         method: "GET",
       }
     );
-
+    // ${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*.*&filter[status][_eq]=published
     const lettersReq = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*.*&filter[status][_eq]=published`,
+      `${ENDPOINTS.COLLECTIONS}/open_letters?fields=letter_submissions.*,*&filter[status][_eq]=published`,
       {
         method: "GET",
         headers: {
@@ -48,7 +50,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
     const { data } = await res.json();
     const { data: letters } = await lettersReq.json();
-
     if (!data?.[0]) {
       return {
         notFound: true,
@@ -60,6 +61,8 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       .sort(() => 0.5 - Math.random())
       .slice(0, 3);
 
+    console.log(data, "pageleters");
+    console.log(randomizedLetters, "randomleters");
     return {
       props: {
         pageData: data[0] ?? null,
@@ -68,9 +71,9 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     };
   } catch (error) {
     return {
-      redirect: {
-        destination: "/500",
-      },
+      // redirect: {
+      //   destination: "/500",
+      // },
     };
   }
 };
@@ -95,7 +98,6 @@ export default function LetterDetail({ pageData, relatedLetters }: Props) {
 
   const submitForm = async (data: any) => {
     setIsLoading(true);
-
     if (pageData?.requires_signup) {
       try {
         const body = {
@@ -153,21 +155,41 @@ export default function LetterDetail({ pageData, relatedLetters }: Props) {
       <BreadCrumbs />
 
       <main style={{ marginBottom: "80px" }}>
-        <Hero>
-          <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16">
+        <Hero
+          center
+          imageUrl={parseImageURL(pageData?.image?.id, 1200)}
+          style={{
+            minHeight: 555,
+            position: "relative",
+          }}
+        >
+          <div className="flex flex-col items-center justify-center text-center max-w-2xl md:max-w-4xl my-16">
             <TitleWithHighlights
-              highlightColor="info"
+              //highlightColor="info"
               text={pageData?.detail_title}
-              textToHighlight={pageData?.detail_title_highlighted}
+              // textToHighlight={pageData?.detail_title_highlighted}
               headerElement="h1"
-              color="primary"
+              color="white"
             />
-            <div className="mb-8">
+            <div className="mb-8 text-[#fff] text-[20px] font-[300] md:text-[18px]">
               {pageData?.content && parseHTMLtoReact(pageData?.content)}
             </div>
           </div>
         </Hero>
-
+        <section className="mt-[-120px]">
+          <Container className="flex max-w-[1385px]">
+            <BriefItem
+              key={`a23y2u0`}
+              title={""}
+              content={""}
+              imgSrc={parseImageURL(`422e656a-7c18-41a3-b702-b07b17b00736`)}
+              fileSrc={`/kinderen/open-brieven/${undefined}`}
+              bg={`#FE517E`}
+              className="flex-1"
+            />
+            <LetterForm className="flex-1 p-0 py-10 md:px-10 md:py-0" />
+          </Container>
+        </section>
         <section>
           {pageData?.requires_signup ? (
             <Container>

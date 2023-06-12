@@ -164,7 +164,7 @@ const CardWrapper = ({
       return <StyledBlog className={className}>{children}</StyledBlog>;
 
     case "brief":
-      return <StyledLetter>{children}</StyledLetter>;
+      return <StyledLetter className={className}>{children}</StyledLetter>;
     case "story":
       return <StyledStory>{children}</StyledStory>;
     case "primary":
@@ -172,7 +172,7 @@ const CardWrapper = ({
     case "info":
       return <StyledInfo className={className}>{children}</StyledInfo>;
     default:
-      return <StyledPost>{children}</StyledPost>;
+      return <StyledPost className={className}>{children}</StyledPost>;
   }
 };
 

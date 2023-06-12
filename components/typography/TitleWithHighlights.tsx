@@ -1,5 +1,4 @@
 import { H1, H2, H3, H4, H5, H6 } from ".";
-
 import { ColorType } from "../../types/colorTypes";
 import React from "react";
 import parseHTMLtoReact from "../../utils/parseHTMLtoReact";

@@ -26,7 +26,7 @@ const InfoCard: React.FC<InfoCardType> = ({
   category,
 }) => {
   return (
-    <InfoCardWrapper>
+    <InfoCardWrapper className={variant}>
       <Card variant={variant} className={`${className}`}>
         {imageUrl && (
           <CardHeader>

@@ -76,7 +76,7 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
           <TrainigenHeroWrapper>
             <Hero
               center
-              imageUrl={"/trainigenhead.png"}
+              imageUrl={"/traininghead.png"}
               style={{
                 minHeight: 555,
                 position: "relative",
@@ -192,7 +192,6 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
                     </Button>
                   </div>
                 </InfoCard>
-
                 <InfoCard
                   variant="primary"
                   title={pageData?.cta_2_title}

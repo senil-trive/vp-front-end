@@ -100,7 +100,6 @@ export default function Header() {
   useEffect(() => {
     const getData = async () => {
       const data = await getMenuItems();
-      console.log(data, "menus");
       if (data) {
         setMenuItems(data);
       }
