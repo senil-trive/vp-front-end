@@ -23,20 +23,25 @@ const Wrapper: any = styled.div`
   max-width: 1440px;
   border-radius: 8px;
   top: calc(100% + 25px);
+  width: ${(props: any) => (props.selected === "Vrijwilligers" ? "40%" : "")};
   right: ${(props: any) =>
     props.selected === "Kinderen"
-      ? "calc(100% - 370px)"
+      ? "calc(100% - 408px)"
       : props.selected === "Vrijwilligers"
-      ? "calc(100% - 532px)"
+      ? "calc(100% - 585px)"
       : ""};
 
   &:before {
+    left: ${(props: any) =>
+      props.selected === "Vrijwilligers"
+        ? "calc(100% - 56px)"
+        : "calc(100% - 60px)"};
     content: "";
     position: absolute;
     top: -10px;
-    left: calc(100% - 50px);
+
     border-style: solid;
-    border-width: 10px 10px 10px 10px;
+    border-width: 20px 20px 20px 20px;
     border-color: #ebfffc;
     border-radius: 4px 0;
     transform: rotate(45deg);
@@ -44,7 +49,7 @@ const Wrapper: any = styled.div`
 
   section {
     /* flex: 1; */
-    padding: 0 22px;
+    padding: 0 30px;
 
     p {
       margin-bottom: 16px;
@@ -66,9 +71,9 @@ const Wrapper: any = styled.div`
           padding-bottom: 15px;
         }
 
-        width: 200px;
+        width: 220px;
         a {
-          font-family: "Avenir";
+          // font-family: "Avenir";
           font-weight: 300;
           font-size: 18px;
           line-height: 160%;
@@ -80,7 +85,7 @@ const Wrapper: any = styled.div`
 
           &:hover {
             background-color: ${({ theme }) => theme.colors.primary.normal};
-            padding: 10px;
+            padding: 12px;
             margin: -12px;
             border-radius: 8px;
             color: white;
@@ -89,6 +94,7 @@ const Wrapper: any = styled.div`
             }
           }
           &.active {
+            color: ${({ theme }) => theme.colors.white.normal};
             background-color: ${({ theme }) => theme.colors.primary.normal};
             padding: 12px;
             margin: -12px;
@@ -110,10 +116,12 @@ const Wrapper: any = styled.div`
 
 export default function HeaderSubmenu({ categories, selected }: Props) {
   const router = useRouter();
+
   // const [index, setIndex] = useState<string>(0);
+
   return (
     <Container maxWidth="xl">
-      <Wrapper selected={selected}>
+      <Wrapper selected={selected} className="sub-menu-container-mn">
         {categories.map((category, index) => {
           if (category.status === "published") {
             return (
@@ -134,7 +142,7 @@ export default function HeaderSubmenu({ categories, selected }: Props) {
                   {category.children
                     .filter((item) => item.status === "published")
                     .map((item) => (
-                      <li key={item.link}>
+                      <li key={item.link} style={{ paddingBottom: "20px" }}>
                         <Link
                           className={
                             router.asPath === item.link ? "active" : ""

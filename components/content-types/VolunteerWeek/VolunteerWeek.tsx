@@ -140,7 +140,6 @@ const VolunteerWeek: React.FC<IProps> = ({
                       onChange={(e) => handleChange(e, index, id)}
                       defaultValue={volunteer?.work}
                       name={`${name}${index}`}
-                      className="input-box text-[18px] font-[400]"
                     />
                   ) : (
                     <div className="text-[18px] font-[400]">

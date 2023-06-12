@@ -44,6 +44,10 @@ h6,
   text-transform: uppercase;
 }
 
+input {
+  font-family: "Avenir Next Cyr", sans-serif;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -124,7 +128,7 @@ p {
   color: #fff;
 }
 .author-date {
-  margin-top: 20px;
+  margin-top: 32px;
 }
 .open-brieven-font article footer {
   background: rgb(63, 199, 180) !important;
@@ -145,12 +149,51 @@ p {
   color: #fff !important;
 }
 
-.desktop-menu.new-menu .MuiContainer-root > div:before {
-  left: calc(100% - 100px);
-}
 .with-divider ul li a {
-  font-size: 18px !important;
+  font-size: 15px !important;
 }
 .without-divider ul li a {
   font-size: 15px !important;
+}
+.custom_blogs {
+  width: 31.5% !important;
+}
+
+/* ========================for desgning========================= */
+.blogs-indivi-bg-color article {
+  background-color: #3fc7b4;
+}
+
+.blogs-indivi-bg-color article footer a {
+  color: #3fc7b4;
+}
+
+.blogs-indivi-bg-color article:hover footer a {
+  background: #3fc7b4;
+}
+
+.authorin-blog-txt {
+  font-weight: 500;
+  font-size: 18px !important;
+  font-family: "Avenir Next Cyr", sans-serif !important;
+}
+
+.text-blogs {
+  font-size: 32px !important;
+  font-weight: 400 !important;
+}
+
+.header-banner-title div {
+  font-family: "Fjalla One", sans-serif !important;
+  font-size: 80px;
+  line-height: 94.4px;
+}
+
+.header-banner-text div {
+  font-size: 28px;
+}
+
+.header-banner-text span {
+  font-size: 32px;
+  padding: 5px 15px !important;
 }

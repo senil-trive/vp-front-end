@@ -30,7 +30,7 @@ const StyledNav = styled.nav`
       &.selected {
         font-weight: 700;
         p {
-          color: #150f2f;
+          color: black;
         }
       }
     }
@@ -54,7 +54,7 @@ export default function HeaderNav({
             className={selected?.id === menu.id ? "selected" : ""}
             onClick={() => onChange(menu)}
           >
-            <P className="mr-2">{menu.name}</P>{" "}
+            <P className="mr-5">{menu.name}</P>{" "}
             {selected?.id === menu.id ? <ChevronUp /> : <ChevronDown />}
           </li>
         ))}

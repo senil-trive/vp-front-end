@@ -17,15 +17,15 @@ export const MasonryGridWrapper = styled.div`
       flex-wrap: wrap;
 
       .grid-item {
-        max-height: 624px;
-        margin: 11px auto;
+        max-height: 630px;
+        margin: 16px auto;
 
         > div,
         > article,
         > figure {
           min-height: 100%;
-          max-height: 624px;
-          height: 624px;
+          max-height: 630px;
+          height: 630px;
           width: 100%;
         }
 

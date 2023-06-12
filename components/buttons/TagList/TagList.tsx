@@ -146,11 +146,14 @@ export default function TagList({
   return (
     <Container maxWidth="xl" style={{ margin: "21px auto" }}>
       <Wrapper>
-        <div style={{ display: "block", padding: "0 20px" }} className="prefix">
+        <div
+          style={{ display: "block", padding: "0px 5px 0 20px" }}
+          className="prefix"
+        >
           {prefix}
         </div>
         <div
-          style={{ width: 94, padding: "0 30px" }}
+          style={{ width: 81, padding: "0px 30px 0 0px" }}
           className={"left-arrow"}
           onClick={() => {
             handleHorizantalScroll({
@@ -189,7 +192,7 @@ export default function TagList({
           </div>
         </div>
         <div
-          style={{ width: 94, padding: "0 30px" }}
+          style={{ width: 77, padding: "0px 30px 0 4px" }}
           className="right-arrow active"
           onClick={() => {
             handleHorizantalScroll({
