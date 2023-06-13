@@ -12,6 +12,8 @@ import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import { getLetters } from "../../../utils/api";
 import parseImageURL from "../../../utils/parseImageURL";
 import { FaChevronDown } from "react-icons/fa";
+import InfoCard from "../../../components/content-types/InfoCard/InfoCard";
+import Button from "../../../components/buttons/Button";
 
 interface LettersOverviewPageProps {
   pageData: any;
@@ -19,9 +21,10 @@ interface LettersOverviewPageProps {
 }
 
 export const getServerSideProps = async () => {
+  // ${ENDPOINTS.COLLECTIONS}/letters_overview_page?fields=*.*.*
   try {
     const pageReq = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/letters_overview_page?fields=*.*.*`,
+      `${ENDPOINTS.COLLECTIONS}/letters_overview_page?fields=highlighted_letter.*,*`,
       {
         method: "GET",
         headers: {
@@ -37,7 +40,6 @@ export const getServerSideProps = async () => {
     });
 
     const lettersRes = await lettersReq.json();
-
     return {
       props: {
         pageData: pageRes.data,
@@ -78,15 +80,16 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
         <main>
           <Hero
             center
-            imageUrl={parseImageURL(`84086671-92b0-463f-bef1-1ea98a9b6c34`)}
+            imageUrl={parseImageURL(pageData.hero_image?.id, 1200)}
             style={{
-              minHeight: 649,
+              minHeight: 497,
               position: "relative",
             }}
+            mobileImageHeight={572}
           >
-            <div className="flex flex-col items-center justify-center text-center max-w-2xl  mb-0">
+            <div className="flex flex-col items-center justify-center text-center max-w-4xl  mb-0 mt-[-80px] md:mt-[-40px]">
               <TitleWithHighlights
-                highlightColor="info"
+                //highlightColor="info"
                 text={pageData?.page_title}
                 // textToHighlight={pageData?.page_title_highlighted}
                 headerElement="h1"
@@ -94,10 +97,9 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                 style={{
                   fontFamily: "Fjalla One",
                   fontStyle: `normal`,
-                  fontWeight: `400`,
-                  fontSize: `64px`,
                   lineHeight: `140%`,
                 }}
+                className="text-[#fff] text-[46px] font-[400] md:text-[64px]"
               />
               <P
                 style={{
@@ -114,70 +116,80 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
               </P>
             </div>
           </Hero>
-
-          {/* <section className="my-20">
-            <Container>
-              <div
-                style={{
-                  background:
-                    "linear-gradient(180deg, rgba(0, 110, 247, 0.6) 0%, #006EF7 100%)",
-                }}
-                className="p-20 rounded-lg"
-              >
-                <H3 color="white" variant="bold">
-                  {pageData?.intro_title}
-                </H3>
-                <P color="white">{pageData?.intro_description}</P>
-              </div>
-            </Container>
-          </section> */}
-          <section className="mb-20 -translate-y-24">
+          <section className="mb-20 mt-[-120px] relative">
             <Container maxWidth={`xl`}>
-              <Grid spacing={`32px`} container>
-                <Grid item xs={12} md={6} lg={6}>
-                  {pageData?.intro_title && (
-                    <BriefItem
-                      key={`a23y2u0`}
-                      title={pageData?.intro_title}
-                      content={pageData?.intro_description}
-                      imgSrc={parseImageURL(
-                        `422e656a-7c18-41a3-b702-b07b17b00736`
-                      )}
-                      fileSrc={`/kinderen/open-brieven/${pageData?.highlighted_letter?.slug}`}
-                      bg={`#FE517E`}
-                    />
-                  )}
-                </Grid>
-                <Grid item xs={12} md={6} lg={6}>
-                  {pageData?.highlighted_letter && (
-                    <BriefItem
-                      key={`a23y2u0`}
-                      title={pageData?.highlighted_letter?.title}
-                      content={pageData?.highlighted_letter?.description}
-                      imgSrc={parseImageURL(
-                        pageData?.highlighted_letter?.image?.id
-                      )}
-                      fileSrc={`/kinderen/open-brieven/${pageData?.highlighted_letter?.slug}`}
-                      bg={`#006EF7`}
-                    />
-                  )}
-                </Grid>
-              </Grid>
+              <div className="block relative mt-[-250px] md:flex gap-10 md:mt-[-80px]">
+                {pageData?.intro_title && (
+                  <InfoCard
+                    variant="blog"
+                    imageUrl="/trainingfooterhead.png"
+                    title={pageData?.intro_title}
+                    description={pageData?.intro_description}
+                    icon="/notewrite.png"
+                    category="Thema"
+                    className="small-fonts text-[#fff] h-[100%] flex flex-col mb-[40px] md:mb-[0]"
+                  >
+                    <div className="flex justify-center  mt-[20px] md:mt-[auto]">
+                      <Button
+                        variant="secondary"
+                        className="w-[100%] text-[18px] font-[400] bg-[#fff] text-[#FE517E] border-[#fff] hover:bg-[#FE517E]"
+                        href={`/kinderen/open-brieven/${pageData?.highlighted_letter?.slug}`}
+                      >
+                        Download brief
+                      </Button>
+                    </div>
+                  </InfoCard>
+                )}
+
+                {pageData?.highlighted_letter && (
+                  // <BriefItem
+                  //   key={`a23y2u0`}
+                  //   title={pageData?.highlighted_letter?.title}
+                  //   content={pageData?.highlighted_letter?.description}
+                  //   imgSrc={parseImageURL(
+                  //     pageData?.highlighted_letter?.image?.id
+                  //   )}
+                  //   fileSrc={`/kinderen/open-brieven/${pageData?.highlighted_letter?.slug}`}
+                  //   bg={`#006EF7`}
+                  // />
+                  <InfoCard
+                    variant="primary"
+                    imageUrl={parseImageURL(
+                      pageData?.highlighted_letter?.image?.id
+                    )}
+                    title={pageData?.highlighted_letter?.title}
+                    description={pageData?.highlighted_letter?.description}
+                    icon={"/notewrite.png"}
+                    category="Thema"
+                    className="small-fonts hover:bg-[#fff] text-[#fff] h-[100%] flex flex-col"
+                  >
+                    <div className="flex justify-center mt-[20px] md:mt-[auto]">
+                      <Button
+                        variant="secondary"
+                        className="w-[100%] text-[18px] font-[400] bg-[#fff] text-[#006EF7] border-[#fff] hover:bg-[#006EF7]"
+                        href={`/kinderen/open-brieven/${pageData?.highlighted_letter?.slug}`}
+                      >
+                        Download brief
+                      </Button>
+                    </div>
+                  </InfoCard>
+                )}
+              </div>
             </Container>
           </section>
           <section>
             <Container>
-              <div className="flex flex-col items-center justify-center my-[100px]">
+              <div className="flex flex-col items-center justify-center my-[50px] md:my-[100px]">
                 <H4
                   style={{
                     margin: 0,
                     fontFamily: "Fjalla One",
                     fontStyle: `normal`,
                     fontWeight: `400`,
-                    fontSize: `18px`,
                     lineHeight: `150%`,
                     textAlign: `center`,
                   }}
+                  className="text-[16px] md:text-[18px]"
                 >
                   Meer open brieven, bekijk <br /> ze allemaal!
                 </H4>

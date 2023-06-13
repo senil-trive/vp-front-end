@@ -19,6 +19,7 @@ type Props = {
   content: string;
   bg?: string;
   imgHeight?: number;
+  className?: string;
 };
 
 export default function BriefItem({
@@ -26,6 +27,7 @@ export default function BriefItem({
   fileSrc,
   title,
   titleHighlighted,
+  className,
   category,
   content,
   imgHeight = 180,
@@ -33,7 +35,7 @@ export default function BriefItem({
 }: Props) {
   const [hovering, setHovering] = useState<boolean>(false);
   return (
-    <Card variant="brief">
+    <Card variant="brief" className={className}>
       <CardHeader style={{ maxHeight: imgHeight }}>
         <>
           <Image
@@ -69,10 +71,8 @@ export default function BriefItem({
             color="white"
             highlightColor="tertiary"
             text={title + " ✍🏽"}
-            // textToHighlight={titleHighlighted ?? "    "}
-
             headerElement="h3"
-            className="transition group-hover:text-black"
+            className="transition group-hover:text-black text-[30px] md:text-[32px]"
             style={{ fontWeight: "400" }}
           />
 

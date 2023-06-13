@@ -31,19 +31,19 @@ export const getServerSideProps = async () => {
       lettersRes,
       videosRes,
     } = await getFeed({ postPerPage: POST_PER_PAGE, meta: "filter_count" });
-    console.log(
-      // blogsRes,
-      // "blog",
-      // instagramRes,
-      // "insta",
-      // tiktokRes,
-      // "tiktok",
-      forumRes,
-      "forum"
-      // lettersRes,
-      // "latest",
-      // videosRes
-    );
+    // console.log(
+    //   // blogsRes,
+    //   // "blog",
+    //   // instagramRes,
+    //   // "insta",
+    //   // tiktokRes,
+    //   // "tiktok",
+    //   forumRes,
+    //   "forum"
+    //   // lettersRes,
+    //   // "latest",
+    //   // videosRes
+    // );
     return {
       props: {
         pageData: pageRes.data || null,

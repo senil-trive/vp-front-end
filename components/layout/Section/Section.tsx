@@ -36,7 +36,7 @@ export default function Section({
       className={className}
       {...rest}
     >
-      <div>{children}</div>
+      <div className="h-[100%]">{children}</div>
     </Wrapper>
   );
 }
