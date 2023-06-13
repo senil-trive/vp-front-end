@@ -11,6 +11,7 @@ export type Props = {
 
   /** Wether the  dropdown field has any error */
   hasError?: boolean;
+  setCheck: (param: boolean) => void;
 };
 
 const Wrapper = styled.div<{ hasError: boolean }>`
@@ -54,13 +55,14 @@ export default function Checkbox({
   hasError = false,
   label,
   checked = false,
+  setCheck,
 }: Props) {
   const [isChecked, setChecked] = useState(checked);
 
   const handleClick = () => {
+    setCheck(!isChecked);
     setChecked((val) => !val);
   };
-
   return (
     <Wrapper hasError={hasError} onClick={handleClick}>
       <button className={isChecked ? "checked" : ""}>

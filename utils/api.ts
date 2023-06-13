@@ -87,9 +87,11 @@ export const postForumWithComments = async (data: any) => {
  * @param data
  */
 export const postComment = async (
-  type: "forum" | "blog",
+  type: "forum" | "blog" | "open_letter",
   { post_id, ...rest }: any
 ) => {
+  console.log(post_id);
+  console.log(type);
   const res = await fetch(`${ENDPOINTS.COLLECTIONS}/comments`, {
     method: "POST",
     headers: {
@@ -97,8 +99,7 @@ export const postComment = async (
     },
     body: JSON.stringify({
       ...rest,
-
-      [`${type}_post`]: { id: post_id },
+      [`${type.includes("letter") ? type : `${type}_post`}`]: { id: post_id },
       status: "draft",
     }),
   });
@@ -110,10 +111,17 @@ export const postComment = async (
  * @param post_id
  * @returns
  */
-export const getComments = async (type: "forum" | "blog", post_id: string) => {
+export const getComments = async (
+  type: "forum" | "blog" | "open_letter",
+  post_id: string
+) => {
   //`${ENDPOINTS.COLLECTIONS}/comments?fields=*.*.*&filter[status][_eq]=published&filter[${type}_post][_eq]=${post_id}`
   return await fetch(
-    `${ENDPOINTS.COLLECTIONS}/comments?fields=*&filter[status][_eq]=published&filter[${type}_post][_eq]=${post_id}`,
+    `${
+      ENDPOINTS.COLLECTIONS
+    }/comments?fields=*&filter[status][_eq]=published&filter[${
+      type.includes("letter") ? type : `${type}_post`
+    }][_eq]=${post_id}`,
     {
       method: "GET",
       headers: {

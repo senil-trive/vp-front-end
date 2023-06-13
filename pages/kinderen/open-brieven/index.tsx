@@ -40,9 +40,6 @@ export const getServerSideProps = async () => {
     });
 
     const lettersRes = await lettersReq.json();
-    console.log(pageRes, "pageres");
-
-    // console.log(lettersRes, "lettersres");
     return {
       props: {
         pageData: pageRes.data,
@@ -130,7 +127,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                     description={pageData?.intro_description}
                     icon="/notewrite.png"
                     category="Thema"
-                    className=" text-[#fff] h-[100%] flex flex-col mb-[40px] md:mb-[0]"
+                    className="small-fonts text-[#fff] h-[100%] flex flex-col mb-[40px] md:mb-[0]"
                   >
                     <div className="flex justify-center  mt-[20px] md:mt-[auto]">
                       <Button
@@ -164,7 +161,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                     description={pageData?.highlighted_letter?.description}
                     icon={"/notewrite.png"}
                     category="Thema"
-                    className="hover:bg-[#fff] text-[#fff] h-[100%] flex flex-col"
+                    className="small-fonts hover:bg-[#fff] text-[#fff] h-[100%] flex flex-col"
                   >
                     <div className="flex justify-center mt-[20px] md:mt-[auto]">
                       <Button

@@ -9,6 +9,7 @@ import { GetServerSidePropsContext } from "next";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import React from "react";
 import { getComments } from "../../../utils/api";
+import Image from "next/image";
 
 type Props = {
   pageData: ForumPostType;
@@ -79,7 +80,7 @@ export default function ForumDetail({ pageData, comments = [] }: Props) {
       <Container>
         <Grid container>
           {/* <Grid item xs={0} md={2} lg={2} /> */}
-          <Grid item xs={12} md={10} className="mx-auto">
+          <Grid item xs={12} className="mx-auto">
             <ForumPost
               gender={pageData.user_gender}
               age={pageData.user_age}
@@ -100,7 +101,7 @@ export default function ForumDetail({ pageData, comments = [] }: Props) {
         </Grid>
       </Container>
 
-      <main style={{ marginBottom: "80px" }}>
+      <main>
         <CommentForm
           type="forum"
           comments={comments}
@@ -110,6 +111,23 @@ export default function ForumDetail({ pageData, comments = [] }: Props) {
           ook! Heb jij een goede tip? Deel 'm hieronder!"
           postId={pageData.id}
         />
+        <section>
+          <div className="my-[40px] md:my-[80px]">
+            <CommentForm
+              postId={pageData.id}
+              parent={"Geef zelf antwoord op deze vraag"}
+              type="forum"
+            />
+          </div>
+          <div className="relative">
+            <Image
+              src="/forumbothead.png"
+              alt="respond to letter"
+              fill
+              className="relative h-[768px] mt-[-600px] md:h-[549px] md:mt-[-300px]"
+            />
+          </div>
+        </section>
       </main>
     </PageWrapper>
   );

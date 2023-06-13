@@ -7,7 +7,10 @@ import Button from "../../buttons/Button";
 import Dropdown from "../Dropdown/Dropdown";
 import { FiCheck } from "react-icons/fi";
 import ForumComment from "../../content-types/ForumComment/ForumComment";
-import { ForumCommentType } from "../../../types/forumTypes";
+import {
+  ForumCommentType,
+  LetterDownloadType,
+} from "../../../types/forumTypes";
 import { GENDERS } from "../../../constants/genders";
 import Input from "../Input/Input";
 import Section from "../../layout/Section/Section";
@@ -16,6 +19,8 @@ import { postComment } from "../../../utils/api";
 import styled, { useTheme } from "styled-components";
 import { rgba } from "../../../utils/colors";
 import Checkbox from "../Checkbox/Checkbox";
+import Image from "next/image";
+import { LANGUAGES } from "../../../constants/language";
 
 const LetterForm = ({
   className,
@@ -26,30 +31,27 @@ const LetterForm = ({
   isSubmitted?: boolean;
   className?: string;
   paddingSize?: "sm" | "md";
-  onIsSubmit?: (x: boolean) => void;
+  onIsSubmit: (x: any) => void;
 }) => {
   const { colors } = useTheme();
   const [isLoading, setIsLoading] = useState(false);
 
+  const [check, setCheck] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ForumCommentType>();
+  } = useForm<LetterDownloadType>();
 
   const submitForm = async (data: any) => {
-    setIsLoading(true);
-
-    try {
-      //   onIsSubmit(true);
-    } catch (error) {
-      //   onIsSubmit(false);
-    }
-
-    setIsLoading(false);
+    onIsSubmit(data);
   };
 
-  const onSubmit: SubmitHandler<ForumCommentType> = async (data) => {
+  const onSubmit: SubmitHandler<LetterDownloadType> = async (data) => {
+    const checkboxtipsins: HTMLInputElement | null = document.getElementById(
+      "input-check"
+    ) as HTMLInputElement;
+    data.tips_inspiration_email = checkboxtipsins?.checked;
     submitForm(data);
   };
 
@@ -69,7 +71,9 @@ const LetterForm = ({
       background-position: center center;
       z-index: 1;
     }
-
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     background-color: rgba(255, 151, 29, 1);
     border-radius: 8px;
     padding: 32px;
@@ -92,54 +96,95 @@ const LetterForm = ({
       }
     }
   `;
+  console.log(errors);
   return (
     <Section
       backgroundColor="white"
       paddingSize={paddingSize}
       className={className}
     >
-      <div className="relative">
+      <div className="relative h-[100%]">
         <StyledForm>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="item-center mt-3 mb-5">
+            <H2 style={{ color: "#fff", margin: "0px", fontSize: "32px" }}>
+              De hele brief downloaden?
+              <Image
+                src={"/note.svg"}
+                width={40}
+                height={40}
+                alt={"Heading icon"}
+                objectFit="contain"
+                className="pl-1 inline float-right absolute"
+              />
+            </H2>
+          </div>
+          <form onSubmit={handleSubmit(onSubmit)} className="flex h-[100%]">
             <Grid container spacing="33px">
               <Grid item xs={12} md={6}>
                 <Input
                   label="Voornaam"
                   name="user_name"
+                  required
                   register={register}
                   hasError={!!errors.user_name}
+                  helperText={!!errors.user_name ? "voornaam is verplicht" : ""}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} md={6}>
                 <Input
                   label="E-mailadres"
+                  required
                   type="email"
                   name="user_email"
                   register={register}
+                  helperText={
+                    !!errors?.user_email ? "e-mailadres is verplicht" : ""
+                  }
                 />
               </Grid>
 
               <Grid item xs={12} md={6}>
                 <Dropdown
-                  options={GENDERS}
+                  options={LANGUAGES}
+                  required
                   label="Selecteer een taal"
                   name="pdf_language"
                   register={register}
+                  helperText={
+                    !!errors?.pdf_language
+                      ? "selecteer alstublieft één taal"
+                      : ""
+                  }
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} md={6}>
                 <Input
-                  label="E-mailadres"
-                  type="email"
-                  name="user_email"
+                  type="number"
+                  required
+                  label="Postcode"
+                  name="post_code"
                   register={register}
+                  helperText={!!errors.post_code ? "postcode is verplicht" : ""}
                 />
               </Grid>
-              <Grid item xs={12}>
-                <Checkbox label="Ja, ik wil graag maandelijks tips & inspiratie via de mail ontvangen" />
+              <Grid item xs={12} className="items-center flex">
+                <input
+                  id="input-check"
+                  type="checkbox"
+                  name="tips_insipiration_email"
+                  className="bg-transparent mx-1 w-[40px] md:w-[20px] h-[20px]"
+                />
+                <label>
+                  Ja, ik wil graag maandelijks tips & inspiratie via de mail
+                  ontvangen
+                </label>
               </Grid>
-              <Grid item xs={12} md={4}>
-                <Button loading={isLoading} disabled={isSubmitted}>
+              <Grid item xs={12}>
+                <Button
+                  loading={isLoading}
+                  disabled={isSubmitted}
+                  className="bg-[#fff] w-[100%] text-center text-[#ff971d] text-[18px] font-[400]"
+                >
                   download brief
                 </Button>
               </Grid>

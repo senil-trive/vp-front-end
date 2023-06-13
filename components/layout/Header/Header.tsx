@@ -111,6 +111,7 @@ export default function Header() {
     }
   }, [isLoading, menuItems]);
 
+  console.log(menuItems);
   return (
     <StyledHeader ref={elRef}>
       <div className="desktop-menu new-menu">

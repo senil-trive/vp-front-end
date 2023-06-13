@@ -161,6 +161,9 @@ const Style = css<Props>`
 
 const StyledButton = styled.button`
   ${Style}
+  font-size: 18px;
+  font-weight: 400;
+  width: 100%;
 `;
 
 const StyledLink = styled.a`

@@ -40,3 +40,13 @@ export type ForumCommentType = {
   theme: string;
   doc_: string;
 };
+export type LetterDownloadType = {
+  id: string;
+  date_created: string;
+  date_updated: string;
+  user_name: string;
+  user_email: string;
+  pdf_language: string;
+  post_code: string;
+  tips_inspiration_email: boolean;
+};
