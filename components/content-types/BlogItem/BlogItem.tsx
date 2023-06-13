@@ -19,28 +19,28 @@ type Props = {
   mediaSrc?: string;
   embedSrc?: string;
   link: string;
-  description?: string;
+  description: any;
+  buttonText: any;
   category?: string;
   content?: string;
   author: string;
   postDate: Date;
-  buttonText?: string;
 };
 
 export default function BlogItem({
   type = "blog",
   mediaSrc,
   embedSrc,
+
   link,
   title,
   category,
   content,
   author,
   postDate,
-  buttonText,
-  description,
 }: Props) {
   const { colors } = useTheme();
+
   const generateMediaItem = () => {
     let Child = null;
 
@@ -58,7 +58,7 @@ export default function BlogItem({
     } else if (mediaSrc) {
       Child = (
         <Image
-          className="absolute h-full w-full top-0 left-0 z-0 object-cover"
+          className="absolute h-full w-full top-0 left-0 z-0 object-cover test"
           src={mediaSrc}
           alt={title}
           fill
@@ -92,33 +92,25 @@ export default function BlogItem({
   return (
     <Card variant={type}>
       {generateMediaItem()}
+
       <CardFooter>
-        <H4 className="title text-4xl" style={{ margin: 0 }} variant="bold">
+        <H4 className="text-blogs" style={{ margin: 0 }} variant="bold">
           {truncate(title, 23)}
         </H4>
-        {!!description ? (
-          <div className="blog-description">
-            <P style={{ marginBottom: 30, marginTop: 12 }}>{description}</P>
-          </div>
-        ) : (
-          <div style={{ overflowY: "auto", height: 90 }}>
-            {!!content && (
-              <P style={{ marginBottom: 30, marginTop: 12 }}>
-                {content ? truncate(content, 200) : ""}
-              </P>
-            )}
-          </div>
-        )}
-        <div className="flex items-center justify-between author-date mb-[20px] mt-[0]">
-          <p className="text-[18px] font-avenir font-[900]">{author}</p>
+
+        <div style={{ overflowY: "auto", height: 90 }}>
+          {!!content && (
+            <P style={{ marginBottom: 30, marginTop: 12 }}>
+              {content ? truncate(content, 200) : ""}
+            </P>
+          )}
+        </div>
+        <div className="flex items-center justify-between author-date">
+          <p className="text-lg font-avenir authorin-blog-txt">{author}</p>
           <p className="italic font-light font-avenir">{parseDate(postDate)}</p>
         </div>
-        <Button style={{ marginTop: "auto" }} variant="secondary" href={link}>
-          {buttonText
-            ? buttonText
-            : type == "vlog"
-            ? "Vlog bekijken"
-            : "Blog lezen"}
+        <Button style={{ marginTop: 32 }} variant="secondary" href={link}>
+          {type == "vlog" ? "Vlog bekijken" : "Blog lezen"}
         </Button>
       </CardFooter>
     </Card>

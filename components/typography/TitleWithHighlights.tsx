@@ -61,11 +61,16 @@ const TitleWithHighlights: React.FC<TitleWithHighlightsProps> = ({
       // theme.colors[highlightColor].normal
     );
   }
-
+  console.log(typeof newText);
   switch (headerElement) {
     case "h1":
       return (
-        <H1 color={color} variant="bold" style={style} className={className}>
+        <H1
+          color={color}
+          variant="bold"
+          style={style}
+          className={className + " header-banner-title"}
+        >
           <>{parseHTMLtoReact(newText)}</>
         </H1>
       );

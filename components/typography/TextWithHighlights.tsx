@@ -54,9 +54,15 @@ const TextWithHighlights: React.FC<TextWithHighlightsProps> = ({
       textToHighlight.color
     );
   }
+
   return (
-    <P color={color} variant={variant} style={style} className={className}>
-      <>{parseHTMLtoReact(newText.replace(",", ""))}</>
+    <P
+      color={color}
+      variant={variant}
+      style={style}
+      className={className + " header-banner-text"}
+    >
+      <>{parseHTMLtoReact(newText)}</>
     </P>
   );
 };

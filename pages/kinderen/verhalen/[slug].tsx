@@ -215,6 +215,8 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
                         ? parseImageURL(post.related_vlogposts_id.image.id)
                         : ""
                     }
+                    description={"blog"}
+                    buttonText={"button"}
                     embedSrc={post.related_vlogposts_id?.youtube_embed}
                     link={`/kinderen/verhalen/${post.related_vlogposts_id?.slug}`}
                     type={post.related_vlogposts_id?.type}

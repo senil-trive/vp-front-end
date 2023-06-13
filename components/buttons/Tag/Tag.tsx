@@ -31,10 +31,11 @@ const BaseTag = styled.span<Variant & Position & { isActive: boolean }>`
   border: 1px solid;
   font-weight: 300;
   font-family: ${({ theme }) => theme.fonts.secondary};
-  text-transform: uppercase;
+  text-transform: ;
   line-height: 160%;
   cursor: pointer;
   white-space: nowrap;
+  font-size: 18px !important;
 
   &:hover {
     background: ${({ variant, theme }) =>
@@ -47,7 +48,7 @@ const BaseTag = styled.span<Variant & Position & { isActive: boolean }>`
     isActive &&
     css`
       background-color: ${({ theme }) => theme.colors.info.normal};
-      color: "${({ theme }) => theme.colors.white.normal}";
+      color: ${({ theme }) => theme.colors.white.normal};
     `}
 
   ${({ position }) => {
@@ -95,7 +96,7 @@ const BaseTag = styled.span<Variant & Position & { isActive: boolean }>`
 
 const StyledTag = styled(BaseTag)`
   line-height: 160%;
-  padding: 14.5px 24px;
+  padding: 14px 24.5px;
   font-size: ${({ theme }) => theme.fontSizes.p.mobile};
 
   @media ${({ theme }) => theme.breakpoints.tablet} {

@@ -52,6 +52,7 @@ const StyledHeader = styled.header`
       display: flex;
       align-items: center;
       background-color: white;
+      gap: 52px;
     }
   }
 

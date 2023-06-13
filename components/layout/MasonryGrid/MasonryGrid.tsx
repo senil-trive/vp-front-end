@@ -231,7 +231,7 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
                   >
                     <BlogItem
                       mediaSrc={
-                        blogContent.image?.id
+                        blogContent.image
                           ? parseImageURL(blogContent.image.id)
                           : ""
                       }
@@ -239,6 +239,8 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
                       link={`/kinderen/verhalen/${blogContent.slug}`}
                       type={blogContent.type}
                       author={blogContent.author}
+                      description={"blog"}
+                      buttonText={"button"}
                       content={blogContent.content}
                       postDate={new Date(blogContent.date_created)}
                       category={blogContent.categories[0]?.categories_id?.name}
