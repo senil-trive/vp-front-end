@@ -96,7 +96,6 @@ const LetterForm = ({
       }
     }
   `;
-  console.log(errors);
   return (
     <Section
       backgroundColor="white"

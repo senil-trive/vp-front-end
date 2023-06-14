@@ -90,19 +90,20 @@ export const postComment = async (
   type: "forum" | "blog" | "open_letter",
   { post_id, ...rest }: any
 ) => {
-  console.log(post_id);
-  console.log(type);
-  const res = await fetch(`${ENDPOINTS.COLLECTIONS}/comments`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      ...rest,
-      [`${type.includes("letter") ? type : `${type}_post`}`]: { id: post_id },
-      status: "draft",
-    }),
-  });
+  if (rest.parent_id) {
+  } else {
+    const res = await fetch(`${ENDPOINTS.COLLECTIONS}/comments`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...rest,
+        [`${type.includes("letter") ? type : `${type}_post`}`]: { id: post_id },
+        status: "draft",
+      }),
+    });
+  }
 };
 
 /**
@@ -119,7 +120,7 @@ export const getComments = async (
   return await fetch(
     `${
       ENDPOINTS.COLLECTIONS
-    }/comments?fields=*&filter[status][_eq]=published&filter[${
+    }/comments?fields=*,child_comments.*&filter[status][_eq]=published&filter[${
       type.includes("letter") ? type : `${type}_post`
     }][_eq]=${post_id}`,
     {

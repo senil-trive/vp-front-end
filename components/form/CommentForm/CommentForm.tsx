@@ -50,13 +50,7 @@ const SubmitForm = ({
 
   const submitForm = async (data: any) => {
     setIsLoading(true);
-
-    const body = {
-      ...data,
-      post_id: postId,
-      parent_comment: replyId,
-    };
-
+    const body = { ...data, post_id: postId, parent_comment: replyId };
     try {
       await postComment(type, body);
       onIsSubmit(true);
@@ -225,7 +219,6 @@ export default function CommentForm({
   const handleReply = (id: string) => {
     setReplyId(id);
   };
-  console.log(comments);
   return (
     <Container className="max-w-[1185px]">
       {!parent ? (
@@ -236,9 +229,7 @@ export default function CommentForm({
             </Grid>
           </Grid>
           {comments
-            .filter(
-              (comment) => !comment.parent_comment || !!comment.parent_comment
-            )
+            .filter((comment) => !comment.parent_comment)
             .map((comment) => (
               <Grid container key={comment.id}>
                 <Grid item xs={12}>
@@ -275,11 +266,10 @@ export default function CommentForm({
                         onIsSubmit={(x) => setIsSubmitted(x)}
                       />
                     </div>
-
                     {comment.child_comments
                       ?.filter((comment) => comment.status === "published")
                       .map((child) => (
-                        <div key={child.id}>
+                        <div key={child.id} className="pl-3">
                           <ForumComment
                             isReplyComment
                             author={child.user_name}
@@ -288,7 +278,6 @@ export default function CommentForm({
                             title={child.content}
                             onReply={() => handleReply(child.id)}
                           />
-
                           <div
                             className={
                               replyId === child.id
