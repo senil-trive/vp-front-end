@@ -1,28 +1,28 @@
 import { colors, Container, Grid } from "@mui/material";
-import { Hero, Pagination } from "../../../components/layout";
-import { H4, P, TitleWithHighlights } from "../../../components/typography";
+import { Hero, Pagination } from "../../components/layout";
+import { H4, P, TitleWithHighlights } from "../../components/typography";
 import React, { useEffect, useState } from "react";
 import {
   getContentTags,
   getForumOverviewPageData,
   getForumPosts,
-} from "../../../utils/api";
+} from "../../utils/api";
 
-import Button from "../../../components/buttons/Button";
+import Button from "../../components/buttons/Button";
 import { CircleSpinner } from "react-spinners-kit";
-import CollectionSearchBar from "../../../components/form/CollectionSearchBar/CollectionSearchBar";
-import { ForumPageProps } from "../../../types/pageTypes";
-import ForumPost from "../../../components/content-types/ForumPost/ForumPost";
+import CollectionSearchBar from "../../components/form/CollectionSearchBar/CollectionSearchBar";
+import { ForumPageProps } from "../../types/pageTypes";
+import ForumPost from "../../components/content-types/ForumPost/ForumPost";
 import Link from "next/link";
-import { POST_PER_PAGE } from "../../../constants/app-configs";
-import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
-import SortBar from "../../../components/form/SortBar/SortBar";
-import TagList from "../../../components/buttons/TagList/TagList";
-import parseImageURL from "../../../utils/parseImageURL";
-import ChevronRight from "../../../components/icons/ChevronRight/ChevronRight";
+import { POST_PER_PAGE } from "../../constants/app-configs";
+import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
+import SortBar from "../../components/form/SortBar/SortBar";
+import TagList from "../../components/buttons/TagList/TagList";
+import parseImageURL from "../../utils/parseImageURL";
+import ChevronRight from "../../components/icons/ChevronRight/ChevronRight";
 import Image from "next/image";
-import Input from "../../../components/form/Input/Input";
-import SearchIcon from "../../../components/icons/SearchIcon/SearchIcon";
+import Input from "../../components/form/Input/Input";
+import SearchIcon from "../../components/icons/SearchIcon/SearchIcon";
 
 const forumSortOptions = [
   { name: "Titel (a-z)", value: "content" },
@@ -131,7 +131,7 @@ export default function Forum({
         description: pageData?.seo_description
           ? pageData?.seo_description
           : pageData?.page_subtitle,
-        canonical: "https://www.villapinedo.nl/kinderen/forum",
+        canonical: "https://www.villapinedo.nl/forum",
         image: pageData?.seo_image
           ? parseImageURL(pageData?.seo_image?.id)
           : "",
@@ -172,7 +172,7 @@ export default function Forum({
 
               <div style={{ display: "flex", gap: 32 }}>
                 <Button
-                  href="/kinderen/forum/stel-een-vraag"
+                  href="/forum/stel-een-vraag"
                   style={{
                     backgroundColor: "#3FC7B4",
                     fontSize: "18px",
@@ -285,7 +285,7 @@ export default function Forum({
                 <>
                   {posts.map((item, index) => (
                     <Grid key={index} item xs={12} md={4}>
-                      <Link href={`/kinderen/forum/${item.slug}`}>
+                      <Link href={`/forum/${item.slug}`}>
                         <ForumPost
                           truncateContent
                           fullHeight={false}

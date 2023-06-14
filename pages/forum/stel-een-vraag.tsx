@@ -1,26 +1,26 @@
-import { Grid, Hero } from "../../../components/layout";
-import { H2, P, TitleWithHighlights } from "../../../components/typography";
+import { Grid, Hero } from "../../components/layout";
+import { H2, P, TitleWithHighlights } from "../../components/typography";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { getContentTags, postForum, uploadFile } from "../../../utils/api";
+import { getContentTags, postForum, uploadFile } from "../../utils/api";
 
-import Button from "../../../components/buttons/Button";
-import { COLORS } from "../../../styles/theme";
+import Button from "../../components/buttons/Button";
+import { COLORS } from "../../styles/theme";
 import { Container } from "@mui/system";
 import { Divider } from "@mui/material";
-import Dropdown from "../../../components/form/Dropdown/Dropdown";
-import { ForumPostType } from "../../../types/forumTypes";
-import { ForumQuestionPageProps } from "../../../types/pageTypes";
-import { GENDERS } from "../../../constants/genders";
-import Input from "../../../components/form/Input/Input";
+import Dropdown from "../../components/form/Dropdown/Dropdown";
+import { ForumPostType } from "../../types/forumTypes";
+import { ForumQuestionPageProps } from "../../types/pageTypes";
+import { GENDERS } from "../../constants/genders";
+import Input from "../../components/form/Input/Input";
 import Link from "next/link";
-import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
-import Section from "../../../components/layout/Section/Section";
-import TextArea from "../../../components/form/TextArea/TextArea";
-import TextList from "../../../components/typography/TextList/TextList";
+import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
+import Section from "../../components/layout/Section/Section";
+import TextArea from "../../components/form/TextArea/TextArea";
+import TextList from "../../components/typography/TextList/TextList";
 import { useState } from "react";
-import { slugify } from "../../../utils/url";
+import { slugify } from "../../utils/url";
 import styled from "styled-components";
-import parseImageURL from "../../../utils/parseImageURL";
+import parseImageURL from "../../utils/parseImageURL";
 
 export const getServerSideProps = async () => {
   try {
@@ -120,7 +120,7 @@ export default function Vraag({ categories }: ForumQuestionPageProps) {
         description:
           "Stel je vraag aan de Buddy's en andere kinderen met gescheiden ouders",
 
-        canonical: "https://www.villapinedo.nl/kinderen/forum/stel-een-vraag",
+        canonical: "https://www.villapinedo.nl/forum/stel-een-vraag",
       }}
     >
       <Hero
@@ -354,7 +354,7 @@ export default function Vraag({ categories }: ForumQuestionPageProps) {
                         textDecoration: "underline",
                         color: COLORS.primary.normal,
                       }}
-                      href={"/kinderen/forum"}
+                      href={"/forum"}
                     >
                       Klik dan hier.
                     </Link>
@@ -367,7 +367,7 @@ export default function Vraag({ categories }: ForumQuestionPageProps) {
                         textDecoration: "underline",
                         color: COLORS.primary.normal,
                       }}
-                      href={"/kinderen/ik-wil-een-buddy"}
+                      href={"/ik-wil-een-buddy"}
                     >
                       Vraag dan een buddy aan.
                     </Link>{" "}
