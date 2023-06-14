@@ -1,20 +1,20 @@
-import { H3, P, TitleWithHighlights } from "../../../components/typography";
+import { H3, P, TitleWithHighlights } from "../../components/typography";
 
-import { BlogDetailPageProps } from "../../../types/pageTypes";
-import BlogItem from "../../../components/content-types/BlogItem/BlogItem";
-import BreadCrumbs from "../../../components/layout/BreadCrumbs/BreadCrumbs";
-import CommentForm from "../../../components/form/CommentForm/CommentForm";
+import { BlogDetailPageProps } from "../../types/pageTypes";
+import BlogItem from "../../components/content-types/BlogItem/BlogItem";
+import BreadCrumbs from "../../components/layout/BreadCrumbs/BreadCrumbs";
+import CommentForm from "../../components/form/CommentForm/CommentForm";
 import { Container } from "@mui/material";
 import { GetServerSidePropsContext } from "next";
-import { Hero } from "../../../components/layout";
+import { Hero } from "../../components/layout";
 import Image from "next/image";
-import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
+import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import React from "react";
-import Tag from "../../../components/buttons/Tag/Tag";
-import YoutubePlayer from "../../../components/media/YoutubePlayer";
-import { getPostDetail } from "../../../utils/api";
-import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
-import parseImageURL from "../../../utils/parseImageURL";
+import Tag from "../../components/buttons/Tag/Tag";
+import YoutubePlayer from "../../components/media/YoutubePlayer";
+import { getPostDetail } from "../../utils/api";
+import parseHTMLtoReact from "../../utils/parseHTMLtoReact";
+import parseImageURL from "../../utils/parseImageURL";
 import styled from "styled-components";
 
 const StyledBlogContent = styled.article`
@@ -109,7 +109,7 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
           pageData?.content && pageData?.content?.length > 160
             ? pageData?.content?.slice(0, 160)
             : "",
-        canonical: `https://www.villapinedo.nl/kinderen/forum/${pageData?.slug}`,
+        canonical: `https://www.villapinedo.nl/forum/${pageData?.slug}`,
         og: {
           type: "article",
           article: {
@@ -218,7 +218,7 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
                     description={"blog"}
                     buttonText={"button"}
                     embedSrc={post.related_vlogposts_id?.youtube_embed}
-                    link={`/kinderen/verhalen/${post.related_vlogposts_id?.slug}`}
+                    link={`/verhalen/${post.related_vlogposts_id?.slug}`}
                     type={post.related_vlogposts_id?.type}
                     author={post.related_vlogposts_id?.author}
                     content={post.related_vlogposts_id?.content}

@@ -72,7 +72,7 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
           description: pageData?.seo_description
             ? pageData?.seo_description
             : pageData?.page_subtitle,
-          canonical: "https://www.villapinedo.nl/kinderen/ik-wil-een-buddy/",
+          canonical: "https://www.villapinedo.nl/ik-wil-een-buddy/",
           image: pageData?.seo_image
             ? parseImageURL(pageData?.seo_image?.id)
             : "",
@@ -100,7 +100,7 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                 <Button
                   variant="success"
                   className="mr-[31px] mb-[10px] bg-[transparent] text-[#fff] border-[#fff] hover:bg-[#fff] hover:text-[#3FC7B4]"
-                  href={"/kinderen/ik-wil-een-buddy"}
+                  href={"/ik-wil-een-buddy"}
                 >
                   {pageData?.header_button_1_label}
                 </Button>
