@@ -146,7 +146,7 @@ export default function Search() {
                 resultTitleSuffix={` in ons Forum`}
                 list={forumPosts?.map((post) => ({
                   name: truncate(post.content, 120),
-                  link: `/kinderen/forum/${post.slug}`,
+                  link: `/forum/${post.slug}`,
                 }))}
               />
             </Grid>

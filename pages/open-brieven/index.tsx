@@ -1,19 +1,19 @@
 import React from "react";
 
-import { H3, H4, P, TitleWithHighlights } from "../../../components/typography";
-import BriefItem from "../../../components/content-types/BriefItem/BriefItem";
+import { H3, H4, P, TitleWithHighlights } from "../../components/typography";
+import BriefItem from "../../components/content-types/BriefItem/BriefItem";
 import { Container, Grid } from "@mui/material";
-import ENDPOINTS from "../../../constants/endpoints";
+import ENDPOINTS from "../../constants/endpoints";
 import { FiChevronsDown } from "react-icons/fi";
-import { Hero } from "../../../components/layout";
-import { Letter } from "../../../types/content-types/Letter.type";
-import { POST_PER_PAGE } from "../../../constants/app-configs";
-import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
-import { getLetters } from "../../../utils/api";
-import parseImageURL from "../../../utils/parseImageURL";
+import { Hero } from "../../components/layout";
+import { Letter } from "../../types/content-types/Letter.type";
+import { POST_PER_PAGE } from "../../constants/app-configs";
+import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
+import { getLetters } from "../../utils/api";
+import parseImageURL from "../../utils/parseImageURL";
 import { FaChevronDown } from "react-icons/fa";
-import InfoCard from "../../../components/content-types/InfoCard/InfoCard";
-import Button from "../../../components/buttons/Button";
+import InfoCard from "../../components/content-types/InfoCard/InfoCard";
+import Button from "../../components/buttons/Button";
 
 interface LettersOverviewPageProps {
   pageData: any;
@@ -71,7 +71,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
           description: pageData?.seo_description
             ? pageData?.seo_description
             : pageData?.page_subtitle,
-          canonical: "https://www.villapinedo.nl/kinderen/open-brieven",
+          canonical: "https://www.villapinedo.nl/open-brieven",
           image: pageData?.seo_image
             ? parseImageURL(pageData?.seo_image?.id)
             : "",
@@ -133,7 +133,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                       <Button
                         variant="secondary"
                         className="w-[100%] text-[18px] font-[400] bg-[#fff] text-[#FE517E] border-[#fff] hover:bg-[#FE517E]"
-                        href={`/kinderen/open-brieven/${pageData?.highlighted_letter?.slug}`}
+                        href={`/open-brieven/${pageData?.highlighted_letter?.slug}`}
                       >
                         Download brief
                       </Button>
@@ -167,7 +167,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                       <Button
                         variant="secondary"
                         className="w-[100%] text-[18px] font-[400] bg-[#fff] text-[#006EF7] border-[#fff] hover:bg-[#006EF7]"
-                        href={`/kinderen/open-brieven/${pageData?.highlighted_letter?.slug}`}
+                        href={`/open-brieven/${pageData?.highlighted_letter?.slug}`}
                       >
                         Download brief
                       </Button>
@@ -207,7 +207,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                     // titleHighlighted={letter.title_highlighted}
                     content={letter.description}
                     imgSrc={parseImageURL(letter.image?.id)}
-                    fileSrc={`/kinderen/open-brieven/${letter.slug}`}
+                    fileSrc={`/open-brieven/${letter.slug}`}
                     bg={letter.bg_color}
                     imgHeight={180}
                   />

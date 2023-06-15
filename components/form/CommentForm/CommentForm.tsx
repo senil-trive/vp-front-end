@@ -225,7 +225,9 @@ export default function CommentForm({
         <>
           <Grid container style={{ margin: "70px 0" }}>
             <Grid item xs={12} md={8} lg={8}>
-              <H2>Reacties ({comments.length})</H2>
+              <H2 className="text-[35px] md:text-[42px]">
+                Reacties ({comments.length})
+              </H2>
             </Grid>
           </Grid>
           {comments

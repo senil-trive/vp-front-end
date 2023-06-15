@@ -1,26 +1,26 @@
-import { H3, P, TitleWithHighlights } from "../../../components/typography";
+import { H3, P, TitleWithHighlights } from "../../components/typography";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-import BreadCrumbs from "../../../components/layout/BreadCrumbs/BreadCrumbs";
-import BriefItem from "../../../components/content-types/BriefItem/BriefItem";
-import Button from "../../../components/buttons/Button";
+import BreadCrumbs from "../../components/layout/BreadCrumbs/BreadCrumbs";
+import BriefItem from "../../components/content-types/BriefItem/BriefItem";
+import Button from "../../components/buttons/Button";
 import { Container, Grid } from "@mui/material";
-import ENDPOINTS from "../../../constants/endpoints";
+import ENDPOINTS from "../../constants/endpoints";
 import { FiCheck } from "react-icons/fi";
 import { GetServerSidePropsContext } from "next";
-import { Hero } from "../../../components/layout";
-import Input from "../../../components/form/Input/Input";
-import { Letter } from "../../../types/content-types/Letter.type";
-import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
-import { parseFileURL } from "../../../utils/parseFileURL";
-import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
-import parseImageURL from "../../../utils/parseImageURL";
-import { getComments, postLetterSubscription } from "../../../utils/api";
+import { Hero } from "../../components/layout";
+import Input from "../../components/form/Input/Input";
+import { Letter } from "../../types/content-types/Letter.type";
+import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
+import { parseFileURL } from "../../utils/parseFileURL";
+import parseHTMLtoReact from "../../utils/parseHTMLtoReact";
+import parseImageURL from "../../utils/parseImageURL";
+import { getComments, postLetterSubscription } from "../../utils/api";
 import { useTheme } from "styled-components";
-import LetterForm from "../../../components/form/LetterForm/LetterForm";
-import { LetterDownloadType } from "../../../types/forumTypes";
-import CommentForm from "../../../components/form/CommentForm/CommentForm";
+import LetterForm from "../../components/form/LetterForm/LetterForm";
+import { LetterDownloadType } from "../../types/forumTypes";
+import CommentForm from "../../components/form/CommentForm/CommentForm";
 import Image from "next/image";
 
 type Props = {
@@ -145,7 +145,7 @@ export default function LetterDetail({
         title: pageData.title,
         description:
           pageData.content.length > 160 ? pageData.content.slice(0, 160) : "",
-        canonical: `https://www.villapinedo.nl/kinderen/forum/${pageData.slug}`,
+        canonical: `https://www.villapinedo.nl/forum/${pageData.slug}`,
         og: {
           type: "article",
           article: {
@@ -188,7 +188,7 @@ export default function LetterDetail({
             title={pageoverview?.letter_for_title}
             content={pageoverview?.letter_for_description}
             imgSrc={parseImageURL(undefined)}
-            fileSrc={`/kinderen/open-brieven/${undefined}`}
+            fileSrc={`/open-brieven/${undefined}`}
             bg={`#FE517E`}
             className="flex-1"
           />
@@ -241,7 +241,7 @@ export default function LetterDetail({
                   titleHighlighted={letter.title_highlighted}
                   content={letter.description}
                   imgSrc={parseImageURL(letter.image?.id)}
-                  fileSrc={`/kinderen/open-brieven/${letter.slug}`}
+                  fileSrc={`/open-brieven/${letter.slug}`}
                 />
               ))}
             </div>

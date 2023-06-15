@@ -21,6 +21,12 @@ const StyledWrapper = styled.div`
     display: flex;
     align-items: center;
     gap: 8px;
+    font-size: 18px !important;
+  }
+  @media (max-width: 767px) {
+    .profile-meta {
+      font-size: 16px !important;
+    }
   }
 `;
 

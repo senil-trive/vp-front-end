@@ -1,25 +1,25 @@
 import { CircularProgress, Container, Grid } from "@mui/material";
-import { H4, P, TitleWithHighlights } from "../../../components/typography";
+import { H4, P, TitleWithHighlights } from "../../components/typography";
 import React, { useEffect, useState } from "react";
 import {
   getContentTags,
   getPostOverviewPageData,
   getPosts,
-} from "../../../utils/api";
+} from "../../utils/api";
 
-import { BlogPageProps } from "../../../types/pageTypes";
-import CollectionSearchBar from "../../../components/form/CollectionSearchBar/CollectionSearchBar";
-import { Hero } from "../../../components/layout";
-import { MasonryGrid } from "../../../components/layout/MasonryGrid/MasonryGrid";
-import { POST_PER_PAGE } from "../../../constants/app-configs";
-import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
-import SortBar from "../../../components/form/SortBar/SortBar";
-import TagList from "../../../components/buttons/TagList/TagList";
-import parseImageURL from "../../../utils/parseImageURL";
-import { useCallbackWhenReachedBottom } from "../../../utils/scroll";
+import { BlogPageProps } from "../../types/pageTypes";
+import CollectionSearchBar from "../../components/form/CollectionSearchBar/CollectionSearchBar";
+import { Hero } from "../../components/layout";
+import { MasonryGrid } from "../../components/layout/MasonryGrid/MasonryGrid";
+import { POST_PER_PAGE } from "../../constants/app-configs";
+import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
+import SortBar from "../../components/form/SortBar/SortBar";
+import TagList from "../../components/buttons/TagList/TagList";
+import parseImageURL from "../../utils/parseImageURL";
+import { useCallbackWhenReachedBottom } from "../../utils/scroll";
 import { useTheme } from "styled-components";
 import { v4 as uuidv4 } from "uuid";
-import ChevronRight from "../../../components/icons/ChevronRight/ChevronRight";
+import ChevronRight from "../../components/icons/ChevronRight/ChevronRight";
 
 export const getServerSideProps = async () => {
   try {
@@ -42,8 +42,6 @@ export const getServerSideProps = async () => {
       },
     };
   } catch (error) {
-    console.log(error);
-
     return {
       redirect: {
         destination: "/500",
@@ -138,7 +136,7 @@ export default function Forum({
         description: pageData?.seo_description
           ? pageData?.seo_description
           : pageData?.page_subtitle,
-        canonical: "https://www.villapinedo.nl/kinderen/verhalen",
+        canonical: "https://www.villapinedo.nl/verhalen",
         image: pageData?.seo_image
           ? parseImageURL(pageData?.seo_image?.id)
           : "",

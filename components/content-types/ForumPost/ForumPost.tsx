@@ -1,7 +1,4 @@
-import styled, { useTheme } from "styled-components";
-
-import Button from "../../buttons/Button";
-import { H4, P } from "../../typography";
+import styled from "styled-components";
 import React from "react";
 import Tag from "../../buttons/Tag/Tag";
 import { parseDate } from "../../../utils/parseDate";
@@ -68,6 +65,9 @@ const StyledForumPost = styled.article<styledProps>`
         color: ${({ theme }) => theme.colors.text.normal};
       }
     }
+    .forum-tag {
+      background: #3fc7b4 !important;
+    }
     .content {
       color: ${({ theme }) => theme.colors.text.normal};
       .forum-tags {
@@ -118,8 +118,10 @@ const StyledForumPost = styled.article<styledProps>`
     }
     .forum-tags {
       span {
+        padding: 11px 10px;
         background: white;
         border: none;
+        height: 41px;
         color: 3FC7B4;
         font-weight: 400;
         font-size: 18px;
@@ -167,8 +169,6 @@ export default function ForumPost({
   tags = [],
   image,
 }: Props) {
-  const { colors } = useTheme();
-
   const generateContent = () => {
     if (fullHeight && truncateContent) {
       return parseHTMLtoReact(truncate(content, 500));
@@ -211,8 +211,8 @@ export default function ForumPost({
               src={parseImageURL(image)}
             />
             <div>
-              <p className="font-avenir font-extrabold text-lg">Buddy</p>
-              <p>
+              <p className="font-avenir font-extrabold text-lg">{title}</p>
+              <p className="text-[16px] md:text-[18px] font-[300]">
                 {authorType}, {age?.includes("jaar") ? age : `${age} jaar`}
               </p>
             </div>
@@ -221,7 +221,7 @@ export default function ForumPost({
             {tags.length > 0 && (
               <div className="flex flex-wrap forum-tags">
                 {tags.map((item, index) => (
-                  <Tag key={index} size="m">
+                  <Tag key={index} size="m" className="forum-tag">
                     {item}
                   </Tag>
                 ))}

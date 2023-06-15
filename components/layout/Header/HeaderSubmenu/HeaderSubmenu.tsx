@@ -23,7 +23,8 @@ const Wrapper: any = styled.div`
   max-width: 1440px;
   border-radius: 8px;
   top: calc(100% + 25px);
-  width: ${(props: any) => (props.selected === "Vrijwilligers" ? "40%" : "")};
+  /* width: ${(props: any) =>
+    props.selected === "Vrijwilligers" ? "40%" : ""}; */
   right: ${(props: any) =>
     props.selected === "Kinderen"
       ? "calc(100% - 408px)"
@@ -33,9 +34,11 @@ const Wrapper: any = styled.div`
 
   &:before {
     left: ${(props: any) =>
-      props.selected === "Vrijwilligers"
-        ? "calc(100% - 56px)"
-        : "calc(100% - 60px)"};
+      props.selected === "Kinderen"
+        ? "calc(100% - 109px)"
+        : props.selected === "Vrijwilligers"
+        ? "calc(100% - 50px)"
+        : "0"};
     content: "";
     position: absolute;
     top: -10px;
@@ -65,19 +68,20 @@ const Wrapper: any = styled.div`
     ul {
       list-style: none;
       padding: 0;
+      display: block !important;
 
       li {
         &:not(:last-child) {
           padding-bottom: 15px;
         }
 
-        width: 220px;
+        max-width: 220px;
         a {
           // font-family: "Avenir";
           font-weight: 300;
           font-size: 18px;
           line-height: 160%;
-          width: 250px;
+          max-width: 250px;
           word-break: break-word;
           white-space: normal;
           // letter-spacing: 0.02em;
@@ -112,13 +116,32 @@ const Wrapper: any = styled.div`
       border-right: 1px solid ${({ theme }) => theme.colors.grey.normal};
     }
   }
+  @media (min-width: 1550px) {
+    &:before {
+      left: ${(props: any) =>
+        props.selected === "Kinderen"
+          ? "calc(100% - 80)"
+          : props.selected === "Vrijwilligers"
+          ? "calc(100% - 80px)"
+          : "0"} !important;
+    }
+  }
+  @media (min-width: 1600px) {
+    &:before {
+      left: ${(props: any) =>
+        props.selected === "Kinderen"
+          ? "calc(100% - 80)"
+          : props.selected === "Vrijwilligers"
+          ? "calc(100% - 155px)"
+          : "0"} !important;
+    }
+  }
 `;
 
 export default function HeaderSubmenu({ categories, selected }: Props) {
   const router = useRouter();
 
   // const [index, setIndex] = useState<string>(0);
-
   return (
     <Container maxWidth="xl">
       <Wrapper selected={selected} className="sub-menu-container-mn">

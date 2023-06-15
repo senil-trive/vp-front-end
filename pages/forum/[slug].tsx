@@ -1,14 +1,14 @@
 import { Container, Grid } from "@mui/material";
 
-import BreadCrumbs from "../../../components/layout/BreadCrumbs/BreadCrumbs";
-import CommentForm from "../../../components/form/CommentForm/CommentForm";
-import ENDPOINTS from "../../../constants/endpoints";
-import ForumPost from "../../../components/content-types/ForumPost/ForumPost";
-import { ForumCommentType, ForumPostType } from "../../../types/forumTypes";
+import BreadCrumbs from "../../components/layout/BreadCrumbs/BreadCrumbs";
+import CommentForm from "../../components/form/CommentForm/CommentForm";
+import ENDPOINTS from "../../constants/endpoints";
+import ForumPost from "../../components/content-types/ForumPost/ForumPost";
+import { ForumCommentType, ForumPostType } from "../../types/forumTypes";
 import { GetServerSidePropsContext } from "next";
-import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
+import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import React from "react";
-import { getComments } from "../../../utils/api";
+import { getComments } from "../../utils/api";
 import Image from "next/image";
 
 type Props = {
@@ -32,7 +32,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     );
 
     const { data } = await res.json();
-    console.log(data);
     if (!data[0]) {
       return {
         redirect: "/forum",
@@ -64,7 +63,7 @@ export default function ForumDetail({ pageData, comments = [] }: Props) {
         title: pageData.title,
         description:
           pageData.content.length > 160 ? pageData.content.slice(0, 160) : "",
-        canonical: `https://www.villapinedo.nl/kinderen/forum/${pageData.slug}`,
+        canonical: `https://www.villapinedo.nl/forum/${pageData.slug}`,
         og: {
           type: "article",
           article: {

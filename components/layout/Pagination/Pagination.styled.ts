@@ -5,6 +5,7 @@ export const PaginationWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
+  margin-top: 20px;
   button {
     background-color: white;
     border: none;

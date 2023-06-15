@@ -158,7 +158,7 @@ export default function ZeroResponsesPage({
                 </Grid>
                 {posts.map((item, index) => (
                   <Grid key={index} item xs={12} md={4}>
-                    <Link href={`/kinderen/forum/${item.slug}`}>
+                    <Link href={`/forum/${item.slug}`}>
                       <ForumPost
                         truncateContent
                         fullHeight={false}

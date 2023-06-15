@@ -8,6 +8,7 @@ type Props = {
   color?: ColorType;
   children: ReactNode;
   style?: React.CSSProperties;
+  className?: string;
 };
 
 const BaseH2 = styled.h2<{ color: ColorType }>`
