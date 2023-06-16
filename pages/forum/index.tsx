@@ -351,7 +351,9 @@ export default function Forum({
                       >
                         {isLoading && "Bezig..."}
                         {isSubmitted && "Verzonden"}
-                        {!isLoading && !isSubmitted && "Versturen"}
+                        {!isLoading &&
+                          !isSubmitted &&
+                          "ja, ik wil mijn vraag plaatsen"}
                       </Button>
                     </Grid>
                   </Grid>
