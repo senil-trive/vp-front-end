@@ -123,7 +123,7 @@ export default function ForumDetail({ pageData, comments = [] }: Props) {
               src="/forumbothead.png"
               alt="respond to letter"
               fill
-              className="relative h-[768px] mt-[-600px] md:h-[549px] md:mt-[-300px]"
+              className="relative h-[768px] mt-[-600px] md:h-[549px] object-cover md:mt-[-450px]"
             />
           </div>
         </section>

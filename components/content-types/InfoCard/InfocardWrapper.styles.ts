@@ -42,11 +42,12 @@ export const InfoCardWrapper = styled.div`
     margin-bottom: 20px;
   }
   .info-card-footer {
-    h2 {
+    .footer-title {
       font-size: 42px !important;
       font-weight: 400 !important;
+      margin-bottom: 12px;
     }
-    p {
+    .footer-content {
       font-size: 18px !important;
       font-weight: 300 !important;
     }
@@ -55,9 +56,9 @@ export const InfoCardWrapper = styled.div`
     flex-direction: column;
     height: 100%;
   }
-
-  .info-card-footer {
-    h2 {
+  .small-fonts {
+    .footer-title {
+      margin-bottom: 12px !important;
       font-size: 32px !important;
     }
   }
@@ -67,8 +68,18 @@ export const InfoCardWrapper = styled.div`
     }
   }
   @media (max-width: 767px) {
-    .info-card-footer h2 {
-      font-size: 30px !important;
+    .info-card-footer {
+      .footer-title {
+        font-size: 32px !important;
+      }
+      .footer-content {
+        font-size: 16px !important;
+      }
+    }
+    .small-fonts {
+      .footer-title {
+        font-size: 30px !important;
+      }
     }
   }
 `;

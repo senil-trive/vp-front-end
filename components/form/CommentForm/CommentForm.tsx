@@ -64,7 +64,6 @@ const SubmitForm = ({
   const onSubmit: SubmitHandler<ForumCommentType> = async (data) => {
     submitForm(data);
   };
-
   const StyledForm = styled.div`
     &:before {
       content: " ";
@@ -78,8 +77,10 @@ const SubmitForm = ({
       background: url("/chatBg.png");
       // background-size: cover;
       // background-repeat: no-repeat;
-      background-position: center center;
+      /* background-position: center center; */
       z-index: 1;
+      background-size: 59%;
+      background-position: left 225px top -75px;
     }
     display: flex;
     height: 100%;
@@ -106,8 +107,17 @@ const SubmitForm = ({
       }
     }
     @media (max-width: 768px) {
+      padding: 24px !important;
+      &:before {
+        background-size: 135%;
+        background-position: left -108px top 8px;
+      }
       form > div > div {
         padding: 14px !important;
+      }
+      .form-wrapper {
+        margin: auto !important;
+        width: inherit;
       }
       label {
         margin-bottom: 6px;
@@ -121,7 +131,7 @@ const SubmitForm = ({
       <StyledForm>
         {!isSubmitted ? (
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Grid container spacing="33px">
+            <Grid container spacing={"33"} className="form-wrapper">
               <Grid item xs={12} sm={6} md={4}>
                 <Input
                   label="Voornaam"
@@ -176,9 +186,6 @@ const SubmitForm = ({
                 />
               </Grid>
               <Grid item xs={12}>
-                <P variant="light">* Verplichte velden</P>
-              </Grid>
-              <Grid item xs={12}>
                 <Button
                   loading={isLoading}
                   disabled={isSubmitted}
@@ -193,7 +200,6 @@ const SubmitForm = ({
           </form>
         ) : (
           <div className="flex flex-col items-center justify-center">
-            {/* <FiCheck size={40} color={colors.secondary.normal} /> */}
             <H3 variant="bold" color="white">
               Bedankt! Jouw reactie wordt door ons beoordeeld.
             </H3>
@@ -220,7 +226,7 @@ export default function CommentForm({
     setReplyId(id);
   };
   return (
-    <Container className="max-w-[1185px]">
+    <Container className="max-w-[1118px]">
       {!parent ? (
         <>
           <Grid container style={{ margin: "70px 0" }}>
@@ -336,27 +342,16 @@ export default function CommentForm({
                 </Grid>
               </Grid>
             ))}
-
-          {!isSubmitted && (
-            <Grid
-              container
-              direction="column"
-              justifyItems="center"
-              alignItems="center"
-              className="mb-[32px]"
-            >
-              <Grid item xs={4}>
-                <Button onClick={() => setIsOpen((open) => !open)}>
-                  Reactie toevoegen
-                </Button>
-              </Grid>
-            </Grid>
-          )}
         </>
       ) : (
         <div>
           <div>
-            <H3 variant="bold">{parent}</H3>
+            <H3
+              variant="bold"
+              className="text-[36px] font-[400] mb-[20px] md:mb-[32px] md:text-[42px]"
+            >
+              {parent}
+            </H3>
           </div>
           <SubmitForm
             postId={postId}
