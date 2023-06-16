@@ -1,7 +1,7 @@
 import { colors, Container, Grid } from "@mui/material";
 import { Hero, Pagination } from "../../components/layout";
-import { H4,H2, P, TitleWithHighlights } from "../../components/typography";
-import React, { useEffect, useState,ChangeEvent } from "react";
+import { H4, H2, P, TitleWithHighlights } from "../../components/typography";
+import React, { useEffect, useState, ChangeEvent } from "react";
 import {
   getContentTags,
   getForumOverviewPageData,
@@ -85,7 +85,7 @@ export default function Forum({
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  
+
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const {
@@ -122,9 +122,6 @@ export default function Forum({
   const handleSort = (x: string) => {
     setSort(x);
   };
-
-
-  
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files && e.target.files[0];
@@ -206,8 +203,9 @@ export default function Forum({
                 {pageData?.page_subtitle}
               </P>
 
-              <div style={{ display: "flex", gap: 32, justifyContent: "center" }}>
-                
+              <div
+                style={{ display: "flex", gap: 32, justifyContent: "center" }}
+              >
                 <Button
                   variant="white"
                   filled={false}
@@ -229,141 +227,144 @@ export default function Forum({
       </Hero>
 
       <main style={{ marginBottom: "80px" }}>
-      <Container className="mb-[80px] mt-[-120px] relative md:mb-[120px]">
-      <div style={{
-                  backgroundImage: "url(" + "/forum-bg.png" + ")",
-                  backgroundPosition: 'center',
-                  backgroundSize: 'cover',
-                  backgroundRepeat: 'no-repeat',
-                  padding: "32px 32px",
-                  width: "1118px",
-                  margin: "0 auto",
-                  borderRadius: "8px",
-               }}>
-              {!isSubmitted ? (
-                <form className="forum-from-dz" onSubmit={handleSubmit(submitForm)}>
-                  <Grid container spacing="33px" style={{rowGap:"13px"}}>
-                    <Grid item xs={12} md={4}>
-                      <Input
-                        label="Voornaam"
-                        required
-                        name="Je naam..."
-                        placeholder="Je naam..."
-                        register={register}
-                        hasError={!!errors.first_name}
-                        helperText={errors.first_name && "Vul je voornaam in"}
-                      />
-                    </Grid>
-                    <Grid item xs={12} md={4}>
-                      <Input
-                        label="Leeftijd"
-                        required
-                        name="Jouw leeftijd..."
-                        placeholder="Jouw leeftijd..."
-                        register={register}
-                        hasError={!!errors.last_name}
-                        helperText={errors.last_name && "Vul je achternaam in"}
-                      />
-                    </Grid>
-                    <Grid item xs={12} md={4}>
+        <Container className="mb-[80px] mt-[-120px] relative md:mb-[120px]">
+          <div
+            style={{
+              backgroundImage: "url(" + "/forum-bg.png" + ")",
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              padding: "32px 32px",
+              width: "1118px",
+              margin: "0 auto",
+              borderRadius: "8px",
+            }}
+          >
+            {!isSubmitted ? (
+              <form
+                className="forum-from-dz"
+                onSubmit={handleSubmit(submitForm)}
+              >
+                <Grid container spacing="33px" style={{ rowGap: "13px" }}>
+                  <Grid item xs={12} md={4}>
                     <Input
-                        label="E-mail"
-                        required
-                        name="Je e-mailadres..."
-                        placeholder="Je e-mailadres..."
-                        register={register}
-                        hasError={!!errors.last_name}
-                        helperText={errors.last_name && "Vul je achternaam in"}
-                      />
-                    </Grid>
-                    <Grid item xs={12} md={4}>
+                      label="Voornaam"
+                      required
+                      name="Je naam..."
+                      placeholder="Je naam..."
+                      register={register}
+                      hasError={!!errors.first_name}
+                      helperText={errors.first_name && "Vul je voornaam in"}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={4}>
                     <Input
-                        label="Woonplaats"
-                        required
-                        name="Je e-mailadres..."
-                        placeholder="Je woonplaats..."
-                        register={register}
-                        hasError={!!errors.last_name}
-                        helperText={errors.last_name && "Vul je achternaam in"}
-                      />
-                    </Grid>
-                    <Grid item xs={12} md={4}>
-                      <Input
-                        label="Geslacht"
-                        type="email"
-                        required
-                        name="email"
-                        placeholder="Jouw geslacht..."
-                        register={register}
-                        hasError={!!errors.email}
-                        helperText={errors.email && "Vul je e-mail adres in"}
-                      />
-                    </Grid>
-                    <Grid item xs={12} md={4}>
-                      <Input
-                        label="Thema"
-                        type="text"
-                        required
-                        name="city"
-                        placeholder="Thema..."
-                        register={register}
-                        hasError={!!errors.city}
-                        helperText={errors.city && "Vul je woonplaats in"}
-                      />
-                    </Grid>
+                      label="Leeftijd"
+                      required
+                      name="Jouw leeftijd..."
+                      placeholder="Jouw leeftijd..."
+                      register={register}
+                      hasError={!!errors.last_name}
+                      helperText={errors.last_name && "Vul je achternaam in"}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <Input
+                      label="E-mail"
+                      required
+                      name="Je e-mailadres..."
+                      placeholder="Je e-mailadres..."
+                      register={register}
+                      hasError={!!errors.last_name}
+                      helperText={errors.last_name && "Vul je achternaam in"}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <Input
+                      label="Woonplaats"
+                      required
+                      name="Je e-mailadres..."
+                      placeholder="Je woonplaats..."
+                      register={register}
+                      hasError={!!errors.last_name}
+                      helperText={errors.last_name && "Vul je achternaam in"}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <Input
+                      label="Geslacht"
+                      type="email"
+                      required
+                      name="email"
+                      placeholder="Jouw geslacht..."
+                      register={register}
+                      hasError={!!errors.email}
+                      helperText={errors.email && "Vul je e-mail adres in"}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <Input
+                      label="Thema"
+                      type="text"
+                      required
+                      name="city"
+                      placeholder="Thema..."
+                      register={register}
+                      hasError={!!errors.city}
+                      helperText={errors.city && "Vul je woonplaats in"}
+                    />
+                  </Grid>
 
-                    <Grid item xs={12}>
-                     
-                      <Upload 
-                        label="Upload bestand"
-                        name="file"
-                        onChange={handleFileChange}
-                      />
-                    </Grid>
+                  <Grid item xs={12}>
+                    <Upload
+                      label="Upload bestand"
+                      name="file"
+                      onChange={handleFileChange}
+                    />
+                  </Grid>
 
-                    <Grid item xs={12}>
+                  <Grid item xs={12}>
                     <TextArea
-                                      label="Mijn vraag"
-                                      name="content"
-                                      placeholder="Vul hier jouw vraag in..."
-                                      required
-                                      register={register}
-                                      hasError={!!errors.content}
-                                      helperText={!!errors.content ? "Dit veld is verplicht" : ""}
-                       
-                      />
-                    </Grid>
+                      label="Mijn vraag"
+                      name="content"
+                      placeholder="Vul hier jouw vraag in..."
+                      required
+                      register={register}
+                      hasError={!!errors.content}
+                      helperText={
+                        !!errors.content ? "Dit veld is verplicht" : ""
+                      }
+                    />
+                  </Grid>
 
-                    <Grid item xs={12}>
-                      {/* <Grid item xs={12}>
+                  <Grid item xs={12}>
+                    {/* <Grid item xs={12}>
                         <P variant="light" style={{ color: "#fff" }}>
                           * Verplichte velden
                         </P>
                       </Grid> */}
-                      <Grid item xs={12}>
-                        <Button
-                          loading={isLoading}
-                          disabled={isSubmitted}
-                          className="w-[100] bg-[#fff] text-[#FF971D] text-[18px] font-[400]"
-                        >
-                          {isLoading && "Bezig..."}
-                          {isSubmitted && "Verzonden"}
-                          {!isLoading && !isSubmitted && "Versturen"}
-                        </Button>
-                      </Grid>
+                    <Grid item xs={12}>
+                      <Button
+                        loading={isLoading}
+                        disabled={isSubmitted}
+                        className="w-[100] bg-[#fff] text-[#FF971D] text-[18px] font-[400]"
+                      >
+                        {isLoading && "Bezig..."}
+                        {isSubmitted && "Verzonden"}
+                        {!isLoading && !isSubmitted && "Versturen"}
+                      </Button>
                     </Grid>
-
-                   
                   </Grid>
-                </form>
-              ) : (
-                <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16 mx-auto">
-                  <H2 variant="bold">Bedankt voor je aanmelding!</H2>
-                  <P>We nemen zo snel mogelijk contact met je op.</P>
-                </div>
-              )}
-            </div>
-          </Container>
+                </Grid>
+              </form>
+            ) : (
+              <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16 mx-auto">
+                <H2 variant="bold">Bedankt voor je aanmelding!</H2>
+                <P>We nemen zo snel mogelijk contact met je op.</P>
+              </div>
+            )}
+          </div>
+        </Container>
       </main>
     </PageWrapper>
   );

@@ -159,8 +159,6 @@ p {
   width: 31.5% !important;
 }
 
-
-
 /* ========================for desgning========================= */
 .blogs-indivi-bg-color article {
   background-color: #3fc7b4;
@@ -200,7 +198,8 @@ p {
   padding: 5px 15px !important;
 }
 
-.forum-from-dz label, .forum-from-dz label span{
+.forum-from-dz label,
+.forum-from-dz label span {
   font-weight: 400 !important;
 }
 
@@ -208,13 +207,13 @@ p {
     row-gap: 13px;
 } */
 
-.upload-button-dz{
-  background: #FFFFFF;
-  border: 1px dashed #C7C7C7;
+.upload-button-dz {
+  background: #ffffff;
+  border: 1px dashed #c7c7c7;
   border-radius: 8px;
   height: 49px;
   position: relative;
-  color: #C7C7C7;
+  color: #c7c7c7;
   font-size: 18px;
   font-weight: 400;
   text-align: center;
@@ -223,7 +222,7 @@ p {
   justify-content: center;
 }
 
-.upload-button-dz input{
+.upload-button-dz input {
   position: absolute;
   width: 100%;
   opacity: 0;

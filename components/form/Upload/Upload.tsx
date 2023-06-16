@@ -48,7 +48,7 @@ type Props = {
 };
 
 const InputWrapper = styled.div<InputStateType>`
-label {
+  label {
     margin-bottom: 16px;
     font-weight: 700;
     font-size: 18px;
@@ -84,15 +84,15 @@ export default function Upload({
         )}
         <div className="upload-button-dz">
           Upload een afbeelding
-        <input
-          type="file"
-          placeholder={placeholder}
-          onChange={onChange}
-          defaultValue={defaultValue}
-          name={name}
-          required={required}
-          {...rest}
-        />
+          <input
+            type="file"
+            placeholder={placeholder}
+            onChange={onChange}
+            defaultValue={defaultValue}
+            name={name}
+            required={required}
+            {...rest}
+          />
         </div>
         {!!iconRight && (
           <IconWrapper style={{ marginLeft: 10 }}>{iconRight}</IconWrapper>

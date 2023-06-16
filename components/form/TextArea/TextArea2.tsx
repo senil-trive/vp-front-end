@@ -182,7 +182,7 @@ export default function TextArea({
           )}
         </label>
       )}
-      <div style={{ borderColor: '#fff' }}>
+      <div style={{ borderColor: "#fff" }}>
         <textarea
           rows={7}
           ref={inputRef}
