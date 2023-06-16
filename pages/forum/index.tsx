@@ -179,7 +179,7 @@ export default function Forum({
       >
         <Container>
           <Grid container>
-            <Grid item xs={12} md={8} className="w-[100%] mx-auto">
+            <Grid item xs={12} md={8} className="w-[100%] mx-auto  mt-[-80px]">
               <TitleWithHighlights
                 text={pageData?.page_title ?? ""}
                 color="white"
@@ -227,7 +227,7 @@ export default function Forum({
       </Hero>
 
       <main style={{ marginBottom: "80px" }}>
-        <Container className="mb-[80px] mt-[-120px] relative md:mb-[120px]">
+        <Container className="mb-[80px] mt-[-79px] relative md:mb-[120px]">
           <div
             style={{
               backgroundImage: "url(" + "/forum-bg.png" + ")",
