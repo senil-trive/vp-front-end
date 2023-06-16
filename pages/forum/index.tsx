@@ -1,7 +1,7 @@
 import { colors, Container, Grid } from "@mui/material";
 import { Hero, Pagination } from "../../components/layout";
-import { H4, P, TitleWithHighlights } from "../../components/typography";
-import React, { useEffect, useState } from "react";
+import { H4,H2, P, TitleWithHighlights } from "../../components/typography";
+import React, { useEffect, useState,ChangeEvent } from "react";
 import {
   getContentTags,
   getForumOverviewPageData,
@@ -9,10 +9,15 @@ import {
 } from "../../utils/api";
 
 import Button from "../../components/buttons/Button";
+import Section from "../../components/layout/Section/Section";
+import Dropdown from "../../components/form/Dropdown/Dropdown";
+import { GENDERS } from "../../constants/genders";
 import { CircleSpinner } from "react-spinners-kit";
 import CollectionSearchBar from "../../components/form/CollectionSearchBar/CollectionSearchBar";
 import { ForumPageProps } from "../../types/pageTypes";
 import ForumPost from "../../components/content-types/ForumPost/ForumPost";
+import { ForumRequestType } from "../../types/forumrequestType";
+import { postVolunteerApplication } from "../../utils/api";
 import Link from "next/link";
 import { POST_PER_PAGE } from "../../constants/app-configs";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
@@ -23,7 +28,9 @@ import ChevronRight from "../../components/icons/ChevronRight/ChevronRight";
 import Image from "next/image";
 import Input from "../../components/form/Input/Input";
 import SearchIcon from "../../components/icons/SearchIcon/SearchIcon";
-
+import { useForm } from "react-hook-form";
+import TextArea from "../../components/form/TextArea/TextArea2";
+import Upload from "../../components/form/Upload/Upload";
 const forumSortOptions = [
   { name: "Titel (a-z)", value: "content" },
   { name: "Titel (z-a)", value: "-content" },
@@ -77,7 +84,27 @@ export default function Forum({
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ForumRequestType>();
+
+  const submitForm = async (data: ForumRequestType) => {
+    setIsLoading(true);
+    try {
+      await postVolunteerApplication(data);
+      setIsSubmitted(true);
+    } catch (error) {
+      setIsSubmitted(false);
+    }
+
+    setIsLoading(false);
+  };
   const changePage = (index: number) => {
     if (index <= 1) {
       setCurrentPage(1);
@@ -94,6 +121,14 @@ export default function Forum({
 
   const handleSort = (x: string) => {
     setSort(x);
+  };
+
+
+  
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files && e.target.files[0];
+    setSelectedFile(file || null);
   };
 
   useEffect(() => {
@@ -139,7 +174,7 @@ export default function Forum({
     >
       <Hero
         center
-        imageUrl={parseImageURL(pageData?.hero_image?.id, 1400)}
+        imageUrl={"/header_forum.png"}
         style={{
           minHeight: 649,
           position: "relative",
@@ -165,27 +200,21 @@ export default function Forum({
                   textAlign: "center",
                   fontSize: "18px",
                   fontWeight: "300",
+                  marginBottom: "6px",
                 }}
               >
                 {pageData?.page_subtitle}
               </P>
 
-              <div style={{ display: "flex", gap: 32 }}>
-                <Button
-                  href="/forum/stel-een-vraag"
-                  style={{
-                    backgroundColor: "#3FC7B4",
-                    fontSize: "18px",
-                    fontWeight: "300",
-                  }}
-                >
-                  {pageData?.submit_question_button_label}
-                </Button>
+              <div style={{ display: "flex", gap: 32, justifyContent: "center" }}>
+                
                 <Button
                   variant="white"
                   filled={false}
                   href="/ik-wil-een-buddy"
                   style={{
+                    width: "auto",
+                    padding: "16px 64px",
                     fontSize: "18px",
                     fontWeight: "300",
                     border: "1px solid #fff",
@@ -200,126 +229,141 @@ export default function Forum({
       </Hero>
 
       <main style={{ marginBottom: "80px" }}>
-        <div
-          style={{
-            marginBottom: 32,
-            transform: "translateY(calc(-50% - 24px))",
-          }}
-        >
-          <TagList
-            tags={tags}
-            selected={selectedTag}
-            prefix={
-              <H4
-                style={{
-                  whiteSpace: "nowrap",
-                  display: "flex",
-                  alignItems: "flex-start",
-                  gap: "5px",
-                }}
-              >
-                Onderwerp{" "}
-                <span
-                  style={{
-                    marginTop: "-6px",
-                  }}
-                >
-                  👉🏾
-                </span>
-              </H4>
-            }
-            suffix={<ChevronRight />}
-            onSelect={(x: string) => {
-              setSelectedTag(x);
-            }}
-          />
-        </div>
-
-        <Container style={{ margin: "56px auto" }}>
-          <Grid container spacing={"34px"}>
-            <>
-              <Grid item xs={12} md={9}>
-                <P color="primary">
-                  {totalCount} {totalCount === 1 ? "vraag" : "vragen"}
-                </P>
-              </Grid>
-              <Grid item xs={12} md={3}>
-                <SortBar sortOptions={forumSortOptions} onSort={handleSort} />
-              </Grid>
-              <Grid item xs={12} md={8}>
-                <div className="flex flex-col h-[100%]">
-                  <Image
-                    src="/Imageforum.png"
-                    alt="forum search"
-                    fill
-                    className="relative w-[100%] h-[120px]"
-                  />
-                  <div className="bg-[#FE517E] h-[246px] p-[32px]">
-                    <div>
-                      <TitleWithHighlights
-                        text={"je hoeft het niet alleen te doen"}
-                        color="white"
-                        className="text-[32px]"
+      <Container className="mb-[80px] mt-[-120px] relative md:mb-[120px]">
+      <div style={{
+                  backgroundImage: "url(" + "/forum-bg.png" + ")",
+                  backgroundPosition: 'center',
+                  backgroundSize: 'cover',
+                  backgroundRepeat: 'no-repeat',
+                  padding: "32px 32px",
+                  width: "1118px",
+                  margin: "0 auto",
+                  borderRadius: "8px",
+               }}>
+              {!isSubmitted ? (
+                <form className="forum-from-dz" onSubmit={handleSubmit(submitForm)}>
+                  <Grid container spacing="33px" style={{rowGap:"13px"}}>
+                    <Grid item xs={12} md={4}>
+                      <Input
+                        label="Voornaam"
+                        required
+                        name="Je naam..."
+                        placeholder="Je naam..."
+                        register={register}
+                        hasError={!!errors.first_name}
+                        helperText={errors.first_name && "Vul je voornaam in"}
                       />
-                      <div className="md:flex md:items-center">
-                        <div className="w-[180px] text-[18px] text-[#fff]">
-                          Doorzoek het forum:
-                        </div>
-                        <div className="mt-[20px] flex-1 md:mt-[0px]">
-                          <Input
-                            iconLeft={<SearchIcon />}
-                            defaultValue={search}
-                            placeholder={"Zoek in het forum.."}
-                            onChange={handleSearch}
-                            borderColor="primary"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Grid>
-              {isLoading ? (
-                <CircleSpinner size={34} color="#fff" />
-              ) : (
-                <>
-                  {posts.map((item, index) => (
-                    <Grid key={index} item xs={12} md={4}>
-                      <Link href={`/forum/${item.slug}`}>
-                        <ForumPost
-                          truncateContent
-                          fullHeight={false}
-                          gender={item.user_gender}
-                          age={item.user_age}
-                          image={item.user_image?.id || "asad"}
-                          authorType={item.user_name}
-                          postDate={new Date(item.date_created)}
-                          tags={
-                            item.categories?.map(
-                              (cat) => cat.categories_id?.name
-                            ) ?? []
-                          }
-                          title={
-                            item.title ?? "Titel moet in CMS worden ingevoerd"
-                          }
-                          comments={item.comments.length}
-                          content={item.content}
-                        />
-                      </Link>
                     </Grid>
-                  ))}
-                </>
+                    <Grid item xs={12} md={4}>
+                      <Input
+                        label="Leeftijd"
+                        required
+                        name="Jouw leeftijd..."
+                        placeholder="Jouw leeftijd..."
+                        register={register}
+                        hasError={!!errors.last_name}
+                        helperText={errors.last_name && "Vul je achternaam in"}
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                    <Input
+                        label="E-mail"
+                        required
+                        name="Je e-mailadres..."
+                        placeholder="Je e-mailadres..."
+                        register={register}
+                        hasError={!!errors.last_name}
+                        helperText={errors.last_name && "Vul je achternaam in"}
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                    <Input
+                        label="Woonplaats"
+                        required
+                        name="Je e-mailadres..."
+                        placeholder="Je woonplaats..."
+                        register={register}
+                        hasError={!!errors.last_name}
+                        helperText={errors.last_name && "Vul je achternaam in"}
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                      <Input
+                        label="Geslacht"
+                        type="email"
+                        required
+                        name="email"
+                        placeholder="Jouw geslacht..."
+                        register={register}
+                        hasError={!!errors.email}
+                        helperText={errors.email && "Vul je e-mail adres in"}
+                      />
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                      <Input
+                        label="Thema"
+                        type="text"
+                        required
+                        name="city"
+                        placeholder="Thema..."
+                        register={register}
+                        hasError={!!errors.city}
+                        helperText={errors.city && "Vul je woonplaats in"}
+                      />
+                    </Grid>
+
+                    <Grid item xs={12}>
+                     
+                      <Upload 
+                        label="Upload bestand"
+                        name="file"
+                        onChange={handleFileChange}
+                      />
+                    </Grid>
+
+                    <Grid item xs={12}>
+                    <TextArea
+                                      label="Mijn vraag"
+                                      name="content"
+                                      placeholder="Vul hier jouw vraag in..."
+                                      required
+                                      register={register}
+                                      hasError={!!errors.content}
+                                      helperText={!!errors.content ? "Dit veld is verplicht" : ""}
+                       
+                      />
+                    </Grid>
+
+                    <Grid item xs={12}>
+                      {/* <Grid item xs={12}>
+                        <P variant="light" style={{ color: "#fff" }}>
+                          * Verplichte velden
+                        </P>
+                      </Grid> */}
+                      <Grid item xs={12}>
+                        <Button
+                          loading={isLoading}
+                          disabled={isSubmitted}
+                          className="w-[100] bg-[#fff] text-[#FF971D] text-[18px] font-[400]"
+                        >
+                          {isLoading && "Bezig..."}
+                          {isSubmitted && "Verzonden"}
+                          {!isLoading && !isSubmitted && "Versturen"}
+                        </Button>
+                      </Grid>
+                    </Grid>
+
+                   
+                  </Grid>
+                </form>
+              ) : (
+                <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16 mx-auto">
+                  <H2 variant="bold">Bedankt voor je aanmelding!</H2>
+                  <P>We nemen zo snel mogelijk contact met je op.</P>
+                </div>
               )}
-            </>
-          </Grid>
-        </Container>
-        {totalCount / POST_PER_PAGE > 2 && (
-          <Pagination
-            total={Math.ceil(totalCount / POST_PER_PAGE)}
-            truncated
-            onChange={changePage}
-          />
-        )}
+            </div>
+          </Container>
       </main>
     </PageWrapper>
   );
