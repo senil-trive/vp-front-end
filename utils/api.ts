@@ -138,7 +138,7 @@ export const getComments = async (
 export const getMenuItems = async () => {
   try {
     const res = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/main_nav_items?fields=children.*.*.*.*,parent.*,*&filter[status][_eq]=published`,
+      `${ENDPOINTS.COLLECTIONS}/main_nav_items?fields=*.*.*.*&filter[status][_eq]=published`,
       {
         method: "GET",
         headers: {

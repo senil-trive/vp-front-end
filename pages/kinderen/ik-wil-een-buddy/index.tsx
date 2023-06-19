@@ -64,7 +64,7 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
           description: pageData?.seo_description
             ? pageData?.seo_description
             : pageData?.page_subtitle,
-          canonical: "https://www.villapinedo.nl/kinderen/ik-wil-een-buddy/",
+          canonical: "https://www.villapinedo.nl/ik-wil-een-buddy/",
           image: pageData?.seo_image
             ? parseImageURL(pageData?.seo_image?.id)
             : "",

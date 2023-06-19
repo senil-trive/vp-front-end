@@ -178,7 +178,7 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
                       bg={letterContent.bg_color}
                       content={letterContent.description}
                       imgSrc={parseImageURL(letterContent?.image?.id)}
-                      fileSrc={`/kinderen/open-brieven/${letterContent.slug}`}
+                      fileSrc={`/open-brieven/${letterContent.slug}`}
                     />
                   </motion.div>
                 );
@@ -196,7 +196,7 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
                     <ForumPost
                       showButton
                       fullHeight={fullHeightItems}
-                      buttonUrl={`/kinderen/forum/${forumContent.slug}`}
+                      buttonUrl={`/forum/${forumContent.slug}`}
                       truncateContent
                       gender={forumContent.user_gender}
                       image={parseImageURL(forumContent?.user_image?.id)}
@@ -236,7 +236,7 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
                           : ""
                       }
                       embedSrc={blogContent.youtube_embed}
-                      link={`/kinderen/verhalen/${blogContent.slug}`}
+                      link={`/verhalen/${blogContent.slug}`}
                       type={blogContent.type}
                       author={blogContent.author}
                       description={"blog"}

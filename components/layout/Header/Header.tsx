@@ -91,6 +91,7 @@ export default function Header() {
   });
 
   const toggleMenu = (menu: MenuItem) => {
+    console.log(selected, "toggle");
     if (selected?.id === menu.id) {
       return setSelected(() => undefined);
     }
@@ -112,7 +113,7 @@ export default function Header() {
     }
   }, [isLoading, menuItems]);
 
-  console.log(menuItems);
+  console.log(menuItems, "menus");
   return (
     <StyledHeader ref={elRef}>
       <div className="desktop-menu new-menu">

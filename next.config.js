@@ -20,22 +20,22 @@ const moduleExports = {
        */
       {
         source: "/blog",
-        destination: "/kinderen/verhalen",
+        destination: "/verhalen",
         permanent: false,
       },
       {
         source: "/blog/:path*",
-        destination: "/kinderen/verhalen/:path*",
+        destination: "/verhalen/:path*",
         permanent: false,
       },
       {
         source: "/filmpjes/:path*",
-        destination: "/kinderen/verhalen/:path*",
+        destination: "/verhalen/:path*",
         permanent: false,
       },
       {
         source: "/in-de-media/:path*",
-        destination: "/kinderen/verhalen/:path*",
+        destination: "/verhalen/:path*",
         permanent: false,
       },
 
@@ -44,17 +44,17 @@ const moduleExports = {
        */
       {
         source: "/forum",
-        destination: "/kinderen/forum",
+        destination: "/forum",
         permanent: false,
       },
       {
         source: "/stel-een-vraag/",
-        destination: "/kinderen/forum/stel-een-vraag/",
+        destination: "/forum/stel-een-vraag/",
         permanent: false,
       },
       {
         source: "/forum/:path*",
-        destination: "/kinderen/forum/:path*",
+        destination: "/forum/:path*",
         permanent: false,
       },
 
@@ -63,57 +63,53 @@ const moduleExports = {
        */
       {
         source: "/open-brieven",
-        destination: "/kinderen/open-brieven",
+        destination: "/open-brieven",
         permanent: false,
       },
       {
         source: "/open-brief-aan-alle-kinderen-van-gescheiden-ouders",
-        destination:
-          "/kinderen/open-brieven/aan-alle-kinderen-met-gescheiden-ouders",
+        destination: "/open-brieven/aan-alle-kinderen-met-gescheiden-ouders",
         permanent: false,
       },
       {
         source: "/open-brief-aan-alle-gescheiden-ouders",
-        destination: "/kinderen/open-brieven/voor-je-ouders",
+        destination: "/open-brieven/voor-je-ouders",
         permanent: false,
       },
       {
         source: "/open-brief-aan-alle-nieuwe-partners-van-gescheiden-ouders",
-        destination:
-          "/kinderen/open-brieven/voor-de-nieuwe-partner-van-papa-of-mama",
+        destination: "/open-brieven/voor-de-nieuwe-partner-van-papa-of-mama",
         permanent: false,
       },
       {
         source: "/open-brief-aan-alle-nieuwe-partners-van-gescheiden-ouders",
-        destination:
-          "/kinderen/open-brieven/voor-de-nieuwe-partner-van-papa-of-mama",
+        destination: "/open-brieven/voor-de-nieuwe-partner-van-papa-of-mama",
         permanent: false,
       },
       {
         source: "/aan-alle-volwassenen",
-        destination: "/kinderen/open-brieven/voor-je-familie-en-vrienden",
+        destination: "/open-brieven/voor-je-familie-en-vrienden",
         permanent: false,
       },
       {
         source: "/open-brief-aan-alle-leraren",
-        destination: "/kinderen/open-brieven/voor-je-leraar",
+        destination: "/open-brieven/voor-je-leraar",
         permanent: false,
       },
       {
         source:
           "/open-brief-gescheiden-ouders-met-wie-wij-het-contact-even-zijn-verloren",
-        destination:
-          "/kinderen/open-brieven/voor-als-je-even-geen-contact-hebt",
+        destination: "/open-brieven/voor-als-je-even-geen-contact-hebt",
         permanent: false,
       },
       {
         source: "/aan-alle-gescheiden-ouders-met-een-kind-in-groep-8",
-        destination: "/kinderen/open-brieven/voor-als-je-in-groep-8-zit",
+        destination: "/open-brieven/voor-als-je-in-groep-8-zit",
         permanent: false,
       },
       {
         source: "/aan-alle-gescheiden-ouders-met-een-eindexamenkandidaat",
-        destination: "/kinderen/open-brieven/voor-als-je-eindexamen-doet",
+        destination: "/open-brieven/voor-als-je-eindexamen-doet",
         permanent: false,
       },
 
@@ -121,14 +117,14 @@ const moduleExports = {
       // {
       //   source:
       //     "https://www.villapinedo.nl/wp-content/uploads/2022/07/Open-Brief-Villa-Pinedo-Aan-alle-studenten-met-gescheiden-ouders.pdf",
-      //   destination: "/kinderen/open-brieven/??",
+      //   destination: "/open-brieven/??",
       //   permanent: false,
       // },
       // Aan alle kinderen met gescheiden ouders Lieve jij,
       // {
       //   source:
       //     "https://www.villapinedo.nl/wp-content/uploads/2022/07/Open-Brief-Aan-alle-kinderen-met-gescheiden-ouders-met-QR.pdf",
-      //   destination: "/kinderen/open-brieven/??",
+      //   destination: "/open-brieven/??",
       //   permanent: false,
       // },
 
@@ -137,7 +133,7 @@ const moduleExports = {
        */
       {
         source: "/informatie-over-buddy",
-        destination: "/kinderen/klets-met-een-buddy",
+        destination: "/klets-met-een-buddy",
         permanent: false,
       },
 
