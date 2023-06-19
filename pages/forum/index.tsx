@@ -1,4 +1,4 @@
-import { colors, Container, Grid } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import { Hero, Pagination } from "../../components/layout";
 import { H4, P, TitleWithHighlights } from "../../components/typography";
 import React, { useEffect, useState } from "react";
@@ -10,28 +10,17 @@ import {
 
 import Button from "../../components/buttons/Button";
 import { CircleSpinner } from "react-spinners-kit";
-import CollectionSearchBar from "../../components/form/CollectionSearchBar/CollectionSearchBar";
 import { ForumPageProps } from "../../types/pageTypes";
 import ForumPost from "../../components/content-types/ForumPost/ForumPost";
 import Link from "next/link";
 import { POST_PER_PAGE } from "../../constants/app-configs";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
-import SortBar from "../../components/form/SortBar/SortBar";
 import TagList from "../../components/buttons/TagList/TagList";
 import parseImageURL from "../../utils/parseImageURL";
 import ChevronRight from "../../components/icons/ChevronRight/ChevronRight";
 import Image from "next/image";
 import Input from "../../components/form/Input/Input";
 import SearchIcon from "../../components/icons/SearchIcon/SearchIcon";
-
-const forumSortOptions = [
-  { name: "Titel (a-z)", value: "content" },
-  { name: "Titel (z-a)", value: "-content" },
-  { name: "Auteur (a-z)", value: "user_name" },
-  { name: "Auteur (z-a)", value: "-user_name" },
-  { name: "Datum (oud-nieuw)", value: "date_created" },
-  { name: "Datum (nieuw-oud)", value: "-date_created" },
-];
 
 export const getServerSideProps = async () => {
   try {
@@ -45,6 +34,8 @@ export const getServerSideProps = async () => {
     const pageRes = await pageReq.json();
     const forumRes = await forumReq.json();
     const tagsRes = await tagsReq.json();
+
+    console.log(forumRes);
     return {
       props: {
         pageData: pageRes.data || null,
@@ -76,7 +67,6 @@ export default function Forum({
   const [selectedTag, setSelectedTag] = useState<string>("");
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
-  const [sort, setSort] = useState("");
 
   const changePage = (index: number) => {
     if (index <= 1) {
@@ -91,10 +81,6 @@ export default function Forum({
     setCurrentPage(1);
   };
 
-  const handleSort = (x: string) => {
-    setSort(x);
-  };
-
   useEffect(() => {
     const getPaginatedPost = async () => {
       setIsLoading(true);
@@ -103,7 +89,6 @@ export default function Forum({
           postPerPage: POST_PER_PAGE,
           page: currentPage,
           search,
-          sort,
           meta: "filter_count",
           filter:
             selectedTag.length > 0
@@ -122,7 +107,7 @@ export default function Forum({
     };
 
     getPaginatedPost();
-  }, [currentPage, search, sort, selectedTag]);
+  }, [currentPage, search, selectedTag]);
   return (
     <PageWrapper
       seo={{
@@ -143,40 +128,34 @@ export default function Forum({
           minHeight: 649,
           position: "relative",
         }}
+        mobileImageHeight={772}
       >
-        <Container>
+        <Container className="max-w-[1384px] mt-[40px] md:mt-[0]">
           <Grid container>
-            <Grid item xs={12} md={8} className="w-[100%] mx-auto">
+            <Grid item xs={12} md={10} className="w-[100%] mx-auto">
               <TitleWithHighlights
                 text={pageData?.page_title ?? ""}
                 color="white"
-                style={{
-                  textAlign: "center",
-                  padding: "0 24px",
-                  fontSize: "64px",
-                  fontWeight: "400",
-                }}
+                className={
+                  "text-[46px] font-[400] md:text-[64px] md:text-center"
+                }
               />
               <P
                 color="white"
                 variant="light"
-                style={{
-                  textAlign: "center",
-                  fontSize: "18px",
-                  fontWeight: "300",
-                }}
+                className={
+                  "text-[16px] font-[300] leading-[160%] md:text-[18px] md:text-center"
+                }
               >
                 {pageData?.page_subtitle}
               </P>
 
-              <div style={{ display: "flex", gap: 32 }}>
+              <div className="mt-[40px] w-[100%] mx-auto md:w-[70%] sm:flex sm:gap-5">
                 <Button
+                  variant="white"
+                  filled={false}
                   href="/forum/stel-een-vraag"
-                  style={{
-                    backgroundColor: "#3FC7B4",
-                    fontSize: "18px",
-                    fontWeight: "300",
-                  }}
+                  className="w-[100%] text-[18px] font-[300] border-[1px] border-[#fff] hover:bg-[#3FC7B4] hover:border-[#3FC7B4]"
                 >
                   {pageData?.submit_question_button_label}
                 </Button>
@@ -184,11 +163,7 @@ export default function Forum({
                   variant="white"
                   filled={false}
                   href="/ik-wil-een-buddy"
-                  style={{
-                    fontSize: "18px",
-                    fontWeight: "300",
-                    border: "1px solid #fff",
-                  }}
+                  className="w-[100%] mt-3 text-[18px] font-[300] border-[1px] border-[#fff] hover:bg-[#3FC7B4] hover:border-[#3FC7B4] sm:mt-0"
                 >
                   {pageData?.chat_button_label}
                 </Button>
@@ -199,66 +174,59 @@ export default function Forum({
       </Hero>
 
       <main style={{ marginBottom: "80px" }}>
-        <div
-          style={{
-            marginBottom: 32,
-            transform: "translateY(calc(-50% - 24px))",
-          }}
-        >
-          <TagList
-            tags={tags}
-            selected={selectedTag}
-            prefix={
-              <H4
-                style={{
-                  whiteSpace: "nowrap",
-                  display: "flex",
-                  alignItems: "flex-start",
-                  gap: "5px",
-                }}
-              >
-                Onderwerp{" "}
-                <span
+        <Container className="max-w-[1384px] p-[0]">
+          <div
+            style={{
+              marginBottom: 32,
+              transform: "translateY(calc(-50% - 24px))",
+            }}
+          >
+            <TagList
+              tags={tags}
+              selected={selectedTag}
+              prefix={
+                <H4
                   style={{
-                    marginTop: "-6px",
+                    whiteSpace: "nowrap",
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: "5px",
                   }}
                 >
-                  👉🏾
-                </span>
-              </H4>
-            }
-            suffix={<ChevronRight />}
-            onSelect={(x: string) => {
-              setSelectedTag(x);
-            }}
-          />
-        </div>
-
-        <Container style={{ margin: "56px auto" }}>
+                  Onderwerp{" "}
+                  <span
+                    className={
+                      "transform mt-[0px] rotate-[90deg] md:rotate-[0deg] md:mt-[-6px]"
+                    }
+                  >
+                    👉🏾
+                  </span>
+                </H4>
+              }
+              suffix={<ChevronRight />}
+              onSelect={(x: string) => {
+                setSelectedTag(x);
+              }}
+            />
+          </div>
+        </Container>
+        <Container className="max-w-[1384px] mt-[-90px] mx-[auto] md:mt-[0px] md:mb-[56px]">
           <Grid container spacing={"34px"}>
             <>
-              <Grid item xs={12} md={9}>
-                <P color="primary">
-                  {totalCount} {totalCount === 1 ? "vraag" : "vragen"}
-                </P>
-              </Grid>
-              <Grid item xs={12} md={3}>
-                <SortBar sortOptions={forumSortOptions} onSort={handleSort} />
-              </Grid>
               <Grid item xs={12} md={8}>
                 <div className="flex flex-col h-[100%]">
                   <Image
                     src="/Imageforum.png"
                     alt="forum search"
                     fill
-                    className="relative w-[100%] h-[120px]"
+                    className="relative w-[100%] h-[121px] rounded-t-[8px]"
                   />
-                  <div className="bg-[#FE517E] h-[246px] p-[32px]">
+                  <div className="bg-[#FE517E] h-[264px] p-[24px] md:p-[32px] rounded-b-[8px]">
                     <div>
                       <TitleWithHighlights
-                        text={"je hoeft het niet alleen te doen"}
+                        text={pageData?.search_bar_quote || ""}
                         color="white"
-                        className="text-[32px]"
+                        className="text-[30px] font-[400]"
                       />
                       <div className="md:flex md:items-center">
                         <div className="w-[180px] text-[18px] text-[#fff]">

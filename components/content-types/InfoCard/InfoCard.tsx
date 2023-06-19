@@ -60,7 +60,10 @@ const InfoCard: React.FC<InfoCardType> = ({
         )}
         <div className="info-card-footer p-[20px] md:py-[32px] md:px-[24px]">
           <div className="item-center">
-            <H2 style={{ color: "#fff", margin: "0px" }}>
+            <H2
+              style={{ color: "#fff", margin: "0px" }}
+              className="footer-title"
+            >
               {title}
               <Image
                 src={icon}

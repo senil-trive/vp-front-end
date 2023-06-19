@@ -83,7 +83,7 @@ export default function ForumComment({
             <P
               variant="helper"
               style={{ textAlign: "right", color: "#150F2F" }}
-              className="text-base font-avenir italic"
+              className="text-base font-avenir italic text-[16px] md:text-[18px]"
             >
               {formatDistance(postDate, new Date(), {
                 includeSeconds: false,
@@ -99,7 +99,9 @@ export default function ForumComment({
         <footer className="bg-white -mx-6 -mb-6 justify-start">
           <button className="flex mt-8" onClick={handleReply}>
             <ReplyIcon />
-            <span className="ml-2 font-avenir text-lg font-light">Reageer</span>
+            <span className="ml-2 font-avenir text-lg font-light text-[16px] md:text-[18px]">
+              Reageer
+            </span>
             {/* <FiMessageCircle size={24} color={colors.secondary.normal} /> */}
           </button>
           {/* <MoreIcon /> */}
