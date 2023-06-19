@@ -177,7 +177,7 @@ export default function Home({
     >
       <Hero
         center
-        imageUrl={parseImageURL(pageData?.hero_image?.id, 1440)}
+        imageUrl={"/home-hero.png"}
         style={{
           minHeight: 649,
           position: "relative",
