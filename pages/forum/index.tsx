@@ -87,7 +87,6 @@ export default function Forum({
   };
 
   const handleSearch = (x: any) => {
-    console.log(x);
     setSearch(x.target.value);
     setCurrentPage(1);
   };
