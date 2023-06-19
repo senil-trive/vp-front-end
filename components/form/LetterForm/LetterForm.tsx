@@ -68,7 +68,9 @@ const LetterForm = ({
       background: url("/chatBg.png");
       // background-size: cover;
       // background-repeat: no-repeat;
-      background-position: center center;
+      /* background-position: center center; */
+      background-size: 59%;
+      background-position: left 225px top -75px;
       z-index: 1;
     }
     display: flex;
@@ -95,8 +97,25 @@ const LetterForm = ({
         border: none;
       }
     }
+    @media (max-width: 768px) {
+      padding: 24px !important;
+      &:before {
+        background-size: 135%;
+        background-position: left -108px top 8px;
+      }
+      form > div > div {
+        padding: 14px 0 !important;
+      }
+      .form-wrapper {
+        margin: auto !important;
+        width: inherit;
+      }
+      label {
+        margin-bottom: 6px;
+        line-height: 130%;
+      }
+    }
   `;
-  console.log(errors);
   return (
     <Section
       backgroundColor="white"
@@ -119,7 +138,7 @@ const LetterForm = ({
             </H2>
           </div>
           <form onSubmit={handleSubmit(onSubmit)} className="flex h-[100%]">
-            <Grid container spacing="33px">
+            <Grid container spacing={"33"} className="form-wrapper">
               <Grid item xs={12} md={6}>
                 <Input
                   label="Voornaam"

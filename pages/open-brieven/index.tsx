@@ -87,7 +87,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
             }}
             mobileImageHeight={572}
           >
-            <div className="flex flex-col items-center justify-center text-center max-w-4xl  mb-0 mt-[-80px] md:mt-[-40px]">
+            <div className="flex flex-col max-w-2xl md:items-center md:justify-center md:text-center md:max-w-4xl mb-0 mt-[-80px] md:mt-[-40px]">
               <TitleWithHighlights
                 //highlightColor="info"
                 text={pageData?.page_title}
@@ -99,7 +99,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                   fontStyle: `normal`,
                   lineHeight: `140%`,
                 }}
-                className="text-[#fff] text-[46px] font-[400] md:text-[64px]"
+                className="text-[#fff] m-[0px] text-[46px] font-[400] md:text-[64px]"
               />
               <P
                 style={{
@@ -110,6 +110,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                   fontSize: `18px`,
                   lineHeight: `160%`,
                   color: `white`,
+                  margin: 0,
                 }}
               >
                 {pageData?.page_subtitle}
@@ -142,16 +143,6 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                 )}
 
                 {pageData?.highlighted_letter && (
-                  // <BriefItem
-                  //   key={`a23y2u0`}
-                  //   title={pageData?.highlighted_letter?.title}
-                  //   content={pageData?.highlighted_letter?.description}
-                  //   imgSrc={parseImageURL(
-                  //     pageData?.highlighted_letter?.image?.id
-                  //   )}
-                  //   fileSrc={`/kinderen/open-brieven/${pageData?.highlighted_letter?.slug}`}
-                  //   bg={`#006EF7`}
-                  // />
                   <InfoCard
                     variant="primary"
                     imageUrl={parseImageURL(
@@ -199,12 +190,11 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
               </div>
             </Container>
             <Container maxWidth="xl" className="open-brieven-font">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-20">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-20">
                 {lettersData.map((letter: Letter) => (
                   <BriefItem
                     key={letter.id}
                     title={letter.title}
-                    // titleHighlighted={letter.title_highlighted}
                     content={letter.description}
                     imgSrc={parseImageURL(letter.image?.id)}
                     fileSrc={`/open-brieven/${letter.slug}`}

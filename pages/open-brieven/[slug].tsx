@@ -1,27 +1,23 @@
-import { H3, P, TitleWithHighlights } from "../../components/typography";
-import React, { useState } from "react";
+import { H3, TitleWithHighlights } from "../../components/typography";
+import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-
 import BreadCrumbs from "../../components/layout/BreadCrumbs/BreadCrumbs";
 import BriefItem from "../../components/content-types/BriefItem/BriefItem";
-import Button from "../../components/buttons/Button";
-import { Container, Grid } from "@mui/material";
+import { Container } from "@mui/material";
 import ENDPOINTS from "../../constants/endpoints";
-import { FiCheck } from "react-icons/fi";
 import { GetServerSidePropsContext } from "next";
 import { Hero } from "../../components/layout";
-import Input from "../../components/form/Input/Input";
 import { Letter } from "../../types/content-types/Letter.type";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import { parseFileURL } from "../../utils/parseFileURL";
 import parseHTMLtoReact from "../../utils/parseHTMLtoReact";
 import parseImageURL from "../../utils/parseImageURL";
 import { getComments, postLetterSubscription } from "../../utils/api";
-import { useTheme } from "styled-components";
 import LetterForm from "../../components/form/LetterForm/LetterForm";
 import { LetterDownloadType } from "../../types/forumTypes";
 import CommentForm from "../../components/form/CommentForm/CommentForm";
 import Image from "next/image";
+import Tag from "../../components/buttons/Tag/Tag";
 
 type Props = {
   pageData: Letter;
@@ -86,9 +82,9 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     };
   } catch (error) {
     return {
-      // redirect: {
-      //   destination: "/500",
-      // },
+      redirect: {
+        destination: "/500",
+      },
     };
   }
 };
@@ -99,18 +95,9 @@ export default function LetterDetail({
   relatedLetters,
   comments,
 }: Props) {
-  console.log(pageData);
-
-  console.log(comments);
   const {
-    register,
-    handleSubmit,
     formState: { errors },
-    reset,
-    resetField,
   } = useForm<LetterDownloadType>();
-  console.log(register);
-  console.log(handleSubmit);
   const downloadFile = () => {
     window.open(parseFileURL(pageData.downloadable_document), "_blank");
   };
@@ -143,7 +130,7 @@ export default function LetterDetail({
   const onSubmit: SubmitHandler<any> = async (data) => {
     submitForm(data);
   };
-
+  console.log(pageData);
   return (
     <PageWrapper
       seo={{
@@ -163,7 +150,6 @@ export default function LetterDetail({
       }}
     >
       <BreadCrumbs />
-
       <Hero
         center
         imageUrl={parseImageURL(pageData?.image?.id, 1200)}
@@ -171,17 +157,20 @@ export default function LetterDetail({
           minHeight: 555,
           position: "relative",
         }}
-        mobileImageHeight={572}
+        mobileImageHeight={772}
       >
-        <div className="flex flex-col items-center justify-center text-center max-w-2xl md:max-w-4xl my-16">
+        <div className="flex flex-col md:items-center md:justify-center md:text-center max-w-2xl md:max-w-4xl md:my-16 mt-10">
+          <Tag className="w-[max-content] text-[#3FC7B4] font-[400] text-[18px] bg-[#fff] border-[#fff]">
+            {pageData?.categories[0] || "Category"}
+          </Tag>
           <TitleWithHighlights
             text={pageData?.detail_title}
             headerElement="h1"
             color="white"
-            className="text-[46px] font-[400] md:text-[64px]"
+            className="text-[42px] font-[400] md:text-[64px]"
           />
           <div className="mb-8 text-[#fff] text-[18px] font-[300] md:text-[20px]">
-            {pageData?.content && parseHTMLtoReact(pageData?.content)}
+            {pageData?.description && parseHTMLtoReact(pageData.description)}
           </div>
         </div>
       </Hero>
@@ -195,6 +184,7 @@ export default function LetterDetail({
             imgSrc={parseImageURL(undefined)}
             fileSrc={`/open-brieven/${undefined}`}
             bg={`#FE517E`}
+            btnHidden={true}
             className="flex-1"
           />
           <LetterForm
@@ -204,7 +194,7 @@ export default function LetterDetail({
         </Container>
       </section>
 
-      <main style={{ marginBottom: "80px" }}>
+      <main style={{ marginBottom: "80px" }} className="px-[8px] md:px-[0]">
         <CommentForm
           type="open_letter"
           comments={comments}
@@ -225,20 +215,24 @@ export default function LetterDetail({
               src="/opeletterbothead.png"
               alt="respond to letter"
               fill
-              className="relative h-[768px] mt-[600] md:h-[549px] md:mt-[-300px]"
+              className="relative h-[768px] mt-[-600px] md:h-[549px] md:mt-[-450px] object-cover"
             />
           </div>
         </section>
         <section>
           <Container>
-            <div className="flex flex-col items-center justify-center my-[100px]">
-              <H3 variant="bold" style={{ margin: 0 }}>
+            <div className="flex flex-col items-center justify-center mt-[80px]">
+              <H3
+                variant="bold"
+                style={{ margin: 0 }}
+                className="text-[36px] font-[400] md:text-[42px]"
+              >
                 Relevante brieven
               </H3>
             </div>
           </Container>
           <Container maxWidth="xl">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-20">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-[40px] md:my-[80px]">
               {relatedLetters.map((letter: Letter) => (
                 <BriefItem
                   key={letter.id}

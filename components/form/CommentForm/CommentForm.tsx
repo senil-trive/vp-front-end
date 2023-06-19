@@ -50,13 +50,7 @@ const SubmitForm = ({
 
   const submitForm = async (data: any) => {
     setIsLoading(true);
-
-    const body = {
-      ...data,
-      post_id: postId,
-      parent_comment: replyId,
-    };
-
+    const body = { ...data, post_id: postId, parent_comment: replyId };
     try {
       await postComment(type, body);
       onIsSubmit(true);
@@ -70,7 +64,6 @@ const SubmitForm = ({
   const onSubmit: SubmitHandler<ForumCommentType> = async (data) => {
     submitForm(data);
   };
-
   const StyledForm = styled.div`
     &:before {
       content: " ";
@@ -84,8 +77,10 @@ const SubmitForm = ({
       background: url("/chatBg.png");
       // background-size: cover;
       // background-repeat: no-repeat;
-      background-position: center center;
+      /* background-position: center center; */
       z-index: 1;
+      background-size: 59%;
+      background-position: left 225px top -75px;
     }
     display: flex;
     height: 100%;
@@ -112,8 +107,17 @@ const SubmitForm = ({
       }
     }
     @media (max-width: 768px) {
+      padding: 24px !important;
+      &:before {
+        background-size: 135%;
+        background-position: left -108px top 8px;
+      }
       form > div > div {
         padding: 14px !important;
+      }
+      .form-wrapper {
+        margin: auto !important;
+        width: inherit;
       }
       label {
         margin-bottom: 6px;
@@ -127,7 +131,7 @@ const SubmitForm = ({
       <StyledForm>
         {!isSubmitted ? (
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Grid container spacing="33px">
+            <Grid container spacing={"33"} className="form-wrapper">
               <Grid item xs={12} sm={6} md={4}>
                 <Input
                   label="Voornaam"
@@ -182,9 +186,6 @@ const SubmitForm = ({
                 />
               </Grid>
               <Grid item xs={12}>
-                <P variant="light">* Verplichte velden</P>
-              </Grid>
-              <Grid item xs={12}>
                 <Button
                   loading={isLoading}
                   disabled={isSubmitted}
@@ -199,7 +200,6 @@ const SubmitForm = ({
           </form>
         ) : (
           <div className="flex flex-col items-center justify-center">
-            {/* <FiCheck size={40} color={colors.secondary.normal} /> */}
             <H3 variant="bold" color="white">
               Bedankt! Jouw reactie wordt door ons beoordeeld.
             </H3>
@@ -225,20 +225,19 @@ export default function CommentForm({
   const handleReply = (id: string) => {
     setReplyId(id);
   };
-  console.log(comments);
   return (
-    <Container className="max-w-[1185px]">
+    <Container className="max-w-[1118px]">
       {!parent ? (
         <>
           <Grid container style={{ margin: "70px 0" }}>
             <Grid item xs={12} md={8} lg={8}>
-              <H2>Reacties ({comments.length})</H2>
+              <H2 className="text-[35px] md:text-[42px]">
+                Reacties ({comments.length})
+              </H2>
             </Grid>
           </Grid>
           {comments
-            .filter(
-              (comment) => !comment.parent_comment || !!comment.parent_comment
-            )
+            .filter((comment) => !comment.parent_comment)
             .map((comment) => (
               <Grid container key={comment.id}>
                 <Grid item xs={12}>
@@ -275,11 +274,10 @@ export default function CommentForm({
                         onIsSubmit={(x) => setIsSubmitted(x)}
                       />
                     </div>
-
                     {comment.child_comments
                       ?.filter((comment) => comment.status === "published")
                       .map((child) => (
-                        <div key={child.id}>
+                        <div key={child.id} className="pl-3">
                           <ForumComment
                             isReplyComment
                             author={child.user_name}
@@ -288,7 +286,6 @@ export default function CommentForm({
                             title={child.content}
                             onReply={() => handleReply(child.id)}
                           />
-
                           <div
                             className={
                               replyId === child.id
@@ -345,27 +342,16 @@ export default function CommentForm({
                 </Grid>
               </Grid>
             ))}
-
-          {!isSubmitted && (
-            <Grid
-              container
-              direction="column"
-              justifyItems="center"
-              alignItems="center"
-              className="mb-[32px]"
-            >
-              <Grid item xs={4}>
-                <Button onClick={() => setIsOpen((open) => !open)}>
-                  Reactie toevoegen
-                </Button>
-              </Grid>
-            </Grid>
-          )}
         </>
       ) : (
         <div>
           <div>
-            <H3 variant="bold">{parent}</H3>
+            <H3
+              variant="bold"
+              className="text-[36px] font-[400] mb-[20px] md:mb-[32px] md:text-[42px]"
+            >
+              {parent}
+            </H3>
           </div>
           <SubmitForm
             postId={postId}

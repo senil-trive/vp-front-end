@@ -50,6 +50,7 @@ export type ForumPageProps = {
     seo_description: string;
     hero_image: ImageFileType;
     seo_image: ImageFileType;
+    search_bar_quote: string;
   };
   forumData: ForumPostType[];
   totalPosts: number;

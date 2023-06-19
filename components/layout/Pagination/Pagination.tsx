@@ -87,7 +87,10 @@ export default function Pagination({
   ).map((i) => i + 1);
 
   if (truncated) {
-    pages = pagination(currentPage, total, 5, 7);
+    pages =
+      globalThis.innerWidth < 768
+        ? pagination(currentPage, total, 3, 5)
+        : pagination(currentPage, total, 5, 7);
   }
 
   const handleChangePage = (page: number | string) => {
@@ -125,7 +128,12 @@ export default function Pagination({
 
   return (
     <PaginationWrapper>
-      <button onClick={handlePrev}>Vorige</button>
+      <button
+        onClick={handlePrev}
+        className="text-[16px] font-[300] md:text-[18px]"
+      >
+        Vorige
+      </button>
       <nav>
         <ol>
           {pages.map((page, index) => (
@@ -140,7 +148,12 @@ export default function Pagination({
           ))}
         </ol>
       </nav>
-      <button onClick={handleNext}>Volgende</button>
+      <button
+        onClick={handleNext}
+        className="text-[16px] font-[300] md:text-[18px]"
+      >
+        Volgende
+      </button>
     </PaginationWrapper>
   );
 }

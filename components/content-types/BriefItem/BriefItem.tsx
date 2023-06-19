@@ -11,6 +11,7 @@ import { truncate } from "../../../utils/truncate";
 import Image from "next/image";
 
 type Props = {
+  btnHidden?: boolean;
   title: string;
   titleHighlighted?: string;
   imgSrc: string;
@@ -28,6 +29,7 @@ export default function BriefItem({
   title,
   titleHighlighted,
   className,
+  btnHidden,
   category,
   content,
   imgHeight = 180,
@@ -53,7 +55,7 @@ export default function BriefItem({
         </>
       </CardHeader>
       <CardFooter
-        className={`group bg-[${bg}] hover:bg-white`}
+        className={`group bg-[${bg}] hover:bg-white p-[24px] md:px-[24px] md:py-[32px]`}
         onMouseEnter={() => setHovering(true)}
         onMouseLeave={() => setHovering(false)}
         style={
@@ -83,27 +85,29 @@ export default function BriefItem({
             {truncate(content, 200)}
           </P>
         </div>
-        <Button
-          href={fileSrc}
-          style={
-            hovering
-              ? {
-                  background: bg,
-                  color: `white`,
-                  fontWeight: `400`,
-                  fontSize: `18px`,
-                }
-              : {
-                  background: `white`,
-                  color: bg,
-                  fontWeight: `400`,
-                  fontSize: `18px`,
-                }
-          }
-          // variant="tertiary"
-        >
-          Download brief
-        </Button>
+        {!btnHidden && (
+          <Button
+            href={fileSrc}
+            style={
+              hovering
+                ? {
+                    background: bg,
+                    color: `white`,
+                    fontWeight: `400`,
+                    fontSize: `18px`,
+                  }
+                : {
+                    background: `white`,
+                    color: bg,
+                    fontWeight: `400`,
+                    fontSize: `18px`,
+                  }
+            }
+            // variant="tertiary"
+          >
+            Download brief
+          </Button>
+        )}
       </CardFooter>
     </Card>
   );

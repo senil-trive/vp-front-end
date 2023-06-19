@@ -1,26 +1,26 @@
-import { Grid, Hero } from "../../components/layout";
-import { H2, P, TitleWithHighlights } from "../../components/typography";
+import { Grid, Hero } from "../components/layout";
+import { H2, P, TitleWithHighlights } from "../components/typography";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { getContentTags, postForum, uploadFile } from "../../utils/api";
+import { getContentTags, postForum, uploadFile } from "../utils/api";
 
-import Button from "../../components/buttons/Button";
-import { COLORS } from "../../styles/theme";
+import Button from "../components/buttons/Button";
+import { COLORS } from "../styles/theme";
 import { Container } from "@mui/system";
 import { Divider } from "@mui/material";
-import Dropdown from "../../components/form/Dropdown/Dropdown";
-import { ForumPostType } from "../../types/forumTypes";
-import { ForumQuestionPageProps } from "../../types/pageTypes";
-import { GENDERS } from "../../constants/genders";
-import Input from "../../components/form/Input/Input";
+import Dropdown from "../components/form/Dropdown/Dropdown";
+import { ForumPostType } from "../types/forumTypes";
+import { ForumQuestionPageProps } from "../types/pageTypes";
+import { GENDERS } from "../constants/genders";
+import Input from "../components/form/Input/Input";
 import Link from "next/link";
-import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
-import Section from "../../components/layout/Section/Section";
-import TextArea from "../../components/form/TextArea/TextArea";
-import TextList from "../../components/typography/TextList/TextList";
+import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
+import Section from "../components/layout/Section/Section";
+import TextArea from "../components/form/TextArea/TextArea";
+import TextList from "../components/typography/TextList/TextList";
 import { useState } from "react";
-import { slugify } from "../../utils/url";
+import { slugify } from "../utils/url";
 import styled from "styled-components";
-import parseImageURL from "../../utils/parseImageURL";
+import parseImageURL from "../utils/parseImageURL";
 
 export const getServerSideProps = async () => {
   try {
@@ -86,8 +86,9 @@ export default function Vraag({ categories }: ForumQuestionPageProps) {
       background: url("/chatBg.png");
       // background-size: cover;
       // background-repeat: no-repeat;
-      background-position: center center;
       z-index: 1;
+      background-size: 59%;
+      background-position: left 225px top -75px;
     }
 
     background-color: rgba(255, 151, 29, 1);
@@ -111,6 +112,13 @@ export default function Vraag({ categories }: ForumQuestionPageProps) {
         border: none;
       }
     }
+    @media (max-width: 768px) {
+      padding: 24px !important;
+      &:before {
+        background-size: 135%;
+        background-position: left -108px top 8px;
+      }
+    }
   `;
 
   return (
@@ -132,57 +140,42 @@ export default function Vraag({ categories }: ForumQuestionPageProps) {
           position: "relative",
         }}
       >
-        <Grid container style={{ marginBottom: 65 }}>
-          <Grid item xs={0} md={2} lg={3} />
-          <Grid
-            item
-            xs={12}
-            md={8}
-            lg={6}
-            className="flex flex-col items-center"
+        <div className="flex flex-col max-w-2xl md:items-center md:justify-center md:text-center md:max-w-4xl mb-0 mt-[-80px] md:mt-[-40px]">
+          <TitleWithHighlights
+            text="Stel je vraag"
+            highlightColor="info"
+            style={{
+              textAlign: "center",
+              fontFamily: "Fjalla One",
+              fontStyle: "normal",
+              color: `white`,
+            }}
+            className="text-[46px] font-[400] md:text-[64px]"
+          />
+          <P
+            style={{
+              textAlign: "center",
+              fontFamily: "Avenir",
+              fontStyle: "normal",
+            }}
+            className="text-[16px] font-[300] text-[#fff] text-[300] md:text-[18px]"
           >
-            <TitleWithHighlights
-              text="Stel je vraag"
-              highlightColor="info"
-              style={{
-                textAlign: "center",
-                fontFamily: "Fjalla One",
-                fontStyle: "normal",
-                fontWeight: "400",
-                fontSize: "64px",
-                lineHeight: "140%",
-                color: `white`,
-              }}
-            />
-            <P
-              style={{
-                textAlign: "center",
-                fontFamily: "Avenir",
-                fontStyle: "normal",
-                fontWeight: `300`,
-                fontSize: `18px`,
-                lineHeight: `160%`,
-                color: `white`,
-              }}
-            >
-              Heb jij een vraag over de scheiding? Stel ‘m hier! De Buddy’s en
-              andere kinderen met gescheiden ouders geven jou tips en
-              beantwoorden al jouw vragen.
-            </P>
-            <Button
-              variant="infoReversed"
-              className="border-white text-white w-96 mt-5"
-            >
-              Lees hier de vragen van anderen
-            </Button>
-          </Grid>
-          <Grid item xs={0} md={2} lg={3} />
-        </Grid>
+            Heb jij een vraag over de scheiding? Stel ‘m hier! De Buddy’s en
+            andere kinderen met gescheiden ouders geven jou tips en beantwoorden
+            al jouw vragen.
+          </P>
+          <Button
+            variant="infoReversed"
+            className="border-white text-white w-96 mt-5 hover:border-[#ff971d]"
+          >
+            Lees hier de vragen van anderen
+          </Button>
+        </div>
       </Hero>
       <Container>
         <main>
           <Container
-            className="relative"
+            className="relative max-w-[1118px]"
             style={{
               marginBottom: 32,
               transform: "translateY(-75px)",
@@ -190,9 +183,8 @@ export default function Vraag({ categories }: ForumQuestionPageProps) {
           >
             <StyledForm>
               {!isSubmitted ? (
-                <form onSubmit={handleSubmit(submitForm)}>
-                  <Grid container spacing="33px">
-                    <Grid item xs={12}></Grid>
+                <form onSubmit={handleSubmit(submitForm)} className="pb-[20px]">
+                  <Grid container spacing="33px" className="form-wrapper">
                     <Grid item xs={12} md={4}>
                       <Input
                         label="Voornaam"
@@ -220,17 +212,17 @@ export default function Vraag({ categories }: ForumQuestionPageProps) {
                         register={register}
                       />
                     </Grid>
-
-                    <Grid item xs={12} md={6}>
-                      <Dropdown
-                        options={GENDERS}
-                        label="Geslacht"
-                        placeholder="Maak een keuze"
-                        name="user_gender"
+                    <Grid item xs={12} md={4}>
+                      <Input
+                        label="Woonplaats"
+                        type="text"
+                        placeholder="Vul hier je woonplaats in"
+                        name="user_location"
                         register={register}
                       />
                     </Grid>
-                    <Grid item xs={12} md={6}>
+
+                    <Grid item xs={12} md={4}>
                       <Input
                         label="Woonplaats"
                         type="text"
@@ -266,10 +258,6 @@ export default function Vraag({ categories }: ForumQuestionPageProps) {
                         }
                       />
                     </Grid>
-
-                    {/* <Grid item xs={12}>
-                        <P variant="light">* Verplichte velden</P>
-                      </Grid> */}
                     <Grid item xs={12} md={12}>
                       <Button
                         className="bg-white text-orange-700 font-normal w-full"
@@ -282,61 +270,6 @@ export default function Vraag({ categories }: ForumQuestionPageProps) {
                           "ja, ik wil mijn vraag plaatsen"}
                       </Button>
                     </Grid>
-
-                    {/* <div className="py-[30px]">
-                        <Divider variant="middle" className="my-[48px]" />
-                        <Container>
-                          <P>Houd je aan de volgende regels:</P>
-                          <TextList ordered>
-                            <li className=" mb-2">
-                              Behandel elkaar met respect: Geen persoonlijke
-                              aanvallen, geen gevloek, neem elkaar serieus.
-                            </li>
-                            <li className=" mb-2">
-                              Geef alleen je voornaam of een fictieve naam op.
-                              Post nooit persoonlijke gegevens zoals je mobiele
-                              telefoonnummer of je (e-mail) adres.
-                            </li>
-                            <li className=" mb-2">
-                              Dating, bedreiging, discriminatie en seksuele
-                              intimidatie zijn absoluut verboden. Let op: Onder
-                              dating valt elke vorm van contact en het
-                              uitwisselen van gegevens.
-                            </li>
-                            <li className=" mb-2">
-                              Op het forum mag geen reclame gemaakt worden, dus
-                              ook niet voor je eigen websites. Je mag geen
-                              aanstootgevende plaatjes/filmpjes posten of dingen
-                              proberen te verkopen.
-                            </li>
-                            <li className=" mb-2">
-                              Schrijf leesbaar en post niet twee keer hetzelfde
-                              forumbericht of dezelfde reactie.
-                            </li>
-                            <li className=" mb-2">
-                              Villa Pinedo monitort alle berichten die worden
-                              geplaatst op het forum voordat deze daadwerkelijk
-                              op het forum verschijnen.
-                            </li>
-                            <li className=" mb-2">
-                              Villa Pinedo heeft het recht ongepaste berichten
-                              en/of berichten die in strijd zijn met de algemene
-                              voorwaarden te verwijderen van het forum.
-                            </li>
-                            <li className=" mb-2">
-                              Villa Pinedo mag dit bericht delen op haar andere
-                              online kanalen en in offline uitingen, zolang de
-                              schrijver maar anoniem blijft en zolang dit onze
-                              missie ondersteunt om ouders bewust te maken.
-                            </li>
-                            <li className=" mb-2">
-                              Wij spelen jouw gegevens niet door aan anderen en
-                              volgen hierbij onze privacyverklaring en
-                              bewaartermijnen beleid.
-                            </li>
-                          </TextList>
-                        </Container>
-                      </div> */}
                   </Grid>
                 </form>
               ) : (
