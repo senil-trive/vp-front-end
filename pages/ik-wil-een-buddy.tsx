@@ -142,9 +142,9 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                             <Button
                               variant="secondary"
                               className="w-[100%] text-[18px] font-[400] bg-[#fff] text-[#FE517E] border-[#fff]"
-                              // href="/vrijwilligerswerk/aanmelden"
+                              href={item?.button_url}
                             >
-                              bekijken
+                              {item?.button_label}
                             </Button>
                           </div>
                         </InfoCard>
@@ -164,9 +164,9 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                             <Button
                               variant="secondary"
                               className="w-[100%] text-[18px] font-[400] bg-[#fff] text-[#006EF7] border-[#fff]"
-                              // href="/vrijwilligerswerk/aanmelden"
+                              href={item.button_url}
                             >
-                              bekijken
+                              {item?.button_label}
                             </Button>
                           </div>
                         </InfoCard>

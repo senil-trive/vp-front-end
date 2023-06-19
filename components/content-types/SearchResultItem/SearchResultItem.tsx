@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useRef, useState } from "react";
 
 import { BsChevronRight } from "react-icons/bs";
 import { P } from "../../typography";
@@ -71,13 +71,16 @@ const Wrapper = styled.div<{ colorVariant: number }>`
     }
   }
 `;
-
 export default function SearchResultItem({
   amount,
   resultTitleSuffix,
   list,
   colorVariant = 1,
 }: Props) {
+  const forumsearched = useRef(null);
+  const docForum = forumsearched.current;
+  const [scrollHeight, setScrollHeight] = useState(0);
+  const [offsetHeight, setOffsetHeight] = useState(0);
   return (
     <Wrapper colorVariant={colorVariant}>
       <section>
@@ -88,7 +91,7 @@ export default function SearchResultItem({
       </section>
 
       {list.length > 0 && (
-        <ul className="list-disc list-none">
+        <ul className="list-disc list-none" ref={forumsearched}>
           {list.map((item) => (
             <li key={item.link}>
               <a href={item.link} className="flex items-center hover:underline">

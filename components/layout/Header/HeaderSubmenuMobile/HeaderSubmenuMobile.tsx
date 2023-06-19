@@ -64,7 +64,7 @@ const Wrapper = styled.div`
         color: ${({ theme }) => theme.colors.primary.normal};
       }
       .items {
-        max-height: 99px;
+        max-height: 100% !important;
       }
     }
   }
@@ -87,7 +87,7 @@ export default function HeaderSubmenuMobile({
 
     return className;
   };
-
+  console.log(menuCols, "menus");
   return (
     <Wrapper id="header-submenu-mobile">
       <ul>
@@ -104,17 +104,23 @@ export default function HeaderSubmenuMobile({
               {selected?.id === menu.id ? <ChevronUp /> : <ChevronDown />}
             </div>
             <ul key={index} className="items">
-              {menu.children.map((category, index) => (
-                <>
-                  {category.children.map((item) => (
-                    <li key={item.link}>
-                      <P>
-                        <Link href={item.link}>{item.name}</Link>
-                      </P>
-                    </li>
-                  ))}
-                </>
-              ))}
+              {menu.children.map((category, index) => {
+                if (category.status === "published") {
+                  return (
+                    <>
+                      {category.children
+                        .filter((items) => items.status === "published")
+                        .map((item) => (
+                          <li key={item.link}>
+                            <P>
+                              <Link href={item.link}>{item.name}</Link>
+                            </P>
+                          </li>
+                        ))}
+                    </>
+                  );
+                }
+              })}
             </ul>
           </li>
         ))}
