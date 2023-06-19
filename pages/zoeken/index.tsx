@@ -1,24 +1,31 @@
 import { Container, Grid } from "@mui/material";
-import { H1, H4, P, TitleWithHighlights } from "../../components/typography";
-import React, { useEffect, useState } from "react";
+import { H4, TitleWithHighlights } from "../../components/typography";
+import React, { useEffect, useRef, useState } from "react";
 import { getForumPosts, getLetters, getPosts } from "../../utils/api";
-
 import { BlogType } from "../../types/content-types/Blog.type";
 import { ForumPostType } from "../../types/forumTypes";
 import { Hero } from "../../components/layout";
 import { Letter } from "../../types/content-types/Letter.type";
 import { POST_PER_PAGE } from "../../constants/app-configs";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
-import SearchBar from "../../components/form/SearchBar/SearchBar";
 import SearchResultItem from "../../components/content-types/SearchResultItem/SearchResultItem";
 import { truncate } from "../../utils/truncate";
 import { useRouter } from "next/router";
 import parseImageURL from "../../utils/parseImageURL";
 import TextWithHighlights from "../../components/typography/TextWithHighlights";
 import SearchBarWrapper from "../../components/form/SearchBar/SearchBarWrapper";
+import {
+  ContainerWrapper,
+  HeroBannerWrapper,
+} from "../../styles/global.styled";
 
 export default function Search() {
   const router = useRouter();
+
+  const brievenRef = useRef(null);
+  const blogRef = useRef(null);
+  const forumRef = useRef(null);
+
   const [posts, setPosts] = useState<BlogType[]>([]);
   const [forumPosts, setForumPosts] = useState<ForumPostType[]>([]);
   const [letters, setLetters] = useState<Letter[]>([]);
@@ -82,51 +89,31 @@ export default function Search() {
       }}
     >
       <Hero
-        imageUrl={parseImageURL("874097af-edba-4bac-81b3-53cfcf5c7797")}
+        imageUrl={parseImageURL(undefined, 1080)}
         center
         style={{
-          minHeight: 649,
+          minHeight: 548,
           position: "relative",
         }}
       >
-        <Container>
-          <Grid container>
-            {/* <Grid item xs={0} md={2} lg={3} /> */}
-            <Grid item xs={12} md={8} lg={12}>
-              <div className="text-center">
-                <TitleWithHighlights
-                  text={`${
-                    posts?.length + forumPosts?.length + letters?.length
-                  } resultaten gevonden`}
-                  color="white"
-                  style={{
-                    // textAlign: "center",
-                    fontFamily: "Fjalla One",
-                    fontStyle: `normal`,
-                    fontWeight: `400`,
-                    fontSize: `80px`,
-                    lineHeight: `118%`,
-                    marginBottom: `50px`,
-                  }}
-                />
-                <TextWithHighlights
-                  color="white"
-                  variant="light"
-                  style={{
-                    fontFamily: "Avenir",
-                    fontStyle: `normal`,
-                    fontWeight: `500`,
-                    fontSize: `28px`,
-                    lineHeight: `120.5%`,
-                  }}
-                  text={`Je hebt gezocht op "${q}"`}
-                  textToHighlight={{ word: `"${q}"`, color: "#3FC7B4" }}
-                />
-              </div>
-            </Grid>
-            {/* <Grid item xs={0} md={2} lg={3} /> */}
-          </Grid>
-        </Container>
+        <HeroBannerWrapper className="zoeken-page">
+          <div className="title-wrap max-w-4xl">
+            <TitleWithHighlights
+              text={`${
+                posts?.length + forumPosts?.length + letters?.length
+              } resultaten gevonden`}
+              color="white"
+              className="title"
+            />
+            <TextWithHighlights
+              color="white"
+              variant="light"
+              text={`Je hebt gezocht op "${q}"`}
+              textToHighlight={{ word: `"${q}"`, color: "#3FC7B4" }}
+              className="subtitle"
+            />
+          </div>
+        </HeroBannerWrapper>
       </Hero>
 
       <main style={{ marginBottom: "80px" }}>
@@ -136,9 +123,17 @@ export default function Search() {
             transform: "translateY(calc(-50% - 24px))",
           }}
         >
-          <SearchBarWrapper prefix={<H4>Gebruik een ander zoekwoord 👉🏾</H4>} />
+          <ContainerWrapper className="lg-container px-[0]">
+            <SearchBarWrapper
+              prefix={
+                <H4 className="text-[24px] font-[400] leading-[120%]">
+                  Gebruik een ander zoekwoord 👉🏾
+                </H4>
+              }
+            />
+          </ContainerWrapper>
         </div>
-        <Container maxWidth="xl">
+        <ContainerWrapper className="lg-container">
           <Grid container spacing={"22px"}>
             <Grid item xs={12} md={4}>
               <SearchResultItem
@@ -173,7 +168,7 @@ export default function Search() {
               />
             </Grid>
           </Grid>
-        </Container>
+        </ContainerWrapper>
       </main>
     </PageWrapper>
   );
