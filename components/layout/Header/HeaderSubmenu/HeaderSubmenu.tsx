@@ -142,7 +142,6 @@ export default function HeaderSubmenu({ categories, selected }: Props) {
   const router = useRouter();
 
   // const [index, setIndex] = useState<string>(0);
-  console.log(categories, "cta");
   return (
     <Container maxWidth="xl">
       <Wrapper selected={selected} className="sub-menu-container-mn">
@@ -173,7 +172,6 @@ export default function HeaderSubmenu({ categories, selected }: Props) {
                           }
                           href={item.link}
                         >
-                          <>{console.log(item, "sub item")}</>
                           {item.name}
                         </Link>
                       </li>

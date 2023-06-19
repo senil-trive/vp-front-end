@@ -61,7 +61,6 @@ const TitleWithHighlights: React.FC<TitleWithHighlightsProps> = ({
       // theme.colors[highlightColor].normal
     );
   }
-  console.log(typeof newText);
   switch (headerElement) {
     case "h1":
       return (

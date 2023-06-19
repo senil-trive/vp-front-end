@@ -90,8 +90,6 @@ export const postComment = async (
   type: "forum" | "blog" | "open_letter",
   { post_id, ...rest }: any
 ) => {
-  console.log(post_id);
-  console.log(type);
   const res = await fetch(`${ENDPOINTS.COLLECTIONS}/comments`, {
     method: "POST",
     headers: {

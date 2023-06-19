@@ -225,7 +225,7 @@ export default function CommentForm({
   const handleReply = (id: string) => {
     setReplyId(id);
   };
-  console.log(comments);
+
   return (
     <Container className="max-w-[1185px]">
       {!parent ? (

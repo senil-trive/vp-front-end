@@ -45,7 +45,6 @@ export default function HeaderNav({
   onChange,
   menuCols = MENU_COLS,
 }: Props) {
-  console.log(menuCols, "menu cols");
   return (
     <StyledNav>
       <ul>
@@ -55,7 +54,6 @@ export default function HeaderNav({
             className={selected?.id === menu.id ? "selected" : ""}
             onClick={() => onChange(menu)}
           >
-            <>{console.log(menu)}</>
             <P className="mr-5">{menu.name}</P>{" "}
             {selected?.id === menu.id ? <ChevronUp /> : <ChevronDown />}
           </li>

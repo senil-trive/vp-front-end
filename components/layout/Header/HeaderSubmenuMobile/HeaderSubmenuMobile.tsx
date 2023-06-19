@@ -87,7 +87,6 @@ export default function HeaderSubmenuMobile({
 
     return className;
   };
-  console.log(menuCols, "menus");
   return (
     <Wrapper id="header-submenu-mobile">
       <ul>
@@ -120,6 +119,7 @@ export default function HeaderSubmenuMobile({
                     </>
                   );
                 }
+                return;
               })}
             </ul>
           </li>

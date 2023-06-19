@@ -99,9 +99,6 @@ export default function LetterDetail({
   relatedLetters,
   comments,
 }: Props) {
-  console.log(pageData);
-
-  console.log(comments);
   const {
     register,
     handleSubmit,
@@ -109,8 +106,6 @@ export default function LetterDetail({
     reset,
     resetField,
   } = useForm<LetterDownloadType>();
-  console.log(register);
-  console.log(handleSubmit);
   const downloadFile = () => {
     window.open(parseFileURL(pageData.downloadable_document), "_blank");
   };
