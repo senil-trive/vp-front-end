@@ -1,7 +1,7 @@
-import { Container, Grid } from "@mui/material";
+import { colors, Container, Grid } from "@mui/material";
 import { Hero, Pagination } from "../../components/layout";
-import { H4, P, TitleWithHighlights } from "../../components/typography";
-import React, { useEffect, useState } from "react";
+import { H4, H2, P, TitleWithHighlights } from "../../components/typography";
+import React, { useEffect, useState, ChangeEvent } from "react";
 import {
   getContentTags,
   getForumOverviewPageData,
@@ -9,18 +9,36 @@ import {
 } from "../../utils/api";
 
 import Button from "../../components/buttons/Button";
+import Section from "../../components/layout/Section/Section";
+import Dropdown from "../../components/form/Dropdown/Dropdown";
+import { GENDERS } from "../../constants/genders";
 import { CircleSpinner } from "react-spinners-kit";
+import CollectionSearchBar from "../../components/form/CollectionSearchBar/CollectionSearchBar";
 import { ForumPageProps } from "../../types/pageTypes";
 import ForumPost from "../../components/content-types/ForumPost/ForumPost";
+import { ForumRequestType } from "../../types/forumrequestType";
+import { postVolunteerApplication } from "../../utils/api";
 import Link from "next/link";
 import { POST_PER_PAGE } from "../../constants/app-configs";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
+import SortBar from "../../components/form/SortBar/SortBar";
 import TagList from "../../components/buttons/TagList/TagList";
 import parseImageURL from "../../utils/parseImageURL";
 import ChevronRight from "../../components/icons/ChevronRight/ChevronRight";
 import Image from "next/image";
 import Input from "../../components/form/Input/Input";
 import SearchIcon from "../../components/icons/SearchIcon/SearchIcon";
+import { useForm } from "react-hook-form";
+import TextArea from "../../components/form/TextArea/TextArea2";
+import Upload from "../../components/form/Upload/Upload";
+const forumSortOptions = [
+  { name: "Titel (a-z)", value: "content" },
+  { name: "Titel (z-a)", value: "-content" },
+  { name: "Auteur (a-z)", value: "user_name" },
+  { name: "Auteur (z-a)", value: "-user_name" },
+  { name: "Datum (oud-nieuw)", value: "date_created" },
+  { name: "Datum (nieuw-oud)", value: "-date_created" },
+];
 
 export const getServerSideProps = async () => {
   try {
@@ -34,8 +52,6 @@ export const getServerSideProps = async () => {
     const pageRes = await pageReq.json();
     const forumRes = await forumReq.json();
     const tagsRes = await tagsReq.json();
-
-    console.log(forumRes);
     return {
       props: {
         pageData: pageRes.data || null,
@@ -67,7 +83,28 @@ export default function Forum({
   const [selectedTag, setSelectedTag] = useState<string>("");
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
+  const [sort, setSort] = useState("");
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ForumRequestType>();
+
+  const submitForm = async (data: ForumRequestType) => {
+    setIsLoading(true);
+    try {
+      await postVolunteerApplication(data);
+      setIsSubmitted(true);
+    } catch (error) {
+      setIsSubmitted(false);
+    }
+
+    setIsLoading(false);
+  };
   const changePage = (index: number) => {
     if (index <= 1) {
       setCurrentPage(1);
@@ -77,8 +114,18 @@ export default function Forum({
   };
 
   const handleSearch = (x: any) => {
+    console.log(x);
     setSearch(x.target.value);
     setCurrentPage(1);
+  };
+
+  const handleSort = (x: string) => {
+    setSort(x);
+  };
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files && e.target.files[0];
+    setSelectedFile(file || null);
   };
 
   useEffect(() => {
@@ -89,6 +136,7 @@ export default function Forum({
           postPerPage: POST_PER_PAGE,
           page: currentPage,
           search,
+          sort,
           meta: "filter_count",
           filter:
             selectedTag.length > 0
@@ -107,7 +155,7 @@ export default function Forum({
     };
 
     getPaginatedPost();
-  }, [currentPage, search, selectedTag]);
+  }, [currentPage, search, sort, selectedTag]);
   return (
     <PageWrapper
       seo={{
@@ -123,47 +171,52 @@ export default function Forum({
     >
       <Hero
         center
-        imageUrl={parseImageURL(pageData?.hero_image?.id, 1400)}
+        imageUrl={"/header_forum.png"}
         style={{
           minHeight: 649,
           position: "relative",
         }}
-        mobileImageHeight={772}
       >
-        <Container className="max-w-[1384px] mt-[40px] md:mt-[0]">
+        <Container>
           <Grid container>
-            <Grid item xs={12} md={10} className="w-[100%] mx-auto">
+            <Grid item xs={12} md={8} className="w-[100%] mx-auto  mt-[-80px]">
               <TitleWithHighlights
                 text={pageData?.page_title ?? ""}
                 color="white"
-                className={
-                  "text-[46px] font-[400] md:text-[64px] md:text-center"
-                }
+                style={{
+                  textAlign: "center",
+                  padding: "0 24px",
+                  fontSize: "64px",
+                  fontWeight: "400",
+                }}
               />
               <P
                 color="white"
                 variant="light"
-                className={
-                  "text-[16px] font-[300] leading-[160%] md:text-[18px] md:text-center"
-                }
+                style={{
+                  textAlign: "center",
+                  fontSize: "18px",
+                  fontWeight: "300",
+                  marginBottom: "6px",
+                }}
               >
                 {pageData?.page_subtitle}
               </P>
 
-              <div className="mt-[40px] w-[100%] mx-auto md:w-[70%] sm:flex sm:gap-5">
-                <Button
-                  variant="white"
-                  filled={false}
-                  href="/forum/stel-een-vraag"
-                  className="w-[100%] text-[18px] font-[300] border-[1px] border-[#fff] hover:bg-[#3FC7B4] hover:border-[#3FC7B4]"
-                >
-                  {pageData?.submit_question_button_label}
-                </Button>
+              <div
+                style={{ display: "flex", gap: 32, justifyContent: "center" }}
+              >
                 <Button
                   variant="white"
                   filled={false}
                   href="/ik-wil-een-buddy"
-                  className="w-[100%] mt-3 text-[18px] font-[300] border-[1px] border-[#fff] hover:bg-[#3FC7B4] hover:border-[#3FC7B4] sm:mt-0"
+                  style={{
+                    width: "auto",
+                    padding: "16px 64px",
+                    fontSize: "18px",
+                    fontWeight: "300",
+                    border: "1px solid #fff",
+                  }}
                 >
                   {pageData?.chat_button_label}
                 </Button>
@@ -174,119 +227,146 @@ export default function Forum({
       </Hero>
 
       <main style={{ marginBottom: "80px" }}>
-        <Container className="max-w-[1384px] p-[0]">
+        <Container className="mb-[80px] mt-[-79px] relative md:mb-[120px]">
           <div
             style={{
-              marginBottom: 32,
-              transform: "translateY(calc(-50% - 24px))",
+              backgroundImage: "url(" + "/forum-bg.png" + ")",
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              padding: "32px 32px",
+              width: "1118px",
+              margin: "0 auto",
+              borderRadius: "8px",
             }}
           >
-            <TagList
-              tags={tags}
-              selected={selectedTag}
-              prefix={
-                <H4
-                  style={{
-                    whiteSpace: "nowrap",
-                    display: "flex",
-                    alignItems: "flex-start",
-                    gap: "5px",
-                  }}
-                >
-                  Onderwerp{" "}
-                  <span
-                    className={
-                      "transform mt-[0px] rotate-[90deg] md:rotate-[0deg] md:mt-[-6px]"
-                    }
-                  >
-                    👉🏾
-                  </span>
-                </H4>
-              }
-              suffix={<ChevronRight />}
-              onSelect={(x: string) => {
-                setSelectedTag(x);
-              }}
-            />
+            {!isSubmitted ? (
+              <form
+                className="forum-from-dz"
+                onSubmit={handleSubmit(submitForm)}
+              >
+                <Grid container spacing="33px" style={{ rowGap: "13px" }}>
+                  <Grid item xs={12} md={4}>
+                    <Input
+                      label="Voornaam"
+                      required
+                      name="Je naam..."
+                      placeholder="Je naam..."
+                      register={register}
+                      hasError={!!errors.first_name}
+                      helperText={errors.first_name && "Vul je voornaam in"}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <Input
+                      label="Leeftijd"
+                      required
+                      name="Jouw leeftijd..."
+                      placeholder="Jouw leeftijd..."
+                      register={register}
+                      hasError={!!errors.last_name}
+                      helperText={errors.last_name && "Vul je achternaam in"}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <Input
+                      label="E-mail"
+                      required
+                      name="Je e-mailadres..."
+                      placeholder="Je e-mailadres..."
+                      register={register}
+                      hasError={!!errors.last_name}
+                      helperText={errors.last_name && "Vul je achternaam in"}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <Input
+                      label="Woonplaats"
+                      required
+                      name="Je e-mailadres..."
+                      placeholder="Je woonplaats..."
+                      register={register}
+                      hasError={!!errors.last_name}
+                      helperText={errors.last_name && "Vul je achternaam in"}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <Input
+                      label="Geslacht"
+                      type="email"
+                      required
+                      name="email"
+                      placeholder="Jouw geslacht..."
+                      register={register}
+                      hasError={!!errors.email}
+                      helperText={errors.email && "Vul je e-mail adres in"}
+                    />
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <Input
+                      label="Thema"
+                      type="text"
+                      required
+                      name="city"
+                      placeholder="Thema..."
+                      register={register}
+                      hasError={!!errors.city}
+                      helperText={errors.city && "Vul je woonplaats in"}
+                    />
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <Upload
+                      label="Upload bestand"
+                      name="file"
+                      onChange={handleFileChange}
+                    />
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <TextArea
+                      label="Mijn vraag"
+                      name="content"
+                      placeholder="Vul hier jouw vraag in..."
+                      required
+                      register={register}
+                      hasError={!!errors.content}
+                      helperText={
+                        !!errors.content ? "Dit veld is verplicht" : ""
+                      }
+                    />
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    {/* <Grid item xs={12}>
+                        <P variant="light" style={{ color: "#fff" }}>
+                          * Verplichte velden
+                        </P>
+                      </Grid> */}
+                    <Grid item xs={12}>
+                      <Button
+                        loading={isLoading}
+                        disabled={isSubmitted}
+                        className="w-[100] bg-[#fff] text-[#FF971D] text-[18px] font-[400]"
+                      >
+                        {isLoading && "Bezig..."}
+                        {isSubmitted && "Verzonden"}
+                        {!isLoading &&
+                          !isSubmitted &&
+                          "ja, ik wil mijn vraag plaatsen"}
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </form>
+            ) : (
+              <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16 mx-auto">
+                <H2 variant="bold">Bedankt voor je aanmelding!</H2>
+                <P>We nemen zo snel mogelijk contact met je op.</P>
+              </div>
+            )}
           </div>
         </Container>
-        <Container className="max-w-[1384px] mt-[-90px] mx-[auto] md:mt-[0px] md:mb-[56px]">
-          <Grid container spacing={"34px"}>
-            <>
-              <Grid item xs={12} md={8}>
-                <div className="flex flex-col h-[100%]">
-                  <Image
-                    src="/Imageforum.png"
-                    alt="forum search"
-                    fill
-                    className="relative w-[100%] h-[121px] rounded-t-[8px]"
-                  />
-                  <div className="bg-[#FE517E] h-[264px] p-[24px] md:p-[32px] rounded-b-[8px]">
-                    <div>
-                      <TitleWithHighlights
-                        text={pageData?.search_bar_quote || ""}
-                        color="white"
-                        className="text-[30px] font-[400]"
-                      />
-                      <div className="md:flex md:items-center">
-                        <div className="w-[180px] text-[18px] text-[#fff]">
-                          Doorzoek het forum:
-                        </div>
-                        <div className="mt-[20px] flex-1 md:mt-[0px]">
-                          <Input
-                            iconLeft={<SearchIcon />}
-                            defaultValue={search}
-                            placeholder={"Zoek in het forum.."}
-                            onChange={handleSearch}
-                            borderColor="primary"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Grid>
-              {isLoading ? (
-                <CircleSpinner size={34} color="#fff" />
-              ) : (
-                <>
-                  {posts.map((item, index) => (
-                    <Grid key={index} item xs={12} md={4}>
-                      <Link href={`/forum/${item.slug}`}>
-                        <ForumPost
-                          truncateContent
-                          fullHeight={false}
-                          gender={item.user_gender}
-                          age={item.user_age}
-                          image={item.user_image?.id || "asad"}
-                          authorType={item.user_name}
-                          postDate={new Date(item.date_created)}
-                          tags={
-                            item.categories?.map(
-                              (cat) => cat.categories_id?.name
-                            ) ?? []
-                          }
-                          title={
-                            item.title ?? "Titel moet in CMS worden ingevoerd"
-                          }
-                          comments={item.comments.length}
-                          content={item.content}
-                        />
-                      </Link>
-                    </Grid>
-                  ))}
-                </>
-              )}
-            </>
-          </Grid>
-        </Container>
-        {totalCount / POST_PER_PAGE > 2 && (
-          <Pagination
-            total={Math.ceil(totalCount / POST_PER_PAGE)}
-            truncated
-            onChange={changePage}
-          />
-        )}
       </main>
     </PageWrapper>
   );
