@@ -12,15 +12,37 @@ interface FAQItemProps extends Partial<FAQ> {
 }
 
 const StyleFaq = styled.div`
+  .faq-title {
+    font-family: "Fjalla One" !important;
+    font-style: normal;
+  }
   .description {
     transition: 0.3s ease-in-out;
     max-height: 1px;
     opacity: 0;
     overflow: hidden;
 
+    font-family: "Avenir" !important;
+    font-style: normal;
+    p {
+      font-size: 18px;
+    }
+    span {
+      font-size: 18px;
+    }
     &.visible {
       opacity: 1;
       max-height: 999px;
+    }
+  }
+  @media (max-width: 767px) {
+    .description {
+      p {
+        font-size: 18px;
+      }
+      span {
+        font-size: 18px;
+      }
     }
   }
 `;
@@ -40,7 +62,7 @@ const FAQItem: React.FC<FAQItemProps> = ({
 
   return (
     <StyleFaq
-      className={`cursor-pointer pl-[61px] p-[42px] rounded-lg ${
+      className={`cursor-pointer p-[25px] md:pl-[61px] md:p-[42px] rounded-lg ${
         isSelected ? "bg-[#3FC7B4]" : "bg-[#EBFFFC]"
       } hover:bg-[#3FC7B4]`}
       onClick={handelSelect}
@@ -62,7 +84,7 @@ const FAQItem: React.FC<FAQItemProps> = ({
       </div>
 
       <div
-        className={`description  text-left ${isSelected ? "visible mt-4" : ""}`}
+        className={`description text-left ${isSelected ? "visible mt-4" : ""}`}
         style={{ color: "#fff" }}
       >
         {parseHTMLtoReact(description ?? "")}

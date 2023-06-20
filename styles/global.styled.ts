@@ -7,15 +7,18 @@ const HeroBannerWrapper = styled(Container)`
     align-items: center;
     justify-content: center;
     margin: 0 auto !important;
+    width: 100%;
   }
   .subtitle {
     font-size: 18px !important;
     font-weight: 300 !important;
-    line-height: 120% !important;
+    line-height: 160% !important;
     font-family: "Avenir";
     font-style: "normal";
+    color: #fff !important;
   }
   .title {
+    width: 100%;
     font-size: 64px !important;
     font-weight: 400 !important;
     line-height: 160% !important;
@@ -37,12 +40,24 @@ const HeroBannerWrapper = styled(Container)`
       line-height: 118% !important;
     }
   }
+  &.stel-een-vraag {
+    margin-top: -100px;
+  }
   @media (max-width: 767px) {
+    .title-wrap {
+      text-align: left !important;
+    }
     .title {
       font-size: 46px !important;
     }
     .subtitle {
       font-size: 16px !important;
+    }
+    &.stel-een-vraag {
+      margin-top: -50px;
+    }
+    &.training {
+      margin-top: -200px !important;
     }
     &.zoeken-page {
       .subtitle {

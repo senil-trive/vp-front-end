@@ -80,7 +80,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
         <main>
           <Hero
             center
-            imageUrl={parseImageURL(pageData.hero_image?.id, 1200)}
+            imageUrl={"/kletsmeethead.png"}
             style={{
               minHeight: 497,
               position: "relative",
@@ -107,11 +107,8 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                   fontFamily: "Avenir",
                   fontStyle: "normal",
                   fontWeight: `300`,
-                  fontSize: `18px`,
-                  lineHeight: `160%`,
-                  color: `white`,
-                  margin: 0,
                 }}
+                className="text-center text-[16px] text-[#fff] md:text-[18px] leading-[160%] m-[0]"
               >
                 {pageData?.page_subtitle}
               </P>
@@ -133,7 +130,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                     <div className="flex justify-center  mt-[20px] md:mt-[auto]">
                       <Button
                         variant="secondary"
-                        className="w-[100%] text-[18px] font-[400] bg-[#fff] text-[#FE517E] border-[#fff] hover:bg-[#FE517E]"
+                        className="w-[100%] text-[16px] font-[400] bg-[#fff] text-[#FE517E] border-[#fff] hover:bg-[#FE517E] md:text-[18px]"
                         href={`/open-brieven/${pageData?.highlighted_letter?.slug}`}
                       >
                         Download brief
@@ -157,7 +154,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                     <div className="flex justify-center mt-[20px] md:mt-[auto]">
                       <Button
                         variant="secondary"
-                        className="w-[100%] text-[18px] font-[400] bg-[#fff] text-[#006EF7] border-[#fff] hover:bg-[#006EF7]"
+                        className="w-[100%] text-[16px] font-[400] bg-[#fff] text-[#006EF7] border-[#fff] hover:bg-[#006EF7] md:text-[18px]"
                         href={`/open-brieven/${pageData?.highlighted_letter?.slug}`}
                       >
                         Download brief
@@ -168,7 +165,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
               </div>
             </Container>
           </section>
-          <section>
+          <section className="mb-[100px]">
             <Container>
               <div className="flex flex-col items-center justify-center my-[50px] md:my-[100px]">
                 <H4

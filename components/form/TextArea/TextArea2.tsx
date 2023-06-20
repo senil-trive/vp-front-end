@@ -1,27 +1,17 @@
-import { InputStateType, InputType } from "../../../types/formTypes";
-import React, { ReactNode, useRef } from "react";
+import React, { ReactNode, useRef, useState } from "react";
 import styled, { css, useTheme } from "styled-components";
-
+import { ColorType } from "../../../types/colorTypes";
+import { InputStateType, InputType } from "../../../types/formTypes";
 import IconWrapper from "../../icons/IconWrapper/IconWrapper";
 import ImportantCircle from "../../icons/ImportantCircle/ImportantCircle";
 import { P } from "../../typography";
-import { ColorType } from "../../../types/colorTypes";
 
 type Props = {
   /** Label of the input field. */
   label?: string;
 
-  /** React or custom Icon to be placed in front of the input  */
-  iconLeft?: ReactNode;
-
-  /** React or custom Icon to be placed in after of the input  */
-  iconRight?: ReactNode;
-
   /** Small text that will appear under the input field. */
   helperText?: string;
-
-  /** Type of input. Same as HTML Input type. */
-  type?: InputType;
 
   /** Placeholder for the input field */
   placeholder?: string;
@@ -32,42 +22,36 @@ type Props = {
   /** Wether the  input field is active */
   active?: boolean;
 
-  /** Wether the  input field is required */
-  required?: boolean;
-
   /** Wether the  input field has errors */
   hasError?: boolean;
 
+  /** Wether the  input field is required */
+  required?: boolean;
+
   /** Name of the input field. required for submitting the form */
-  name?: string;
+  name: string;
 
-  defaultValue?: string;
-
-  /** Callback to handle the input */
-  onChange?: (x: any) => void;
-
-  labelClass?: string;
   /** React hook form register function for error handling */
   register?: any;
 
   /** The color of the border */
   borderColor?: ColorType;
+
+  /** The maximum amount of characters */
+  maxLength?: number;
 };
 
-const InputWrapper = styled.div<InputStateType>`
+const Wrapper = styled.div<InputStateType>`
   display: flex;
   flex-direction: column;
   cursor: text;
 
   label {
     margin-bottom: 16px;
-
     font-weight: 700;
     font-size: 18px;
     line-height: 160%;
-    /* identical to box height, or 29px */
-
-    color: #ffff;
+    color: #fff;
   }
 
   > div {
@@ -75,27 +59,20 @@ const InputWrapper = styled.div<InputStateType>`
     background-color: white;
     width: 100%;
     border-radius: 8px;
-
     display: flex;
     align-items: center;
     padding: 10px 12px 10px 16px;
 
-    input {
+    textarea {
       border: none;
       width: 100%;
-
+      border-radius: 8px;
       font-weight: 400;
       font-size: 18px;
       line-height: 160%;
-
       color: #888888;
       background-color: transparent;
-      ::placeholder {
-        color: #c7c7c7;
-        font-weight: 300 !important;
-        font-family: "Avenir Next Cyr", sans-serif !important;
-        opacity: 1;
-      }
+
       &:focus {
         outline: 0;
       }
@@ -133,7 +110,7 @@ const InputWrapper = styled.div<InputStateType>`
           }
         `
       : null}
-
+  
   ${({ hasError }) =>
     hasError
       ? css`
@@ -154,52 +131,67 @@ const InputWrapper = styled.div<InputStateType>`
       : null}
 `;
 
-export default function Input({
-  iconLeft,
-  iconRight,
-  type = "text",
+export default function TextArea({
   label,
   helperText,
   placeholder = "Vul hier je reactie in",
   active = false,
   disabled = false,
   hasError = false,
-  defaultValue = "",
-  name,
-  onChange,
   register,
   required,
-  labelClass,
-  borderColor = "white",
+  borderColor = "primary",
+  name,
+  maxLength,
   ...rest
 }: Props) {
+  const [count, setCount] = useState(0);
   const { colors } = useTheme();
 
-  const formRegister =
-    register && name
-      ? register(name, {
-          required: required ? "Dit veld is verplicht" : null,
-        })
-      : {};
+  const formRegister = register
+    ? register(name, {
+        required: required ? "Dit veld is verplicht" : null,
+        onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+          if (maxLength) {
+            setCount(e.target.value.length);
+          }
+        },
+      })
+    : {};
+
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+
+  const handleInputFocus = () => {
+    inputRef?.current?.focus();
+  };
 
   return (
-    <InputWrapper disabled={disabled} active={active} hasError={hasError}>
-      {!!label && <label className={labelClass}>{label}</label>}
-      <div style={{ borderColor: colors[borderColor].normal }}>
-        {!!iconLeft && (
-          <IconWrapper style={{ marginRight: 10 }}>{iconLeft}</IconWrapper>
-        )}
-        <input
-          type={type}
+    <Wrapper
+      disabled={disabled}
+      hasError={hasError}
+      active={active}
+      onClick={handleInputFocus}
+    >
+      {(!!label || !!maxLength) && (
+        <label className="flex justify-between">
+          <span>{!!label && label}</span>
+          {!!maxLength && (
+            <small className="font-normal ">
+              {count} / {maxLength} tekens
+            </small>
+          )}
+        </label>
+      )}
+      <div style={{ borderColor: "#fff" }}>
+        <textarea
+          rows={7}
+          ref={inputRef}
           placeholder={placeholder}
-          onChange={(e) => onChange?.(e)}
-          defaultValue={defaultValue}
+          disabled={disabled}
+          maxLength={maxLength}
           {...formRegister}
           {...rest}
         />
-        {!!iconRight && (
-          <IconWrapper style={{ marginLeft: 10 }}>{iconRight}</IconWrapper>
-        )}
       </div>
 
       {!!helperText && (
@@ -212,6 +204,6 @@ export default function Input({
           </P>
         </footer>
       )}
-    </InputWrapper>
+    </Wrapper>
   );
 }

@@ -130,6 +130,7 @@ export default function LetterDetail({
   const onSubmit: SubmitHandler<any> = async (data) => {
     submitForm(data);
   };
+  console.log(comments, "comment");
   console.log(pageData);
   return (
     <PageWrapper
@@ -159,8 +160,8 @@ export default function LetterDetail({
         }}
         mobileImageHeight={772}
       >
-        <div className="flex flex-col md:items-center md:justify-center md:text-center max-w-2xl md:max-w-4xl md:my-16 mt-10">
-          <Tag className="w-[max-content] text-[#3FC7B4] font-[400] text-[18px] bg-[#fff] border-[#fff]">
+        <div className="flex flex-col md:items-center md:justify-center md:text-center max-w-2xl md:max-w-5xl md:my-16 mt-10">
+          <Tag className="w-[max-content] pt-[10px] mb-[20px] text-[#3FC7B4] font-[400] text-[18px] bg-[#fff] border-[#fff] md:mb-[0]">
             {pageData?.categories[0] || "Category"}
           </Tag>
           <TitleWithHighlights
@@ -170,7 +171,9 @@ export default function LetterDetail({
             className="text-[42px] font-[400] md:text-[64px]"
           />
           <div className="mb-8 text-[#fff] text-[18px] font-[300] md:text-[20px]">
-            {pageData?.description && parseHTMLtoReact(pageData.description)}
+            {pageData?.description &&
+              parseHTMLtoReact(pageData.description).toString().slice(0, 200) +
+                "..."}
           </div>
         </div>
       </Hero>
@@ -194,7 +197,7 @@ export default function LetterDetail({
         </Container>
       </section>
 
-      <main style={{ marginBottom: "80px" }} className="px-[8px] md:px-[0]">
+      <main className="px-[8px] mb-[100px]  md:px-[0] md:mb-[140px] md:mt-[128px]">
         <CommentForm
           type="open_letter"
           comments={comments}
@@ -204,7 +207,7 @@ export default function LetterDetail({
           ook! Heb jij een goede tip? Deel 'm hieronder!"
           postId={pageData.id}
         />
-        <section className="my-[40px] md:my-[80px]">
+        <section className="my-[40px] md:mt-[103px] md:mb-[80px]">
           <CommentForm
             postId={pageData.id}
             parent={"reageer op deze brief"}

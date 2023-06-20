@@ -15,6 +15,7 @@ import { postVolunteerApplication } from "../../../utils/api";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { TrainigenHeroWrapper } from "../../../styles/Vrjwilligerswerk/TrainigenWrapper.styles";
+import { HeroBannerWrapper } from "../../../styles/global.styled";
 
 type VolunteersSignupPageProps = {
   pageData: any;
@@ -110,22 +111,22 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
               }}
               mobileImageHeight={564}
             >
-              <div className="flex flex-col mt-[-60px] items-center justify-center text-center max-w-2xl md:max-w-4xl md:mt-[-80px]">
-                <TitleWithHighlights
-                  headerElement="h1"
-                  color="primary"
-                  highlightColor="info"
-                  text={pageData?.page_title}
-                  className="text-[#fff] text-[46px] font-[400] md:text-[64px]"
-                />
-                <P className="text-[#fff] text-[20px] md:text-[18px] md:mt-[-10px]">
-                  {pageData?.page_subtitle}
-                </P>
-              </div>
+              <HeroBannerWrapper>
+                <div className="title-wrap max-w-2xl md:max-w-4xl">
+                  <TitleWithHighlights
+                    headerElement="h1"
+                    color="white"
+                    highlightColor="info"
+                    text={pageData?.page_title}
+                    className="title"
+                  />
+                  <P className="subtitle">{pageData?.page_subtitle}</P>
+                </div>
+              </HeroBannerWrapper>
             </Hero>
           </TrainigenHeroWrapper>
-          <Container className="mb-[80px] mt-[-120px] relative md:mb-[120px]">
-            <Section>
+          <Container className="mb-[80px] mt-[-120px] relative md:mb-[120px] max-w-[1118px]">
+            <Section className="py-[32px] px-[32px]">
               {!isSubmitted ? (
                 <form onSubmit={handleSubmit(submitForm)}>
                   <Grid container spacing="33px">
@@ -138,6 +139,7 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
                         register={register}
                         hasError={!!errors.first_name}
                         helperText={errors.first_name && "Vul je voornaam in"}
+                        labelClass="aanmelden-form-label"
                       />
                     </Grid>
                     <Grid item xs={12} md={4}>
@@ -149,6 +151,7 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
                         register={register}
                         hasError={!!errors.last_name}
                         helperText={errors.last_name && "Vul je achternaam in"}
+                        labelClass="aanmelden-form-label"
                       />
                     </Grid>
                     <Grid item xs={12} md={4}>
@@ -161,6 +164,7 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
                         required
                         hasError={!!errors.gender}
                         helperText={errors.gender && "Maak een keuze"}
+                        labelClass="aanmelden-form-label"
                       />
                     </Grid>
                     <Grid item xs={12} md={4}>
@@ -174,6 +178,7 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
                         helperText={
                           errors.birthdate && "Vul je geboortedatum in"
                         }
+                        labelClass="aanmelden-form-label"
                       />
                     </Grid>
                     <Grid item xs={12} md={4}>
@@ -186,6 +191,7 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
                         register={register}
                         hasError={!!errors.email}
                         helperText={errors.email && "Vul je e-mail adres in"}
+                        labelClass="aanmelden-form-label"
                       />
                     </Grid>
                     <Grid item xs={12} md={4}>
@@ -198,6 +204,7 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
                         register={register}
                         hasError={!!errors.city}
                         helperText={errors.city && "Vul je woonplaats in"}
+                        labelClass="aanmelden-form-label"
                       />
                     </Grid>
 

@@ -18,6 +18,7 @@ import {
 import InfoCard from "../../../components/content-types/InfoCard/InfoCard";
 import CommonDetailCard from "../../../components/content-types/CommonDetailCard/CommonDetailCard";
 import { ContainerWrapper } from "../../../styles/Vrjwilligerswerk/index.styles";
+import { HeroBannerWrapper } from "../../../styles/global.styled";
 
 type VolunteersTrainingPageProps = {
   pageData: any;
@@ -56,8 +57,9 @@ export const getServerSideProps = async () => {
 const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
   pageData,
 }) => {
+  console.log(pageData);
   return (
-    <ContainerWrapper className="voluntee">
+    <ContainerWrapper className="volunteer-training">
       <PageWrapper
         seo={{
           title: pageData?.seo_title
@@ -76,24 +78,25 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
           <TrainigenHeroWrapper>
             <Hero
               center
-              imageUrl={"/traininghead.png"}
+              imageUrl={"/trainingehead.png"}
               style={{
                 minHeight: 555,
                 position: "relative",
               }}
+              mobileImageHeight={932}
             >
-              <div className="flex flex-col mt-[-290px] md:items-center md:justify-center md:text-center max-w-4xl md:mt-[-80px]">
-                <TitleWithHighlights
-                  highlightColor="info"
-                  text={pageData?.page_title}
-                  headerElement="h1"
-                  color="primary"
-                  className="text-white text-[46px] p-0 m-0 font-[400] md:leading-[140%] md:text-[64px]"
-                />
-                <P className="text-white text-[18px] leading-[160%] md:text-[20px]">
-                  {pageData?.page_subtitle}
-                </P>
-              </div>
+              <HeroBannerWrapper className="training">
+                <div className="title-wrap max-w-4xl">
+                  <TitleWithHighlights
+                    highlightColor="info"
+                    text={pageData?.page_title}
+                    headerElement="h1"
+                    color="white"
+                    className="title"
+                  />
+                  <P className="subtitle">{pageData?.page_subtitle}</P>
+                </div>
+              </HeroBannerWrapper>
             </Hero>
           </TrainigenHeroWrapper>
 

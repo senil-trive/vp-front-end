@@ -21,6 +21,7 @@ import InfoCard from "../components/content-types/InfoCard/InfoCard";
 import VideoItem from "../components/content-types/VideoItem/VideoItem";
 import { VideoWrapper } from "../styles/Vrjwilligerswerk/VrijwilligerWorden.styles";
 import CommonDetailCard from "../components/content-types/CommonDetailCard/CommonDetailCard";
+import { ContainerWrapper } from "../styles/Vrjwilligerswerk/index.styles";
 
 type BuddyPageProps = {
   pageData: any;
@@ -61,7 +62,7 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
   const { colors } = useTheme();
 
   return (
-    <div>
+    <ContainerWrapper className="klets-meet">
       <PageWrapper
         seo={{
           title: pageData?.seo_title
@@ -133,7 +134,7 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                           description={item?.description}
                           icon="/handsake.svg"
                           category="Thema"
-                          className=" hover:bg-[#FE517E] text-[#fff] h-[100%] flex
+                          className="small-fonts hover:bg-[#FE517E] text-[#fff] h-[100%] flex
                   flex-col"
                         >
                           <div className="flex justify-center  mt-[20px] md:mt-[auto]">
@@ -155,7 +156,7 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                           description={item?.description}
                           category="Thema"
                           icon="/buddyappicon.png"
-                          className="mt-[32px] md:mt-[0px] h-[100%] flex
+                          className="small-fonts mt-[32px] md:mt-[0px] h-[100%] flex
                   flex-col"
                         >
                           <div className="flex justify-center mt-[20px] md:mt-[auto]">
@@ -286,7 +287,7 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
           </Container>
         </main>
       </PageWrapper>
-    </div>
+    </ContainerWrapper>
   );
 };
 

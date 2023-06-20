@@ -12,7 +12,6 @@ export const InfoCardWrapper = styled.div`
       color: #fff !important;
     }
   }
-
   &.primary:hover {
     article {
       background: #fff !important;
@@ -21,6 +20,17 @@ export const InfoCardWrapper = styled.div`
     button {
       background: #006ef7 !important;
       color: #fff !important;
+    }
+  }
+  &.blog {
+    header span {
+      background: #fe517e !important;
+    }
+  }
+  &.primary {
+    header span {
+      background: #006ef7 !important;
+      border-color: #006ef7 !important;
     }
   }
   &:hover {
@@ -70,7 +80,7 @@ export const InfoCardWrapper = styled.div`
   @media (max-width: 767px) {
     .info-card-footer {
       .footer-title {
-        font-size: 32px !important;
+        font-size: 30px !important;
       }
       .footer-content {
         font-size: 16px !important;

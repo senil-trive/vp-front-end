@@ -36,7 +36,7 @@ export const TrainingBlogWrapper = styled.section`
     }
   }
   @media (max-width: 767px) {
-    margin-top: -400px;
+    margin-top: -350px !important;
     .training-blog {
       flex-direction: column;
     }

@@ -229,7 +229,7 @@ export default function CommentForm({
     <Container className="max-w-[1118px]">
       {!parent ? (
         <>
-          <Grid container style={{ margin: "70px 0" }}>
+          <Grid container className="m-[0] mt-[70px] mb-[6px]">
             <Grid item xs={12} md={8} lg={8}>
               <H2 className="text-[35px] md:text-[42px]">
                 Reacties ({comments.length})
@@ -237,7 +237,7 @@ export default function CommentForm({
             </Grid>
           </Grid>
           {comments
-            .filter((comment) => !comment.parent_comment)
+            .filter((comment) => comment.status === "published")
             .map((comment) => (
               <Grid container key={comment.id}>
                 <Grid item xs={12}>
@@ -247,7 +247,7 @@ export default function CommentForm({
                         colors.primary.normal,
                         0.2
                       )}`,
-                      marginBottom: 34,
+                      marginBottom: "32px",
                     }}
                   >
                     <ForumComment

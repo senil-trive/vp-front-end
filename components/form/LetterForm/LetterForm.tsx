@@ -136,6 +136,7 @@ const LetterForm = ({
                 className="pl-1 inline float-right absolute"
               />
             </H2>
+            <P color="white">Vertel ons hoe je heet en hij komt naar je toe!</P>
           </div>
           <form onSubmit={handleSubmit(onSubmit)} className="flex h-[100%]">
             <Grid container spacing={"33"} className="form-wrapper">

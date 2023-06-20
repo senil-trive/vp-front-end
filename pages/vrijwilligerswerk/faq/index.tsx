@@ -10,6 +10,7 @@ import { useState } from "react";
 import Button from "../../../components/buttons/Button";
 import { Container } from "@mui/material";
 import { ContainerWrapper } from "../../../styles/Vrjwilligerswerk/index.styles";
+import { HeroBannerWrapper } from "../../../styles/global.styled";
 
 const POST_PER_PAGE = 7;
 
@@ -79,24 +80,29 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
   };
 
   return (
-    <ContainerWrapper className="voluntee">
-      <PageWrapper
-        seo={{
-          title: pageData?.seo_title
-            ? pageData?.seo_title
-            : pageData?.page_title,
-          description: pageData?.seo_description
-            ? pageData?.seo_description
-            : pageData?.page_subtitle,
-          canonical: "https://www.villapinedo.nl/vrijwilligerswerk",
-          image: pageData?.seo_image
-            ? parseImageURL(pageData?.seo_image?.id)
-            : "",
-        }}
-      >
-        <main>
-          <Hero imageUrl={parseImageURL(pageData?.background_image?.id, 1410)}>
-            <div className="flex flex-col max-w-2xl md:items-center md:justify-center md:text-center md:max-w-4xl my-16">
+    <PageWrapper
+      seo={{
+        title: pageData?.seo_title ? pageData?.seo_title : pageData?.page_title,
+        description: pageData?.seo_description
+          ? pageData?.seo_description
+          : pageData?.page_subtitle,
+        canonical: "https://www.villapinedo.nl/vrijwilligerswerk",
+        image: pageData?.seo_image
+          ? parseImageURL(pageData?.seo_image?.id)
+          : "",
+      }}
+    >
+      <main className="mb-[128px]">
+        <Hero
+          imageUrl={parseImageURL(pageData?.background_image?.id, 1410)}
+          style={{
+            minHeight: 377,
+            position: "relative",
+          }}
+          mobileImageHeight={468}
+        >
+          <HeroBannerWrapper>
+            <div className="title-wrap max-w-2xl md:max-w-4xl">
               <TitleWithHighlights
                 text={pageData?.page_title ?? ""}
                 textToHighlight="vrijwilligers"
@@ -107,27 +113,20 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
                   fontWeight: `400`,
                   color: `white`,
                 }}
-                className="text-[46px] md:leading-[140%] md:text-[64px]"
+                className="title mt-[180px] md:mt-[80px]"
               />
-              <P
-                style={{
-                  fontStyle: `normal`,
-                  fontWeight: `300`,
-                  lineHeight: `160%`,
-                  color: `white`,
-                }}
-                className="font-avenir text-[20px] md:text-[18px] md:mt-[-10px]"
-              >
-                {pageData?.page_subtitle}
-              </P>
+              <P className="font-avenir subtitle">{pageData?.page_subtitle}</P>
             </div>
-          </Hero>
+          </HeroBannerWrapper>
+        </Hero>
+        <ContainerWrapper className="voluntee">
           <div className="relative mt-[-134px] md:mt-[0px]">
             <FAQList
               items={items}
               isLoading={isLoading}
               showLoadMore={showMoreButton}
               onLoadMore={changePage}
+              containerWidth={"md"}
             />
             <Container className="mb-[80px]">
               <Button
@@ -139,9 +138,9 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
               </Button>
             </Container>
           </div>
-        </main>
-      </PageWrapper>
-    </ContainerWrapper>
+        </ContainerWrapper>
+      </main>
+    </PageWrapper>
   );
 };
 

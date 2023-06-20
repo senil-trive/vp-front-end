@@ -154,7 +154,7 @@ export default function Forum({
                 <Button
                   variant="white"
                   filled={false}
-                  href="/forum/stel-een-vraag"
+                  href="/stel-een-vraag"
                   className="w-[100%] text-[18px] font-[300] border-[1px] border-[#fff] hover:bg-[#3FC7B4] hover:border-[#3FC7B4]"
                 >
                   {pageData?.submit_question_button_label}
@@ -221,7 +221,7 @@ export default function Forum({
                     fill
                     className="relative w-[100%] h-[121px] rounded-t-[8px]"
                   />
-                  <div className="bg-[#FE517E] h-[264px] p-[24px] md:p-[32px] rounded-b-[8px]">
+                  <div className="bg-[#FE517E] min-h-[264px] h-[100%] p-[24px] md:p-[32px] rounded-b-[8px]">
                     <div>
                       <TitleWithHighlights
                         text={pageData?.search_bar_quote || ""}

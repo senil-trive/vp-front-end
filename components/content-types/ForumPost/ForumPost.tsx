@@ -217,7 +217,7 @@ export default function ForumPost({
               </p>
             </div>
           </header>
-          <div className="content">
+          <div className="content text-[16px] md:text-[18px]">
             {tags.length > 0 && (
               <div className="flex flex-wrap forum-tags">
                 {tags.map((item, index) => (
@@ -236,7 +236,9 @@ export default function ForumPost({
           <div>
             <div className="icon-wrapper mr-4">
               <FiHeart size={24} />
-              <p className="font-avenir font-light text-lg">{comments}</p>
+              <p className="font-avenir font-light text-[16px] md:text-[18px]">
+                {comments}
+              </p>
             </div>
           </div>
           <div>
