@@ -46,6 +46,7 @@ type Props = {
   /** Callback to handle the input */
   onChange?: (x: any) => void;
 
+  labelClass?: string;
   /** React hook form register function for error handling */
   register?: any;
 
@@ -168,6 +169,7 @@ export default function Input({
   onChange,
   register,
   required,
+  labelClass,
   borderColor = "white",
   ...rest
 }: Props) {
@@ -182,7 +184,7 @@ export default function Input({
 
   return (
     <InputWrapper disabled={disabled} active={active} hasError={hasError}>
-      {!!label && <label>{label}</label>}
+      {!!label && <label className={labelClass}>{label}</label>}
       <div style={{ borderColor: colors[borderColor].normal }}>
         {!!iconLeft && (
           <IconWrapper style={{ marginRight: 10 }}>{iconLeft}</IconWrapper>

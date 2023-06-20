@@ -47,7 +47,13 @@ const StyledForumPost = styled.article<{ isReplyComment: boolean }>`
     margin-top: 24px;
     padding-top: 12px;
   }
-
+  .content p {
+    font-family: "Avenir" !important;
+    font-size: 18px;
+  }
+  @media (max-width: 767px) {
+    font-size: 16px;
+  }
   ${({ isReplyComment }) => {
     if (!isReplyComment) return null;
 
@@ -94,7 +100,7 @@ export default function ForumComment({
           )}
         </div>
       </header>
-      <div className="content">
+      <div className="content font-avenir text-[16px] leading-[160%] md:text-[18px]">
         {parseHTMLtoReact(title)}
         <footer className="bg-white -mx-6 -mb-6 justify-start">
           <button className="flex mt-8" onClick={handleReply}>

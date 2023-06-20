@@ -55,6 +55,24 @@ const InputWrapper = styled.div<InputStateType>`
     line-height: 160%;
     color: #fff;
   }
+  .upload-button-dz {
+    background: #fff;
+    font-family: "Avenir";
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 160%;
+    color: #c7c7c7;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    > input {
+      width: 100%;
+      opacity: 0;
+      position: absolute;
+      left: 0;
+    }
+  }
 `;
 
 export default function Upload({
@@ -78,7 +96,10 @@ export default function Upload({
   return (
     <InputWrapper disabled={disabled} active={active} hasError={hasError}>
       {!!label && <label>{label}</label>}
-      <div style={{ borderColor: colors[borderColor].normal }}>
+      <div
+        style={{ borderColor: colors[borderColor].normal }}
+        className="mt-[16px]"
+      >
         {!!iconLeft && (
           <IconWrapper style={{ marginRight: 10 }}>{iconLeft}</IconWrapper>
         )}

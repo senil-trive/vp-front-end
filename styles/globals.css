@@ -197,6 +197,12 @@ p {
   font-size: 32px;
   padding: 5px 15px !important;
 }
+.aanmelden-form-label {
+  font-size: 18px !important;
+  font-weight: 900 !important;
+  line-height: 160% !important;
+  color: #fff !important;
+}
 
 .forum-from-dz label,
 .forum-from-dz label span {

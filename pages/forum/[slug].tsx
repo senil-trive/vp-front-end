@@ -76,7 +76,7 @@ export default function ForumDetail({ pageData, comments = [] }: Props) {
       }}
     >
       <BreadCrumbs />
-      <Container>
+      <Container className="max-w-[1118px] mt-[64px] md:mt-[128px]">
         <Grid container>
           {/* <Grid item xs={0} md={2} lg={2} /> */}
           <Grid item xs={12} className="mx-auto">
@@ -100,7 +100,7 @@ export default function ForumDetail({ pageData, comments = [] }: Props) {
         </Grid>
       </Container>
 
-      <main>
+      <main className="mt-[100px] md:mt-[128px]">
         <CommentForm
           type="forum"
           comments={comments}
@@ -110,8 +110,8 @@ export default function ForumDetail({ pageData, comments = [] }: Props) {
           ook! Heb jij een goede tip? Deel 'm hieronder!"
           postId={pageData.id}
         />
-        <section>
-          <div className="my-[40px] md:my-[80px]">
+        <section className="mt-[100px] md:mt-[128]">
+          <div>
             <CommentForm
               postId={pageData.id}
               parent={"Geef zelf antwoord op deze vraag"}

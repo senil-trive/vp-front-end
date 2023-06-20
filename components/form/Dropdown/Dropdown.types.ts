@@ -46,7 +46,7 @@ export type DropdownProps = {
 
   /** React hook form register function for error handling */
   register?: any;
-
+  labelClass?: string;
   control?: Control<any>;
 
   /** The color of the border */
