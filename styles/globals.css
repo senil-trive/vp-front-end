@@ -203,3 +203,33 @@ p {
   line-height: 160% !important;
   color: #fff !important;
 }
+
+.forum-from-dz label,
+.forum-from-dz label span {
+  font-weight: 400 !important;
+}
+
+/* .forum-from-dz .MuiGrid-container{
+    row-gap: 13px;
+} */
+
+.upload-button-dz {
+  background: #ffffff;
+  border: 1px dashed #c7c7c7;
+  border-radius: 8px;
+  height: 49px;
+  position: relative;
+  color: #c7c7c7;
+  font-size: 18px;
+  font-weight: 400;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-button-dz input {
+  position: absolute;
+  width: 100%;
+  opacity: 0;
+}
