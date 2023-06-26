@@ -19,7 +19,7 @@ const StyledWrapper = styled.div`
 
 function YoutubePlayer({ src }: YoutubeProps) {
   return (
-    <StyledWrapper className="overflow-hidden rounded-[8px]">
+    <StyledWrapper className="overflow-hidden ">
       {src && (
         <iframe
           src={`https://www.youtube.com/embed/${

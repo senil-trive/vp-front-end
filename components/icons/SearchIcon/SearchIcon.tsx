@@ -22,7 +22,7 @@ const SearchIcon = ({ color, ...props }: SVGProps<SVGSVGElement>) => {
         strokeWidth={2}
         strokeLinecap="round"
         strokeLinejoin="round"
-        style={{ stroke: "#C7C7C7" }}
+        style={{ stroke: "#150F2F" }}
       />
     </svg>
   );

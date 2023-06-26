@@ -3,7 +3,7 @@ import { SVGProps } from "react";
 import { useTheme } from "styled-components";
 import { IconProps } from "../../../types/iconTypes";
 
-const ListIcon = ({ color = "primary", ...props }: IconProps) => {
+const ListIcon = ({ color = "black", ...props }: IconProps) => {
   const { colors } = useTheme();
 
   return (

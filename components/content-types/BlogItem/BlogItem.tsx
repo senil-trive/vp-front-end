@@ -93,7 +93,7 @@ export default function BlogItem({
     <Card variant={type}>
       {generateMediaItem()}
       <CardFooter>
-        <H4 className="text-4xl" style={{ margin: 0 }} variant="bold">
+        <H4 className="text-4xl" style={{ margin: 0 }}>
           {truncate(title, 23)}
         </H4>
         {!!description ? (
@@ -110,7 +110,9 @@ export default function BlogItem({
           </div>
         )}
         <div className="flex items-center justify-between author-date mb-[20px] mt-[0]">
-          <p className="text-lg font-avenir">{author}</p>
+          <p style={{ fontWeight: "700" }} className="text-lg">
+            {author}
+          </p>
           <p className="italic font-light font-avenir">{parseDate(postDate)}</p>
         </div>
         <Button style={{ marginTop: "auto" }} variant="secondary" href={link}>
