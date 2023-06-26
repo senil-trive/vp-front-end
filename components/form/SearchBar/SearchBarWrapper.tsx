@@ -28,10 +28,20 @@ const Wrapper = styled.div`
 
     .inner {
       width: 100%;
-
       input {
         width: 100%;
       }
+    }
+  }
+  @media (max-width: 767px) {
+    flex-direction: column;
+    padding: 0 16px;
+    .hand-icon {
+      transform: rotate(90deg);
+      display: inline-block;
+    }
+    .outer {
+      padding: 0 16px 36px 16px;
     }
   }
 `;
@@ -46,7 +56,7 @@ export default function SearchBarWrapper({
     <Container maxWidth="xl" style={{ margin: "21px auto" }}>
       <Wrapper>
         {prefix && (
-          <div style={{ display: "block", paddingRight: 20 }}>{prefix}</div>
+          <div className="pt-[16px] md:p-[32px] md:blocK flex">{prefix}</div>
         )}
         <div className="outer flex-1">
           <div className="inner scrolling-right">
