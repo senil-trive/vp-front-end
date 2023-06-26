@@ -9,7 +9,7 @@ import {
 
 import { BlogPageProps } from "../../types/pageTypes";
 import CollectionSearchBar from "../../components/form/CollectionSearchBar/CollectionSearchBar";
-import { Hero } from "../../components/layout";
+import { Hero, Pagination } from "../../components/layout";
 import { MasonryGrid } from "../../components/layout/MasonryGrid/MasonryGrid";
 import { POST_PER_PAGE } from "../../constants/app-configs";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
@@ -20,6 +20,8 @@ import { useCallbackWhenReachedBottom } from "../../utils/scroll";
 import { useTheme } from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 import ChevronRight from "../../components/icons/ChevronRight/ChevronRight";
+import SearchIcon from "../../components/icons/SearchIcon/SearchIcon";
+import Input from "../../components/form/Input/Input";
 
 export const getServerSideProps = async () => {
   try {
@@ -31,6 +33,7 @@ export const getServerSideProps = async () => {
     });
 
     const pageRes = await pageReq.json();
+    console.log(pageRes, "Ddddf");
     const blogRes = await blogsReq.json();
     const tagsRes = await tagsReq.json();
     return {
@@ -62,38 +65,38 @@ export default function Forum({
   const [selectedTag, setSelectedTag] = useState<string>("");
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
+
   const [sort, setSort] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
-  useCallbackWhenReachedBottom(async () => {
-    if (posts.length < totalCount) {
-      setIsLoading(true);
-      try {
-        const req = await getPosts({
-          postPerPage: POST_PER_PAGE,
-          page: currentPage + 1,
-          search,
-          sort,
-          meta: "filter_count",
-          filter:
-            selectedTag.length > 0
-              ? `filter={"categories": { "categories_id": { "id": { "_eq": "${selectedTag}"}}}}`
-              : ``,
-        });
-        const res = await req.json();
+  // useCallbackWhenReachedBottom(async () => {
+  //   if (posts.length < totalCount) {
+  //     setIsLoading(true);
+  //     try {
+  //       const req = await getPosts({
+  //         postPerPage: POST_PER_PAGE,
+  //         page: currentPage + 1,
+  //         search,
+  //         sort,
+  //         meta: "filter_count",
+  //         filter:
+  //           selectedTag.length > 0
+  //             ? `filter={"categories": { "categories_id": { "id": { "_eq": "${selectedTag}"}}}}`
+  //             : ``,
+  //       });
+  //       const res = await req.json();
 
-        setPosts([...posts, ...(res.data || [])]);
-        setIsLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
+  //       setPosts([...posts, ...(res.data || [])]);
+  //       setIsLoading(false);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
 
-      setCurrentPage((page) => page + 1);
-    } else {
-      setIsEnd(true);
-    }
-  });
+  //   } else {
+  //     setIsEnd(true);
+  //   }
+  // });
 
   const handleSearch = (x: string) => {
     setSearch(x);
@@ -103,7 +106,13 @@ export default function Forum({
   const handleSort = (x: string) => {
     setSort(x);
   };
-
+  const changePage = (index: number) => {
+    if (index <= 1) {
+      setCurrentPage(1);
+    } else {
+      setCurrentPage(index);
+    }
+  };
   useEffect(() => {
     const getPaginatedBlogs = async () => {
       try {
@@ -153,9 +162,11 @@ export default function Forum({
           minHeight: 649,
           position: "relative",
         }}
+        mbgn={"/Header_Banner.png"}
+        mobileImageHeight={740}
       >
         <Container>
-          <Grid container>
+          <Grid container className="custom_banner_content">
             <Grid item xs={0} md={2} lg={3} />
             <Grid item xs={12} md={8} lg={6}>
               <TitleWithHighlights
@@ -167,19 +178,36 @@ export default function Forum({
                   fontWeight: "400",
                 }}
                 color="white"
-                textToHighlight={["Blog", "Vlogs"]}
               />
               <P
                 color="white"
                 variant="light"
                 style={{
                   textAlign: "center",
-                  fontSize: "18px",
+                  fontSize: "22px",
                   fontWeight: "300",
                 }}
               >
                 {pageData?.page_subtitle}
               </P>
+              <div
+                style={{
+                  display: "flex",
+                  marginTop: "20px",
+                  justifyContent: "space-between",
+                }}
+                className="custom_banner_form"
+              >
+                <P style={{ color: "#fff", fontSize: "18px" }}>
+                  Doorzoek de blogs / vlogs
+                </P>
+                <div style={{ width: "60%" }} className="custom_banner_formBox">
+                  <Input
+                    iconLeft={<SearchIcon color={"#fff"} />}
+                    placeholder={pageData?.search_bar_quote}
+                  />
+                </div>
+              </div>
             </Grid>
             <Grid item xs={0} md={2} lg={3} />
           </Grid>
@@ -233,10 +261,10 @@ export default function Forum({
         /> */}
 
         <div style={{ margin: "0px auto" }}>
-          <Container style={{ marginBottom: "38px" }}>
+          <Container style={{ marginBottom: "0px", maxWidth: "100%" }}>
             <Grid container>
               <Grid item xs={12} md={9}>
-                <P style={{ color: colors.primary.normal }}>
+                <P style={{ color: colors.black.normal, fontSize: "24px" }}>
                   {totalCount} verhalen
                 </P>
               </Grid>
@@ -256,13 +284,22 @@ export default function Forum({
         </div>
 
         <div className="flex items-center justify-center">
-          {isLoading && <CircularProgress size={"30px"} />}
+          {/* {isLoading && <CircularProgress size={"30px"} />} */}
           {isEnd && (
             <P style={{ marginLeft: "1rem" }} color="info">
               Geen posts meer om te tonen
             </P>
           )}
         </div>
+        {totalCount / POST_PER_PAGE > 2 && (
+          <div style={{ paddingBottom: "128px" }}>
+            <Pagination
+              total={Math.ceil(totalCount / POST_PER_PAGE)}
+              truncated
+              onChange={changePage}
+            />
+          </div>
+        )}
       </main>
     </PageWrapper>
   );
