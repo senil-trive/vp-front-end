@@ -42,21 +42,6 @@ const moduleExports = {
       /**
        * Redirects for forum
        */
-      {
-        source: "/forum",
-        destination: "/forum",
-        permanent: false,
-      },
-      {
-        source: "/stel-een-vraag/",
-        destination: "/forum/stel-een-vraag/",
-        permanent: false,
-      },
-      {
-        source: "/forum/:path*",
-        destination: "/forum/:path*",
-        permanent: false,
-      },
 
       /**
        * Redirects for open brieven

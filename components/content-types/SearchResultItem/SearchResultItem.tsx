@@ -31,7 +31,7 @@ const Wrapper = styled.div<{ colorVariant: number }>`
     font-size: 18px;
     font-weight: 500;
     position: absolute;
-    left: 30%;
+    left: 21%;
     span {
       font-size: 18px;
       display: inline-block;
@@ -170,7 +170,7 @@ export default function SearchResultItem({
           )} */}
           {showScrollContent && (
             <div className={`scroll-content ${classes}`}>
-              Scroll to see more{" "}
+              Scroll verder en bekijk meer
               <span
                 style={{
                   marginTop: "-6px",
