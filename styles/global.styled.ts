@@ -26,7 +26,7 @@ const HeroBannerWrapper = styled(Container)`
     font-style: "normal";
   }
   &.zoeken-page {
-    .subtitle {
+    .search {
       font-size: 28px !important;
       font-weight: 500 !important;
       span {
@@ -38,6 +38,7 @@ const HeroBannerWrapper = styled(Container)`
     .title {
       margin-bottom: 32px !important;
       line-height: 118% !important;
+      font-size: 80px !important;
     }
   }
   &.stel-een-vraag {
@@ -60,26 +61,50 @@ const HeroBannerWrapper = styled(Container)`
       margin-top: -200px !important;
     }
     &.zoeken-page {
-      .subtitle {
+      .search {
         font-size: 20px !important;
         span {
           font-size: 18px !important;
         }
       }
+
       .title {
         margin-bottom: 32px !important;
         line-height: 118% !important;
+        font-size: 46px !important;
       }
     }
   }
 `;
 
-const ContainerWrapper = styled(Container)`
+const ContainerWrapper = styled(Container)<{ cardHeight?: number | string }>`
+  .cardHeight {
+    max-height: ${({ cardHeight }) => `${cardHeight}px`};
+    padding-top: 0;
+  }
   &.lg-container {
     max-width: 1384px !important;
   }
   &.sm-container {
     max-width: 1118px;
+  }
+  @media (max-width: 767px) {
+    ul {
+      max-height: 400px;
+      height: 100%;
+    }
+    .cardHeight {
+      margin-top: 40px;
+    }
+    &.zoeken {
+      margin-top: -80px !important;
+      section > p {
+        font-size: 30px;
+      }
+      ul > li {
+        font-size: 16px;
+      }
+    }
   }
 `;
 export { HeroBannerWrapper, ContainerWrapper };

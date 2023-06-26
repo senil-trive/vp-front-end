@@ -1,4 +1,4 @@
-import { Container, Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { H4, TitleWithHighlights } from "../../components/typography";
 import React, { useEffect, useRef, useState } from "react";
 import { getForumPosts, getLetters, getPosts } from "../../utils/api";
@@ -11,6 +11,7 @@ import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import SearchResultItem from "../../components/content-types/SearchResultItem/SearchResultItem";
 import { truncate } from "../../utils/truncate";
 import { useRouter } from "next/router";
+import { v4 as uuidv4 } from "uuid";
 import parseImageURL from "../../utils/parseImageURL";
 import TextWithHighlights from "../../components/typography/TextWithHighlights";
 import SearchBarWrapper from "../../components/form/SearchBar/SearchBarWrapper";
@@ -18,6 +19,10 @@ import {
   ContainerWrapper,
   HeroBannerWrapper,
 } from "../../styles/global.styled";
+import BriefItem from "../../components/content-types/BriefItem/BriefItem";
+import Link from "next/link";
+import ForumPost from "../../components/content-types/ForumPost/ForumPost";
+import { MasonryGrid } from "../../components/layout/MasonryGrid/MasonryGrid";
 
 export default function Search() {
   const router = useRouter();
@@ -25,12 +30,11 @@ export default function Search() {
   const brievenRef = useRef(null);
   const blogRef = useRef(null);
   const forumRef = useRef(null);
-
+  const [cardHeight, setCardHeight] = useState(0);
   const [posts, setPosts] = useState<BlogType[]>([]);
   const [forumPosts, setForumPosts] = useState<ForumPostType[]>([]);
   const [letters, setLetters] = useState<Letter[]>([]);
   const { q } = router.query;
-
   useEffect(() => {
     const getPaginatedBlogs = async () => {
       try {
@@ -45,7 +49,6 @@ export default function Search() {
         console.log(error);
       }
     };
-
     const getPaginatedForum = async () => {
       try {
         const req = await getForumPosts({
@@ -79,7 +82,22 @@ export default function Search() {
       getPaginatedLetters();
     }
   }, [q, router.isReady]);
-
+  useEffect(() => {
+    const blogItem = document.querySelector(".zoeken-blog");
+    const forumItem = document.getElementById("zoeken-forum");
+    const letterItem = document.getElementById("zoeken-letter");
+    let allCardHeight = [];
+    if (blogItem) {
+      allCardHeight.push(blogItem?.clientHeight);
+    }
+    if (forumItem) {
+      allCardHeight.push(forumItem?.clientHeight);
+    }
+    if (letterItem) {
+      allCardHeight.push(letterItem?.clientHeight);
+    }
+    allCardHeight.length > 0 && setCardHeight(Math.max(...allCardHeight));
+  });
   return (
     <PageWrapper
       seo={{
@@ -103,19 +121,20 @@ export default function Search() {
                 posts?.length + forumPosts?.length + letters?.length
               } resultaten gevonden`}
               color="white"
+              style={{ fontFamily: "Fjalla One !important" }}
               className="title"
             />
             <TextWithHighlights
               color="white"
+              style={{ fontFamily: "Fjalla One !important" }}
               variant="light"
               text={`Je hebt gezocht op "${q}"`}
               textToHighlight={{ word: `"${q}"`, color: "#3FC7B4" }}
-              className="subtitle"
+              className="search"
             />
           </div>
         </HeroBannerWrapper>
       </Hero>
-
       <main style={{ marginBottom: "80px" }}>
         <div
           style={{
@@ -127,45 +146,114 @@ export default function Search() {
             <SearchBarWrapper
               prefix={
                 <H4 className="text-[24px] font-[400] leading-[120%]">
-                  Gebruik een ander zoekwoord 👉🏾
+                  Gebruik ander zoekwoord <span className="hand-icon">👉🏾</span>
                 </H4>
               }
             />
           </ContainerWrapper>
         </div>
-        <ContainerWrapper className="lg-container">
+        <ContainerWrapper
+          className="zoeken lg-container"
+          cardHeight={
+            typeof cardHeight === "number" &&
+            cardHeight > 100 &&
+            (posts.length === 1 ||
+              letters.length === 1 ||
+              forumPosts.length === 1)
+              ? cardHeight
+              : "100%"
+          }
+        >
           <Grid container spacing={"22px"}>
-            <Grid item xs={12} md={4}>
-              <SearchResultItem
-                amount={forumPosts?.length}
-                resultTitleSuffix={` in ons Forum`}
-                list={forumPosts?.map((post) => ({
-                  name: truncate(post.content, 120),
-                  link: `/forum/${post.slug}`,
-                }))}
-              />
+            <Grid item xs={12} md={4} className="cardHeight">
+              {forumPosts.length === 1 ? (
+                <div id="zoeken-forum">
+                  <Link href={`/forum/${forumPosts[0].slug}`}>
+                    <ForumPost
+                      truncateContent
+                      fullHeight={false}
+                      gender={forumPosts[0].user_gender}
+                      age={forumPosts[0].user_age}
+                      image={forumPosts[0].user_image?.id || "asad"}
+                      authorType={forumPosts[0].user_name}
+                      postDate={new Date(forumPosts[0].date_created)}
+                      tags={
+                        forumPosts[0].categories?.map(
+                          (cat) => cat.categories_id?.name
+                        ) ?? []
+                      }
+                      title={
+                        forumPosts[0].title ??
+                        "Titel moet in CMS worden ingevoerd"
+                      }
+                      comments={forumPosts[0].comments.length}
+                      content={forumPosts[0].content}
+                    />
+                  </Link>
+                </div>
+              ) : (
+                <SearchResultItem
+                  amount={forumPosts?.length}
+                  resultTitleSuffix={` in ons Forum`}
+                  list={forumPosts?.map((post) => ({
+                    name: truncate(post.content, 120),
+                    link: `/forum/${post.slug}`,
+                  }))}
+                  searchRef={brievenRef}
+                />
+              )}
             </Grid>
-            <Grid item xs={12} md={4}>
-              <SearchResultItem
-                colorVariant={2}
-                amount={posts?.length}
-                resultTitleSuffix={` in Blogs en Vlogs`}
-                list={posts?.map((post) => ({
-                  name: post.title,
-                  link: `/verhalen/${post.slug}`,
-                }))}
-              />
+            <Grid item xs={12} md={4} className="cardHeight">
+              {posts.length === 1 ? (
+                <div className="mt-[-15px]">
+                  <MasonryGrid
+                    feed={posts.map((item) => ({
+                      id: `blog-${uuidv4()}`,
+                      type: "blog",
+                      width: 1,
+                      content: { ...item },
+                    }))}
+                    className="zoeken-blog"
+                  />
+                </div>
+              ) : (
+                <SearchResultItem
+                  colorVariant={2}
+                  amount={posts?.length}
+                  resultTitleSuffix={` in Blogs en Vlogs`}
+                  list={posts?.map((post) => ({
+                    name: post.title,
+                    link: `/verhalen/${post.slug}`,
+                  }))}
+                  searchRef={blogRef}
+                />
+              )}
             </Grid>
-            <Grid item xs={12} md={4}>
-              <SearchResultItem
-                colorVariant={3}
-                amount={letters?.length}
-                resultTitleSuffix={` in Brieven`}
-                list={letters?.map((post) => ({
-                  name: post.title,
-                  link: `/verhalen/${post.slug}`,
-                }))}
-              />
+            <Grid item xs={12} md={4} className="cardHeight">
+              {letters.length === 1 ? (
+                <div id="zoeken-letter">
+                  <BriefItem
+                    key={letters[0].id}
+                    title={letters[0].title}
+                    content={letters[0].description}
+                    imgSrc={parseImageURL(letters[0].image?.id)}
+                    fileSrc={`/open-brieven/${letters[0].slug}`}
+                    bg={letters[0].bg_color}
+                    imgHeight={180}
+                  />
+                </div>
+              ) : (
+                <SearchResultItem
+                  colorVariant={3}
+                  amount={letters?.length}
+                  resultTitleSuffix={` in Brieven`}
+                  list={letters?.map((post) => ({
+                    name: post.title,
+                    link: `/verhalen/${post.slug}`,
+                  }))}
+                  searchRef={forumRef}
+                />
+              )}
             </Grid>
           </Grid>
         </ContainerWrapper>

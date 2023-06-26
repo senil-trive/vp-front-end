@@ -38,10 +38,15 @@ export type FeedItem = {
 
 type Props = {
   fullHeightItems?: boolean;
+  className?: string;
   feed: FeedItem[];
 };
 
-export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
+export function MasonryGrid({
+  fullHeightItems = true,
+  feed = [],
+  className,
+}: Props) {
   const [loading, setLoading] = useState(true);
 
   //1. Adust stiffness ,bounce and duration
@@ -222,7 +227,7 @@ export function MasonryGrid({ fullHeightItems = true, feed = [] }: Props) {
 
                 return (
                   <motion.div
-                    className={`grid-item grid-item-w-${item.width}`}
+                    className={`grid-item grid-item-w-${item.width} ${className}`}
                     key={index}
                     variants={cardVariants}
                     initial="offscreen"
