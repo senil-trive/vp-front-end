@@ -249,7 +249,7 @@ export default function Search() {
                   resultTitleSuffix={` in Brieven`}
                   list={letters?.map((post) => ({
                     name: post.title,
-                    link: `/verhalen/${post.slug}`,
+                    link: `/open-brieven/${post.slug}`,
                   }))}
                   searchRef={forumRef}
                 />
