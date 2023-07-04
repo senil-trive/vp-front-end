@@ -132,53 +132,64 @@ const SubmitForm = ({
         {!isSubmitted ? (
           <form onSubmit={handleSubmit(onSubmit)}>
             <Grid container spacing={"33"} className="form-wrapper">
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={6} md={3}>
                 <Input
-                  label="Voornaam"
+                  label="Naam"
                   name="user_name"
                   register={register}
+                  placeholder="Jouw naam..."
+                  required
                   hasError={!!errors.user_name}
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={6} md={3}>
                 <Input
                   label="Leeftijd"
                   type="number"
                   name="user_age"
+                  placeholder="Jouw leeftijd..."
                   register={register}
+                  required
+                  hasError={!!errors.user_age}
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              <Grid item xs={12} sm={6} md={3}>
                 <Input
-                  label="Email adres"
+                  label="E-mail"
                   type="email"
                   name="user_email"
+                  placeholder="Jouw email..."
                   register={register}
+                  required
+                  hasError={!!errors.user_email}
                 />
               </Grid>
               <Grid item xs={12} sm={6} md={4}>
                 <Input
-                  label="Woonplaats"
-                  name="residence"
+                  label="Postcode"
+                  name="user_postcode"
+                  placeholder="Jouw postcode..."
                   register={register}
+                  required
+                  hasError={!!errors.user_postcode}
                 />
               </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              {/* <Grid item xs={12} sm={6} md={4}>
                 <Dropdown
                   options={GENDERS}
                   label="Geslacht"
                   name="user_gender"
                   register={register}
                 />
-              </Grid>
-              <Grid item xs={12} sm={6} md={4}>
+              </Grid> */}
+              {/* <Grid item xs={12} sm={6} md={4}>
                 <Input label="Thema" name="theme" />
-              </Grid>
+              </Grid> */}
               <Grid item xs={12}>
                 <TextArea
-                  label="Schrijf hier je vraag of bericht *"
+                  label="Reactie"
                   name="content"
-                  placeholder="Schrijf hier je vraag of bericht"
+                  placeholder="Jouw reactie..."
                   required
                   register={register}
                   hasError={!!errors.content}
