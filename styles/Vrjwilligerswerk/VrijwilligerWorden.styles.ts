@@ -2,6 +2,10 @@ import styled from "styled-components";
 
 export const PeopleWrapper = styled.section`
   margin: 80px 0;
+  .sub-title {
+    font-weight: 300 !important;
+    line-height: 160% !important;
+  }
   .people-container {
     margin: auto;
   }
@@ -14,13 +18,14 @@ export const PeopleWrapper = styled.section`
   }
   .card-container .title,
   .description {
-    color: #fff;
+    color: #150f2f;
     font-weight: 400;
   }
   .card-container .title {
     font-size: 26px;
     font-weight: 400;
   }
+
   @media (max-width: 991px) {
     .people-container .card-container {
       width: calc(50% - 22px) !important;
@@ -35,6 +40,14 @@ export const PeopleWrapper = styled.section`
     }
   }
   @media (max-width: 767px) {
+    .people-container .card-container {
+      .title {
+        font-size: 26px;
+      }
+      .description {
+        line-height: 160% !important;
+      }
+    }
     .card-container footer {
       padding: 20px;
     }
@@ -42,9 +55,9 @@ export const PeopleWrapper = styled.section`
       font-size: 20px;
       margin: 0;
     }
-    .people-container .card-container img {
+    /* .people-container .card-container img {
       object-fit: fill !important;
-    }
+    } */
   }
   @media (max-width: 600px) {
     .people-container .card-container {
@@ -58,6 +71,9 @@ export const PeopleWrapper = styled.section`
   }
 `;
 export const VideoWrapper = styled.section`
+  .sub-title {
+    line-height: 160%;
+  }
   .video-container figure {
     width: calc(33.33% - 22px) !important;
     margin-right: 22px;
@@ -72,18 +88,39 @@ export const VideoWrapper = styled.section`
       width: 60px !important;
     }
     .video-container figcaption h3 {
-      font-size: 23px;
+      font-size: 32px;
+      line-height: 120%;
     }
-    .video-container figcaption p {
+    /* .video-container figcaption p {
       line-height: 130%;
-    }
+    } */
   }
   @media (max-width: 767px) {
     margin-top: 40px;
-    .video-container figure {
-      width: 100% !important;
-      height: 471px !important;
-      margin: 20px 0px;
+    .video-container {
+      figure {
+        width: 100% !important;
+        height: 471px !important;
+        margin: 20px 0px;
+      }
+      figcaption h3 {
+        font-size: 32px;
+        line-height: 120%;
+      }
+      figcaption p {
+        line-height: 160%;
+      }
+    }
+  }
+`;
+
+export const FaqStyle = styled.div`
+  .faq-title {
+    font-size: 26px;
+  }
+  @media (max-width: 767px) {
+    .faq-title {
+      font-size: 22px;
     }
   }
 `;

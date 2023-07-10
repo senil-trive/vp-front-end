@@ -15,4 +15,16 @@ export const ContainerWrapper = styled.div`
   &.klets-meet .MuiContainer-root {
     max-width: 1384px !important;
   }
+  @media (max-width: 767px) {
+    &.volunteer.overvies {
+      .title-wrap {
+        .title {
+          line-height: 118% !important;
+        }
+        .subtitle {
+          font-weight: 400 !important;
+        }
+      }
+    }
+  }
 `;

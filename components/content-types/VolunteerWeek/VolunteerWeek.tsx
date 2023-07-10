@@ -109,7 +109,7 @@ const VolunteerWeek: React.FC<IProps> = ({
   };
   return (
     <VolunteerWrapper
-      className={`${className} volunteer-week-box border-[5px] border-[#3FC7B4] p-[32px] ${
+      className={`${className} volunteer-week-box p-[32px] ${
         activeId === id ? "active" : ""
       }`}
       onClick={() => handleClick(activeId)}
@@ -120,7 +120,7 @@ const VolunteerWeek: React.FC<IProps> = ({
       <div>
         <div className="flex items-center">
           <h3 className="week-title text-[26px] font-[400] pr-[10px]">
-            {title}{" "}
+            {title}
           </h3>
 
           <Image
@@ -136,13 +136,15 @@ const VolunteerWeek: React.FC<IProps> = ({
               data?.map((volunteer: any, index) => (
                 <li key={index} className="pt-2">
                   {edit && activeId === id ? (
-                    <Input
-                      onChange={(e) => handleChange(e, index, id)}
-                      defaultValue={volunteer?.work}
-                      name={`${name}${index}`}
-                    />
+                    <div className="input-week">
+                      <Input
+                        onChange={(e) => handleChange(e, index, id)}
+                        defaultValue={volunteer?.work}
+                        name={`${name}${index}`}
+                      />
+                    </div>
                   ) : (
-                    <div className="text-[18px] font-[400]">
+                    <div className="list-week text-[18px] font-[400]">
                       {volunteer?.work}
                     </div>
                   )}

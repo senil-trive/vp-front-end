@@ -383,7 +383,7 @@ export const getVideoItems = async ({
   meta = "total_count",
 }: DirectusParams) => {
   //${ENDPOINTS.COLLECTIONS}/video_items?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}
-  let url = `${ENDPOINTS.COLLECTIONS}/video_items?fields=*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+  let url = `${ENDPOINTS.COLLECTIONS}/video_items?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
 
   if (meta) {
     url = `${url}&meta=${meta}`;
