@@ -6,6 +6,8 @@ import Script from "next/script";
 export type TikTokPostProps = {
   name?: string;
   embed_code: string;
+  date_created?: string;
+  date_updated?: string;
 };
 
 const StyledPost = styled.article`

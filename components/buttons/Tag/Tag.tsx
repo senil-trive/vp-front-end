@@ -28,7 +28,7 @@ const BaseTag = styled.span<Variant & Position & { isActive: boolean }>`
   border-radius: 8px;
   color: ${({ variant, theme }) =>
     variant === "light" ? theme.colors.primary.normal : "white"};
-  border: 1px solid;
+
   font-weight: 300;
   font-family: ${({ theme }) => theme.fonts.secondary};
   text-transform: ;
@@ -36,6 +36,7 @@ const BaseTag = styled.span<Variant & Position & { isActive: boolean }>`
   cursor: pointer;
   white-space: nowrap;
   font-size: 18px !important;
+  text-transform: uppercase;
 
   &:hover {
     background: ${({ variant, theme }) =>
