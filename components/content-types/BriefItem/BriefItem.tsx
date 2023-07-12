@@ -105,7 +105,7 @@ export default function BriefItem({
             }
             // variant="tertiary"
           >
-            Download brief
+            Lees verder
           </Button>
         )}
       </CardFooter>

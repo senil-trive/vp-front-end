@@ -99,6 +99,7 @@ export default function Forum({
   // });
 
   const handleSearch = (x: string) => {
+    console.log("hereeee", x);
     setSearch(x);
     setCurrentPage(1);
   };
@@ -115,6 +116,7 @@ export default function Forum({
   };
   useEffect(() => {
     const getPaginatedBlogs = async () => {
+      console.log("hereeee", search);
       try {
         const req = await getPosts({
           postPerPage: POST_PER_PAGE,
@@ -205,6 +207,7 @@ export default function Forum({
                   <Input
                     iconLeft={<SearchIcon color={"#fff"} />}
                     placeholder={pageData?.search_bar_quote}
+                    onChange={(e) => handleSearch(e.target.value)}
                   />
                 </div>
               </div>

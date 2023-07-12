@@ -137,7 +137,7 @@ export default function Forum({
                 text={pageData?.page_title ?? ""}
                 color="white"
                 className={
-                  "text-[46px] font-[400] md:text-[64px] md:text-center"
+                  "text-[46px] font-[400] md:text-[64px] md:text-center sm:text-[46px]"
                 }
               />
               <P

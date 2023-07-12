@@ -1,11 +1,11 @@
 import { CircularProgress, Container } from "@mui/material";
-import { Grid, Hero } from "../components/layout";
+import { Footer, Grid, Hero } from "../components/layout";
 import { H4, P, TitleWithHighlights } from "../components/typography";
 import { getContentTags, getFeed, getHomeData } from "../utils/api";
 import { useCallback, useEffect, useState } from "react";
 
 import { HomePageProps } from "../types/pageTypes";
-import { MasonryGrid } from "../components/layout/MasonryGrid/MasonryGrid";
+import { MasonryGrid } from "../components/layout/MasonryGrid/MasonryGRid2";
 import PageWrapper from "../components/layout/PageWrapper/PageWrappernew";
 import TagList from "../components/buttons/TagList/TagList";
 import { generateFeedTiles } from "../utils/feed-utils";
@@ -31,6 +31,15 @@ export const getServerSideProps = async () => {
       lettersRes,
       videosRes,
     } = await getFeed({ postPerPage: POST_PER_PAGE, meta: "filter_count" });
+    console.log(
+      "aline, 18 jaar",
+      blogsRes,
+      instagramRes,
+      tiktokRes,
+      forumRes,
+      lettersRes,
+      videosRes
+    );
     // console.log(
     //   // blogsRes,
     //   // "blog",
@@ -56,7 +65,7 @@ export const getServerSideProps = async () => {
             tiktok: tiktokRes.data,
             videos: videosRes.data,
           },
-          true
+          false
         ),
         totalPosts:
           blogsRes.meta?.filter_count ||
@@ -120,13 +129,14 @@ export default function Home({
 
         const res = generateFeedTiles(
           {
-            blogs: blogsRes?.data ?? [],
+            // blogs: blogsRes?.data ?? [],
             forum: forumRes?.data ?? [],
             letters: lettersRes?.data ?? [],
             instagram: instagramRes?.data ?? [],
             tiktok: tiktokRes?.data ?? [],
             videos: videosRes?.data ?? [],
           },
+
           // generated first tiles only when its the first load
           false
         );
@@ -240,8 +250,8 @@ export default function Home({
         <div
           className={
             showTags
-              ? "mt-[-102px] relative mb-[50px] sm:mb-[100px] sm:mt-[-72px] md:block"
-              : "mt-[-122px] relative mb-[50px] sm:mb-[100px] hidden sm:mt-[-72px] md:block"
+              ? "mt-[-102px] relative mb-[50px] sm:mb-[48px] sm:mt-[-72px] md:block"
+              : "mt-[-122px] relative mb-[50px] sm:mb-[48px] hidden sm:mt-[-72px] md:block"
           }
         >
           <TagList
@@ -278,7 +288,7 @@ export default function Home({
           />
         </div>
 
-        <MasonryGrid feed={posts} />
+        <MasonryGrid feed={posts} homepage={true} />
 
         <div className="flex items-center justify-center">
           {isLoading && <CircularProgress size={"30px"} />}
@@ -289,6 +299,7 @@ export default function Home({
           )}
         </div>
       </main>
+      <Footer />
     </PageWrapper>
   );
 }

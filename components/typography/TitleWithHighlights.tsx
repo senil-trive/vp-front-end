@@ -68,7 +68,7 @@ const TitleWithHighlights: React.FC<TitleWithHighlightsProps> = ({
           color={color}
           variant="bold"
           style={style}
-          className={className + "header-banner-title"}
+          className={className + "header-banner-title new-section-latest"}
         >
           <>{parseHTMLtoReact(newText)}</>
         </H1>
