@@ -101,8 +101,14 @@ export default function Header() {
   useEffect(() => {
     const getData = async () => {
       const data = await getMenuItems();
+      console.log(data, "FSfffff");
       if (data) {
-        setMenuItems(data);
+        const sortedArray = [...data].sort(
+          (a, b) => b.children.length - a.children.length
+        );
+
+        console.log(sortedArray, "FSfffffsort");
+        setMenuItems(sortedArray);
       }
       setIsLoading(false);
     };
@@ -131,7 +137,7 @@ export default function Header() {
             <SearchBar />
           </div>
         </div>
-        {selected && (
+        {selected && selected?.children.length > 0 && (
           <HeaderSubmenu
             selected={selected?.name}
             categories={selected?.children}
