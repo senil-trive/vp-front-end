@@ -30,7 +30,7 @@ export const getServerSideProps = async () => {
 
   try {
     const pageReq = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/volunteer_training_overview_page`,
+      `${ENDPOINTS.COLLECTIONS}/volunteer_training_overview_page?fields=*.*.*`,
       {
         method: "GET",
         headers: {
@@ -78,7 +78,7 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
           <TrainigenHeroWrapper>
             <Hero
               center
-              imageUrl={"/trainingehead.png"}
+              imageUrl={parseImageURL(pageData?.hero_image?.id)}
               style={{
                 minHeight: 555,
                 position: "relative",
@@ -100,36 +100,47 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
             </Hero>
           </TrainigenHeroWrapper>
 
-          <TrainingBlogWrapper>
+          <section className="mb-[40px] md:mb-[80px]">
             <Container>
-              <div className="training-blog md:max-w-[912px] md:mx-auto">
-                <BlogItem
-                  embedSrc="https://www.youtube.com/embed/98do3PUk4cM"
-                  // link={`/kinderen/verhalen/`}
-                  link={pageData?.training_1_button_url}
-                  type={"vlog"}
-                  author={pageData?.training_1_author}
-                  description={pageData?.training_1_description}
-                  postDate={new Date(pageData?.training_1_date)}
-                  category={"Thema"}
+              <div className="block relative mt-[-120px] md:mt-[-80px] md:flex gap-10">
+                <InfoCard
+                  variant="ideal"
                   title={pageData?.training_1_title}
-                  buttonText={pageData?.training_1_button_label}
-                />
-                <BlogItem
-                  embedSrc="https://www.youtube.com/embed/98do3PUk4cM"
-                  // link={`/kinderen/verhalen/`}
-                  link={pageData?.training_2_button_url}
-                  type={"vlog"}
-                  author={pageData?.training_2_author}
-                  description={pageData?.training_2_description}
-                  postDate={new Date(pageData?.training_2_date)}
-                  category={"Thema"}
+                  description={pageData?.training_1_description}
+                  icon="/handsake.svg"
+                  className=" h-[100%] flex flex-col"
+                >
+                  <div className="flex justify-center  mt-[20px] md:mt-[auto]">
+                    <Button
+                      variant="secondary"
+                      className="w-[100%] bg-[#FE517E] text-[18px] font-[400] text-[#fff] border-[#fff] mt-[20px]"
+                      href={pageData?.cta_section_block_1_button_url}
+                    >
+                       {pageData?.training_1_button_label}
+                    </Button>
+                  </div>
+                </InfoCard>
+                <InfoCard
+                  variant="follow"
                   title={pageData?.training_2_title}
-                  buttonText={pageData?.training_2_button_label}
-                />
+                  description={pageData?.training_2_description}
+                  icon="/note.svg"
+                  className="mt-[32px] md:mt-[0px] h-[100%] flex
+                  flex-col"
+                >
+                  <div className="flex justify-center mt-[20px] md:mt-[auto]">
+                    <Button
+                      variant="secondary"
+                      className="w-[100%] bg-[#3FC7B4] text-[18px] font-[400] text-[#fff] border-[#fff]"
+                      href={pageData?.training_2_button_url}
+                    >
+                      {pageData?.training_2_button_label}
+                    </Button>
+                  </div>
+                </InfoCard>
               </div>
             </Container>
-          </TrainingBlogWrapper>
+          </section>
           <PackageWrapper className="mt-[40px] md:mt-[80px]">
             <Container>
               <div className="flex flex-col items-center justify-center mb-6 md:mb-14">
@@ -156,16 +167,12 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
                             key={listItem}
                             className="packagelist-item text-[18px] font-[400]"
                           >
-                            <img
-                              src="/icons8-tick.svg"
-                              alt="packagelist iocns"
-                            />
                             {listItem?.item}
                           </li>
                         ))}
                       </ul>
                     }
-                    variant="info"
+                    variant="follow"
                     key={item}
                     button={item?.view_package_button}
                     buttonLink={item?.view_package_link}
@@ -178,17 +185,16 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
             <Container>
               <div className="ideal-container block relative md:flex gap-10">
                 <InfoCard
-                  variant="blog"
+                  variant="follow"
                   title={pageData?.cta_1_title}
                   description={pageData?.cta_1_description}
                   icon="/eye.png"
-                  className=" hover:bg-[#FE517E] text-[#fff] h-[100%] flex
-                  flex-col"
+                  className="h-[100%] flex flex-col"
                 >
                   <div className="flex justify-center  mt-[20px] md:mt-[auto]">
                     <Button
                       variant="secondary"
-                      className="w-[100%] text-[18px] font-[400] bg-[#fff] text-[#FE517E] border-[#fff]"
+                      className="w-[100%] bg-[#3FC7B4] text-[18px] font-[400] text-[#fff] border-[#fff]"
                       href={pageData?.cta_1_button_url}
                     >
                       {pageData?.cta_1_button_label}
@@ -196,7 +202,7 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
                   </div>
                 </InfoCard>
                 <InfoCard
-                  variant="primary"
+                  variant="ideal"
                   title={pageData?.cta_2_title}
                   description={pageData?.cta_2_description}
                   icon="/note.svg"
@@ -206,7 +212,7 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
                   <div className="flex justify-center mt-[20px] md:mt-[auto]">
                     <Button
                       variant="secondary"
-                      className="w-[100%] text-[18px] font-[400] bg-[#fff] text-[#006EF7] border-[#fff]"
+                      className="w-[100%] bg-[#FE517E] text-[18px] font-[400] text-[#fff] border-[#fff] mt-[20px]"
                       href={pageData?.cta_2_button_url}
                     >
                       {pageData?.cta_2_button_label}

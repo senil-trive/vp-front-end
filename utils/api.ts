@@ -633,7 +633,7 @@ export const getFaqs = async ({
  * @returns
  */
 export const getFaqOverviewData = async () => {
-  return await fetch(`${ENDPOINTS.COLLECTIONS}/faq_overview_page`, {
+  return await fetch(`${ENDPOINTS.COLLECTIONS}/faq_overview_page?fields=*.*`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

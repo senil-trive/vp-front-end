@@ -21,7 +21,7 @@ const HeroBannerWrapper = styled(Container)`
     width: 100%;
     font-size: 64px !important;
     font-weight: 400 !important;
-    line-height: 160% !important;
+    line-height: 140% !important;
     font-family: "Fjalla One";
     font-style: "normal";
   }
