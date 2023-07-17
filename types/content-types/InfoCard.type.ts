@@ -4,7 +4,7 @@ import { Variant } from "../../components/card/Card";
 type InfoCard = {
   title: string;
   icon: string;
-  description: string;
+  description?: string;
   imageUrl?: string;
   category?: string;
   className?: string;

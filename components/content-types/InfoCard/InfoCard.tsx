@@ -67,21 +67,25 @@ const InfoCard: React.FC<InfoCardType> = ({
               className="footer-title"
             >
               {title}
-              <Image
-                src={icon}
-                width={45}
-                height={45}
-                alt={"Heading icon"}
-                objectFit="contain"
-                className="pl-1 inline"
-              />
+              {icon && (
+                <Image
+                  src={icon}
+                  width={45}
+                  height={45}
+                  alt={"Heading icon"}
+                  objectFit="contain"
+                  className="pl-1 inline"
+                />
+              )}
             </H2>
           </div>
           {/* <P > */}
-          <div
-            className="footer-content text-[#fff] leading-[160%]"
-            dangerouslySetInnerHTML={{ __html: description }}
-          />
+          {description && (
+            <div
+              className="footer-content text-[#fff] leading-[160%]"
+              dangerouslySetInnerHTML={{ __html: description }}
+            />
+          )}
           {/* </P> */}
           {children}
         </div>

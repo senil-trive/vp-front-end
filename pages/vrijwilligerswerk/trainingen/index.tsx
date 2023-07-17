@@ -1,4 +1,4 @@
-import { P, TitleWithHighlights } from "../../../components/typography";
+import { H3, P, TitleWithHighlights } from "../../../components/typography";
 
 import Button from "../../../components/buttons/Button";
 import { Container } from "@mui/material";
@@ -141,43 +141,63 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
               </div>
             </Container>
           </section>
+          <section>
+            <Container>
+              <div className="p-[32px] bg-[#EBFFFC]">
+                <H3 className="text-center">{pageData?.work_plan_title}</H3>
+                <div className="flex justify-center  mt-[20px] md:mt-[auto]">
+                  <Button
+                    variant="secondary"
+                    className="w-[100%] bg-[#3FC7B4] text-[18px] font-[400] text-[#fff] border-[#fff] mt-[20px]"
+                    href={pageData?.work_plan_button_url}
+                  >
+                    {pageData?.work_plan_button_label}
+                  </Button>
+                </div>
+              </div>
+            </Container>
+          </section>
           <PackageWrapper className="mt-[40px] md:mt-[80px]">
             <Container>
               <div className="flex flex-col items-center justify-center mb-6 md:mb-14">
                 <TitleWithHighlights
-                  text={pageData?.package_block_title}
+                  text={pageData?.volunteer_package_title}
                   headerElement="h3"
                   color="black"
                   className="text-[42px] font-[400]"
                 />
                 <P className="max-w-4xl font-[400]">
-                  {pageData?.package_block_description}
+                  {pageData?.volunteer_package_description}
                 </P>
               </div>
             </Container>
             <Container>
-              <div className="package-container flex flex-wrap">
-                {pageData?.training_packages?.map((item: any) => (
-                  <CommonDetailCard
-                    title={item.title}
-                    description={
-                      <ul>
-                        {item?.training_package_detail?.map((listItem: any) => (
-                          <li
-                            key={listItem}
-                            className="packagelist-item text-[18px] font-[400]"
-                          >
-                            {listItem?.item}
-                          </li>
-                        ))}
-                      </ul>
-                    }
-                    variant="follow"
-                    key={item}
-                    button={item?.view_package_button}
-                    buttonLink={item?.view_package_link}
-                  />
-                ))}
+              <div className="package-container flex flex-wrap gap-[32px]">
+                {pageData?.volunteer_package_block?.map(
+                  (volunteerpackage: any, index: number) => (
+                    <div
+                      className={
+                        index === 0 || index === 3
+                          ? `p-[20px] md:p-[32px] bg-[#FFECF1] md:w-[calc(50%-20px)] hover:shadow-lg`
+                          : `p-[20px] md:p-[32px] bg-[#EBFFFC] md:w-[calc(50%-20px)] hover:shadow-lg`
+                      }
+                      key={volunteerpackage.title}
+                    >
+                      <H3
+                        style={{ fontFamily: "Fjalla One" }}
+                        className="text-[32px] md:text-[42px]"
+                      >
+                        {volunteerpackage.title}
+                      </H3>
+                      <P
+                        style={{ fontFamily: "Avenir" }}
+                        className="leading-[160%] text-[16px] md:text-[18px]"
+                      >
+                        {volunteerpackage.description}
+                      </P>
+                    </div>
+                  )
+                )}
               </div>
             </Container>
           </PackageWrapper>

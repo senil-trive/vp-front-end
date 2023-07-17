@@ -21,6 +21,7 @@ import {
 import { ContainerWrapper } from "../../styles/Vrjwilligerswerk/index.styles";
 import { HeroBannerWrapper } from "../../styles/global.styled";
 import parseVideoURL from "../../utils/parseVideoURL";
+import { H3 } from "../../components/typography";
 type VolunteersPageProps = {
   pageData: any;
   volunteerweekwork: any;
@@ -70,6 +71,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
   pageData,
   volunteerweekwork,
 }) => {
+  console.log(pageData);
   const { colors } = useTheme();
   const [volunteerweek, setVolunteerWeek] = useState(volunteerweekwork);
   return (
@@ -210,6 +212,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
               </div>
             </Container>
           </PeopleWrapper>
+
           <section>
             <Container>
               <Container className="pl-[0] md:pl-[24px]">
@@ -300,6 +303,53 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
               )}
             </Container>
           </section>
+          <section className="my-[40px] md:my-[80px]">
+            <Container>
+              <div className="block relative md:flex gap-10">
+                <InfoCard
+                  variant="ideal"
+                  title={pageData?.about_1_title}
+                  icon={
+                    pageData.about_1_training_icon
+                      ? parseImageURL(pageData?.about_1_training_icon?.id)
+                      : ""
+                  }
+                  className=" h-[100%] flex flex-col"
+                >
+                  <div className="flex justify-center">
+                    <Button
+                      variant="secondary"
+                      className="w-[100%] bg-[#FE517E] text-[18px] font-[400] text-[#fff] border-[#fff]"
+                      href={pageData?.button_1_url}
+                    >
+                      {pageData?.button_1_title}
+                    </Button>
+                  </div>
+                </InfoCard>
+                <InfoCard
+                  variant="follow"
+                  title={pageData?.about_2_title}
+                  icon={
+                    pageData.about_2_training_icon
+                      ? parseImageURL(pageData?.about_2_training_icon?.id)
+                      : ""
+                  }
+                  className="mt-[32px] md:mt-[0px] h-[100%] flex
+                  flex-col"
+                >
+                  <div className="flex justify-center">
+                    <Button
+                      variant="secondary"
+                      className="w-[100%] bg-[#3FC7B4] text-[18px] font-[400] text-[#fff] border-[#fff]"
+                      href={pageData?.button_2_url}
+                    >
+                      {pageData?.button_2_title}
+                    </Button>
+                  </div>
+                </InfoCard>
+              </div>
+            </Container>
+          </section>
           <VideoWrapper className="my-[40px] md:my-[80px]">
             <Container>
               <div className="flex flex-col items-center justify-center mb-6 md:mb-14 title">
@@ -359,6 +409,17 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
               </Button>
             </div>
           </Container>
+          <section className="my-[80px]">
+            <Container>
+              <H3 className="mb-[18px]">{pageData?.another_question_title}</H3>
+              <P
+                style={{ fontFamily: "Avenir" }}
+                className="text-[18px] font-[300] md:text-[18px]"
+              >
+                {pageData?.another_question_description}
+              </P>
+            </Container>
+          </section>
         </main>
       </PageWrapper>
     </ContainerWrapper>
