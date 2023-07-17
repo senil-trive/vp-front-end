@@ -35,8 +35,7 @@ const StyledForumPost = styled.article<styledProps>`
   overflow: hidden;
   position: relative;
   z-index: 1;
-  background-color: ${({ theme, showButton }: any) =>
-    showButton ? theme.colors.secondary.normal : theme.colors.primary.normal};
+  background-color: #006ef7;
   height: 100%;
 
   // a {
@@ -205,15 +204,10 @@ export default function ForumPost({
             </header>
           )} */}
           <header>
-            <UserAvatar
-              size="md"
-              alt="villa pinedo"
-              src={parseImageURL(image)}
-            />
             <div>
               <p className="font-avenir font-extrabold text-lg">{title}</p>
               <p className="text-[16px] md:text-[18px] font-[300]">
-                {authorType}, {age?.includes("jaar") ? age : `${age} jaar`}
+                {age?.includes("jaar") ? age : `${age} jaar`}
               </p>
             </div>
           </header>
@@ -227,8 +221,8 @@ export default function ForumPost({
                 ))}
               </div>
             )}
-
-            <p className="custom_forum_tags"> {generateContent()}</p>
+            <h2>{authorType}</h2>
+            {generateContent()}
           </div>
         </div>
 

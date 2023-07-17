@@ -118,6 +118,10 @@ p {
   border: 2px solid #fff;
 }
 
+.chat-btn-blue a {
+  color: #006ef7;
+}
+
 /* .new-menu .kxChWs {
   max-width: 100%;
   width: 530px;
@@ -243,8 +247,51 @@ p {
   opacity: 0;
 }
 
+/* ===================css for home page blocks=================== */
+.home-cntnt-wrapper {
+  width: 100%;
+}
+
+.home-cntnt-mn {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.video-log-div {
+  width: 65%;
+}
+
+.blog-post {
+  width: 50%;
+}
+
+.chat-orange {
+  width: 35%;
+}
+
+.inst-post,
+.forum-post,
+.new-post-item {
+  width: 25%;
+}
+
 @media (max-width: 820px) {
   .custom_form_layout {
+    width: 100% !important;
+  }
+  .home-cntnt-mn {
+    display: block;
+    width: 100%;
+  }
+  .inst-post,
+  .forum-post,
+  .new-post-item,
+  .chat-orange,
+  .video-log-div,
+  .blog-post,
+  .three-post,
+  .custom_inst_post {
     width: 100% !important;
   }
 }
@@ -252,6 +299,18 @@ p {
 @media (max-width: 768px) {
   .custom_form_layout {
     width: 100% !important;
+  }
+  .home-cntnt-mn {
+    display: block;
+    width: 100%;
+  }
+  .inst-post,
+  .forum-post,
+  .new-post-item,
+  .chat-orange,
+  .video-log-div,
+  .blog-post {
+    width: 100%;
   }
 }
 
@@ -304,12 +363,62 @@ p {
     text-align: start !important;
   }
 }
+.custom_forum_tags {
+  margin-bottom: 130px;
+}
 
-.aanmelden-form-label {
-  color: #000 !important;
-  font-family: Avenir;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 800;
-  line-height: 160%;
+.three-post {
+  width: 60%;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.three-post .blog-post {
+  width: 100%;
+}
+.custom_inst_post .inst-post {
+  width: 100%;
+}
+.custom_inst_post {
+  width: 40%;
+  /* margin-left: 14px; */
+  padding: 8px;
+}
+@media (max-width: 600px) {
+  .home-cntnt-mn {
+    width: 100%;
+    display: block;
+  }
+  .custom_inst_post {
+    width: 100%;
+  }
+  .three-post .blog-post {
+    padding-bottom: 15px;
+  }
+  .three-post {
+    display: block;
+    width: 100%;
+  }
+  .custom_forum_tags {
+    margin-bottom: 176px;
+  }
+  .new-section-latest {
+    font-size: 46px !important;
+  }
+  .header-banner-text span {
+    font-size: 17px;
+  }
+  .header-banner-text {
+    display: flex;
+  }
+
+  .inst-post,
+  .forum-post,
+  .new-post-item,
+  .chat-orange,
+  .video-log-div,
+  .blog-post {
+    width: 100%;
+  }
 }
