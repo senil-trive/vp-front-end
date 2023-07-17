@@ -69,15 +69,17 @@ export default function BriefItem({
         }
       >
         <div>
-          <TitleWithHighlights
-            color="white"
-            highlightColor="tertiary"
-            text={title + " ✍🏽"}
-            headerElement="h3"
-            className="transition group-hover:text-black text-[30px] md:text-[32px]"
-            style={{ fontWeight: "400" }}
-          />
-
+          <div className="title-with-image">
+            <TitleWithHighlights
+              color="white"
+              highlightColor="tertiary"
+              text={title}
+              headerElement="h3"
+              className="transition group-hover:text-black text-[30px] md:text-[32px]"
+              style={{ fontWeight: "400" }}
+            />
+            <img src="/letterBlog.png" />
+          </div>
           <P
             className="transition text-white group-hover:text-black"
             style={{ marginBottom: 56, marginTop: 12, fontWeight: "300" }}

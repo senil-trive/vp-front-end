@@ -41,7 +41,7 @@ const Style = css<Props>`
   height: 60px;
   border-radius: 12px;
   padding: 16px;
-  border: none;
+  border: none !important;
   font-weight: bold;
   font-family: ${({ theme }) => theme.fonts.primary};
   font-size: ${({ theme }) => theme.fontSizes.p.mobile};
@@ -68,7 +68,18 @@ const Style = css<Props>`
           border: 2px solid ${({ theme }) => theme.colors.secondary.normal};
           &:hover {
             background-color: transparent;
-            color: ${({ theme }) => theme.colors.secondary.normal};
+            color: #3fc7b4;
+
+            /* box-shadow: inset -8px -8px 24px rgba(0, 0, 0, 0.3); */
+          }
+        `;
+      case "primary":
+        return css`
+          background: ${({ theme }) => theme.colors.secondary.normal};
+          border: 2px solid ${({ theme }) => theme.colors.secondary.normal};
+          &:hover {
+            background-color: transparent;
+            color: #3fc7b4;
             /* box-shadow: inset -8px -8px 24px rgba(0, 0, 0, 0.3); */
           }
         `;

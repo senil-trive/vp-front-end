@@ -313,7 +313,11 @@ p {
     width: 100%;
   }
 }
-
+.title-with-image {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
 @media (max-width: 600px) {
   .custom_form_layout {
     width: 100% !important;
