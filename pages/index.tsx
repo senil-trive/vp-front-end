@@ -267,7 +267,7 @@ export default function Home({
                 style={{
                   whiteSpace: "nowrap",
                   display: "flex",
-                  alignItems: "flex-start",
+                  alignItems: "center",
                   gap: "5px",
                 }}
               >
@@ -275,10 +275,11 @@ export default function Home({
                 <span
                   style={{
                     marginTop: "-6px",
+                    width: "30px",
                   }}
                   className="hand-icon"
                 >
-                  👉🏾
+                  <img src="/Onderwerp.png" />
                 </span>
               </H4>
             }
