@@ -14,6 +14,8 @@ const color = {
   vlog: "",
   story: "",
   info: "",
+  ideal: "#FFECF1",
+  follow: "#EBFFFC",
 };
 const InfoCard: React.FC<InfoCardType> = ({
   variant,

@@ -1,7 +1,14 @@
 import styled from "styled-components";
 
 export const InfoCardWrapper = styled.div`
+  .footer-content {
+    margin-top: 16px;
+  }
+  .footer-title {
+    line-height: 120% !important;
+  }
   flex: 1;
+
   &.blog:hover {
     article {
       background: #fff !important;
@@ -40,6 +47,40 @@ export const InfoCardWrapper = styled.div`
     div,
     a {
       color: #150f2f !important;
+    }
+  }
+  &.ideal {
+    /* header span { */
+    background: #ffecf1 !important;
+    border-color: #ffecf1 !important;
+    border-radius: 8px;
+    /* } */
+    p,
+    .footer-title,
+    div {
+      color: #150f2f !important;
+    }
+    &:hover {
+      button,
+      a {
+        color: #fff !important;
+      }
+    }
+  }
+  &.follow {
+    background: #ebfffc !important;
+    border-color: #ebfffc !important;
+    p,
+    .footer-title,
+    div {
+      color: #150f2f !important;
+    }
+    border-radius: 8px;
+    &:hover {
+      button,
+      a {
+        color: #fff !important;
+      }
     }
   }
   header {

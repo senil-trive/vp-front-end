@@ -14,11 +14,13 @@ import VoulunteerWeek from "../../components/content-types/VolunteerWeek/Volunte
 import InfoCard from "../../components/content-types/InfoCard/InfoCard";
 import CommonDetailCard from "../../components/content-types/CommonDetailCard/CommonDetailCard";
 import {
+  FaqStyle,
   PeopleWrapper,
   VideoWrapper,
 } from "../../styles/Vrjwilligerswerk/VrijwilligerWorden.styles";
 import { ContainerWrapper } from "../../styles/Vrjwilligerswerk/index.styles";
 import { HeroBannerWrapper } from "../../styles/global.styled";
+import parseVideoURL from "../../utils/parseVideoURL";
 type VolunteersPageProps = {
   pageData: any;
   volunteerweekwork: any;
@@ -29,7 +31,7 @@ export const getServerSideProps = async () => {
   // fetch page data from API
   try {
     const req = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/volunteers_overview_page?fields=faq_items.*,video_items.*,usps.*,*`,
+      `${ENDPOINTS.COLLECTIONS}/volunteers_overview_page?fields=*.*.*.*`,
       {
         method: "GET",
         headers: {
@@ -71,7 +73,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
   const { colors } = useTheme();
   const [volunteerweek, setVolunteerWeek] = useState(volunteerweekwork);
   return (
-    <ContainerWrapper className="volunteer">
+    <ContainerWrapper className="volunteer overvies">
       <PageWrapper
         seo={{
           title: pageData?.seo_title
@@ -89,24 +91,24 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
         <main>
           <Hero
             center
-            imageUrl={"/vrijwilligerswerkheader.png"}
+            imageUrl={parseImageURL(pageData?.header_image?.id)}
             style={{
               minHeight: 649,
               position: "relative",
             }}
-            mbgn={"/vrijwilligerswerkheadermobile.png"}
+            mbgn={parseImageURL(pageData?.mobile_hero_image?.id)}
             mobileImageHeight={740}
           >
-            <HeroBannerWrapper>
+            <HeroBannerWrapper className="volunteer overview">
               <div className="title-wrap max-w-2xl md:max-w-5xl">
                 <TitleWithHighlights
                   highlightColor="info"
                   text={pageData?.page_title}
                   headerElement="h1"
                   color="white"
-                  className="title"
+                  className="header-title"
                 />
-                <P color="white" className="subtitle">
+                <P color="white" className="header-subtitle">
                   {pageData?.page_subtitle}
                 </P>
 
@@ -134,17 +136,16 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
             <Container>
               <div className="block relative mt-[-120px] md:mt-[-80px] md:flex gap-10">
                 <InfoCard
-                  variant="blog"
+                  variant="ideal"
                   title={pageData?.cta_section_block_1_title}
                   description={pageData?.cta_section_block_1_subtitle}
                   icon="/handsake.svg"
-                  className=" hover:bg-[#FE517E] text-[#fff] h-[100%] flex
-                  flex-col"
+                  className=" h-[100%] flex flex-col"
                 >
                   <div className="flex justify-center  mt-[20px] md:mt-[auto]">
                     <Button
                       variant="secondary"
-                      className="w-[100%] bg-[#fff] text-[18px] font-[400] text-[#FE517E] border-[#fff] mt-[20px]"
+                      className="w-[100%] bg-[#FE517E] text-[18px] font-[400] text-[#fff] border-[#fff] mt-[20px]"
                       href={pageData?.cta_section_block_1_button_url}
                     >
                       {pageData?.cta_section_block_1_button_label}
@@ -152,7 +153,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
                   </div>
                 </InfoCard>
                 <InfoCard
-                  variant="primary"
+                  variant="follow"
                   title={pageData?.cta_section_block_2_title}
                   description={pageData?.cta_section_block_2_subtitle}
                   icon="/note.svg"
@@ -162,7 +163,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
                   <div className="flex justify-center mt-[20px] md:mt-[auto]">
                     <Button
                       variant="secondary"
-                      className="w-[100%] bg-[#fff] text-[18px] font-[400] text-[#006EF7] border-[#fff]"
+                      className="w-[100%] bg-[#3FC7B4] text-[18px] font-[400] text-[#fff] border-[#fff]"
                       href={pageData?.cta_section_block_2_button_url}
                     >
                       {pageData?.cta_section_block_2_button_label}
@@ -182,7 +183,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
                   color="black"
                   className="text-[30px] md:text-[42px] font-[400]"
                 />
-                <P className="max-w-4xl text-[300]">
+                <P className="max-w-4xl text-[300] sub-title">
                   {pageData?.usp_section_description}
                 </P>
               </div>
@@ -203,7 +204,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
                         ? "/diffpeople3.png"
                         : "/diffpeople4.png"
                     }
-                    variant="info"
+                    variant="follow"
                   />
                 ))}
               </div>
@@ -269,8 +270,10 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
                       setVolunteerWeek={setVolunteerWeek}
                     />
                   </div>
-                  <div className="hidden md:flex w-[100%] h-[88px] bg-[#3FC7B4]/[.1] justify-center items-center px-[34px]">
-                    <div className="w-[100%] px-[50px] text-red h-[2px] bg-[#3FC7B4]"></div>
+                  <div className="hidden md:flex w-[100%] h-[88px] bg-[#FFECF1] justify-center items-center px-[34px]">
+                    <div className="w-[100%] px-[50px] text-red h-[3px] bg-[#FE517E]/[25%]">
+                      <div className="inner"></div>
+                    </div>
                   </div>
 
                   <div className="hidden md:flex justify-around md:pt-[50px] bottom-block">
@@ -299,7 +302,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
           </section>
           <VideoWrapper className="my-[40px] md:my-[80px]">
             <Container>
-              <div className="flex flex-col items-center justify-center mb-6 md:mb-14">
+              <div className="flex flex-col items-center justify-center mb-6 md:mb-14 title">
                 <TitleWithHighlights
                   text={pageData?.video_section_title}
                   headerElement="h3"
@@ -307,7 +310,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
                   className="text-[30px] m:text-[42px] font-[400]"
                 />
 
-                <P className="max-w-4xl font-[300]">
+                <P className="max-w-4xl font-[300] sub-title">
                   {pageData?.video_section_subtitle}
                 </P>
               </div>
@@ -321,12 +324,12 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
                       title={storyvideo?.title}
                       poster={
                         index === 0
-                          ? "/storyposter1.png"
+                          ? parseImageURL(storyvideo?.video_cover_image?.id)
                           : index === 1
-                          ? "/storyposter2.png"
-                          : "/storyposter3.png"
+                          ? parseImageURL(storyvideo?.video_cover_image?.id)
+                          : parseImageURL(storyvideo?.video_cover_image?.id)
                       }
-                      src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                      src={parseVideoURL(storyvideo?.video_file?.id)}
                       subtitle={storyvideo?.subtitle}
                     />
                   )
@@ -334,12 +337,13 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
               </div>
             </Container>
           </VideoWrapper>
-          <FAQList
-            containerWidth="lg"
-            title={pageData?.faq_section_title}
-            items={pageData?.faq_items}
-          />
-
+          <FaqStyle>
+            <FAQList
+              containerWidth="lg"
+              title={pageData?.faq_section_title}
+              items={pageData?.faq_items}
+            />
+          </FaqStyle>
           <Container
             style={{ marginBottom: 80 }}
             className="my-[40px] md:my-[80px]"
@@ -349,7 +353,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
                 variant="link"
                 style={{ color: colors.info.normal }}
                 href="/vrijwilligerswerk/faq"
-                className="w-[100%] text-[18px] font-[400] bg-[#3FC7B4] text-[#fff] no-underline hover:underline"
+                className="w-[100%] text-[18px] font-[400] bg-[#FE517E] text-[#fff] no-underline hover:underline"
               >
                 Meer lezen
               </Button>

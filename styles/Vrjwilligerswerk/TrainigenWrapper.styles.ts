@@ -89,10 +89,6 @@ export const PackageWrapper = styled.section`
       }
     }
   }
-  .package-container .card-container footer .title,
-  .description {
-    color: #fff;
-  }
   .package-container .card-container .description {
     margin-bottom: 20px;
   }
@@ -101,16 +97,25 @@ export const PackageWrapper = styled.section`
   }
   .package-container .card-container footer a {
     margin-top: auto;
-    background: #ffffff;
+    background: #3fc7b4;
     border-radius: 12px;
-    color: #ff971d;
+    color: #fff;
   }
   .packagelist-item {
     display: flex;
   }
-  .packagelist-item img {
-    width: 20px;
-    margin-right: 5px;
+  .packagelist-item::before {
+    content: "";
+    position: relative;
+    left: 0;
+    top: 8px;
+    border: none;
+    border-left: 2px solid #000;
+    margin-right: 8px;
+    border-bottom: 2px solid #000;
+    width: 15px;
+    height: 8px;
+    transform: rotate(-45deg);
   }
 
   @media (max-width: 991px) {

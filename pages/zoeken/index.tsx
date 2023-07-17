@@ -98,6 +98,7 @@ export default function Search() {
     }
     allCardHeight.length > 0 && setCardHeight(Math.max(...allCardHeight));
   });
+
   return (
     <PageWrapper
       seo={{

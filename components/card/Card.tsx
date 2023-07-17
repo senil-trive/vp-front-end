@@ -3,7 +3,15 @@ import React, { ReactNode } from "react";
 import styled from "styled-components";
 
 export type Variant = {
-  variant?: "brief" | "blog" | "vlog" | "story" | "primary" | "info";
+  variant?:
+    | "brief"
+    | "blog"
+    | "vlog"
+    | "story"
+    | "primary"
+    | "info"
+    | "ideal"
+    | "follow";
   className?: string;
 };
 
@@ -153,6 +161,29 @@ const StyledInfo = styled(BaseStyle)`
       var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
   }
 `;
+const StyledIdeal = styled(BaseStyle)`
+  background-color: #ffecf1;
+  &:hover {
+    --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px 1px rgb(0 0 0 / 0.1) !important;
+    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color),
+      0 4px 6px 1px var(--tw-shadow-color) !important;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+      var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+  }
+`;
+
+const StyledFollow = styled(BaseStyle)`
+  background-color: #ebfffc;
+  &:hover {
+    --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px 1px rgb(0 0 0 / 0.1) !important;
+    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color),
+      0 4px 6px 1px var(--tw-shadow-color) !important;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+      var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+  }
+`;
 const CardWrapper = ({
   variant,
   children,
@@ -171,6 +202,10 @@ const CardWrapper = ({
       return <StyledPrimary className={className}>{children}</StyledPrimary>;
     case "info":
       return <StyledInfo className={className}>{children}</StyledInfo>;
+    case "ideal":
+      return <StyledIdeal className={className}>{children}</StyledIdeal>;
+    case "follow":
+      return <StyledFollow className={className}>{children}</StyledFollow>;
     default:
       return <StyledPost className={className}>{children}</StyledPost>;
   }

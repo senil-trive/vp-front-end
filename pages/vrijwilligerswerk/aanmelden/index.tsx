@@ -1,5 +1,5 @@
 import { Container, Grid } from "@mui/material";
-import { H2, P, TitleWithHighlights } from "../../../components/typography";
+import { H2, H3, P, TitleWithHighlights } from "../../../components/typography";
 
 import Button from "../../../components/buttons/Button";
 import Dropdown from "../../../components/form/Dropdown/Dropdown";
@@ -24,7 +24,6 @@ type VolunteersSignupPageProps = {
 
 export const getServerSideProps = async () => {
   // fetch page data from API
-
   try {
     const pageReq = await fetch(
       `${ENDPOINTS.COLLECTIONS}/volunteer_signup_page?fields=*.*.*`,
@@ -49,8 +48,6 @@ export const getServerSideProps = async () => {
       },
     };
   } catch (error) {
-    console.log(error);
-
     return {
       redirect: {
         destination: "/500",
@@ -104,12 +101,13 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
           <TrainigenHeroWrapper>
             <Hero
               center
-              imageUrl={"/signupheader.png"}
+              imageUrl={parseImageURL(pageData?.hero_image?.id)}
               style={{
-                minHeight: 555,
+                minHeight: 554,
                 position: "relative",
               }}
               mobileImageHeight={564}
+              mbgn={parseImageURL(pageData?.mobile_hero_image?.id)}
             >
               <HeroBannerWrapper>
                 <div className="title-wrap max-w-2xl md:max-w-4xl">
@@ -126,9 +124,15 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
             </Hero>
           </TrainigenHeroWrapper>
           <Container className="mb-[80px] mt-[-120px] relative md:mb-[120px] max-w-[1118px]">
-            <Section className="py-[32px] px-[32px]">
+            <Section className="py-[32px] px-[32px] bg-[#FFECF1]">
               {!isSubmitted ? (
                 <form onSubmit={handleSubmit(submitForm)}>
+                  <H3 className="text-[32px] font-avenir font-[400]">
+                    Jouw gegevens
+                  </H3>
+                  <P className="font-[300] font-avenir md:text-[18px]">
+                    Vertel ons hoe je heet en we nemen contact met je op.
+                  </P>
                   <Grid container spacing="33px">
                     <Grid item xs={12} md={4}>
                       <Input
@@ -209,16 +213,11 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
                     </Grid>
 
                     <Grid item xs={12}>
-                      {/* <Grid item xs={12}>
-                        <P variant="light" style={{ color: "#fff" }}>
-                          * Verplichte velden
-                        </P>
-                      </Grid> */}
                       <Grid item xs={12}>
                         <Button
                           loading={isLoading}
                           disabled={isSubmitted}
-                          className="w-[100] bg-[#fff] text-[#FF971D] text-[18px] font-[400]"
+                          className="w-[100] bg-[#FE517E] text-[#fff] text-[18px] font-[400]"
                         >
                           {isLoading && "Bezig..."}
                           {isSubmitted && "Verzonden"}

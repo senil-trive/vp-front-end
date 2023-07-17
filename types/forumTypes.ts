@@ -32,6 +32,7 @@ export type ForumCommentType = {
   content: string;
   // attachment_image: File[];
   forum_post?: string;
+  user_postcode?: string;
   blog_post?: string;
   status: ContentStatus;
   child_comments: ForumCommentType[];

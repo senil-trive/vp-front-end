@@ -21,7 +21,7 @@ const HeroBannerWrapper = styled(Container)`
     width: 100%;
     font-size: 64px !important;
     font-weight: 400 !important;
-    line-height: 160% !important;
+    line-height: 140% !important;
     font-family: "Fjalla One";
     font-style: "normal";
   }
@@ -44,6 +44,11 @@ const HeroBannerWrapper = styled(Container)`
   &.stel-een-vraag {
     margin-top: -100px;
   }
+  &.volunteer {
+    &.overview .title {
+      line-height: 140% !important;
+    }
+  }
   @media (max-width: 767px) {
     .title-wrap {
       text-align: left !important;
@@ -59,6 +64,11 @@ const HeroBannerWrapper = styled(Container)`
     }
     &.training {
       margin-top: -200px !important;
+    }
+    .volunteer.overvies {
+      .subtitle {
+        font-weight: 400 !important;
+      }
     }
     &.zoeken-page {
       .search {

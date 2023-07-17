@@ -173,6 +173,7 @@ export default function Home({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [feed, selectedTag]);
+  console.log(feed);
   return (
     <PageWrapper
       homepage={true}

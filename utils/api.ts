@@ -383,7 +383,7 @@ export const getVideoItems = async ({
   meta = "total_count",
 }: DirectusParams) => {
   //${ENDPOINTS.COLLECTIONS}/video_items?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}
-  let url = `${ENDPOINTS.COLLECTIONS}/video_items?fields=*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+  let url = `${ENDPOINTS.COLLECTIONS}/video_items?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
 
   if (meta) {
     url = `${url}&meta=${meta}`;
@@ -633,7 +633,7 @@ export const getFaqs = async ({
  * @returns
  */
 export const getFaqOverviewData = async () => {
-  return await fetch(`${ENDPOINTS.COLLECTIONS}/faq_overview_page`, {
+  return await fetch(`${ENDPOINTS.COLLECTIONS}/faq_overview_page?fields=*.*`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

@@ -94,9 +94,9 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
     >
       <main className="mb-[128px]">
         <Hero
-          imageUrl={parseImageURL(pageData?.background_image?.id, 1410)}
+          imageUrl={parseImageURL(pageData?.background_image?.id)}
           style={{
-            minHeight: 377,
+            minHeight: 455,
             position: "relative",
           }}
           mobileImageHeight={468}
@@ -120,7 +120,7 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
           </HeroBannerWrapper>
         </Hero>
         <ContainerWrapper className="voluntee">
-          <div className="relative mt-[-134px] md:mt-[0px]">
+          <div className="relative mt-[-134px] md:mt-[-150px]">
             <FAQList
               items={items}
               isLoading={isLoading}
@@ -132,7 +132,7 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
               <Button
                 variant="link"
                 style={{ border: "2px solid" }}
-                className="w-[100%] text-[18px] font-[400] border-[#3FC7B4] text-[#3FC7B4] hover:text-[#fff] hover:bg-[#3FC7B4]"
+                className="w-[100%] text-[18px] font-[400] bg-[#FE517E] border-[#FE517E] text-[#fff] hover:text-[#FE517E] hover:bg-[#fff]"
               >
                 meer lezen
               </Button>
