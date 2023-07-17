@@ -121,6 +121,68 @@ const StyledBlog = styled(BaseStyle)`
       var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
   }
 `;
+const StyledBlogNew = styled(BaseStyle)`
+  // padding: 24px;
+  // border-color: ${({ theme }) => theme.colors.primary.normal};
+  background-color: ${({ theme }) => theme.colors.primary.normal};
+  header {
+    height: 294px;
+
+    img,
+    video,
+    iframe {
+      // border-radius: 8px;
+      // background-color: ${({ theme }) => theme.colors.grey.normal};
+      height: 294px;
+    }
+  }
+  section {
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+  }
+  footer {
+    padding: 24px !important;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    p {
+      color: white;
+    }
+    h4 {
+      color: white;
+    }
+    a {
+      border: none;
+      font-weight: 400;
+      font-size: 18px;
+      font-family: "Fjalla One";
+      background: white;
+      color: ${({ theme }) => theme.colors.secondary.normal};
+    }
+  }
+
+  &:hover {
+    background-color: white;
+    footer {
+      color: ${({ theme }) => theme.colors.text.normal};
+      h4,
+      p {
+        color: ${({ theme }) => theme.colors.text.normal};
+      }
+      a {
+        background: ${({ theme }) => theme.colors.secondary.normal};
+        color: white;
+      }
+    }
+    --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
+      0 4px 6px 1px rgb(0 0 0 / 0.1) !important;
+    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color),
+      0 4px 6px 1px var(--tw-shadow-color) !important;
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
+      var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+  }
+`;
 const StyledPrimary = styled(BaseStyle)`
   background-color: #006ef7;
   header {
@@ -160,9 +222,9 @@ const CardWrapper = ({
 }: React.PropsWithChildren<Variant>) => {
   switch (variant) {
     case "vlog":
-    case "blog":
       return <StyledBlog className={className}>{children}</StyledBlog>;
-
+    case "blog":
+      return <StyledBlogNew className={className}>{children}</StyledBlogNew>;
     case "brief":
       return <StyledLetter className={className}>{children}</StyledLetter>;
     case "story":

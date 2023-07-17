@@ -244,11 +244,15 @@ export function MasonryGrid({
                       link={`/verhalen/${blogContent.slug}`}
                       type={blogContent.type}
                       author={blogContent.author}
-                      description={"blog"}
-                      buttonText={"button"}
+                      description={blogContent.content}
+                      buttonText={
+                        blogContent.type == "vlog"
+                          ? "Vlog bekijken"
+                          : "Blog lezen"
+                      }
                       content={blogContent.content}
                       postDate={new Date(blogContent.date_created)}
-                      category={blogContent.categories[0]?.categories_id?.name}
+                      category={"Thema"}
                       title={blogContent.title}
                     />
                   </motion.div>

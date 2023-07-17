@@ -11,6 +11,7 @@ import YoutubePlayer from "../../media/YoutubePlayer";
 import { parseDate } from "../../../utils/parseDate";
 import { truncate } from "../../../utils/truncate";
 import { useTheme } from "styled-components";
+import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
 
 type Props = {
   type: "blog" | "vlog";
@@ -41,6 +42,7 @@ export default function BlogItem({
   description,
 }: Props) {
   const { colors } = useTheme();
+
   const generateMediaItem = () => {
     let Child = null;
 
@@ -72,11 +74,24 @@ export default function BlogItem({
       <CardHeader>
         <>
           {Child}
-          {!!category && (
+          {!!category && type == "vlog" && (
             <Tag
               variant="dark"
               size="m"
               position="blNew"
+              style={{
+                backgroundColor: colors.info.normal,
+                borderColor: colors.info.normal,
+              }}
+            >
+              <>{category}</>
+            </Tag>
+          )}
+          {!!category && type == "blog" && (
+            <Tag
+              variant="dark"
+              size="m"
+              position="blNewNew"
               style={{
                 backgroundColor: colors.info.normal,
                 borderColor: colors.info.normal,
@@ -98,7 +113,9 @@ export default function BlogItem({
         </H4>
         {!!description ? (
           <div className="blog-description">
-            <P style={{ marginBottom: 30, marginTop: 12 }}>{description}</P>
+            <P style={{ marginBottom: 30, marginTop: 12 }}>
+              {truncate(description, 200)}
+            </P>
           </div>
         ) : (
           <div style={{ overflowY: "auto", height: 90 }}>
@@ -115,7 +132,11 @@ export default function BlogItem({
           </p>
           <p className="italic font-light font-avenir">{parseDate(postDate)}</p>
         </div>
-        <Button style={{ marginTop: "auto" }} variant="secondary" href={link}>
+        <Button
+          style={{ marginTop: "auto" }}
+          variant={type == "vlog" ? "secondary" : "tertiary"}
+          href={link}
+        >
           {buttonText
             ? buttonText
             : type == "vlog"
