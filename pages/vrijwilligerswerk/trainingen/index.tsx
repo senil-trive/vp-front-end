@@ -116,7 +116,7 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
                       className="w-[100%] bg-[#FE517E] text-[18px] font-[400] text-[#fff] border-[#fff] mt-[20px]"
                       href={pageData?.cta_section_block_1_button_url}
                     >
-                       {pageData?.training_1_button_label}
+                      {pageData?.training_1_button_label}
                     </Button>
                   </div>
                 </InfoCard>

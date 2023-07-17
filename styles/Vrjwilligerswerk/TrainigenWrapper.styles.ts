@@ -97,7 +97,7 @@ export const PackageWrapper = styled.section`
   }
   .package-container .card-container footer a {
     margin-top: auto;
-    background: #3FC7B4;
+    background: #3fc7b4;
     border-radius: 12px;
     color: #fff;
   }
@@ -111,7 +111,7 @@ export const PackageWrapper = styled.section`
     top: 8px;
     border: none;
     border-left: 2px solid #000;
-    margin-right:8px;
+    margin-right: 8px;
     border-bottom: 2px solid #000;
     width: 15px;
     height: 8px;

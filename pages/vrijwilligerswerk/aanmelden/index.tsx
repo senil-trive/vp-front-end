@@ -127,8 +127,12 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
             <Section className="py-[32px] px-[32px] bg-[#FFECF1]">
               {!isSubmitted ? (
                 <form onSubmit={handleSubmit(submitForm)}>
-                  <H3 className="text-[32px] font-avenir font-[400]">Jouw gegevens</H3>
-                  <P className="font-[300] font-avenir md:text-[18px]">Vertel ons hoe je heet en we nemen contact met je op.</P>
+                  <H3 className="text-[32px] font-avenir font-[400]">
+                    Jouw gegevens
+                  </H3>
+                  <P className="font-[300] font-avenir md:text-[18px]">
+                    Vertel ons hoe je heet en we nemen contact met je op.
+                  </P>
                   <Grid container spacing="33px">
                     <Grid item xs={12} md={4}>
                       <Input
