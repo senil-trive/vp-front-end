@@ -54,11 +54,11 @@ const StyledForumPost = styled.article<styledProps>`
       var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
 
     background-color: white;
-    // a {
-    //   background-color: ${({ theme }) => theme.colors.secondary.normal};
-    //   border: 0;
-    //   color: white;
-    // }
+    a {
+      background-color: ${({ theme }) => theme.colors.secondary.normal};
+      border: 0;
+      color: white;
+    }
     header {
       p,
       h4 {
@@ -208,7 +208,7 @@ export default function ForumPost({
             <UserAvatar
               size="md"
               alt="villa pinedo"
-              src={parseImageURL(image)}
+              src="/android-chrome-192x192.png"
             />
             <div>
               <p className="font-avenir font-extrabold text-lg">{title}</p>

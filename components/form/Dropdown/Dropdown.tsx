@@ -119,7 +119,12 @@ export default function Dropdown({
       ref={wrapperRef}
     >
       {!!label && (
-        <label className={`${labelClass} text-[#fff]`}>{label}</label>
+        <label
+          style={{ fontFamily: "Avenir" }}
+          className={`${labelClass} text-[#fff]`}
+        >
+          {label}
+        </label>
       )}
       <div>
         <select
@@ -139,17 +144,22 @@ export default function Dropdown({
         </select>
         <div
           className={`selectBox ${isOpen ? "open" : ""}`}
-          style={{ borderColor: colors[borderColor].normal }}
+          style={{
+            borderColor: colors[borderColor].normal,
+            fontFamily: "Avenir",
+          }}
           onClick={() => setIsOpen((state) => !state)}
         >
-          <div className="flex items-center">
+          <div className="flex items-center" style={{ fontFamily: "Avenir" }}>
             {!!iconLeft && (
               <IconWrapper style={{ marginRight: 10 }}>{iconLeft}</IconWrapper>
             )}
             {!multi ? (
-              <span>{selectedSingle?.name || placeholder}</span>
+              <span style={{ fontFamily: "Avenir" }}>
+                {selectedSingle?.name || placeholder}
+              </span>
             ) : (
-              <span>{placeholder}</span>
+              <span style={{ fontFamily: "Avenir" }}>{placeholder}</span>
             )}
           </div>
           <span>

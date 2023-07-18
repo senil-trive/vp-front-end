@@ -8,7 +8,7 @@ import { VideoPropsType } from "./VideoItem.types";
 
 const StyledFigure = styled.figure`
   background: #b8b8b8;
-  border-radius: 8px;
+
   overflow: hidden;
   position: relative;
   max-height: 624px;

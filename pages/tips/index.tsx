@@ -267,7 +267,13 @@ export default function Forum({
           <Container style={{ marginBottom: "0px", maxWidth: "100%" }}>
             <Grid container>
               <Grid item xs={12} md={9}>
-                <P style={{ color: colors.black.normal, fontSize: "24px" }}>
+                <P
+                  style={{
+                    color: colors.black.normal,
+                    fontSize: "24px",
+                    fontFamily: "Avenir",
+                  }}
+                >
                   {totalCount} verhalen
                 </P>
               </Grid>

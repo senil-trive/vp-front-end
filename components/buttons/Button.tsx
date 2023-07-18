@@ -65,7 +65,7 @@ const Style = css<Props>`
       case "secondary":
         return css`
           background: ${({ theme }) => theme.colors.secondary.normal};
-       
+
           border: 2px solid ${({ theme }) => theme.colors.secondary.normal};
           &:hover {
             background-color: transparent;
@@ -77,11 +77,12 @@ const Style = css<Props>`
       case "primary":
         return css`
           background: ${({ theme }) => theme.colors.secondary.normal};
-          color:#3FC7B4 !important;
+          color: #3fc7b4 !important;
           border: 2px solid ${({ theme }) => theme.colors.secondary.normal};
           &:hover {
-            background-color: transparent;
-            color: #fff;
+            background-color: #3fc7b4 !important;
+            color: #fff !important;
+
             /* box-shadow: inset -8px -8px 24px rgba(0, 0, 0, 0.3); */
           }
         `;
