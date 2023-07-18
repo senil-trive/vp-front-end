@@ -134,7 +134,7 @@ export default function BlogItem({
         </div>
         <Button
           style={{ marginTop: "auto" }}
-          variant={type == "vlog" ? "secondary" : "tertiary"}
+          variant={type == "vlog" ? "secondary" : "primary"}
           href={link}
         >
           {buttonText
