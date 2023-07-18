@@ -179,8 +179,8 @@ const StyledBlogNew = styled(BaseStyle)`
         color: ${({ theme }) => theme.colors.text.normal};
       }
       a {
-        background: ${({ theme }) => theme.colors.secondary.normal};
-        color: white;
+        background-color: #3fc7b4 !important;
+        color: #fff !important;
       }
     }
     --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),

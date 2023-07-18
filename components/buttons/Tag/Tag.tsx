@@ -30,7 +30,7 @@ const BaseTag = styled.span<Variant & Position & { isActive: boolean }>`
     variant === "light" ? theme.colors.primary.normal : "white"};
 
   font-weight: 300;
-  font-family: ${({ theme }) => theme.fonts.primary};
+  font-family: "Avenir";
   text-transform: ;
   line-height: 160%;
   cursor: pointer;
