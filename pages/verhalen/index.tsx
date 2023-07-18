@@ -281,7 +281,7 @@ export default function Forum({
             feed={posts.map((item) => ({
               id: `blog-${uuidv4()}`,
               type: "blog",
-              width: 4,
+              width: 3,
               content: item,
             }))}
           />
