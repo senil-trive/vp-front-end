@@ -30,6 +30,7 @@ const BaseStyle = styled.article`
     height: 180px;
     position: relative;
   }
+  cursor: pointer;
 `;
 
 const StyledPost = styled(BaseStyle)`
@@ -52,6 +53,10 @@ const StyledLetter = styled(BaseStyle)`
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
     var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
   &:hover {
+    a {
+      background: ${({ theme }) => `${theme.colors.primary.normal} !important`};
+      color: #fff !important;
+    }
   }
 
   footer {
@@ -171,7 +176,7 @@ const StyledBlogNew = styled(BaseStyle)`
   }
 
   &:hover {
-    background-color: white;
+    background-color: white !important;
     footer {
       color: ${({ theme }) => theme.colors.text.normal};
       h4,

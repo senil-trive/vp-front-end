@@ -116,7 +116,7 @@ export default function BlogItem({
         {!!description ? (
           <div className="blog-description">
             <P style={{ marginBottom: 30, marginTop: 12 }}>
-              {truncate(description, 200)}
+              {truncate(description, 100)}
             </P>
           </div>
         ) : (

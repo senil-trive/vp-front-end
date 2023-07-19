@@ -24,7 +24,7 @@ const StyledWrapper = styled.div<{ bgImg: string }>`
   border-radius: 8px;
 
   color: white;
-
+  cursor: pointer;
   background-image: ${({ bgImg }) => `url(${bgImg})`};
   background-repeat: no-repeat;
   background-size: cover;
