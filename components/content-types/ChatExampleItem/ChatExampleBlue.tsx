@@ -23,7 +23,7 @@ const StyledForumPost = styled.article`
     background-position: center center;
     z-index: 1;
   }
-
+  cursor: pointer;
   background-color: #006ef7;
   border-radius: 8px;
   padding: 24px;

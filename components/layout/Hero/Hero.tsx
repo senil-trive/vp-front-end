@@ -32,7 +32,7 @@ const Wrapper = styled.div<{
     bgn &&
     css`
       background-image: url(${bgn});
-      background-size: contain;
+      background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
       @media (max-width: 767px) {
