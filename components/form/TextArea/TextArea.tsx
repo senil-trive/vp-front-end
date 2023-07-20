@@ -13,6 +13,8 @@ type Props = {
   /** Small text that will appear under the input field. */
   helperText?: string;
 
+  rows?: number;
+
   /** Placeholder for the input field */
   placeholder?: string;
 
@@ -143,6 +145,7 @@ export default function TextArea({
   borderColor = "primary",
   name,
   maxLength,
+  rows,
   ...rest
 }: Props) {
   const [count, setCount] = useState(0);
@@ -184,7 +187,7 @@ export default function TextArea({
       )}
       <div style={{ borderColor: colors[borderColor].normal }}>
         <textarea
-          rows={7}
+          rows={rows || 7}
           ref={inputRef}
           placeholder={placeholder}
           disabled={disabled}

@@ -1,14 +1,7 @@
-import { Container, Grid } from "@mui/material";
-import { H2, H3, P, TitleWithHighlights } from "../../../components/typography";
-
-import Button from "../../../components/buttons/Button";
-import Dropdown from "../../../components/form/Dropdown/Dropdown";
+import { P, TitleWithHighlights } from "../../../components/typography";
 import ENDPOINTS from "../../../constants/endpoints";
-import { GENDERS } from "../../../constants/genders";
 import { Hero } from "../../../components/layout";
-import Input from "../../../components/form/Input/Input";
 import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
-import Section from "../../../components/layout/Section/Section";
 import { VolunteerRequestType } from "../../../types/volunteerRequestTypes";
 import parseImageURL from "../../../utils/parseImageURL";
 import { postVolunteerApplication } from "../../../utils/api";
@@ -16,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { TrainigenHeroWrapper } from "../../../styles/Vrjwilligerswerk/TrainigenWrapper.styles";
 import { HeroBannerWrapper } from "../../../styles/global.styled";
+import SignupStepperForm from "../../../components/layout/SignupStepperForm";
 
 type VolunteersSignupPageProps = {
   pageData: any;
@@ -123,7 +117,11 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
               </HeroBannerWrapper>
             </Hero>
           </TrainigenHeroWrapper>
-          <Container className="mb-[80px] mt-[-120px] relative md:mb-[120px] max-w-[1118px]">
+
+          <section className="aanmelden-stepper-wrapper mb-[80px] mx-[40px] md:mb-[128px]">
+            <SignupStepperForm />
+          </section>
+          {/* <Container className="mb-[80px] mt-[-120px] relative md:mb-[120px] max-w-[1118px]">
             <Section className="py-[32px] px-[32px] bg-[#FFECF1]">
               {!isSubmitted ? (
                 <form onSubmit={handleSubmit(submitForm)}>
@@ -234,7 +232,7 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
                 </div>
               )}
             </Section>
-          </Container>
+          </Container> */}
         </main>
       </PageWrapper>
     </div>

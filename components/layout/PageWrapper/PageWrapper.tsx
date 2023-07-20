@@ -156,9 +156,7 @@ export default function PageWrapper({
         <meta name="robots" content="index, follow"></meta>
         <meta charSet="UTF-8"></meta>
       </Head>
-
       <DynamicHeader />
-
       <div className="page-content">{children}</div>
       <DynamicFooter />
     </StyledWrapper>

@@ -117,7 +117,7 @@ export function MasonryGrid({
         type: "spring",
         stiffness: 43,
         bounce: 0.3,
-        duration: 0.4,
+        duration: 0.3,
       },
     },
   };
