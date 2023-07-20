@@ -9,6 +9,10 @@ type InfoCard = {
   category?: string;
   className?: string;
   children?: React.ReactNode;
+  embedSrc?: string;
+  mediaSrc?: string;
+  poster?: string;
+  videoClassName?: string;
 };
 
 export type InfoCardType = InfoCard & Variant;

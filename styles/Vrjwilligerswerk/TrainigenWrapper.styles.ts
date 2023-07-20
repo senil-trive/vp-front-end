@@ -49,22 +49,15 @@ export const TrainingBlogWrapper = styled.section`
   }
 `;
 export const TrainigenIdealWrapper = styled.section`
-  margin-top: 80px;
+  margin: 128px 0 80px 0 !important;
   .ideal-container {
-    margin-bottom: -180px;
     z-index: 1;
   }
   @media (max-width: 767px) {
-    > img {
-      height: 725px !important;
-    }
     .info-card-footer {
       line-height: 160%;
     }
-    margin-top: 40px !important;
-    .ideal-container {
-      margin-bottom: -490px;
-    }
+    margin: 80px 0 !important;
   }
 `;
 

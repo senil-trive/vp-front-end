@@ -67,6 +67,11 @@ export const InfoCardWrapper = styled.div`
       }
     }
   }
+  .about-training {
+    .footer-title {
+      margin-bottom: 32px !important;
+    }
+  }
   &.follow {
     background: #ebfffc !important;
     border-color: #ebfffc !important;

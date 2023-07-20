@@ -118,14 +118,14 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
                   <Button
                     variant="success"
                     href="/vrijwilligerswerk/aanmelden"
-                    className="px-[5px]  bg-[transparent] border-[#fff] text-[#fff] hover:bg-[#06D6A0] hover:border-none text-[18px] font-[400]"
+                    className="overview-act px-[5px]  bg-[transparent]  border-[#fff] text-[#fff] hover:bg-[#06D6A0] hover:border-none text-[18px] font-[400]"
                   >
                     {pageData?.signup_button_label}
                   </Button>
                   <Button
                     variant="infoReversed"
                     href="/vrijwilligerswerk/trainingen"
-                    className="px-[5px] text-[18px] font-[400] bg-[transparent] border-[#fff] text-[#fff] hover:bg-[#06D6A0] hover:border-none"
+                    className="overview-act px-[5px] text-[18px] font-[400] bg-[transparent] border-[#fff] text-[#fff] hover:bg-[#06D6A0] hover:border-none"
                   >
                     {pageData?.about_button_label}
                   </Button>
@@ -314,7 +314,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
                       ? parseImageURL(pageData?.about_1_training_icon?.id)
                       : ""
                   }
-                  className=" h-[100%] flex flex-col"
+                  className="about-training h-[100%] flex flex-col"
                 >
                   <div className="flex justify-center">
                     <Button
@@ -334,7 +334,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
                       ? parseImageURL(pageData?.about_2_training_icon?.id)
                       : ""
                   }
-                  className="mt-[32px] md:mt-[0px] h-[100%] flex
+                  className="about-training mt-[32px] md:mt-[0px] h-[100%] flex
                   flex-col"
                 >
                   <div className="flex justify-center">

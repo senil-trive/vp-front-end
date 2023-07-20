@@ -6,6 +6,10 @@ import Card from "../../card/Card";
 import CardHeader from "../../card/CardHeader/CardHeader";
 import { H2, P } from "../../typography";
 import { InfoCardWrapper } from "./InfocardWrapper.styles";
+import YoutubePlayer from "../../media/YoutubePlayer";
+import VideoItem from "../VideoItem/VideoItem";
+import parseImageURL from "../../../utils/parseImageURL";
+import parseVideoURL from "../../../utils/parseVideoURL";
 
 const color = {
   blog: "#FE517E",
@@ -17,6 +21,7 @@ const color = {
   ideal: "#FFECF1",
   follow: "#EBFFFC",
 };
+
 const InfoCard: React.FC<InfoCardType> = ({
   variant,
   icon,
@@ -26,10 +31,23 @@ const InfoCard: React.FC<InfoCardType> = ({
   children,
   imageUrl,
   category,
+  embedSrc,
+  poster,
+  mediaSrc,
+  videoClassName,
 }) => {
   return (
     <InfoCardWrapper className={variant}>
       <Card variant={variant} className={`${className}`}>
+        {embedSrc && <YoutubePlayer src={embedSrc} />}
+        {mediaSrc && (
+          <VideoItem
+            poster={parseImageURL(poster)}
+            src={parseVideoURL(mediaSrc)}
+            className={videoClassName}
+          />
+        )}
+
         {imageUrl && (
           <CardHeader>
             <Image
@@ -67,7 +85,8 @@ const InfoCard: React.FC<InfoCardType> = ({
               className="footer-title"
             >
               {title}
-              {icon && (
+
+              {icon !== "" && (
                 <Image
                   src={icon}
                   width={45}
@@ -82,7 +101,8 @@ const InfoCard: React.FC<InfoCardType> = ({
           {/* <P > */}
           {description && (
             <div
-              className="footer-content text-[#fff] leading-[160%]"
+              style={{ fontFamily: "Avenir" }}
+              className="footer-content text-[#fff] leading-[160%] text-[16px] md:text-[18px]"
               dangerouslySetInnerHTML={{ __html: description }}
             />
           )}

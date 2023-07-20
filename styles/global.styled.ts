@@ -45,8 +45,16 @@ const HeroBannerWrapper = styled(Container)`
     margin-top: -100px;
   }
   &.volunteer {
-    &.overview .title {
-      line-height: 140% !important;
+    &.overview {
+      .overview-act {
+        border: 1px solid #fff !important;
+        &:hover {
+          border: none !important;
+        }
+      }
+      .title {
+        line-height: 140% !important;
+      }
     }
   }
   @media (max-width: 767px) {
