@@ -12,6 +12,7 @@ import { parseDate } from "../../../utils/parseDate";
 import { truncate } from "../../../utils/truncate";
 import { useTheme } from "styled-components";
 import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
+import VideoItem from "../VideoItem/VideoItem";
 
 type Props = {
   type: "blog" | "vlog";
@@ -52,7 +53,8 @@ export default function BlogItem({
 
     if (type === "vlog" && mediaSrc) {
       Child = (
-        <video
+        <VideoItem
+          poster={mediaSrc}
           src={mediaSrc}
           className="absolute h-full w-full top-0 left-0 z-0 object-cover"
         />
@@ -108,20 +110,20 @@ export default function BlogItem({
     <Card variant={type}>
       {generateMediaItem()}
       <CardFooter>
-        <H4 className="text-4xl" style={{ margin: 0 }}>
+        <H4 className="text-new" style={{ margin: 0 }}>
           {truncate(title, 23)}
         </H4>
         {!!description ? (
           <div className="blog-description">
             <P style={{ marginBottom: 30, marginTop: 12 }}>
-              {truncate(description, 200)}
+              {truncate(description, 100)}
             </P>
           </div>
         ) : (
           <div style={{ overflowY: "auto", height: 90 }}>
             {!!content && (
               <P style={{ marginBottom: 30, marginTop: 12 }}>
-                {content ? truncate(content, 200) : ""}
+                {content ? truncate(content, 150) : ""}
               </P>
             )}
           </div>
@@ -130,11 +132,16 @@ export default function BlogItem({
           <p style={{ fontWeight: "700" }} className="text-lg">
             {author}
           </p>
-          <p className="italic font-light font-avenir">{parseDate(postDate)}</p>
+          <p
+            className="italic font-light font-avenir "
+            style={{ fontSize: "18px" }}
+          >
+            {parseDate(postDate)}
+          </p>
         </div>
         <Button
           style={{ marginTop: "auto" }}
-          variant={type == "vlog" ? "secondary" : "tertiary"}
+          variant={type == "vlog" ? "secondary" : "primary"}
           href={link}
         >
           {buttonText

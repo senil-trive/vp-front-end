@@ -237,7 +237,7 @@ export function MasonryGrid({
                     <BlogItem
                       mediaSrc={
                         blogContent.image
-                          ? parseImageURL(blogContent.image.id)
+                          ? `${process.env.NEXT_PUBLIC_API_URL}/assets/${blogContent.image}?width=700`
                           : ""
                       }
                       embedSrc={blogContent.youtube_embed}

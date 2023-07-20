@@ -131,7 +131,7 @@ export default function Forum({
         });
         const res = await req.json();
         console.log(res);
-        setPosts(res.data || []);
+        setPosts([...res.data.slice(0, 6), ...res.data.slice(0, 6)] || []);
         setTotalCount(res.meta.filter_count || 0);
       } catch (error) {
         console.log(error);
@@ -159,13 +159,13 @@ export default function Forum({
         imageUrl={
           pageData?.hero_image?.id
             ? parseImageURL(pageData?.hero_image?.id)
-            : "/vrijwilligerswerkheader.png"
+            : "/verhalen.png"
         }
         style={{
-          minHeight: 649,
+          minHeight: 525,
           position: "relative",
         }}
-        mbgn={"/Header_Banner.png"}
+        mbgn={"/verhalenmob.png"}
         mobileImageHeight={740}
       >
         <Container>
@@ -176,7 +176,7 @@ export default function Forum({
                 text={pageData?.page_title ?? ""}
                 style={{
                   textAlign: "center",
-                  padding: "0 24px",
+
                   fontSize: "64px",
                   fontWeight: "400",
                 }}
@@ -222,7 +222,7 @@ export default function Forum({
         <div
           style={{
             marginBottom: -40,
-            transform: "translateY(calc(-50% - 24px))",
+            transform: "translateY(calc(-50% - 40px))",
           }}
         >
           <TagList
@@ -241,9 +241,11 @@ export default function Forum({
                 <span
                   style={{
                     marginTop: "-6px",
+                    width: "30px",
                   }}
+                  className="hand-icon"
                 >
-                  👉🏾
+                  <img src="/Onderwerp.png" />
                 </span>
               </H4>
             }
@@ -268,7 +270,13 @@ export default function Forum({
           <Container style={{ marginBottom: "0px", maxWidth: "100%" }}>
             <Grid container>
               <Grid item xs={12} md={9}>
-                <P style={{ color: colors.black.normal, fontSize: "24px" }}>
+                <P
+                  style={{
+                    color: colors.black.normal,
+                    fontSize: "24px",
+                    fontFamily: "Avenir",
+                  }}
+                >
                   {totalCount} verhalen
                 </P>
               </Grid>
@@ -281,7 +289,7 @@ export default function Forum({
             feed={posts.map((item) => ({
               id: `blog-${uuidv4()}`,
               type: "blog",
-              width: 4,
+              width: 3,
               content: item,
             }))}
           />

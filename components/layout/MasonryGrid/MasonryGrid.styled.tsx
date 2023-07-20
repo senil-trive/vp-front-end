@@ -35,7 +35,7 @@ export const MasonryGridWrapper = styled.div`
         }
 
         &.grid-item-w-3 {
-          width: calc(50% - 22px);
+          width: calc(33% - 22px);
         }
         &.grid-item-w-4 {
           width: calc(50% - 22px);
@@ -56,7 +56,7 @@ export const MasonryGridWrapper = styled.div`
     .mason-grid {
       .grid-item {
         &.grid-item-w-3 {
-          width: calc(${(100 / 12) * 3}% - 22px);
+          width: calc(${(100 / 12) * 4}% - 22px);
         }
         &.grid-item-w-4 {
           width: calc(${(100 / 12) * 4}% - 22px);

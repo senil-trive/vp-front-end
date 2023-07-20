@@ -38,7 +38,11 @@ const StyledForumPost = styled.article<styledProps>`
   background-color: ${({ theme, showButton }: any) =>
     showButton ? theme.colors.secondary.normal : theme.colors.primary.normal};
   height: 100%;
-
+  p {
+  }
+  .forum-tag {
+    color: #fe517e !important;
+  }
   // a {
   //   background: white;
   //   color: ${({ theme }) => theme.colors.secondary.normal};
@@ -53,12 +57,10 @@ const StyledForumPost = styled.article<styledProps>`
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
       var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
 
-    background-color: white;
-    // a {
-    //   background-color: ${({ theme }) => theme.colors.secondary.normal};
-    //   border: 0;
-    //   color: white;
-    // }
+    background-color: ${({ theme }) => theme.colors.secondary.normal};
+    border: 0;
+    color: white;
+
     header {
       p,
       h4 {
@@ -66,7 +68,7 @@ const StyledForumPost = styled.article<styledProps>`
       }
     }
     .forum-tag {
-      background: #3fc7b4 !important;
+      background: #fff !important;
     }
     .content {
       color: ${({ theme }) => theme.colors.text.normal};
@@ -109,7 +111,7 @@ const StyledForumPost = styled.article<styledProps>`
   .content {
     margin-bottom: 30px;
     font-size: ${({ theme }) => theme.fontSizes.p.desktop};
-    font-family: "Avenir";
+
     color: white;
     > div {
       display: flex;
@@ -208,10 +210,10 @@ export default function ForumPost({
             <UserAvatar
               size="md"
               alt="villa pinedo"
-              src={parseImageURL(image)}
+              src="/android-chrome-192x192.png"
             />
             <div>
-              <p className="font-avenir font-extrabold text-lg">{title}</p>
+              <p className="font-extrabold text-lg">{title}</p>
               <p className="text-[16px] md:text-[18px] font-[300]">
                 {authorType}, {age?.includes("jaar") ? age : `${age} jaar`}
               </p>
