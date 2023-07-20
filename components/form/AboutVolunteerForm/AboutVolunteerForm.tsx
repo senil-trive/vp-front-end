@@ -247,6 +247,7 @@ const AboutVolunteerForm = ({
             <Grid item xs={12}>
               <Button
                 loading={isLoading}
+                variant="infoReversed"
                 //   disabled={isSubmitted}
                 className="bg-[#FE517E] w-[100%] text-center text-[#fff] text-[18px] font-[400]"
               >

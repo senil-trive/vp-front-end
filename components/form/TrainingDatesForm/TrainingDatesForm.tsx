@@ -136,6 +136,7 @@ const TrainingDatesForm = ({
             </Grid>
             <Grid item xs={12}>
               <Button
+                variant="infoReversed"
                 loading={isLoading}
                 //   disabled={isSubmitted}
                 className="bg-[#FE517E] w-[100%] text-center text-[#fff] text-[18px] font-[400]"
