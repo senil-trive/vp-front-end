@@ -363,6 +363,7 @@ p {
 
   .custom_banner_form {
     display: block !important;
+    margin-top: 40px !important;
   }
 
   .custom_banner_content h1 {

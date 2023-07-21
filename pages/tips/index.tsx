@@ -53,7 +53,7 @@ export const getServerSideProps = async () => {
   }
 };
 
-export default function Forum({
+export default function Tips({
   pageData,
   blogsData,
   totalPosts,
@@ -116,7 +116,6 @@ export default function Forum({
   };
   useEffect(() => {
     const getPaginatedBlogs = async () => {
-      console.log("hereeee", search);
       try {
         const req = await getPosts({
           postPerPage: POST_PER_PAGE,
@@ -141,175 +140,183 @@ export default function Forum({
   }, [search, sort, selectedTag]);
 
   return (
-    <PageWrapper
-      seo={{
-        title: pageData?.seo_title ? pageData?.seo_title : pageData?.page_title,
-        description: pageData?.seo_description
-          ? pageData?.seo_description
-          : pageData?.page_subtitle,
-        canonical: "https://www.villapinedo.nl/verhalen",
-        image: pageData?.seo_image
-          ? parseImageURL(pageData?.seo_image?.id)
-          : "",
-      }}
-    >
-      <Hero
-        center
-        imageUrl={
-          pageData?.hero_image?.id
-            ? parseImageURL(pageData?.hero_image?.id)
-            : "/vrijwilligerswerkheader.png"
-        }
-        style={{
-          minHeight: 649,
-          position: "relative",
+    <>
+      <PageWrapper
+        seo={{
+          title: "Tips voor jou",
+          description: pageData?.seo_description
+            ? pageData?.seo_description
+            : pageData?.page_subtitle,
+          canonical: "https://www.villapinedo.nl/verhalen",
+          image: pageData?.seo_image
+            ? parseImageURL(pageData?.seo_image?.id)
+            : "",
         }}
-        mbgn={"/Header_Banner.png"}
-        mobileImageHeight={740}
       >
-        <Container>
-          <Grid container className="custom_banner_content">
-            <Grid item xs={0} md={2} lg={3} />
-            <Grid item xs={12} md={8} lg={6}>
-              <TitleWithHighlights
-                text={pageData?.page_title ?? ""}
-                style={{
-                  textAlign: "center",
-                  padding: "0 24px",
-                  fontSize: "64px",
-                  fontWeight: "400",
-                }}
-                color="white"
-              />
-              <P
-                color="white"
-                variant="light"
-                style={{
-                  textAlign: "center",
-                  fontSize: "22px",
-                  fontWeight: "300",
-                }}
-              >
-                {pageData?.page_subtitle}
-              </P>
-              <div
-                style={{
-                  display: "flex",
-                  marginTop: "20px",
-                  justifyContent: "space-between",
-                }}
-                className="custom_banner_form"
-              >
-                <P style={{ color: "#fff", fontSize: "18px" }}>
-                  Doorzoek de blogs / vlogs
-                </P>
-                <div style={{ width: "60%" }} className="custom_banner_formBox">
-                  <Input
-                    iconLeft={<SearchIcon color={"#fff"} />}
-                    placeholder={pageData?.search_bar_quote}
-                    onChange={(e) => handleSearch(e.target.value)}
-                  />
-                </div>
-              </div>
-            </Grid>
-            <Grid item xs={0} md={2} lg={3} />
-          </Grid>
-        </Container>
-      </Hero>
-
-      <main style={{ marginBottom: "0px" }}>
-        <div
+        <Hero
+          center
+          imageUrl={
+            pageData?.hero_image?.id
+              ? parseImageURL(pageData?.hero_image?.id)
+              : "/vrijwilligerswerkheader.png"
+          }
           style={{
-            marginBottom: -40,
-            transform: "translateY(calc(-50% - 24px))",
+            minHeight: 649,
+            position: "relative",
           }}
+          mbgn={"/Header_Banner.png"}
+          mobileImageHeight={740}
         >
-          <TagList
-            tags={tags}
-            selected={selectedTag}
-            prefix={
-              <H4
-                style={{
-                  whiteSpace: "nowrap",
-                  display: "flex",
-                  alignItems: "flex-start",
-                  gap: "5px",
-                }}
-              >
-                Onderwerp{" "}
-                <span
+          <Container>
+            <Grid container className="custom_banner_content">
+              <Grid item xs={0} md={2} lg={3} />
+              <Grid item xs={12} md={8} lg={6}>
+                <TitleWithHighlights
+                  text="Tips voor jou"
                   style={{
-                    marginTop: "-6px",
+                    textAlign: "center",
+
+                    fontSize: "64px",
+                    fontWeight: "400",
+                  }}
+                  color="white"
+                />
+                <P
+                  color="white"
+                  variant="light"
+                  style={{
+                    textAlign: "center",
+                    fontSize: "22px",
+                    fontWeight: "300",
+                    letterSpacing: "0.5px",
                   }}
                 >
-                  👉🏾
-                </span>
-              </H4>
-            }
-            suffix={<ChevronRight />}
-            onSelect={(x: string) => {
-              if (x === selectedTag) {
-                setSelectedTag("");
-              } else {
-                setSelectedTag(x);
-              }
+                  Bekijk hier leuke tips in de vorm van <br />
+                  films, boeken, doe-opdrachten
+                </P>
+                <div
+                  style={{
+                    display: "flex",
+                    marginTop: "40px",
+
+                    gap: "20px",
+                  }}
+                  className="custom_banner_form"
+                >
+                  <P style={{ color: "#fff", fontSize: "18px" }}>
+                    Doorzoek de tips
+                  </P>
+                  <div
+                    style={{ width: "60%" }}
+                    className="custom_banner_formBox"
+                  >
+                    <Input
+                      iconLeft={<SearchIcon color={"#fff"} />}
+                      placeholder={pageData?.search_bar_quote}
+                      onChange={(e) => handleSearch(e.target.value)}
+                    />
+                  </div>
+                </div>
+              </Grid>
+              <Grid item xs={0} md={2} lg={3} />
+            </Grid>
+          </Container>
+        </Hero>
+
+        <main style={{ marginBottom: "0px" }}>
+          <div
+            style={{
+              marginBottom: -40,
+              transform: "translateY(calc(-50% - 24px))",
             }}
-          />
-        </div>
-        {/* 
+          >
+            <TagList
+              tags={tags}
+              selected={selectedTag}
+              prefix={
+                <H4
+                  style={{
+                    whiteSpace: "nowrap",
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: "5px",
+                  }}
+                >
+                  Onderwerp{" "}
+                  <span
+                    style={{
+                      marginTop: "-6px",
+                    }}
+                  >
+                    👉🏾
+                  </span>
+                </H4>
+              }
+              suffix={<ChevronRight />}
+              onSelect={(x: string) => {
+                if (x === selectedTag) {
+                  setSelectedTag("");
+                } else {
+                  setSelectedTag(x);
+                }
+              }}
+            />
+          </div>
+          {/* 
         <CollectionSearchBar
           quote={pageData?.search_bar_quote ?? ""}
           onSearch={handleSearch}
           searchLabel="Doorzoek de verhalen"
         /> */}
 
-        <div style={{ margin: "0px auto" }}>
-          <Container style={{ marginBottom: "0px", maxWidth: "100%" }}>
-            <Grid container>
-              <Grid item xs={12} md={9}>
-                <P
-                  style={{
-                    color: colors.black.normal,
-                    fontSize: "24px",
-                    fontFamily: "Avenir",
-                  }}
-                >
-                  {totalCount} verhalen
-                </P>
+          <div style={{ margin: "0px auto" }}>
+            <Container style={{ marginBottom: "0px", maxWidth: "100%" }}>
+              <Grid container>
+                <Grid item xs={12} md={9}>
+                  <P
+                    style={{
+                      color: colors.black.normal,
+                      fontSize: "24px",
+                      fontFamily: "Avenir",
+                    }}
+                  >
+                    {totalCount} tips
+                  </P>
+                </Grid>
+                <Grid item xs={12} md={3}>
+                  <SortBar onSort={handleSort} />
+                </Grid>
               </Grid>
-              <Grid item xs={12} md={3}>
-                <SortBar onSort={handleSort} />
-              </Grid>
-            </Grid>
-          </Container>
-          <MasonryGrid
-            feed={posts.map((item) => ({
-              id: `blog-${uuidv4()}`,
-              type: "blog",
-              width: 4,
-              content: item,
-            }))}
-          />
-        </div>
-
-        <div className="flex items-center justify-center">
-          {/* {isLoading && <CircularProgress size={"30px"} />} */}
-          {isEnd && (
-            <P style={{ marginLeft: "1rem" }} color="info">
-              Geen posts meer om te tonen
-            </P>
-          )}
-        </div>
-        {totalCount / POST_PER_PAGE > 2 && (
-          <div style={{ paddingBottom: "128px" }}>
-            <Pagination
-              total={Math.ceil(totalCount / POST_PER_PAGE)}
-              truncated
-              onChange={changePage}
+            </Container>
+            <MasonryGrid
+              feed={posts.map((item) => ({
+                id: `blog-${uuidv4()}`,
+                type: "blog",
+                width: 4,
+                content: item,
+              }))}
             />
           </div>
-        )}
-      </main>
-    </PageWrapper>
+
+          <div className="flex items-center justify-center">
+            {/* {isLoading && <CircularProgress size={"30px"} />} */}
+            {isEnd && (
+              <P style={{ marginLeft: "1rem" }} color="info">
+                Geen posts meer om te tonen
+              </P>
+            )}
+          </div>
+          {totalCount / POST_PER_PAGE > 2 && (
+            <div style={{ paddingBottom: "128px" }}>
+              <Pagination
+                total={Math.ceil(totalCount / POST_PER_PAGE)}
+                truncated
+                onChange={changePage}
+              />
+            </div>
+          )}
+        </main>
+      </PageWrapper>
+    </>
   );
 }
