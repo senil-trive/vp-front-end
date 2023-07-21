@@ -18,6 +18,8 @@ import { LetterDownloadType } from "../../types/forumTypes";
 import CommentForm from "../../components/form/CommentForm/CommentForm";
 import Image from "next/image";
 import Tag from "../../components/buttons/Tag/Tag";
+import styled from "styled-components";
+import LetterForyou from "../../components/content-types/LetterForyou/LetterForyou";
 
 type Props = {
   pageData: Letter;
@@ -177,8 +179,18 @@ export default function LetterDetail({
           </div>
         </div>
       </Hero>
-
-      <section className="mt-[-120px]">
+      <section className="my-[128px] md:my-[128px]">
+        <Container>
+          <LetterForyou
+            letter_for_you={pageData?.letter_for_you}
+            middle_colored_letter_for_you={
+              pageData?.middle_colored_letter_for_you
+            }
+            bottom_letter_for_you={pageData?.bottom_letter_for_you}
+          />
+        </Container>
+      </section>
+      <section className="my-[80px]">
         <Container className="block max-w-[1385px] md:flex">
           <BriefItem
             key={`a23y2u0`}

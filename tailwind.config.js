@@ -26,6 +26,7 @@ module.exports = {
     },
     fontFamily: {
       avenir: ["Avenir", "sans-serif"],
+      handwritten:['villa_pinedo___handwrittenRg']
     },
   },
   plugins: [],
