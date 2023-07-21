@@ -53,10 +53,6 @@ const StyledLetter = styled(BaseStyle)`
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
     var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
   &:hover {
-    a {
-      background: ${({ theme }) => `${theme.colors.primary.normal} !important`};
-      color: #fff !important;
-    }
   }
 
   footer {

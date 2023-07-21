@@ -36,6 +36,7 @@ export default function BriefItem({
   bg = `#3FC7B4`,
 }: Props) {
   const [hovering, setHovering] = useState<boolean>(false);
+  (bg = `#3FC7B4`), console.log(bg, "EFgadgafkfjn");
   return (
     <Card variant="brief" className={className}>
       <CardHeader style={{ maxHeight: imgHeight }}>
@@ -56,17 +57,6 @@ export default function BriefItem({
       </CardHeader>
       <CardFooter
         className={`group bg-[${bg}] hover:bg-white p-[24px] md:px-[24px] md:py-[32px]`}
-        onMouseEnter={() => setHovering(true)}
-        onMouseLeave={() => setHovering(false)}
-        style={
-          hovering
-            ? {
-                background: `white`,
-              }
-            : {
-                background: bg,
-              }
-        }
       >
         <div>
           <div className="title-with-image">
@@ -90,6 +80,7 @@ export default function BriefItem({
         {!btnHidden && (
           <Button
             href={fileSrc}
+            hover={hovering}
             style={
               hovering
                 ? {

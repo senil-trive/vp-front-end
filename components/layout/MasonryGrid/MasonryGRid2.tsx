@@ -474,7 +474,29 @@ export function MasonryGrid({
                     initial="offscreen"
                     whileInView="onscreen"
                     viewport={{ once: true, amount: 0.1 }}
-                  ></motion.div>
+                  >
+                    <BlogItem
+                      mediaSrc={
+                        blogContent.image
+                          ? `${process.env.NEXT_PUBLIC_API_URL}/assets/${blogContent.image}?width=700`
+                          : ""
+                      }
+                      embedSrc={blogContent.youtube_embed}
+                      link={`/verhalen/${blogContent.slug}`}
+                      type={blogContent.type}
+                      author={blogContent.author}
+                      description={blogContent.content}
+                      buttonText={
+                        blogContent.type == "vlog"
+                          ? "Vlog bekijken"
+                          : "Blog lezen"
+                      }
+                      content={blogContent.content}
+                      postDate={new Date(blogContent.date_created)}
+                      category={"Thema"}
+                      title={blogContent.title}
+                    />
+                  </motion.div>
                 );
               case "instagram":
                 const instaContent = content as InstaPost;

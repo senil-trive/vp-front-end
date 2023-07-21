@@ -16,6 +16,7 @@ export type ButtonVariant =
 type Props = {
   variant?: ButtonVariant;
   filled?: boolean;
+  hover?: boolean;
   children: ReactNode;
 
   /** Wether the button should be treated as a <a/> */

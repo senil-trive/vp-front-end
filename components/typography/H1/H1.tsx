@@ -18,7 +18,7 @@ const BaseH1 = styled.h1<{ color: ColorType }>`
   margin: 12px 0;
 
   @media ${({ theme }) => theme.devices.tablet} {
-    margin: 24px 0;
+    margin: 0 0 22px;
     font-size: 48px;
     line-height: 140%;
   }
