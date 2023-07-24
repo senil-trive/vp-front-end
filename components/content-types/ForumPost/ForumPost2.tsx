@@ -65,7 +65,7 @@ const StyledForumPost = styled.article<styledProps>`
       }
     }
     .forum-tag {
-      background: #3fc7b4 !important;
+      background: #006ef7 !important;
     }
     .content {
       color: ${({ theme }) => theme.colors.text.normal};
@@ -215,7 +215,12 @@ export default function ForumPost({
             {tags.length > 0 && (
               <div className="flex flex-wrap forum-tags">
                 {tags.map((item, index) => (
-                  <Tag key={index} size="m" className="forum-tag">
+                  <Tag
+                    key={index}
+                    size="m"
+                    className="forum-tag"
+                    color="#006ef7"
+                  >
                     {item}
                   </Tag>
                 ))}

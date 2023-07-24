@@ -81,8 +81,8 @@ const Style = css<Props>`
           color: #3fc7b4 !important;
           border: 2px solid ${({ theme }) => theme.colors.secondary.normal};
           &:hover {
-            background-color: #3fc7b4 !important;
-            color: #fff !important;
+            // background-color: #3fc7b4 !important;
+            // color: #fff !important;
 
             /* box-shadow: inset -8px -8px 24px rgba(0, 0, 0, 0.3); */
           }
@@ -102,8 +102,8 @@ const Style = css<Props>`
           background: ${({ theme }) => theme.colors.success.normal};
           border: 2px solid ${({ theme }) => theme.colors.success.normal};
           &:hover {
-            background-color: transparent;
-            color: ${({ theme }) => theme.colors.success.normal};
+            // background-color: transparent;
+            // color: ${({ theme }) => theme.colors.success.normal};
             /* box-shadow: inset -8px -8px 24px rgba(0, 0, 0, 0.3); */
           }
         `;

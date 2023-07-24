@@ -26,8 +26,8 @@ const BaseTag = styled.span<Variant & Position & { isActive: boolean }>`
   background: ${({ variant, theme }) =>
     variant === "light" ? "transparent" : theme.colors.primary.normal};
   border-radius: 8px;
-  color: ${({ variant, theme }) =>
-    variant === "light" ? theme.colors.primary.normal : "white"};
+  color: ${({ variant, theme, color }) =>
+    variant === "light" ? color : "white"};
 
   font-weight: 300;
   font-family: "Avenir";
@@ -39,10 +39,6 @@ const BaseTag = styled.span<Variant & Position & { isActive: boolean }>`
   text-transform: uppercase;
 
   &:hover {
-    background: ${({ variant, theme }) =>
-      variant === "light" ? "transparent" : theme.colors.tertiary.normal};
-    color: ${({ variant, theme }) =>
-      variant === "light" ? theme.colors.tertiary.normal : "white"};
   }
 
   ${({ isActive }) =>
@@ -126,6 +122,7 @@ export default function Tag({
   variant = "light",
   size = "l",
   onClick,
+  color = "#3fc7b4",
   children,
   position,
   isActive = false,
@@ -138,6 +135,7 @@ export default function Tag({
           position={position}
           onClick={onClick}
           variant={variant}
+          color={color}
           isActive={isActive}
           {...rest}
         >
@@ -151,6 +149,7 @@ export default function Tag({
           position={position}
           onClick={onClick}
           variant={variant}
+          color={color}
           isActive={isActive}
           {...rest}
         >
