@@ -56,7 +56,7 @@ export default function BriefItem({
         </>
       </CardHeader>
       <CardFooter
-        className={`group bg-[${bg}] hover:bg-white p-[24px] md:px-[24px] md:py-[32px]`}
+        className={`group bg-[${bg}]  p-[24px] md:px-[24px] md:py-[32px]`}
       >
         <div>
           <div className="title-with-image">
@@ -65,13 +65,13 @@ export default function BriefItem({
               highlightColor="tertiary"
               text={title}
               headerElement="h3"
-              className="transition group-hover:text-black text-[30px] md:text-[32px]"
+              className="transition  text-[30px] md:text-[32px]"
               style={{ fontWeight: "400" }}
             />
             <img src="/letterBlog.png" />
           </div>
           <P
-            className="transition text-white group-hover:text-black"
+            className="transition text-white "
             style={{ marginBottom: 56, marginTop: 12, fontWeight: "300" }}
           >
             {truncate(content, 200)}

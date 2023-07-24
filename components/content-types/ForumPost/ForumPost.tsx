@@ -124,7 +124,7 @@ const StyledForumPost = styled.article<styledProps>`
         background: white;
         border: none;
         height: 41px;
-        color: 3FC7B4;
+        color: #3fc7b4;
         font-weight: 400;
         font-size: 18px;
         font-family: "Fjalla One";

@@ -133,7 +133,7 @@ p {
 } */
 
 .chat_btn a:hover {
-  color: #fff;
+  background-color: #fff;
 }
 
 .author-date {
