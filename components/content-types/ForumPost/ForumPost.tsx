@@ -202,11 +202,11 @@ export default function ForumPost({
             </header>
           )} */}
           <header>
-            <UserAvatar
+            {/* <UserAvatar
               size="md"
               alt="villa pinedo"
               src="/android-chrome-192x192.png"
-            />
+            /> */}
             <div>
               <p className="font-extrabold text-lg">{title}</p>
               <p className="text-[16px] md:text-[18px] font-[300]">

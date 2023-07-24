@@ -16,8 +16,9 @@ import { getComments, postLetterSubscription } from "../../utils/api";
 import LetterForm from "../../components/form/LetterForm/LetterForm";
 import { LetterDownloadType } from "../../types/forumTypes";
 import CommentForm from "../../components/form/CommentForm/CommentForm";
-import Image from "next/image";
 import Tag from "../../components/buttons/Tag/Tag";
+import LetterForyou from "../../components/content-types/LetterForyou/LetterForyou";
+import { LetterFormWrapper } from "../../styles/kinderen/index.styles";
 
 type Props = {
   pageData: Letter;
@@ -31,7 +32,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   try {
     const pageoverviewReq = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/letters_overview_page?fields=highlighted_letter.*,*`,
+      `${ENDPOINTS.COLLECTIONS}/letters_overview_page?fields=*.*.*.*`,
       {
         method: "GET",
         headers: {
@@ -43,14 +44,14 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     // Get the letters
     // ${ENDPOINTS.COLLECTIONS}/open_letters?filter[slug][_eq]=${slug}&fields=*.*&
     const res = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/open_letters?filter[slug][_eq]=${slug}&fields=*&`,
+      `${ENDPOINTS.COLLECTIONS}/open_letters?filter[slug][_eq]=${slug}&fields=*.*.*`,
       {
         method: "GET",
       }
     );
     // ${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*.*&filter[status][_eq]=published
     const lettersReq = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/open_letters?fields=letter_submissions.*,*&filter[status][_eq]=published`,
+      `${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*.*.*&filter[status][_eq]=published`,
       {
         method: "GET",
         headers: {
@@ -130,7 +131,6 @@ export default function LetterDetail({
   const onSubmit: SubmitHandler<any> = async (data) => {
     submitForm(data);
   };
-  console.log(comments, "comment");
   console.log(pageData);
   return (
     <PageWrapper
@@ -153,7 +153,7 @@ export default function LetterDetail({
       <BreadCrumbs />
       <Hero
         center
-        imageUrl={parseImageURL(pageData?.image?.id, 1200)}
+        imageUrl={parseImageURL(pageoverview?.hero_image?.id)}
         style={{
           minHeight: 555,
           position: "relative",
@@ -161,8 +161,11 @@ export default function LetterDetail({
         mobileImageHeight={772}
       >
         <div className="flex flex-col md:items-center md:justify-center md:text-center max-w-2xl md:max-w-5xl md:my-16 mt-10">
-          <Tag className="w-[max-content] pt-[10px] mb-[20px] text-[#3FC7B4] font-[400] text-[18px] bg-[#fff] border-[#fff] md:mb-[0]">
-            {pageData?.categories[0] || "Category"}
+          <Tag
+            style={{ fontFamily: "Fjalla One" }}
+            className="w-[max-content] pt-[10px] mb-[20px] text-[#3FC7B4] font-[400] text-[18px] bg-[#fff] border-[#fff] md:mb-[0]"
+          >
+            Open brief
           </Tag>
           <TitleWithHighlights
             text={pageData?.detail_title}
@@ -177,26 +180,17 @@ export default function LetterDetail({
           </div>
         </div>
       </Hero>
-
-      <section className="mt-[-120px]">
-        <Container className="block max-w-[1385px] md:flex">
-          <BriefItem
-            key={`a23y2u0`}
-            title={pageoverview?.letter_for_title}
-            content={pageoverview?.letter_for_description}
-            imgSrc={parseImageURL(undefined)}
-            fileSrc={`/open-brieven/${undefined}`}
-            bg={`#FE517E`}
-            btnHidden={true}
-            className="flex-1"
-          />
-          <LetterForm
-            className="flex-1 p-0 py-10 md:px-10 md:py-0"
-            onIsSubmit={onSubmit}
+      <section className="my-[128px] md:my-[128px]">
+        <Container>
+          <LetterForyou
+            letter_for_you={pageData?.letter_for_you}
+            middle_colored_letter_for_you={
+              pageData?.middle_colored_letter_for_you
+            }
+            bottom_letter_for_you={pageData?.bottom_letter_for_you}
           />
         </Container>
       </section>
-
       <main className="px-[8px] mb-[100px]  md:px-[0] md:mb-[140px] md:mt-[128px]">
         <CommentForm
           type="open_letter"
@@ -207,35 +201,39 @@ export default function LetterDetail({
           ook! Heb jij een goede tip? Deel 'm hieronder!"
           postId={pageData.id}
         />
-        <section className="my-[40px] md:mt-[103px] md:mb-[80px]">
-          <CommentForm
-            postId={pageData.id}
-            parent={"reageer op deze brief"}
-            type="open_letter"
-          />
-          <div className="relative">
-            <Image
-              src="/opeletterbothead.png"
-              alt="respond to letter"
-              fill
-              className="relative h-[768px] mt-[-600px] md:h-[549px] md:mt-[-450px] object-cover"
+        <LetterFormWrapper className="my-[80px]">
+          <Container className="block max-w-[1385px] p-[0px] md:flex">
+            <CommentForm
+              formTitle={pageoverview?.comment_form_title}
+              formSubtitle={pageoverview?.comment_form_subtitle}
+              type="open_letter"
+              postId={pageData.id}
+              className="bg-[#FE517E]"
+              submitLabel="Reageer op deze brief"
+              commentFormType="open_letter"
             />
-          </div>
-        </section>
-        <section>
-          <Container>
-            <div className="flex flex-col items-center justify-center mt-[80px]">
+            <LetterForm
+              className="w-[100%] p-0 py-10 px-5 md:py-0"
+              formTitle={pageoverview?.download_brief_title}
+              formSubtitle={pageoverview?.download_brief_subtitle}
+              onIsSubmit={onSubmit}
+            />
+          </Container>
+        </LetterFormWrapper>
+        <section className="my-[80px]">
+          <Container className="max-w-[1385px]">
+            <div className="mt-[80px]">
               <H3
                 variant="bold"
                 style={{ margin: 0 }}
                 className="text-[36px] font-[400] md:text-[42px]"
               >
-                Relevante brieven
+                gerelateerde brieven
               </H3>
             </div>
           </Container>
-          <Container maxWidth="xl">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-[40px] md:my-[80px]">
+          <Container className="max-w-[1385px]">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 my-[20px] md:my-[32px]">
               {relatedLetters.map((letter: Letter) => (
                 <BriefItem
                   key={letter.id}

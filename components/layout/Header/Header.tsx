@@ -40,7 +40,6 @@ const StyledHeader = styled.header`
   top: 0;
   background-color: ${({ theme }) => theme.colors.white.normal};
   z-index: 500;
-
   .inner {
     display: flex;
     justify-content: space-between;

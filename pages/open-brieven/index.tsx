@@ -1,10 +1,9 @@
 import React from "react";
 
-import { H3, H4, P, TitleWithHighlights } from "../../components/typography";
+import { H4, P, TitleWithHighlights } from "../../components/typography";
 import BriefItem from "../../components/content-types/BriefItem/BriefItem";
 import { Container, Grid } from "@mui/material";
 import ENDPOINTS from "../../constants/endpoints";
-import { FiChevronsDown } from "react-icons/fi";
 import { Hero } from "../../components/layout";
 import { Letter } from "../../types/content-types/Letter.type";
 import { POST_PER_PAGE } from "../../constants/app-configs";
@@ -24,7 +23,7 @@ export const getServerSideProps = async () => {
   // ${ENDPOINTS.COLLECTIONS}/letters_overview_page?fields=*.*.*
   try {
     const pageReq = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/letters_overview_page?fields=highlighted_letter.*,*`,
+      `${ENDPOINTS.COLLECTIONS}/letters_overview_page?fields=*.*.*.*`,
       {
         method: "GET",
         headers: {
@@ -61,6 +60,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
   pageData,
   lettersData,
 }) => {
+  console.log(pageData);
   return (
     <div>
       <PageWrapper
@@ -80,18 +80,16 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
         <main>
           <Hero
             center
-            imageUrl={"/kletsmeethead.png"}
+            imageUrl={parseImageURL(pageData?.hero_image?.id)}
             style={{
-              minHeight: 497,
+              minHeight: 500,
               position: "relative",
             }}
             mobileImageHeight={572}
           >
             <div className="flex flex-col max-w-2xl md:items-center md:justify-center md:text-center md:max-w-4xl mb-0 mt-[-80px] md:mt-[-40px]">
               <TitleWithHighlights
-                //highlightColor="info"
                 text={pageData?.page_title}
-                // textToHighlight={pageData?.page_title_highlighted}
                 headerElement="h1"
                 color="white"
                 style={{
@@ -120,12 +118,12 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                 {pageData?.intro_title && (
                   <InfoCard
                     variant="blog"
-                    imageUrl="/trainingfooterhead.png"
+                    imageUrl={parseImageURL(pageData?.intro_image?.id)}
                     title={pageData?.intro_title}
                     description={pageData?.intro_description}
-                    icon="/notewrite.png"
-                    category="Thema"
-                    className="small-fonts text-[#fff] h-[100%] flex flex-col mb-[40px] md:mb-[0]"
+                    icon={parseImageURL(pageData?.note_write_icon?.id)}
+                    category={pageData?.intro_category}
+                    className="small-fonts bg-[#FE517E] text-[#fff] h-[100%] flex flex-col mb-[40px] md:mb-[0]"
                   >
                     <div className="flex justify-center  mt-[20px] md:mt-[auto]">
                       <Button
@@ -133,7 +131,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                         className="w-[100%] text-[16px] font-[400] bg-[#fff] text-[#FE517E] border-[#fff] hover:bg-[#FE517E] md:text-[18px]"
                         href={`/open-brieven/${pageData?.highlighted_letter?.slug}`}
                       >
-                        Download brief
+                        {pageData?.intro_button_label}
                       </Button>
                     </div>
                   </InfoCard>
@@ -147,8 +145,11 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                     )}
                     title={pageData?.highlighted_letter?.title}
                     description={pageData?.highlighted_letter?.description}
-                    icon={"/notewrite.png"}
-                    category="Thema"
+                    icon={parseImageURL(pageData?.note_write_icon?.id)}
+                    category={
+                      pageData?.highlighted_letter?.categories?.[0]?.name ||
+                      "THEMA"
+                    }
                     className="small-fonts hover:bg-[#fff] text-[#fff] h-[100%] flex flex-col"
                   >
                     <div className="flex justify-center mt-[20px] md:mt-[auto]">
@@ -157,7 +158,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                         className="w-[100%] text-[16px] font-[400] bg-[#fff] text-[#006EF7] border-[#fff] hover:bg-[#006EF7] md:text-[18px]"
                         href={`/open-brieven/${pageData?.highlighted_letter?.slug}`}
                       >
-                        Download brief
+                        {pageData?.letter_for_button_label}
                       </Button>
                     </div>
                   </InfoCard>
@@ -165,27 +166,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
               </div>
             </Container>
           </section>
-          <section className="mb-[100px]">
-            <Container>
-              <div className="flex flex-col items-center justify-center my-[50px] md:my-[100px]">
-                <H4
-                  style={{
-                    margin: 0,
-                    fontFamily: "Fjalla One",
-                    fontStyle: `normal`,
-                    fontWeight: `400`,
-                    lineHeight: `150%`,
-                    textAlign: `center`,
-                  }}
-                  className="text-[16px] md:text-[18px]"
-                >
-                  Meer open brieven, bekijk <br /> ze allemaal!
-                </H4>
-                <div className="mt-7 text-2xl p-3 rounded-full bg-[#FE517E] text-white">
-                  <FaChevronDown stroke="white" color="white" />
-                </div>
-              </div>
-            </Container>
+          <section className="mt-[40px] md:mt-[64px] mb-[80px] md:mb-[128px]">
             <Container maxWidth="xl" className="open-brieven-font">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-20">
                 {lettersData.map((letter: Letter) => (

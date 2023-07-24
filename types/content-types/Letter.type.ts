@@ -1,5 +1,4 @@
 import { ContentStatus } from "./Status.type";
-
 export type Letter = {
   id: string;
   date_created: string;
@@ -17,4 +16,7 @@ export type Letter = {
   image: any;
   requires_signup: Boolean;
   bg_color: string;
+  letter_for_you?: string;
+  middle_colored_letter_for_you?: string;
+  bottom_letter_for_you?: string;
 };

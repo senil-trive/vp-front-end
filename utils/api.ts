@@ -428,12 +428,15 @@ export const getPostDetail = async (slug: string) => {
  */
 export const getForumOverviewPageData = async () => {
   // page forum overiew ${ENDPOINTS.COLLECTIONS}/forum_overview_page?fields=*.*.*
-  return await fetch(`${ENDPOINTS.COLLECTIONS}/forum_overview_page`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  return await fetch(
+    `${ENDPOINTS.COLLECTIONS}/forum_overview_page?fields=*.*.*`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
 };
 
 /**
@@ -452,7 +455,7 @@ export const getForumPosts = async ({
   meta,
 }: DirectusParams) => {
   // post forum let url = `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
-  let url = `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=categories.*,comments.*,categories.*.*,*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+  let url = `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
 
   if (meta) {
     url = `${url}&meta=${meta}`;
@@ -523,7 +526,7 @@ export const postVolunteerApplication = async (data: VolunteerRequestType) => {
 export const getContentTags = async () => {
   // content url `${ENDPOINTS.COLLECTIONS}/categories?filter[status][_eq]=published&fields=*.*.*`
   return await fetch(
-    `${ENDPOINTS.COLLECTIONS}/categories?filter[status][_eq]=published`,
+    `${ENDPOINTS.COLLECTIONS}/categories?filter[status][_eq]=published&fields=*.*.*`,
     {
       method: "GET",
       headers: {

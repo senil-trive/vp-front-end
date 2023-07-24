@@ -13,6 +13,7 @@ import { FiMessageCircle } from "react-icons/fi";
 import ReplyIcon from "../../icons/ReplyIcon";
 
 type Props = {
+  commentFormType?: string;
   author: string;
   age: string;
   title: string;
@@ -70,6 +71,7 @@ export default function ForumComment({
   age,
   postDate,
   isReplyComment = false,
+  commentFormType,
   onReply,
 }: Props) {
   const { colors } = useTheme();
@@ -103,13 +105,15 @@ export default function ForumComment({
       <div className="content font-avenir text-[16px] leading-[160%] md:text-[18px]">
         {parseHTMLtoReact(title)}
         <footer className="bg-white -mx-6 -mb-6 justify-start">
-          <button className="flex mt-8" onClick={handleReply}>
-            <ReplyIcon />
-            <span className="ml-2 font-avenir text-lg font-light text-[16px] md:text-[18px]">
-              Reageer
-            </span>
-            {/* <FiMessageCircle size={24} color={colors.secondary.normal} /> */}
-          </button>
+          {commentFormType === "open_letter" && (
+            <button className="flex mt-8" onClick={handleReply}>
+              <ReplyIcon />
+              <span className="ml-2 font-avenir text-lg font-light text-[16px] md:text-[18px]">
+                Reageer
+              </span>
+              {/* <FiMessageCircle size={24} color={colors.secondary.normal} /> */}
+            </button>
+          )}
           {/* <MoreIcon /> */}
         </footer>
       </div>

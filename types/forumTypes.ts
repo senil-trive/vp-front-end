@@ -47,6 +47,7 @@ export type LetterDownloadType = {
   date_updated: string;
   user_name: string;
   user_email: string;
+  residence: string;
   pdf_language: string;
   post_code: string;
   tips_inspiration_email: boolean;

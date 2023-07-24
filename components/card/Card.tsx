@@ -1,5 +1,4 @@
 import React, { ReactNode } from "react";
-
 import styled from "styled-components";
 
 export type Variant = {
@@ -14,7 +13,6 @@ export type Variant = {
     | "follow";
   className?: string;
 };
-
 type Props = Variant & {
   children: ReactNode;
 };
@@ -52,14 +50,24 @@ const StyledLetter = styled(BaseStyle)`
     0 4px 6px 1px var(--tw-shadow-color) !important;
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
     var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
-  &:hover {
-  }
+  // &:hover {
+  //   a {
+  //     background: ${({ theme }) =>
+    `${theme.colors.primary.normal} !important`};
+  //     color: #fff !important;
+  //   }
+  // }
 
   footer {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    &:hover {
+      a {
+        color: #fff !important;
+      }
+    }
   }
 `;
 
@@ -130,6 +138,7 @@ const StyledBlog = styled(BaseStyle)`
       var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
   }
 `;
+
 const StyledBlogNew = styled(BaseStyle)`
   // padding: 24px;
   // border-color: ${({ theme }) => theme.colors.primary.normal};
@@ -192,6 +201,7 @@ const StyledBlogNew = styled(BaseStyle)`
       var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
   }
 `;
+
 const StyledPrimary = styled(BaseStyle)`
   background-color: #006ef7;
   header {
@@ -213,6 +223,7 @@ const StyledPrimary = styled(BaseStyle)`
       var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
   }
 `;
+
 const StyledInfo = styled(BaseStyle)`
   background-color: #ff971d;
   &:hover {
@@ -224,6 +235,7 @@ const StyledInfo = styled(BaseStyle)`
       var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
   }
 `;
+
 const StyledIdeal = styled(BaseStyle)`
   background-color: #ffecf1;
   &:hover {
@@ -247,6 +259,7 @@ const StyledFollow = styled(BaseStyle)`
       var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
   }
 `;
+
 const CardWrapper = ({
   variant,
   children,
