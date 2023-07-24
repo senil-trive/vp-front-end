@@ -19,7 +19,7 @@ const LetterForYouStyles = styled.section`
     }
   }
   .middle__color__letter__for__you {
-    border-radius:8px;
+    border-radius: 8px;
     background: #006ef7;
     color: #fff;
     padding: 40px;
@@ -38,4 +38,4 @@ const LetterForYouStyles = styled.section`
     }
   }
 `;
-export {LetterForYouStyles}
+export { LetterForYouStyles };

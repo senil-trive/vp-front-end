@@ -11,7 +11,7 @@
 @import "swiper/css";
 @import "swiper/css/free-mode";
 @import "swiper/css/pagination";
-@import '../fonts/handwritten/fonts.css';
+@import "../fonts/handwritten/fonts.css";
 
 @font-face {
   font-family: "Avenir";
@@ -20,7 +20,6 @@
   font-weight: normal;
   font-style: normal;
 }
-
 
 ::-webkit-scrollbar {
   width: 0;

@@ -35,7 +35,6 @@ export const getServerSideProps = async () => {
     const forumRes = await forumReq.json();
     const tagsRes = await tagsReq.json();
 
-    console.log(forumRes);
     return {
       props: {
         pageData: pageRes.data || null,
@@ -45,8 +44,6 @@ export const getServerSideProps = async () => {
       },
     };
   } catch (error) {
-    console.log(error);
-
     return {
       redirect: {
         destination: "/500",
@@ -152,18 +149,16 @@ export default function Forum({
 
               <div className="mt-[40px] w-[100%] mx-auto md:w-[70%] sm:flex sm:gap-5">
                 <Button
-                  variant="white"
-                  filled={false}
+                  variant="success"
                   href="/stel-een-vraag"
-                  className="w-[100%] text-[18px] font-[300] border-[1px] border-[#fff] hover:bg-[#3FC7B4] hover:border-[#3FC7B4]"
+                  className="overview-act px-[5px]  bg-[transparent]  border-[#fff] text-[#fff] hover:bg-[#06D6A0] hover:border-none text-[18px] font-[400]"
                 >
                   {pageData?.submit_question_button_label}
                 </Button>
                 <Button
-                  variant="white"
-                  filled={false}
+                  variant="infoReversed"
                   href="/ik-wil-een-buddy"
-                  className="w-[100%] mt-3 text-[18px] font-[300] border-[1px] border-[#fff] hover:bg-[#3FC7B4] hover:border-[#3FC7B4] sm:mt-0"
+                  className="overview-act px-[5px] text-[18px] font-[400] bg-[transparent] border-[#fff] text-[#fff] hover:bg-[#06D6A0] hover:border-none"
                 >
                   {pageData?.chat_button_label}
                 </Button>

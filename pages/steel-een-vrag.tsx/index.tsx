@@ -1,33 +1,20 @@
-import { colors, Container, Grid } from "@mui/material";
-import { Hero, Pagination } from "../../components/layout";
-import { H4, H2, P, TitleWithHighlights } from "../../components/typography";
+import { Container, Grid } from "@mui/material";
+import { Hero } from "../../components/layout";
+import { H2, P, TitleWithHighlights } from "../../components/typography";
 import React, { useEffect, useState, ChangeEvent } from "react";
 import {
   getContentTags,
   getForumOverviewPageData,
   getForumPosts,
 } from "../../utils/api";
-
 import Button from "../../components/buttons/Button";
-import Section from "../../components/layout/Section/Section";
-import Dropdown from "../../components/form/Dropdown/Dropdown";
-import { GENDERS } from "../../constants/genders";
-import { CircleSpinner } from "react-spinners-kit";
-import CollectionSearchBar from "../../components/form/CollectionSearchBar/CollectionSearchBar";
 import { ForumPageProps } from "../../types/pageTypes";
-import ForumPost from "../../components/content-types/ForumPost/ForumPost";
 import { ForumRequestType } from "../../types/forumrequestType";
 import { postVolunteerApplication } from "../../utils/api";
-import Link from "next/link";
 import { POST_PER_PAGE } from "../../constants/app-configs";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
-import SortBar from "../../components/form/SortBar/SortBar";
-import TagList from "../../components/buttons/TagList/TagList";
 import parseImageURL from "../../utils/parseImageURL";
-import ChevronRight from "../../components/icons/ChevronRight/ChevronRight";
-import Image from "next/image";
 import Input from "../../components/form/Input/Input";
-import SearchIcon from "../../components/icons/SearchIcon/SearchIcon";
 import { useForm } from "react-hook-form";
 import TextArea from "../../components/form/TextArea/TextArea2";
 import Upload from "../../components/form/Upload/Upload";
@@ -52,6 +39,7 @@ export const getServerSideProps = async () => {
     const pageRes = await pageReq.json();
     const forumRes = await forumReq.json();
     const tagsRes = await tagsReq.json();
+
     return {
       props: {
         pageData: pageRes.data || null,
@@ -61,8 +49,6 @@ export const getServerSideProps = async () => {
       },
     };
   } catch (error) {
-    console.log(error);
-
     return {
       redirect: {
         destination: "/500",
@@ -338,11 +324,6 @@ export default function Forum({
                   </Grid>
 
                   <Grid item xs={12}>
-                    {/* <Grid item xs={12}>
-                        <P variant="light" style={{ color: "#fff" }}>
-                          * Verplichte velden
-                        </P>
-                      </Grid> */}
                     <Grid item xs={12}>
                       <Button
                         loading={isLoading}

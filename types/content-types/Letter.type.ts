@@ -16,7 +16,7 @@ export type Letter = {
   image: any;
   requires_signup: Boolean;
   bg_color: string;
-  letter_for_you?:string;
-  middle_colored_letter_for_you?:string;
-  bottom_letter_for_you?:string;
+  letter_for_you?: string;
+  middle_colored_letter_for_you?: string;
+  bottom_letter_for_you?: string;
 };

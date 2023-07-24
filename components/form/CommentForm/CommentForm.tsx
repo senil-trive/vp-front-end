@@ -4,24 +4,26 @@ import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 import Button from "../../buttons/Button";
-import Dropdown from "../Dropdown/Dropdown";
-import { FiCheck } from "react-icons/fi";
 import ForumComment from "../../content-types/ForumComment/ForumComment";
 import { ForumCommentType } from "../../../types/forumTypes";
-import { GENDERS } from "../../../constants/genders";
 import Input from "../Input/Input";
-import Section from "../../layout/Section/Section";
 import TextArea from "../TextArea/TextArea";
 import { postComment } from "../../../utils/api";
 import styled, { useTheme } from "styled-components";
 import { rgba } from "../../../utils/colors";
+import Image from "next/image";
 
 type Props = {
+  commentFormType?: string;
+  submitLabel?: string;
+  formSubtitle?: string;
+  formTitle?: string;
   type?: "forum" | "blog" | "open_letter";
   postId: string;
   comments?: ForumCommentType[];
   preText?: string;
   parent?: string;
+  className?: string;
 };
 
 const SubmitForm = ({
@@ -31,12 +33,20 @@ const SubmitForm = ({
   isSubmitted,
   onIsSubmit,
   paddingSize = "md",
+  className,
+  formTitle,
+  submitLabel,
+  formSubtitle,
 }: {
   type: "forum" | "blog" | "open_letter";
   postId: string;
   replyId?: string;
   isSubmitted: boolean;
+  className?: string;
   paddingSize?: "sm" | "md";
+  formSubtitle?: string;
+  submitLabel?: string;
+  formTitle?: string;
   onIsSubmit: (x: boolean) => void;
 }) => {
   const { colors } = useTheme();
@@ -84,14 +94,13 @@ const SubmitForm = ({
     }
     display: flex;
     height: 100%;
-    background-color: rgba(255, 151, 29, 1);
     border-radius: 8px;
     padding: 32px;
 
     label {
       font-family: "Avenir";
       font-style: normal;
-      font-weight: 400;
+      font-weight: 800;
       font-size: 18px;
       line-height: 160%;
       color: white;
@@ -104,6 +113,10 @@ const SubmitForm = ({
       div,
       .selectBox {
         border: none;
+      }
+      label {
+        padding: 0;
+        margin: 6px 0;
       }
     }
     @media (max-width: 768px) {
@@ -126,87 +139,179 @@ const SubmitForm = ({
     }
   `;
 
+  const getCommentForm = () => {
+    switch (type) {
+      case "forum":
+        return (
+          <React.Fragment>
+            <Grid item xs={12} sm={6} md={3}>
+              <Input
+                label="Voornaam"
+                name="user_name"
+                register={register}
+                placeholder="Jouw naam..."
+                required
+                hasError={!!errors.user_name}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <Input
+                label="Leeftijd"
+                type="number"
+                name="user_age"
+                placeholder="Jouw leeftijd..."
+                register={register}
+                required
+                hasError={!!errors.user_age}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <Input
+                label="E-mail"
+                type="email"
+                name="user_email"
+                placeholder="Jouw email..."
+                register={register}
+                required
+                hasError={!!errors.user_email}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <Input
+                label="Woonplaats"
+                name="residence"
+                placeholder="Jouw woonplaats..."
+                register={register}
+                required
+                hasError={!!errors.residence}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextArea
+                label="Reactie"
+                name="content"
+                placeholder="Jouw reactie..."
+                required
+                register={register}
+                hasError={!!errors.content}
+                helperText={!!errors.content ? "Dit veld is verplicht" : ""}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Button
+                variant="info"
+                loading={isLoading}
+                disabled={isSubmitted}
+                className="bg-[#fff] text-[#FF971D]"
+              >
+                {isLoading && "bezig..."}
+                {isSubmitted && "Verzonden"}
+                {!isLoading && !isSubmitted && "Reactie plaatsen"}
+              </Button>
+            </Grid>
+          </React.Fragment>
+        );
+      case "open_letter":
+        return (
+          <React.Fragment>
+            <Grid item xs={12} md={6}>
+              <Input
+                label="Voornaam"
+                name="user_name"
+                register={register}
+                placeholder="Jouw naam..."
+                required
+                hasError={!!errors.user_name}
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Input
+                label="Leeftijd"
+                type="number"
+                name="user_age"
+                placeholder="Jouw leeftijd..."
+                register={register}
+                required
+                hasError={!!errors.user_age}
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Input
+                label="E-mail"
+                type="email"
+                name="user_email"
+                placeholder="Jouw email..."
+                register={register}
+                required
+                hasError={!!errors.user_email}
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <Input
+                label="Woonplaats"
+                name="residence"
+                placeholder="Jouw woonplaats..."
+                register={register}
+                required
+                hasError={!!errors.residence}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextArea
+                label="Reactie"
+                name="content"
+                placeholder="Jouw reactie..."
+                required
+                register={register}
+                hasError={!!errors.content}
+                helperText={!!errors.content ? "Dit veld is verplicht" : ""}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Button
+                variant="info"
+                loading={isLoading}
+                disabled={isSubmitted}
+                className="comment-form-button bg-[#fff] text-[#FF971D]"
+              >
+                {isLoading && "bezig..."}
+                {isSubmitted && "Verzonden"}
+                {!isLoading &&
+                  !isSubmitted &&
+                  (submitLabel || "Reactie plaatsen")}
+              </Button>
+            </Grid>
+          </React.Fragment>
+        );
+      default:
+        return null;
+    }
+  };
   return (
     <div className="relative h-[100%] z-10">
-      <StyledForm>
+      <StyledForm className={className ? `${className}` : `bg-[#ff971d]`}>
         {!isSubmitted ? (
           <form onSubmit={handleSubmit(onSubmit)}>
-            <Grid container spacing={"33"} className="form-wrapper">
-              <Grid item xs={12} sm={6} md={3}>
-                <Input
-                  label="Naam"
-                  name="user_name"
-                  register={register}
-                  placeholder="Jouw naam..."
-                  required
-                  hasError={!!errors.user_name}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <Input
-                  label="Leeftijd"
-                  type="number"
-                  name="user_age"
-                  placeholder="Jouw leeftijd..."
-                  register={register}
-                  required
-                  hasError={!!errors.user_age}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6} md={3}>
-                <Input
-                  label="E-mail"
-                  type="email"
-                  name="user_email"
-                  placeholder="Jouw email..."
-                  register={register}
-                  required
-                  hasError={!!errors.user_email}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6} md={4}>
-                <Input
-                  label="Postcode"
-                  name="user_postcode"
-                  placeholder="Jouw postcode..."
-                  register={register}
-                  required
-                  hasError={!!errors.user_postcode}
-                />
-              </Grid>
-              {/* <Grid item xs={12} sm={6} md={4}>
-                <Dropdown
-                  options={GENDERS}
-                  label="Geslacht"
-                  name="user_gender"
-                  register={register}
-                />
-              </Grid> */}
-              {/* <Grid item xs={12} sm={6} md={4}>
-                <Input label="Thema" name="theme" />
-              </Grid> */}
-              <Grid item xs={12}>
-                <TextArea
-                  label="Reactie"
-                  name="content"
-                  placeholder="Jouw reactie..."
-                  required
-                  register={register}
-                  hasError={!!errors.content}
-                  helperText={!!errors.content ? "Dit veld is verplicht" : ""}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <Button
-                  loading={isLoading}
-                  disabled={isSubmitted}
-                  className="bg-[#fff] text-[#FF971D]"
-                >
-                  {isLoading && "bezig..."}
-                  {isSubmitted && "Verzonden"}
-                  {!isLoading && !isSubmitted && "Reactie plaatsen"}
-                </Button>
-              </Grid>
+            <Grid container spacing={"16"} className="form-wrapper">
+              {formTitle && (
+                <Grid item xs={12} lg={8}>
+                  <H3 className="text-[#fff]">
+                    {formTitle}
+                    <Image
+                      src={"/note.svg"}
+                      width={40}
+                      height={40}
+                      alt={"Heading icon"}
+                      objectFit="contain"
+                      className="pl-1 inline float-right absolute"
+                    />
+                  </H3>
+                  {formSubtitle && (
+                    <P className="text-[#fff]">{formSubtitle}</P>
+                  )}
+                </Grid>
+              )}
+              {getCommentForm()}
             </Grid>
           </form>
         ) : (
@@ -223,137 +328,165 @@ const SubmitForm = ({
 
 export default function CommentForm({
   type = "blog",
+  submitLabel,
+  commentFormType,
   comments = [],
   preText,
+  formSubtitle,
   postId,
   parent,
+  className,
+  formTitle,
 }: Props) {
   const { colors } = useTheme();
-  const [isOpen, setIsOpen] = useState(false);
   const [replyId, setReplyId] = useState<string | null>(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleReply = (id: string) => {
     setReplyId(id);
   };
+
   return (
     <Container className="max-w-[1118px]">
       {!parent ? (
-        <>
-          <Grid container className="m-[0] mt-[70px] mb-[6px]">
-            <Grid item xs={12} md={8} lg={8}>
-              <H2 className="text-[35px] md:text-[42px]">
-                Reacties ({comments.length})
-              </H2>
-            </Grid>
-          </Grid>
-          {comments
-            .filter((comment) => comment.status === "published")
-            .map((comment) => (
-              <Grid container key={comment.id}>
-                <Grid item xs={12}>
-                  <div
-                    style={{
-                      borderBottom: `1px solid ${rgba(
-                        colors.primary.normal,
-                        0.2
-                      )}`,
-                      marginBottom: "32px",
-                    }}
-                  >
-                    <ForumComment
-                      author={comment.user_name}
-                      age={comment.user_age}
-                      postDate={new Date(comment.date_created)}
-                      title={comment.content}
-                      onReply={() => handleReply(comment.id)}
-                    />
-
-                    <div
-                      className={
-                        replyId === comment.id
-                          ? "overflow-hidden max-h-[999px]"
-                          : "overflow-hidden max-h-[0px]"
-                      }
-                    >
-                      <SubmitForm
-                        paddingSize="sm"
-                        postId={postId}
-                        replyId={comment.id}
-                        isSubmitted={isSubmitted}
-                        type={type}
-                        onIsSubmit={(x) => setIsSubmitted(x)}
-                      />
-                    </div>
-                    {comment.child_comments
-                      ?.filter((comment) => comment.status === "published")
-                      .map((child) => (
-                        <div key={child.id} className="pl-3">
-                          <ForumComment
-                            isReplyComment
-                            author={child.user_name}
-                            age={child.user_age}
-                            postDate={new Date(child.date_created)}
-                            title={child.content}
-                            onReply={() => handleReply(child.id)}
-                          />
-                          <div
-                            className={
-                              replyId === child.id
-                                ? "overflow-hidden max-h-[999px]"
-                                : "overflow-hidden max-h-[0px]"
-                            }
-                          >
-                            <SubmitForm
-                              paddingSize="sm"
-                              postId={postId}
-                              replyId={child.id}
-                              isSubmitted={isSubmitted && replyId === child.id}
-                              type={type}
-                              onIsSubmit={(x) => setIsSubmitted(x)}
-                            />
-                          </div>
-                          {child.child_comments
-                            ?.filter(
-                              (comment) => comment.status === "published"
-                            )
-                            .map((grandChild) => (
-                              <div key={grandChild.id}>
-                                <ForumComment
-                                  isReplyComment
-                                  author={grandChild.user_name}
-                                  age={grandChild.user_age}
-                                  postDate={new Date(grandChild.date_created)}
-                                  title={grandChild.content}
-                                  onReply={() => handleReply(grandChild.id)}
-                                />
-                                <div
-                                  className={
-                                    replyId === grandChild.id
-                                      ? "overflow-hidden max-h-[999px]"
-                                      : "overflow-hidden max-h-[0px]"
-                                  }
-                                >
-                                  <SubmitForm
-                                    paddingSize="sm"
-                                    postId={postId}
-                                    replyId={grandChild.id}
-                                    isSubmitted={
-                                      isSubmitted && replyId === grandChild.id
-                                    }
-                                    type={type}
-                                    onIsSubmit={(x) => setIsSubmitted(x)}
-                                  />
-                                </div>
-                              </div>
-                            ))}
-                        </div>
-                      ))}
-                  </div>
-                </Grid>
+        !formTitle ? (
+          <>
+            <Grid container className="m-[0] mt-[70px] mb-[6px]">
+              <Grid item xs={12} md={8} lg={8}>
+                <H2 className="text-[35px] md:text-[42px]">
+                  Reacties ({comments.length})
+                </H2>
               </Grid>
-            ))}
-        </>
+            </Grid>
+            {comments
+              .filter((comment) => comment.status === "published")
+              .map((comment) => (
+                <Grid container key={comment.id}>
+                  <Grid item xs={12}>
+                    <div
+                      style={{
+                        borderBottom: `1px solid ${rgba(
+                          colors.primary.normal,
+                          0.2
+                        )}`,
+                        marginBottom: "32px",
+                      }}
+                    >
+                      <ForumComment
+                        author={comment.user_name}
+                        age={comment.user_age}
+                        postDate={new Date(comment.date_created)}
+                        title={comment.content}
+                        onReply={() => handleReply(comment.id)}
+                        commentFormType={commentFormType}
+                      />
+
+                      <div
+                        className={
+                          replyId === comment.id
+                            ? "overflow-hidden max-h-[999px]"
+                            : "overflow-hidden max-h-[0px]"
+                        }
+                      >
+                        <SubmitForm
+                          paddingSize="sm"
+                          postId={postId}
+                          replyId={comment.id}
+                          isSubmitted={isSubmitted}
+                          type={type}
+                          onIsSubmit={(x) => setIsSubmitted(x)}
+                          className={className}
+                        />
+                      </div>
+                      {comment.child_comments
+                        ?.filter((comment) => comment.status === "published")
+                        .map((child) => (
+                          <div key={child.id} className="pl-3">
+                            <ForumComment
+                              isReplyComment
+                              author={child.user_name}
+                              age={child.user_age}
+                              postDate={new Date(child.date_created)}
+                              title={child.content}
+                              onReply={() => handleReply(child.id)}
+                              commentFormType={commentFormType}
+                            />
+                            <div
+                              className={
+                                replyId === child.id
+                                  ? "overflow-hidden max-h-[999px]"
+                                  : "overflow-hidden max-h-[0px]"
+                              }
+                            >
+                              <SubmitForm
+                                paddingSize="sm"
+                                postId={postId}
+                                replyId={child.id}
+                                isSubmitted={
+                                  isSubmitted && replyId === child.id
+                                }
+                                type={type}
+                                onIsSubmit={(x) => setIsSubmitted(x)}
+                                className={className}
+                              />
+                            </div>
+                            {child.child_comments
+                              ?.filter(
+                                (comment) => comment.status === "published"
+                              )
+                              .map((grandChild) => (
+                                <div key={grandChild.id}>
+                                  <ForumComment
+                                    isReplyComment
+                                    author={grandChild.user_name}
+                                    age={grandChild.user_age}
+                                    postDate={new Date(grandChild.date_created)}
+                                    title={grandChild.content}
+                                    onReply={() => handleReply(grandChild.id)}
+                                    commentFormType={commentFormType}
+                                  />
+                                  <div
+                                    className={
+                                      replyId === grandChild.id
+                                        ? "overflow-hidden max-h-[999px]"
+                                        : "overflow-hidden max-h-[0px]"
+                                    }
+                                  >
+                                    <SubmitForm
+                                      paddingSize="sm"
+                                      postId={postId}
+                                      replyId={grandChild.id}
+                                      isSubmitted={
+                                        isSubmitted && replyId === grandChild.id
+                                      }
+                                      type={type}
+                                      onIsSubmit={(x) => setIsSubmitted(x)}
+                                      className={className}
+                                    />
+                                  </div>
+                                </div>
+                              ))}
+                          </div>
+                        ))}
+                    </div>
+                  </Grid>
+                </Grid>
+              ))}
+          </>
+        ) : (
+          <div>
+            <SubmitForm
+              postId={postId}
+              isSubmitted={isSubmitted}
+              type={type}
+              onIsSubmit={(x) => setIsSubmitted(x)}
+              className={className}
+              formTitle={formTitle}
+              formSubtitle={formSubtitle}
+              submitLabel={submitLabel}
+            />
+          </div>
+        )
       ) : (
         <div>
           <div>
@@ -369,6 +502,7 @@ export default function CommentForm({
             isSubmitted={isSubmitted}
             type={type}
             onIsSubmit={(x) => setIsSubmitted(x)}
+            className={className}
           />
         </div>
       )}

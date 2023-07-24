@@ -1,42 +1,31 @@
-import { Container, Grid } from "@mui/material";
-import { H3, H2, P } from "../../typography";
+import { Grid } from "@mui/material";
+import { H2, P } from "../../typography";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-
 import Button from "../../buttons/Button";
-import Dropdown from "../Dropdown/Dropdown";
-import { FiCheck } from "react-icons/fi";
-import ForumComment from "../../content-types/ForumComment/ForumComment";
-import {
-  ForumCommentType,
-  LetterDownloadType,
-} from "../../../types/forumTypes";
-import { GENDERS } from "../../../constants/genders";
+import { LetterDownloadType } from "../../../types/forumTypes";
 import Input from "../Input/Input";
 import Section from "../../layout/Section/Section";
-import TextArea from "../TextArea/TextArea";
-import { postComment } from "../../../utils/api";
-import styled, { useTheme } from "styled-components";
-import { rgba } from "../../../utils/colors";
-import Checkbox from "../Checkbox/Checkbox";
+import styled from "styled-components";
 import Image from "next/image";
-import { LANGUAGES } from "../../../constants/language";
 
 const LetterForm = ({
   className,
   isSubmitted,
   onIsSubmit,
+  formSubtitle,
+  formTitle,
   paddingSize = "md",
 }: {
   isSubmitted?: boolean;
+  formSubtitle?: string;
+  formTitle?: string;
   className?: string;
   paddingSize?: "sm" | "md";
   onIsSubmit: (x: any) => void;
 }) => {
-  const { colors } = useTheme();
   const [isLoading, setIsLoading] = useState(false);
 
-  const [check, setCheck] = useState(false);
   const {
     register,
     handleSubmit,
@@ -83,7 +72,7 @@ const LetterForm = ({
     label {
       font-family: "Avenir";
       font-style: normal;
-      font-weight: 400;
+      font-weight: 800;
       font-size: 18px;
       line-height: 160%;
       color: white;
@@ -126,7 +115,7 @@ const LetterForm = ({
         <StyledForm>
           <div className="item-center mt-3 mb-5">
             <H2 style={{ color: "#fff", margin: "0px", fontSize: "32px" }}>
-              De hele brief downloaden?
+              {formTitle}
               <Image
                 src={"/note.svg"}
                 width={40}
@@ -136,7 +125,7 @@ const LetterForm = ({
                 className="pl-1 inline float-right absolute"
               />
             </H2>
-            <P color="white">Vertel ons hoe je heet en hij komt naar je toe!</P>
+            <P color="white">{formSubtitle}</P>
           </div>
           <form onSubmit={handleSubmit(onSubmit)} className="flex h-[100%]">
             <Grid container spacing={"33"} className="form-wrapper">
@@ -145,6 +134,7 @@ const LetterForm = ({
                   label="Voornaam"
                   name="user_name"
                   required
+                  placeholder="Jouw voornaam..."
                   register={register}
                   hasError={!!errors.user_name}
                   helperText={!!errors.user_name ? "voornaam is verplicht" : ""}
@@ -156,35 +146,23 @@ const LetterForm = ({
                   required
                   type="email"
                   name="user_email"
+                  placeholder="Jouw email..."
                   register={register}
                   helperText={
                     !!errors?.user_email ? "e-mailadres is verplicht" : ""
                   }
                 />
               </Grid>
-
-              <Grid item xs={12} md={6}>
-                <Dropdown
-                  options={LANGUAGES}
+              <Grid item xs={12}>
+                <Input
                   required
-                  label="Selecteer een taal"
-                  name="pdf_language"
+                  label="Woonplaats"
+                  name="residence"
+                  placeholder="Jouw woonplaats..."
                   register={register}
                   helperText={
-                    !!errors?.pdf_language
-                      ? "selecteer alstublieft één taal"
-                      : ""
+                    !!errors.residence ? "woonplaats is verplicht" : ""
                   }
-                />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Input
-                  type="number"
-                  required
-                  label="Postcode"
-                  name="post_code"
-                  register={register}
-                  helperText={!!errors.post_code ? "postcode is verplicht" : ""}
                 />
               </Grid>
               <Grid item xs={12} className="items-center flex">
@@ -201,6 +179,7 @@ const LetterForm = ({
               </Grid>
               <Grid item xs={12}>
                 <Button
+                  variant="info"
                   loading={isLoading}
                   disabled={isSubmitted}
                   className="bg-[#fff] w-[100%] text-center text-[#ff971d] text-[18px] font-[400]"
