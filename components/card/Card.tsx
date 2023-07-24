@@ -63,11 +63,6 @@ const StyledLetter = styled(BaseStyle)`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    &:hover {
-      a {
-        color: #fff !important;
-      }
-    }
   }
 `;
 
