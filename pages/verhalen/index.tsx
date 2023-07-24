@@ -196,7 +196,7 @@ export default function Forum({
               <div
                 style={{
                   display: "flex",
-                  marginTop: "20px",
+                  marginTop: "40px",
                   justifyContent: "space-between",
                 }}
                 className="custom_banner_form"

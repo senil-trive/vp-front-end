@@ -134,7 +134,7 @@ p {
 } */
 
 .chat_btn a:hover {
-  color: #fff;
+  background-color: #fff;
 }
 
 .author-date {
@@ -364,6 +364,7 @@ p {
 
   .custom_banner_form {
     display: block !important;
+    margin-top: 40px !important;
   }
 
   .custom_banner_content h1 {

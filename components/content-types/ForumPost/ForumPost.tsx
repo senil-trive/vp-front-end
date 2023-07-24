@@ -64,14 +64,14 @@ const StyledForumPost = styled.article<styledProps>`
     header {
       p,
       h4 {
-        color: ${({ theme }) => theme.colors.text.normal};
+      
       }
     }
     .forum-tag {
       background: #fff !important;
     }
     .content {
-      color: ${({ theme }) => theme.colors.text.normal};
+    
       .forum-tags {
         span {
           background: ${({ theme }) => theme.colors.secondary.normal};
@@ -83,12 +83,7 @@ const StyledForumPost = styled.article<styledProps>`
         }
       }
     }
-    footer {
-      color: ${({ theme }) => theme.colors.text.normal};
-
-      .geplaatst {
-        color: ${({ theme }) => theme.colors.text.normal};
-      }
+ 
     }
   }
 
@@ -124,7 +119,7 @@ const StyledForumPost = styled.article<styledProps>`
         background: white;
         border: none;
         height: 41px;
-        color: 3FC7B4;
+        color: #3fc7b4;
         font-weight: 400;
         font-size: 18px;
         font-family: "Fjalla One";

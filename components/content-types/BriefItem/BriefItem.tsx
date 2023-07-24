@@ -36,6 +36,7 @@ export default function BriefItem({
   bg = `#3FC7B4`,
 }: Props) {
   const [hovering, setHovering] = useState<boolean>(false);
+  (bg = `#3FC7B4`), console.log(bg, "EFgadgafkfjn");
   return (
     <Card variant="brief" className={className}>
       <CardHeader style={{ maxHeight: imgHeight }}>
@@ -55,18 +56,7 @@ export default function BriefItem({
         </>
       </CardHeader>
       <CardFooter
-        className={`group bg-[${bg}] hover:bg-white p-[24px] md:px-[24px] md:py-[32px]`}
-        onMouseEnter={() => setHovering(true)}
-        onMouseLeave={() => setHovering(false)}
-        style={
-          hovering
-            ? {
-                background: `white`,
-              }
-            : {
-                background: bg,
-              }
-        }
+        className={`group bg-[${bg}]  p-[24px] md:px-[24px] md:py-[32px]`}
       >
         <div>
           <div className="title-with-image">
@@ -75,13 +65,13 @@ export default function BriefItem({
               highlightColor="tertiary"
               text={title}
               headerElement="h3"
-              className="transition group-hover:text-black text-[30px] md:text-[32px]"
+              className="transition  text-[30px] md:text-[32px]"
               style={{ fontWeight: "400" }}
             />
             <img src="/letterBlog.png" />
           </div>
           <P
-            className="transition text-white group-hover:text-black"
+            className="transition text-white "
             style={{ marginBottom: 56, marginTop: 12, fontWeight: "300" }}
           >
             {truncate(content, 200)}
@@ -90,6 +80,7 @@ export default function BriefItem({
         {!btnHidden && (
           <Button
             href={fileSrc}
+            hover={hovering}
             style={
               hovering
                 ? {
