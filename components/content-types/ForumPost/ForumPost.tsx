@@ -13,6 +13,7 @@ type Props = {
   name: string;
   gender: string;
   age: string;
+  authorType?: string;
   title: string;
   content: string;
   truncateContent?: boolean;
