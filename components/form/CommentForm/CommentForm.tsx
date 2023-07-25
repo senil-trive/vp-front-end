@@ -192,6 +192,7 @@ const SubmitForm = ({
                 name="content"
                 placeholder="Jouw reactie..."
                 required
+                rows={3}
                 register={register}
                 hasError={!!errors.content}
                 helperText={!!errors.content ? "Dit veld is verplicht" : ""}
@@ -206,7 +207,9 @@ const SubmitForm = ({
               >
                 {isLoading && "bezig..."}
                 {isSubmitted && "Verzonden"}
-                {!isLoading && !isSubmitted && "Reactie plaatsen"}
+                {!isLoading &&
+                  !isSubmitted &&
+                  (submitLabel || "Reactie plaatsen")}
               </Button>
             </Grid>
           </React.Fragment>
@@ -294,7 +297,7 @@ const SubmitForm = ({
           <form onSubmit={handleSubmit(onSubmit)}>
             <Grid container spacing={"16"} className="form-wrapper">
               {formTitle && (
-                <Grid item xs={12} lg={8}>
+                <Grid item xs={12} lg={12}>
                   <H3 className="text-[#fff]">
                     {formTitle}
                     <Image
@@ -503,6 +506,7 @@ export default function CommentForm({
             type={type}
             onIsSubmit={(x) => setIsSubmitted(x)}
             className={className}
+            submitLabel={submitLabel}
           />
         </div>
       )}

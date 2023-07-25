@@ -176,7 +176,7 @@ export default function Search() {
                       gender={forumPosts[0].user_gender}
                       age={forumPosts[0].user_age}
                       image={forumPosts[0].user_image?.id || "asad"}
-                      authorType={forumPosts[0].user_name}
+                      name={forumPosts[0].user_name}
                       postDate={new Date(forumPosts[0].date_created)}
                       tags={
                         forumPosts[0].categories?.map(

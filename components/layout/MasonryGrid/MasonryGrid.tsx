@@ -206,7 +206,7 @@ export function MasonryGrid({
                       gender={forumContent.user_gender}
                       image={parseImageURL(forumContent?.user_image?.id)}
                       age={forumContent.user_age}
-                      authorType={forumContent.user_name}
+                      name={forumContent.user_name}
                       postDate={new Date(forumContent.date_created)}
                       tags={
                         forumContent.categories?.map(

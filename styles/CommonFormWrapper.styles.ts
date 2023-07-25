@@ -11,7 +11,10 @@ export const StyledForm = styled.div`
     height: 100%;
     opacity: 0.25;
     background: url("/chatBg.png");
-    background-size: 59%;
+    // background-size: cover;
+    // background-repeat: no-repeat;
+    /* background-position: center center; */
+    background-size: 45%;
     background-position: left 225px top -75px;
     z-index: 1;
   }
@@ -21,16 +24,17 @@ export const StyledForm = styled.div`
   background-color: rgba(255, 151, 29, 1);
   border-radius: 8px;
   padding: 32px;
-
   label {
     font-family: "Avenir";
     font-style: normal;
-    font-weight: 400;
+    font-weight: 800;
     font-size: 18px;
     line-height: 160%;
-    color: white;
+    color: #fff !important;
   }
-
+  .forum_act {
+    color: #ff971d !important;
+  }
   form {
     position: relative;
     z-index: 2;
@@ -39,6 +43,7 @@ export const StyledForm = styled.div`
       border: none;
     }
   }
+
   @media (max-width: 768px) {
     padding: 24px !important;
     &:before {

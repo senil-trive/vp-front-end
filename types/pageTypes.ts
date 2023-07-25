@@ -51,6 +51,15 @@ export type ForumPageProps = {
     hero_image: ImageFileType;
     seo_image: ImageFileType;
     search_bar_quote: string;
+    forum_rules_title: string;
+    forum_rules_content: any;
+    message_hero_image: ImageFileType;
+    message_hero_title: string;
+    message_hero_subtitle: string;
+    message_hero_button_url: string;
+    message_hero_button_title: string;
+    form_title: string;
+    form_subtitle: string;
   };
   forumData: ForumPostType[];
   totalPosts: number;

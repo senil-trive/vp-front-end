@@ -7,9 +7,10 @@ import { truncate } from "../../../utils/truncate";
 import { FiHeart } from "react-icons/fi";
 import UserAvatar from "../../icons/UserAvatar/UserAvatar";
 import parseImageURL from "../../../utils/parseImageURL";
+import { H4, P } from "../../typography";
 
 type Props = {
-  authorType: string;
+  name: string;
   gender: string;
   age: string;
   title: string;
@@ -40,6 +41,14 @@ const StyledForumPost = styled.article<styledProps>`
   height: 100%;
   p {
   }
+  > div:last-child {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    >div{
+      height: 100%;
+    }
+}
   .forum-tag {
     color: #fe517e !important;
   }
@@ -57,16 +66,10 @@ const StyledForumPost = styled.article<styledProps>`
     box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
       var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
 
-    background-color: ${({ theme }) => theme.colors.secondary.normal};
+    // background-color: ${({ theme }) => theme.colors.secondary.normal};
     border: 0;
     color: white;
 
-    header {
-      p,
-      h4 {
-      
-      }
-    }
     .forum-tag {
       background: #fff !important;
     }
@@ -119,7 +122,7 @@ const StyledForumPost = styled.article<styledProps>`
         background: white;
         border: none;
         height: 41px;
-        color: #3fc7b4;
+        color: #3fc7b4 !important;
         font-weight: 400;
         font-size: 18px;
         font-family: "Fjalla One";
@@ -144,7 +147,15 @@ const StyledForumPost = styled.article<styledProps>`
       margin: 0;
     }
   }
-
+.title{
+  font-size:32px !important;
+  font-weight:400;
+}
+@media(max-width:767px){
+  .title{
+    font-size:24px !important;
+  }
+}
   @media ${({ theme }) => theme.breakpoints.tablet} {
     .content {
       font-size: ${({ theme }) => theme.fontSizes.p.mobile};
@@ -157,13 +168,13 @@ export default function ForumPost({
   content,
   age,
   comments = 0,
-  authorType,
   postDate,
   truncateContent = true,
   showButton = false,
   buttonUrl = "",
   fullHeight = true,
   tags = [],
+  name,
   image,
 }: Props) {
   const generateContent = () => {
@@ -186,37 +197,17 @@ export default function ForumPost({
         href={buttonUrl}
         className="transition h-full flex flex-col justify-between "
       > */}
+      <div>
+        <p className="font-extrabold text-lg text-[#fff]">{name}</p>
+        <p className="text-[16px] text-[#fff] md:text-[18px] font-[300]">
+          {age?.includes("jaar") ? age : `${age} jaar`}
+        </p>
+      </div>
       <ComponentTag {...props}>
         <div>
-          {/* {!!title && (
-            <header>
-              <UserAvatar size="md" alt="villa pinedo" src={image} />
-              <div>
-                <H4
-                  style={{ marginBottom: 0, marginTop: "16px" }}
-                  variant="bold"
-                >
-                  {truncate(title, 75)}
-                </H4>
-              </div>
-            </header>
-          )} */}
-          <header>
-            {/* <UserAvatar
-              size="md"
-              alt="villa pinedo"
-              src="/android-chrome-192x192.png"
-            /> */}
-            <div>
-              <p className="font-extrabold text-lg">{title}</p>
-              <p className="text-[16px] md:text-[18px] font-[300]">
-                {authorType}, {age?.includes("jaar") ? age : `${age} jaar`}
-              </p>
-            </div>
-          </header>
           <div className="content text-[16px] md:text-[18px]">
             {tags.length > 0 && (
-              <div className="flex flex-wrap forum-tags">
+              <div className="flex flex-wrap forum-tags my-[32px]">
                 {tags.map((item, index) => (
                   <Tag key={index} size="m" className="forum-tag">
                     {item}
@@ -224,8 +215,16 @@ export default function ForumPost({
                 ))}
               </div>
             )}
-
-            <p className="custom_forum_tags"> {generateContent()}</p>
+            {!!title && (
+              <H4
+                variant="bold"
+                color="white"
+                className="title my-[30px] font-[32px]"
+              >
+                {truncate(title, 75)}
+              </H4>
+            )}
+            <div className="custom_forum_tags"> {generateContent()}</div>
           </div>
         </div>
 

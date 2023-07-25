@@ -50,19 +50,22 @@ const StyledLetter = styled(BaseStyle)`
     0 4px 6px 1px var(--tw-shadow-color) !important;
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
     var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
-  // &:hover {
-  //   a {
-  //     background: ${({ theme }) =>
-    `${theme.colors.primary.normal} !important`};
-  //     color: #fff !important;
-  //   }
-  // }
-
   footer {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    &:hover {
+      background: #fff !important;
+      h3,
+      p {
+        color: #000 !important;
+      }
+      a {
+        background: #3fc7b4 !important;
+        color: #fff !important;
+      }
+    }
   }
 `;
 
