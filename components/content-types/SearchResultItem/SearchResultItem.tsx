@@ -5,7 +5,7 @@ import styled from "styled-components";
 type Props = {
   /** The amount of search results found */
   amount: number;
-
+  suffix?: boolean;
   /** The color of the result block */
   colorVariant?: 1 | 2 | 3;
 
@@ -27,11 +27,11 @@ const Wrapper = styled.div<{ colorVariant: number }>`
   .scroll-content {
     align-items: center;
     color: #fff;
-    bottom: 14px;
+    bottom: 32px;
     font-size: 18px;
     font-weight: 500;
     position: absolute;
-    left: 21%;
+    left: 19%;
     span {
       font-size: 18px;
       display: inline-block;
@@ -77,7 +77,7 @@ const Wrapper = styled.div<{ colorVariant: number }>`
         return theme.colors.tertiary.light;
     }
   }};
-  padding: 50px;
+  padding: 50px 44px;
   ul {
     gap: 12px;
     border-radius: 8px;
@@ -86,7 +86,6 @@ const Wrapper = styled.div<{ colorVariant: number }>`
     li {
       a {
         span {
-          font-family: "Avenir";
         }
       }
       font-weight: 500;
@@ -97,12 +96,13 @@ const Wrapper = styled.div<{ colorVariant: number }>`
     }
   }
   @media (max-width: 767px) {
-    padding: 35px 25px 46px !important;
+    padding: 35px 25px 76px !important;
   }
 `;
 export default function SearchResultItem({
   amount,
   resultTitleSuffix,
+  suffix = false,
   list,
   cardHeight,
   searchRef,
@@ -136,10 +136,17 @@ export default function SearchResultItem({
   return (
     <Wrapper colorVariant={colorVariant}>
       <section>
-        <p className="summary uppercase">
-          {amount} {amount === 1 ? "Resultaat" : "Resultaten"}
-          {resultTitleSuffix}
-        </p>
+        {suffix ? (
+          <p className="summary uppercase">
+            {amount}
+            {amount === 1 ? " Resultaat" : " Resultaten"}
+            {resultTitleSuffix}
+          </p>
+        ) : (
+          <p className="summary uppercase">
+            {amount} {resultTitleSuffix}
+          </p>
+        )}
       </section>
 
       {list.length > 0 && (
@@ -173,11 +180,12 @@ export default function SearchResultItem({
               Scroll verder en bekijk meer
               <span
                 style={{
-                  marginTop: "-6px",
+                  marginBottom: "-9px",
+                  width: "30px",
                 }}
                 className="hand-icon"
               >
-                👉🏾
+                <img src="/Onderwerp.png" />
               </span>
             </div>
           )}
