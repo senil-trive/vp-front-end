@@ -7,7 +7,6 @@ import {
   getForumOverviewPageData,
   getForumPosts,
 } from "../../utils/api";
-
 import Button from "../../components/buttons/Button";
 import { CircleSpinner } from "react-spinners-kit";
 import { ForumPageProps } from "../../types/pageTypes";
@@ -21,6 +20,16 @@ import ChevronRight from "../../components/icons/ChevronRight/ChevronRight";
 import Image from "next/image";
 import Input from "../../components/form/Input/Input";
 import SearchIcon from "../../components/icons/SearchIcon/SearchIcon";
+import { HeroButtonWrapper } from "../../styles/kinderen/index.styles";
+import SortBar from "../../components/form/SortBar/SortBar";
+const forumSortOptions = [
+  { name: "Titel (a-z)", value: "content" },
+  { name: "Titel (z-a)", value: "-content" },
+  { name: "Auteur (a-z)", value: "user_name" },
+  { name: "Auteur (z-a)", value: "-user_name" },
+  { name: "Datum (oud-nieuw)", value: "date_created" },
+  { name: "Datum (nieuw-oud)", value: "-date_created" },
+];
 
 export const getServerSideProps = async () => {
   try {
@@ -64,6 +73,7 @@ export default function Forum({
   const [selectedTag, setSelectedTag] = useState<string>("");
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
+  const [sort, setSort] = useState("");
 
   const changePage = (index: number) => {
     if (index <= 1) {
@@ -77,6 +87,9 @@ export default function Forum({
     setSearch(x.target.value);
     setCurrentPage(1);
   };
+  const handleSort = (x: string) => {
+    setSort(x);
+  };
 
   useEffect(() => {
     const getPaginatedPost = async () => {
@@ -86,6 +99,7 @@ export default function Forum({
           postPerPage: POST_PER_PAGE,
           page: currentPage,
           search,
+          sort,
           meta: "filter_count",
           filter:
             selectedTag.length > 0
@@ -104,7 +118,8 @@ export default function Forum({
     };
 
     getPaginatedPost();
-  }, [currentPage, search, selectedTag]);
+  }, [currentPage, search, sort, selectedTag]);
+
   return (
     <PageWrapper
       seo={{
@@ -147,22 +162,22 @@ export default function Forum({
                 {pageData?.page_subtitle}
               </P>
 
-              <div className="mt-[40px] w-[100%] mx-auto md:w-[70%] sm:flex sm:gap-5">
+              <HeroButtonWrapper className="mt-[40px] w-[100%] mx-auto md:w-[70%] sm:flex sm:gap-5">
                 <Button
                   variant="success"
                   href="/stel-een-vraag"
-                  className="overview-act px-[5px]  bg-[transparent]  border-[#fff] text-[#fff] hover:bg-[#06D6A0] hover:border-none text-[18px] font-[400]"
+                  className="forum-act px-[5px]  bg-[transparent]  border-[#fff] text-[#fff] hover:bg-[#06D6A0] hover:border-none text-[18px] font-[400]"
                 >
                   {pageData?.submit_question_button_label}
                 </Button>
                 <Button
                   variant="infoReversed"
                   href="/ik-wil-een-buddy"
-                  className="overview-act px-[5px] text-[18px] font-[400] bg-[transparent] border-[#fff] text-[#fff] hover:bg-[#06D6A0] hover:border-none"
+                  className="forum-act px-[5px] text-[18px] font-[400] bg-[transparent] border-[#fff] text-[#fff] hover:bg-[#06D6A0] hover:border-none"
                 >
                   {pageData?.chat_button_label}
                 </Button>
-              </div>
+              </HeroButtonWrapper>
             </Grid>
           </Grid>
         </Container>
@@ -208,6 +223,15 @@ export default function Forum({
         <Container className="max-w-[1384px] mt-[-90px] mx-[auto] md:mt-[0px] md:mb-[56px]">
           <Grid container spacing={"34px"}>
             <>
+              <Grid item xs={12} md={9}>
+                <P>
+                  {totalCount} {totalCount === 1 ? "vraag" : "vragen"}
+                </P>
+              </Grid>
+              <Grid item xs={12} md={3}>
+                <SortBar sortOptions={forumSortOptions} onSort={handleSort} />
+              </Grid>
+
               <Grid item xs={12} md={8}>
                 <div className="flex flex-col h-[100%]">
                   <Image
@@ -253,8 +277,8 @@ export default function Forum({
                           fullHeight={false}
                           gender={item.user_gender}
                           age={item.user_age}
+                          name={item.user_name}
                           image={item.user_image?.id || "asad"}
-                          authorType={item.user_name}
                           postDate={new Date(item.date_created)}
                           tags={
                             item.categories?.map(

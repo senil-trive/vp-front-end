@@ -87,8 +87,7 @@ export const DropdownWrapper = styled.div<{ hasError: boolean }>`
     hasError
       ? css`
           .selectBox {
-            background-color: rgba(255, 51, 51, 0.1);
-            border-color: #ff3333;
+            border: 2px solid #ff3333 !important;
           }
 
           footer {

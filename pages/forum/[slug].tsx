@@ -78,17 +78,16 @@ export default function ForumDetail({ pageData, comments = [] }: Props) {
       <BreadCrumbs />
       <Container className="max-w-[1118px] mt-[64px] md:mt-[128px]">
         <Grid container>
-          {/* <Grid item xs={0} md={2} lg={2} /> */}
           <Grid item xs={12} className="mx-auto">
             <ForumPost
               gender={pageData.user_gender}
               age={pageData.user_age}
-              authorType={pageData.user_name}
               postDate={new Date(pageData.date_created)}
               truncateContent={false}
               tags={
                 pageData.categories?.map((cat) => cat.categories_id.name) ?? []
               }
+              name={pageData?.user_name}
               title={pageData.title ?? "Titel moet in CMS worden ingevoerd"}
               content={pageData.content}
               comments={comments.length}
@@ -96,7 +95,6 @@ export default function ForumDetail({ pageData, comments = [] }: Props) {
               image={pageData.attachment_image}
             />
           </Grid>
-          {/* <Grid item xs={0} md={2} lg={2} /> */}
         </Grid>
       </Container>
 
@@ -114,8 +112,10 @@ export default function ForumDetail({ pageData, comments = [] }: Props) {
           <div>
             <CommentForm
               postId={pageData.id}
-              parent={"Geef zelf antwoord op deze vraag"}
+              formTitle={"Geef zelf antwoord op deze vraag"}
+              formSubtitle="Vertel ons hoe je heet en hij komt naar je toe!"
               type="forum"
+              submitLabel="Ja, ik wil mijn reactie plaatsen"
             />
           </div>
           <div className="relative">
@@ -123,7 +123,7 @@ export default function ForumDetail({ pageData, comments = [] }: Props) {
               src="/forumbothead.png"
               alt="respond to letter"
               fill
-              className="relative h-[768px] mt-[-600px] md:h-[549px] object-cover md:mt-[-450px]"
+              className="relative h-[750px] mt-[-650px] md:h-[400px] object-cover md:mt-[-250px]"
             />
           </div>
         </section>

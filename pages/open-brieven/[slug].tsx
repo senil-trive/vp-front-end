@@ -51,7 +51,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     );
     // ${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*.*&filter[status][_eq]=published
     const lettersReq = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*.*.*&filter[status][_eq]=published`,
+      `${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*.*&filter[status][_eq]=published`,
       {
         method: "GET",
         headers: {

@@ -164,7 +164,7 @@ export default function ZeroResponsesPage({
                         fullHeight={false}
                         gender={item.user_gender}
                         age={item.user_age}
-                        authorType={item.user_name}
+                        name={item.user_name}
                         postDate={new Date(item.date_created)}
                         tags={
                           item.categories?.map(

@@ -429,7 +429,7 @@ export const getPostDetail = async (slug: string) => {
 export const getForumOverviewPageData = async () => {
   // page forum overiew ${ENDPOINTS.COLLECTIONS}/forum_overview_page?fields=*.*.*
   return await fetch(
-    `${ENDPOINTS.COLLECTIONS}/forum_overview_page?fields=*.*.*`,
+    `${ENDPOINTS.COLLECTIONS}/forum_overview_page?fields=*.*.*.*`,
     {
       method: "GET",
       headers: {

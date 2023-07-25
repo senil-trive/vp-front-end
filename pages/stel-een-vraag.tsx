@@ -1,57 +1,34 @@
-import { colors, Container, Grid } from "@mui/material";
-import { Hero, Pagination } from "../components/layout";
-import { H4, H2, P, TitleWithHighlights } from "../components/typography";
-import React, { useEffect, useState, ChangeEvent } from "react";
-import {
-  getContentTags,
-  getForumOverviewPageData,
-  getForumPosts,
-} from "../utils/api";
-
+import { Container, Grid } from "@mui/material";
+import { Hero } from "../components/layout";
+import { H2, H3, P, TitleWithHighlights } from "../components/typography";
+import React, { useState } from "react";
+import { getForumOverviewPageData } from "../utils/api";
 import Button from "../components/buttons/Button";
-import Section from "../components/layout/Section/Section";
-import Dropdown from "../components/form/Dropdown/Dropdown";
-import { GENDERS } from "../constants/genders";
-import { CircleSpinner } from "react-spinners-kit";
-import CollectionSearchBar from "../components/form/CollectionSearchBar/CollectionSearchBar";
 import { ForumPageProps } from "../types/pageTypes";
-import ForumPost from "../components/content-types/ForumPost/ForumPost";
 import { ForumRequestType } from "../types/forumrequestType";
-import { postVolunteerApplication } from "../utils/api";
-import Link from "next/link";
-import { POST_PER_PAGE } from "../constants/app-configs";
 import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
-import SortBar from "../components/form/SortBar/SortBar";
-import TagList from "../components/buttons/TagList/TagList";
 import parseImageURL from "../utils/parseImageURL";
-import ChevronRight from "../components/icons/ChevronRight/ChevronRight";
-import Image from "next/image";
 import Input from "../components/form/Input/Input";
-import SearchIcon from "../components/icons/SearchIcon/SearchIcon";
 import { useForm } from "react-hook-form";
-import TextArea from "../components/form/TextArea/TextArea2";
-import Upload from "../components/form/Upload/Upload";
+
 import { HeroBannerWrapper } from "../styles/global.styled";
 import { StyledForm } from "../styles/CommonFormWrapper.styles";
+import TextArea from "../components/form/TextArea/TextArea";
+import Dropdown from "../components/form/Dropdown/Dropdown";
+import Image from "next/image";
+import {
+  ForumRulesWrapper,
+  HeroButtonWrapper,
+} from "../styles/kinderen/index.styles";
 
 export const getServerSideProps = async () => {
   try {
     const pageReq = await getForumOverviewPageData();
-    const tagsReq = await getContentTags();
-    const forumReq = await getForumPosts({
-      postPerPage: POST_PER_PAGE,
-      meta: "filter_count",
-    });
-
     const pageRes = await pageReq.json();
-    const forumRes = await forumReq.json();
-    const tagsRes = await tagsReq.json();
+
     return {
       props: {
         pageData: pageRes.data || null,
-        forumData: forumRes.data || null,
-        totalPosts: forumRes.meta?.filter_count || null,
-        tags: tagsRes.data || null,
       },
     };
   } catch (error) {
@@ -65,21 +42,8 @@ export const getServerSideProps = async () => {
   }
 };
 
-export default function Vraag({
-  pageData,
-  forumData,
-  totalPosts,
-  tags,
-}: ForumPageProps) {
-  const [posts, setPosts] = useState(forumData);
+export default function Vraag({ pageData }: ForumPageProps) {
   const [isLoading, setIsLoading] = useState(false);
-  const [totalCount, setTotalCount] = useState(totalPosts);
-  const [selectedTag, setSelectedTag] = useState<string>("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [search, setSearch] = useState("");
-  const [sort, setSort] = useState("");
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const {
@@ -91,7 +55,7 @@ export default function Vraag({
   const submitForm = async (data: ForumRequestType) => {
     setIsLoading(true);
     try {
-      await postVolunteerApplication(data);
+      // await postVolunteerApplication(data);
       setIsSubmitted(true);
     } catch (error) {
       setIsSubmitted(false);
@@ -99,57 +63,8 @@ export default function Vraag({
 
     setIsLoading(false);
   };
-  const changePage = (index: number) => {
-    if (index <= 1) {
-      setCurrentPage(1);
-    } else {
-      setCurrentPage(index);
-    }
-  };
 
-  const handleSearch = (x: any) => {
-    console.log(x);
-    setSearch(x.target.value);
-    setCurrentPage(1);
-  };
-
-  const handleSort = (x: string) => {
-    setSort(x);
-  };
-
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files && e.target.files[0];
-    setSelectedFile(file || null);
-  };
-
-  useEffect(() => {
-    const getPaginatedPost = async () => {
-      setIsLoading(true);
-      try {
-        const req = await getForumPosts({
-          postPerPage: POST_PER_PAGE,
-          page: currentPage,
-          search,
-          sort,
-          meta: "filter_count",
-          filter:
-            selectedTag.length > 0
-              ? `filter[categories][categories_id][id][_eq]=${selectedTag}`
-              : ``,
-        });
-        const res = await req.json();
-
-        setPosts(res.data ?? []);
-        setTotalCount(res?.meta?.filter_count || 0);
-      } catch (error) {
-        console.log(error);
-      }
-
-      setIsLoading(false);
-    };
-
-    getPaginatedPost();
-  }, [currentPage, search, sort, selectedTag]);
+  console.log(pageData);
   return (
     <PageWrapper
       seo={{
@@ -165,7 +80,7 @@ export default function Vraag({
     >
       <Hero
         center
-        imageUrl={"/header_forum.png"}
+        imageUrl={parseImageURL(pageData?.message_hero_image?.id)}
         style={{
           minHeight: 555,
           position: "relative",
@@ -175,33 +90,28 @@ export default function Vraag({
         <HeroBannerWrapper className="stel-een-vraag">
           <div className="title-wrap max-w-4xl">
             <TitleWithHighlights
-              text={pageData?.page_title ?? ""}
+              text={pageData?.message_hero_title ?? ""}
               color="white"
               className="title mb-[10px]"
             />
             <P color="white" variant="light" className="subtitle mb-[24px]">
-              {pageData?.page_subtitle}
+              {pageData?.message_hero_subtitle}
             </P>
-            <div className="flex md:justify-center">
+            <HeroButtonWrapper className="flex md:justify-center">
               <Button
-                variant="white"
+                variant="infoReversed"
                 filled={false}
-                href="/ik-wil-een-buddy"
-                style={{
-                  fontSize: "18px",
-                  fontWeight: "300",
-                  border: "1px solid #fff",
-                }}
-                className="w-fit p-[20px] leading-[160%] md:py-[16px] md:px-[50px] md:w-auto"
+                href={pageData?.message_hero_button_url}
+                className="w-fit px-[40px] text-[18px] font-[400] bg-[transparent] py-[40px] md:py-[0] border-[#fff] text-[#fff] hover:bg-[#06D6A0] hover:border-none md:w-auto"
               >
-                {pageData?.chat_button_label}
+                {pageData?.message_hero_button_title}
               </Button>
-            </div>
+            </HeroButtonWrapper>
           </div>
         </HeroBannerWrapper>
       </Hero>
       <main style={{ marginBottom: "80px" }}>
-        <Container className="mb-[80px] mt-[-140px] md:mt-[-79px] relative md:mb-[120px] max-w-[1118px]">
+        <Container className="mb-[80px] mt-[-140px] md:mt-[-79px] relative md:mb-[120px] max-w-[1385px]">
           <div className="relative h-[100%]">
             <StyledForm>
               {!isSubmitted ? (
@@ -210,89 +120,89 @@ export default function Vraag({
                   onSubmit={handleSubmit(submitForm)}
                 >
                   <Grid container spacing="33px" className="form-wrapper">
-                    <Grid item xs={12} md={4}>
+                    <Grid item xs={12} lg={12}>
+                      <H3 className="text-[#fff]">
+                        {pageData?.form_title}
+                        <Image
+                          src={"/note.svg"}
+                          width={40}
+                          height={40}
+                          alt={"Heading icon"}
+                          objectFit="contain"
+                          className="pl-1 inline float-right absolute"
+                        />
+                      </H3>
+                      <P className="text-[#fff]">{pageData?.form_subtitle}</P>
+                    </Grid>
+
+                    <Grid item xs={12} md={3}>
                       <Input
                         label="Voornaam"
                         required
-                        name="Je naam..."
-                        placeholder="Je naam..."
+                        name="user_name"
+                        placeholder="Jouw voornaam..."
                         register={register}
-                        hasError={!!errors.first_name}
-                        helperText={errors.first_name && "Vul je voornaam in"}
+                        hasError={!!errors.user_name}
+                        helperText={errors.user_name && "Vul je voornaam in"}
                       />
                     </Grid>
-                    <Grid item xs={12} md={4}>
-                      <Input
-                        label="Leeftijd"
+                    <Grid item xs={12} md={3}>
+                      <Dropdown
+                        options={[]}
                         required
-                        name="Jouw leeftijd..."
-                        placeholder="Jouw leeftijd..."
+                        label="Thema"
+                        name="thema"
                         register={register}
-                        hasError={!!errors.last_name}
-                        helperText={errors.last_name && "Vul je achternaam in"}
+                        placeholder="Het thema..."
+                        helperText={
+                          !!errors?.thema
+                            ? "selecteer alstublieft een optie"
+                            : ""
+                        }
+                        hasError={!!errors?.thema}
                       />
                     </Grid>
-                    <Grid item xs={12} md={4}>
+                    <Grid item xs={12} md={3}>
                       <Input
                         label="E-mail"
                         required
-                        name="Je e-mailadres..."
-                        placeholder="Je e-mailadres..."
+                        name="email"
+                        placeholder="Jouw email..."
                         register={register}
-                        hasError={!!errors.last_name}
-                        helperText={errors.last_name && "Vul je achternaam in"}
+                        hasError={!!errors.email}
+                        helperText={errors.email && "Vul je email in"}
                       />
                     </Grid>
-                    <Grid item xs={12} md={4}>
+                    <Grid item xs={12} md={3}>
                       <Input
                         label="Woonplaats"
                         required
-                        name="Je e-mailadres..."
-                        placeholder="Je woonplaats..."
+                        name="residence"
+                        placeholder="Jouw woonplaats..."
                         register={register}
-                        hasError={!!errors.last_name}
-                        helperText={errors.last_name && "Vul je achternaam in"}
+                        hasError={!!errors.residence}
+                        helperText={errors.residence && "Vul je woonplaats in"}
                       />
                     </Grid>
-                    <Grid item xs={12} md={4}>
+                    <Grid item xs={12}>
                       <Input
-                        label="Geslacht"
-                        type="email"
-                        required
-                        name="email"
-                        placeholder="Jouw geslacht..."
-                        register={register}
-                        hasError={!!errors.email}
-                        helperText={errors.email && "Vul je e-mail adres in"}
-                      />
-                    </Grid>
-                    <Grid item xs={12} md={4}>
-                      <Input
-                        label="Thema"
+                        label="Bericht titel"
                         type="text"
                         required
-                        name="city"
+                        name="title"
                         placeholder="Thema..."
                         register={register}
-                        hasError={!!errors.city}
-                        helperText={errors.city && "Vul je woonplaats in"}
+                        hasError={!!errors.title}
+                        helperText={errors.title && "Vul je bericht titel in"}
                       />
                     </Grid>
-
-                    <Grid item xs={12}>
-                      <Upload
-                        label="Upload bestand"
-                        name="file"
-                        onChange={handleFileChange}
-                      />
-                    </Grid>
-
                     <Grid item xs={12}>
                       <TextArea
-                        label="Mijn vraag"
+                        label="Bericht"
                         name="content"
-                        placeholder="Vul hier jouw vraag in..."
+                        placeholder="Jouw bericht..."
                         required
+                        rows={5}
                         register={register}
                         hasError={!!errors.content}
                         helperText={
@@ -302,22 +212,17 @@ export default function Vraag({
                     </Grid>
 
                     <Grid item xs={12}>
-                      {/* <Grid item xs={12}>
-                        <P variant="light" style={{ color: "#fff" }}>
-                          * Verplichte velden
-                        </P>
-                      </Grid> */}
                       <Grid item xs={12}>
                         <Button
                           loading={isLoading}
-                          disabled={isSubmitted}
-                          className="w-[100] bg-[#fff] text-[#FF971D] text-[18px] font-[400]"
+                          // disabled={isSubmitted}
+                          className="forum_act w-[100] bg-[#fff] text-[#FF971D] text-[18px] font-[400]"
                         >
                           {isLoading && "Bezig..."}
                           {isSubmitted && "Verzonden"}
                           {!isLoading &&
                             !isSubmitted &&
-                            "ja, ik wil mijn vraag plaatsen"}
+                            "Ja, ik wil mijn bericht plaatsen"}
                         </Button>
                       </Grid>
                     </Grid>
@@ -332,6 +237,20 @@ export default function Vraag({
             </StyledForm>
           </div>
         </Container>
+        <ForumRulesWrapper>
+          <Container className="max-w-[1385px]">
+            <H3 style={{ fontFamily: "Fjalla One" }}>
+              {pageData?.forum_rules_title}
+            </H3>
+            <div
+              style={{ fontFamily: "Avenir" }}
+              dangerouslySetInnerHTML={{
+                __html: pageData?.forum_rules_content,
+              }}
+              className="forum_rules"
+            />
+          </Container>
+        </ForumRulesWrapper>
       </main>
     </PageWrapper>
   );
