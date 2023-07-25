@@ -50,9 +50,9 @@ export default function Vraag({ pageData }: ForumPageProps) {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ForumRequestType>();
+  } = useForm<any>();
 
-  const submitForm = async (data: ForumRequestType) => {
+  const submitForm = async (data: any) => {
     setIsLoading(true);
     try {
       // await postVolunteerApplication(data);
