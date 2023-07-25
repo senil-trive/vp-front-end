@@ -45,39 +45,14 @@ const StyledForumPost = styled.article<styledProps>`
   // }
 
   &:hover {
-    --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
-      0 4px 6px -4px rgb(0 0 0 / 0.1) !important;
-    --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color),
-      0 4px 6px -4px var(--tw-shadow-color) !important;
-    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
-      var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
-
-    background-color: white;
-    // a {
-    //   background-color: ${({ theme }) => theme.colors.secondary.normal};
-    //   border: 0;
-    //   color: white;
-    // }
     header {
       p,
       h4 {
       }
     }
     .forum-tag {
-      background: #006ef7 !important;
     }
-    .content {
-      .forum-tags {
-        span {
-          background: ${({ theme }) => theme.colors.secondary.normal};
-          border: none;
-          color: white;
-          font-weight: 400;
-          font-size: 18px;
-          font-family: "Fjalla One";
-        }
-      }
-    }
+
     footer {
     }
   }
