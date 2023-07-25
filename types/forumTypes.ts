@@ -20,6 +20,7 @@ export type ForumPostType = {
   categories?: { categories_id: CategoryType }[];
   user_image?: { id: string };
   authorType?: string;
+  name?: string;
 };
 
 export type ForumCommentType = {
