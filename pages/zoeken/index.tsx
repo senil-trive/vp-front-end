@@ -108,12 +108,13 @@ export default function Search() {
       }}
     >
       <Hero
-        imageUrl={parseImageURL(undefined, 1080)}
         center
+        imageUrl={"/Zoeken-main.png"}
         style={{
           minHeight: 548,
           position: "relative",
         }}
+        mbgn={"/Zoeken-mob.png"}
       >
         <HeroBannerWrapper className="zoeken-page">
           <div className="title-wrap max-w-4xl">
@@ -122,15 +123,19 @@ export default function Search() {
                 posts?.length + forumPosts?.length + letters?.length
               } resultaten gevonden`}
               color="white"
-              style={{ fontFamily: "Fjalla One !important" }}
+              style={{
+                fontFamily: "Fjalla One !important",
+                fontSize: "80px",
+                fontWeight: "400",
+                marginBottom: "34px",
+              }}
               className="title"
             />
             <TextWithHighlights
               color="white"
-              style={{ fontFamily: "Fjalla One !important" }}
               variant="light"
-              text={`Je hebt gezocht op "${q}"`}
-              textToHighlight={{ word: `"${q}"`, color: "#3FC7B4" }}
+              text={`Je hebt gezocht op 'zoekterm'`}
+              textToHighlight={{ word: `'zoekterm'`, color: "#3FC7B4" }}
               className="search"
             />
           </div>
@@ -139,15 +144,31 @@ export default function Search() {
       <main style={{ marginBottom: "80px" }}>
         <div
           style={{
-            marginBottom: 32,
+            marginBottom: 0,
             transform: "translateY(calc(-50% - 24px))",
           }}
         >
           <ContainerWrapper className="lg-container px-[0]">
             <SearchBarWrapper
               prefix={
-                <H4 className="text-[24px] font-[400] leading-[120%]">
-                  Gebruik ander zoekwoord <span className="hand-icon">👉🏾</span>
+                <H4
+                  className="text-[24px] font-[400] leading-[120%]"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "4px",
+                  }}
+                >
+                  Gebruik ander zoekwoord{" "}
+                  <span
+                    style={{
+                      marginTop: "-6px",
+                      width: "30px",
+                    }}
+                    className="hand-icon"
+                  >
+                    <img src="/Onderwerp.png" />
+                  </span>
                 </H4>
               }
             />
@@ -167,7 +188,33 @@ export default function Search() {
         >
           <Grid container spacing={"22px"}>
             <Grid item xs={12} md={4} className="cardHeight">
-              {forumPosts.length === 1 ? (
+              {posts.length === 1 ? (
+                <div className="mt-[-15px]">
+                  <MasonryGrid
+                    feed={posts.map((item) => ({
+                      id: `blog-${uuidv4()}`,
+                      type: "blog",
+                      width: 1,
+                      content: { ...item },
+                    }))}
+                    className="zoeken-blog"
+                  />
+                </div>
+              ) : (
+                <SearchResultItem
+                  colorVariant={1}
+                  amount={posts?.length}
+                  resultTitleSuffix={`in pagina's gevonden`}
+                  list={posts?.map((post) => ({
+                    name: post.title,
+                    link: `/verhalen/${post.slug}`,
+                  }))}
+                  searchRef={blogRef}
+                />
+              )}
+            </Grid>
+            <Grid item xs={12} md={4} className="cardHeight">
+              {forumPosts.length == 1 ? (
                 <div id="zoeken-forum">
                   <Link href={`/forum/${forumPosts[0].slug}`}>
                     <ForumPost
@@ -195,6 +242,8 @@ export default function Search() {
               ) : (
                 <SearchResultItem
                   amount={forumPosts?.length}
+                  suffix={true}
+                  colorVariant={2}
                   resultTitleSuffix={` in ons Forum`}
                   list={forumPosts?.map((post) => ({
                     name: truncate(post.content, 120),
@@ -205,41 +254,16 @@ export default function Search() {
               )}
             </Grid>
             <Grid item xs={12} md={4} className="cardHeight">
-              {posts.length === 1 ? (
-                <div className="mt-[-15px]">
-                  <MasonryGrid
-                    feed={posts.map((item) => ({
-                      id: `blog-${uuidv4()}`,
-                      type: "blog",
-                      width: 1,
-                      content: { ...item },
-                    }))}
-                    className="zoeken-blog"
-                  />
-                </div>
-              ) : (
-                <SearchResultItem
-                  colorVariant={2}
-                  amount={posts?.length}
-                  resultTitleSuffix={` in Blogs en Vlogs`}
-                  list={posts?.map((post) => ({
-                    name: post.title,
-                    link: `/verhalen/${post.slug}`,
-                  }))}
-                  searchRef={blogRef}
-                />
-              )}
-            </Grid>
-            <Grid item xs={12} md={4} className="cardHeight">
-              {letters.length === 1 ? (
+              {letters.length != 1 ? (
                 <div id="zoeken-letter">
                   <BriefItem
-                    key={letters[0].id}
-                    title={letters[0].title}
-                    content={letters[0].description}
-                    imgSrc={parseImageURL(letters[0].image?.id)}
-                    fileSrc={`/open-brieven/${letters[0].slug}`}
-                    bg={letters[0].bg_color}
+                    key={letters[0]?.id}
+                    category="Thema"
+                    title={letters[0]?.title}
+                    content={letters[0]?.description}
+                    imgSrc={parseImageURL(letters[0]?.image?.id)}
+                    fileSrc={`/open-brieven/${letters[0]?.slug}`}
+                    bg={letters[0]?.bg_color}
                     imgHeight={180}
                   />
                 </div>

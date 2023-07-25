@@ -426,6 +426,7 @@ p {
   }
   .header-banner-text {
     display: flex;
+    align-items: center;
   }
 
   .inst-post,
