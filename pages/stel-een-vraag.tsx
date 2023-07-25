@@ -45,7 +45,7 @@ export const getServerSideProps = async () => {
 export default function Vraag({ pageData }: ForumPageProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-
+  console.log(pageData);
   const {
     register,
     handleSubmit,
