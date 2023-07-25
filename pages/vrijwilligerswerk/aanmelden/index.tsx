@@ -62,10 +62,10 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
     formState: { errors },
   } = useForm<VolunteerRequestType>();
 
-  const submitForm = async (data: VolunteerRequestType) => {
+  const submitForm = async (data: VolunteerRequestType | any) => {
     setIsLoading(true);
     try {
-      await postVolunteerApplication(data);
+      // await postVolunteerApplication(data);
       setIsSubmitted(true);
     } catch (error) {
       setIsSubmitted(false);
