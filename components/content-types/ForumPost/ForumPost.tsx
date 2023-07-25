@@ -10,7 +10,7 @@ import parseImageURL from "../../../utils/parseImageURL";
 import { H4, P } from "../../typography";
 
 type Props = {
-  name: string;
+  name?: string;
   gender: string;
   age: string;
   authorType?: string;
