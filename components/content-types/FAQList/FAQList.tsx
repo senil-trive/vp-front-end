@@ -30,10 +30,10 @@ export default function FAQList({
     if (onLoadMore) onLoadMore();
   };
   return (
-    <div>
+    <div className="hidden sm:block">
       <FAQListWrapper
-        className="my-[40px] md:mt-[80px] md:text-center"
-        style={{ marginBottom: showLoadMore ? 56 : 80 }}
+        className="md:text-center mb-"
+        style={{ marginBottom: showLoadMore ? 56 : 0 }}
       >
         {!!title && (
           <Container maxWidth={containerWidth}>
@@ -50,7 +50,7 @@ export default function FAQList({
         )}
 
         <Container maxWidth={containerWidth}>
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-4">
             {items?.map((faq: FAQ) => (
               <FAQItem
                 id={faq.id}
