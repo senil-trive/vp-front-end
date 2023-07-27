@@ -6,7 +6,7 @@ type Props = React.HtmlHTMLAttributes<HTMLDivElement> & {
 };
 
 const StyledFooter = styled.footer<{ hasPadding: boolean }>`
-  padding: 32px 24px;
+  padding: 32px;
 `;
 
 export default function CardFooter({

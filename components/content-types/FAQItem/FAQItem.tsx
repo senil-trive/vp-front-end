@@ -13,6 +13,7 @@ interface FAQItemProps extends Partial<FAQ> {
 
 const StyleFaq = styled.div`
   .faq-title {
+    font-size: 26px;
     font-family: "Fjalla One" !important;
     font-style: normal;
   }
@@ -63,8 +64,8 @@ const FAQItem: React.FC<FAQItemProps> = ({
   return (
     <StyleFaq
       className={`cursor-pointer p-[25px] md:pl-[61px] md:p-[42px] rounded-lg ${
-        isSelected ? "bg-[#FE517E]" : "bg-[#FFECF1]"
-      } hover:bg-[#FE517E]`}
+        isSelected ? "bg-[#3FC7B4]" : "bg-[#3fc7b440]"
+      } hover:bg-[#3FC7B4]`}
       onClick={handelSelect}
     >
       <div className="flex items-center justify-between  text-left">
@@ -84,7 +85,7 @@ const FAQItem: React.FC<FAQItemProps> = ({
       </div>
 
       <div
-        className={`description text-left ${isSelected ? "visible mt-4" : ""}`}
+        className={`description text-left ${isSelected ? "visible" : ""}`}
         style={{ color: "#fff" }}
       >
         {parseHTMLtoReact(description ?? "")}

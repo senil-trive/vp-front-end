@@ -2,9 +2,14 @@ import Image from "next/image";
 import React from "react";
 import Button from "../../buttons/Button";
 import Card from "../../card/Card";
+import styled from "styled-components";
 import CardFooter from "../../card/CardFooter/CardFooter";
 import CardHeader from "../../card/CardHeader/CardHeader";
 import { H3, P } from "../../typography";
+
+const DescriptionText = styled.p`
+  margin-bottom: 0;
+`;
 
 const CommonDetailCard = ({
   title,
@@ -43,13 +48,15 @@ const CommonDetailCard = ({
               // width={80}
               // height={80}
               fill
-              className="left-icon"
+              className="left-icon mr-6"
             />
           )}
-          <H3 className="title">{title}</H3>
+          <H3 className="title mt-0">{title}</H3>
         </div>
         {typeof description === "string" ? (
-          <P className="description">{description}</P>
+          <DescriptionText className="description">
+            {description}
+          </DescriptionText>
         ) : (
           <div className="description">{description}</div>
         )}
