@@ -116,7 +116,7 @@ const TrainingDatesForm = ({
             {VOLUNTEERTRAININGDATES.map((item) => (
               <Grid item xs={12} className="items-center flex" key={item}>
                 <InputCheckbox
-                  name="training_dates"
+                  name="training_date"
                   label={"Basistraining op maandag 20 augustus om 20:00 uur"}
                   checked={trainingDate === item}
                   setChecked={setTrainingDates}

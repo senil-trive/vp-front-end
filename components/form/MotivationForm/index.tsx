@@ -113,7 +113,7 @@ const MotivationForm = ({
             <Grid item xs={12}>
               <TextArea
                 label="waarom wil je vrijwilliger worden bij Villa Pinedo? Waarom spreekt het jou aan en past het bij jou?"
-                name="volunteeratvillapinedo"
+                name="volunteer_at_villapinedo"
                 placeholder="Jouw antwoord..."
                 required
                 register={register}
@@ -127,7 +127,7 @@ const MotivationForm = ({
             <Grid item xs={12}>
               <TextArea
                 label="Hoe heb je de scheiding van je ouders beleefd? Wat zijn jouw ervaringen?"
-                name="yourexperiences"
+                name="your_experiences"
                 placeholder="Jouw antwoord..."
                 required
                 register={register}
@@ -141,7 +141,7 @@ const MotivationForm = ({
             <Grid item xs={12}>
               <TextArea
                 label="Waarom is het juist nu de tijd voor jou om je in te zetten als vrijwilliger voor kinderen met gescheiden ouders?"
-                name="volunteerforchildren"
+                name="volunteer_for_children"
                 placeholder="Jouw antwoord..."
                 required
                 register={register}

@@ -235,7 +235,7 @@ const AboutVolunteerForm = ({
               <Grid item xs={12} md={4}>
                 <Input
                   label="weet van?"
-                  name="know_from"
+                  name="other_reference_from"
                   required
                   hasError={!!errors.know_from}
                   register={register}
