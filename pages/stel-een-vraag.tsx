@@ -2,7 +2,11 @@ import { Container, Grid } from "@mui/material";
 import { Hero } from "../components/layout";
 import { H2, H3, P, TitleWithHighlights } from "../components/typography";
 import React, { useState } from "react";
-import { getForumOverviewPageData } from "../utils/api";
+import {
+  getForumOverviewPageData,
+  postForum,
+  postVolunteerApplication,
+} from "../utils/api";
 import Button from "../components/buttons/Button";
 import { ForumPageProps } from "../types/pageTypes";
 import { ForumRequestType } from "../types/forumrequestType";
@@ -20,6 +24,7 @@ import {
   ForumRulesWrapper,
   HeroButtonWrapper,
 } from "../styles/kinderen/index.styles";
+import { THEMA } from "../constants/thema";
 
 export const getServerSideProps = async () => {
   try {
@@ -53,9 +58,10 @@ export default function Vraag({ pageData }: ForumPageProps) {
   } = useForm<any>();
 
   const submitForm = async (data: any) => {
+    console.log(data);
     setIsLoading(true);
     try {
-      // await postVolunteerApplication(data);
+      await postForum(data);
       setIsSubmitted(true);
     } catch (error) {
       setIsSubmitted(false);
@@ -82,7 +88,7 @@ export default function Vraag({ pageData }: ForumPageProps) {
         center
         imageUrl={parseImageURL(pageData?.message_hero_image?.id)}
         style={{
-          minHeight: 555,
+          minHeight: 656,
           position: "relative",
         }}
         mobileImageHeight={564}
@@ -111,7 +117,7 @@ export default function Vraag({ pageData }: ForumPageProps) {
         </HeroBannerWrapper>
       </Hero>
       <main style={{ marginBottom: "80px" }}>
-        <Container className="mb-[80px] mt-[-140px] md:mt-[-79px] relative md:mb-[120px] max-w-[1385px]">
+        <Container className="mb-[80px] mt-[-105px] md:mt-[-135px] relative md:mb-[120px] max-w-[1385px]">
           <div className="relative h-[100%]">
             <StyledForm>
               {!isSubmitted ? (
@@ -148,7 +154,7 @@ export default function Vraag({ pageData }: ForumPageProps) {
                     </Grid>
                     <Grid item xs={12} md={3}>
                       <Dropdown
-                        options={[]}
+                        options={THEMA}
                         required
                         label="Thema"
                         name="thema"
@@ -166,11 +172,11 @@ export default function Vraag({ pageData }: ForumPageProps) {
                       <Input
                         label="E-mail"
                         required
-                        name="email"
+                        name="user_email"
                         placeholder="Jouw email..."
                         register={register}
-                        hasError={!!errors.email}
-                        helperText={errors.email && "Vul je email in"}
+                        hasError={!!errors.user_email}
+                        helperText={errors.user_email && "Vul je email in"}
                       />
                     </Grid>
                     <Grid item xs={12} md={3}>
@@ -190,7 +196,7 @@ export default function Vraag({ pageData }: ForumPageProps) {
                         type="text"
                         required
                         name="title"
-                        placeholder="Thema..."
+                        placeholder="De titel van jouw bericht..."
                         register={register}
                         hasError={!!errors.title}
                         helperText={errors.title && "Vul je bericht titel in"}
@@ -218,11 +224,11 @@ export default function Vraag({ pageData }: ForumPageProps) {
                           // disabled={isSubmitted}
                           className="forum_act w-[100] bg-[#fff] text-[#FF971D] text-[18px] font-[400]"
                         >
-                          {isLoading && "Bezig..."}
-                          {isSubmitted && "Verzonden"}
-                          {!isLoading &&
-                            !isSubmitted &&
-                            "Ja, ik wil mijn bericht plaatsen"}
+                          {isLoading
+                            ? "Bezig..."
+                            : isSubmitted
+                            ? "Verzonden"
+                            : "Ja, ik wil mijn bericht plaatsen"}
                         </Button>
                       </Grid>
                     </Grid>
@@ -230,8 +236,12 @@ export default function Vraag({ pageData }: ForumPageProps) {
                 </form>
               ) : (
                 <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16 mx-auto">
-                  <H2 variant="bold">Bedankt voor je aanmelding!</H2>
-                  <P>We nemen zo snel mogelijk contact met je op.</P>
+                  <H2 variant="bold" className="text-[#fff]">
+                    Bedankt voor je aanmelding!
+                  </H2>
+                  <P className="text-[#fff]">
+                    We nemen zo snel mogelijk contact met je op.
+                  </P>
                 </div>
               )}
             </StyledForm>
