@@ -91,30 +91,32 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
               <div className="text-left max-w-2xl md:max-w-4xl mt-[-80px] md:mt-[-120px] md:text-center">
                 <TitleWithHighlights
                   text={pageData?.page_title}
+                  style={{ marginBottom: "0px" }}
                   className="text-[#fff] text-[46px] font-[400] md:text-[64px]"
                 />
-                <P className="text-[#fff] text-[20px] leading-[160%] md:text-[18px]">
+                <P
+                  style={{ marginBottom: "18px" }}
+                  className="text-[#fff] text-[20px] leading-[160%] md:text-[18px]"
+                >
                   {pageData?.page_subtitle}
                 </P>
               </div>
-              <div className="hidden md:flex md:mt-[32px]">
+              <div className="hidden md:flex justify-center">
                 <Button
                   variant="success"
-                  className="mr-[31px] mb-[10px] text-[18px] font-[400] bg-[transparent] text-[#fff] border-[#fff] hover:bg-[#fff] hover:text-[#3FC7B4]"
+                  className="mr-[31px] w-auto py-4 px-16  mb-[10px] text-[18px] font-[400] bg-[transparent] text-[#fff] border-[#fff] hover:bg-[#fff] hover:text-[#3FC7B4]"
                   href={pageData?.cta_section_footer_ios_url}
                   target="_blank"
                 >
-                  <FaAppStoreIos size={25} />
-                  App Store
+                  download de buddy app
                 </Button>
                 <Button
                   variant="success"
-                  className="bg-[transparent] text-[18px] font-[400] text-[#fff] border-[#fff] hover:bg-[#fff] hover:text-[#3FC7B4]"
+                  className="bg-[transparent] w-auto py-4 px-16 text-[18px] font-[400] text-[#fff] border-[#fff] hover:bg-[#fff] hover:text-[#3FC7B4]"
                   href={pageData?.cta_section_footer_android_url}
                   target="_blank"
                 >
-                  <FaGooglePlay size={25} />
-                  Google Play
+                  zelf buddy worden
                 </Button>
               </div>
             </div>
@@ -128,7 +130,7 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                     <>
                       {index === 0 && (
                         <InfoCard
-                          variant="blog"
+                          variant="ideal"
                           imageUrl="/buddymedia.png"
                           title={item?.title}
                           description={item?.description}
@@ -138,13 +140,15 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                   flex-col"
                         >
                           <div className="flex justify-center  mt-[20px] md:mt-[auto]">
-                            <Button
-                              variant="secondary"
-                              className="w-[100%] text-[18px] font-[400] bg-[#fff] text-[#FE517E] border-[#fff]"
-                              href={item?.button_url}
-                            >
-                              {item?.button_label}
-                            </Button>
+                            {item?.button_label?.length && (
+                              <Button
+                                variant="secondary"
+                                className="w-[100%] text-[18px] font-[400] bg-[#fff] text-[#FE517E] border-[#fff]"
+                                href={item?.button_url}
+                              >
+                                {item?.button_label}
+                              </Button>
+                            )}
                           </div>
                         </InfoCard>
                       )}
@@ -176,20 +180,20 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
               </div>
             </Container>
           </BuddymediaWrapper>
-          <ReflectiveCardWrapper className="mt-[40px] md:mt-[80px]">
+          <ReflectiveCardWrapper className="mt-[40px] md:mt-[141px]">
             <Container>
               <div className="flex flex-col text-center md:items-center md:justify-center mb-6 md:mb-14">
                 <TitleWithHighlights
-                  text={"ben je al vrijwilliger en zoek je verdieping?"}
+                  text={"waar kan een buddy jou mee helpen?"}
                   headerElement="h3"
                   color="black"
                   className="text-[30px] md:text-[42px] font-[400]"
                 />
-                <P className="max-w-4xl text-[16px] md:text-[18px]">
+                <P className="max-w-7xl text-[16px] md:text-[18px]">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
                   do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                   Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat
+                  laboris nisi ut aliquip ex ea commodo consequat.
                 </P>
               </div>
             </Container>
@@ -222,19 +226,20 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
               </div>
             </Container>
           </ReflectiveCardWrapper>
-          <VideoWrapper className="my-[40px] md:my-[80px]">
+          <VideoWrapper className="my-[136px]">
             <Container>
               <div className="flex flex-col md:items-center md:justify-center mb-6 md:mb-14">
                 <TitleWithHighlights
                   text={
                     "Zij gingen jou voor, luister hieronder naar hun verhaal"
                   }
+                  style={{}}
                   headerElement="h3"
                   color="black"
-                  className="text-[30px] md:text-[42px] font-[400]"
+                  className="text-[30px] max-w-3xl text-center md:text-[42px] font-[400]"
                 />
 
-                <P className="max-w-4xl text-[16px] md:text-[18px]">
+                <P className="max-w-5xl text-[16px] md:text-[18px] text-center">
                   Deze brief is speciaal voor jou: voor kinderen waarvan de
                   ouders uit elkaar gaan of al zijn. Wist je dat 86.000 kinderen
                   per jaar horen dat hun ouders gaan scheiden? Dat is superveel,
@@ -271,13 +276,17 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
             items={pageData?.featured_faqs.slice(0, 3)}
           />
           <Container
-            style={{ marginBottom: 80 }}
-            className="my-[40px] md:my-[80px]"
+            style={{ marginBottom: 145, marginTop: -24 }}
+            className="mt-2 hidden sm:block"
           >
-            <div className="mt-[20px] flex justify-center mb-6 md:mt-14">
+            <div className="mt-[20px] flex justify-center mb-6 md:mt-14 ">
               <Button
                 variant="link"
-                style={{ color: colors.info.normal }}
+                style={{
+                  color: colors.info.normal,
+                  fontSize: "18px",
+                  fontWeight: "400",
+                }}
                 href="/vrijwilligerswerk/faq"
                 className="w-[100%] bg-[#3FC7B4] text-[#fff] no-underline hover:underline"
               >

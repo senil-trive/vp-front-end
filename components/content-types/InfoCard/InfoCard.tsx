@@ -62,16 +62,6 @@ const InfoCard: React.FC<InfoCardType> = ({
                 size="m"
                 position="blNew"
                 className="left-[14px] md:left-[24px]"
-                style={{
-                  backgroundColor:
-                    variant !== undefined
-                      ? `${color[variant]} !important`
-                      : "#FE517E",
-                  borderColor:
-                    variant !== undefined
-                      ? `${color[variant]} !important`
-                      : "#FE517E",
-                }}
               >
                 <>{category}</>
               </Tag>

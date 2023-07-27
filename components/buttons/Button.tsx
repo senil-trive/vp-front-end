@@ -42,7 +42,7 @@ const Style = css<Props>`
   height: 60px;
   border-radius: 12px;
   padding: 16px;
-  border: none !important;
+
   font-weight: bold;
   font-family: ${({ theme }) => theme.fonts.primary};
   font-size: ${({ theme }) => theme.fontSizes.p.mobile};
