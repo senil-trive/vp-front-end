@@ -134,7 +134,7 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                           imageUrl="/buddymedia.png"
                           title={item?.title}
                           description={item?.description}
-                          icon="/handsake.svg"
+                          icon="/eyes.png"
                           category="Thema"
                           className="small-fonts hover:bg-[#FE517E] text-[#fff] h-[100%] flex
                   flex-col"
