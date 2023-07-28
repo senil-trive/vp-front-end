@@ -1,6 +1,5 @@
 import { CategoryType } from "./categoryTypes";
 import { ContentStatus } from "./content-types/Status.type";
-
 export type ForumPostType = {
   id: string;
   date_created: string;
@@ -56,17 +55,11 @@ export type LetterDownloadType = {
 };
 
 export type MotivationType = {
-  id: string;
-  date_created: string;
-  date_updated: string;
-  volunteeratvillapinedo: string;
-  yourexperiences: string;
-  volunteerforchildren: string;
+  volunteer_at_villapinedo: string;
+  your_experiences: string;
+  volunteer_for_children: string;
 };
 export type AboutVolunteerType = {
-  id: string;
-  date_created: string;
-  date_updated: string;
   your_initials: string;
   first_name: string;
   surname: string;
@@ -76,10 +69,8 @@ export type AboutVolunteerType = {
   address: string;
   phone_number: string;
   know_about_us: string;
-  know_from?: string;
+  other_reference_from?: string;
 };
 export type TrainingType = {
-  id: string;
-  date_created: string;
-  date_updated: string;
-} & Record<string, boolean | undefined>;
+  training_date: string;
+};

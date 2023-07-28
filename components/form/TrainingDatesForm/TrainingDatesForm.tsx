@@ -1,25 +1,32 @@
 import { Grid } from "@mui/material";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { MotivationType } from "../../../types/forumTypes";
+import {
+  AboutVolunteerType,
+  MotivationType,
+  TrainingType,
+} from "../../../types/forumTypes";
 import styled from "styled-components";
 import InputCheckbox from "../InputCheckbox/InputCheckbox";
 import Button from "../../buttons/Button";
 import { VOLUNTEERTRAININGDATES } from "../../../constants/volunteer-training-dates";
+import { postVolunteerApplication } from "../../../utils/api";
 
 const TrainingDatesForm = ({
+  setIsSubmitted,
   className,
   step,
   setStep,
-  //   isSubmitted,
-  //   onIsSubmit,
+  aboutVolunteer,
+  volunteerMotivation,
   paddingSize = "md",
 }: {
-  //   isSubmitted?: boolean;
+  aboutVolunteer: AboutVolunteerType;
+  volunteerMotivation: MotivationType;
   className?: string;
   paddingSize?: "sm" | "md";
-  //   onIsSubmit: (x: any) => void;
   step: number;
+  setIsSubmitted: (params: boolean) => void;
   setStep: (param: number) => void;
 }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -29,17 +36,39 @@ const TrainingDatesForm = ({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<MotivationType>();
+  } = useForm<TrainingType>();
 
-  const submitForm = async (data: any) => {
-    // onIsSubmit(data);
+  const submitForm = async (data: TrainingType) => {
+    setIsLoading(true);
+
+    try {
+      await postVolunteerApplication({
+        training_date: trainingDate,
+        ...aboutVolunteer,
+        ...volunteerMotivation,
+      });
+      setIsSubmitted(true);
+    } catch (error) {
+      setIsSubmitted(false);
+    }
+
+    setIsLoading(false);
   };
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [trainingDate, setTrainingDates] = useState("");
+  // const [acceptTAndC, setAcceptTAndC] = useState(false);
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   formState: { errors },
+  // } = useForm<MotivationType>();
 
-  const onSubmit: SubmitHandler<MotivationType> = async (data) => {
-    const checkboxtipsins: HTMLInputElement | null = document.getElementById(
-      "input-check"
-    ) as HTMLInputElement;
-    // data.tips_inspiration_email = checkboxtipsins?.checked;
+  // const submitForm = async (data: any) => {
+  //   // onIsSubmit(data);
+  // };
+
+  const onSubmit: SubmitHandler<TrainingType> = async (data) => {
+    setIsSubmitted(true);
     submitForm(data);
     console.log(errors);
     if (!errors) {
@@ -116,7 +145,7 @@ const TrainingDatesForm = ({
             {VOLUNTEERTRAININGDATES.map((item) => (
               <Grid item xs={12} className="items-center flex" key={item}>
                 <InputCheckbox
-                  name="training_dates"
+                  name="training_date"
                   label={"Basistraining op maandag 20 augustus om 20:00 uur"}
                   checked={trainingDate === item}
                   setChecked={setTrainingDates}

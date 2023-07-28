@@ -1,16 +1,10 @@
-import { FaAppStoreIos, FaGooglePlay } from "react-icons/fa";
-import { H3, P, TitleWithHighlights } from "../components/typography";
-
+import { P, TitleWithHighlights } from "../components/typography";
 import Button from "../components/buttons/Button";
-import CTAItem from "../components/content-types/CTAItem/CTAItem";
 import { Container } from "@mui/material";
-import ContentCarousel from "../components/carousels/ContentCarousel";
 import ENDPOINTS from "../constants/endpoints";
 import FAQList from "../components/content-types/FAQList/FAQList";
 import { Hero } from "../components/layout";
 import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
-import { TEMP_QUOTES } from "../constants/mockData";
-import TextItem from "../components/content-types/TextItem/TextItem";
 import parseImageURL from "../utils/parseImageURL";
 import { useTheme } from "styled-components";
 import {
@@ -33,7 +27,7 @@ export const getServerSideProps = async () => {
 
   try {
     const pageReq = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/buddy_page?fields=featured_faqs.*,featured_stories.*,media_items.*,*`,
+      `${ENDPOINTS.COLLECTIONS}/buddy_page?fields=*.*.*.*.*`,
       {
         method: "GET",
         headers: {
@@ -60,7 +54,7 @@ export const getServerSideProps = async () => {
 
 const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
   const { colors } = useTheme();
-
+  console.log(pageData);
   return (
     <ContainerWrapper className="klets-meet">
       <PageWrapper
@@ -80,7 +74,7 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
         <main>
           <Hero
             center
-            imageUrl={"/kletsmeethead.png"}
+            imageUrl={parseImageURL(pageData?.header_background_image?.id)}
             style={{
               minHeight: 576,
               position: "relative",
@@ -108,7 +102,7 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                   href={pageData?.cta_section_footer_ios_url}
                   target="_blank"
                 >
-                  download de buddy app
+                  {pageData?.header_button_1_label}
                 </Button>
                 <Button
                   variant="success"
@@ -116,7 +110,7 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                   href={pageData?.cta_section_footer_android_url}
                   target="_blank"
                 >
-                  zelf buddy worden
+                  {pageData?.header_button_2_label}
                 </Button>
               </div>
             </div>
@@ -131,10 +125,10 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                       {index === 0 && (
                         <InfoCard
                           variant="ideal"
-                          imageUrl="/buddymedia.png"
+                          imageUrl={parseImageURL(item?.image?.id)}
                           title={item?.title}
                           description={item?.description}
-                          icon="/eyes.png"
+                          icon={parseImageURL(item?.title_right_icon?.id)}
                           category="Thema"
                           className="small-fonts hover:bg-[#FE517E] text-[#fff] h-[100%] flex
                   flex-col"
@@ -155,11 +149,11 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                       {index === 1 && (
                         <InfoCard
                           variant="primary"
-                          imageUrl="/buddyappmedia.png"
+                          imageUrl={parseImageURL(item?.image?.id)}
                           title={item.title}
                           description={item?.description}
                           category="Thema"
-                          icon="/buddyappicon.png"
+                          icon={parseImageURL(item?.title_right_icon?.id)}
                           className="small-fonts mt-[32px] md:mt-[0px] h-[100%] flex
                   flex-col"
                         >

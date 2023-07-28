@@ -71,7 +71,7 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
         }}
       >
         <main>
-          <Hero center>
+          {/* <Hero center>
             <div className="flex flex-col items-center justify-center text-center max-w-2xl my-16">
               <TitleWithHighlights
                 text={pageData?.page_title ?? ""}
@@ -158,7 +158,7 @@ const BuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                 </div>
               </div>
             </Container>
-          </section>
+          </section> */}
 
           <section className="my-[80px] text-center">
             <Container>
