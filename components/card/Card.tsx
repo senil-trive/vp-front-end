@@ -38,7 +38,6 @@ const StyledPost = styled(BaseStyle)`
 `;
 
 const StyledLetter = styled(BaseStyle)`
-  // border-color: ${({ theme }) => theme.colors.info.normal};
   border: none;
   // TODO: this is required to make the home grid rows the same size
   // min-height: 624px;
@@ -55,6 +54,9 @@ const StyledLetter = styled(BaseStyle)`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    a {
+      border: none;
+    }
     &:hover {
       background: #fff !important;
       h3,
@@ -64,6 +66,7 @@ const StyledLetter = styled(BaseStyle)`
       a {
         background: #3fc7b4 !important;
         color: #fff !important;
+        border: none;
       }
     }
   }

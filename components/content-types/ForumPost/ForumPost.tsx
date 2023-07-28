@@ -203,8 +203,6 @@ export default function ForumPost({
         <p className="text-[16px] text-[#fff] md:text-[18px] font-[300]">
           {age?.includes("jaar") ? age : `${age} jaar`}
         </p>
-      </div>
-      <ComponentTag {...props}>
         <div>
           <div className="content text-[16px] md:text-[18px]">
             {tags.length > 0 && (
@@ -228,7 +226,8 @@ export default function ForumPost({
             <div className="custom_forum_tags"> {generateContent()}</div>
           </div>
         </div>
-
+      </div>
+      <ComponentTag {...props}>
         <footer>
           <div>
             <div className="icon-wrapper mr-4">

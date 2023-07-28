@@ -44,7 +44,7 @@ const StyledHeader = styled.header`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 41px;
+    padding: 0px 41px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
 
     > div {
@@ -136,12 +136,12 @@ export default function Header() {
             <SearchBar />
           </div>
         </div>
-        {selected && selected?.children.length > 0 && (
+        {/* {selected && selected?.children.length > 0 && (
           <HeaderSubmenu
             selected={selected?.name}
             categories={selected?.children}
           />
-        )}
+        )} */}
       </div>
       <div className="mobile-menu">
         <div className="inner">

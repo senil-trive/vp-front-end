@@ -35,7 +35,6 @@ const CommonDetailCard = ({
     if (!Child) return;
     return <CardHeader>{Child}</CardHeader>;
   };
-
   return (
     <Card className="card-container" variant={variant}>
       {generateMediaItem()}
@@ -43,10 +42,10 @@ const CommonDetailCard = ({
         <div className="icon-title-wrapper">
           {!!leftIcon && (
             <Image
-              src={leftIcon}
+              src={
+                "https://admin.villapinedo.nl/assets/93587efa-6483-42b7-b78e-d8bee49400bc?width=100"
+              }
               alt={title}
-              // width={80}
-              // height={80}
               fill
               className="left-icon mr-6"
             />
