@@ -16,6 +16,8 @@ import VideoItem from "../components/content-types/VideoItem/VideoItem";
 import { VideoWrapper } from "../styles/Vrjwilligerswerk/VrijwilligerWorden.styles";
 import CommonDetailCard from "../components/content-types/CommonDetailCard/CommonDetailCard";
 import { ContainerWrapper } from "../styles/Vrjwilligerswerk/index.styles";
+import { parseFileURL } from "../utils/parseFileURL";
+import { findIp } from "../utils/findIp";
 
 type BuddyPageProps = {
   pageData: any;
@@ -24,7 +26,6 @@ type BuddyPageProps = {
 
 export const getServerSideProps = async () => {
   // fetch page data from API
-
   try {
     const pageReq = await fetch(
       `${ENDPOINTS.COLLECTIONS}/buddy_page?fields=*.*.*.*.*`,
@@ -54,7 +55,7 @@ export const getServerSideProps = async () => {
 
 const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
   const { colors } = useTheme();
-  console.log(pageData);
+  console.log(findIp(), "isa");
   return (
     <ContainerWrapper className="klets-meet">
       <PageWrapper
@@ -178,43 +179,43 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
             <Container>
               <div className="flex flex-col text-center md:items-center md:justify-center mb-6 md:mb-14">
                 <TitleWithHighlights
-                  text={"waar kan een buddy jou mee helpen?"}
+                  text={pageData?.buddy_help_section_title}
                   headerElement="h3"
                   color="black"
                   className="text-[30px] md:text-[42px] font-[400]"
                 />
                 <P className="max-w-7xl text-[16px] md:text-[18px]">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
+                  {pageData?.buddy_help_section_subtitle}
                 </P>
               </div>
             </Container>
             <Container>
               <div className="container-reflect flex flex-wrap">
                 <CommonDetailCard
-                  leftIcon="/icon1reflect.svg"
-                  title={"jou helpen met lastige vragen te beantwoorden"}
-                  description={
-                    "Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
-                  }
+                  leftIcon={parseImageURL(
+                    pageData?.buddy_help_1_image?.id,
+                    100
+                  )}
+                  title={pageData?.buddy_help_1_title}
+                  description={pageData?.buddy_help_1_description}
                   variant="info"
                 />
                 <CommonDetailCard
-                  leftIcon="/icon2reflect.svg"
-                  title={"zich in jou situatie verplaatsen / adviseren"}
-                  description={
-                    "Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
-                  }
+                  leftIcon={parseImageURL(
+                    pageData?.buddy_help_2_image?.id,
+                    100
+                  )}
+                  title={pageData?.buddy_help_2_title}
+                  description={pageData?.buddy_help_2_description}
                   variant="info"
                 />
                 <CommonDetailCard
-                  leftIcon="/icon3reflect.svg"
-                  title={"luisteren zodat jij je hart kunt luchten"}
-                  description={
-                    "Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore"
-                  }
+                  leftIcon={parseImageURL(
+                    pageData?.buddy_help_3_image?.id,
+                    100
+                  )}
+                  title={pageData?.buddy_help_3_title}
+                  description={pageData?.buddy_help_3_description}
                   variant="info"
                 />
               </div>
@@ -224,9 +225,7 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
             <Container>
               <div className="flex flex-col md:items-center md:justify-center mb-6 md:mb-14">
                 <TitleWithHighlights
-                  text={
-                    "Zij gingen jou voor, luister hieronder naar hun verhaal"
-                  }
+                  text={pageData?.stories_section_title}
                   style={{}}
                   headerElement="h3"
                   color="black"
@@ -234,33 +233,35 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                 />
 
                 <P className="max-w-5xl text-[16px] md:text-[18px] text-center">
-                  Deze brief is speciaal voor jou: voor kinderen waarvan de
-                  ouders uit elkaar gaan of al zijn. Wist je dat 86.000 kinderen
-                  per jaar horen dat hun ouders gaan scheiden? Dat is superveel,
-                  bijna twee voetbalstadions vol.
+                  {pageData?.stories_section_subtitle}
                 </P>
               </div>
             </Container>
             <Container>
               <div className="video-container flex flex-wrap">
-                <VideoItem
-                  title="Wat leer je bij de trainingen?"
-                  poster="/storyposter1.png"
-                  src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                  subtitle="Hier komt een omschrijvende tekst"
-                />
-                <VideoItem
+                {pageData?.featured_stories?.map((feature_stories: any) => (
+                  <VideoItem
+                    key={feature_stories?.title}
+                    title={feature_stories?.title}
+                    poster={parseImageURL(
+                      feature_stories?.video_cover_image?.id
+                    )}
+                    src={parseFileURL(feature_stories?.video_file?.id)}
+                    subtitle={feature_stories.subtitle}
+                  />
+                ))}
+                {/* <VideoItem
                   title="Wat leer je bij de trainingen?"
                   poster="/storyposter2.png"
                   src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
                   subtitle="Hier komt een omschrijvende tekst"
-                />
-                <VideoItem
+                /> */}
+                {/* <VideoItem
                   title="Wat leer je bij de trainingen?"
                   poster="/storyposter3.png"
                   src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
                   subtitle="Hier komt een omschrijvende tekst"
-                />
+                /> */}
               </div>
             </Container>
           </VideoWrapper>
@@ -284,7 +285,7 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                 href="/vrijwilligerswerk/faq"
                 className="w-[100%] bg-[#3FC7B4] text-[#fff] no-underline hover:underline"
               >
-                Meer lezen
+                {pageData?.more_faq_button_title}
               </Button>
             </div>
           </Container>

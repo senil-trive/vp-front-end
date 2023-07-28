@@ -16,32 +16,23 @@ const Wrapper: any = styled.div`
   background-color: #ebfffc;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   display: flex;
-  position: absolute;
+  // position: absolute;
 
   z-index: 999;
   // width: 100%;
   max-width: 1440px;
   border-radius: 8px;
-  top: calc(100% + 25px);
+
   /* width: ${(props: any) =>
     props.selected === "Vrijwilligers" ? "40%" : ""}; */
-  right: ${(props: any) =>
-    props.selected === "Kinderen"
-      ? "calc(100% - 408px)"
-      : props.selected === "Vrijwilligers"
-      ? "calc(100% - 585px)"
-      : ""};
-
+  // right: 0;
+  min-width: 291px;
+  max-width: 500px;
   &:before {
-    left: ${(props: any) =>
-      props.selected === "Kinderen"
-        ? "calc(100% - 109px)"
-        : props.selected === "Vrijwilligers"
-        ? "calc(100% - 50px)"
-        : "0"};
+    left: calc(100% - 50px) !important;
     content: "";
     position: absolute;
-    top: -10px;
+    top: -14px;
 
     border-style: solid;
     border-width: 20px 20px 20px 20px;
@@ -51,6 +42,7 @@ const Wrapper: any = styled.div`
   }
 
   section {
+    width: 100%;
     /* flex: 1; */
     padding: 0 30px;
 
@@ -75,7 +67,8 @@ const Wrapper: any = styled.div`
           padding-bottom: 15px;
         }
 
-        max-width: 220px;
+        max-width: 100%;
+        margin: 0;
         a {
           // font-family: "Avenir";
           font-weight: 300;
@@ -90,7 +83,7 @@ const Wrapper: any = styled.div`
           &:hover {
             background-color: ${({ theme }) => theme.colors.primary.normal};
             padding: 12px;
-            margin: -12px;
+            // margin: -12px;
             border-radius: 8px;
             color: white;
             &:after {
@@ -101,8 +94,9 @@ const Wrapper: any = styled.div`
             color: ${({ theme }) => theme.colors.white.normal};
             background-color: ${({ theme }) => theme.colors.primary.normal};
             padding: 12px;
-            margin: -12px;
+            // margin: -12px;
             border-radius: 8px;
+            width: fit-content;
             color: white;
             &:after {
               content: "  👉🏽";
@@ -116,34 +110,17 @@ const Wrapper: any = styled.div`
       border-right: 1px solid ${({ theme }) => theme.colors.grey.normal};
     }
   }
-  @media (min-width: 1550px) {
-    &:before {
-      left: ${(props: any) =>
-        props.selected === "Kinderen"
-          ? "calc(100% - 80)"
-          : props.selected === "Vrijwilligers"
-          ? "calc(100% - 80px)"
-          : "0"} !important;
-    }
-  }
-  @media (min-width: 1600px) {
-    &:before {
-      left: ${(props: any) =>
-        props.selected === "Kinderen"
-          ? "calc(100% - 80)"
-          : props.selected === "Vrijwilligers"
-          ? "calc(100% - 155px)"
-          : "0"} !important;
-    }
-  }
 `;
-
 export default function HeaderSubmenu({ categories, selected }: Props) {
+  console.log(selected);
   const router = useRouter();
 
   // const [index, setIndex] = useState<string>(0);
   return (
-    <Container maxWidth="xl">
+    <Container
+      maxWidth="xl"
+      style={{ position: "absolute", right: "50px", top: "calc(100% + 25px)" }}
+    >
       <Wrapper selected={selected} className="sub-menu-container-mn">
         {categories.map((category, index) => {
           if (category.status === "published") {

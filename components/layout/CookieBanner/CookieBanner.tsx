@@ -20,6 +20,15 @@ const Wrapper = styled.div`
     gap: 24px;
     margin-top: 32px;
     width: 100%;
+    .rathor_act,
+    .accept_act {
+      color: #fff !important;
+      &:hover {
+        border: 2px solid #fe517e !important;
+        background: transparent;
+        color: #fe517e !important;
+      }
+    }
   }
 `;
 
@@ -92,10 +101,15 @@ export default function CookieBanner() {
           <Button
             variant="secondary"
             onClick={() => setCookie(cookieName, false)}
+            className="rathor_act"
           >
             Liever Niet
           </Button>
-          <Button variant="primary" onClick={() => setCookie(cookieName, true)}>
+          <Button
+            variant="primary"
+            onClick={() => setCookie(cookieName, true)}
+            className="accept_act"
+          >
             Accepteren
           </Button>
         </footer>
