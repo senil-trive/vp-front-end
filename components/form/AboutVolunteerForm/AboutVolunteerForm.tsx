@@ -14,18 +14,15 @@ const AboutVolunteerForm = ({
   className,
   step,
   setStep,
-  //   isSubmitted,
-  //   onIsSubmit,
+  setAboutVolunteer,
   paddingSize = "md",
 }: {
-  //   isSubmitted?: boolean;
+  setAboutVolunteer: (params: AboutVolunteerType) => void;
   className?: string;
   paddingSize?: "sm" | "md";
-  //   onIsSubmit: (x: any) => void;
   step: number;
   setStep: (params: number) => void;
 }) => {
-  const [isLoading, setIsLoading] = useState(false);
   const [knowFrom, setKnowFrom] = useState("");
   const {
     register,
@@ -33,15 +30,11 @@ const AboutVolunteerForm = ({
     formState: { errors },
   } = useForm<AboutVolunteerType>();
 
-  const submitForm = async (data: any) => {
-    console.log(data);
-    // onIsSubmit(data);
+  const submitForm = async (data: AboutVolunteerType) => {
+    setAboutVolunteer({ ...data });
   };
 
   const onSubmit: SubmitHandler<AboutVolunteerType> = async (data) => {
-    const checkboxtipsins: HTMLInputElement | null = document.getElementById(
-      "input-check"
-    ) as HTMLInputElement;
     submitForm(data);
     setStep(step + 1);
   };
@@ -228,7 +221,7 @@ const AboutVolunteerForm = ({
                     : ""
                 }
                 hasError={!!errors.know_about_us}
-                onChange={(e) => setKnowFrom(e)}
+                // onChange={(e) => setKnowFrom(e)}
               />
             </Grid>
             {knowFrom === "Anderen" && (
@@ -237,18 +230,18 @@ const AboutVolunteerForm = ({
                   label="weet van?"
                   name="other_reference_from"
                   required
-                  hasError={!!errors.know_from}
+                  hasError={!!errors.other_reference_from}
                   register={register}
                   placeholder="weet van..."
-                  helperText={!!errors.know_from ? "weet van is verplicht" : ""}
+                  helperText={
+                    !!errors.other_reference_from ? "weet van is verplicht" : ""
+                  }
                 />
               </Grid>
             )}
             <Grid item xs={12}>
               <Button
-                loading={isLoading}
                 variant="infoReversed"
-                //   disabled={isSubmitted}
                 className="bg-[#FE517E] w-[100%] text-center text-[#fff] text-[18px] font-[400]"
               >
                 volgende

@@ -53,27 +53,7 @@ export const getServerSideProps = async () => {
 const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
   pageData,
 }) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<VolunteerRequestType>();
-
-  const submitForm = async (data: VolunteerRequestType | any) => {
-    setIsLoading(true);
-    try {
-      // await postVolunteerApplication(data);
-      setIsSubmitted(true);
-    } catch (error) {
-      setIsSubmitted(false);
-    }
-
-    setIsLoading(false);
-  };
-
+  const [aboutVolunteer, setAboutVolunteer] = useState({});
   return (
     <div>
       <PageWrapper

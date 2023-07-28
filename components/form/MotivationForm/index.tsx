@@ -8,16 +8,15 @@ import Button from "../../buttons/Button";
 
 const MotivationForm = ({
   className,
-  // isSubmitted,
   step,
   setStep,
-  // onIsSubmit,
   paddingSize = "md",
+  setVolunteerMotivation,
 }: {
+  setVolunteerMotivation: (params: MotivationType) => void;
   isSubmitted?: boolean;
   className?: string;
   paddingSize?: "sm" | "md";
-  // onIsSubmit: (x: any) => void;
   step: number;
   setStep: (params: number) => void;
 }) => {
@@ -28,17 +27,12 @@ const MotivationForm = ({
     formState: { errors },
   } = useForm<MotivationType>();
 
-  const submitForm = async (data: any) => {
-    // onIsSubmit(data);
+  const submitForm = async (data: MotivationType) => {
+    setVolunteerMotivation(data);
   };
 
   const onSubmit: SubmitHandler<MotivationType> = async (data) => {
-    const checkboxtipsins: HTMLInputElement | null = document.getElementById(
-      "input-check"
-    ) as HTMLInputElement;
-    // data.tips_inspiration_email = checkboxtipsins?.checked;
     submitForm(data);
-
     setStep(step + 1);
   };
 
@@ -117,9 +111,11 @@ const MotivationForm = ({
                 placeholder="Jouw antwoord..."
                 required
                 register={register}
-                hasError={!!errors.volunteeratvillapinedo}
+                hasError={!!errors.volunteer_at_villapinedo}
                 helperText={
-                  !!errors.volunteeratvillapinedo ? "Dit veld is verplicht" : ""
+                  !!errors.volunteer_at_villapinedo
+                    ? "Dit veld is verplicht"
+                    : ""
                 }
                 rows={5}
               />
@@ -131,9 +127,9 @@ const MotivationForm = ({
                 placeholder="Jouw antwoord..."
                 required
                 register={register}
-                hasError={!!errors.yourexperiences}
+                hasError={!!errors.your_experiences}
                 helperText={
-                  !!errors.yourexperiences ? "Dit veld is verplicht" : ""
+                  !!errors.your_experiences ? "Dit veld is verplicht" : ""
                 }
                 rows={5}
               />
@@ -145,9 +141,9 @@ const MotivationForm = ({
                 placeholder="Jouw antwoord..."
                 required
                 register={register}
-                hasError={!!errors.volunteerforchildren}
+                hasError={!!errors.volunteer_for_children}
                 helperText={
-                  !!errors.volunteerforchildren ? "Dit veld is verplicht" : ""
+                  !!errors.volunteer_for_children ? "Dit veld is verplicht" : ""
                 }
                 rows={5}
               />
