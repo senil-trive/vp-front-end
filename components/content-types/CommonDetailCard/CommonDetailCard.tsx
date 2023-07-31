@@ -41,14 +41,7 @@ const CommonDetailCard = ({
       <CardFooter>
         <div className="icon-title-wrapper">
           {!!leftIcon && (
-            <Image
-              src={
-                "https://admin.villapinedo.nl/assets/93587efa-6483-42b7-b78e-d8bee49400bc?width=100"
-              }
-              alt={title}
-              fill
-              className="left-icon mr-6"
-            />
+            <img className="object-cover" src={leftIcon} alt={title} />
           )}
           <H3 className="title mt-0">{title}</H3>
         </div>

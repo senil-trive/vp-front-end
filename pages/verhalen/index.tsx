@@ -225,40 +225,43 @@ export default function Forum({
             transform: "translateY(calc(-50% - 40px))",
           }}
         >
-          <TagList
-            tags={tags}
-            selected={selectedTag}
-            prefix={
-              <H4
-                style={{
-                  whiteSpace: "nowrap",
-                  display: "flex",
-                  alignItems: "flex-start",
-                  gap: "5px",
-                }}
-              >
-                Onderwerp{" "}
-                <span
+          <Container className="max-w-[1384px]">
+            <TagList
+              tags={tags}
+              selected={selectedTag}
+              prefix={
+                <H4
                   style={{
-                    marginTop: "-6px",
-                    width: "30px",
+                    whiteSpace: "nowrap",
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: "5px",
                   }}
-                  className="hand-icon"
                 >
-                  <img src="/Onderwerp.png" />
-                </span>
-              </H4>
-            }
-            suffix={<ChevronRight />}
-            onSelect={(x: string) => {
-              if (x === selectedTag) {
-                setSelectedTag("");
-              } else {
-                setSelectedTag(x);
+                  Onderwerp{" "}
+                  <span
+                    style={{
+                      marginTop: "-6px",
+                      width: "30px",
+                    }}
+                    className="hand-icon"
+                  >
+                    <img src="/Onderwerp.png" />
+                  </span>
+                </H4>
               }
-            }}
-          />
+              suffix={<ChevronRight />}
+              onSelect={(x: string) => {
+                if (x === selectedTag) {
+                  setSelectedTag("");
+                } else {
+                  setSelectedTag(x);
+                }
+              }}
+            />
+          </Container>
         </div>
+
         {/* 
         <CollectionSearchBar
           quote={pageData?.search_bar_quote ?? ""}
@@ -267,7 +270,7 @@ export default function Forum({
         /> */}
 
         <div style={{ margin: "0px auto" }}>
-          <Container style={{ marginBottom: "0px", maxWidth: "100%" }}>
+          <Container style={{ marginBottom: "0px", maxWidth: "1384px" }}>
             <Grid container>
               <Grid item xs={12} md={9}>
                 <P
