@@ -119,6 +119,9 @@ const SubmitForm = ({
         margin: 6px 0;
       }
     }
+    .comment-form-button {
+      border: none;
+    }
     @media (max-width: 768px) {
       padding: 24px !important;
       &:before {

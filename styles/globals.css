@@ -41,12 +41,12 @@ h4,
 h5,
 h6,
 .font-heading {
-  font-family: "Fjalla One", sans-serif !important;
+  font-family: "Fjalla One" !important;
   text-transform: uppercase;
 }
 
 input {
-  font-family: "Avenir Next Cyr", sans-serif;
+  font-family: "Avenir";
 }
 
 a {
@@ -60,7 +60,7 @@ p {
 
 * {
   box-sizing: border-box;
-  font-family: "Avenir Next Cyr", sans-serif;
+  font-family: "Avenir";
 }
 
 .xmasonry-static {
@@ -143,7 +143,7 @@ p {
 
 .open-brieven-font article footer {
   background: rgb(63, 199, 180) !important;
-  font-family: "Fjalla One", sans-serif;
+  font-family: "Fjalla One";
 }
 
 .open-brieven-font article footer:hover a {
@@ -188,7 +188,7 @@ p {
 .authorin-blog-txt {
   font-weight: 500;
   font-size: 18px !important;
-  font-family: "Avenir Next Cyr", sans-serif !important;
+  font-family: "Avenir" !important;
 }
 
 .text-blogs {
@@ -197,7 +197,7 @@ p {
 }
 
 .header-banner-title div {
-  font-family: "Fjalla One", sans-serif !important;
+  font-family: "Fjalla One" !important;
   font-size: 80px;
   line-height: 94.4px;
 }

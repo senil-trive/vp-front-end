@@ -60,7 +60,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
   pageData,
   lettersData,
 }) => {
-  console.log(pageData);
+  console.log(lettersData);
   return (
     <div>
       <PageWrapper
@@ -106,7 +106,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                   fontStyle: "normal",
                   fontWeight: `300`,
                 }}
-                className="text-center text-[16px] text-[#fff] md:text-[18px] leading-[160%] m-[0]"
+                className="text-center text-[16px] text-[#fff] md:text-[22px] leading-[160%] m-[0]"
               >
                 {pageData?.page_subtitle}
               </P>
@@ -127,6 +127,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                   >
                     <div className="flex justify-center  mt-[20px] md:mt-[auto]">
                       <Button
+                        style={{ fontFamily: "Fjalla One" }}
                         variant="secondary"
                         className="w-[100%] text-[16px] font-[400] bg-[#fff] text-[#FE517E] border-[#fff] hover:bg-[#FE517E] md:text-[18px]"
                         href={`/open-brieven/${pageData?.highlighted_letter?.slug}`}
@@ -154,6 +155,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                   >
                     <div className="flex justify-center mt-[20px] md:mt-[auto]">
                       <Button
+                        style={{ fontFamily: "Fjalla One" }}
                         variant="secondary"
                         className="w-[100%] text-[16px] font-[400] bg-[#fff] text-[#006EF7] border-[#fff] hover:bg-[#006EF7] md:text-[18px]"
                         href={`/open-brieven/${pageData?.highlighted_letter?.slug}`}

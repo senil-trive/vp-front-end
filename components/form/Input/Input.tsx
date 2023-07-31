@@ -93,7 +93,7 @@ const InputWrapper = styled.div<InputStateType>`
       ::placeholder {
         color: #c7c7c7;
         font-weight: 300 !important;
-        font-family: "Avenir Next Cyr", sans-serif !important;
+        font-family: "Avenir Next Cyr" !important;
         opacity: 1;
       }
       &:focus {

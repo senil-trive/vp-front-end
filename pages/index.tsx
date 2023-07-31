@@ -13,6 +13,7 @@ import parseImageURL from "../utils/parseImageURL";
 import { useCallbackWhenReachedBottom } from "../utils/scroll";
 import ChevronRight from "../components/icons/ChevronRight/ChevronRight";
 import TextWithHighlights from "../components/typography/TextWithHighlights";
+import Image from "next/image";
 
 const POST_PER_PAGE = 6;
 export const getServerSideProps = async () => {
@@ -188,12 +189,12 @@ export default function Home({
     >
       <Hero
         center
-        imageUrl={"/home-hero.png"}
+        imageUrl={parseImageURL(pageData?.hero_image?.id)}
         style={{
           minHeight: 649,
           position: "relative",
         }}
-        mbgn={"/Header.png"}
+        mbgn={parseImageURL(pageData?.mobile_hero_image?.id)}
         showTags={showTags}
       >
         <Container>
@@ -204,12 +205,8 @@ export default function Home({
                 <TitleWithHighlights
                   text={pageData?.page_title ?? ""}
                   color="white"
-                  className="text-left leading-[150%] sm:text-[46px] sm:text-center md:leading-[120%] lg:text-[80px] font-light"
-                  style={{
-                    textAlign: "center",
-                  }}
+                  className="text-left items-center leading-[150%] sm:text-[46px] sm:text-center md:leading-[120%] lg:text-[80px] font-light"
                 />
-
                 <TextWithHighlights
                   color="white"
                   variant="light"
@@ -234,18 +231,17 @@ export default function Home({
         >
           <div
             className={
-              "w-[320px] bg-[#3FC7B4] px-[50px] py-[16px] text-white text-[18px] rounded-[12px] cursor-pointer"
+              "w-[320px] bg-[#3FC7B4] px-[20px] flex justify-center md:px-[50px] py-[16px] text-white text-[18px] rounded-[12px] cursor-pointer"
             }
           >
-            Selecteer onderwerp
-            <span
-              style={{
-                marginTop: "-6px",
-              }}
-              className="hand-icon ml-2"
-            >
-              👉🏾
-            </span>
+            {pageData?.tag_select_subject_title}
+            <Image
+              src={parseImageURL(pageData?.thumb_icon?.id)}
+              alt="header icon"
+              width={30}
+              height={30}
+              className="ml-[6px] mt-[-6px] -rotate-90"
+            />
           </div>
         </div>
         <div
@@ -270,17 +266,29 @@ export default function Home({
                   alignItems: "center",
                   gap: "5px",
                 }}
+                className="pr-[20px]"
               >
-                Onderwerp{" "}
                 <span
-                  style={{
-                    marginTop: "-6px",
-                    width: "30px",
-                  }}
-                  className="hand-icon"
+                  style={{ fontFamily: "Fjalla One" }}
+                  className="md:hidden text-[16px] font-[400]"
                 >
-                  <img src="/Onderwerp.png" />
+                  {pageData?.tag_select_subject_title}
                 </span>
+                <span
+                  style={{ fontFamily: "Fjalla One" }}
+                  className="hidden md:block text-[18px] font-[400]"
+                >
+                  {pageData?.tag_subject_title}
+                </span>
+                {/* Onderwerp{" "} */}
+
+                <Image
+                  src={parseImageURL(pageData?.thumb_icon?.id)}
+                  alt="hand_icon"
+                  width={30}
+                  height={30}
+                  className="md:-rotate-90"
+                />
               </H4>
             }
             suffix={<ChevronRight />}
@@ -294,10 +302,10 @@ export default function Home({
 
         <div className="flex items-center justify-center">
           {isLoading && <CircularProgress size={"30px"} />}
-          {isEnd && (
-            <P color="info">
-              Geen posts {posts.length <= 0 ? "" : "meer"} om te tonen
-            </P>
+          {isEnd && posts.length <= 0 ? (
+            <P color="info">{pageData?.loader_post_message}</P>
+          ) : (
+            <P color="info">{pageData?.loader_more_post_message}</P>
           )}
         </div>
       </main>
