@@ -140,7 +140,7 @@ export function MasonryGrid({
 
   return (
     <MasonryGridWrapper>
-      <Container maxWidth="xl" style={{ padding: " 0 13px" }}>
+      <Container className="max-w-[1384px] px-[13px]">
         <div id="mason-grid" className="mason-grid">
           {feed.map((item, index) => {
             const { content } = item;

@@ -144,7 +144,10 @@ export default function TagList({
   const rightArrow = useRef(null);
   const isSelected = (id: string) => selected === id;
   return (
-    <Container maxWidth="xl" style={{ margin: "21px auto", padding: "0 50px" }}>
+    <Container
+      className="max-w-[1384px]"
+      style={{ margin: "21px auto", padding: "0" }}
+    >
       <Wrapper>
         <div
           style={{ display: "block", padding: "0px 5px 0 20px" }}

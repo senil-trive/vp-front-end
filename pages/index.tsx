@@ -221,83 +221,84 @@ export default function Home({
         </Container>
       </Hero>
       <main style={{ marginBottom: "80px" }}>
-        <div
-          className={
-            showTags
-              ? "hidden"
-              : "flex justify-center text-center mt-[-34px] relative mb-[100px] md:hidden"
-          }
-          onClick={() => setShowTags(true)}
-        >
+        <Container className="max-w-[1384px] px-[13px]">
           <div
             className={
-              "w-[320px] bg-[#3FC7B4] px-[20px] flex justify-center md:px-[50px] py-[16px] text-white text-[18px] rounded-[12px] cursor-pointer"
+              showTags
+                ? "hidden"
+                : "flex justify-center text-center mt-[-34px] relative mb-[100px] md:hidden"
+            }
+            onClick={() => setShowTags(true)}
+          >
+            <div
+              className={
+                "w-[320px] bg-[#3FC7B4] px-[20px] flex justify-center md:px-[50px] py-[16px] text-white text-[18px] rounded-[12px] cursor-pointer"
+              }
+            >
+              {pageData?.tag_select_subject_title}
+              <Image
+                src={parseImageURL(pageData?.thumb_icon?.id)}
+                alt="header icon"
+                width={30}
+                height={30}
+                className="ml-[6px] mt-[-6px] -rotate-90"
+              />
+            </div>
+          </div>
+          <div
+            className={
+              showTags
+                ? "mt-[-102px] relative mb-[50px] sm:mb-[48px] sm:mt-[-72px] md:block"
+                : "mt-[-122px] relative mb-[50px] sm:mb-[48px] hidden sm:mt-[-72px] md:block"
             }
           >
-            {pageData?.tag_select_subject_title}
-            <Image
-              src={parseImageURL(pageData?.thumb_icon?.id)}
-              alt="header icon"
-              width={30}
-              height={30}
-              className="ml-[6px] mt-[-6px] -rotate-90"
+            <TagList
+              tags={categories.map((cat) => ({
+                id: cat.id,
+                name: cat.name,
+                status: cat.status,
+              }))}
+              selected={selectedTag}
+              prefix={
+                <H4
+                  style={{
+                    whiteSpace: "nowrap",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "5px",
+                  }}
+                  className="pr-[20px]"
+                >
+                  <span
+                    style={{ fontFamily: "Fjalla One" }}
+                    className="md:hidden text-[16px] font-[400]"
+                  >
+                    {pageData?.tag_select_subject_title}
+                  </span>
+                  <span
+                    style={{ fontFamily: "Fjalla One" }}
+                    className="hidden md:block md:text-[28px] font-[400]"
+                  >
+                    {pageData?.tag_subject_title}
+                  </span>
+                  {/* Onderwerp{" "} */}
+
+                  <Image
+                    src={parseImageURL(pageData?.thumb_icon?.id)}
+                    alt="hand_icon"
+                    width={30}
+                    height={30}
+                    className="md:-rotate-90"
+                  />
+                </H4>
+              }
+              suffix={<ChevronRight />}
+              onSelect={(x: string) => {
+                setSelectedTag(x);
+              }}
             />
           </div>
-        </div>
-        <div
-          className={
-            showTags
-              ? "mt-[-102px] relative mb-[50px] sm:mb-[48px] sm:mt-[-72px] md:block"
-              : "mt-[-122px] relative mb-[50px] sm:mb-[48px] hidden sm:mt-[-72px] md:block"
-          }
-        >
-          <TagList
-            tags={categories.map((cat) => ({
-              id: cat.id,
-              name: cat.name,
-              status: cat.status,
-            }))}
-            selected={selectedTag}
-            prefix={
-              <H4
-                style={{
-                  whiteSpace: "nowrap",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "5px",
-                }}
-                className="pr-[20px]"
-              >
-                <span
-                  style={{ fontFamily: "Fjalla One" }}
-                  className="md:hidden text-[16px] font-[400]"
-                >
-                  {pageData?.tag_select_subject_title}
-                </span>
-                <span
-                  style={{ fontFamily: "Fjalla One" }}
-                  className="hidden md:block text-[18px] font-[400]"
-                >
-                  {pageData?.tag_subject_title}
-                </span>
-                {/* Onderwerp{" "} */}
-
-                <Image
-                  src={parseImageURL(pageData?.thumb_icon?.id)}
-                  alt="hand_icon"
-                  width={30}
-                  height={30}
-                  className="md:-rotate-90"
-                />
-              </H4>
-            }
-            suffix={<ChevronRight />}
-            onSelect={(x: string) => {
-              setSelectedTag(x);
-            }}
-          />
-        </div>
-
+        </Container>
         <MasonryGrid feed={posts} homepage={true} />
 
         <div className="flex items-center justify-center">

@@ -100,7 +100,6 @@ export default function LetterDetail({
     formState: { errors },
   } = useForm<LetterDownloadType>();
   const downloadFile = () => {
-    console.log(pageData.downloadable_document);
     window.open(parseFileURL(pageData.downloadable_document?.id), "_blank");
   };
   const submitForm = async (data: any) => {

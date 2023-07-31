@@ -248,6 +248,7 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                     )}
                     src={parseFileURL(feature_stories?.video_file?.id)}
                     subtitle={feature_stories.subtitle}
+                    className="rounded-[10px]"
                   />
                 ))}
                 {/* <VideoItem

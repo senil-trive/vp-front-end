@@ -146,7 +146,7 @@ export function MasonryGrid({
 
   return (
     <MasonryGridWrapper>
-      <Container maxWidth="xl" style={{ padding: " 0 13px" }}>
+      <Container className="max-w-[1384px]" style={{ padding: " 0 13px" }}>
         <div id="mason-grid" className="mason-grid">
           {homepage && (
             <div className="home-cntnt-wrapper">
