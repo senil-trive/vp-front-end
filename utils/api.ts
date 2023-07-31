@@ -203,7 +203,7 @@ export const getLetters = async ({
   meta = "total_count",
 }: DirectusParams) => {
   //${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}
-  let url = `${ENDPOINTS.COLLECTIONS}/open_letters?fields=*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+  let url = `${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
 
   if (meta) {
     url = `${url}&meta=${meta}`;
@@ -483,7 +483,7 @@ export const getForumPosts = async ({
  * @returns
  */
 export const getHomeData = async () => {
-  return await fetch(`${ENDPOINTS.COLLECTIONS}/home_page`, {
+  return await fetch(`${ENDPOINTS.COLLECTIONS}/home_page?fields=*.*.*`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

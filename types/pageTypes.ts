@@ -13,7 +13,13 @@ export type HomePageProps = {
     seo_title: string;
     seo_description: string;
     seo_image: ImageFileType;
+    thumb_icon: ImageFileType;
+    mobile_hero_image: ImageFileType;
     hero_image: ImageFileType;
+    tag_select_subject_title: string;
+    tag_subject_title: string;
+    loader_post_message: string;
+    loader_more_post_message: string;
     highlight_words: { word: string; color: string }[];
   };
   categories: CategoryType[];

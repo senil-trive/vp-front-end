@@ -86,7 +86,7 @@ export const SHADOWS = {
 
 export const FONTS = {
   primary: "Fjalla One",
-  secondary: "Avenir Next Cyr, sans-serif",
+  secondary: "Avenir",
 };
 
 export const FONT_SIZES = {

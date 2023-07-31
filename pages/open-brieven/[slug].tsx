@@ -100,7 +100,8 @@ export default function LetterDetail({
     formState: { errors },
   } = useForm<LetterDownloadType>();
   const downloadFile = () => {
-    window.open(parseFileURL(pageData.downloadable_document), "_blank");
+    console.log(pageData.downloadable_document);
+    window.open(parseFileURL(pageData.downloadable_document?.id), "_blank");
   };
   const submitForm = async (data: any) => {
     if (pageData?.requires_signup) {
@@ -155,7 +156,7 @@ export default function LetterDetail({
         center
         imageUrl={parseImageURL(pageoverview?.hero_image?.id)}
         style={{
-          minHeight: 555,
+          minHeight: 476,
           position: "relative",
         }}
         mobileImageHeight={772}
@@ -163,7 +164,7 @@ export default function LetterDetail({
         <div className="flex flex-col md:items-center md:justify-center md:text-center max-w-2xl md:max-w-5xl md:my-16 mt-10">
           <Tag
             style={{ fontFamily: "Fjalla One" }}
-            className="w-[max-content] pt-[10px] mb-[20px] text-[#3FC7B4] font-[400] text-[18px] bg-[#fff] border-[#fff] md:mb-[0]"
+            className="w-[max-content] pt-[10px] mb-[20px] text-[#3FC7B4] font-[400] text-[18px] bg-[#fff] border-[#fff] md:mb-[32px]"
           >
             Open brief
           </Tag>
@@ -173,11 +174,11 @@ export default function LetterDetail({
             color="white"
             className="text-[42px] font-[400] md:text-[64px]"
           />
-          <div className="mb-8 text-[#fff] text-[18px] font-[300] md:text-[20px]">
+          {/* <div className="mb-8 text-[#fff] text-[18px] font-[300] md:text-[20px]">
             {pageData?.description &&
               parseHTMLtoReact(pageData.description).toString().slice(0, 200) +
                 "..."}
-          </div>
+          </div> */}
         </div>
       </Hero>
       <section className="my-[128px] md:my-[128px]">
