@@ -302,11 +302,13 @@ export default function Home({
         <MasonryGrid feed={posts} homepage={true} />
 
         <div className="flex items-center justify-center">
-          {isLoading && <CircularProgress size={"30px"} />}
-          {isEnd && posts.length <= 0 ? (
-            <P color="info">{pageData?.loader_post_message}</P>
+          {isLoading ? (
+            <CircularProgress size={"30px"} />
           ) : (
-            <P color="info">{pageData?.loader_more_post_message}</P>
+            isEnd && <P color="info">{pageData?.loader_more_post_message}</P>
+          )}
+          {isEnd && posts.length <= 0 && (
+            <P color="info">{pageData?.loader_post_message}</P>
           )}
         </div>
       </main>

@@ -115,7 +115,7 @@ export const generateFeedTiles = (
   }));
   const videosFeedItem: FeedItem[] = videos.map((item) => ({
     id: `video-${uuidv4()}`,
-    width: 8,
+    width: 4,
     type: "video",
     content: {
       title: item?.title || "",
