@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import TikTokPost, {
   TikTokPostProps,
 } from "../../content-types/TikTokPost/TikTokPost";
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import BlogItem from "../../content-types/BlogItem/BlogItem";
 import { BlogType } from "../../../types/content-types/Blog.type";
 import BriefItem from "../../content-types/BriefItem/BriefItem";
@@ -54,7 +54,6 @@ export function MasonryGrid({
   homepage = false,
 }: Props) {
   const [loading, setLoading] = useState(true);
-  console.log("vgvjvvjhhjhjjhhj", feed);
   //1. Adust stiffness ,bounce and duration
   // const cardVariants: Variants = {
   //   offscreen: {
@@ -376,9 +375,7 @@ export function MasonryGrid({
 
           {feed.map((item, index) => {
             const { content } = item;
-            {
-              console.log(item);
-            }
+
             switch (item.type) {
               case "video":
                 const videoContent = content as VideoPropsType;
@@ -396,6 +393,7 @@ export function MasonryGrid({
                       title={videoContent.title}
                       src={videoContent.src}
                       subtitle={videoContent.subtitle}
+                      className="rounded-[10px]"
                     />
                   </motion.div>
                 );
@@ -419,7 +417,7 @@ export function MasonryGrid({
                       content={letterContent.description}
                       imgSrc={
                         letterContent?.image
-                          ? `${process.env.NEXT_PUBLIC_API_URL}/assets/${letterContent?.image}`
+                          ? `${process.env.NEXT_PUBLIC_API_URL}/assets/${letterContent?.image?.id}`
                           : ""
                       }
                       fileSrc={`/open-brieven/${letterContent.slug}`}
