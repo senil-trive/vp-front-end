@@ -91,7 +91,7 @@ const InputWrapper = styled.div<InputStateType>`
       color: #888888;
       background-color: transparent;
       ::placeholder {
-        color: #c7c7c7;
+        color: #777 !important;
         font-weight: 300 !important;
         font-family: "Avenir Next Cyr" !important;
         opacity: 1;

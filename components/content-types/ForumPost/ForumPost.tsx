@@ -5,8 +5,6 @@ import { parseDate } from "../../../utils/parseDate";
 import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
 import { truncate } from "../../../utils/truncate";
 import { FiHeart } from "react-icons/fi";
-import UserAvatar from "../../icons/UserAvatar/UserAvatar";
-import parseImageURL from "../../../utils/parseImageURL";
 import { H4, P } from "../../typography";
 
 type Props = {
@@ -176,7 +174,6 @@ export default function ForumPost({
   fullHeight = true,
   tags = [],
   name,
-  image,
 }: Props) {
   const generateContent = () => {
     if (fullHeight && truncateContent) {
@@ -194,10 +191,6 @@ export default function ForumPost({
       showButton={showButton}
       style={{ minHeight: fullHeight ? "624px" : "" }}
     >
-      {/* <a
-        href={buttonUrl}
-        className="transition h-full flex flex-col justify-between "
-      > */}
       <div>
         <p className="font-extrabold text-lg text-[#fff]">{name}</p>
         <p className="text-[16px] text-[#fff] md:text-[18px] font-[300]">
@@ -239,13 +232,6 @@ export default function ForumPost({
           </div>
           <div>
             {postDate && (
-              // <P
-              //   // variant="helper"
-              //   color="primary"
-              //   style={{ textAlign: "right" }}
-              //   className=""
-              // >
-              // </P>
               <p className="geplaatst font-avenir font-light text-lg italic text-right">
                 Geplaatst op {parseDate(postDate)}
               </p>
@@ -254,17 +240,6 @@ export default function ForumPost({
         </footer>
         {/* </a> */}
       </ComponentTag>
-      {/* {showButton && (
-        <Button
-          style={{
-            margin: "1rem auto",
-          }}
-          variant="info"
-          href={buttonUrl}
-        >
-          Vraag bekijken
-        </Button>
-      )} */}
     </StyledForumPost>
   );
 }

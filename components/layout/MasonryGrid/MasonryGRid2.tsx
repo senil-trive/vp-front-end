@@ -54,79 +54,6 @@ export function MasonryGrid({
   homepage = false,
 }: Props) {
   const [loading, setLoading] = useState(true);
-  //1. Adust stiffness ,bounce and duration
-  // const cardVariants: Variants = {
-  //   offscreen: {
-  //     y: 300,
-  //   },
-  //   onscreen: {
-  //     y: 0,
-  //     // rotate: -10,
-  //     transition: {
-  //       type: "spring",
-  //       stiffness: 43,
-  //       bounce: 0.3,
-  //       duration: 0.4,
-  //     },
-  //   },
-  // };
-
-  //2. Add a rotation effect
-  // const cardVariants: Variants = {
-  //   offscreen: {
-  //     y: 300,
-  //     rotate: -10,
-  //   },
-  //   onscreen: {
-  //     y: 0,
-  //     rotate: 0,
-  //     transition: {
-  //       type: "spring",
-  //       stiffness: 43,
-  //       bounce: 0.3,
-  //       duration: 0.4,
-  //     },
-  //   },
-  // };
-
-  //3. Adjust the bounce effect
-  // const cardVariants: Variants = {
-  //   offscreen: {
-  //     y: 300,
-  //     rotate: -10,
-  //   },
-  //   onscreen: {
-  //     y: 0,
-  //     rotate: 0,
-  //     transition: {
-  //       type: "spring",
-  //       stiffness: 200,
-  //       damping: 20,
-  //       duration: 0.4,
-  //     },
-  //   },
-  // };
-
-  //4. Add an opacity animation
-  // const cardVariants: Variants = {
-  //   offscreen: {
-  //     y: 300,
-  //     rotate: -10,
-  //     opacity: 0,
-  //   },
-  //   onscreen: {
-  //     y: 0,
-  //     rotate: 0,
-  //     opacity: 1,
-  //     transition: {
-  //       type: "spring",
-  //       stiffness: 43,
-  //       bounce: 0.3,
-  //       duration: 0.4,
-  //     },
-  //   },
-  // };
-
   useEffect(() => {
     if (feed.length > 0) {
       setLoading(false);
@@ -180,7 +107,6 @@ export function MasonryGrid({
                 <div className="inst-post">
                   <motion.div
                     className={`grid-item grid-item-w-10`}
-                    // variants={cardVariants}
                     initial="offscreen"
                     whileInView="onscreen"
                     viewport={{ once: true, amount: 0.1 }}
@@ -213,7 +139,6 @@ export function MasonryGrid({
                 <div className="forum-post">
                   <motion.div
                     className={`grid-item grid-item-w-10`}
-                    // variants={cardVariants}
                     initial="offscreen"
                     whileInView="onscreen"
                     viewport={{ once: true, amount: 0.1 }}
@@ -314,7 +239,6 @@ export function MasonryGrid({
                 <div className="three-post">
                   <div className="blog-post">
                     <motion.div
-                      // variants={cardVariants}
                       initial="offscreen"
                       whileInView="onscreen"
                       viewport={{ once: true, amount: 0.1 }}
@@ -357,7 +281,6 @@ export function MasonryGrid({
                   <div className="inst-post">
                     <motion.div
                       className={`grid-item grid-item-w-10`}
-                      // variants={cardVariants}
                       initial="offscreen"
                       whileInView="onscreen"
                       viewport={{ once: true, amount: 0.1 }}
@@ -383,7 +306,6 @@ export function MasonryGrid({
                   <motion.div
                     className={`grid-item grid-item-w-${item.width}`}
                     key={index}
-                    // variants={cardVariants}
                     initial="offscreen"
                     whileInView="onscreen"
                     viewport={{ once: true, amount: 0.1 }}
@@ -393,7 +315,6 @@ export function MasonryGrid({
                       title={videoContent.title}
                       src={videoContent.src}
                       subtitle={videoContent.subtitle}
-                      className="rounded-[10px]"
                     />
                   </motion.div>
                 );
@@ -404,7 +325,6 @@ export function MasonryGrid({
                   <motion.div
                     className={`grid-item grid-item-w-${item.width}`}
                     key={index}
-                    // variants={cardVariants}
                     initial="offscreen"
                     whileInView="onscreen"
                     viewport={{ once: true, amount: 0.1 }}
@@ -430,7 +350,6 @@ export function MasonryGrid({
                   <motion.div
                     className={`grid-item grid-item-w-${item.width}`}
                     key={index}
-                    // variants={cardVariants}
                     initial="offscreen"
                     whileInView="onscreen"
                     viewport={{ once: true, amount: 0.1 }}
@@ -461,12 +380,10 @@ export function MasonryGrid({
                 );
               case "blog":
                 const blogContent = content as BlogType;
-
                 return (
                   <motion.div
                     className={`grid-item grid-item-w-${item.width} ${className}`}
                     key={index}
-                    // variants={cardVariants}
                     initial="offscreen"
                     whileInView="onscreen"
                     viewport={{ once: true, amount: 0.1 }}
@@ -501,7 +418,6 @@ export function MasonryGrid({
                   <motion.div
                     className={`grid-item grid-item-w-${item.width}`}
                     key={index}
-                    // variants={cardVariants}
                     initial="offscreen"
                     whileInView="onscreen"
                     viewport={{ once: true, amount: 0.1 }}
@@ -516,7 +432,6 @@ export function MasonryGrid({
                   <motion.div
                     className={`grid-item grid-item-w-${item.width}`}
                     key={index}
-                    // variants={cardVariants}
                     initial="offscreen"
                     whileInView="onscreen"
                     viewport={{ once: true, amount: 0.1 }}
@@ -531,7 +446,6 @@ export function MasonryGrid({
                   <motion.div
                     className={`grid-item grid-item-w-${item.width}`}
                     key={index}
-                    // variants={cardVariants}
                     initial="offscreen"
                     whileInView="onscreen"
                     viewport={{ once: true, amount: 0.1 }}

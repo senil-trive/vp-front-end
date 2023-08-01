@@ -38,6 +38,7 @@ export const getServerSideProps = async () => {
     const forumReq = await getForumPosts({
       postPerPage: POST_PER_PAGE,
       meta: "filter_count",
+      filter: "date_created",
     });
 
     const pageRes = await pageReq.json();
@@ -269,7 +270,7 @@ export default function Forum({
                 <CircleSpinner size={34} color="#fff" />
               ) : (
                 <>
-                  {posts.map((item, index) => (
+                  {posts?.map((item, index) => (
                     <Grid key={index} item xs={12} md={4}>
                       <Link href={`/forum/${item.slug}`}>
                         <ForumPost
