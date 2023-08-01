@@ -1,18 +1,21 @@
 import { H3, TitleWithHighlights } from "../../components/typography";
-import React from "react";
+import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import BreadCrumbs from "../../components/layout/BreadCrumbs/BreadCrumbs";
 import BriefItem from "../../components/content-types/BriefItem/BriefItem";
-import { Container } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import ENDPOINTS from "../../constants/endpoints";
 import { GetServerSidePropsContext } from "next";
 import { Hero } from "../../components/layout";
 import { Letter } from "../../types/content-types/Letter.type";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import { parseFileURL } from "../../utils/parseFileURL";
-import parseHTMLtoReact from "../../utils/parseHTMLtoReact";
 import parseImageURL from "../../utils/parseImageURL";
-import { getComments, postLetterSubscription } from "../../utils/api";
+import {
+  getComments,
+  postLetterDownload,
+  postLetterSubscription,
+} from "../../utils/api";
 import LetterForm from "../../components/form/LetterForm/LetterForm";
 import { LetterDownloadType } from "../../types/forumTypes";
 import CommentForm from "../../components/form/CommentForm/CommentForm";
@@ -99,8 +102,28 @@ export default function LetterDetail({
   const {
     formState: { errors },
   } = useForm<LetterDownloadType>();
-  const downloadFile = () => {
-    window.open(parseFileURL(pageData.downloadable_document?.id), "_blank");
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [letterPdfMessage, setLetterPdfMessage] = useState("");
+  const downloadFile = async (data: any) => {
+    try {
+      await postLetterDownload({
+        document_id: pageData.id,
+        document_title: pageData?.detail_title,
+        document_type: "open_letter",
+        subject_type: "Letter",
+        user_name: data?.user_name,
+        user_email: data?.user_email,
+        user_residence: data?.residence,
+        monthly_tips_and_inspiration_email: data?.tips_inspiration_email,
+      });
+      setIsSubmitted(true);
+      setLetterPdfMessage(
+        "Er wordt een downloadlink verzonden naar het door u opgegeven e-mailadres"
+      );
+      window.open(parseFileURL(pageData.downloadable_document?.id), "_blank");
+    } catch (err) {
+      console.log(err);
+    }
   };
   const submitForm = async (data: any) => {
     if (pageData?.requires_signup) {
@@ -116,7 +139,7 @@ export default function LetterDetail({
 
         // download downloadable document
         if (pageData?.downloadable_document) {
-          downloadFile();
+          downloadFile(data);
         }
       } catch (error) {
         console.log(error);
@@ -124,7 +147,10 @@ export default function LetterDetail({
     } else {
       // download downloadable document
       if (pageData?.downloadable_document) {
-        downloadFile();
+        downloadFile(data);
+      } else {
+        setIsSubmitted(true);
+        setLetterPdfMessage("Van deze brief is geen pdf beschikbaar");
       }
     }
   };
@@ -212,12 +238,20 @@ export default function LetterDetail({
               submitLabel="Reageer op deze brief"
               commentFormType="open_letter"
             />
-            <LetterForm
-              className="w-[100%] p-0 py-10 px-5 md:py-0"
-              formTitle={pageoverview?.download_brief_title}
-              formSubtitle={pageoverview?.download_brief_subtitle}
-              onIsSubmit={onSubmit}
-            />
+            {isSubmitted ? (
+              <div className="flex flex-col w-[100%] rounded-[10px] items-center justify-center px-[32px] py-[50px] bg-[#ff971d] h-[100%] text-[#fff] font-[400]">
+                <H3 variant="bold" color="white">
+                  {letterPdfMessage}
+                </H3>
+              </div>
+            ) : (
+              <LetterForm
+                className="w-[100%] p-0 py-10 px-5 md:py-0"
+                formTitle={pageoverview?.download_brief_title}
+                formSubtitle={pageoverview?.download_brief_subtitle}
+                onIsSubmit={onSubmit}
+              />
+            )}
           </Container>
         </LetterFormWrapper>
         <section className="my-[80px]">

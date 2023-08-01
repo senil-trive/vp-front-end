@@ -4,6 +4,13 @@ export type VolunteerRequestType =
       id?: string;
       date_created?: string;
       date_updated?: string;
+      webform_id: string;
+      entity_type: null;
+      entity_id: null;
+      in_draft: boolean;
+      langcode: string;
+      uri: string;
+      mail: string;
     }
   | AboutVolunteerType
   | MotivationType

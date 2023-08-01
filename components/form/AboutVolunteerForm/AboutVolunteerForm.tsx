@@ -100,7 +100,9 @@ const AboutVolunteerForm = ({
       }
     }
   `;
-
+  // const handleChange = (e: any) => {
+  //   e === "Anderen" ? setKnowFrom(true) : setKnowFrom(false);
+  // };
   return (
     <div className="relative h-[100%]">
       <StyledForm>
@@ -221,7 +223,7 @@ const AboutVolunteerForm = ({
                     : ""
                 }
                 hasError={!!errors.know_about_us}
-                // onChange={(e) => setKnowFrom(e)}
+                // setValue={setKnowFrom}
               />
             </Grid>
             {knowFrom === "Anderen" && (
@@ -242,7 +244,7 @@ const AboutVolunteerForm = ({
             <Grid item xs={12}>
               <Button
                 variant="infoReversed"
-                className="bg-[#FE517E] w-[100%] text-center text-[#fff] text-[18px] font-[400]"
+                className="bg-[#FE517E] w-[100%] text-center text-[#fff] border-none text-[18px] font-[400]"
               >
                 volgende
               </Button>

@@ -240,6 +240,15 @@ export const postLetterSubscription = async (data: any) => {
   });
 };
 
+export const postLetterDownload = async (data: any) => {
+  await fetch(`${ENDPOINTS.COLLECTIONS}/document_download`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+};
 /**
  * Gets the blog overview page details
  */
