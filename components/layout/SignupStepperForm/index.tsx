@@ -97,7 +97,7 @@ const SignupStepperForm = ({ stepTitle, children }: any) => {
           : "bg-[#FFECF1] p-[32px] mt-[-50px] max-w-[912px] mx-auto relative rounded-[5px]"
       }
     >
-      {isSubmitted ? <>{redirect()}</> : currentActiveForm()}
+      {currentActiveForm()}
     </div>
   );
 };

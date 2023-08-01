@@ -7,7 +7,6 @@ const InputCheckbox: FC<any> = ({
   setChecked,
   onChange,
 }) => {
-  console.log(checked);
   const checkboxChange = (e: any) => {
     onChange();
   };

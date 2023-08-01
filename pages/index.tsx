@@ -307,6 +307,7 @@ export default function Home({
           ) : (
             isEnd && <P color="info">{pageData?.loader_more_post_message}</P>
           )}
+
           {isEnd && posts.length <= 0 && (
             <P color="info">{pageData?.loader_post_message}</P>
           )}

@@ -17,7 +17,7 @@ const KNOWABOUTUSFROM = [
   { name: "Ik heb een buddy gehad", value: "Ik heb een buddy gehad" },
   { name: "Ik ben eerder buddy geweest", value: "Ik ben eerder buddy geweest" },
   { name: "Via een vrijwilliger", value: "Via een vrijwilliger" },
-  { name: "Anderen", value: "Anderen" },
+  // { name: "Anderen", value: "Anderen" },
 ];
 
 export { KNOWABOUTUSFROM };

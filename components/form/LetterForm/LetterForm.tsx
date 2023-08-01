@@ -29,11 +29,14 @@ const LetterForm = ({
   const {
     register,
     handleSubmit,
+    setValue,
+    reset,
     formState: { errors },
   } = useForm<LetterDownloadType>();
 
   const submitForm = async (data: any) => {
     onIsSubmit(data);
+    reset({ user_name: "", user_email: "", residence: "" });
   };
 
   const onSubmit: SubmitHandler<LetterDownloadType> = async (data) => {
@@ -148,6 +151,7 @@ const LetterForm = ({
                   name="user_email"
                   placeholder="Jouw email..."
                   register={register}
+                  hasError={!!errors?.user_email}
                   helperText={
                     !!errors?.user_email ? "e-mailadres is verplicht" : ""
                   }
@@ -160,6 +164,7 @@ const LetterForm = ({
                   name="residence"
                   placeholder="Jouw woonplaats..."
                   register={register}
+                  hasError={!!errors.residence}
                   helperText={
                     !!errors.residence ? "woonplaats is verplicht" : ""
                   }

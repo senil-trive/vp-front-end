@@ -31,6 +31,7 @@ const TrainingDatesForm = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [trainingDate, setTrainingDates] = useState("");
+  const [error, setErrors] = useState({ trainingDate: "", acceptTAndC: "" });
   const [acceptTAndC, setAcceptTAndC] = useState(false);
   const {
     register,
@@ -40,9 +41,15 @@ const TrainingDatesForm = ({
 
   const submitForm = async (data: TrainingType) => {
     setIsLoading(true);
-
     try {
       await postVolunteerApplication({
+        webform_id: "register_as_a_volunteer",
+        entity_type: null,
+        entity_id: null,
+        in_draft: false,
+        mail: aboutVolunteer.email_address,
+        langcode: "nl",
+        uri: "['/webform/register_as_a_volunteer/api']",
         training_date: trainingDate,
         ...aboutVolunteer,
         ...volunteerMotivation,
@@ -68,11 +75,23 @@ const TrainingDatesForm = ({
   // };
 
   const onSubmit: SubmitHandler<TrainingType> = async (data) => {
-    setIsSubmitted(true);
-    submitForm(data);
-    console.log(errors);
-    if (!errors) {
-      setStep(step + 1);
+    if (!trainingDate) {
+      setErrors({ ...error, trainingDate: "Dit veld is verplicht " });
+      !acceptTAndC &&
+        setErrors({ ...error, acceptTAndC: "Dit veld is verplicht " });
+    }
+    if (!acceptTAndC) {
+      setErrors({ ...error, acceptTAndC: "Dit veld is verplicht" });
+      !trainingDate &&
+        setErrors({ ...error, trainingDate: "Dit veld is verplicht " });
+    }
+    if (acceptTAndC && trainingDate) {
+      setErrors({ trainingDate: "", acceptTAndC: "" });
+      setIsSubmitted(true);
+      submitForm(data);
+      if (!errors) {
+        setStep(step + 1);
+      }
     }
   };
   const StyledForm = styled.div`
@@ -118,6 +137,9 @@ const TrainingDatesForm = ({
         margin-left: 8px;
       }
     }
+    .training {
+      border: none !important;
+    }
     @media (max-width: 768px) {
       &:before {
         background-size: 135%;
@@ -149,10 +171,16 @@ const TrainingDatesForm = ({
                   label={"Basistraining op maandag 20 augustus om 20:00 uur"}
                   checked={trainingDate === item}
                   setChecked={setTrainingDates}
-                  onChange={() => setTrainingDates(item)}
+                  required
+                  onChange={() => {
+                    setTrainingDates(item);
+                    setErrors({ ...error, trainingDate: "" });
+                  }}
                 />
               </Grid>
             ))}
+            <span className="px-6 pt-2 text-[red]">{error.trainingDate}</span>
+
             <Grid item xs={12} className="items-center flex">
               <InputCheckbox
                 label={
@@ -160,15 +188,19 @@ const TrainingDatesForm = ({
                 }
                 checked={acceptTAndC}
                 name="acceptTAndC"
-                onChange={() => setAcceptTAndC(!acceptTAndC)}
+                onChange={() => {
+                  setAcceptTAndC(!acceptTAndC);
+                  setErrors({ ...error, acceptTAndC: "" });
+                }}
               />
             </Grid>
+            <span className="px-6 pt-2 text-[red]">{error.acceptTAndC}</span>
             <Grid item xs={12}>
               <Button
                 variant="infoReversed"
                 loading={isLoading}
                 //   disabled={isSubmitted}
-                className="bg-[#FE517E] w-[100%] text-center text-[#fff] text-[18px] font-[400]"
+                className="training bg-[#FE517E] w-[100%] text-center text-[#fff] text-[18px] font-[400]"
               >
                 aanmelding afronden!
               </Button>

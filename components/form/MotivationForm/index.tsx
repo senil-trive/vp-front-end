@@ -153,7 +153,7 @@ const MotivationForm = ({
                 variant="infoReversed"
                 loading={isLoading}
                 //   disabled={isSubmitted}
-                className="bg-[#FE517E] w-[100%] text-center text-[#fff] text-[18px] font-[400]"
+                className="bg-[#FE517E] w-[100%] text-center text-[#fff] border-none text-[18px] font-[400]"
               >
                 volgende
               </Button>
