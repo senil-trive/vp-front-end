@@ -464,7 +464,7 @@ export const getForumPosts = async ({
   meta,
 }: DirectusParams) => {
   // post forum let url = `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
-  let url = `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+  let url = `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=*.*.*&filter[status][_eq]=published&sort[]=-date_created&limit=${postPerPage}&page=${page}`;
 
   if (meta) {
     url = `${url}&meta=${meta}`;

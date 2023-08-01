@@ -32,28 +32,7 @@ export const getServerSideProps = async () => {
       lettersRes,
       videosRes,
     } = await getFeed({ postPerPage: POST_PER_PAGE, meta: "filter_count" });
-    console.log(
-      "aline, 18 jaar",
-      blogsRes,
-      instagramRes,
-      tiktokRes,
-      forumRes,
-      lettersRes,
-      videosRes
-    );
-    // console.log(
-    //   // blogsRes,
-    //   // "blog",
-    //   // instagramRes,
-    //   // "insta",
-    //   // tiktokRes,
-    //   // "tiktok",
-    //   forumRes,
-    //   "forum"
-    //   // lettersRes,
-    //   // "latest",
-    //   // videosRes
-    // );
+
     return {
       props: {
         pageData: pageRes.data || null,
@@ -66,16 +45,16 @@ export const getServerSideProps = async () => {
             tiktok: tiktokRes.data,
             videos: videosRes.data,
           },
-          false
+          true
         ),
         totalPosts:
-          blogsRes.meta?.filter_count ||
-          0 + forumRes.meta?.filter_count ||
-          0 + lettersRes.meta?.filter_count ||
-          0 + instagramRes.meta?.filter_count ||
-          0 + videosRes.meta?.filter_count ||
-          0 + tiktokRes.meta?.filter_count ||
-          0,
+          blogsRes.meta.filter_count +
+            forumRes.meta.filter_count +
+            lettersRes.meta.filter_count +
+            instagramRes.meta.filter_count +
+            videosRes.meta.filter_count +
+            tiktokRes.meta.filter_count || 0,
+
         categories: categoriesRes.data,
       },
     };
@@ -130,7 +109,7 @@ export default function Home({
 
         const res = generateFeedTiles(
           {
-            // blogs: blogsRes?.data ?? [],
+            blogs: blogsRes?.data ?? [],
             forum: forumRes?.data ?? [],
             letters: lettersRes?.data ?? [],
             instagram: instagramRes?.data ?? [],
@@ -174,7 +153,6 @@ export default function Home({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [feed, selectedTag]);
-  console.log(feed);
   return (
     <PageWrapper
       homepage={true}

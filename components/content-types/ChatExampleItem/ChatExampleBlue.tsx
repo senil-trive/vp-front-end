@@ -163,7 +163,7 @@ export default function ChatExampleItem() {
         </div>
       </div>
       <footer className="chat_btn chat-btn-blue">
-        <Button variant="success" href="/vrijwilligerswerk/buddy-programma">
+        <Button variant="success" href="/ik-wil-een-buddy">
           Nu Chatten
         </Button>
       </footer>
