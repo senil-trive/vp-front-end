@@ -6,6 +6,7 @@ import { Hero } from "../../components/layout";
 import Button from "../../components/buttons/Button";
 import { HeroBannerWrapper } from "../../styles/global.styled";
 import TextWithHighlights from "../../components/typography/TextWithHighlights";
+import Link from "next/link";
 
 const Bedankt: React.FC = () => {
   return (
@@ -24,8 +25,6 @@ const Bedankt: React.FC = () => {
           minHeight: 754,
           position: "relative",
         }}
-        mbgn={"/bedkant.png"}
-        mobileImageHeight={740}
       >
         <HeroBannerWrapper className="zoeken-page">
           <div className="title-wrap max-w-5xl">
@@ -45,7 +44,7 @@ const Bedankt: React.FC = () => {
               style={{
                 textAlign: "center",
                 fontSize: "18px",
-                width: "568px",
+                maxWidth: "568px",
                 fontWeight: "300",
                 margin: "32px auto 44px",
               }}
@@ -53,18 +52,19 @@ const Bedankt: React.FC = () => {
               Je motivatie wordt doorgenomen. Je krijgt van ons bericht met de
               officiële uitnodiging op de basistraining!
             </P>
-
-            <TextWithHighlights
-              color="white"
-              style={{ fontFamily: "Fjalla One !important" }}
-              variant="light"
-              text={"terug naar de homepagina"}
-              textToHighlight={{
-                word: "terug naar de homepagina",
-                color: "#3FC7B4",
-              }}
-              className="new-bedankt-btn"
-            />
+            <Link href="/">
+              <TextWithHighlights
+                color="white"
+                style={{ fontFamily: "Fjalla One !important" }}
+                variant="light"
+                text={"terug naar de homepagina"}
+                textToHighlight={{
+                  word: "terug naar de homepagina",
+                  color: "#3FC7B4",
+                }}
+                className="new-bedankt-btn"
+              />
+            </Link>
           </div>
         </HeroBannerWrapper>
       </Hero>
