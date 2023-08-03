@@ -2,12 +2,10 @@ import { H3, P, TitleWithHighlights } from "../../components/typography";
 
 import { BlogDetailPageProps } from "../../types/pageTypes";
 import BlogItem from "../../components/content-types/BlogItem/BlogItem";
-import BreadCrumbs from "../../components/layout/BreadCrumbs/BreadCrumbs";
 import CommentForm from "../../components/form/CommentForm/CommentForm";
 import { Container } from "@mui/material";
 import { GetServerSidePropsContext } from "next";
 import { Hero } from "../../components/layout";
-import Image from "next/image";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import React from "react";
 import Tag from "../../components/buttons/Tag/Tag";
@@ -83,14 +81,6 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
       );
     } else if (pageData?.image?.id) {
       return parseImageURL(pageData?.image.id);
-      // Child = (
-      //   <Image
-      //     className="absolute h-full w-full top-0 left-0 z-0 object-cover"
-      //     src={parseImageURL(pageData?.image.id)}
-      //     alt={pageData.title}
-      //     fill
-      //   />
-      // );
     }
 
     if (!Child) return;
@@ -136,7 +126,6 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
               <TitleWithHighlights
                 highlightColor="info"
                 text={`${pageData?.title}`}
-                // textToHighlight={pageData?.page_title_highlighted}
                 headerElement="h1"
                 color="white"
                 style={{

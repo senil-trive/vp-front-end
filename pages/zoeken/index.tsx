@@ -35,6 +35,7 @@ export default function Search() {
   const [forumPosts, setForumPosts] = useState<ForumPostType[]>([]);
   const [letters, setLetters] = useState<Letter[]>([]);
   const { q } = router.query;
+
   useEffect(() => {
     const getPaginatedBlogs = async () => {
       try {

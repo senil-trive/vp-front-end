@@ -2,19 +2,13 @@ import { Container, Grid } from "@mui/material";
 import { Hero } from "../components/layout";
 import { H2, H3, P, TitleWithHighlights } from "../components/typography";
 import React, { useState } from "react";
-import {
-  getForumOverviewPageData,
-  postForum,
-  postVolunteerApplication,
-} from "../utils/api";
+import { getForumOverviewPageData, postForum } from "../utils/api";
 import Button from "../components/buttons/Button";
 import { ForumPageProps } from "../types/pageTypes";
-import { ForumRequestType } from "../types/forumrequestType";
 import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
 import parseImageURL from "../utils/parseImageURL";
 import Input from "../components/form/Input/Input";
 import { useForm } from "react-hook-form";
-
 import { HeroBannerWrapper } from "../styles/global.styled";
 import { StyledForm } from "../styles/CommonFormWrapper.styles";
 import TextArea from "../components/form/TextArea/TextArea";
@@ -221,7 +215,6 @@ export default function Vraag({ pageData }: ForumPageProps) {
                       <Grid item xs={12}>
                         <Button
                           loading={isLoading}
-                          // disabled={isSubmitted}
                           className="forum_act w-[100] bg-[#fff] text-[#FF971D] text-[18px] font-[400]"
                         >
                           {isLoading

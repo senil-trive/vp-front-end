@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import BreadCrumbs from "../../components/layout/BreadCrumbs/BreadCrumbs";
 import BriefItem from "../../components/content-types/BriefItem/BriefItem";
-import { Container, Grid } from "@mui/material";
+import { Container } from "@mui/material";
 import ENDPOINTS from "../../constants/endpoints";
 import { GetServerSidePropsContext } from "next";
 import { Hero } from "../../components/layout";
@@ -157,7 +157,7 @@ export default function LetterDetail({
   const onSubmit: SubmitHandler<any> = async (data) => {
     submitForm(data);
   };
-  console.log(pageData);
+
   return (
     <PageWrapper
       seo={{
@@ -199,11 +199,6 @@ export default function LetterDetail({
             color="white"
             className="text-[42px] font-[400] md:text-[64px]"
           />
-          {/* <div className="mb-8 text-[#fff] text-[18px] font-[300] md:text-[20px]">
-            {pageData?.description &&
-              parseHTMLtoReact(pageData.description).toString().slice(0, 200) +
-                "..."}
-          </div> */}
         </div>
       </Hero>
       <section className="my-[128px] md:my-[128px]">

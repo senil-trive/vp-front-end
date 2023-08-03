@@ -47,7 +47,7 @@ const TrainingDatesForm = ({
         entity_type: null,
         entity_id: null,
         in_draft: false,
-        mail: aboutVolunteer.email_address,
+        email: aboutVolunteer.email_address,
         langcode: "nl",
         uri: "['/webform/register_as_a_volunteer/api']",
         training_date: trainingDate,
@@ -58,21 +58,8 @@ const TrainingDatesForm = ({
     } catch (error) {
       setIsSubmitted(false);
     }
-
     setIsLoading(false);
   };
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [trainingDate, setTrainingDates] = useState("");
-  // const [acceptTAndC, setAcceptTAndC] = useState(false);
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors },
-  // } = useForm<MotivationType>();
-
-  // const submitForm = async (data: any) => {
-  //   // onIsSubmit(data);
-  // };
 
   const onSubmit: SubmitHandler<TrainingType> = async (data) => {
     if (!trainingDate) {

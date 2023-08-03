@@ -17,7 +17,6 @@ import { VideoWrapper } from "../styles/Vrjwilligerswerk/VrijwilligerWorden.styl
 import CommonDetailCard from "../components/content-types/CommonDetailCard/CommonDetailCard";
 import { ContainerWrapper } from "../styles/Vrjwilligerswerk/index.styles";
 import { parseFileURL } from "../utils/parseFileURL";
-import { findIp } from "../utils/findIp";
 
 type BuddyPageProps = {
   pageData: any;
@@ -55,7 +54,6 @@ export const getServerSideProps = async () => {
 
 const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
   const { colors } = useTheme();
-  console.log(findIp(), "isa");
   return (
     <ContainerWrapper className="klets-meet">
       <PageWrapper
@@ -226,7 +224,6 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
               <div className="flex flex-col md:items-center md:justify-center mb-6 md:mb-14">
                 <TitleWithHighlights
                   text={pageData?.stories_section_title}
-                  style={{}}
                   headerElement="h3"
                   color="black"
                   className="text-[30px] max-w-3xl text-center md:text-[42px] font-[400]"
@@ -251,18 +248,6 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                     className="rounded-[10px]"
                   />
                 ))}
-                {/* <VideoItem
-                  title="Wat leer je bij de trainingen?"
-                  poster="/storyposter2.png"
-                  src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                  subtitle="Hier komt een omschrijvende tekst"
-                /> */}
-                {/* <VideoItem
-                  title="Wat leer je bij de trainingen?"
-                  poster="/storyposter3.png"
-                  src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
-                  subtitle="Hier komt een omschrijvende tekst"
-                /> */}
               </div>
             </Container>
           </VideoWrapper>

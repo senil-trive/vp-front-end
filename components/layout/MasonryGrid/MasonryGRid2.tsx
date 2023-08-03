@@ -22,6 +22,7 @@ import VideoItem from "../../content-types/VideoItem/VideoItem";
 import { VideoPropsType } from "../../content-types/VideoItem/VideoItem.types";
 import parseImageURL from "../../../utils/parseImageURL";
 import NewPostItem from "../../content-types/NewPostItem/NewPostItem";
+import Link from "next/link";
 
 export type FeedType =
   | "forum"
@@ -354,28 +355,30 @@ export function MasonryGrid({
                     whileInView="onscreen"
                     viewport={{ once: true, amount: 0.1 }}
                   >
-                    <ForumPost
-                      showButton
-                      fullHeight={fullHeightItems}
-                      buttonUrl={`/forum/${forumContent.slug}`}
-                      truncateContent
-                      gender={forumContent.user_gender}
-                      image={parseImageURL(forumContent?.user_image?.id)}
-                      age={forumContent.user_age}
-                      name={forumContent.user_name}
-                      postDate={new Date(forumContent.date_created)}
-                      tags={
-                        forumContent.categories?.map(
-                          (cat) => cat.categories_id?.name
-                        ) ?? []
-                      }
-                      title={
-                        forumContent.title ??
-                        "Titel moet in CMS worden ingevoerd"
-                      }
-                      comments={forumContent.comments.length}
-                      content={forumContent.content}
-                    />
+                    <Link href={`/forum/${forumContent?.slug}`}>
+                      <ForumPost
+                        showButton
+                        fullHeight={fullHeightItems}
+                        buttonUrl={`/forum/${forumContent.slug}`}
+                        truncateContent
+                        gender={forumContent.user_gender}
+                        image={parseImageURL(forumContent?.user_image?.id)}
+                        age={forumContent.user_age}
+                        name={forumContent.user_name}
+                        postDate={new Date(forumContent.date_created)}
+                        tags={
+                          forumContent.categories?.map(
+                            (cat) => cat.categories_id?.name
+                          ) ?? []
+                        }
+                        title={
+                          forumContent.title ??
+                          "Titel moet in CMS worden ingevoerd"
+                        }
+                        comments={forumContent.comments.length}
+                        content={forumContent.content}
+                      />
+                    </Link>
                   </motion.div>
                 );
               case "blog":
