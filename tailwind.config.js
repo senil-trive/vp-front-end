@@ -25,7 +25,7 @@ module.exports = {
       },
     },
     fontFamily: {
-      avenir: ["Avenir", "sans-serif"],
+      avenir: ["Avenir", "Fjalla One"],
       handwritten: ["villa_pinedo___handwrittenRg"],
     },
   },

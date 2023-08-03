@@ -203,7 +203,7 @@ export const getLetters = async ({
   meta = "total_count",
 }: DirectusParams) => {
   //${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}
-  let url = `${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+  let url = `${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*.*&filter[status][_eq]=published`;
 
   if (meta) {
     url = `${url}&meta=${meta}`;

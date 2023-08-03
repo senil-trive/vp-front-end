@@ -79,6 +79,9 @@ export default function Home({
   const [isLoading, setIsLoading] = useState(false);
   const [isEnd, setIsEnd] = useState(false);
   const [showTags, setShowTags] = useState(false);
+  useEffect(() => {
+    setCurrentPage(0);
+  }, [selectedTag]);
   const getAllFeedItem = useCallback(
     async ({
       append = false,

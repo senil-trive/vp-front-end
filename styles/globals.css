@@ -13,13 +13,13 @@
 @import "swiper/css/pagination";
 @import "../fonts/fonts.css";
 
-@font-face {
+/* @font-face {
   font-family: "Avenir";
-
+ 
   src: url("../fonts/avenir/avenir_next.ttf");
   font-weight: normal;
   font-style: normal;
-}
+} */
 
 ::-webkit-scrollbar {
   width: 0;
@@ -284,13 +284,6 @@ p {
   padding: 16px 64px !important;
   font-size: 18px !important;
   line-height: 160% !important;
-}
-@media (max-width: 600px) {
-  .new-bedankt-btn span.font-heading {
-    padding: 16px 18px !important;
-    font-size: 16px !important;
-    line-height: 160% !important;
-  }
 }
 
 @media (max-width: 820px) {
