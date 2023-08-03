@@ -10,7 +10,7 @@ export type VolunteerRequestType =
       in_draft: boolean;
       langcode: string;
       uri: string;
-      mail: string;
+      email: string;
     }
   | AboutVolunteerType
   | MotivationType

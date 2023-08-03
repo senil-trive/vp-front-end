@@ -1,14 +1,55 @@
-import { Container, Grid } from "@mui/material";
 import React from "react";
 import { P, TitleWithHighlights } from "../../components/typography";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import { Hero } from "../../components/layout";
-import Button from "../../components/buttons/Button";
 import { HeroBannerWrapper } from "../../styles/global.styled";
 import TextWithHighlights from "../../components/typography/TextWithHighlights";
+import ENDPOINTS from "../../constants/endpoints";
 import Link from "next/link";
+import Button from "../../components/buttons/Button";
+import parseImageURL from "../../utils/parseImageURL";
 
-const Bedankt: React.FC = () => {
+export const getServerSideProps = async () => {
+  // fetch page data from API
+  try {
+    const pageReq = await fetch(
+      `${ENDPOINTS.COLLECTIONS}/volunteer_signup_page?fields=thanks_title,thanks_sub_title,thanks_hero_image.*,home_button_title,home_button_url`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const pageRes = await pageReq.json();
+    if (!pageRes?.data) {
+      return {
+        notFound: true,
+      };
+    }
+    return {
+      props: {
+        pageData: pageRes.data,
+      },
+    };
+  } catch (error) {
+    return {
+      redirect: {
+        destination: "/500",
+      },
+    };
+  }
+};
+
+const Bedankt: React.FC<any> = (pageData) => {
+  const {
+    thanks_title,
+    thanks_sub_title,
+    thanks_hero_image,
+    home_button_title,
+    home_button_url,
+  } = pageData?.pageData || {};
+  console.log(pageData);
   return (
     <PageWrapper
       seo={{
@@ -20,7 +61,7 @@ const Bedankt: React.FC = () => {
     >
       <Hero
         center
-        imageUrl="/bedkant.png"
+        imageUrl={parseImageURL(thanks_hero_image?.id)}
         style={{
           minHeight: 754,
           position: "relative",
@@ -29,7 +70,7 @@ const Bedankt: React.FC = () => {
         <HeroBannerWrapper className="zoeken-page">
           <div className="title-wrap max-w-5xl">
             <TitleWithHighlights
-              text="SUPER LEUK DAT JE JE HEBT AANGEMELD ALS VRIJWILLIGER BIJ VILLA PINEDO!"
+              text={thanks_title}
               style={{
                 textAlign: "center",
                 margin: "0px",
@@ -49,21 +90,16 @@ const Bedankt: React.FC = () => {
                 margin: "32px auto 44px",
               }}
             >
-              Je motivatie wordt doorgenomen. Je krijgt van ons bericht met de
-              officiële uitnodiging op de basistraining!
+              {thanks_sub_title}
             </P>
-            <Link href="/">
-              <TextWithHighlights
-                color="white"
+            <Link href={home_button_url}>
+              <Button
                 style={{ fontFamily: "Fjalla One !important" }}
-                variant="light"
-                text={"terug naar de homepagina"}
-                textToHighlight={{
-                  word: "terug naar de homepagina",
-                  color: "#3FC7B4",
-                }}
-                className="new-bedankt-btn"
-              />
+                variant="secondary"
+                className="min-w-[320px] bg-[#3FC7B4] text-[18px] font-[400] text-[#fff] md:w-auto md:px-[64px] md:py-[16px]"
+              >
+                {home_button_title}
+              </Button>
             </Link>
           </div>
         </HeroBannerWrapper>

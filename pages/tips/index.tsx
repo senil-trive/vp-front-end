@@ -22,10 +22,20 @@ import { v4 as uuidv4 } from "uuid";
 import ChevronRight from "../../components/icons/ChevronRight/ChevronRight";
 import SearchIcon from "../../components/icons/SearchIcon/SearchIcon";
 import Input from "../../components/form/Input/Input";
+import ENDPOINTS from "../../constants/endpoints";
 
 export const getServerSideProps = async () => {
   try {
-    const pageReq = await getPostOverviewPageData();
+    const pageReq = await fetch(
+      `${ENDPOINTS.COLLECTIONS}/tips_overview_page?fields=*.*`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
     const tagsReq = await getContentTags();
     const blogsReq = await getPosts({
       postPerPage: POST_PER_PAGE,
@@ -33,9 +43,9 @@ export const getServerSideProps = async () => {
     });
 
     const pageRes = await pageReq.json();
-    console.log(pageRes, "Ddddf");
     const blogRes = await blogsReq.json();
     const tagsRes = await tagsReq.json();
+    console.log(pageRes, "aKS");
     return {
       props: {
         pageData: pageRes.data || null,
@@ -53,12 +63,7 @@ export const getServerSideProps = async () => {
   }
 };
 
-export default function Tips({
-  pageData,
-  blogsData,
-  totalPosts,
-  tags,
-}: BlogPageProps) {
+export default function Tips({ pageData, blogsData, totalPosts, tags }: any) {
   const { colors } = useTheme();
   const [posts, setPosts] = useState(blogsData);
   const [totalCount, setTotalCount] = useState(totalPosts);
@@ -68,8 +73,6 @@ export default function Tips({
 
   const [sort, setSort] = useState("");
   const [isLoading, setIsLoading] = useState(true);
-  const [isEnd, setIsEnd] = useState(false);
-
   // useCallbackWhenReachedBottom(async () => {
   //   if (posts.length < totalCount) {
   //     setIsLoading(true);
@@ -138,12 +141,12 @@ export default function Tips({
 
     getPaginatedBlogs();
   }, [search, sort, selectedTag]);
-
+  console.log(pageData);
   return (
     <>
       <PageWrapper
         seo={{
-          title: "Tips voor jou",
+          title: pageData?.seo_title,
           description: pageData?.seo_description
             ? pageData?.seo_description
             : pageData?.page_subtitle,
@@ -172,7 +175,7 @@ export default function Tips({
               <Grid item xs={0} md={2} lg={3} />
               <Grid item xs={12} md={8} lg={6}>
                 <TitleWithHighlights
-                  text="Tips voor jou"
+                  text={pageData?.title}
                   style={{
                     textAlign: "center",
 
@@ -191,8 +194,7 @@ export default function Tips({
                     letterSpacing: "0.5px",
                   }}
                 >
-                  Bekijk hier leuke tips in de vorm van <br />
-                  films, boeken, doe-opdrachten
+                  {pageData?.sub_title}
                 </P>
                 <div
                   style={{
@@ -230,37 +232,39 @@ export default function Tips({
               transform: "translateY(calc(-50% - 24px))",
             }}
           >
-            <TagList
-              tags={tags}
-              selected={selectedTag}
-              prefix={
-                <H4
-                  style={{
-                    whiteSpace: "nowrap",
-                    display: "flex",
-                    alignItems: "flex-start",
-                    gap: "5px",
-                  }}
-                >
-                  Onderwerp{" "}
-                  <span
+            <Container className="max-w-[1384px]">
+              <TagList
+                tags={tags}
+                selected={selectedTag}
+                prefix={
+                  <H4
                     style={{
-                      marginTop: "-6px",
+                      whiteSpace: "nowrap",
+                      display: "flex",
+                      alignItems: "flex-start",
+                      gap: "5px",
                     }}
                   >
-                    👉🏾
-                  </span>
-                </H4>
-              }
-              suffix={<ChevronRight />}
-              onSelect={(x: string) => {
-                if (x === selectedTag) {
-                  setSelectedTag("");
-                } else {
-                  setSelectedTag(x);
+                    Onderwerp{" "}
+                    <span
+                      style={{
+                        marginTop: "-6px",
+                      }}
+                    >
+                      👉🏾
+                    </span>
+                  </H4>
                 }
-              }}
-            />
+                suffix={<ChevronRight />}
+                onSelect={(x: string) => {
+                  if (x === selectedTag) {
+                    setSelectedTag("");
+                  } else {
+                    setSelectedTag(x);
+                  }
+                }}
+              />
+            </Container>
           </div>
           {/* 
         <CollectionSearchBar
@@ -270,7 +274,7 @@ export default function Tips({
         /> */}
 
           <div style={{ margin: "0px auto" }}>
-            <Container style={{ marginBottom: "0px", maxWidth: "100%" }}>
+            <Container style={{ marginBottom: "0px", maxWidth: "1384px" }}>
               <Grid container>
                 <Grid item xs={12} md={9}>
                   <P
@@ -289,7 +293,7 @@ export default function Tips({
               </Grid>
             </Container>
             <MasonryGrid
-              feed={posts.map((item) => ({
+              feed={posts.map((item: any) => ({
                 id: `blog-${uuidv4()}`,
                 type: "blog",
                 width: 4,
@@ -300,9 +304,9 @@ export default function Tips({
 
           <div className="flex items-center justify-center">
             {/* {isLoading && <CircularProgress size={"30px"} />} */}
-            {isEnd && (
+            {posts?.lenght <= 0 && (
               <P style={{ marginLeft: "1rem" }} color="info">
-                Geen posts meer om te tonen
+                Geen posts om te tonen
               </P>
             )}
           </div>

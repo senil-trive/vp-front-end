@@ -1,8 +1,8 @@
 import React from "react";
 
-import { H4, P, TitleWithHighlights } from "../../components/typography";
+import { P, TitleWithHighlights } from "../../components/typography";
 import BriefItem from "../../components/content-types/BriefItem/BriefItem";
-import { Container, Grid } from "@mui/material";
+import { Container } from "@mui/material";
 import ENDPOINTS from "../../constants/endpoints";
 import { Hero } from "../../components/layout";
 import { Letter } from "../../types/content-types/Letter.type";
@@ -10,7 +10,6 @@ import { POST_PER_PAGE } from "../../constants/app-configs";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import { getLetters } from "../../utils/api";
 import parseImageURL from "../../utils/parseImageURL";
-import { FaChevronDown } from "react-icons/fa";
 import InfoCard from "../../components/content-types/InfoCard/InfoCard";
 import Button from "../../components/buttons/Button";
 

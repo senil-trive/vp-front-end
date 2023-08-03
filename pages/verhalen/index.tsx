@@ -1,4 +1,4 @@
-import { CircularProgress, Container, Grid } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import { H4, P, TitleWithHighlights } from "../../components/typography";
 import React, { useEffect, useState } from "react";
 import {
@@ -6,9 +6,7 @@ import {
   getPostOverviewPageData,
   getPosts,
 } from "../../utils/api";
-
 import { BlogPageProps } from "../../types/pageTypes";
-import CollectionSearchBar from "../../components/form/CollectionSearchBar/CollectionSearchBar";
 import { Hero, Pagination } from "../../components/layout";
 import { MasonryGrid } from "../../components/layout/MasonryGrid/MasonryGrid";
 import { POST_PER_PAGE } from "../../constants/app-configs";
@@ -16,7 +14,6 @@ import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import SortBar from "../../components/form/SortBar/SortBar";
 import TagList from "../../components/buttons/TagList/TagList";
 import parseImageURL from "../../utils/parseImageURL";
-import { useCallbackWhenReachedBottom } from "../../utils/scroll";
 import { useTheme } from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 import ChevronRight from "../../components/icons/ChevronRight/ChevronRight";
@@ -69,34 +66,6 @@ export default function Forum({
   const [sort, setSort] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
-
-  // useCallbackWhenReachedBottom(async () => {
-  //   if (posts.length < totalCount) {
-  //     setIsLoading(true);
-  //     try {
-  //       const req = await getPosts({
-  //         postPerPage: POST_PER_PAGE,
-  //         page: currentPage + 1,
-  //         search,
-  //         sort,
-  //         meta: "filter_count",
-  //         filter:
-  //           selectedTag.length > 0
-  //             ? `filter={"categories": { "categories_id": { "id": { "_eq": "${selectedTag}"}}}}`
-  //             : ``,
-  //       });
-  //       const res = await req.json();
-
-  //       setPosts([...posts, ...(res.data || [])]);
-  //       setIsLoading(false);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-
-  //   } else {
-  //     setIsEnd(true);
-  //   }
-  // });
 
   const handleSearch = (x: string) => {
     console.log("hereeee", x);
@@ -261,14 +230,6 @@ export default function Forum({
             />
           </Container>
         </div>
-
-        {/* 
-        <CollectionSearchBar
-          quote={pageData?.search_bar_quote ?? ""}
-          onSearch={handleSearch}
-          searchLabel="Doorzoek de verhalen"
-        /> */}
-
         <div style={{ margin: "0px auto" }}>
           <Container style={{ marginBottom: "0px", maxWidth: "1384px" }}>
             <Grid container>
@@ -299,7 +260,6 @@ export default function Forum({
         </div>
 
         <div className="flex items-center justify-center">
-          {/* {isLoading && <CircularProgress size={"30px"} />} */}
           {isEnd && (
             <P style={{ marginLeft: "1rem" }} color="info">
               Geen posts meer om te tonen

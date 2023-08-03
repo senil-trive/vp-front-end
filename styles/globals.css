@@ -11,11 +11,11 @@
 @import "swiper/css";
 @import "swiper/css/free-mode";
 @import "swiper/css/pagination";
-@import "../fonts/handwritten/fonts.css";
+@import "../fonts/fonts.css";
 
 @font-face {
   font-family: "Avenir";
-  /* src: url("../fonts/avenir/avenir.otf"); */
+
   src: url("../fonts/avenir/avenir_next.ttf");
   font-weight: normal;
   font-style: normal;
