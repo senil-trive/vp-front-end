@@ -66,8 +66,6 @@ const Bedankt: React.FC<any> = (pageData) => {
           minHeight: 754,
           position: "relative",
         }}
-        mbgn={"/bedkant.png"}
-        mobileImageHeight={740}
       >
         <HeroBannerWrapper className="zoeken-page">
           <div className="title-wrap max-w-5xl">
@@ -87,7 +85,7 @@ const Bedankt: React.FC<any> = (pageData) => {
               style={{
                 textAlign: "center",
                 fontSize: "18px",
-                width: "568px",
+                maxWidth: "568px",
                 fontWeight: "300",
                 margin: "32px auto 44px",
               }}
