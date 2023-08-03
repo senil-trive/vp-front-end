@@ -163,8 +163,10 @@ export default function LetterDetail({
       seo={{
         title: pageData.title,
         description:
-          pageData.content.length > 160 ? pageData.content.slice(0, 160) : "",
-        canonical: `https://www.villapinedo.nl/forum/${pageData.slug}`,
+          pageData?.content?.length > 160
+            ? pageData?.content.slice(0, 160)
+            : "",
+        canonical: `https://www.villapinedo.nl/forum/${pageData?.slug}`,
         og: {
           type: "article",
           article: {
