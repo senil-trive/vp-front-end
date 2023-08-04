@@ -102,7 +102,7 @@ const TrainingDatesForm = ({
     flex-direction: column;
     height: 100%;
     border-radius: 8px;
-    padding: 32px 0px;
+    margin-top: 16px;
     label {
       font-family: "Avenir";
       font-style: normal;
@@ -178,6 +178,12 @@ const TrainingDatesForm = ({
                 onChange={() => {
                   setAcceptTAndC(!acceptTAndC);
                   setErrors({ ...error, acceptTAndC: "" });
+                }}
+                style={{
+                  fontFamily: "Avenir",
+                  color: "#150F2F",
+                  fontWeight: 300,
+                  fontStyle: "italic",
                 }}
               />
             </Grid>

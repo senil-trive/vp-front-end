@@ -17,6 +17,7 @@ export default function Dropdown({
   label,
   disabled,
   helperText,
+  fill,
   labelClass,
   register,
   name,
@@ -168,7 +169,7 @@ export default function Dropdown({
           </div>
           <span>
             {!isOpen ? (
-              <ChevronDownFilled color={borderColor} />
+              <ChevronDownFilled color={borderColor} fill={fill} />
             ) : (
               <ChevronUpFilled color={borderColor} />
             )}

@@ -6,6 +6,7 @@ const InputCheckbox: FC<any> = ({
   checked,
   setChecked,
   onChange,
+  style,
 }) => {
   const checkboxChange = (e: any) => {
     onChange();
@@ -20,7 +21,18 @@ const InputCheckbox: FC<any> = ({
         checked={checked}
         onChange={checkboxChange}
       />
-      <label>{label}</label>
+      <label
+        style={
+          style || {
+            fontFamily: "Avenir",
+            color: "#150F2F",
+            fontWeight: 300,
+            fontStyle: "normal",
+          }
+        }
+      >
+        {label}
+      </label>
     </React.Fragment>
   );
 };

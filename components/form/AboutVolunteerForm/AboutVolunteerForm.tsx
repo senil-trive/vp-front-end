@@ -147,6 +147,7 @@ const AboutVolunteerForm = ({
             <Grid item xs={12} md={4}>
               <Dropdown
                 options={GENDERS}
+                fill={"#FE517E"}
                 required
                 label="Wat is je geslacht?"
                 placeholder="Jouw geslacht..."
@@ -215,6 +216,7 @@ const AboutVolunteerForm = ({
                 required
                 label="Hoe ken je ons?"
                 name="know_about_us"
+                fill={"#FE517E"}
                 register={register}
                 placeholder="selecteer..."
                 helperText={
@@ -223,7 +225,6 @@ const AboutVolunteerForm = ({
                     : ""
                 }
                 hasError={!!errors.know_about_us}
-                // setValue={setKnowFrom}
               />
             </Grid>
             {knowFrom === "Anderen" && (

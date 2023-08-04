@@ -1,6 +1,72 @@
 import styled from "styled-components";
 
 export const MasonryGridWrapper = styled.div`
+  .front .main-forum.forum-post {
+    background: #fe517e;
+    width: 100%;
+
+    .forum-tags {
+      color: #fe517e !important;
+    }
+  }
+  .back .main-forum.forum-post {
+    background: #fff5f8 !important;
+    width: 100%;
+  }
+  .forum-card {
+    perspective: 4000px;
+    position: relative;
+  }
+
+  .forum-content {
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    text-align: left;
+
+    transition: transform 1s;
+    transform-style: preserve-3d;
+    .custom_forum_tags {
+      line-height: 1.5;
+    }
+  }
+
+  .forum-card:hover .forum-content {
+    transform: rotateY(180deg);
+    transition: transform 0.5s;
+  }
+
+  .front,
+  .back {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    line-height: 300px;
+    color: #03446a;
+    font-size: 60px;
+    border-radius: 5px;
+    backface-visibility: hidden;
+  }
+
+  .back {
+    h4,
+    h3,
+    p,
+    div {
+      color: #150f2f !important;
+    }
+    transform: rotateY(180deg);
+    .forum-tags {
+      span {
+        color: #fff !important;
+        background: #fe517e !important;
+      }
+    }
+  }
+  .front .forum-tags span {
+    color: #fe517e !important;
+  }
+
   margin-bottom: 32px;
   overflow-x: hidden;
   .mason-grid {
