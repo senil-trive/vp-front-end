@@ -4,7 +4,6 @@ export const MasonryGridWrapper = styled.div`
   .front .main-forum.forum-post {
     background: #fe517e;
     width: 100%;
-
     .forum-tags {
       color: #fe517e !important;
     }
