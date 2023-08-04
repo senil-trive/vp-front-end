@@ -79,14 +79,15 @@ const StyledForumPost = styled.article<styledProps>`
     border: 0;
     color: white;
 
-    .forum-tag {
+    main-forum .forum-tag {
       background: #fff !important;
     }
-    .content {
+   .main-forum .content {
     
       .forum-tags {
         span {
-          background: ${({ theme }) => theme.colors.secondary.normal};
+          background: ${({ theme }) =>
+            theme.colors.secondary.normal} !important;
           border: none;
           color: white;
           font-weight: 400;
@@ -131,7 +132,7 @@ const StyledForumPost = styled.article<styledProps>`
         background: white;
         border: none;
         height: 41px;
-        color: #3fc7b4;
+        color: #3fc7b4 !important;
         font-weight: 400;
         font-size: 18px;
         font-family: "Fjalla One";
