@@ -11,12 +11,14 @@ type Props = {
   title?: string;
   containerWidth?: "sm" | "md" | "lg" | "xl" | undefined;
   showLoadMore?: boolean;
+  show?: boolean;
   items: FAQ[];
   isLoading?: boolean;
   onLoadMore?: () => void;
 };
 
 export default function FAQList({
+  show,
   title,
   showLoadMore,
   items = [],
@@ -30,7 +32,7 @@ export default function FAQList({
     if (onLoadMore) onLoadMore();
   };
   return (
-    <div className="hidden sm:block">
+    <div className={`${show ? "block" : "hidden sm:block"}`}>
       <FAQListWrapper
         className="md:text-center mb-"
         style={{ marginBottom: showLoadMore ? 56 : 0 }}

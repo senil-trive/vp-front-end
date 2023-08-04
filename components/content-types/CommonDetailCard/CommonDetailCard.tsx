@@ -11,6 +11,44 @@ const DescriptionText = styled.p`
   margin-bottom: 0;
 `;
 
+const CommonDetailCardWrapper = styled(Card)`
+  a {
+    margin-top: 20px;
+    background: #fff;
+    border: none;
+    color: #ff971d !important;
+  }
+  &.divorced-parents {
+    margin-bottom: 20px;
+    width: calc(25% - 15px) !important;
+    @media (max-width: 991px) {
+      width: calc(50% - 20px) !important;
+      &:nth-child(2) {
+        margin-right: 0 !important;
+      }
+    }
+    @media (max-width: 767px) {
+      width: calc(100% - 20px) !important;
+    }
+    footer {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      z p {
+        margin-bottom: 20px;
+      }
+    }
+    a {
+      margin-top: auto;
+    }
+  }
+
+  // footer {
+  //   display: flex;
+  //   flex-direction: column;
+  //   flex: 1;
+  // }
+`;
 const CommonDetailCard = ({
   title,
   description,
@@ -19,6 +57,7 @@ const CommonDetailCard = ({
   variant,
   buttonLink,
   leftIcon,
+  className,
 }: any) => {
   const generateMediaItem = () => {
     let Child = null;
@@ -36,7 +75,10 @@ const CommonDetailCard = ({
     return <CardHeader>{Child}</CardHeader>;
   };
   return (
-    <Card className="card-container" variant={variant}>
+    <CommonDetailCardWrapper
+      className={`card-container ${className}`}
+      variant={variant}
+    >
       {generateMediaItem()}
       <CardFooter>
         <div className="icon-title-wrapper">
@@ -58,7 +100,7 @@ const CommonDetailCard = ({
           </Button>
         )}
       </CardFooter>
-    </Card>
+    </CommonDetailCardWrapper>
   );
 };
 

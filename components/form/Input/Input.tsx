@@ -87,13 +87,13 @@ const InputWrapper = styled.div<InputStateType>`
       font-weight: 400;
       font-size: 18px;
       line-height: 160%;
-
+      font-family: "Avenir" !important;
       color: #888888;
       background-color: transparent;
       ::placeholder {
-        color: #777 !important;
+        color: #a7a7a7 !important;
         font-weight: 300 !important;
-        font-family: "Avenir Next Cyr" !important;
+        font-family: "Avenir" !important;
         opacity: 1;
       }
       &:focus {

@@ -36,7 +36,7 @@ const SignupStepperForm = ({ stepTitle, children }: any) => {
         return (
           <>
             <div className="flex justify-between">
-              <H3>Wie ben jij</H3>
+              <H3>Wie ben jij?</H3>
               <H3>{step + "/" + 3}</H3>
             </div>
             <AboutVolunteerForm
@@ -71,7 +71,9 @@ const SignupStepperForm = ({ stepTitle, children }: any) => {
                 <H3 className="text-[32px]">Trainingsdata</H3>
                 <H3>{step + "/" + 3}</H3>
               </div>
-              <P>Ik ben aanwezig op deze trainingen (één kiezen):</P>
+              <P style={{ fontWeight: "800" }}>
+                Ik ben aanwezig op deze trainingen (één kiezen):
+              </P>
             </div>
             <TrainingDatesForm
               step={step}

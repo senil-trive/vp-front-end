@@ -37,6 +37,7 @@ export const DropdownWrapper = styled.div<{ hasError: boolean }>`
       font-weight: 400;
       font-size: 18px;
       line-height: 160%;
+      color: #a7a7a7;
     }
 
     &.open {

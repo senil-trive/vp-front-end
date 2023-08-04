@@ -17,6 +17,7 @@ export type DropdownProps = {
   /** React or custom Icon to be placed in front of the input  */
   iconLeft?: ReactNode;
 
+  fill?: string;
   /** Options that should be used as dropdown options */
   options: DropdownItem[];
 

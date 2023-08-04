@@ -6,17 +6,21 @@ import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
 import { truncate } from "../../../utils/truncate";
 import { FiHeart } from "react-icons/fi";
 import { H4, P } from "../../typography";
+import Button from "../../buttons/Button";
+import Link from "next/link";
 
 type Props = {
   name?: string;
   gender: string;
   age: string;
+  button?: boolean;
   authorType?: string;
   title: string;
   content: string;
   truncateContent?: boolean;
   showButton?: boolean;
   buttonUrl?: string;
+  className?: string;
   tags: string[];
   comments?: number;
   fullHeight?: boolean;
@@ -35,8 +39,14 @@ const StyledForumPost = styled.article<styledProps>`
   overflow: hidden;
   position: relative;
   z-index: 1;
+ &.main-forum{
   background-color: ${({ theme, showButton }: any) =>
-    showButton ? theme.colors.secondary.normal : theme.colors.primary.normal};
+    showButton
+      ? theme.colors.secondary.normal
+      : theme.colors.primary.normal} !important;
+  
+  width:100%;
+ }
   height: 100%;
   p {
   }
@@ -121,7 +131,7 @@ const StyledForumPost = styled.article<styledProps>`
         background: white;
         border: none;
         height: 41px;
-        color: #3fc7b4 !important;
+        color: #3fc7b4;
         font-weight: 400;
         font-size: 18px;
         font-family: "Fjalla One";
@@ -163,6 +173,7 @@ const StyledForumPost = styled.article<styledProps>`
 `;
 
 export default function ForumPost({
+  button,
   title,
   content,
   age,
@@ -174,6 +185,7 @@ export default function ForumPost({
   fullHeight = true,
   tags = [],
   name,
+  className,
 }: Props) {
   const generateContent = () => {
     if (fullHeight && truncateContent) {
@@ -190,6 +202,7 @@ export default function ForumPost({
     <StyledForumPost
       showButton={showButton}
       style={{ minHeight: fullHeight ? "624px" : "" }}
+      className={`main-forum ${className}`}
     >
       <div>
         <p className="font-extrabold text-lg text-[#fff]">{name}</p>
@@ -220,26 +233,33 @@ export default function ForumPost({
           </div>
         </div>
       </div>
-      <ComponentTag {...props}>
-        <footer>
-          <div>
-            <div className="icon-wrapper mr-4">
-              <FiHeart size={24} />
-              <p className="font-avenir font-light text-[16px] md:text-[18px]">
-                {comments}
-              </p>
+      {button ? (
+        <Link href={buttonUrl}>
+          <footer>
+            <Button variant="secondary">Laat een reachtie achter!</Button>
+          </footer>
+        </Link>
+      ) : (
+        <ComponentTag {...props}>
+          <footer>
+            <div>
+              <div className="icon-wrapper mr-4">
+                <FiHeart size={24} />
+                <p className="font-avenir font-light text-[16px] md:text-[18px]">
+                  {comments}
+                </p>
+              </div>
             </div>
-          </div>
-          <div>
-            {postDate && (
-              <p className="geplaatst font-avenir font-light text-lg italic text-right">
-                Geplaatst op {parseDate(postDate)}
-              </p>
-            )}
-          </div>
-        </footer>
-        {/* </a> */}
-      </ComponentTag>
+            <div>
+              {postDate && (
+                <p className="geplaatst font-avenir font-light text-lg italic text-right">
+                  Geplaatst op {parseDate(postDate)}
+                </p>
+              )}
+            </div>
+          </footer>
+        </ComponentTag>
+      )}
     </StyledForumPost>
   );
 }

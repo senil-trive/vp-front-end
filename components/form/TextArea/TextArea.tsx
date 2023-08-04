@@ -74,9 +74,13 @@ const Wrapper = styled.div<InputStateType>`
       line-height: 160%;
       color: #888888;
       background-color: transparent;
-
+      font-family: "Avenir";
       &:focus {
         outline: 0;
+      }
+      ::placeholder {
+        font-family: "Avenir";
+        color: #a7a7a7 !important;
       }
     }
   }

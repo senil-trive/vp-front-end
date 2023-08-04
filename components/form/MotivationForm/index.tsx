@@ -53,12 +53,11 @@ const MotivationForm = ({
       background-position: left 225px top -75px;
       z-index: 1;
     }
+    margin-top: 16px;
     display: flex;
     flex-direction: column;
     height: 100%;
     border-radius: 8px;
-    padding: 32px 0;
-
     label {
       font-family: "Avenir";
       font-style: normal;

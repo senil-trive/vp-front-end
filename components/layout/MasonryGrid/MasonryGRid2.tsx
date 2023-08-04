@@ -139,26 +139,50 @@ export function MasonryGrid({
 
                 <div className="forum-post">
                   <motion.div
-                    className={`grid-item grid-item-w-10`}
+                    className={`grid-item grid-item-w-10 forum-card`}
                     initial="offscreen"
                     whileInView="onscreen"
                     viewport={{ once: true, amount: 0.1 }}
                   >
-                    <ForumPost
-                      showButton
-                      fullHeight={fullHeightItems}
-                      buttonUrl="#"
-                      truncateContent
-                      gender='{"name":"Kirsten","value":"v"}'
-                      image={""}
-                      age="25"
-                      name={"Kirsten"}
-                      tags={["TAG NAME", "Tag Name"]}
-                      title={"Titel moet in CMS worden ingevoerd"}
-                      comments={156}
-                      postDate={new Date("2023-04-05T08:45:08.000Z")}
-                      content="Ik heb het gevoel dat mijn ouders gaan scheiden. Met wie kan ik praten en wat kan ik het beste doen in dit geval? Ik heb gehoord dat ik bij Villa Pinedo een Buddy kan krijgen waarmee ik kan praten over alles waar ik mee zit. Dat is precies wat ik zoek."
-                    />
+                    <div className="forum-content">
+                      <div className="front">
+                        <ForumPost
+                          showButton
+                          fullHeight={fullHeightItems}
+                          buttonUrl="#"
+                          truncateContent
+                          gender='{"name":"Kirsten","value":"v"}'
+                          image={""}
+                          age="25"
+                          name={"Kirsten"}
+                          tags={["TAG NAME", "Tag Name"]}
+                          title={"Titel moet in CMS worden ingevoerd"}
+                          comments={156}
+                          postDate={new Date("2023-04-05T08:45:08.000Z")}
+                          className="forum-post"
+                          content="Ik heb het gevoel dat mijn ouders gaan scheiden. Met wie kan ik praten en wat kan ik het beste doen in dit geval? Ik heb gehoord dat ik bij Villa Pinedo een Buddy kan krijgen waarmee ik kan praten over alles waar ik mee zit. Dat is precies wat ik zoek."
+                        />
+                      </div>
+                      <div className="back">
+                        <ForumPost
+                          showButton
+                          fullHeight={fullHeightItems}
+                          buttonUrl="#"
+                          truncateContent
+                          gender='{"name":"Kirsten","value":"v"}'
+                          image={""}
+                          age="25"
+                          name={"Kirsten"}
+                          tags={["TAG NAME", "Tag Name"]}
+                          title={"Titel moet in CMS worden ingevoerd"}
+                          comments={156}
+                          postDate={new Date("2023-04-05T08:45:08.000Z")}
+                          className="forum-post"
+                          content="Ik heb het gevoel dat mijn ouders gaan scheiden. Met wie kan ik praten en wat kan ik het beste doen in dit geval? Ik heb gehoord dat ik bij Villa Pinedo een Buddy kan krijgen waarmee ik kan praten over alles waar ik mee zit. Dat is precies wat ik zoek."
+                          button={true}
+                        />
+                      </div>
+                    </div>
                   </motion.div>
                 </div>
 
@@ -349,36 +373,65 @@ export function MasonryGrid({
                 const forumContent = content as ForumPostType;
                 return (
                   <motion.div
-                    className={`grid-item grid-item-w-${item.width}`}
+                    className={`grid-item grid-item-w-${item.width} forum-card`}
                     key={index}
                     initial="offscreen"
                     whileInView="onscreen"
                     viewport={{ once: true, amount: 0.1 }}
                   >
-                    <Link href={`/forum/${forumContent?.slug}`}>
-                      <ForumPost
-                        showButton
-                        fullHeight={fullHeightItems}
-                        buttonUrl={`/forum/${forumContent.slug}`}
-                        truncateContent
-                        gender={forumContent.user_gender}
-                        image={parseImageURL(forumContent?.user_image?.id)}
-                        age={forumContent.user_age}
-                        name={forumContent.user_name}
-                        postDate={new Date(forumContent.date_created)}
-                        tags={
-                          forumContent.categories?.map(
-                            (cat) => cat.categories_id?.name
-                          ) ?? []
-                        }
-                        title={
-                          forumContent.title ??
-                          "Titel moet in CMS worden ingevoerd"
-                        }
-                        comments={forumContent.comments.length}
-                        content={forumContent.content}
-                      />
-                    </Link>
+                    <div className="forum-content">
+                      <div className="front">
+                        <ForumPost
+                          showButton
+                          fullHeight={fullHeightItems}
+                          buttonUrl={`/forum/${forumContent.slug}`}
+                          truncateContent
+                          gender={forumContent.user_gender}
+                          image={parseImageURL(forumContent?.user_image?.id)}
+                          age={forumContent.user_age}
+                          name={forumContent.user_name}
+                          postDate={new Date(forumContent.date_created)}
+                          tags={
+                            forumContent.categories?.map(
+                              (cat) => cat.categories_id?.name
+                            ) ?? []
+                          }
+                          title={
+                            forumContent.title ??
+                            "Titel moet in CMS worden ingevoerd"
+                          }
+                          comments={forumContent.comments.length}
+                          className="forum-post"
+                          content={forumContent.content}
+                        />
+                      </div>
+                      <div className="back">
+                        <ForumPost
+                          showButton
+                          fullHeight={fullHeightItems}
+                          buttonUrl={`/forum/${forumContent.slug}`}
+                          truncateContent
+                          gender={forumContent.user_gender}
+                          image={parseImageURL(forumContent?.user_image?.id)}
+                          age={forumContent.user_age}
+                          name={forumContent.user_name}
+                          postDate={new Date(forumContent.date_created)}
+                          tags={
+                            forumContent.categories?.map(
+                              (cat) => cat.categories_id?.name
+                            ) ?? []
+                          }
+                          title={
+                            forumContent.title ??
+                            "Titel moet in CMS worden ingevoerd"
+                          }
+                          comments={forumContent.comments.length}
+                          content={forumContent.content}
+                          className="forum-post"
+                          button={true}
+                        />
+                      </div>
+                    </div>
                   </motion.div>
                 );
               case "blog":
