@@ -3,12 +3,15 @@ import { H3, P } from "../../typography";
 import styled, { useTheme } from "styled-components";
 
 import { FAQ } from "../../../types/content-types/FAQ.type";
-import React from "react";
+import React, { useEffect } from "react";
 import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
 
 interface FAQItemProps extends Partial<FAQ> {
   isSelected: boolean;
   onSelect: (id: string) => void;
+  visible: boolean;
+  setVisible: (params: boolean) => void;
+  selected: string;
 }
 
 const StyleFaq = styled.div`
@@ -50,33 +53,43 @@ const StyleFaq = styled.div`
 
 const FAQItem: React.FC<FAQItemProps> = ({
   id,
+  selected,
   isSelected = false,
   title,
   description,
   onSelect,
+  visible,
+  setVisible,
 }) => {
   const theme = useTheme();
-
+  useEffect(() => {
+    setVisible(true);
+  }, []);
   const handelSelect = () => {
     onSelect(id ?? "");
+
+    id !== selected ? setVisible(true) : setVisible(!visible);
   };
 
   return (
     <StyleFaq
       className={`cursor-pointer p-[25px] md:pl-[61px] md:p-[42px] rounded-lg ${
-        isSelected ? "bg-[#3FC7B4]" : "bg-[#3fc7b440]"
+        isSelected && visible ? "bg-[#3FC7B4]" : "bg-[#3fc7b440]"
       } hover:bg-[#3FC7B4]`}
       onClick={handelSelect}
     >
       <div className="flex items-center justify-between  text-left">
-        <H3 color={isSelected ? "white" : "black"} className="faq-title">
+        <H3
+          color={isSelected && visible ? "white" : "black"}
+          className="faq-title"
+        >
           {title}
         </H3>
         <button
           onClick={handelSelect}
           className="flex items-center justify-center w-8 h-8"
         >
-          {isSelected ? (
+          {isSelected && visible ? (
             <FiMinus color={`white`} size={42} />
           ) : (
             <FiPlus color={`black`} size={42} />
@@ -85,7 +98,9 @@ const FAQItem: React.FC<FAQItemProps> = ({
       </div>
 
       <div
-        className={`description text-left ${isSelected ? "visible" : ""}`}
+        className={`description text-left ${
+          isSelected && visible ? "visible" : ""
+        }`}
         style={{ color: "#fff" }}
       >
         {parseHTMLtoReact(description ?? "")}
