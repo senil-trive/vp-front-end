@@ -48,7 +48,7 @@ const Dark = () => {
   return (
     <>
       <Image
-        src={"/logo.png"}
+        src={"/header.svg"}
         height={100}
         width={200}
         className={isTablet ? "" : "hidden"}

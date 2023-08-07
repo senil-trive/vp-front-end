@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Container } from "@mui/system";
+import { Grid } from "@mui/material";
 
 const HeroBannerWrapper = styled(Container)`
   .title-wrap {
@@ -125,4 +126,104 @@ const ContainerWrapper = styled(Container)<{ cardHeight?: number | string }>`
     }
   }
 `;
-export { HeroBannerWrapper, ContainerWrapper };
+
+const ForumFlipWrapper = styled(Grid)`
+  &.form-card {
+    perspective: 4000px;
+    position: relative;
+    height: 600px;
+  }
+  .front .main-forum.forum-post {
+    background: #fe517e;
+    width: 100%;
+    .forum-tags span {
+      color: #fe517e !important;
+    }
+  }
+  .back .main-forum.forum-post {
+    background: #fff5f8 !important;
+    width: 100%;
+  }
+  .forum-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    text-align: left;
+
+    transition: transform 1s;
+    transform-style: preserve-3d;
+    .custom_forum_tags {
+      line-height: 1.5;
+    }
+  }
+  &.forum-card:hover .forum-content {
+    transform: rotateY(180deg);
+    transition: transform 0.5s;
+    .back .main-forum.forum-post.forum-list {
+      .forum-tags span {
+        background: #3fc7b4 !important;
+        color: #fff !important;
+      }
+      .back-act {
+        background: #3fc7b4 !important;
+        border: none !important;
+      }
+    }
+  }
+
+  .front,
+  .back {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    line-height: 300px;
+    // color: #03446a;
+    font-size: 60px;
+    border-radius: 5px;
+    backface-visibility: hidden;
+  }
+
+  .back {
+    h4,
+    h3,
+    p,
+    div {
+      color: #150f2f !important;
+    }
+    transform: rotateY(180deg);
+  }
+  .back .main-forum.forum-post .forum-tags .forum-tag {
+    color: #fff !important;
+    background: #fe517e !important;
+  }
+  .front .forum-tags span {
+    color: #fe517e !important;
+  }
+  .front .main-forum.forum-post.forum-list {
+    .forum-tags span {
+      color: #3fc7b4 !important;
+    }
+    .back-act {
+      background: #3fc7b4 !important;
+      border: none !important;
+    }
+  }
+  .back .main-forum.forum-post.forum-list {
+    .forum-tags span {
+      background: #3fc7b4 !important;
+      color: #fff !important;
+    }
+    .forum-link:hover {
+      button {
+        color: #fff !important;
+      }
+    }
+  }
+  .front .main-forum.forum-post.forum-list {
+    .forum-footer {
+      height: auto !important;
+    }
+  }
+`;
+export { HeroBannerWrapper, ContainerWrapper, ForumFlipWrapper };

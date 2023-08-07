@@ -251,7 +251,7 @@ const GescheidenOudersWatNu: React.FC<BuddyPageProps> = ({
                     fontSize: "18px",
                     fontWeight: "400",
                   }}
-                  href="/vrijwilligerswerk/faq"
+                  href="/faqs/volunteer_faq"
                   className="w-[100%] bg-[#3FC7B4] text-[#fff] no-underline hover:underline"
                 >
                   {pageData?.more_faq_button_title}

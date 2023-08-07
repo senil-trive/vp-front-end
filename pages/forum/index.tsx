@@ -22,6 +22,7 @@ import Input from "../../components/form/Input/Input";
 import SearchIcon from "../../components/icons/SearchIcon/SearchIcon";
 import { HeroButtonWrapper } from "../../styles/kinderen/index.styles";
 import SortBar from "../../components/form/SortBar/SortBar";
+import { ForumFlipWrapper } from "../../styles/global.styled";
 const forumSortOptions = [
   { name: "Titel (a-z)", value: "content" },
   { name: "Titel (z-a)", value: "-content" },
@@ -186,7 +187,6 @@ export default function Forum({
           style={{
             marginBottom: 32,
             transform: "translateY(calc(-50% - 24px))",
-            margin: "0 10px",
           }}
         >
           <TagList
@@ -215,10 +215,11 @@ export default function Forum({
             suffix={<ChevronRight />}
             onSelect={(x: string) => {
               setSelectedTag(x);
+              setCurrentPage(1);
             }}
           />
         </div>
-        <Container className="max-w-[1384px] mt-[-90px] mx-[auto] md:mt-[0px] md:mb-[56px]">
+        <Container className="max-w-[1384px] mt-[-90px] mx-[auto] md:mt-[0px] md:mb-[56px] px-[32px]">
           <Grid container spacing={"34px"}>
             <>
               <Grid item xs={12} md={9}>
@@ -268,29 +269,63 @@ export default function Forum({
               ) : (
                 <>
                   {posts?.map((item, index) => (
-                    <Grid key={index} item xs={12} md={4}>
-                      <Link href={`/forum/${item.slug}`}>
-                        <ForumPost
-                          truncateContent
-                          fullHeight={false}
-                          gender={item.user_gender}
-                          age={item.user_age}
-                          name={item.user_name}
-                          image={item.user_image?.id || "asad"}
-                          postDate={new Date(item.date_created)}
-                          tags={
-                            item.categories?.map(
-                              (cat) => cat.categories_id?.name
-                            ) ?? []
-                          }
-                          title={
-                            item.title ?? "Titel moet in CMS worden ingevoerd"
-                          }
-                          comments={item.comments.length}
-                          content={item.content}
-                        />
-                      </Link>
-                    </Grid>
+                    <ForumFlipWrapper
+                      key={index}
+                      item
+                      xs={12}
+                      md={4}
+                      className="forum-card h-[400px] md:h-[540px]"
+                    >
+                      <>{console.log(item)}</>
+                      <div className="forum-content">
+                        <div className="front">
+                          <ForumPost
+                            truncateContent
+                            fullHeight={false}
+                            gender={item.user_gender}
+                            age={item.user_age}
+                            name={item.user_name}
+                            image={item.user_image?.id || "asad"}
+                            postDate={new Date(item.date_created)}
+                            tags={
+                              item.categories?.map(
+                                (cat) => cat.categories_id?.name
+                              ) ?? []
+                            }
+                            title={
+                              item.title ?? "Titel moet in CMS worden ingevoerd"
+                            }
+                            comments={item.comments.length}
+                            content={item.content}
+                            className="forum-post forum-list"
+                          />
+                        </div>
+                        <div className="back z-10">
+                          <ForumPost
+                            truncateContent
+                            fullHeight={false}
+                            gender={item.user_gender}
+                            age={item.user_age}
+                            name={item.user_name}
+                            image={item.user_image?.id || "asad"}
+                            postDate={new Date(item.date_created)}
+                            button={true}
+                            tags={
+                              item.categories?.map(
+                                (cat) => cat.categories_id?.name
+                              ) ?? []
+                            }
+                            title={
+                              item.title ?? "Titel moet in CMS worden ingevoerd"
+                            }
+                            comments={item.comments.length}
+                            content={item.content}
+                            className="forum-post forum-list"
+                            buttonUrl={`/forum/${item?.slug}`}
+                          />
+                        </div>
+                      </div>
+                    </ForumFlipWrapper>
                   ))}
                 </>
               )}

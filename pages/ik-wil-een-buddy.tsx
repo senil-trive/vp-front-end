@@ -271,7 +271,7 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                   fontSize: "18px",
                   fontWeight: "400",
                 }}
-                href="/vrijwilligerswerk/faq"
+                href="/faqs/buddy_faq"
                 className="w-[100%] bg-[#3FC7B4] text-[#fff] no-underline hover:underline"
               >
                 {pageData?.more_faq_button_title}

@@ -11,7 +11,7 @@ import { VolunteerRequestType } from "../types/volunteerRequestTypes";
 
 type DirectusParams = {
   /** The amount of items that will be fetched, set -1 to retrieve all */
-  postPerPage: number;
+  postPerPage?: number;
 
   /** If post per page is set, you can use this param to paginate */
   page?: number;
@@ -609,15 +609,15 @@ export const getFeed = async ({
  * @returns
  */
 export const getFaqs = async ({
-  postPerPage,
-  page = 1,
+  // postPerPage,
+  // page = 1,
   search,
   sort,
   filter,
   meta = "total_count",
   type = "volunteer_faq",
 }: DirectusParams & { type?: string }) => {
-  let url = `${ENDPOINTS.COLLECTIONS}/faq_items?fields=*.*.*?filter[status][_eq]=published&filter[type][_eq]=${type}&limit=${postPerPage}&page=${page}`;
+  let url = `${ENDPOINTS.COLLECTIONS}/faq_items?fields=*.*.*?filter[status][_eq]=published&filter[type][_eq]=${type}`;
 
   if (meta) {
     url = `${url}&meta=${meta}`;

@@ -1,11 +1,9 @@
 import React, { ReactNode } from "react";
 import styled from "styled-components";
-import hexToRgba from "hex-to-rgba";
 
 import Button from "../../buttons/Button";
 import { P } from "../../typography";
 import UserAvatar from "../../icons/UserAvatar/UserAvatar";
-import bg from "../../../public/chatBg.png";
 
 const StyledForumPost = styled.article`
   &:before {
