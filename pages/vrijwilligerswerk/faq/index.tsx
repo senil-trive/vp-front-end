@@ -1,4 +1,4 @@
-import { P, TitleWithHighlights } from "../../../components/typography";
+import { H3, P, TitleWithHighlights } from "../../../components/typography";
 import { getFaqOverviewData, getFaqs } from "../../../utils/api";
 
 import FAQList from "../../../components/content-types/FAQList/FAQList";
@@ -119,26 +119,39 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
             </div>
           </HeroBannerWrapper>
         </Hero>
-        <ContainerWrapper className="voluntee">
+        <ContainerWrapper className="volunteer-faq">
           <div className="relative mt-[-134px] md:mt-[-150px]">
             <FAQList
               items={items}
               isLoading={isLoading}
               showLoadMore={showMoreButton}
               onLoadMore={changePage}
+              show={true}
               containerWidth={"md"}
             />
-            <Container className="mb-[80px]">
+            <Container className="my-[80px]">
               <Button
                 variant="link"
                 style={{ border: "2px solid" }}
-                className="w-[100%] text-[18px] font-[400] bg-[#FE517E] border-[#FE517E] text-[#fff] hover:text-[#FE517E] hover:bg-[#fff]"
+                className="w-[100%] text-[18px] font-[400] bg-transparent border-[#3FC7B4] text-[#3FC7B4] hover:text-[#fff] hover:bg-[#3FC7B4]"
               >
                 meer lezen
               </Button>
             </Container>
           </div>
         </ContainerWrapper>
+
+        <section className="my-[80px]">
+          <Container className="max-w-[1384px]">
+            <H3 className="mb-[18px]">{pageData?.another_question_title}</H3>
+            <P
+              style={{ fontFamily: "Avenir" }}
+              className="text-[18px] font-[300] md:text-[18px]"
+            >
+              {pageData?.another_question_description}
+            </P>
+          </Container>
+        </section>
       </main>
     </PageWrapper>
   );

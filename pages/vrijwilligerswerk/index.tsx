@@ -142,12 +142,12 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
                   title={pageData?.cta_section_block_1_title}
                   description={pageData?.cta_section_block_1_subtitle}
                   icon="/handsake.svg"
-                  className=" h-[100%] flex flex-col"
+                  className=" h-[100%] flex flex-col hover:cursor-text"
                 >
                   <div className="flex justify-center  mt-[20px] md:mt-[auto]">
                     <Button
                       variant="secondary"
-                      className="w-[100%] bg-[#FE517E] text-[18px] font-[400] text-[#fff] border-[#fff] mt-[20px]"
+                      className="w-[100%] bg-[#FE517E] text-[18px] font-[400] text-[#fff] mt-[20px]"
                       href={pageData?.cta_section_block_1_button_url}
                     >
                       {pageData?.cta_section_block_1_button_label}
@@ -160,12 +160,12 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
                   description={pageData?.cta_section_block_2_subtitle}
                   icon="/note.svg"
                   className="mt-[32px] md:mt-[0px] h-[100%] flex
-                  flex-col"
+                  flex-col hover:cursor-text"
                 >
                   <div className="flex justify-center mt-[20px] md:mt-[auto]">
                     <Button
                       variant="secondary"
-                      className="w-[100%] bg-[#3FC7B4] text-[18px] font-[400] text-[#fff] border-[#fff]"
+                      className="w-[100%] bg-[#3FC7B4] text-[18px] font-[400] text-[#fff] border-none"
                       href={pageData?.cta_section_block_2_button_url}
                     >
                       {pageData?.cta_section_block_2_button_label}
@@ -403,7 +403,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
                 variant="link"
                 style={{ color: colors.info.normal }}
                 href="/vrijwilligerswerk/faq"
-                className="w-[100%] text-[18px] font-[400] bg-[#FE517E] text-[#fff] no-underline hover:underline"
+                className="w-[100%] text-[18px] font-[400] text-[#fff] no-underline hover:underline"
               >
                 Meer lezen
               </Button>

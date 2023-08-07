@@ -61,11 +61,7 @@ const StyledForumPost = styled.article<styledProps>`
   .forum-tag {
     color: #fe517e !important;
   }
-  // a {
-  //   background: white;
-  //   color: ${({ theme }) => theme.colors.secondary.normal};
-  //   border: 0;
-  // }
+
 
   &:hover {
     --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
@@ -235,7 +231,7 @@ export default function ForumPost({
         </div>
       </div>
       {button ? (
-        <Link href={buttonUrl}>
+        <Link href={buttonUrl} className="hover:cursor-pointer">
           <footer>
             <Button variant="secondary">Laat een reachtie achter!</Button>
           </footer>

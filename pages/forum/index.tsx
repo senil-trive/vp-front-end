@@ -12,7 +12,7 @@ import { CircleSpinner } from "react-spinners-kit";
 import { ForumPageProps } from "../../types/pageTypes";
 import ForumPost from "../../components/content-types/ForumPost/ForumPost";
 import Link from "next/link";
-import { POST_PER_PAGE } from "../../constants/app-configs";
+import { FORUM_POST_PER_PAGE } from "../../constants/app-configs";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import TagList from "../../components/buttons/TagList/TagList";
 import parseImageURL from "../../utils/parseImageURL";
@@ -36,7 +36,7 @@ export const getServerSideProps = async () => {
     const pageReq = await getForumOverviewPageData();
     const tagsReq = await getContentTags();
     const forumReq = await getForumPosts({
-      postPerPage: POST_PER_PAGE,
+      postPerPage: FORUM_POST_PER_PAGE,
       meta: "filter_count",
       filter: "date_created",
     });
@@ -97,7 +97,7 @@ export default function Forum({
       setIsLoading(true);
       try {
         const req = await getForumPosts({
-          postPerPage: POST_PER_PAGE,
+          postPerPage: FORUM_POST_PER_PAGE,
           page: currentPage,
           search,
           sort,
@@ -108,16 +108,13 @@ export default function Forum({
               : ``,
         });
         const res = await req.json();
-
         setPosts(res.data ?? []);
         setTotalCount(res?.meta?.filter_count || 0);
       } catch (error) {
         console.log(error);
       }
-
       setIsLoading(false);
     };
-
     getPaginatedPost();
   }, [currentPage, search, sort, selectedTag]);
 
@@ -163,7 +160,7 @@ export default function Forum({
                 {pageData?.page_subtitle}
               </P>
 
-              <HeroButtonWrapper className="mt-[40px] w-[100%] mx-auto md:w-[70%] sm:flex sm:gap-5">
+              <HeroButtonWrapper className="mt-[40px] w-[100%] mx-auto md:w-[70%] md:flex gap-5">
                 <Button
                   variant="success"
                   href="/stel-een-vraag"
@@ -185,42 +182,42 @@ export default function Forum({
       </Hero>
 
       <main style={{ marginBottom: "80px" }}>
-        <Container className="max-w-[1384px] p-[0]">
-          <div
-            style={{
-              marginBottom: 32,
-              transform: "translateY(calc(-50% - 24px))",
-            }}
-          >
-            <TagList
-              tags={tags}
-              selected={selectedTag}
-              prefix={
-                <H4
-                  style={{
-                    whiteSpace: "nowrap",
-                    display: "flex",
-                    alignItems: "flex-start",
-                    gap: "5px",
-                  }}
+        <div
+          style={{
+            marginBottom: 32,
+            transform: "translateY(calc(-50% - 24px))",
+            margin: "0 10px",
+          }}
+        >
+          <TagList
+            tags={tags}
+            selected={selectedTag}
+            prefix={
+              <H4
+                style={{
+                  whiteSpace: "nowrap",
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: "5px",
+                }}
+                className="forum-tag"
+              >
+                Onderwerp{" "}
+                <span
+                  className={
+                    "transform mt-[0px] rotate-[90deg] md:rotate-[0deg] md:mt-[-6px]"
+                  }
                 >
-                  Onderwerp{" "}
-                  <span
-                    className={
-                      "transform mt-[0px] rotate-[90deg] md:rotate-[0deg] md:mt-[-6px]"
-                    }
-                  >
-                    👉🏾
-                  </span>
-                </H4>
-              }
-              suffix={<ChevronRight />}
-              onSelect={(x: string) => {
-                setSelectedTag(x);
-              }}
-            />
-          </div>
-        </Container>
+                  👉🏾
+                </span>
+              </H4>
+            }
+            suffix={<ChevronRight />}
+            onSelect={(x: string) => {
+              setSelectedTag(x);
+            }}
+          />
+        </div>
         <Container className="max-w-[1384px] mt-[-90px] mx-[auto] md:mt-[0px] md:mb-[56px]">
           <Grid container spacing={"34px"}>
             <>
@@ -300,9 +297,9 @@ export default function Forum({
             </>
           </Grid>
         </Container>
-        {totalCount / POST_PER_PAGE > 2 && (
+        {totalCount / FORUM_POST_PER_PAGE > 2 && (
           <Pagination
-            total={Math.ceil(totalCount / POST_PER_PAGE)}
+            total={Math.ceil(totalCount / FORUM_POST_PER_PAGE)}
             truncated
             onChange={changePage}
           />

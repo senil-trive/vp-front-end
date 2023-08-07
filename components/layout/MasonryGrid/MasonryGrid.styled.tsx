@@ -8,6 +8,7 @@ export const MasonryGridWrapper = styled.div`
       color: #fe517e !important;
     }
   }
+
   .back .main-forum.forum-post {
     background: #fff5f8 !important;
     width: 100%;
@@ -41,7 +42,7 @@ export const MasonryGridWrapper = styled.div`
     height: 100%;
     width: 100%;
     line-height: 300px;
-    color: #03446a;
+    // color: #03446a;
     font-size: 60px;
     border-radius: 5px;
     backface-visibility: hidden;
@@ -55,12 +56,10 @@ export const MasonryGridWrapper = styled.div`
       color: #150f2f !important;
     }
     transform: rotateY(180deg);
-    .forum-tags {
-      span {
-        color: #fff !important;
-        background: #fe517e !important;
-      }
-    }
+  }
+  .back .main-forum.forum-post .forum-tags .forum-tag {
+    color: #fff !important;
+    background: #fe517e !important;
   }
   .front .forum-tags span {
     color: #fe517e !important;

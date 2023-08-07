@@ -81,6 +81,8 @@ export type VolunteersFAQPageProps = {
     page_title: string;
     page_subtitle?: string;
     seo_title: string;
+    another_question_title?: string;
+    another_question_description?: string;
     seo_description: string;
     seo_image: ImageFileType;
     background_image: any;

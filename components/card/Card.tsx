@@ -238,7 +238,7 @@ const StyledInfo = styled(BaseStyle)`
 `;
 
 const StyledIdeal = styled(BaseStyle)`
-  background-color: #ffecf1;
+  background-color: #ffecf1 !important;
   &:hover {
     --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1),
       0 4px 6px 1px rgb(0 0 0 / 0.1) !important;
