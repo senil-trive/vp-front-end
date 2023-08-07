@@ -207,6 +207,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
                         : "/diffpeople4.png"
                     }
                     variant="follow"
+                    className="cursor-text"
                   />
                 ))}
               </div>
