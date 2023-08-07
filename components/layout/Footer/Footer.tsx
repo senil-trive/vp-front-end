@@ -215,7 +215,7 @@ export default function Footer() {
                 {/*  <div className="mb-[50px]">{generateLogo()}</div> */}
                 <div className="logos_wrapper">
                   <Image
-                    src="/logo_trim.png"
+                    src="/footer.svg"
                     alt=""
                     className="footer_logo"
                     width={294}

@@ -157,6 +157,16 @@ const StyledForumPost = styled.article<styledProps>`
   font-size:32px !important;
   font-weight:400;
 }
+&.main-forum.forum-post.forum-list{
+  .forum-tags span{
+    color:#3FC7B4 !important;
+  }
+  .back-act{
+    background:#3FC7B4 !important;
+    border:none !important;
+    
+  }
+}
 @media(max-width:767px){
   .title{
     font-size:24px !important;
@@ -231,13 +241,15 @@ export default function ForumPost({
         </div>
       </div>
       {button ? (
-        <Link href={buttonUrl} className="hover:cursor-pointer">
+        <Link href={buttonUrl} className="forum-link hover:cursor-pointer">
           <footer>
-            <Button variant="secondary">Laat een reachtie achter!</Button>
+            <Button variant="secondary" className="back-act">
+              Laat een reachtie achter!
+            </Button>
           </footer>
         </Link>
       ) : (
-        <ComponentTag {...props}>
+        <ComponentTag {...props} className="forum-footer">
           <footer>
             <div>
               <div className="icon-wrapper mr-4">

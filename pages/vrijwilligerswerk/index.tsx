@@ -403,8 +403,8 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
               <Button
                 variant="link"
                 style={{ color: colors.info.normal }}
-                href="/vrijwilligerswerk/faq"
-                className="w-[100%] text-[18px] font-[400] text-[#fff] no-underline hover:underline"
+                href="/faqs/volunteer_faq"
+                className="w-[100%] text-[18px] bg-[#3FC7B4] font-[400] text-[#fff] no-underline hover:underline"
               >
                 Meer lezen
               </Button>

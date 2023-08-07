@@ -1,25 +1,26 @@
-import { H3, P, TitleWithHighlights } from "../../../components/typography";
-import { getFaqOverviewData, getFaqs } from "../../../utils/api";
+import { H3, P, TitleWithHighlights } from "../../components/typography";
+import { getFaqOverviewData, getFaqs } from "../../utils/api";
 
-import FAQList from "../../../components/content-types/FAQList/FAQList";
-import { Hero } from "../../../components/layout";
-import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
-import { VolunteersFAQPageProps } from "../../../types/pageTypes";
-import parseImageURL from "../../../utils/parseImageURL";
+import FAQList from "../../components/content-types/FAQList/FAQList";
+import { Hero } from "../../components/layout";
+import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
+import { VolunteersFAQPageProps } from "../../types/pageTypes";
+import parseImageURL from "../../utils/parseImageURL";
 import { useState } from "react";
-import Button from "../../../components/buttons/Button";
+import Button from "../../components/buttons/Button";
 import { Container } from "@mui/material";
-import { ContainerWrapper } from "../../../styles/Vrjwilligerswerk/index.styles";
-import { HeroBannerWrapper } from "../../../styles/global.styled";
+import { ContainerWrapper } from "../../styles/Vrjwilligerswerk/index.styles";
+import { HeroBannerWrapper } from "../../styles/global.styled";
 
 const POST_PER_PAGE = 7;
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (context: any) => {
+  const { slug } = context?.params || {};
   try {
     const pageReq = await getFaqOverviewData();
     const faqReq = await getFaqs({
-      postPerPage: POST_PER_PAGE,
       meta: "filter_count",
+      type: slug,
     });
 
     const pageRes = await pageReq.json();
@@ -55,29 +56,29 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
   const showMoreButton =
     totalCount > items.length && totalCount > POST_PER_PAGE;
 
-  const getPaginatedPost = async () => {
-    setIsLoading(true);
-    try {
-      const req = await getFaqs({
-        postPerPage: POST_PER_PAGE,
-        page: currentPage,
-        meta: "filter_count",
-      });
-      const res = await req.json();
+  // const getPaginatedPost = async () => {
+  //   setIsLoading(true);
+  //   try {
+  //     const req = await getFaqs({
+  //       postPerPage: POST_PER_PAGE,
+  //       page: currentPage,
+  //       meta: "filter_count",
+  //     });
+  //     const res = await req.json();
 
-      setItems([...items, ...(res.data ?? [])]);
-      setTotalCount(res?.meta?.filter_count || 0);
-    } catch (error) {
-      console.log(error);
-    }
+  //     setItems([...items, ...(res.data ?? [])]);
+  //     setTotalCount(res?.meta?.filter_count || 0);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
 
-    setIsLoading(false);
-  };
+  //   setIsLoading(false);
+  // };
 
-  const changePage = () => {
-    setCurrentPage(currentPage + 1);
-    getPaginatedPost();
-  };
+  // const changePage = () => {
+  //   setCurrentPage(currentPage + 1);
+  //   getPaginatedPost();
+  // };
 
   return (
     <PageWrapper
@@ -119,13 +120,13 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
             </div>
           </HeroBannerWrapper>
         </Hero>
-        <ContainerWrapper className="volunteer-faq">
-          <div className="relative mt-[-134px] md:mt-[-150px]">
+        <ContainerWrapper className="volunteer-faq mt-[80px] md:mt-[120px]">
+          <div className="relative">
             <FAQList
               items={items}
               isLoading={isLoading}
               showLoadMore={showMoreButton}
-              onLoadMore={changePage}
+              // onLoadMore={changePage}
               show={true}
               containerWidth={"md"}
             />
