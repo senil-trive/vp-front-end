@@ -8,6 +8,7 @@ const KNOWABOUTUSFROM = [
   { name: "Therapeut/psycholoog/coach", value: "Therapeut/psycholoog/coach" },
   { name: "Via school", value: "Via school" },
   { name: "Via instagram", value: "Via instagram" },
+  { name: "Via TikTok", value: "Via TikTok" },
   { name: "Via Facebook", value: "Via Facebook" },
   {
     name: "Via het forum van Villa Pinedo",

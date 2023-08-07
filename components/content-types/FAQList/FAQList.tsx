@@ -4,7 +4,7 @@ import { Container } from "@mui/system";
 import { FAQ } from "../../../types/content-types/FAQ.type";
 import FAQItem from "../FAQItem/FAQItem";
 import { H3 } from "../../typography";
-import React from "react";
+import React, { useState } from "react";
 import { FAQListWrapper } from "./FAQListWrapper";
 
 type Props = {
@@ -28,6 +28,7 @@ export default function FAQList({
 }: Props) {
   const [selected, setSelected] = React.useState<string>(items[0]?.id ?? "");
 
+  const [visible, setVisible] = useState(false);
   const handleClick = () => {
     if (onLoadMore) onLoadMore();
   };
@@ -60,7 +61,12 @@ export default function FAQList({
                 key={faq.id}
                 title={faq.title}
                 description={faq.description}
-                onSelect={(id) => setSelected(id)}
+                onSelect={(id) => {
+                  setSelected(id);
+                }}
+                visible={visible}
+                setVisible={setVisible}
+                selected={selected}
               />
             ))}
           </div>
