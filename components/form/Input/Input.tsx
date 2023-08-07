@@ -164,7 +164,6 @@ export default function Input({
   active = false,
   disabled = false,
   hasError = false,
-  defaultValue = "",
   name,
   onChange,
   register,
@@ -192,8 +191,10 @@ export default function Input({
         <input
           type={type}
           placeholder={placeholder}
-          onChange={(e) => onChange?.(e)}
-          defaultValue={defaultValue}
+          onChange={(e) => {
+            onChange?.(e);
+            console.log(e);
+          }}
           {...formRegister}
           {...rest}
         />

@@ -55,12 +55,23 @@ export const InfoCardWrapper = styled.div`
     border-color: #ffecf1 !important;
     border-radius: 8px;
     /* } */
-    p,
+    p {
+       {
+        color: #000 !important;
+        background: #fe517e;
+      }
+    }
     h2.footer-title,
-    div {
-      color: #fff !important;
+    p,
+    .footer-content {
+      color: #150f2f !important;
+    }
+    ,
+    > div {
+      color: #000 !important;
       background: #fe517e;
     }
+
     &:hover {
       button,
       a {

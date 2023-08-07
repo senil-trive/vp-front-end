@@ -101,8 +101,8 @@ export default function Vraag({ pageData }: ForumPageProps) {
               <Button
                 variant="infoReversed"
                 filled={false}
-                href={pageData?.message_hero_button_url}
-                className="w-fit px-[40px] text-[18px] font-[400] bg-[transparent] py-[40px] md:py-[0] border-[#fff] text-[#fff] hover:bg-[#06D6A0] hover:border-none md:w-auto"
+                href={"/forum"}
+                className="w-fit px-[40px] text-[18px] font-[400] bg-[transparent] py-[40px] md:py-[0] border-[#fff] text-[#fff] hover:bg-[#ff971d] hover:border-none md:w-auto"
               >
                 {pageData?.message_hero_button_title}
               </Button>

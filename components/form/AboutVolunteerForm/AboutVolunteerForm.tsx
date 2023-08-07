@@ -100,6 +100,7 @@ const AboutVolunteerForm = ({
       }
     }
   `;
+
   // const handleChange = (e: any) => {
   //   e === "Anderen" ? setKnowFrom(true) : setKnowFrom(false);
   // };
@@ -258,3 +259,5 @@ const AboutVolunteerForm = ({
 };
 
 export default AboutVolunteerForm;
+
+// after error generating if i type anything it take first character after that cursor move out side and error gone but i need cusor in input tag

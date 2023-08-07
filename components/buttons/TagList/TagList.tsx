@@ -17,6 +17,7 @@ const Wrapper = styled.div`
   background-color: #ebfffc;
   display: flex;
   border-radius: 8px;
+  margin: 0 24px !important;
   align-items: center;
   justify-content: space-between;
 
@@ -99,6 +100,7 @@ const Wrapper = styled.div`
   }
   @media (max-width: 767px) {
     display: block;
+    margin: 0 6px !important;
     padding: 16px;
     .prefix {
       padding: 0 !important;
@@ -144,10 +146,7 @@ export default function TagList({
   const rightArrow = useRef(null);
   const isSelected = (id: string) => selected === id;
   return (
-    <Container
-      className="max-w-[1384px]"
-      style={{ margin: "21px auto", padding: "0" }}
-    >
+    <Container className="max-w-[1384px]  my-[21px] p-0">
       <Wrapper>
         <div
           style={{ display: "block", padding: "0px 5px 0 20px" }}

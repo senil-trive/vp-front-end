@@ -15,6 +15,10 @@ export const ContainerWrapper = styled.div`
   &.klets-meet .MuiContainer-root {
     max-width: 1384px !important;
   }
+
+  &.volunteer-faq .MuiContainer-root {
+    max-width: 1384px !important;
+  }
   @media (max-width: 767px) {
     &.volunteer.overvies {
       .title-wrap {

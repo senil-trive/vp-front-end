@@ -9,6 +9,10 @@ const HeroButtonWrapper = styled.div`
   a {
     border: 2px solid #fff !important;
   }
+  @media (max-width: 767px) {
+    display: flex !important;
+    flex-direction: column !important;
+  }
 `;
 
 const ForumRulesWrapper = styled.section`

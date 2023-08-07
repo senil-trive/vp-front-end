@@ -123,13 +123,13 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                     <>
                       {index === 0 && (
                         <InfoCard
-                          variant="ideal"
+                          variant="vlog"
                           imageUrl={parseImageURL(item?.image?.id)}
                           title={item?.title}
                           description={item?.description}
                           icon={parseImageURL(item?.title_right_icon?.id)}
                           category="Thema"
-                          className="small-fonts hover:bg-[#FE517E] text-[#fff] h-[100%] flex
+                          className="small-fonts h-[100%] flex
                   flex-col"
                         >
                           <div className="flex justify-center  mt-[20px] md:mt-[auto]">
@@ -197,6 +197,7 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                   title={pageData?.buddy_help_1_title}
                   description={pageData?.buddy_help_1_description}
                   variant="info"
+                  className="cursor-text"
                 />
                 <CommonDetailCard
                   leftIcon={parseImageURL(
@@ -206,6 +207,7 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                   title={pageData?.buddy_help_2_title}
                   description={pageData?.buddy_help_2_description}
                   variant="info"
+                  className="cursor-text"
                 />
                 <CommonDetailCard
                   leftIcon={parseImageURL(
@@ -215,6 +217,7 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                   title={pageData?.buddy_help_3_title}
                   description={pageData?.buddy_help_3_description}
                   variant="info"
+                  className="cursor-text"
                 />
               </div>
             </Container>
