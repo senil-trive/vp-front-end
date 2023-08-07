@@ -129,7 +129,7 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
               show={true}
               containerWidth={"md"}
             />
-            <Container className="my-[80px]">
+            {/* <Container className="my-[80px]">
               <Button
                 variant="link"
                 style={{ border: "2px solid" }}
@@ -137,7 +137,7 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
               >
                 meer lezen
               </Button>
-            </Container>
+            </Container> */}
           </div>
         </ContainerWrapper>
 
