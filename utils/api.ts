@@ -569,7 +569,7 @@ export const postVolunteerApplication = async (data: VolunteerRequestType) => {
 /**
  * Gets all available tags
  */
-export const getContentTags = async ({ filter }: any) => {
+export const getContentTag = async ({ filter }: any) => {
   // content url `${ENDPOINTS.COLLECTIONS}/categories?filter[status][_eq]=published&fields=*.*.*`
   let url = `${ENDPOINTS.COLLECTIONS}/categories?fields=*.*.*?filter[status][_eq]=published`;
   if (filter) {
@@ -581,6 +581,18 @@ export const getContentTags = async ({ filter }: any) => {
       "Content-Type": "application/json",
     },
   });
+};
+export const getContentTags = async () => {
+  // content url `${ENDPOINTS.COLLECTIONS}/categories?filter[status][_eq]=published&fields=*.*.*`
+  return await fetch(
+    `${ENDPOINTS.COLLECTIONS}/categories?fields=*.*.*?filter[status][_eq]=published`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
 };
 
 export const getFeed = async ({

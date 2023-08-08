@@ -2,7 +2,7 @@ import { CircularProgress, Container, Grid } from "@mui/material";
 import { H4, P, TitleWithHighlights } from "../../components/typography";
 import React, { useEffect, useState } from "react";
 import {
-  getContentTags,
+  getContentTag,
   getPostOverviewPageData,
   getPosts,
 } from "../../utils/api";
@@ -36,7 +36,7 @@ export const getServerSideProps = async () => {
       }
     );
 
-    const tagsReq = await getContentTags({
+    const tagsReq = await getContentTag({
       filter: `filter[type][_eq]=main`,
     });
     const blogsReq = await getPosts({
