@@ -28,9 +28,9 @@ const forumSortOptions = [
 export const getServerSideProps = async () => {
   try {
     const pageReq = await getForumOverviewPageData();
-    const tagsReq = await getContentTags({
-      filter: `filter[type][_eq]=main`,
-    });
+    // const tagsReq = await getContentTags({
+    //   filter: `filter[type][_eq]=main`,
+    // });
     const forumReq = await getForumPosts({
       postPerPage: POST_PER_PAGE,
       meta: "filter_count",
@@ -38,14 +38,14 @@ export const getServerSideProps = async () => {
 
     const pageRes = await pageReq.json();
     const forumRes = await forumReq.json();
-    const tagsRes = await tagsReq.json();
+    // const tagsRes = await tagsReq.json();
 
     return {
       props: {
         pageData: pageRes.data || null,
         forumData: forumRes.data || null,
         totalPosts: forumRes.meta?.filter_count || null,
-        tags: tagsRes.data || null,
+        // tags: tagsRes.data || null,
       },
     };
   } catch (error) {
