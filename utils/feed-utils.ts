@@ -73,6 +73,7 @@ export const generateFeedTiles = (
     instagram = [],
     tiktok = [],
     videos = [],
+    chats = [],
   }: {
     blogs?: BlogType[];
     letters?: Letter[];
@@ -80,6 +81,7 @@ export const generateFeedTiles = (
     instagram?: InstaPost[];
     tiktok?: TikTokPostProps[];
     videos?: VideoType[];
+    chats?: any;
   },
   fixedFirstItems = false
 ) => {
@@ -115,7 +117,7 @@ export const generateFeedTiles = (
   }));
   const videosFeedItem: FeedItem[] = videos.map((item) => ({
     id: `video-${uuidv4()}`,
-    width: 4,
+    width: 6,
     type: "video",
     content: {
       title: item?.title || "",
@@ -124,7 +126,12 @@ export const generateFeedTiles = (
       src: parseVideoURL(item?.video_file?.id),
     },
   }));
-
+  const chatFeedItem: FeedItem[] = chats.map((item: any) => ({
+    id: `chat-${uuidv4()}`,
+    width: 4,
+    type: "chat",
+    content: item,
+  }));
   const feedItems: FeedItem[] = [
     ...blogFeedItem,
     ...letterFeedItem,
@@ -132,7 +139,7 @@ export const generateFeedTiles = (
     ...instagramFeedItem,
     ...tiktokFeedItem,
     ...videosFeedItem,
+    ...chatFeedItem,
   ];
-
   return feedItems;
 };

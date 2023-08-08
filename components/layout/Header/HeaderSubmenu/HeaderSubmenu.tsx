@@ -112,7 +112,6 @@ const Wrapper: any = styled.div`
   }
 `;
 export default function HeaderSubmenu({ categories, selected }: Props) {
-  console.log(selected);
   const router = useRouter();
 
   // const [index, setIndex] = useState<string>(0);

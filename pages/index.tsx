@@ -19,7 +19,9 @@ const POST_PER_PAGE = 6;
 export const getServerSideProps = async () => {
   try {
     const pageReq = await getHomeData();
-    const categoriesReq = await getContentTags();
+    const categoriesReq = await getContentTags({
+      filter: `filter[type][_eq]=main`,
+    });
 
     const pageRes = await pageReq.json();
     const categoriesRes = await categoriesReq.json();
@@ -31,8 +33,8 @@ export const getServerSideProps = async () => {
       forumRes,
       lettersRes,
       videosRes,
+      chatRes,
     } = await getFeed({ postPerPage: POST_PER_PAGE, meta: "filter_count" });
-
     return {
       props: {
         pageData: pageRes.data || null,
@@ -44,6 +46,7 @@ export const getServerSideProps = async () => {
             instagram: instagramRes.data,
             tiktok: tiktokRes.data,
             videos: videosRes.data,
+            chats: chatRes.data,
           },
           true
         ),
@@ -53,6 +56,7 @@ export const getServerSideProps = async () => {
             lettersRes.meta.filter_count +
             instagramRes.meta.filter_count +
             videosRes.meta.filter_count +
+            chatRes.meta.filter_count +
             tiktokRes.meta.filter_count || 0,
 
         categories: categoriesRes.data,
@@ -80,7 +84,9 @@ export default function Home({
   const [isEnd, setIsEnd] = useState(false);
   const [showTags, setShowTags] = useState(false);
   useEffect(() => {
-    setCurrentPage(0);
+    if (selectedTag) {
+      setCurrentPage(0);
+    }
   }, [selectedTag]);
   const getAllFeedItem = useCallback(
     async ({
@@ -100,6 +106,7 @@ export default function Home({
           forumRes,
           lettersRes,
           videosRes,
+          chatRes,
         } = await getFeed({
           postPerPage: POST_PER_PAGE,
           page: currentPage + 1,
@@ -118,6 +125,7 @@ export default function Home({
             instagram: instagramRes?.data ?? [],
             tiktok: tiktokRes?.data ?? [],
             videos: videosRes?.data ?? [],
+            chats: chatRes?.data ?? [],
           },
 
           // generated first tiles only when its the first load
@@ -136,7 +144,6 @@ export default function Home({
     },
     [currentPage, posts]
   );
-
   useCallbackWhenReachedBottom(async () => {
     if (posts.length < totalPosts && !selectedTag && !isLoading) {
       getAllFeedItem({ append: true, selectedTag: "" });
@@ -156,6 +163,7 @@ export default function Home({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [feed, selectedTag]);
+
   return (
     <PageWrapper
       homepage={true}

@@ -49,7 +49,7 @@ const Bedankt: React.FC<any> = (pageData) => {
     home_button_title,
     home_button_url,
   } = pageData?.pageData || {};
-  console.log(pageData);
+
   return (
     <PageWrapper
       seo={{

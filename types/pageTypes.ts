@@ -66,6 +66,8 @@ export type ForumPageProps = {
     message_hero_button_title: string;
     form_title: string;
     form_subtitle: string;
+    reactie01_hero_title: string;
+    reactie01_hero_subtitle: string;
   };
   forumData: ForumPostType[];
   totalPosts: number;

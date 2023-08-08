@@ -58,7 +58,6 @@ export default function Dropdown({
   };
 
   const handleSelect = (option: DropdownItem) => {
-    console.log("selectdkdjcjsa");
     setSelectedSingle(option);
 
     if (formRegister) {
@@ -111,8 +110,6 @@ export default function Dropdown({
   };
 
   // useOnClickOutsideEl(wrapperRef, () => {
-  //   console.log("outsidedsadass");
-  //   console.log(selectedSingle);
   //   setSelectedSingle(selectedSingle);
   //   setIsOpen(false);
   // });

@@ -23,14 +23,15 @@ import Input from "../../components/form/Input/Input";
 export const getServerSideProps = async () => {
   try {
     const pageReq = await getPostOverviewPageData();
-    const tagsReq = await getContentTags();
+    const tagsReq = await getContentTags({
+      filter: `filter[type][_eq]=main`,
+    });
     const blogsReq = await getPosts({
       postPerPage: POST_PER_PAGE,
       meta: "filter_count",
     });
 
     const pageRes = await pageReq.json();
-    console.log(pageRes, "Ddddf");
     const blogRes = await blogsReq.json();
     const tagsRes = await tagsReq.json();
     return {
@@ -68,7 +69,6 @@ export default function Forum({
   const [isEnd, setIsEnd] = useState(false);
 
   const handleSearch = (x: string) => {
-    console.log("hereeee", x);
     setSearch(x);
     setCurrentPage(1);
   };
@@ -85,7 +85,6 @@ export default function Forum({
   };
   useEffect(() => {
     const getPaginatedBlogs = async () => {
-      console.log("hereeee", search);
       try {
         const req = await getPosts({
           postPerPage: POST_PER_PAGE,
@@ -99,7 +98,7 @@ export default function Forum({
               : ``,
         });
         const res = await req.json();
-        console.log(res);
+
         setPosts([...res.data.slice(0, 6), ...res.data.slice(0, 6)] || []);
         setTotalCount(res.meta.filter_count || 0);
       } catch (error) {

@@ -35,7 +35,9 @@ const forumSortOptions = [
 export const getServerSideProps = async () => {
   try {
     const pageReq = await getForumOverviewPageData();
-    const tagsReq = await getContentTags();
+    const tagsReq = await getContentTags({
+      filter: `filter[type][_eq]=main`,
+    });
     const forumReq = await getForumPosts({
       postPerPage: FORUM_POST_PER_PAGE,
       meta: "filter_count",
@@ -86,7 +88,7 @@ export default function Forum({
   };
 
   const handleSearch = (x: any) => {
-    setSearch(x.target.value);
+    setSearch(x);
     setCurrentPage(1);
   };
   const handleSort = (x: string) => {
@@ -276,7 +278,6 @@ export default function Forum({
                       md={4}
                       className="forum-card h-[400px] md:h-[540px]"
                     >
-                      <>{console.log(item)}</>
                       <div className="forum-content">
                         <div className="front">
                           <ForumPost

@@ -3,6 +3,7 @@ export type Letter = {
   id: string;
   date_created: string;
   date_updated: string;
+  sort: number;
   slug: string;
   status: ContentStatus;
   title: string;

@@ -65,8 +65,6 @@ const GescheidenOudersWatNu: React.FC<BuddyPageProps> = ({
   pageData,
   pageDat,
 }) => {
-  4;
-  console.log(pageDat);
   const { colors } = useTheme();
   return (
     <ContainerWrapper className="klets-meet">

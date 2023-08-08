@@ -9,8 +9,6 @@ import {
 } from "../../utils/api";
 import Button from "../../components/buttons/Button";
 import { ForumPageProps } from "../../types/pageTypes";
-import { ForumRequestType } from "../../types/forumrequestType";
-import { postVolunteerApplication } from "../../utils/api";
 import { POST_PER_PAGE } from "../../constants/app-configs";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import parseImageURL from "../../utils/parseImageURL";
@@ -30,7 +28,9 @@ const forumSortOptions = [
 export const getServerSideProps = async () => {
   try {
     const pageReq = await getForumOverviewPageData();
-    const tagsReq = await getContentTags();
+    const tagsReq = await getContentTags({
+      filter: `filter[type][_eq]=main`,
+    });
     const forumReq = await getForumPosts({
       postPerPage: POST_PER_PAGE,
       meta: "filter_count",
@@ -100,7 +100,6 @@ export default function Forum({
   };
 
   const handleSearch = (x: any) => {
-    console.log(x);
     setSearch(x.target.value);
     setCurrentPage(1);
   };

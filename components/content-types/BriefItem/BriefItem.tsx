@@ -36,7 +36,7 @@ export default function BriefItem({
   bg = `#3FC7B4`,
 }: Props) {
   const [hovering, setHovering] = useState<boolean>(false);
-  (bg = `#3FC7B4`), console.log(bg, "EFgadgafkfjn");
+  bg = `#3FC7B4`;
   return (
     <Card variant="brief" className={className}>
       <CardHeader style={{ maxHeight: imgHeight }}>

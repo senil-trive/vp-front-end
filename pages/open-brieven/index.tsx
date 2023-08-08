@@ -16,6 +16,7 @@ import Button from "../../components/buttons/Button";
 interface LettersOverviewPageProps {
   pageData: any;
   lettersData: Letter[];
+  toplettersData: Letter[];
 }
 
 export const getServerSideProps = async () => {
@@ -32,21 +33,26 @@ export const getServerSideProps = async () => {
     );
 
     const pageRes = await pageReq.json();
+    const toplettersReq = await getLetters({
+      postPerPage: POST_PER_PAGE,
+      filter: `filter[id][_neq]=${pageRes?.data?.highlighted_letter?.id}`,
+      letterFilter: `filter[_and][0][sort][_lt]=3`,
+    });
     const lettersReq = await getLetters({
       postPerPage: POST_PER_PAGE,
       filter: `filter[id][_neq]=${pageRes?.data?.highlighted_letter?.id}`,
+      letterFilter: `filter[_and][0][sort][_gt]=2`,
     });
-
+    const toplettersRes = await toplettersReq.json();
     const lettersRes = await lettersReq.json();
     return {
       props: {
         pageData: pageRes.data,
+        toplettersData: toplettersRes.data,
         lettersData: lettersRes.data,
       },
     };
   } catch (error) {
-    console.log(error);
-
     return {
       redirect: {
         destination: "/500",
@@ -58,8 +64,8 @@ export const getServerSideProps = async () => {
 const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
   pageData,
   lettersData,
+  toplettersData,
 }) => {
-  console.log(lettersData);
   return (
     <div>
       <PageWrapper
@@ -114,12 +120,12 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
           <section className="mb-20 mt-[-120px] relative">
             <Container maxWidth={`xl`}>
               <div className="block relative mt-[-250px] md:flex gap-10 md:mt-[-80px]">
-                {pageData?.intro_title && (
+                {toplettersData?.[0]?.sort === 1 && (
                   <InfoCard
                     variant="blog"
-                    imageUrl={parseImageURL(pageData?.intro_image?.id)}
-                    title={pageData?.intro_title}
-                    description={pageData?.intro_description}
+                    imageUrl={parseImageURL(toplettersData?.[0]?.image?.id)}
+                    title={toplettersData?.[0]?.title}
+                    description={toplettersData?.[0]?.description}
                     icon={parseImageURL(pageData?.note_write_icon?.id)}
                     category={pageData?.intro_category}
                     className="small-fonts bg-[#FE517E] text-[#fff] h-[100%] flex flex-col mb-[40px] md:mb-[0]"
@@ -129,7 +135,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                         style={{ fontFamily: "Fjalla One" }}
                         variant="secondary"
                         className="w-[100%] text-[16px] font-[400] bg-[#fff] text-[#FE517E] border-[#fff] hover:bg-[#FE517E] md:text-[18px]"
-                        href={`/open-brieven/${pageData?.highlighted_letter?.slug}`}
+                        href={`/open-brieven/${toplettersData?.[0]?.slug}`}
                       >
                         {pageData?.intro_button_label}
                       </Button>
@@ -137,14 +143,12 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                   </InfoCard>
                 )}
 
-                {pageData?.highlighted_letter && (
+                {toplettersData?.[1]?.sort === 2 && (
                   <InfoCard
                     variant="primary"
-                    imageUrl={parseImageURL(
-                      pageData?.highlighted_letter?.image?.id
-                    )}
-                    title={pageData?.highlighted_letter?.title}
-                    description={pageData?.highlighted_letter?.description}
+                    imageUrl={parseImageURL(toplettersData?.[1]?.image?.id)}
+                    title={toplettersData?.[1]?.title}
+                    description={toplettersData?.[1]?.description}
                     icon={parseImageURL(pageData?.note_write_icon?.id)}
                     category={
                       pageData?.highlighted_letter?.categories?.[0]?.name ||
@@ -157,7 +161,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                         style={{ fontFamily: "Fjalla One" }}
                         variant="secondary"
                         className="w-[100%] text-[16px] font-[400] bg-[#fff] text-[#006EF7] border-[#fff] hover:bg-[#006EF7] md:text-[18px]"
-                        href={`/open-brieven/${pageData?.highlighted_letter?.slug}`}
+                        href={`/open-brieven/${toplettersData?.[1]?.slug}`}
                       >
                         {pageData?.letter_for_button_label}
                       </Button>
