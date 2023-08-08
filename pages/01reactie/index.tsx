@@ -7,7 +7,7 @@ import ForumPost from "../../components/content-types/ForumPost/ForumPost";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import SortBar from "../../components/form/SortBar/SortBar";
 import {
-  getContentTags,
+  getContentTag,
   getForumOverviewPageData,
   getForumPosts,
 } from "../../utils/api";
@@ -34,7 +34,7 @@ const forumSortOptions = [
 export const getServerSideProps = async () => {
   try {
     const pageReq = await getForumOverviewPageData();
-    const tagsReq = await getContentTags({
+    const tagsReq = await getContentTag({
       filter: `filter[type][_eq]=main`,
     });
     const forumReq = await getForumPosts({

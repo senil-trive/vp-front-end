@@ -2,7 +2,7 @@ import { Container, Grid } from "@mui/material";
 import { H4, P, TitleWithHighlights } from "../../components/typography";
 import React, { useEffect, useState } from "react";
 import {
-  getContentTags,
+  getContentTag,
   getPostOverviewPageData,
   getPosts,
 } from "../../utils/api";
@@ -23,7 +23,7 @@ import Input from "../../components/form/Input/Input";
 export const getServerSideProps = async () => {
   try {
     const pageReq = await getPostOverviewPageData();
-    const tagsReq = await getContentTags({
+    const tagsReq = await getContentTag({
       filter: `filter[type][_eq]=main`,
     });
     const blogsReq = await getPosts({

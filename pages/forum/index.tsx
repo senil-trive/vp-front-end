@@ -3,7 +3,7 @@ import { Hero, Pagination } from "../../components/layout";
 import { H4, P, TitleWithHighlights } from "../../components/typography";
 import React, { useEffect, useState } from "react";
 import {
-  getContentTags,
+  getContentTag,
   getForumOverviewPageData,
   getForumPosts,
 } from "../../utils/api";
@@ -35,7 +35,7 @@ const forumSortOptions = [
 export const getServerSideProps = async () => {
   try {
     const pageReq = await getForumOverviewPageData();
-    const tagsReq = await getContentTags({
+    const tagsReq = await getContentTag({
       filter: `filter[type][_eq]=main`,
     });
     const forumReq = await getForumPosts({

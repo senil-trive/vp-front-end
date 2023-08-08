@@ -1,7 +1,7 @@
 import { CircularProgress, Container } from "@mui/material";
 import { Footer, Grid, Hero } from "../components/layout";
 import { H4, P, TitleWithHighlights } from "../components/typography";
-import { getContentTags, getFeed, getHomeData } from "../utils/api";
+import { getContentTag, getFeed, getHomeData } from "../utils/api";
 import { useCallback, useEffect, useState } from "react";
 
 import { HomePageProps } from "../types/pageTypes";
@@ -19,7 +19,7 @@ const POST_PER_PAGE = 6;
 export const getServerSideProps = async () => {
   try {
     const pageReq = await getHomeData();
-    const categoriesReq = await getContentTags({
+    const categoriesReq = await getContentTag({
       filter: `filter[type][_eq]=main`,
     });
 
