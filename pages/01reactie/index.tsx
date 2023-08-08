@@ -1,17 +1,26 @@
 import { Grid, Hero, Pagination } from "../../components/layout";
-import { H1, P } from "../../components/typography";
+import { H4, P, TitleWithHighlights } from "../../components/typography";
 import { useEffect, useState } from "react";
-
 import { CircleSpinner } from "react-spinners-kit";
-import CollectionSearchBar from "../../components/form/CollectionSearchBar/CollectionSearchBar";
 import { Container } from "@mui/system";
 import ForumPost from "../../components/content-types/ForumPost/ForumPost";
-import { ForumPostType } from "../../types/forumTypes";
-import Link from "next/link";
-import { POST_PER_PAGE } from "../../constants/app-configs";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import SortBar from "../../components/form/SortBar/SortBar";
-import { getForumPosts } from "../../utils/api";
+import {
+  getContentTags,
+  getForumOverviewPageData,
+  getForumPosts,
+} from "../../utils/api";
+import { ForumFlipWrapper } from "../../styles/global.styled";
+import parseImageURL from "../../utils/parseImageURL";
+import { ForumPageProps } from "../../types/pageTypes";
+import Image from "next/image";
+import Input from "../../components/form/Input/Input";
+import SearchIcon from "../../components/icons/SearchIcon/SearchIcon";
+import TagList from "../../components/buttons/TagList/TagList";
+import ChevronRight from "../../components/icons/ChevronRight/ChevronRight";
+
+const POST_PER_PAGE = 10;
 
 const forumSortOptions = [
   { name: "Titel (a-z)", value: "content" },
@@ -22,13 +31,12 @@ const forumSortOptions = [
   { name: "Datum (nieuw-oud)", value: "-date_created" },
 ];
 
-interface ZeroResponsesPageProps {
-  forumData: ForumPostType[];
-  totalPosts: number;
-}
-
 export const getServerSideProps = async () => {
   try {
+    const pageReq = await getForumOverviewPageData();
+    const tagsReq = await getContentTags({
+      filter: `filter[type][_eq]=main`,
+    });
     const forumReq = await getForumPosts({
       postPerPage: POST_PER_PAGE,
       meta: "filter_count",
@@ -37,10 +45,14 @@ export const getServerSideProps = async () => {
 
     const forumRes = await forumReq.json();
 
+    const pageRes = await pageReq.json();
+    const tagsRes = await tagsReq.json();
     return {
       props: {
+        pageData: pageRes.data || null,
         forumData: forumRes.data,
         totalPosts: forumRes.meta.filter_count,
+        tags: tagsRes.data || null,
       },
     };
   } catch (error) {
@@ -55,7 +67,9 @@ export const getServerSideProps = async () => {
 export default function ZeroResponsesPage({
   forumData,
   totalPosts,
-}: ZeroResponsesPageProps) {
+  pageData,
+  tags,
+}: ForumPageProps) {
   const [posts, setPosts] = useState(forumData);
   const [isLoading, setIsLoading] = useState(false);
   const [totalCount, setTotalCount] = useState(totalPosts);
@@ -119,67 +133,182 @@ export default function ZeroResponsesPage({
         canonical: "https://www.villapinedo.nl/01reactie",
       }}
     >
-      <Hero>
-        <Container>
+      <Hero
+        center
+        imageUrl={parseImageURL(pageData?.hero_image?.id, 1400)}
+        style={{
+          minHeight: 649,
+          position: "relative",
+        }}
+        mobileImageHeight={772}
+      >
+        <Container className="max-w-[1384px] mt-[40px] md:mt-[0]">
           <Grid container>
-            <Grid item xs={0} md={2} lg={3} />
-            <Grid item xs={12} md={8} lg={6}>
-              <H1
-                variant="bold"
-                style={{ textAlign: "center", padding: "0 24px" }}
+            <Grid item xs={12} md={10} className="w-[100%] mx-auto">
+              <TitleWithHighlights
+                text={pageData?.reactie01_hero_title ?? ""}
+                color="white"
+                className={
+                  "text-[46px] font-[400] md:text-[64px] md:text-center sm:text-[46px]"
+                }
+              />
+              <P
+                color="white"
+                variant="light"
+                className={
+                  "text-[16px] font-[300] leading-[160%] md:text-[18px] md:text-center"
+                }
               >
-                Vragen met 0 reacties
-              </H1>
-              <P variant="light" className="text-center">
-                Hier vind je alle vragen met 1 of 0 reacties.
+                {pageData?.reactie01_hero_subtitle ?? ""}
               </P>
             </Grid>
-            <Grid item xs={0} md={2} lg={3} />
           </Grid>
         </Container>
       </Hero>
-
       <main style={{ marginBottom: "80px" }}>
-        <CollectionSearchBar onSearch={handleSearch} />
-
-        <Container style={{ margin: "56px auto" }}>
+        <div
+          style={{
+            marginBottom: 32,
+            transform: "translateY(calc(-50% - 24px))",
+          }}
+        >
+          <TagList
+            tags={tags}
+            selected={selectedTag}
+            prefix={
+              <H4
+                style={{
+                  whiteSpace: "nowrap",
+                  display: "flex",
+                  alignItems: "flex-start",
+                  gap: "5px",
+                }}
+                className="forum-tag"
+              >
+                Onderwerp{" "}
+                <span
+                  className={
+                    "transform mt-[0px] rotate-[90deg] md:rotate-[0deg] md:mt-[-6px]"
+                  }
+                >
+                  👉🏾
+                </span>
+              </H4>
+            }
+            suffix={<ChevronRight />}
+            onSelect={(x: string) => {
+              setSelectedTag(x);
+              setCurrentPage(1);
+            }}
+          />
+        </div>
+        <Container className="max-w-[1384px] mt-[120px] mb-[80px] mx-[auto] px-[32px]">
           <Grid container spacing={"34px"}>
+            <>
+              <Grid item xs={12} md={9}>
+                <P>
+                  {totalCount} {totalCount === 1 ? "vraag" : "vragen"}
+                </P>
+              </Grid>
+              <Grid item xs={12} md={3}>
+                <SortBar sortOptions={forumSortOptions} onSort={handleSort} />
+              </Grid>
+
+              <Grid item xs={12} md={8}>
+                <div className="flex flex-col h-[100%]">
+                  <Image
+                    src="/Imageforum.png"
+                    alt="forum search"
+                    fill
+                    className="relative w-[100%] h-[121px] rounded-t-[8px]"
+                  />
+                  <div className="bg-[#FE517E] min-h-[264px] h-[100%] p-[24px] md:p-[32px] rounded-b-[8px]">
+                    <div>
+                      <TitleWithHighlights
+                        text={pageData?.search_bar_quote || ""}
+                        color="white"
+                        className="text-[30px] font-[400]"
+                      />
+                      <div className="md:flex md:items-center">
+                        <div className="w-[180px] text-[18px] text-[#fff]">
+                          Doorzoek het forum:
+                        </div>
+                        <div className="mt-[20px] flex-1 md:mt-[0px]">
+                          <Input
+                            iconLeft={<SearchIcon />}
+                            defaultValue={search}
+                            placeholder={"Zoek in het forum.."}
+                            onChange={handleSearch}
+                            borderColor="primary"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Grid>
+            </>
             {isLoading ? (
               <CircleSpinner size={34} color="#fff" />
             ) : (
               <>
-                <Grid item xs={12} md={9}>
-                  <P color="primary">
-                    {totalCount} {totalCount === 1 ? "vraag" : "vragen"}
-                  </P>
-                </Grid>
-                <Grid item xs={12} md={3}>
-                  <SortBar sortOptions={forumSortOptions} onSort={handleSort} />
-                </Grid>
                 {posts.map((item, index) => (
-                  <Grid key={index} item xs={12} md={4}>
-                    <Link href={`/forum/${item.slug}`}>
-                      <ForumPost
-                        truncateContent
-                        fullHeight={false}
-                        gender={item.user_gender}
-                        age={item.user_age}
-                        name={item.user_name}
-                        postDate={new Date(item.date_created)}
-                        tags={
-                          item.categories?.map(
-                            (cat) => cat.categories_id.name
-                          ) ?? []
-                        }
-                        title={
-                          item.title ?? "Titel moet in CMS worden ingevoerd"
-                        }
-                        comments={item.comments.length}
-                        content={item.content}
-                        image={item.user_image}
-                      />
-                    </Link>
-                  </Grid>
+                  <ForumFlipWrapper
+                    key={index}
+                    item
+                    xs={12}
+                    md={4}
+                    className="forum-card h-[400px] md:h-[540px]"
+                  >
+                    <div className="forum-content">
+                      <div className="front">
+                        <ForumPost
+                          truncateContent
+                          fullHeight={false}
+                          gender={item.user_gender}
+                          age={item.user_age}
+                          name={item.user_name}
+                          postDate={new Date(item.date_created)}
+                          tags={
+                            item.categories?.map(
+                              (cat) => cat.categories_id.name
+                            ) ?? []
+                          }
+                          title={
+                            item.title ?? "Titel moet in CMS worden ingevoerd"
+                          }
+                          comments={item.comments.length}
+                          content={item.content}
+                          image={item.user_image}
+                          className="forum-post forum-list"
+                        />
+                      </div>
+                      <div className="back z-10">
+                        <ForumPost
+                          truncateContent
+                          fullHeight={false}
+                          gender={item.user_gender}
+                          age={item.user_age}
+                          name={item.user_name}
+                          postDate={new Date(item.date_created)}
+                          tags={
+                            item.categories?.map(
+                              (cat) => cat.categories_id.name
+                            ) ?? []
+                          }
+                          title={
+                            item.title ?? "Titel moet in CMS worden ingevoerd"
+                          }
+                          comments={item.comments.length}
+                          content={item.content}
+                          image={item.user_image}
+                          button={true}
+                          className="forum-post forum-list"
+                          buttonUrl={`/forum/${item?.slug}`}
+                        />
+                      </div>
+                    </div>
+                  </ForumFlipWrapper>
                 ))}
               </>
             )}

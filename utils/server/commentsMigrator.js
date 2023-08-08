@@ -36,8 +36,6 @@ function mergeJSON() {
   // 	// Write JSON array to a file
   fs.writeFile(argv.output, JSON.stringify(results, null, 4), (err) => {
     if (err) throw err;
-
-    console.log("Merged JSON array is saved.");
   });
   // });
 }
@@ -45,6 +43,5 @@ function mergeJSON() {
 try {
   mergeJSON();
 } catch (err) {
-  console.log(err);
   console.log("incorrect values try node csvToJson.js --output=file");
 }

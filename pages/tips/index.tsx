@@ -36,7 +36,9 @@ export const getServerSideProps = async () => {
       }
     );
 
-    const tagsReq = await getContentTags();
+    const tagsReq = await getContentTags({
+      filter: `filter[type][_eq]=main`,
+    });
     const blogsReq = await getPosts({
       postPerPage: POST_PER_PAGE,
       meta: "filter_count",
@@ -45,7 +47,6 @@ export const getServerSideProps = async () => {
     const pageRes = await pageReq.json();
     const blogRes = await blogsReq.json();
     const tagsRes = await tagsReq.json();
-    console.log(pageRes, "aKS");
     return {
       props: {
         pageData: pageRes.data || null,
@@ -102,7 +103,6 @@ export default function Tips({ pageData, blogsData, totalPosts, tags }: any) {
   // });
 
   const handleSearch = (x: string) => {
-    console.log("hereeee", x);
     setSearch(x);
     setCurrentPage(1);
   };
@@ -141,7 +141,6 @@ export default function Tips({ pageData, blogsData, totalPosts, tags }: any) {
 
     getPaginatedBlogs();
   }, [search, sort, selectedTag]);
-  console.log(pageData);
   return (
     <>
       <PageWrapper

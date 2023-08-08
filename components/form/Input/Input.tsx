@@ -191,10 +191,9 @@ export default function Input({
         <input
           type={type}
           placeholder={placeholder}
-          onChange={(e) => {
-            onChange?.(e);
-            console.log(e);
-          }}
+          // onChange={(e) => {
+          //   onChange?.(e);
+          // }}
           {...formRegister}
           {...rest}
         />

@@ -9,6 +9,10 @@ import { POST_PER_PAGE } from "../constants/app-configs";
 import { TikTokPostProps } from "../components/content-types/TikTokPost/TikTokPost";
 import { VolunteerRequestType } from "../types/volunteerRequestTypes";
 
+type LetterRequest = {
+  letterFilter?: any;
+} & DirectusParams;
+
 type DirectusParams = {
   /** The amount of items that will be fetched, set -1 to retrieve all */
   postPerPage?: number;
@@ -151,7 +155,6 @@ export const getMenuItems = async () => {
     const resData = await res.json();
     return resData.data as MenuItem[];
   } catch (error) {
-    console.log("error getting menu items", error);
     return null;
   }
 };
@@ -173,7 +176,6 @@ export const getCompanyInfo = async () => {
     const resData = await res.json();
     return resData.data as CompanyInfo;
   } catch (error) {
-    console.log("error getting the company", error);
     return null;
   }
 };
@@ -200,10 +202,11 @@ export const getLetters = async ({
   search,
   sort,
   filter,
+  letterFilter,
   meta = "total_count",
-}: DirectusParams) => {
+}: LetterRequest) => {
   //${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*.*&filter[status][_eq]=published&limit=${postPerPage}&page=${page}
-  let url = `${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*.*&filter[status][_eq]=published`;
+  let url = `${ENDPOINTS.COLLECTIONS}/open_letters?fields=*.*.*&filter[status][_eq]=published&${letterFilter}`;
 
   if (meta) {
     url = `${url}&meta=${meta}`;
@@ -416,6 +419,40 @@ export const getVideoItems = async ({
 };
 
 /**
+ * Get the list of chats
+ */
+
+export const getChatItems = async ({
+  postPerPage,
+  page = 1,
+  search,
+  sort,
+  filter,
+  meta = "total_count",
+}: DirectusParams) => {
+  let url = `${ENDPOINTS.COLLECTIONS}/chat?filter=[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+
+  if (meta) {
+    url = `${url}&meta=${meta}`;
+  }
+  if (search) {
+    url = `${url}&search=${search}`;
+  }
+  if (sort) {
+    url = `${url}&sort=${sort}`;
+  }
+  if (filter) {
+    url = `${url}&${filter}`;
+  }
+
+  return await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+/**
  * Get the post detail base on the slug
  * @param slug the post slug
  * @returns
@@ -532,17 +569,18 @@ export const postVolunteerApplication = async (data: VolunteerRequestType) => {
 /**
  * Gets all available tags
  */
-export const getContentTags = async () => {
+export const getContentTags = async ({ filter }: any) => {
   // content url `${ENDPOINTS.COLLECTIONS}/categories?filter[status][_eq]=published&fields=*.*.*`
-  return await fetch(
-    `${ENDPOINTS.COLLECTIONS}/categories?filter[status][_eq]=published&fields=*.*.*`,
-    {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  let url = `${ENDPOINTS.COLLECTIONS}/categories?fields=*.*.*?filter[status][_eq]=published`;
+  if (filter) {
+    url = `${url}&${filter}`;
+  }
+  return await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 };
 
 export const getFeed = async ({
@@ -551,45 +589,58 @@ export const getFeed = async ({
   filter,
   meta = "total_count",
 }: DirectusParams) => {
-  const [blogsReq, instagramReq, tiktokReq, forumReq, lettersReq, videosReq] =
-    await Promise.all([
-      getPosts({
-        postPerPage,
-        page,
-        meta,
-        filter,
-      }),
-      getInstaPosts({
-        postPerPage,
-        page,
-        filter,
-        meta,
-      }),
-      getTikTokPosts({
-        postPerPage,
-        page,
-        filter,
-        meta,
-      }),
-      getForumPosts({
-        postPerPage,
-        page,
-        filter,
-        meta,
-      }),
-      getLetters({
-        postPerPage,
-        page,
-        filter,
-        meta,
-      }),
-      getVideoItems({
-        postPerPage,
-        page,
-        filter,
-        meta,
-      }),
-    ]);
+  const [
+    blogsReq,
+    instagramReq,
+    tiktokReq,
+    forumReq,
+    lettersReq,
+    videosReq,
+    chatReq,
+  ] = await Promise.all([
+    getPosts({
+      postPerPage,
+      page,
+      meta,
+      filter,
+    }),
+    getInstaPosts({
+      postPerPage,
+      page,
+      filter,
+      meta,
+    }),
+    getTikTokPosts({
+      postPerPage,
+      page,
+      filter,
+      meta,
+    }),
+    getForumPosts({
+      postPerPage,
+      page,
+      filter,
+      meta,
+    }),
+    getLetters({
+      postPerPage,
+      page,
+      filter,
+      meta,
+    }),
+    getVideoItems({
+      postPerPage,
+      page,
+      filter,
+      meta,
+    }),
+    getChatItems({
+      postPerPage,
+      page,
+      filter,
+      meta,
+    }),
+  ]);
 
   return {
     blogsRes: await blogsReq.json(),
@@ -598,6 +649,7 @@ export const getFeed = async ({
     forumRes: await forumReq.json(),
     lettersRes: await lettersReq.json(),
     videosRes: await videosReq.json(),
+    chatRes: await chatReq.json(),
   };
 };
 

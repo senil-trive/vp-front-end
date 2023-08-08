@@ -100,13 +100,12 @@ export default function Header() {
   useEffect(() => {
     const getData = async () => {
       const data = await getMenuItems();
-      console.log(data, "FSfffff");
+
       if (data) {
         const sortedArray = [...data].sort(
           (a, b) => b.children.length - a.children.length
         );
 
-        console.log(sortedArray, "FSfffffsort");
         setMenuItems(sortedArray);
       }
       setIsLoading(false);

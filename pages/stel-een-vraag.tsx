@@ -31,8 +31,6 @@ export const getServerSideProps = async () => {
       },
     };
   } catch (error) {
-    console.log(error);
-
     return {
       redirect: {
         destination: "/500",
@@ -44,7 +42,7 @@ export const getServerSideProps = async () => {
 export default function Vraag({ pageData }: ForumPageProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  console.log(pageData);
+
   const {
     register,
     handleSubmit,
@@ -52,7 +50,6 @@ export default function Vraag({ pageData }: ForumPageProps) {
   } = useForm<any>();
 
   const submitForm = async (data: any) => {
-    console.log(data);
     setIsLoading(true);
     try {
       await postForum(data);
@@ -64,7 +61,6 @@ export default function Vraag({ pageData }: ForumPageProps) {
     setIsLoading(false);
   };
 
-  console.log(pageData);
   return (
     <PageWrapper
       seo={{

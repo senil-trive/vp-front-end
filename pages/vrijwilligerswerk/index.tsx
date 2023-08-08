@@ -71,7 +71,6 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
   pageData,
   volunteerweekwork,
 }) => {
-  console.log(pageData);
   const { colors } = useTheme();
   const [volunteerweek, setVolunteerWeek] = useState(volunteerweekwork);
   return (

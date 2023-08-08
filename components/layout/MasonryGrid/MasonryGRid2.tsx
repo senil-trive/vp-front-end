@@ -400,7 +400,7 @@ export function MasonryGrid({
                             forumContent.title ??
                             "Titel moet in CMS worden ingevoerd"
                           }
-                          comments={forumContent.comments.length}
+                          comments={forumContent.comments?.length}
                           className="forum-post"
                           content={forumContent.content}
                         />
@@ -425,7 +425,7 @@ export function MasonryGrid({
                             forumContent.title ??
                             "Titel moet in CMS worden ingevoerd"
                           }
-                          comments={forumContent.comments.length}
+                          comments={forumContent.comments?.length}
                           content={forumContent.content}
                           className="forum-post"
                           button={true}
@@ -497,7 +497,8 @@ export function MasonryGrid({
                 );
               case "chat":
                 // TODO: replace with CMS content
-                const chatContent = content as VideoPropsType;
+                const chatContent = content as any;
+                <>{console.log(chatContent)}</>;
                 return (
                   <motion.div
                     className={`grid-item grid-item-w-${item.width}`}
@@ -506,7 +507,11 @@ export function MasonryGrid({
                     whileInView="onscreen"
                     viewport={{ once: true, amount: 0.1 }}
                   >
-                    <ChatExampleItem />
+                    {chatContent?.type === "blue" ? (
+                      <ChatExampleBlue />
+                    ) : (
+                      <ChatExampleItem />
+                    )}
                   </motion.div>
                 );
 
