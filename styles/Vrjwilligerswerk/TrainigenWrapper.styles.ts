@@ -50,6 +50,9 @@ export const TrainingBlogWrapper = styled.section`
 `;
 export const TrainigenIdealWrapper = styled.section`
   margin: 128px 0 80px 0 !important;
+  .footer-content p {
+    background: none !important;
+  }
   .ideal-container {
     z-index: 1;
   }
