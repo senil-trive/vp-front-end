@@ -141,7 +141,7 @@ const ForumFlipWrapper = styled(Grid)`
     }
   }
   .back .main-forum.forum-post {
-    background: #fff5f8 !important;
+    background: #fff !important;
     width: 100%;
   }
   .forum-content {

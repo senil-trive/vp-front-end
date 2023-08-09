@@ -3,7 +3,7 @@ import { H3, P } from "../../typography";
 import styled, { useTheme } from "styled-components";
 
 import { FAQ } from "../../../types/content-types/FAQ.type";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
 
 interface FAQItemProps extends Partial<FAQ> {
@@ -50,46 +50,37 @@ const StyleFaq = styled.div`
     }
   }
 `;
-
 const FAQItem: React.FC<FAQItemProps> = ({
   id,
   selected,
-  isSelected = false,
   title,
   description,
   onSelect,
-  visible,
-  setVisible,
 }) => {
   const theme = useTheme();
-  useEffect(() => {
-    setVisible(true);
-  }, []);
-  const handelSelect = () => {
+  const [visible, setVisible] = useState(false);
+
+  const handleSelect = () => {
     onSelect(id ?? "");
 
-    id !== selected ? setVisible(true) : setVisible(!visible);
+    setVisible(!visible); // Toggle the visibility state
   };
 
   return (
     <StyleFaq
-      className={`cursor-pointer p-[25px] md:pl-[61px] md:p-[42px] rounded-lg ${
-        isSelected && visible ? "bg-[#3FC7B4]" : "bg-[#3fc7b440]"
+      className={`p-[25px] md:pl-[61px] md:p-[42px] rounded-lg ${
+        visible ? "bg-[#3FC7B4]" : "bg-[#3fc7b440]"
       } hover:bg-[#3FC7B4]`}
-      onClick={handelSelect}
     >
-      <div className="flex items-center justify-between  text-left">
-        <H3
-          color={isSelected && visible ? "white" : "black"}
-          className="faq-title"
-        >
+      <div className="flex items-center justify-between text-left">
+        <H3 color={visible ? "white" : "black"} className="faq-title">
           {title}
         </H3>
         <button
-          onClick={handelSelect}
-          className="flex items-center justify-center w-8 h-8"
+          onClick={handleSelect}
+          className="cursor-pointer flex items-center justify-center w-8 h-8"
         >
-          {isSelected && visible ? (
+          {visible ? (
             <FiMinus color={`white`} size={42} />
           ) : (
             <FiPlus color={`black`} size={42} />
@@ -98,9 +89,7 @@ const FAQItem: React.FC<FAQItemProps> = ({
       </div>
 
       <div
-        className={`description text-left ${
-          isSelected && visible ? "visible" : ""
-        }`}
+        className={`description text-left ${visible ? "visible" : ""}`}
         style={{ color: "#fff" }}
       >
         {parseHTMLtoReact(description ?? "")}

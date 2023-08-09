@@ -42,7 +42,9 @@ const CommonDetailCardWrapper = styled(Card)`
       margin-top: auto;
     }
   }
-
+  &.volunteer-detail {
+    box-shadow: none !important;
+  }
   // footer {
   //   display: flex;
   //   flex-direction: column;

@@ -8,6 +8,8 @@ export type BlogType = {
   author: string;
   categories: { categories_id?: CategoryType }[];
   content?: string;
+  quote_content: string;
+  after_quote_content: string;
   date_created: string;
   date_updated: string;
   external_links?: string;

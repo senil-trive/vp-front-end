@@ -459,7 +459,7 @@ export const getChatItems = async ({
  */
 export const getPostDetail = async (slug: string) => {
   return await fetch(
-    `${ENDPOINTS.COLLECTIONS}/vlogposts?fields=related.*.*,comments.*.*,categories.*,*&filter[slug][_eq]=${slug}`,
+    `${ENDPOINTS.COLLECTIONS}/vlogposts?fields=*.*.*.*&filter[slug][_eq]=${slug}`,
     {
       method: "GET",
       headers: {
