@@ -47,7 +47,14 @@ export const MasonryGridWrapper = styled.div`
     border-radius: 5px;
     backface-visibility: hidden;
   }
-
+  .back .main-forum.forum-post {
+    z-index: -1 !important;
+    .forum-link:hover {
+      button {
+        color: #fe517e !important;
+      }
+    }
+  }
   .back {
     h4,
     h3,
