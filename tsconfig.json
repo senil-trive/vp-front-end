@@ -28,7 +28,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "docs/styleguid.config.js"
+    "docs/styleguid.config.js",
+    "lib/fbpixel.js"
   ],
   "exclude": ["node_modules"]
 }

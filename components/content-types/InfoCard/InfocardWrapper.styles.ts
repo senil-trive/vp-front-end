@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 export const InfoCardWrapper = styled.div`
+  .training {
+    height: 180px;
+  }
   .footer-content {
     margin-top: 16px;
   }
@@ -136,6 +139,9 @@ export const InfoCardWrapper = styled.div`
     }
   }
   @media (max-width: 767px) {
+    .training {
+      height: 230px;
+    }
     .info-card-footer {
       .footer-title {
         font-size: 30px !important;

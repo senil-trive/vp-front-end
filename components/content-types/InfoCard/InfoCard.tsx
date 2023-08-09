@@ -83,7 +83,7 @@ const InfoCard: React.FC<InfoCardType> = ({
                   height={45}
                   alt={"Heading icon"}
                   objectFit="contain"
-                  className="pl-1 inline"
+                  className="pl-1 inline mt-[-10px]"
                 />
               )}
             </H2>
