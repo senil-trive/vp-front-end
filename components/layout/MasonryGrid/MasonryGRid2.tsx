@@ -163,7 +163,7 @@ export function MasonryGrid({
                           content="Ik heb het gevoel dat mijn ouders gaan scheiden. Met wie kan ik praten en wat kan ik het beste doen in dit geval? Ik heb gehoord dat ik bij Villa Pinedo een Buddy kan krijgen waarmee ik kan praten over alles waar ik mee zit. Dat is precies wat ik zoek."
                         />
                       </div>
-                      <div className="back">
+                      <div className="back z-10">
                         <ForumPost
                           showButton
                           fullHeight={fullHeightItems}
@@ -405,7 +405,7 @@ export function MasonryGrid({
                           content={forumContent.content}
                         />
                       </div>
-                      <div className="back">
+                      <div className="back z-10">
                         <ForumPost
                           showButton
                           fullHeight={fullHeightItems}

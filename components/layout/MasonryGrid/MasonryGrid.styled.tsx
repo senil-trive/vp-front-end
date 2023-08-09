@@ -10,7 +10,7 @@ export const MasonryGridWrapper = styled.div`
   }
 
   .back .main-forum.forum-post {
-    background: #fff5f8 !important;
+    background: #fff !important;
     width: 100%;
   }
   .forum-card {
@@ -47,7 +47,14 @@ export const MasonryGridWrapper = styled.div`
     border-radius: 5px;
     backface-visibility: hidden;
   }
-
+  .back .main-forum.forum-post {
+    z-index: -1 !important;
+    .forum-link:hover {
+      button {
+        color: #fe517e !important;
+      }
+    }
+  }
   .back {
     h4,
     h3,
