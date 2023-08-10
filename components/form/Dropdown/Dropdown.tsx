@@ -98,6 +98,7 @@ export default function Dropdown({
   };
 
   const generateOptionActiveStyle = (option: DropdownItem) => {
+    console.log(option);
     const found = selectedMulti.filter((item) => item.value === option.value);
 
     if (multi && found[0]) {

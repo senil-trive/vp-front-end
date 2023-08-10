@@ -1,5 +1,5 @@
 import { H3, TitleWithHighlights } from "../../components/typography";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import BreadCrumbs from "../../components/layout/BreadCrumbs/BreadCrumbs";
 import BriefItem from "../../components/content-types/BriefItem/BriefItem";
@@ -22,14 +22,31 @@ import CommentForm from "../../components/form/CommentForm/CommentForm";
 import Tag from "../../components/buttons/Tag/Tag";
 import LetterForyou from "../../components/content-types/LetterForyou/LetterForyou";
 import { LetterFormWrapper } from "../../styles/kinderen/index.styles";
-
+import { Document, Page, pdfjs } from "react-pdf";
+import styled from "styled-components";
 type Props = {
   pageData: Letter;
   relatedLetters: Letter[];
   pageoverview: any;
   comments: any;
 };
+const PdfViewContainer = styled.div`
+  .react-pdf__Page__textContent.textLayer {
+    display: none !important;
+  }
 
+  .react-pdf__Page__annotations.annotationLayer {
+    display: none !important;
+  }
+  display: flex;
+  justify-content: center;
+  @media (max-width: 1200px) {
+    display: block;
+    canvas {
+      margin: 0 auto;
+    }
+  }
+`;
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const { slug } = ctx.query;
 
@@ -157,7 +174,12 @@ export default function LetterDetail({
   const onSubmit: SubmitHandler<any> = async (data) => {
     submitForm(data);
   };
-
+  console.log(pageData);
+  useEffect(() => {
+    if (pageData.slug === "zelf-een-brief-schrijven") {
+      pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+    }
+  }, []);
   return (
     <PageWrapper
       seo={{
@@ -205,13 +227,38 @@ export default function LetterDetail({
       </Hero>
       <section className="my-[128px] md:my-[128px]">
         <Container>
-          <LetterForyou
-            letter_for_you={pageData?.letter_for_you}
-            middle_colored_letter_for_you={
-              pageData?.middle_colored_letter_for_you
-            }
-            bottom_letter_for_you={pageData?.bottom_letter_for_you}
-          />
+          {pageData.slug === "zelf-een-brief-schrijven" ? (
+            <PdfViewContainer>
+              <Document
+                file={parseFileURL(pageData?.downloadable_document?.id)}
+              >
+                <Page pageNumber={1} className={"text-center"}>
+                  1
+                </Page>
+              </Document>
+              <Document
+                file={parseFileURL(pageData?.downloadable_document?.id)}
+              >
+                <Page pageNumber={2} className={"text-center"}>
+                  2
+                </Page>
+              </Document>
+            </PdfViewContainer>
+          ) : (
+            // <object
+            //   data={parseFileURL(pageData?.downloadable_document?.id)}
+            //   type="application/pdf"
+            //   width="100%"
+            //   height="100%"
+            // ></object>
+            <LetterForyou
+              letter_for_you={pageData?.letter_for_you}
+              middle_colored_letter_for_you={
+                pageData?.middle_colored_letter_for_you
+              }
+              bottom_letter_for_you={pageData?.bottom_letter_for_you}
+            />
+          )}
         </Container>
       </section>
       <main className="px-[8px] mb-[100px]  md:px-[0] md:mb-[140px] md:mt-[128px]">

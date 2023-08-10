@@ -1,15 +1,77 @@
-import { Grid } from "@mui/material";
 import React, { useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-
+import { Grid } from "@mui/material";
+import { useForm, Controller, SubmitHandler } from "react-hook-form"; // Import the necessary modules
+import ControlledInput from "../Input/ControlledInput"; // Replace with the actual path to your ControlledInput component
+import { AboutVolunteerType } from "../../../types/forumTypes";
+import styled from "styled-components";
 import Button from "../../buttons/Button";
 import Dropdown from "../Dropdown/Dropdown";
-import { AboutVolunteerType } from "../../../types/forumTypes";
-import Input from "../Input/Input";
-import styled from "styled-components";
 import { GENDERS } from "../../../constants/genders";
 import { KNOWABOUTUSFROM } from "../../../constants/know-aboutus-from";
+import ControlledDropDown from "../Dropdown/ControlledDropDown";
+// import Dropdown from "./Dropdown"; // Replace with the actual path to your Dropdown component
 
+const StyledForm = styled.div`
+  &:before {
+    content: " ";
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    opacity: 0.25;
+    background-size: 59%;
+    background-position: left 225px top -75px;
+    z-index: 1;
+  }
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 8px;
+  padding: 32px 0;
+
+  label {
+    font-family: "Avenir";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 160%;
+    color: white;
+  }
+
+  form {
+    position: relative;
+    z-index: 2;
+    div,
+    .selectBox {
+      border: none;
+    }
+    label {
+      color: #000 !important;
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 160%;
+    }
+  }
+  @media (max-width: 768px) {
+    &:before {
+      background-size: 135%;
+      background-position: left -108px top 8px;
+    }
+    form > div > div {
+      padding: 14px 0 !important;
+    }
+    .form-wrapper {
+      margin: auto !important;
+      width: inherit;
+    }
+    label {
+      margin-bottom: 14px;
+      line-height: 130%;
+    }
+  }
+`;
 const AboutVolunteerForm = ({
   className,
   step,
@@ -25,13 +87,17 @@ const AboutVolunteerForm = ({
 }) => {
   const [knowFrom, setKnowFrom] = useState("");
   const {
-    register,
     handleSubmit,
+    control,
     formState: { errors },
-  } = useForm<AboutVolunteerType>();
+    watch,
+    setValue,
+    clearErrors,
+  } = useForm<AboutVolunteerType>(); // Initialize react-hook-form
 
   const submitForm = async (data: AboutVolunteerType) => {
     setAboutVolunteer({ ...data });
+    console.log(data);
   };
 
   const onSubmit: SubmitHandler<AboutVolunteerType> = async (data) => {
@@ -39,207 +105,229 @@ const AboutVolunteerForm = ({
     setStep(step + 1);
   };
 
-  const StyledForm = styled.div`
-    &:before {
-      content: " ";
-      display: block;
-      position: absolute;
-      left: 0;
-      top: 0px;
-      width: 100%;
-      height: 100%;
-      opacity: 0.25;
-      background-size: 59%;
-      background-position: left 225px top -75px;
-      z-index: 1;
-    }
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    border-radius: 8px;
-    padding: 32px 0;
-
-    label {
-      font-family: "Avenir";
-      font-style: normal;
-      font-weight: 400;
-      font-size: 18px;
-      line-height: 160%;
-      color: white;
-    }
-
-    form {
-      position: relative;
-      z-index: 2;
-      div,
-      .selectBox {
-        border: none;
-      }
-      label {
-        color: #000 !important;
-        font-size: 18px;
-        font-weight: 800;
-        line-height: 160%;
-      }
-    }
-    @media (max-width: 768px) {
-      &:before {
-        background-size: 135%;
-        background-position: left -108px top 8px;
-      }
-      form > div > div {
-        padding: 14px 0 !important;
-      }
-      .form-wrapper {
-        margin: auto !important;
-        width: inherit;
-      }
-      label {
-        margin-bottom: 14px;
-        line-height: 130%;
-      }
-    }
-  `;
-
-  // const handleChange = (e: any) => {
-  //   e === "Anderen" ? setKnowFrom(true) : setKnowFrom(false);
-  // };
   return (
     <div className="relative h-[100%]">
       <StyledForm>
         <form onSubmit={handleSubmit(onSubmit)} className="flex h-[100%]">
-          <Grid container spacing={"16"} className="form-wrapper">
+          <Grid container spacing={3}>
             <Grid item xs={12} md={4}>
-              <Input
-                label="Wat zijn je initialen?"
+              <Controller
                 name="your_initials"
-                required
-                register={register}
-                hasError={!!errors.your_initials}
-                placeholder="Jouw initialen"
-                helperText={
-                  !!errors.your_initials ? "initialen is verplicht" : ""
-                }
+                control={control}
+                defaultValue=""
+                rules={{ required: "Initialen is verplicht" }}
+                render={({ field }) => (
+                  <ControlledInput
+                    label="Wat zijn je initialen?"
+                    value={field.value}
+                    onChange={field.onChange}
+                    placeholder="Jouw initialen"
+                    hasError={!!errors.your_initials}
+                    helperText={
+                      errors.your_initials ? errors.your_initials.message : ""
+                    }
+                  />
+                )}
               />
             </Grid>
             <Grid item xs={12} md={4}>
-              <Input
-                label="Wat is je voornaam?"
-                required
+              <Controller
                 name="first_name"
-                placeholder="Jouw voornaam..."
-                register={register}
-                hasError={!!errors.first_name}
-                helperText={!!errors?.first_name ? "voornaam is verplicht" : ""}
+                control={control}
+                defaultValue=""
+                rules={{ required: "voornaam is verplicht" }}
+                render={({ field }) => (
+                  <ControlledInput
+                    label="Wat is je voornaam?"
+                    value={field.value}
+                    onChange={field.onChange}
+                    placeholder="Jouw voornaam..."
+                    hasError={!!errors.first_name}
+                    helperText={
+                      errors.first_name ? "voornaam is verplicht" : ""
+                    }
+                  />
+                )}
               />
             </Grid>
             <Grid item xs={12} md={4}>
-              <Input
-                label="Wat is je achternaam?"
-                required
+              <Controller
                 name="surname"
-                placeholder="Jouw achternaam..."
-                hasError={!!errors.surname}
-                register={register}
-                helperText={!!errors?.surname ? "achternaam is verplicht" : ""}
+                control={control}
+                defaultValue=""
+                rules={{ required: "achternaam is verplicht" }}
+                render={({ field }) => (
+                  <ControlledInput
+                    label="Wat is je achternaam?"
+                    value={field.value}
+                    onChange={field.onChange}
+                    placeholder="Jouw achternaam..."
+                    hasError={!!errors.surname}
+                    helperText={errors.surname ? "achternaam is verplicht" : ""}
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Controller
+                name="gender"
+                control={control}
+                defaultValue=""
+                rules={{ required: "Initialen is verplicht" }}
+                render={({ field }) => (
+                  <ControlledDropDown
+                    {...field}
+                    field={field}
+                    clearErrors={clearErrors}
+                    watch={watch}
+                    setValue={setValue}
+                    options={GENDERS}
+                    fill={"#FE517E"}
+                    required
+                    label="Wat is je geslacht?"
+                    placeholder="Jouw geslacht..."
+                    name="gender"
+                    hasError={!!errors.gender}
+                    helperText={
+                      !!errors?.gender
+                        ? "selecteer alstublieft één geslacht"
+                        : ""
+                    }
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              {/* Use Controller for validated fields */}
+              <Controller
+                name="birth_date"
+                control={control}
+                defaultValue=""
+                rules={{ required: "Initialen is verplicht" }}
+                render={({ field }) => (
+                  <ControlledInput
+                    type="date"
+                    label="Wat is je geboortedatum?"
+                    value={field.value}
+                    onChange={field.onChange}
+                    placeholder="Jouw leeftijd... (18-25)"
+                    hasError={!!errors.birth_date}
+                    helperText={
+                      errors.birth_date ? "geboortedatum is verplicht" : ""
+                    }
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Controller
+                name="email_address"
+                control={control}
+                defaultValue=""
+                rules={{ required: "Initialen is verplicht" }}
+                render={({ field }) => (
+                  <ControlledInput
+                    label="Wat is je e-mailadres"
+                    value={field.value}
+                    onChange={field.onChange}
+                    placeholder="Jouw e-mailadres..."
+                    hasError={!!errors.email_address}
+                    helperText={
+                      errors.email_address ? "e-mailadres is verplicht" : ""
+                    }
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Controller
+                name="address"
+                control={control}
+                defaultValue=""
+                rules={{ required: "Initialen is verplicht" }}
+                render={({ field }) => (
+                  <ControlledInput
+                    label="Waar woon je?"
+                    value={field.value}
+                    onChange={field.onChange}
+                    placeholder="Jouw woonplaats..."
+                    hasError={!!errors.address}
+                    helperText={errors.address ? "adres is verplicht" : ""}
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Controller
+                name="phone_number"
+                control={control}
+                defaultValue=""
+                rules={{ required: "Initialen is verplicht" }}
+                render={({ field }) => (
+                  <ControlledInput
+                    label="Telefoonnummer"
+                    value={field.value}
+                    onChange={field.onChange}
+                    placeholder="Jouw telefoonnummer..."
+                    hasError={!!errors.phone_number}
+                    helperText={
+                      errors.phone_number ? "telefoonnummer is verplicht" : ""
+                    }
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12} md={4}>
+              <Controller
+                name="know_about_us"
+                control={control}
+                defaultValue=""
+                rules={{ required: "Initialen is verplicht" }}
+                render={({ field }) => (
+                  <ControlledDropDown
+                    {...field}
+                    field={field}
+                    clearErrors={clearErrors}
+                    watch={watch}
+                    setValue={setValue}
+                    options={KNOWABOUTUSFROM}
+                    fill={"#FE517E"}
+                    required
+                    label="Hoe ken je ons?"
+                    placeholder="selecteer..."
+                    name="know_about_us"
+                    hasError={!!errors.know_about_us}
+                    helperText={
+                      !!errors?.know_about_us
+                        ? "selecteer alstublieft één geslacht"
+                        : ""
+                    }
+                  />
+                )}
               />
             </Grid>
 
-            <Grid item xs={12} md={4}>
-              <Dropdown
-                options={GENDERS}
-                fill={"#FE517E"}
-                required
-                label="Wat is je geslacht?"
-                placeholder="Jouw geslacht..."
-                name="gender"
-                hasError={!!errors.gender}
-                register={register}
-                helperText={
-                  !!errors?.gender ? "selecteer alstublieft één geslacht" : ""
-                }
-              />
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Input
-                type="date"
-                required
-                label="Wat is je geboortedatum?"
-                name="birth_date"
-                placeholder="Jouw leeftijd... (18-25)"
-                register={register}
-                hasError={!!errors.birth_date}
-                helperText={
-                  !!errors.birth_date ? "geboortedatum is verplicht" : ""
-                }
-              />
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Input
-                label="Wat is je e-mailadres"
-                name="email_address"
-                required
-                hasError={!!errors.email_address}
-                register={register}
-                placeholder="Jouw e-mailadres..."
-                helperText={
-                  !!errors.email_address ? "e-mailadres is verplicht" : ""
-                }
-              />
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Input
-                label="Waar woon je?"
-                name="address"
-                required
-                placeholder="Jouw woonplaats..."
-                register={register}
-                hasError={!!errors.address}
-                helperText={!!errors.address ? "adres is verplicht" : ""}
-              />
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Input
-                label="Telefoonnummer"
-                name="phone_number"
-                required
-                placeholder="Jouw telefoonnummer..."
-                register={register}
-                hasError={!!errors.phone_number}
-                helperText={
-                  !!errors.phone_number ? "telefoonnummer is verplicht" : ""
-                }
-              />
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Dropdown
-                options={KNOWABOUTUSFROM}
-                required
-                label="Hoe ken je ons?"
-                name="know_about_us"
-                fill={"#FE517E"}
-                register={register}
-                placeholder="selecteer..."
-                helperText={
-                  !!errors?.know_about_us
-                    ? "selecteer alstublieft een optie"
-                    : ""
-                }
-                hasError={!!errors.know_about_us}
-              />
-            </Grid>
             {knowFrom === "Anderen" && (
               <Grid item xs={12} md={4}>
-                <Input
-                  label="weet van?"
+                <Controller
                   name="other_reference_from"
-                  required
-                  hasError={!!errors.other_reference_from}
-                  register={register}
-                  placeholder="weet van..."
-                  helperText={
-                    !!errors.other_reference_from ? "weet van is verplicht" : ""
-                  }
+                  control={control}
+                  defaultValue=""
+                  rules={{ required: "weet van is verplicht" }}
+                  render={({ field }) => (
+                    <ControlledInput
+                      label="weet van?"
+                      value={field.value}
+                      onChange={field.onChange}
+                      placeholder="weet van..."
+                      hasError={!!errors.other_reference_from}
+                      helperText={
+                        errors.other_reference_from
+                          ? errors.other_reference_from.message
+                          : ""
+                      }
+                    />
+                  )}
                 />
               </Grid>
             )}
@@ -259,5 +347,3 @@ const AboutVolunteerForm = ({
 };
 
 export default AboutVolunteerForm;
-
-// after error generating if i type anything it take first character after that cursor move out side and error gone but i need cusor in input tag

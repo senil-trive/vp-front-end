@@ -230,7 +230,7 @@ export default function Forum({
           </Container>
         </div>
         <div style={{ margin: "0px auto" }}>
-          <Container style={{ marginBottom: "0px", maxWidth: "1384px" }}>
+          <Container className="max-w-[1384px]">
             <Grid container>
               <Grid item xs={12} md={9}>
                 <P

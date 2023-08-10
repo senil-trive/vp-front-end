@@ -144,69 +144,65 @@ export default function TagList({
   const rightArrow = useRef(null);
   const isSelected = (id: string) => selected === id;
   return (
-    <Container className="max-w-[1384px]  my-[21px] py-0 px-[16px] md:px-[32px]">
-      <Wrapper>
-        <div
-          style={{ display: "block", padding: "0px 5px 0 20px" }}
-          className="prefix"
-        >
-          {prefix}
+    <Wrapper>
+      <div
+        style={{ display: "block", padding: "0px 5px 0 20px" }}
+        className="prefix"
+      >
+        {prefix}
+      </div>
+      <div
+        style={{ width: 81, padding: "0px 30px 0 0px" }}
+        className={"left-arrow"}
+        onClick={() => {
+          handleHorizantalScroll({
+            element: scrollRef.current,
+            step: -100,
+            leftArrow: leftArrow.current,
+            rightArrow: rightArrow.current,
+          });
+        }}
+        id="text"
+        ref={leftArrow}
+      >
+        {suffix}
+      </div>
+      <div className="outer">
+        <div ref={scrollRef} className="inner scrolling-right">
+          <div className="scroll-indicator indicator-left" />
+          {tags.map((tag, index) => (
+            <Tag
+              key={index}
+              className="tag"
+              isActive={isSelected(tag.id)}
+              onClick={() => onSelect?.(isSelected(tag.id) ? "" : tag.id)}
+              style={{
+                backgroundColor: isSelected(tag.id) ? "#3FC7B4" : "transparent",
+                color: isSelected(tag.id) ? "#fff" : "#150F2F",
+                border: "1px solid #3FC7B4",
+              }}
+            >
+              {tag.name}
+            </Tag>
+          ))}
+          <div className="scroll-indicator indicator-right" />
         </div>
-        <div
-          style={{ width: 81, padding: "0px 30px 0 0px" }}
-          className={"left-arrow"}
-          onClick={() => {
-            handleHorizantalScroll({
-              element: scrollRef.current,
-              step: -100,
-              leftArrow: leftArrow.current,
-              rightArrow: rightArrow.current,
-            });
-          }}
-          id="text"
-          ref={leftArrow}
-        >
-          {suffix}
-        </div>
-        <div className="outer">
-          <div ref={scrollRef} className="inner scrolling-right">
-            <div className="scroll-indicator indicator-left" />
-            {tags.map((tag, index) => (
-              <Tag
-                key={index}
-                className="tag"
-                isActive={isSelected(tag.id)}
-                onClick={() => onSelect?.(isSelected(tag.id) ? "" : tag.id)}
-                style={{
-                  backgroundColor: isSelected(tag.id)
-                    ? "#3FC7B4"
-                    : "transparent",
-                  color: isSelected(tag.id) ? "#fff" : "#150F2F",
-                  border: "1px solid #3FC7B4",
-                }}
-              >
-                {tag.name}
-              </Tag>
-            ))}
-            <div className="scroll-indicator indicator-right" />
-          </div>
-        </div>
-        <div
-          style={{ width: 77, padding: "0px 30px 0 4px" }}
-          className="right-arrow active"
-          onClick={() => {
-            handleHorizantalScroll({
-              element: scrollRef.current,
-              step: 100,
-              rightArrow: rightArrow.current,
-              leftArrow: leftArrow.current,
-            });
-          }}
-          ref={rightArrow}
-        >
-          {suffix}
-        </div>
-      </Wrapper>
-    </Container>
+      </div>
+      <div
+        style={{ width: 77, padding: "0px 30px 0 4px" }}
+        className="right-arrow active"
+        onClick={() => {
+          handleHorizantalScroll({
+            element: scrollRef.current,
+            step: 100,
+            rightArrow: rightArrow.current,
+            leftArrow: leftArrow.current,
+          });
+        }}
+        ref={rightArrow}
+      >
+        {suffix}
+      </div>
+    </Wrapper>
   );
 }

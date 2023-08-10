@@ -196,15 +196,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
                     key={usp.title}
                     title={usp?.title}
                     description={usp?.description}
-                    imageUrl={
-                      index === 0
-                        ? "/diffpeople1.png"
-                        : index === 1
-                        ? "/diffpeople2.png"
-                        : index === 2
-                        ? "/diffpeople3.png"
-                        : "/diffpeople4.png"
-                    }
+                    imageUrl={parseImageURL(usp?.image?.id)}
                     variant="follow"
                     className="cursor-text volunteer-detail"
                   />
