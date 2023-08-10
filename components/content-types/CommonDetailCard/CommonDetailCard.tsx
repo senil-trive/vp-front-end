@@ -13,7 +13,7 @@ const DescriptionText = styled.p`
 
 const CommonDetailCardWrapper = styled(Card)`
   a {
-    margin-top: 20px;
+    margin-top: 20px !important;
     background: #fff;
     border: none;
     color: #ff971d !important;
@@ -21,6 +21,9 @@ const CommonDetailCardWrapper = styled(Card)`
   &.divorced-parents {
     margin-bottom: 20px;
     width: calc(25% - 15px) !important;
+    a {
+      margin-top: 32px !important;
+    }
     @media (max-width: 991px) {
       width: calc(50% - 20px) !important;
       &:nth-child(2) {

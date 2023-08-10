@@ -27,7 +27,7 @@ export const getServerSideProps = async () => {
   // fetch page data from API
   try {
     const pageReq = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/buddy_page?fields=*.*.*.*.*`,
+      `${ENDPOINTS.COLLECTIONS}/divorced_parents_now_what?fields=*.*.*`,
       {
         method: "GET",
         headers: {
@@ -35,21 +35,10 @@ export const getServerSideProps = async () => {
         },
       }
     );
-    const pageRqe = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/divorced_parents_now_what?fields=*.*.*.*`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    const pageRse = await pageRqe.json();
     const pageRes = await pageReq.json();
     return {
       props: {
         pageData: pageRes.data || null,
-        pageDat: pageRse.data || null,
       },
     };
   } catch (error) {
@@ -61,10 +50,7 @@ export const getServerSideProps = async () => {
   }
 };
 
-const GescheidenOudersWatNu: React.FC<BuddyPageProps> = ({
-  pageData,
-  pageDat,
-}) => {
+const GescheidenOudersWatNu: React.FC<BuddyPageProps> = ({ pageData }) => {
   const { colors } = useTheme();
   return (
     <ContainerWrapper className="klets-meet">
@@ -95,7 +81,7 @@ const GescheidenOudersWatNu: React.FC<BuddyPageProps> = ({
             <div>
               <div className="text-left max-w-2xl md:max-w-4xl mt-[-80px] md:mt-[-120px] md:text-center">
                 <TitleWithHighlights
-                  text={"gescheiden ouders, wat nu?!"}
+                  text={pageData.title}
                   style={{ marginBottom: "0px" }}
                   className="text-[#fff] text-[46px] font-[400] md:text-[64px]"
                 />
@@ -103,11 +89,7 @@ const GescheidenOudersWatNu: React.FC<BuddyPageProps> = ({
                   style={{ marginBottom: "18px" }}
                   className="text-[#fff] text-[20px] leading-[160%] md:text-[18px]"
                 >
-                  Scheiding van je ouders overleefd? Dan ben je ondertussen een
-                  ervaringsdeskundige. Kinderen die nu in dezelfde situatie
-                  zitten als waar jij in gezeten hebt, vinden het fijn om tips
-                  en adviezen te krijgen van jou. Of gewoon even hun hart te
-                  luchten. Meld je daarom aan als vrijwilliger.
+                  {pageData.sub_title}
                 </P>
               </div>
             </div>
@@ -116,56 +98,46 @@ const GescheidenOudersWatNu: React.FC<BuddyPageProps> = ({
           <BuddymediaWrapper>
             <Container>
               <div className="block relative mt-[-190px] md:flex gap-10 md:mt-[-80px]">
-                {pageData?.media_items?.map((item: any, index: number) => {
-                  return (
-                    <>
-                      {index === 0 && (
-                        <InfoCard
-                          variant="blog"
-                          imageUrl={parseImageURL(item?.image?.id)}
-                          title={item.title}
-                          description={item.description}
-                          icon={parseImageURL(pageData?.note_write_icon?.id)}
-                          category={"Thema"}
-                          className="small-fonts bg-[#FE517E] text-[#fff] h-[100%] flex flex-col mb-[40px] md:mb-[0]"
-                        >
-                          <div className="flex justify-center  mt-[20px] md:mt-[auto]">
-                            <Button
-                              style={{ fontFamily: "Fjalla One" }}
-                              variant="secondary"
-                              className="w-[100%] text-[16px] font-[400] bg-[#fff] text-[#FE517E] border-[#fff] hover:bg-[#FE517E] md:text-[18px]"
-                              href={`/open-brieven/${pageData?.highlighted_letter?.slug}`}
-                            >
-                              Meer lezen
-                            </Button>
-                          </div>
-                        </InfoCard>
-                      )}
-                      {index === 1 && (
-                        <InfoCard
-                          variant="primary"
-                          imageUrl={parseImageURL(item?.image?.id)}
-                          title={item.title}
-                          description={item?.description}
-                          category="Thema"
-                          icon={parseImageURL(item?.title_right_icon?.id)}
-                          className="small-fonts mt-[32px] md:mt-[0px] h-[100%] flex
+                <InfoCard
+                  variant="blog"
+                  imageUrl={parseImageURL(pageData?.media_image?.id)}
+                  title={pageData?.media_title}
+                  description={pageData?.media_description}
+                  icon={"/letterBlog.png"}
+                  category={"Thema"}
+                  className="small-fonts bg-[#FE517E] text-[#fff] h-[100%] flex flex-col mb-[40px] md:mb-[0]"
+                >
+                  <div className="flex justify-center  mt-[20px] md:mt-[auto]">
+                    <Button
+                      style={{ fontFamily: "Fjalla One" }}
+                      variant="secondary"
+                      className="w-[100%] text-[16px] font-[400] bg-[#fff] text-[#FE517E] border-[#fff] hover:bg-[#FE517E] md:text-[18px]"
+                      href={`#`}
+                    >
+                      {pageData?.media_button_title}
+                    </Button>
+                  </div>
+                </InfoCard>
+                <InfoCard
+                  variant="primary"
+                  imageUrl={parseImageURL(pageData?.media_2_image?.id)}
+                  title={pageData?.media_2_title}
+                  description={pageData?.media_2_description}
+                  category="Thema"
+                  icon={"/letterBlog.png"}
+                  className="small-fonts mt-[32px] md:mt-[0px] h-[100%] flex
                   flex-col"
-                        >
-                          <div className="flex justify-center mt-[20px] md:mt-[auto]">
-                            <Button
-                              variant="secondary"
-                              className="w-[100%] text-[18px] font-[400] bg-[#fff] text-[#006EF7] border-[#fff]"
-                              href={item.button_url}
-                            >
-                              {item?.button_label}
-                            </Button>
-                          </div>
-                        </InfoCard>
-                      )}
-                    </>
-                  );
-                })}
+                >
+                  <div className="flex justify-center mt-[20px] md:mt-[auto]">
+                    <Button
+                      variant="secondary"
+                      className="w-[100%] text-[18px] font-[400] bg-[#fff] text-[#006EF7] border-[#fff]"
+                      href={"#"}
+                    >
+                      {pageData?.media_2_button_title}
+                    </Button>
+                  </div>
+                </InfoCard>
               </div>
             </Container>
           </BuddymediaWrapper>
@@ -173,19 +145,19 @@ const GescheidenOudersWatNu: React.FC<BuddyPageProps> = ({
             <Container>
               <div className="flex flex-col md:text-center md:items-center md:justify-center mb-6 md:mb-14">
                 <TitleWithHighlights
-                  text={pageData?.buddy_help_section_title}
+                  text={pageData?.info_title}
                   headerElement="h3"
                   color="black"
                   className="text-[30px] md:text-[42px] font-[400]"
                 />
                 <P className="max-w-7xl text-[16px] md:text-[18px]">
-                  {pageData?.buddy_help_section_subtitle}
+                  {pageData?.info_sub_title}
                 </P>
               </div>
             </Container>
             <Container>
               <div className="container-reflect flex flex-wrap">
-                {pageDat?.info_blocks?.map((ite: any) => (
+                {pageData?.info_blocks?.map((ite: any) => (
                   <CommonDetailCard
                     key={ite.info_title}
                     title={ite.info_title}
@@ -232,11 +204,11 @@ const GescheidenOudersWatNu: React.FC<BuddyPageProps> = ({
             </Container>
           </VideoWrapper>
           <section className="mb-[80px] mt-[-40px] md:mt-[0px]">
-            <FAQList
+            {/* <FAQList
               title={pageData?.faq_section_title}
               items={pageData?.featured_faqs.slice(0, 3)}
               show={true}
-            />
+            /> */}
             <Container
               style={{ marginBottom: 145, marginTop: -24 }}
               className="mt-2 hidden sm:block"

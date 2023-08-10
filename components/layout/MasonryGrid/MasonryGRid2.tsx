@@ -498,7 +498,6 @@ export function MasonryGrid({
               case "chat":
                 // TODO: replace with CMS content
                 const chatContent = content as any;
-                <>{console.log(chatContent)}</>;
                 return (
                   <motion.div
                     className={`grid-item grid-item-w-${item.width}`}

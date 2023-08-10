@@ -97,7 +97,6 @@ const AboutVolunteerForm = ({
 
   const submitForm = async (data: AboutVolunteerType) => {
     setAboutVolunteer({ ...data });
-    console.log(data);
   };
 
   const onSubmit: SubmitHandler<AboutVolunteerType> = async (data) => {
