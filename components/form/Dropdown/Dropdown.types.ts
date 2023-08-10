@@ -13,7 +13,7 @@ export type DropdownItem = {
 export type DropdownProps = {
   /** Label of the dropdown field. */
   label?: string;
-  setValue?: (params: any) => void;
+
   /** React or custom Icon to be placed in front of the input  */
   iconLeft?: ReactNode;
 

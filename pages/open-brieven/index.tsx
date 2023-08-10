@@ -48,7 +48,9 @@ export const getServerSideProps = async () => {
     return {
       props: {
         pageData: pageRes.data,
-        toplettersData: toplettersRes.data,
+        toplettersData: toplettersRes.data.sort(
+          (a: Letter, b: Letter) => a.sort - b.sort
+        ),
         lettersData: lettersRes.data,
       },
     };
@@ -66,6 +68,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
   lettersData,
   toplettersData,
 }) => {
+  console.log(toplettersData);
   return (
     <div>
       <PageWrapper

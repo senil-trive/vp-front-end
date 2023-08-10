@@ -26,7 +26,7 @@ const Wrapper: any = styled.div`
   /* width: ${(props: any) =>
     props.selected === "Vrijwilligers" ? "40%" : ""}; */
   // right: 0;
-  min-width: 291px;
+  min-width: 350px;
   max-width: 500px;
   &:before {
     left: calc(100% - 50px) !important;
@@ -63,8 +63,9 @@ const Wrapper: any = styled.div`
       display: block !important;
 
       li {
+        padding-bottom: 0 !important;
         &:not(:last-child) {
-          padding-bottom: 15px;
+          // padding-bottom: 15px;
         }
 
         max-width: 100%;
@@ -74,11 +75,15 @@ const Wrapper: any = styled.div`
           font-weight: 300;
           font-size: 18px;
           line-height: 160%;
-          max-width: 250px;
+          max-width: 100%;
           word-break: break-word;
           white-space: normal;
           // letter-spacing: 0.02em;
           color: ${({ theme }) => theme.colors.text.normal};
+
+          padding: 12px;
+          border-radius: 8px;
+          width: fit-content;
 
           &:hover {
             background-color: ${({ theme }) => theme.colors.primary.normal};
@@ -98,6 +103,7 @@ const Wrapper: any = styled.div`
             border-radius: 8px;
             width: fit-content;
             color: white;
+            margin: 5px 0;
             &:after {
               content: "  👉🏽";
             }
