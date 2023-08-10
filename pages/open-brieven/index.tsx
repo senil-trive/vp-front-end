@@ -48,12 +48,13 @@ export const getServerSideProps = async () => {
     return {
       props: {
         pageData: pageRes.data,
-        toplettersData:
-          toplettersRes.data?.lenght > 0 &&
-          toplettersRes.data?.sort((a: Letter, b: Letter) => a.sort - b.sort),
-        lettersData:
-          lettersRes.data?.lenght > 0 &&
-          lettersRes.data?.sort((a: Letter, b: Letter) => a.sort - b.sort),
+        toplettersData: toplettersRes.data?.sort(
+          (a: Letter, b: Letter) => a.sort - b.sort
+        ),
+
+        lettersData: lettersRes.data?.sort(
+          (a: Letter, b: Letter) => a.sort - b.sort
+        ),
       },
     };
   } catch (error) {
@@ -71,6 +72,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
   toplettersData,
 }) => {
   console.log(toplettersData);
+  console.log(lettersData);
   return (
     <div>
       <PageWrapper
@@ -179,7 +181,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
           <section className="mt-[40px] md:mt-[64px] mb-[80px] md:mb-[128px]">
             <Container maxWidth="xl" className="open-brieven-font">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-20">
-                {lettersData.map((letter: Letter) => (
+                {lettersData?.map((letter: Letter) => (
                   <BriefItem
                     key={letter.id}
                     title={letter.title}
