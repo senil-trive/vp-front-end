@@ -48,10 +48,12 @@ export const getServerSideProps = async () => {
     return {
       props: {
         pageData: pageRes.data,
-        toplettersData: toplettersRes.data.sort(
-          (a: Letter, b: Letter) => a.sort - b.sort
-        ),
-        lettersData: lettersRes.data,
+        toplettersData:
+          toplettersRes.data?.lenght > 0 &&
+          toplettersRes.data?.sort((a: Letter, b: Letter) => a.sort - b.sort),
+        lettersData:
+          lettersRes.data?.lenght > 0 &&
+          lettersRes.data?.sort((a: Letter, b: Letter) => a.sort - b.sort),
       },
     };
   } catch (error) {
