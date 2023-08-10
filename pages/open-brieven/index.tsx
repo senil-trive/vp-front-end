@@ -15,8 +15,8 @@ import Button from "../../components/buttons/Button";
 
 interface LettersOverviewPageProps {
   pageData: any;
-  lettersData: Letter[];
-  toplettersData: Letter[];
+  lettersDatas: Letter[];
+  toplettersDatas: Letter[];
 }
 
 export const getServerSideProps = async () => {
@@ -48,13 +48,8 @@ export const getServerSideProps = async () => {
     return {
       props: {
         pageData: pageRes.data,
-        toplettersData: toplettersRes.data?.sort(
-          (a: Letter, b: Letter) => a.sort - b.sort
-        ),
-
-        lettersData: lettersRes.data?.sort(
-          (a: Letter, b: Letter) => a.sort - b.sort
-        ),
+        toplettersDatas: toplettersRes.data,
+        lettersDatas: lettersRes.data,
       },
     };
   } catch (error) {
@@ -68,11 +63,16 @@ export const getServerSideProps = async () => {
 
 const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
   pageData,
-  lettersData,
-  toplettersData,
+  lettersDatas,
+  toplettersDatas,
 }) => {
-  console.log(toplettersData);
-  console.log(lettersData);
+  const toplettersData = toplettersDatas?.sort(
+    (a: Letter, b: Letter) => a.sort - b.sort
+  );
+  const lettersData = lettersDatas?.sort(
+    (a: Letter, b: Letter) => a.sort - b.sort
+  );
+
   return (
     <div>
       <PageWrapper
