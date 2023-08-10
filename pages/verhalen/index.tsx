@@ -67,7 +67,11 @@ export default function Forum({
   const [sort, setSort] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
-
+  useEffect(() => {
+    if (selectedTag) {
+      setCurrentPage(1);
+    }
+  }, []);
   const handleSearch = (x: string) => {
     setSearch(x);
     setCurrentPage(1);
@@ -88,7 +92,7 @@ export default function Forum({
       try {
         const req = await getPosts({
           postPerPage: POST_PER_PAGE,
-          // page: currentPage,
+          page: currentPage,
           search,
           sort,
           meta: "filter_count",
@@ -99,7 +103,7 @@ export default function Forum({
         });
         const res = await req.json();
 
-        setPosts([...res.data.slice(0, 6), ...res.data.slice(0, 6)] || []);
+        setPosts(res.data ?? []);
         setTotalCount(res.meta.filter_count || 0);
       } catch (error) {
         console.log(error);
@@ -107,7 +111,7 @@ export default function Forum({
     };
 
     getPaginatedBlogs();
-  }, [search, sort, selectedTag]);
+  }, [search, sort, currentPage, selectedTag]);
 
   return (
     <PageWrapper

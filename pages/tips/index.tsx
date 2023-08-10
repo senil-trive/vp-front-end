@@ -5,6 +5,7 @@ import {
   getContentTag,
   getPostOverviewPageData,
   getPosts,
+  getTips,
 } from "../../utils/api";
 
 import { BlogPageProps } from "../../types/pageTypes";
@@ -39,7 +40,7 @@ export const getServerSideProps = async () => {
     const tagsReq = await getContentTag({
       filter: `filter[type][_eq]=main`,
     });
-    const blogsReq = await getPosts({
+    const blogsReq = await getTips({
       postPerPage: POST_PER_PAGE,
       meta: "filter_count",
     });

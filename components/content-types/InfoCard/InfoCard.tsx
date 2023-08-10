@@ -47,14 +47,12 @@ const InfoCard: React.FC<InfoCardType> = ({
             className={videoClassName}
           />
         )}
-
         {imageUrl && (
           <CardHeader>
-            <Image
+            <img
               src={imageUrl}
               className="absolute h-full w-full top-0 left-0 z-0 object-cover"
               alt={title}
-              fill
             />
             {!!category && (
               <Tag

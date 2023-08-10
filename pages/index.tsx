@@ -241,51 +241,53 @@ export default function Home({
                 : "mt-[-122px] relative mb-[50px] sm:mb-[48px] hidden sm:mt-[-72px] md:block"
             }
           >
-            <TagList
-              tags={categories.map((cat) => ({
-                id: cat.id,
-                name: cat.name,
-                status: cat.status,
-              }))}
-              selected={selectedTag}
-              prefix={
-                <H4
-                  style={{
-                    whiteSpace: "nowrap",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "5px",
-                  }}
-                  className="pr-[20px]"
-                >
-                  <span
-                    style={{ fontFamily: "Fjalla One" }}
-                    className="md:hidden text-[16px] font-[400]"
+            <Container className="max-w-[1384px]">
+              <TagList
+                tags={categories.map((cat) => ({
+                  id: cat.id,
+                  name: cat.name,
+                  status: cat.status,
+                }))}
+                selected={selectedTag}
+                prefix={
+                  <H4
+                    style={{
+                      whiteSpace: "nowrap",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "5px",
+                    }}
+                    className="pr-[20px]"
                   >
-                    {pageData?.tag_select_subject_title}
-                  </span>
-                  <span
-                    style={{ fontFamily: "Fjalla One" }}
-                    className="hidden md:block md:text-[28px] font-[400]"
-                  >
-                    {pageData?.tag_subject_title}
-                  </span>
-                  {/* Onderwerp{" "} */}
+                    <span
+                      style={{ fontFamily: "Fjalla One" }}
+                      className="md:hidden text-[16px] font-[400]"
+                    >
+                      {pageData?.tag_select_subject_title}
+                    </span>
+                    <span
+                      style={{ fontFamily: "Fjalla One" }}
+                      className="hidden md:block md:text-[28px] font-[400]"
+                    >
+                      {pageData?.tag_subject_title}
+                    </span>
+                    {/* Onderwerp{" "} */}
 
-                  <Image
-                    src={parseImageURL(pageData?.thumb_icon?.id)}
-                    alt="hand_icon"
-                    width={30}
-                    height={30}
-                    className="md:-rotate-90"
-                  />
-                </H4>
-              }
-              suffix={<ChevronRight />}
-              onSelect={(x: string) => {
-                setSelectedTag(x);
-              }}
-            />
+                    <Image
+                      src={parseImageURL(pageData?.thumb_icon?.id)}
+                      alt="hand_icon"
+                      width={30}
+                      height={30}
+                      className="md:-rotate-90"
+                    />
+                  </H4>
+                }
+                suffix={<ChevronRight />}
+                onSelect={(x: string) => {
+                  setSelectedTag(x);
+                }}
+              />
+            </Container>
           </div>
         </Container>
         <MasonryGrid feed={posts} homepage={true} />

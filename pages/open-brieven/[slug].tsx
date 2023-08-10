@@ -1,4 +1,4 @@
-import { H3, TitleWithHighlights } from "../../components/typography";
+import { H3, P, TitleWithHighlights } from "../../components/typography";
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import BreadCrumbs from "../../components/layout/BreadCrumbs/BreadCrumbs";
@@ -25,7 +25,7 @@ import { LetterFormWrapper } from "../../styles/kinderen/index.styles";
 import { Document, Page, pdfjs } from "react-pdf";
 import styled from "styled-components";
 type Props = {
-  pageData: Letter;
+  pageData: Letter & { sub_title?: string; hero_description?: string };
   relatedLetters: Letter[];
   pageoverview: any;
   comments: any;
@@ -174,7 +174,6 @@ export default function LetterDetail({
   const onSubmit: SubmitHandler<any> = async (data) => {
     submitForm(data);
   };
-  console.log(pageData);
   useEffect(() => {
     if (pageData.slug === "zelf-een-brief-schrijven") {
       pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
@@ -223,9 +222,35 @@ export default function LetterDetail({
             color="white"
             className="text-[42px] font-[400] md:text-[64px]"
           />
+          {pageData?.sub_title ? (
+            <P
+              color="white"
+              variant="light"
+              className={
+                "text-[16px] font-[300] leading-[160%] md:text-[18px] md:text-center"
+              }
+            >
+              {pageData?.sub_title}
+            </P>
+          ) : (
+            ""
+          )}
         </div>
       </Hero>
       <section className="my-[128px] md:my-[128px]">
+        <Container>
+          {pageData?.hero_description ? (
+            <P
+              color="black"
+              variant="light"
+              className={"text-[16px] font-[300] leading-[160%] md:text-[18px]"}
+            >
+              {pageData?.hero_description}
+            </P>
+          ) : (
+            ""
+          )}
+        </Container>
         <Container>
           {pageData.slug === "zelf-een-brief-schrijven" ? (
             <PdfViewContainer>
@@ -245,12 +270,6 @@ export default function LetterDetail({
               </Document>
             </PdfViewContainer>
           ) : (
-            // <object
-            //   data={parseFileURL(pageData?.downloadable_document?.id)}
-            //   type="application/pdf"
-            //   width="100%"
-            //   height="100%"
-            // ></object>
             <LetterForyou
               letter_for_you={pageData?.letter_for_you}
               middle_colored_letter_for_you={

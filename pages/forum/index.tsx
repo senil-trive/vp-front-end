@@ -191,35 +191,37 @@ export default function Forum({
             transform: "translateY(calc(-50% - 24px))",
           }}
         >
-          <TagList
-            tags={tags}
-            selected={selectedTag}
-            prefix={
-              <H4
-                style={{
-                  whiteSpace: "nowrap",
-                  display: "flex",
-                  alignItems: "flex-start",
-                  gap: "5px",
-                }}
-                className="forum-tag"
-              >
-                Onderwerp{" "}
-                <span
-                  className={
-                    "transform mt-[0px] rotate-[90deg] md:rotate-[0deg] md:mt-[-6px]"
-                  }
+          <Container className="max-w-[1384px]">
+            <TagList
+              tags={tags}
+              selected={selectedTag}
+              prefix={
+                <H4
+                  style={{
+                    whiteSpace: "nowrap",
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: "5px",
+                  }}
+                  className="forum-tag"
                 >
-                  👉🏾
-                </span>
-              </H4>
-            }
-            suffix={<ChevronRight />}
-            onSelect={(x: string) => {
-              setSelectedTag(x);
-              setCurrentPage(1);
-            }}
-          />
+                  Onderwerp{" "}
+                  <span
+                    className={
+                      "transform mt-[0px] rotate-[90deg] md:rotate-[0deg] md:mt-[-6px]"
+                    }
+                  >
+                    👉🏾
+                  </span>
+                </H4>
+              }
+              suffix={<ChevronRight />}
+              onSelect={(x: string) => {
+                setSelectedTag(x);
+                setCurrentPage(1);
+              }}
+            />
+          </Container>
         </div>
         <Container className="max-w-[1384px] mt-[-90px] mx-[auto] md:mt-[0px] md:mb-[56px] px-[32px]">
           <Grid container spacing={"34px"}>

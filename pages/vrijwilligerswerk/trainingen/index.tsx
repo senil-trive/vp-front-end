@@ -209,7 +209,7 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
                     <Button
                       variant="secondary"
                       className="w-[100%] bg-[#FE517E] text-[18px] font-[400] text-[#fff] border-[#fff] mt-[20px]"
-                      href={pageData?.cta_2_button_url}
+                      href={"/verhalen"}
                     >
                       {pageData?.cta_2_button_label}
                     </Button>
@@ -229,7 +229,7 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
                     <Button
                       variant="secondary"
                       className="w-[100%] bg-[#3FC7B4] text-[18px] font-[400] text-[#fff] border-[#fff]"
-                      href={pageData?.cta_1_button_url}
+                      href={"/verhalen"}
                     >
                       {pageData?.cta_1_button_label}
                     </Button>

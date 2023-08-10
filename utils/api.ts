@@ -281,7 +281,6 @@ export const getPosts = async ({
   meta = "total_count",
 }: DirectusParams) => {
   let url = `${ENDPOINTS.COLLECTIONS}/vlogposts?filter=[status][_eq]=published&limit=${postPerPage}&page=${page}`;
-
   if (meta) {
     url = `${url}&meta=${meta}`;
   }
@@ -294,7 +293,35 @@ export const getPosts = async ({
   if (filter) {
     url = `${url}&${filter}`;
   }
-
+  return await fetch(url, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+/*get a list of tips */
+export const getTips = async ({
+  postPerPage,
+  page = 1,
+  search,
+  sort,
+  filter,
+  meta = "total_count",
+}: DirectusParams) => {
+  let url = `${ENDPOINTS.COLLECTIONS}/vlogposts?filter=[status][_eq]=published&filter={"categories": { "categories_id": {"name":{"_contains":"Tips"}}}}&limit=${postPerPage}&page=${page}`;
+  if (meta) {
+    url = `${url}&meta=${meta}`;
+  }
+  if (search) {
+    url = `${url}&search=${search}`;
+  }
+  if (sort) {
+    url = `${url}&sort=${sort}`;
+  }
+  if (filter) {
+    url = `${url}&${filter}`;
+  }
   return await fetch(url, {
     method: "GET",
     headers: {

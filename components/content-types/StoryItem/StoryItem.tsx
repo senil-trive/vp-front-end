@@ -37,9 +37,7 @@ export default function StoryItem({
 
         <P>{truncate(description ?? "", 200)}</P>
 
-        <Button href={`/vrijwilligerswerk/verhalen/${slug}`}>
-          Lees het verhaal
-        </Button>
+        <Button href={`#`}>Lees het verhaal</Button>
       </div>
     </Card>
   );

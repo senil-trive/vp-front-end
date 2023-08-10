@@ -120,7 +120,6 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
       </div>
     );
   };
-  console.log(pageData);
   return (
     <PageWrapper
       seo={{
