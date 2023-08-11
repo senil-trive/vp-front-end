@@ -52,6 +52,7 @@ export const getServerSideProps = async () => {
 
 const GescheidenOudersWatNu: React.FC<BuddyPageProps> = ({ pageData }) => {
   const { colors } = useTheme();
+  console.log(pageData);
   return (
     <ContainerWrapper className="klets-meet">
       <PageWrapper
@@ -71,7 +72,7 @@ const GescheidenOudersWatNu: React.FC<BuddyPageProps> = ({ pageData }) => {
         <main>
           <Hero
             center
-            imageUrl={parseImageURL(pageData?.header_background_image?.id)}
+            imageUrl={parseImageURL(pageData?.hero_image?.id)}
             style={{
               minHeight: 576,
               position: "relative",
@@ -175,28 +176,26 @@ const GescheidenOudersWatNu: React.FC<BuddyPageProps> = ({ pageData }) => {
             <Container>
               <div className="flex flex-col md:items-center md:justify-center mb-6 md:mb-14">
                 <TitleWithHighlights
-                  text={pageData?.stories_section_title}
+                  text={pageData?.video_section_title}
                   headerElement="h3"
                   color="black"
                   className="text-[30px] max-w-3xl md:text-center md:text-[42px] font-[400]"
                 />
 
                 <P className="max-w-5xl text-[16px] md:text-[18px] md:text-center">
-                  {pageData?.stories_section_subtitle}
+                  {pageData?.video_section_sub_title}
                 </P>
               </div>
             </Container>
             <Container>
               <div className="video-container flex flex-wrap">
-                {pageData?.featured_stories?.map((feature_stories: any) => (
+                {pageData?.featured_video?.map((feature_video: any) => (
                   <VideoItem
-                    key={feature_stories?.title}
-                    title={feature_stories?.title}
-                    poster={parseImageURL(
-                      feature_stories?.video_cover_image?.id
-                    )}
-                    src={parseFileURL(feature_stories?.video_file?.id)}
-                    subtitle={feature_stories.subtitle}
+                    key={feature_video?.title}
+                    title={feature_video?.title}
+                    poster={parseImageURL(feature_video?.video_cover_image?.id)}
+                    src={parseFileURL(feature_video?.video_file?.id)}
+                    subtitle={feature_video.subtitle}
                     className="rounded-[10px]"
                   />
                 ))}
@@ -204,11 +203,11 @@ const GescheidenOudersWatNu: React.FC<BuddyPageProps> = ({ pageData }) => {
             </Container>
           </VideoWrapper>
           <section className="mb-[80px] mt-[-40px] md:mt-[0px]">
-            {/* <FAQList
+            <FAQList
               title={pageData?.faq_section_title}
               items={pageData?.featured_faqs.slice(0, 3)}
               show={true}
-            /> */}
+            />
             <Container
               style={{ marginBottom: 145, marginTop: -24 }}
               className="mt-2 hidden sm:block"
