@@ -121,7 +121,12 @@ export function MasonryGrid({
                       whileInView="onscreen"
                       viewport={{ once: true, amount: 0.1 }}
                     >
-                      <ChatExampleNew convo={chats_item?.[0]?.chat_buddy} />
+                      <ChatExampleNew
+                        convo={chats_item?.[0]?.chat_buddy}
+                        buddy={chats_item?.[0]?.budy}
+                        name={chats_item?.[0]?.name}
+                        age={chats_item?.[0]?.age}
+                      />
                     </motion.div>
                   </div>
                 )}
@@ -240,7 +245,12 @@ export function MasonryGrid({
                       whileInView="onscreen"
                       viewport={{ once: true, amount: 0.1 }}
                     >
-                      <ChatExampleBlue convo={chats_item?.[1]?.chat_buddy} />
+                      <ChatExampleBlue
+                        convo={chats_item?.[1]?.chat_buddy}
+                        buddy={chats_item?.[1]?.budy}
+                        name={chats_item?.[1]?.name}
+                        age={chats_item?.[1]?.age}
+                      />
                     </motion.div>
                   </div>
                 )}
