@@ -1,7 +1,12 @@
 import { CircularProgress, Container } from "@mui/material";
 import { Footer, Grid, Hero } from "../components/layout";
 import { H4, P, TitleWithHighlights } from "../components/typography";
-import { getContentTag, getFeed, getHomeData } from "../utils/api";
+import {
+  getContentTag,
+  getFeed,
+  getHomeData,
+  getHomeTopPageData,
+} from "../utils/api";
 import { useCallback, useEffect, useState } from "react";
 
 import { HomePageProps } from "../types/pageTypes";
@@ -16,16 +21,21 @@ import TextWithHighlights from "../components/typography/TextWithHighlights";
 import Image from "next/image";
 
 const POST_PER_PAGE = 6;
+
 export const getServerSideProps = async () => {
   try {
+    const pagetopReq = await getHomeTopPageData();
     const pageReq = await getHomeData();
+
     const categoriesReq = await getContentTag({
       filter: `filter[type][_eq]=main`,
     });
 
     const pageRes = await pageReq.json();
+
     const categoriesRes = await categoriesReq.json();
 
+    const pagetopRes = await pagetopReq.json();
     const {
       blogsRes,
       instagramRes,
@@ -58,7 +68,7 @@ export const getServerSideProps = async () => {
             videosRes.meta.filter_count +
             chatRes.meta.filter_count +
             tiktokRes.meta.filter_count || 0,
-
+        pagetopRes: pagetopRes?.data,
         categories: categoriesRes.data,
       },
     };
@@ -75,6 +85,7 @@ export default function Home({
   pageData,
   categories,
   feed,
+  pagetopRes,
   totalPosts,
 }: HomePageProps) {
   const [selectedTag, setSelectedTag] = useState<string>("");
@@ -290,7 +301,7 @@ export default function Home({
             </Container>
           </div>
         </Container>
-        <MasonryGrid feed={posts} homepage={true} />
+        <MasonryGrid feed={posts} homepage={true} pagetopRes={pagetopRes} />
 
         <div className="flex items-center justify-center">
           {isLoading ? (

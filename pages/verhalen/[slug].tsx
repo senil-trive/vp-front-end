@@ -13,8 +13,12 @@ import { getPostDetail } from "../../utils/api";
 import parseImageURL from "../../utils/parseImageURL";
 import styled from "styled-components";
 import { parseDate } from "../../utils/parseDate";
+import Link from "next/link";
+import Image from "next/image";
+import Tag from "../../components/buttons/Tag/Tag";
 
 const StyledBlogContent = styled.article`
+  padding: 16px;
   h2 {
     color: #150f2f;
     font-family: Fjalla One;
@@ -58,6 +62,7 @@ const StyledBlogContent = styled.article`
       width: 100%;
       height: 100%;
     }
+    h3,
     p {
       color: #fff !important;
       strong {
@@ -68,6 +73,21 @@ const StyledBlogContent = styled.article`
         line-height: 160%;
         text-transform: uppercase;
       }
+    }
+  }
+  .external {
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: url("/chatBg.png");
+      opacity: 0.2;
+      background-size: 50%;
+      background-position: left 225px top -75px;
+      width: 100%;
+      height: 100%;
     }
   }
 `;
@@ -120,6 +140,7 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
       </div>
     );
   };
+  console.log(pageData);
   return (
     <PageWrapper
       seo={{
@@ -156,7 +177,13 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
           mbgn={"/verhalenmob.png"}
           mobileImageHeight={458}
         >
-          <div className="flex flex-col items-center justify-center text-center max-w-2xl  mb-0">
+          <div className="flex flex-col items-center justify-center text-center max-w-3xl  mb-0">
+            <Tag
+              style={{ fontFamily: "Fjalla One" }}
+              className="w-[max-content] pt-[10px] mb-[20px] text-[#3FC7B4] font-[400] text-[18px] bg-[#fff] border-[#fff] md:mb-[32px]"
+            >
+              Thema
+            </Tag>
             <TitleWithHighlights
               highlightColor="info"
               text={`${pageData?.title}`}
@@ -194,26 +221,67 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
               <div
                 dangerouslySetInnerHTML={{ __html: pageData?.content ?? "" }}
               />
-              <div className="quot">
+              {pageData?.quote_content ? (
+                <div className="quot">
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: pageData?.quote_content,
+                    }}
+                    className="quote__content"
+                  />
+                </div>
+              ) : (
+                ""
+              )}
+              {pageData?.after_quote_content ? (
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: pageData?.quote_content ?? "",
+                    __html: pageData?.after_quote_content,
                   }}
-                  className="quote__content"
+                  className="after__quote__content"
                 />
-              </div>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: pageData?.after_quote_content ?? "",
-                }}
-                className="after__quote__content"
-              />
-              <div className="flex justify-between">
-                <H6 style={{ textTransform: "inherit" }}>{pageData?.author}</H6>
-                <P>
-                  {parseDate(new Date(pageData?.date_created ?? new Date()))}
-                </P>
-              </div>
+              ) : (
+                ""
+              )}
+              {pageData?.author && pageData?.date_created ? (
+                <div className="flex justify-between">
+                  <H6 style={{ textTransform: "inherit" }}>
+                    {pageData?.author}
+                  </H6>
+                  <P>{parseDate(new Date(pageData?.date_created))}</P>
+                </div>
+              ) : (
+                ""
+              )}
+              {pageData?.external_links &&
+              pageData?.external_links?.length > 0 ? (
+                <div className="external bg-[#006EF7] p-[24px] rounded-[8px] z-10">
+                  <H3 className="mb-[16px] relative z-[1]">Externe bronnen</H3>
+                  {pageData?.external_links?.map((externalLink: string) => (
+                    <div
+                      key={externalLink}
+                      className="w-full flex items-center relative z-[1]"
+                    >
+                      <Image
+                        src={"/link.svg"}
+                        width={20}
+                        height={20}
+                        className="h-[20px] w-[20px] mt-0"
+                        alt="external links"
+                      />{" "}
+                      <Link
+                        href={externalLink}
+                        target="_blank"
+                        className="px-[6px] text-[#fff] text-[18px] hover:cursor:pointer"
+                      >
+                        Link naar externe bron
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                ""
+              )}
             </div>
           </StyledBlogContent>
 
@@ -222,6 +290,7 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
               <CommentForm
                 comments={pageData?.comments}
                 postId={pageData?.id}
+                reactieClass="md:ml-[-24px]"
               />
               <CommentForm
                 postId={pageData.id}
@@ -229,6 +298,8 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
                 formSubtitle="Vertel ons hoe je heet en hij komt naar je toe!"
                 type="forum"
                 submitLabel="Ja, ik wil mijn reactie plaatsen"
+                style={{ margin: "0px", padding: "16px" }}
+                reactieClass="md:ml-[-24px]"
               />
             </>
           )}
@@ -253,12 +324,12 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
                         ? parseImageURL(post.related_vlogposts_id.image.id)
                         : ""
                     }
-                    buttonText={"button"}
+                    buttonText={"Blog lezen"}
                     embedSrc={post.related_vlogposts_id?.youtube_embed}
                     link={`/verhalen/${post.related_vlogposts_id?.slug}`}
                     type={post.related_vlogposts_id?.type}
                     author={post.related_vlogposts_id?.author}
-                    content={post.related_vlogposts_id?.content}
+                    description={post.related_vlogposts_id?.content}
                     postDate={new Date(post.related_vlogposts_id?.date_created)}
                     category={
                       post.related_vlogposts_id?.categories?.[0]?.categories_id

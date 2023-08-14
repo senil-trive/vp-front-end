@@ -34,7 +34,7 @@ const StyledWrapper = styled.div<{ bgImg: string }>`
     display: flex;
     align-items: start;
     font-size: 32px;
-    gap: 335px;
+    gap: 360px;
     flex-direction: column;
     padding: 36px;
   }
@@ -49,6 +49,12 @@ const StyledWrapper = styled.div<{ bgImg: string }>`
   p {
     font-size: 18px;
   }
+  .tips-content {
+    > div {
+      font-size: 18px;
+    }
+  }
+
   @media (max-width: 767px) {
     .profile-meta {
       font-size: 16px !important;
@@ -73,7 +79,12 @@ export default function NewPostItem({
         )}
         <div className="custom_new_post">
           {title && <h3>{title}</h3>}
-          {description && <p>{description}</p>}
+          {description && (
+            <div
+              dangerouslySetInnerHTML={{ __html: description }}
+              className="tips-content"
+            />
+          )}
         </div>
       </div>
     </StyledWrapper>

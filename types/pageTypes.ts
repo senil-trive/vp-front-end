@@ -25,6 +25,7 @@ export type HomePageProps = {
   categories: CategoryType[];
   totalPosts: number;
   feed: FeedItem[];
+  pagetopRes: any;
 };
 
 export type BlogPageProps = {

@@ -18,6 +18,23 @@ export const MasonryGridWrapper = styled.div`
     position: relative;
   }
 
+  .new-post-item {
+    .grid-item {
+      background-image: url(https://admin.villapinedo.nl/assets/3faa0d1e-8c82-4eeb-9f33-a7d494cdf084);
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-radius: 8px;
+      .profile-meta {
+        padding: 16px;
+      }
+      .custom_new_post {
+        max-height: 250px;
+        overflow-y: auto !important;
+        padding-bottom: 20px;
+      }
+    }
+  }
+
   .forum-content {
     width: 100%;
     height: 100%;
@@ -41,7 +58,7 @@ export const MasonryGridWrapper = styled.div`
     position: absolute;
     height: 100%;
     width: 100%;
-    line-height: 300px;
+    // line-height: 300px;
     // color: #03446a;
     font-size: 60px;
     border-radius: 5px;
@@ -71,7 +88,27 @@ export const MasonryGridWrapper = styled.div`
   .front .forum-tags span {
     color: #fe517e !important;
   }
-
+  .forum-post-2 .front .main-forum.forum-post .forum-tags span {
+    color: #006ef7 !important;
+  }
+  .forum-post-2 .back .main-forum.forum-post .forum-tags .forum-tag {
+    color: #fff !important;
+    background: #006ef7 !important;
+  }
+  .forum-post-2 .back .main-forum.forum-post {
+    .forum-link {
+      &:hover {
+        button {
+          color: #006ef7 !important;
+        }
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    .forum-post-2 .back .main-forum.forum-post {
+      height: auto !important;
+    }
+  }
   margin-bottom: 32px;
   overflow-x: hidden;
   .mason-grid {
