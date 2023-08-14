@@ -66,31 +66,11 @@ const StyledForumPost = styled.article`
   }
 `;
 
-type ChatItem = {
+export type ChatItem = {
   dir: "to" | "from";
-  person: string;
+  user_name: string;
   message: string;
 };
-
-const convo: ChatItem[] = [
-  {
-    dir: "from",
-    person: "Jij",
-    message:
-      "Hoiii!! Ik ben nu bij mama en als ik ga slapen dan mis ik papa weer heel erg...",
-  },
-  {
-    dir: "to",
-    person: "Matthijs",
-    message:
-      "Ohh ja dat heb ik ook echt vaak gehad! Dat is echt geen fijn gevoel he :confused: Dan wil je eigenlijk van papa even een dikke knuffel maar dan kan het niet. Weet je wat mij dan hielp? Papa's shirt meenemen als ik naar mama ging en dan had hij zijn luchtje erop gespoten en ging ik daar lekker mee slapen :heart: Misschien kan je dat ook eens proberen?",
-  },
-  // {
-  //   dir: "from",
-  //   person: "Jij",
-  //   message: "Dat ga ik doen!! Tnx :)",
-  // },
-];
 
 function ChatBubble({
   from,
@@ -126,7 +106,18 @@ function ChatBubble({
   );
 }
 
-export default function ChatExampleItem() {
+export default function ChatExampleItem({
+  convo,
+  buddy,
+  name,
+  age,
+}: {
+  convo?: ChatItem[];
+  buddy?: string;
+  name?: string;
+  age?: string;
+}) {
+  console.log(convo);
   return (
     <StyledForumPost>
       <div className="z-10">
@@ -141,23 +132,25 @@ export default function ChatExampleItem() {
               color="success"
               style={{ margin: 0, fontWeight: 700, color: "#fff" }}
             >
-              Buddy
+              {buddy}
             </P>
             <P style={{ margin: 0, fontWeight: 300, color: "#fff" }}>
-              Matthijs, 18 jaar
+              {name}, {age} jaar
             </P>
           </div>
         </header>
         <div className="flex flex-col content max-h-[390px] overflow-y-auto">
-          {convo.map((item, index) => (
-            <ChatBubble
-              key={index}
-              from={item.person}
-              isLeft={item.dir === "from"}
-            >
-              {item.message}
-            </ChatBubble>
-          ))}
+          {convo !== undefined &&
+            convo?.length > 0 &&
+            convo?.map((item, index) => (
+              <ChatBubble
+                key={index}
+                from={item.user_name}
+                isLeft={item.dir === "from"}
+              >
+                {item.message}
+              </ChatBubble>
+            ))}
         </div>
       </div>
       <footer className="chat_btn chat-btn-blue">

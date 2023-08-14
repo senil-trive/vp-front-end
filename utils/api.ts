@@ -193,6 +193,21 @@ export const getHomePageData = async () => {
 };
 
 /**
+ * get the top home page details
+ *
+ */
+export const getHomeTopPageData = async () => {
+  return await fetch(
+    `${ENDPOINTS.COLLECTIONS}/home_show_top_data?fields=*.*.*.*.*`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+};
+/**
  * Get a list of all published open letters
  * @returns
  */
@@ -289,6 +304,8 @@ export const getPosts = async ({
   }
   if (sort) {
     url = `${url}&sort=${sort}`;
+  } else {
+    url = `${url}&sort=-date_created`;
   }
   if (filter) {
     url = `${url}&${filter}`;
@@ -660,6 +677,7 @@ export const getFeed = async ({
       page,
       filter,
       meta,
+      sort: `-date_created`,
     }),
     getLetters({
       postPerPage,

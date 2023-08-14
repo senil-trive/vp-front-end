@@ -12,7 +12,7 @@ export type BlogType = {
   after_quote_content: string;
   date_created: string;
   date_updated: string;
-  external_links?: string;
+  external_links?: any;
   homepage_id?: string;
   id: string;
   slug: string;

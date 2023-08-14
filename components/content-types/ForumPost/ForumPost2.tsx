@@ -7,6 +7,8 @@ import { truncate } from "../../../utils/truncate";
 import { FiHeart } from "react-icons/fi";
 import UserAvatar from "../../icons/UserAvatar/UserAvatar";
 import parseImageURL from "../../../utils/parseImageURL";
+import Link from "next/link";
+import Button from "../../buttons/Button";
 
 type Props = {
   authorType: string;
@@ -15,8 +17,11 @@ type Props = {
   title: string;
   content: string;
   truncateContent?: boolean;
+  className?: string;
+  button?: boolean;
   showButton?: boolean;
   buttonUrl?: string;
+  name: string;
   tags: string[];
   comments?: number;
   fullHeight?: boolean;
@@ -33,11 +38,14 @@ const StyledForumPost = styled.article<styledProps>`
   border-radius: 8px;
   padding: 24px;
   overflow: hidden;
+  // overflow-y: auto;
   position: relative;
   z-index: 1;
-  background-color: #006ef7;
+  background-color: #006ef7 !important;
   height: 100%;
-
+  @media (max-width: 767px) {
+    height: auto !important;
+  }
   // a {
   //   background: white;
   //   color: ${({ theme }) => theme.colors.secondary.normal};
@@ -89,14 +97,18 @@ const StyledForumPost = styled.article<styledProps>`
         background: white;
         border: none;
         height: 41px;
-        color: 3FC7B4;
+        color: 3FC7B4 !important;
         font-weight: 400;
         font-size: 18px;
         font-family: "Fjalla One";
       }
     }
   }
-
+  .forum-tags {
+    span {
+      color: #006ef7 !important;
+    }
+  }
   footer {
     display: flex;
     justify-content: space-between;
@@ -120,6 +132,9 @@ const StyledForumPost = styled.article<styledProps>`
       font-size: ${({ theme }) => theme.fontSizes.p.mobile};
     }
   }
+  @media (max-width: 767px) {
+    height: auto !importat;
+  }
 `;
 
 export default function ForumPost({
@@ -134,46 +149,32 @@ export default function ForumPost({
   buttonUrl = "",
   fullHeight = true,
   tags = [],
+  name,
   image,
+  className,
+  button,
 }: Props) {
   const generateContent = () => {
-    if (fullHeight && truncateContent) {
-      return parseHTMLtoReact(truncate(content, 500));
-    } else if (truncateContent) {
-      return parseHTMLtoReact(truncate(content, 180));
-    }
-
-    return parseHTMLtoReact(content);
+    console.log(content.length);
+    return parseHTMLtoReact(
+      truncate(
+        "Ik hIk heb ouders die ruzie hebbenIk heb ouders die ruzie hebbenIk heb ouders die ruzie hebbenIk heb ouders die ruzie hebbeneb ouders die ruzie hebbenIk hIk heb ouders die ruzie hebbenIk heb ouders die ruzie hebbenIk heb ouders die ruzie hebbenIk heb ouders die ruzie hebbeneb ouders die ruzie hebbenIk hIk heb ouders die ruzie hebbenIk heb ouders die ruzie hebbenIk heb ouders die ruzie hebbenIk heb ouders die ruzie hebbeneb ouders die ruzie hebben",
+        150
+      )
+    );
   };
-  const ComponentTag = showButton ? "a" : "div";
+  const ComponentTag = showButton ? "div" : "div";
   const props = showButton ? { href: buttonUrl } : {};
   return (
     <StyledForumPost
       showButton={showButton}
-      style={{ minHeight: fullHeight ? "624px" : "" }}
+      className={`main-forum ${className}`}
     >
-      {/* <a
-        href={buttonUrl}
-        className="transition h-full flex flex-col justify-between "
-      > */}
-      <ComponentTag {...props}>
-        <div>
-          {/* {!!title && (
-            <header>
-              <UserAvatar size="md" alt="villa pinedo" src={image} />
-              <div>
-                <H4
-                  style={{ marginBottom: 0, marginTop: "16px" }}
-                  variant="bold"
-                >
-                  {truncate(title, 75)}
-                </H4>
-              </div>
-            </header>
-          )} */}
+      <ComponentTag {...props} className="flex flex-col h-[100%]">
+        <div className="h-[100%]">
           <header>
             <div>
-              <p className="font-avenir font-extrabold text-lg">{title}</p>
+              <p className="font-extrabold text-lg text-[#fff]">{name}</p>
               <p className="text-[16px] md:text-[18px] font-[300]">
                 {age?.includes("jaar") ? age : `${age} jaar`}
               </p>
@@ -198,44 +199,40 @@ export default function ForumPost({
             {generateContent()}
           </div>
         </div>
-
-        <footer>
-          <div>
-            <div className="icon-wrapper mr-4">
-              <FiHeart size={24} />
-              <p className="font-avenir font-light text-[16px] md:text-[18px]">
-                {comments}
-              </p>
+        {button ? (
+          <Link
+            href={buttonUrl}
+            className="forum-link hover:cursor-pointer mt-[0]"
+          >
+            <footer>
+              <Button
+                variant="tertiary"
+                className="back-act h-[auto] lg:h-[60px] px-[10px] text-[16px] lg:px-[16px] lg:text-[18px]"
+              >
+                Laat een reachtie achter!
+              </Button>
+            </footer>
+          </Link>
+        ) : (
+          <footer className="mt-0">
+            <div>
+              <div className="icon-wrapper mr-4">
+                <FiHeart size={24} />
+                <p className="font-avenir font-light text-[16px] md:text-[18px]">
+                  {comments}
+                </p>
+              </div>
             </div>
-          </div>
-          <div>
-            {postDate && (
-              // <P
-              //   // variant="helper"
-              //   color="primary"
-              //   style={{ textAlign: "right" }}
-              //   className=""
-              // >
-              // </P>
-              <p className="geplaatst font-avenir font-light text-lg italic text-right">
-                Geplaatst op {parseDate(postDate)}
-              </p>
-            )}
-          </div>
-        </footer>
-        {/* </a> */}
+            <div>
+              {postDate && (
+                <p className="geplaatst font-avenir font-light text-lg italic text-right">
+                  Geplaatst op {parseDate(postDate)}
+                </p>
+              )}
+            </div>
+          </footer>
+        )}
       </ComponentTag>
-      {/* {showButton && (
-        <Button
-          style={{
-            margin: "1rem auto",
-          }}
-          variant="info"
-          href={buttonUrl}
-        >
-          Vraag bekijken
-        </Button>
-      )} */}
     </StyledForumPost>
   );
 }

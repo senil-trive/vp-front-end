@@ -17,6 +17,8 @@ type Props = {
   commentFormType?: string;
   submitLabel?: string;
   formSubtitle?: string;
+  reactieClass?: string;
+  style?: any;
   formTitle?: string;
   type?: "forum" | "blog" | "open_letter";
   postId: string;
@@ -343,6 +345,8 @@ export default function CommentForm({
   parent,
   className,
   formTitle,
+  style,
+  reactieClass,
 }: Props) {
   const { colors } = useTheme();
   const [replyId, setReplyId] = useState<string | null>(null);
@@ -353,13 +357,13 @@ export default function CommentForm({
   };
 
   return (
-    <Container className="max-w-[1118px]">
+    <Container className="max-w-[1118px]" style={style}>
       {!parent ? (
         !formTitle ? (
           <>
             <Grid container className="m-[0] mt-[70px] mb-[6px]">
               <Grid item xs={12} md={8} lg={8}>
-                <H2 className="text-[35px] md:text-[42px]">
+                <H2 className={`text-[35px] md:text-[42px] ${reactieClass}`}>
                   Reacties ({comments.length})
                 </H2>
               </Grid>

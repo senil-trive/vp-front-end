@@ -123,7 +123,7 @@ export default function BlogItem({
           <div style={{ overflowY: "auto", height: 90 }}>
             {!!content && (
               <P style={{ marginBottom: 30, marginTop: 12 }}>
-                {content ? truncate(content, 200) : ""}
+                {content ? truncate(content, 100) : ""}
               </P>
             )}
           </div>

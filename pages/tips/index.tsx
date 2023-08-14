@@ -1,15 +1,8 @@
-import { CircularProgress, Container, Grid } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import { H4, P, TitleWithHighlights } from "../../components/typography";
 import React, { useEffect, useState } from "react";
-import {
-  getContentTag,
-  getPostOverviewPageData,
-  getPosts,
-  getTips,
-} from "../../utils/api";
+import { getContentTag, getPosts, getTips } from "../../utils/api";
 
-import { BlogPageProps } from "../../types/pageTypes";
-import CollectionSearchBar from "../../components/form/CollectionSearchBar/CollectionSearchBar";
 import { Hero, Pagination } from "../../components/layout";
 import { MasonryGrid } from "../../components/layout/MasonryGrid/MasonryGrid";
 import { POST_PER_PAGE } from "../../constants/app-configs";
@@ -17,7 +10,6 @@ import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import SortBar from "../../components/form/SortBar/SortBar";
 import TagList from "../../components/buttons/TagList/TagList";
 import parseImageURL from "../../utils/parseImageURL";
-import { useCallbackWhenReachedBottom } from "../../utils/scroll";
 import { useTheme } from "styled-components";
 import { v4 as uuidv4 } from "uuid";
 import ChevronRight from "../../components/icons/ChevronRight/ChevronRight";
@@ -129,14 +121,15 @@ export default function Tips({ pageData, blogsData, totalPosts, tags }: any) {
           meta: "filter_count",
           filter:
             selectedTag.length > 0
-              ? `filter={"categories": { "categories_id": { "id": { "_eq": "${selectedTag}"}}}}`
-              : ``,
+              ? `filter={"_and":[{"categories": { "categories_id": { "id": { "_eq": "${selectedTag}"}}}},{"categories": { "categories_id": { "name": { "_eq": "Tips"}}}}]}`
+              : `filter={"categories": { "categories_id": {"name":{"_contains":"Tips"}}}}`,
         });
         const res = await req.json();
         setPosts(res.data || []);
         setTotalCount(res.meta.filter_count || 0);
       } catch (error) {
         console.log(error);
+        setTotalCount(0);
       }
     };
 

@@ -167,7 +167,12 @@ const StyledForumPost = styled.article<styledProps>`
     
   }
 }
+.custom_form_tags{
+  height:170px;
+  overflow-y:auto !important;
+}
 @media(max-width:767px){
+  height:auto !important;
   .title{
     font-size:24px !important;
   }
@@ -209,7 +214,7 @@ export default function ForumPost({
     <StyledForumPost
       showButton={showButton}
       style={{ minHeight: fullHeight ? "624px" : "" }}
-      className={`main-forum ${className}`}
+      className={`main-forum ${className} overflow-auto`}
     >
       <div>
         <p className="font-extrabold text-lg text-[#fff]">{name}</p>
@@ -236,14 +241,17 @@ export default function ForumPost({
                 {truncate(title, 75)}
               </H4>
             )}
-            <div className="custom_forum_tags"> {generateContent()}</div>
+            <div className="custom_forum_tags">{generateContent()}</div>
           </div>
         </div>
       </div>
       {button ? (
         <Link href={buttonUrl} className="forum-link hover:cursor-pointer">
           <footer>
-            <Button variant="secondary" className="back-act">
+            <Button
+              variant="secondary"
+              className="back-act h-[auto] lg:h-[60px] px-[10px] text-[16px] lg:px-[16px] lg:text-[18px]"
+            >
               Laat een reachtie achter!
             </Button>
           </footer>
