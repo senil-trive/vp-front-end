@@ -23,6 +23,7 @@ import { VideoPropsType } from "../../content-types/VideoItem/VideoItem.types";
 import parseImageURL from "../../../utils/parseImageURL";
 import NewPostItem from "../../content-types/NewPostItem/NewPostItem";
 import Link from "next/link";
+import parseVideoURL from "../../../utils/parseVideoURL";
 
 export type FeedType =
   | "forum"
@@ -104,7 +105,7 @@ export function MasonryGrid({
                           videos?.[0]?.video_cover_image?.id
                         )}
                         title={videos?.[0]?.title}
-                        src={videos?.[0]?.video_file}
+                        src={parseVideoURL(videos?.[0]?.video_file?.id)}
                         subtitle={videos?.[0]?.subtitle}
                         className="rounded-[8px]"
                       />
@@ -257,7 +258,7 @@ export function MasonryGrid({
                           videos?.[1]?.video_cover_image?.id
                         )}
                         title={videos?.[1]?.title}
-                        src={videos?.[1]?.video_file}
+                        src={parseVideoURL(videos?.[1]?.video_file?.id)}
                         subtitle={videos?.[1]?.subtitle}
                         className="rounded-[8px]"
                       />
