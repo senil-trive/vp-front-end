@@ -83,6 +83,7 @@ export function MasonryGrid({
   const blogQuote = blog_quote?.filter(
     (item: any) => item.id !== blogTips?.[0]?.id
   );
+  console.log(videos);
   return (
     <MasonryGridWrapper>
       <Container className="max-w-[1384px] px-[16px] md:px-[32px]">
@@ -99,7 +100,9 @@ export function MasonryGrid({
                       viewport={{ once: true, amount: 0.1 }}
                     >
                       <VideoItem
-                        poster={videos?.[0]?.video_cover_image?.id}
+                        poster={parseImageURL(
+                          videos?.[0]?.video_cover_image?.id
+                        )}
                         title={videos?.[0]?.title}
                         src={videos?.[0]?.video_file}
                         subtitle={videos?.[0]?.subtitle}
@@ -250,7 +253,9 @@ export function MasonryGrid({
                       viewport={{ once: true, amount: 0.1 }}
                     >
                       <VideoItem
-                        poster={videos?.[1]?.video_cover_image?.id}
+                        poster={parseImageURL(
+                          videos?.[1]?.video_cover_image?.id
+                        )}
                         title={videos?.[1]?.title}
                         src={videos?.[1]?.video_file}
                         subtitle={videos?.[1]?.subtitle}
