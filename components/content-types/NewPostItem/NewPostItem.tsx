@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "styled-components";
-import Tag from "../../buttons/Tag/Tag";
 import Button from "../../buttons/Button";
 import { ColorType } from "../../../types/colorTypes";
-import UserAvatar from "../../icons/UserAvatar/UserAvatar";
 import { P } from "../../typography";
+import React from "react";
+import Tag from "../../buttons/Tag/Tag";
+import UserAvatar from "../../icons/UserAvatar/UserAvatar";
+import styled from "styled-components";
 
 type Props = {
   title?: string;
@@ -34,9 +34,10 @@ const StyledWrapper = styled.div<{ bgImg: string }>`
     display: flex;
     align-items: start;
     font-size: 32px;
-    gap: 360px;
     flex-direction: column;
+    justify-content: space-between;
     padding: 36px;
+    height: 100%;
   }
   h3,
   h4,

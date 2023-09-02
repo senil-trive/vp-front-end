@@ -5,24 +5,25 @@ import React, { useEffect, useState } from "react";
 import TikTokPost, {
   TikTokPostProps,
 } from "../../content-types/TikTokPost/TikTokPost";
-import { motion } from "framer-motion";
+
 import BlogItem from "../../content-types/BlogItem/BlogItem";
 import { BlogType } from "../../../types/content-types/Blog.type";
 import BriefItem from "../../content-types/BriefItem/BriefItem";
+import ChatExampleBlue from "../../content-types/ChatExampleItem/ChatExampleBlue";
 import ChatExampleItem from "../../content-types/ChatExampleItem/ChatExampleItem";
 import ChatExampleNew from "../../content-types/ChatExampleItem/ChatExampleNew";
-import ChatExampleBlue from "../../content-types/ChatExampleItem/ChatExampleBlue";
 import { Container } from "@mui/material";
 import ForumPost from "../../content-types/ForumPost/ForumPost";
 import ForumPost2 from "../../content-types/ForumPost/ForumPost2";
 import { ForumPostType } from "../../../types/forumTypes";
 import { Letter } from "../../../types/content-types/Letter.type";
+import Link from "next/link";
 import { MasonryGridWrapper } from "./MasonryGrid.styled";
+import NewPostItem from "../../content-types/NewPostItem/NewPostItem";
 import VideoItem from "../../content-types/VideoItem/VideoItem";
 import { VideoPropsType } from "../../content-types/VideoItem/VideoItem.types";
+import { motion } from "framer-motion";
 import parseImageURL from "../../../utils/parseImageURL";
-import NewPostItem from "../../content-types/NewPostItem/NewPostItem";
-import Link from "next/link";
 import parseVideoURL from "../../../utils/parseVideoURL";
 
 export type FeedType =
@@ -81,10 +82,15 @@ export function MasonryGrid({
         category?.categories_id?.name === "Tips" && category !== undefined
     );
   });
-  const blogQuote = blog_quote?.filter(
+  const blogQuote1 = blog_quote?.filter(
     (item: any) => item.id !== blogTips?.[0]?.id
   );
-  console.log(videos);
+
+  const blogQuote2 = blog_quote?.filter(
+    (item: any) =>
+      item.id !== blogTips?.[0]?.id && item.id !== blogQuote1?.[0]?.id
+  );
+
   return (
     <MasonryGridWrapper>
       <Container className="max-w-[1384px] px-[16px] md:px-[32px]">
@@ -276,7 +282,7 @@ export function MasonryGrid({
                   </div>
                 )}
 
-                {blogQuote?.length > 0 && (
+                {blogQuote1?.length > 0 && (
                   <div className="new-post-item">
                     <motion.div
                       className={`grid-item grid-item-w-10`}
@@ -285,12 +291,12 @@ export function MasonryGrid({
                       viewport={{ once: true, amount: 0.1 }}
                     >
                       <NewPostItem
-                        title={blogQuote?.[0]?.title}
-                        description={blogQuote?.[0]?.content}
+                        title={blogQuote1?.[0]?.title}
+                        description={blogQuote1?.[0]?.content}
                         buttonText="quote"
                         bgImg={
-                          blogQuote?.[0]?.image
-                            ? `${process.env.NEXT_PUBLIC_API_URL}/assets/${blogQuote?.[0]?.image.id}?width=700`
+                          blogQuote1?.[0]?.image
+                            ? `${process.env.NEXT_PUBLIC_API_URL}/assets/${blogQuote1?.[0]?.image.id}?width=700`
                             : ""
                         }
                       />
@@ -316,6 +322,27 @@ export function MasonryGrid({
                             : ""
                         }
                         fileSrc={`/open-brieven/${letter?.[1]?.slug}`}
+                      />
+                    </motion.div>
+                  </div>
+                )}
+                {blogQuote2?.length > 0 && (
+                  <div className="new-post-item">
+                    <motion.div
+                      className={`grid-item grid-item-w-10`}
+                      initial="offscreen"
+                      whileInView="onscreen"
+                      viewport={{ once: true, amount: 0.1 }}
+                    >
+                      <NewPostItem
+                        title={blogQuote2?.[0]?.title}
+                        description={blogQuote2?.[0]?.content}
+                        buttonText="quote"
+                        bgImg={
+                          blogQuote2?.[0]?.image
+                            ? `${process.env.NEXT_PUBLIC_API_URL}/assets/${blogQuote2?.[0]?.image.id}?width=700`
+                            : ""
+                        }
                       />
                     </motion.div>
                   </div>
@@ -656,7 +683,7 @@ export function MasonryGrid({
                 const tiktokContent = content as TikTokPostProps & {
                   home_show_top_data: any;
                 };
-                console.log(tiktokContent);
+
                 return (
                   <>
                     {tiktokContent?.home_show_top_data === null && (

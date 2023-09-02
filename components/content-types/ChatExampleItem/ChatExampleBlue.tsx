@@ -1,9 +1,9 @@
 import React, { ReactNode } from "react";
-import styled from "styled-components";
 
 import Button from "../../buttons/Button";
 import { P } from "../../typography";
 import UserAvatar from "../../icons/UserAvatar/UserAvatar";
+import styled from "styled-components";
 
 const StyledForumPost = styled.article`
   &:before {
@@ -117,7 +117,6 @@ export default function ChatExampleItem({
   name?: string;
   age?: string;
 }) {
-  console.log(convo);
   return (
     <StyledForumPost>
       <div className="z-10">

@@ -6,16 +6,16 @@ import CommentForm from "../../components/form/CommentForm/CommentForm";
 import { Container } from "@mui/material";
 import { GetServerSidePropsContext } from "next";
 import { Hero } from "../../components/layout";
+import Image from "next/image";
+import Link from "next/link";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import React from "react";
+import Tag from "../../components/buttons/Tag/Tag";
 import YoutubePlayer from "../../components/media/YoutubePlayer";
 import { getPostDetail } from "../../utils/api";
+import { parseDate } from "../../utils/parseDate";
 import parseImageURL from "../../utils/parseImageURL";
 import styled from "styled-components";
-import { parseDate } from "../../utils/parseDate";
-import Link from "next/link";
-import Image from "next/image";
-import Tag from "../../components/buttons/Tag/Tag";
 
 const StyledBlogContent = styled.article`
   padding: 16px;
@@ -140,7 +140,7 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
       </div>
     );
   };
-  console.log(pageData);
+
   return (
     <PageWrapper
       seo={{
