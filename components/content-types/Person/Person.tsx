@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
 import { ColorType } from "../../../types/colorTypes";
-import UserAvatar from "../../icons/UserAvatar/UserAvatar";
 import { P } from "../../typography";
+import React from "react";
+import UserAvatar from "../../icons/UserAvatar/UserAvatar";
+import styled from "styled-components";
 
 type Props = {
   age?: string;
@@ -46,9 +46,8 @@ export default function Person({
       )}
       <div className="profile-meta">
         <P variant="bold" color={color}>
-          Buddy
+          {name}
         </P>
-        {name}
         {age && (
           <P color={color}>{age.includes("jaar") ? age : `${age} jaar`} </P>
         )}
