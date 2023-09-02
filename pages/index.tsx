@@ -9,16 +9,16 @@ import {
 } from "../utils/api";
 import { useCallback, useEffect, useState } from "react";
 
+import ChevronRight from "../components/icons/ChevronRight/ChevronRight";
 import { HomePageProps } from "../types/pageTypes";
+import Image from "next/image";
 import { MasonryGrid } from "../components/layout/MasonryGrid/MasonryGRid2";
 import PageWrapper from "../components/layout/PageWrapper/PageWrappernew";
 import TagList from "../components/buttons/TagList/TagList";
+import TextWithHighlights from "../components/typography/TextWithHighlights";
 import { generateFeedTiles } from "../utils/feed-utils";
 import parseImageURL from "../utils/parseImageURL";
 import { useCallbackWhenReachedBottom } from "../utils/scroll";
-import ChevronRight from "../components/icons/ChevronRight/ChevronRight";
-import TextWithHighlights from "../components/typography/TextWithHighlights";
-import Image from "next/image";
 
 const POST_PER_PAGE = 6;
 

@@ -5,24 +5,25 @@ import React, { useEffect, useState } from "react";
 import TikTokPost, {
   TikTokPostProps,
 } from "../../content-types/TikTokPost/TikTokPost";
-import { motion } from "framer-motion";
+
 import BlogItem from "../../content-types/BlogItem/BlogItem";
 import { BlogType } from "../../../types/content-types/Blog.type";
 import BriefItem from "../../content-types/BriefItem/BriefItem";
+import ChatExampleBlue from "../../content-types/ChatExampleItem/ChatExampleBlue";
 import ChatExampleItem from "../../content-types/ChatExampleItem/ChatExampleItem";
 import ChatExampleNew from "../../content-types/ChatExampleItem/ChatExampleNew";
-import ChatExampleBlue from "../../content-types/ChatExampleItem/ChatExampleBlue";
 import { Container } from "@mui/material";
 import ForumPost from "../../content-types/ForumPost/ForumPost";
 import ForumPost2 from "../../content-types/ForumPost/ForumPost2";
 import { ForumPostType } from "../../../types/forumTypes";
 import { Letter } from "../../../types/content-types/Letter.type";
+import Link from "next/link";
 import { MasonryGridWrapper } from "./MasonryGrid.styled";
+import NewPostItem from "../../content-types/NewPostItem/NewPostItem";
 import VideoItem from "../../content-types/VideoItem/VideoItem";
 import { VideoPropsType } from "../../content-types/VideoItem/VideoItem.types";
+import { motion } from "framer-motion";
 import parseImageURL from "../../../utils/parseImageURL";
-import NewPostItem from "../../content-types/NewPostItem/NewPostItem";
-import Link from "next/link";
 import parseVideoURL from "../../../utils/parseVideoURL";
 
 export type FeedType =

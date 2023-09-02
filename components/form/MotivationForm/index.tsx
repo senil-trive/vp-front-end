@@ -1,10 +1,11 @@
-import { Grid } from "@mui/material";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+
+import Button from "../../buttons/Button";
+import { Grid } from "@mui/material";
 import { MotivationType } from "../../../types/forumTypes";
 import TextArea from "../TextArea/TextArea";
 import styled from "styled-components";
-import Button from "../../buttons/Button";
 
 const MotivationForm = ({
   className,
@@ -105,7 +106,7 @@ const MotivationForm = ({
           <Grid container spacing={"16"} className="form-wrapper">
             <Grid item xs={12}>
               <TextArea
-                label="waarom wil je vrijwilliger worden bij Villa Pinedo? Waarom spreekt het jou aan en past het bij jou?"
+                label="Waarom wil je vrijwilliger worden bij Villa Pinedo? Waarom spreekt het jou aan en past het bij jou?"
                 name="volunteer_at_villapinedo"
                 placeholder="Jouw antwoord..."
                 required
