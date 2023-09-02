@@ -1,14 +1,12 @@
-import styled from "styled-components";
+import Button from "../../buttons/Button";
+import { FiHeart } from "react-icons/fi";
+import Link from "next/link";
 import React from "react";
 import Tag from "../../buttons/Tag/Tag";
 import { parseDate } from "../../../utils/parseDate";
 import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
+import styled from "styled-components";
 import { truncate } from "../../../utils/truncate";
-import { FiHeart } from "react-icons/fi";
-import UserAvatar from "../../icons/UserAvatar/UserAvatar";
-import parseImageURL from "../../../utils/parseImageURL";
-import Link from "next/link";
-import Button from "../../buttons/Button";
 
 type Props = {
   authorType: string;

@@ -1,22 +1,23 @@
-import { P, TitleWithHighlights } from "../components/typography";
-import Button from "../components/buttons/Button";
-import { Container } from "@mui/material";
-import ENDPOINTS from "../constants/endpoints";
-import FAQList from "../components/content-types/FAQList/FAQList";
-import { Hero } from "../components/layout";
-import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
-import parseImageURL from "../utils/parseImageURL";
-import { useTheme } from "styled-components";
 import {
   BuddymediaWrapper,
   ReflectiveCardWrapper,
 } from "../styles/kinderen/kletsmeet.styles";
+import { P, TitleWithHighlights } from "../components/typography";
+
+import Button from "../components/buttons/Button";
+import CommonDetailCard from "../components/content-types/CommonDetailCard/CommonDetailCard";
+import { Container } from "@mui/material";
+import { ContainerWrapper } from "../styles/Vrjwilligerswerk/index.styles";
+import ENDPOINTS from "../constants/endpoints";
+import FAQList from "../components/content-types/FAQList/FAQList";
+import { Hero } from "../components/layout";
 import InfoCard from "../components/content-types/InfoCard/InfoCard";
+import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
 import VideoItem from "../components/content-types/VideoItem/VideoItem";
 import { VideoWrapper } from "../styles/Vrjwilligerswerk/VrijwilligerWorden.styles";
-import { ContainerWrapper } from "../styles/Vrjwilligerswerk/index.styles";
 import { parseFileURL } from "../utils/parseFileURL";
-import CommonDetailCard from "../components/content-types/CommonDetailCard/CommonDetailCard";
+import parseImageURL from "../utils/parseImageURL";
+import { useTheme } from "styled-components";
 type BuddyPageProps = {
   pageDat: any;
   pageData: any;
@@ -72,7 +73,7 @@ const GescheidenOudersWatNu: React.FC<BuddyPageProps> = ({ pageData }) => {
         <main>
           <Hero
             center
-            imageUrl={parseImageURL(pageData?.hero_image?.id)}
+            imageUrl={parseImageURL(pageData?.hero_image?.id, 1400)}
             style={{
               minHeight: 576,
               position: "relative",

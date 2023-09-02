@@ -1,17 +1,17 @@
 import { Container, Grid } from "@mui/material";
-import { H3, H2, P } from "../../typography";
+import { H2, H3, P } from "../../typography";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import styled, { useTheme } from "styled-components";
 
 import Button from "../../buttons/Button";
 import ForumComment from "../../content-types/ForumComment/ForumComment";
 import { ForumCommentType } from "../../../types/forumTypes";
+import Image from "next/image";
 import Input from "../Input/Input";
 import TextArea from "../TextArea/TextArea";
 import { postComment } from "../../../utils/api";
-import styled, { useTheme } from "styled-components";
 import { rgba } from "../../../utils/colors";
-import Image from "next/image";
 
 type Props = {
   commentFormType?: string;
@@ -306,6 +306,7 @@ const SubmitForm = ({
                   <H3 className="text-[#fff]">
                     {formTitle}
                     <Image
+                      priority
                       src={"/note.svg"}
                       width={40}
                       height={40}

@@ -9,16 +9,16 @@ import {
 } from "../utils/api";
 import { useCallback, useEffect, useState } from "react";
 
+import ChevronRight from "../components/icons/ChevronRight/ChevronRight";
 import { HomePageProps } from "../types/pageTypes";
+import Image from "next/image";
 import { MasonryGrid } from "../components/layout/MasonryGrid/MasonryGRid2";
 import PageWrapper from "../components/layout/PageWrapper/PageWrappernew";
 import TagList from "../components/buttons/TagList/TagList";
+import TextWithHighlights from "../components/typography/TextWithHighlights";
 import { generateFeedTiles } from "../utils/feed-utils";
 import parseImageURL from "../utils/parseImageURL";
 import { useCallbackWhenReachedBottom } from "../utils/scroll";
-import ChevronRight from "../components/icons/ChevronRight/ChevronRight";
-import TextWithHighlights from "../components/typography/TextWithHighlights";
-import Image from "next/image";
 
 const POST_PER_PAGE = 6;
 
@@ -189,7 +189,7 @@ export default function Home({
     >
       <Hero
         center
-        imageUrl={parseImageURL(pageData?.hero_image?.id)}
+        imageUrl={parseImageURL(pageData?.hero_image?.id, 1400)}
         style={{
           minHeight: 649,
           position: "relative",
@@ -237,6 +237,7 @@ export default function Home({
             >
               {pageData?.tag_select_subject_title}
               <Image
+                priority
                 src={parseImageURL(pageData?.thumb_icon?.id)}
                 alt="header icon"
                 width={30}
@@ -285,6 +286,7 @@ export default function Home({
                     {/* Onderwerp{" "} */}
 
                     <Image
+                      priority
                       src={parseImageURL(pageData?.thumb_icon?.id)}
                       alt="hand_icon"
                       width={30}

@@ -23,6 +23,7 @@ export default function StoryItem({
       <div className="flex flex-col gap-4">
         {image && (
           <Image
+            priority
             className="h-full w-full object-cover rounded-lg"
             src={parseImageURL(image.id)}
             alt={title ?? "Verhaal afbeelding"}

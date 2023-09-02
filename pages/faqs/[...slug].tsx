@@ -1,16 +1,16 @@
 import { H3, P, TitleWithHighlights } from "../../components/typography";
 import { getFaqOverviewData, getFaqs } from "../../utils/api";
 
+import Button from "../../components/buttons/Button";
+import { Container } from "@mui/material";
+import { ContainerWrapper } from "../../styles/Vrjwilligerswerk/index.styles";
 import FAQList from "../../components/content-types/FAQList/FAQList";
 import { Hero } from "../../components/layout";
+import { HeroBannerWrapper } from "../../styles/global.styled";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import { VolunteersFAQPageProps } from "../../types/pageTypes";
 import parseImageURL from "../../utils/parseImageURL";
 import { useState } from "react";
-import Button from "../../components/buttons/Button";
-import { Container } from "@mui/material";
-import { ContainerWrapper } from "../../styles/Vrjwilligerswerk/index.styles";
-import { HeroBannerWrapper } from "../../styles/global.styled";
 
 const POST_PER_PAGE = 7;
 
@@ -93,7 +93,7 @@ const VolunteersFAQPage: React.FC<VolunteersFAQPageProps> = ({
     >
       <main className="mb-[128px]">
         <Hero
-          imageUrl={parseImageURL(pageData?.background_image?.id)}
+          imageUrl={parseImageURL(pageData?.background_image?.id, 1400)}
           style={{
             minHeight: 455,
             position: "relative",

@@ -48,6 +48,8 @@ const Dark = () => {
   return (
     <>
       <Image
+        priority
+        quality={100}
         src={"/header.svg"}
         height={100}
         width={200}
@@ -55,6 +57,8 @@ const Dark = () => {
         alt="Logo Villa pinedo"
       />
       <Image
+        priority
+        quality={100}
         src={"/logo-small.png"}
         width={45}
         height={44.88}

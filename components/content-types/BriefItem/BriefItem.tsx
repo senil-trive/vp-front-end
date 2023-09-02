@@ -1,14 +1,14 @@
 import { H3, P, TitleWithHighlights } from "../../typography";
+import React, { useState } from "react";
 
 import Button from "../../buttons/Button";
 /* eslint-disable @next/next/no-img-element */
 import Card from "../../card/Card";
 import CardFooter from "../../card/CardFooter/CardFooter";
 import CardHeader from "../../card/CardHeader/CardHeader";
-import React, { useState } from "react";
+import Image from "next/image";
 import Tag from "../../buttons/Tag/Tag";
 import { truncate } from "../../../utils/truncate";
-import Image from "next/image";
 
 type Props = {
   btnHidden?: boolean;
@@ -42,6 +42,7 @@ export default function BriefItem({
       <CardHeader style={{ maxHeight: imgHeight }}>
         <>
           <Image
+            priority
             className="absolute h-full w-full top-0 left-0 z-0 object-cover"
             src={imgSrc}
             alt={title}

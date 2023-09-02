@@ -1,17 +1,17 @@
-import React from "react";
-
 import { P, TitleWithHighlights } from "../../components/typography";
+
 import BriefItem from "../../components/content-types/BriefItem/BriefItem";
+import Button from "../../components/buttons/Button";
 import { Container } from "@mui/material";
 import ENDPOINTS from "../../constants/endpoints";
 import { Hero } from "../../components/layout";
+import InfoCard from "../../components/content-types/InfoCard/InfoCard";
 import { Letter } from "../../types/content-types/Letter.type";
 import { POST_PER_PAGE } from "../../constants/app-configs";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
+import React from "react";
 import { getLetters } from "../../utils/api";
 import parseImageURL from "../../utils/parseImageURL";
-import InfoCard from "../../components/content-types/InfoCard/InfoCard";
-import Button from "../../components/buttons/Button";
 
 interface LettersOverviewPageProps {
   pageData: any;
@@ -92,7 +92,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
         <main>
           <Hero
             center
-            imageUrl={parseImageURL(pageData?.hero_image?.id)}
+            imageUrl={parseImageURL(pageData?.hero_image?.id, 1400)}
             style={{
               minHeight: 500,
               position: "relative",

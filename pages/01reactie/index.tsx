@@ -1,24 +1,25 @@
 import { Grid, Hero, Pagination } from "../../components/layout";
 import { H4, P, TitleWithHighlights } from "../../components/typography";
-import { useEffect, useState } from "react";
-import { CircleSpinner } from "react-spinners-kit";
-import { Container } from "@mui/system";
-import ForumPost from "../../components/content-types/ForumPost/ForumPost";
-import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
-import SortBar from "../../components/form/SortBar/SortBar";
 import {
   getContentTag,
   getForumOverviewPageData,
   getForumPosts,
 } from "../../utils/api";
+import { useEffect, useState } from "react";
+
+import ChevronRight from "../../components/icons/ChevronRight/ChevronRight";
+import { CircleSpinner } from "react-spinners-kit";
+import { Container } from "@mui/system";
 import { ForumFlipWrapper } from "../../styles/global.styled";
-import parseImageURL from "../../utils/parseImageURL";
 import { ForumPageProps } from "../../types/pageTypes";
+import ForumPost from "../../components/content-types/ForumPost/ForumPost";
 import Image from "next/image";
 import Input from "../../components/form/Input/Input";
+import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import SearchIcon from "../../components/icons/SearchIcon/SearchIcon";
+import SortBar from "../../components/form/SortBar/SortBar";
 import TagList from "../../components/buttons/TagList/TagList";
-import ChevronRight from "../../components/icons/ChevronRight/ChevronRight";
+import parseImageURL from "../../utils/parseImageURL";
 
 const POST_PER_PAGE = 10;
 

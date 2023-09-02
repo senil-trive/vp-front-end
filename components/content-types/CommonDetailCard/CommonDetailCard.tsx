@@ -1,11 +1,12 @@
-import Image from "next/image";
-import React from "react";
+import { H3, P } from "../../typography";
+
 import Button from "../../buttons/Button";
 import Card from "../../card/Card";
-import styled from "styled-components";
 import CardFooter from "../../card/CardFooter/CardFooter";
 import CardHeader from "../../card/CardHeader/CardHeader";
-import { H3, P } from "../../typography";
+import Image from "next/image";
+import React from "react";
+import styled from "styled-components";
 
 const DescriptionText = styled.p`
   margin-bottom: 0;
@@ -69,6 +70,7 @@ const CommonDetailCard = ({
     if (imageUrl) {
       Child = (
         <Image
+          priority
           className="absolute h-full w-full top-0 left-0 z-0 object-cover"
           src={imageUrl}
           alt={title}

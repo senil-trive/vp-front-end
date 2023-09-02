@@ -1,28 +1,30 @@
 import { Container, Grid } from "@mui/material";
-import { Hero, Pagination } from "../../components/layout";
 import { H4, P, TitleWithHighlights } from "../../components/typography";
+import { Hero, Pagination } from "../../components/layout";
 import React, { useEffect, useState } from "react";
 import {
   getContentTag,
   getForumOverviewPageData,
   getForumPosts,
 } from "../../utils/api";
+
 import Button from "../../components/buttons/Button";
+import ChevronRight from "../../components/icons/ChevronRight/ChevronRight";
 import { CircleSpinner } from "react-spinners-kit";
+import { FORUM_POST_PER_PAGE } from "../../constants/app-configs";
+import { ForumFlipWrapper } from "../../styles/global.styled";
 import { ForumPageProps } from "../../types/pageTypes";
 import ForumPost from "../../components/content-types/ForumPost/ForumPost";
-import Link from "next/link";
-import { FORUM_POST_PER_PAGE } from "../../constants/app-configs";
-import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
-import TagList from "../../components/buttons/TagList/TagList";
-import parseImageURL from "../../utils/parseImageURL";
-import ChevronRight from "../../components/icons/ChevronRight/ChevronRight";
+import { HeroButtonWrapper } from "../../styles/kinderen/index.styles";
 import Image from "next/image";
 import Input from "../../components/form/Input/Input";
+import Link from "next/link";
+import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import SearchIcon from "../../components/icons/SearchIcon/SearchIcon";
-import { HeroButtonWrapper } from "../../styles/kinderen/index.styles";
 import SortBar from "../../components/form/SortBar/SortBar";
-import { ForumFlipWrapper } from "../../styles/global.styled";
+import TagList from "../../components/buttons/TagList/TagList";
+import parseImageURL from "../../utils/parseImageURL";
+
 const forumSortOptions = [
   { name: "Titel (a-z)", value: "content" },
   { name: "Titel (z-a)", value: "-content" },

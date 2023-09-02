@@ -1,21 +1,21 @@
 import { Container, Grid } from "@mui/material";
 import { H4, P, TitleWithHighlights } from "../../components/typography";
+import { Hero, Pagination } from "../../components/layout";
 import React, { useEffect, useState } from "react";
 import { getContentTag, getPosts, getTips } from "../../utils/api";
 
-import { Hero, Pagination } from "../../components/layout";
+import ChevronRight from "../../components/icons/ChevronRight/ChevronRight";
+import ENDPOINTS from "../../constants/endpoints";
+import Input from "../../components/form/Input/Input";
 import { MasonryGrid } from "../../components/layout/MasonryGrid/MasonryGrid";
 import { POST_PER_PAGE } from "../../constants/app-configs";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
+import SearchIcon from "../../components/icons/SearchIcon/SearchIcon";
 import SortBar from "../../components/form/SortBar/SortBar";
 import TagList from "../../components/buttons/TagList/TagList";
 import parseImageURL from "../../utils/parseImageURL";
 import { useTheme } from "styled-components";
 import { v4 as uuidv4 } from "uuid";
-import ChevronRight from "../../components/icons/ChevronRight/ChevronRight";
-import SearchIcon from "../../components/icons/SearchIcon/SearchIcon";
-import Input from "../../components/form/Input/Input";
-import ENDPOINTS from "../../constants/endpoints";
 
 export const getServerSideProps = async () => {
   try {
@@ -153,7 +153,7 @@ export default function Tips({ pageData, blogsData, totalPosts, tags }: any) {
           center
           imageUrl={
             pageData?.hero_image?.id
-              ? parseImageURL(pageData?.hero_image?.id)
+              ? parseImageURL(pageData?.hero_image?.id, 1400)
               : "/vrijwilligerswerkheader.png"
           }
           style={{
