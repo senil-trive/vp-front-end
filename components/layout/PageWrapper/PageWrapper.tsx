@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react";
 
+import BackToTopButton from "../../buttons/BackToTopButton/BackToTopButton";
 import Head from "next/head";
 import { NextSeo } from "next-seo";
 import { OpenGraph } from "next-seo/lib/types";
@@ -159,6 +160,7 @@ export default function PageWrapper({
       <DynamicHeader />
       <div className="page-content">{children}</div>
       <DynamicFooter />
+      <BackToTopButton />
     </StyledWrapper>
   );
 }
