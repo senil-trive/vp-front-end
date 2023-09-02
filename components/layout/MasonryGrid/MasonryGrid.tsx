@@ -5,7 +5,8 @@ import React, { useEffect, useState } from "react";
 import TikTokPost, {
   TikTokPostProps,
 } from "../../content-types/TikTokPost/TikTokPost";
-import { motion, Variants } from "framer-motion";
+import { Variants, motion } from "framer-motion";
+
 import BlogItem from "../../content-types/BlogItem/BlogItem";
 import { BlogType } from "../../../types/content-types/Blog.type";
 import BriefItem from "../../content-types/BriefItem/BriefItem";
@@ -173,7 +174,9 @@ export function MasonryGrid({
                       }
                       content={blogContent.content}
                       postDate={new Date(blogContent.date_created)}
-                      category={"Thema"}
+                      category={
+                        blogContent?.categories?.[0]?.categories_id?.name
+                      }
                       title={blogContent.title}
                     />
                   </motion.div>

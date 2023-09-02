@@ -1,13 +1,14 @@
-import styled from "styled-components";
+import { H4, P } from "../../typography";
+
+import Button from "../../buttons/Button";
+import { FiHeart } from "react-icons/fi";
+import Link from "next/link";
 import React from "react";
 import Tag from "../../buttons/Tag/Tag";
 import { parseDate } from "../../../utils/parseDate";
 import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
+import styled from "styled-components";
 import { truncate } from "../../../utils/truncate";
-import { FiHeart } from "react-icons/fi";
-import { H4, P } from "../../typography";
-import Button from "../../buttons/Button";
-import Link from "next/link";
 
 type Props = {
   name?: string;
@@ -97,9 +98,9 @@ const StyledForumPost = styled.article<styledProps>`
   }
 
   /* TODO: required for the home grid */
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-between; */
 
   header {
     display: flex;
@@ -172,17 +173,17 @@ const StyledForumPost = styled.article<styledProps>`
   overflow-y:auto !important;
 }
 @media(max-width:767px){
-  height:auto !important;
+  height: auto !important;
   .title{
     font-size:24px !important;
   }
 }
+
   @media ${({ theme }) => theme.breakpoints.tablet} {
     .content {
       font-size: ${({ theme }) => theme.fontSizes.p.mobile};
     }
-  }
-`;
+  }`;
 
 export default function ForumPost({
   button,

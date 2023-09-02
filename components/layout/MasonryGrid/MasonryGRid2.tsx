@@ -5,24 +5,25 @@ import React, { useEffect, useState } from "react";
 import TikTokPost, {
   TikTokPostProps,
 } from "../../content-types/TikTokPost/TikTokPost";
-import { motion } from "framer-motion";
+
 import BlogItem from "../../content-types/BlogItem/BlogItem";
 import { BlogType } from "../../../types/content-types/Blog.type";
 import BriefItem from "../../content-types/BriefItem/BriefItem";
+import ChatExampleBlue from "../../content-types/ChatExampleItem/ChatExampleBlue";
 import ChatExampleItem from "../../content-types/ChatExampleItem/ChatExampleItem";
 import ChatExampleNew from "../../content-types/ChatExampleItem/ChatExampleNew";
-import ChatExampleBlue from "../../content-types/ChatExampleItem/ChatExampleBlue";
 import { Container } from "@mui/material";
 import ForumPost from "../../content-types/ForumPost/ForumPost";
 import ForumPost2 from "../../content-types/ForumPost/ForumPost2";
 import { ForumPostType } from "../../../types/forumTypes";
 import { Letter } from "../../../types/content-types/Letter.type";
+import Link from "next/link";
 import { MasonryGridWrapper } from "./MasonryGrid.styled";
+import NewPostItem from "../../content-types/NewPostItem/NewPostItem";
 import VideoItem from "../../content-types/VideoItem/VideoItem";
 import { VideoPropsType } from "../../content-types/VideoItem/VideoItem.types";
+import { motion } from "framer-motion";
 import parseImageURL from "../../../utils/parseImageURL";
-import NewPostItem from "../../content-types/NewPostItem/NewPostItem";
-import Link from "next/link";
 import parseVideoURL from "../../../utils/parseVideoURL";
 
 export type FeedType =
@@ -84,7 +85,7 @@ export function MasonryGrid({
   const blogQuote = blog_quote?.filter(
     (item: any) => item.id !== blogTips?.[0]?.id
   );
-  console.log(videos);
+  console.log(feed);
   return (
     <MasonryGridWrapper>
       <Container className="max-w-[1384px] px-[16px] md:px-[32px]">
@@ -158,7 +159,9 @@ export function MasonryGrid({
                     >
                       <BriefItem
                         title={letter?.[0]?.title}
-                        category="Thema"
+                        category={
+                          letter?.[0]?.categories?.[0]?.categories_id?.name
+                        }
                         bg="#3FC7B4"
                         content={letter?.[0]?.description}
                         imgSrc={
@@ -307,7 +310,9 @@ export function MasonryGrid({
                     >
                       <BriefItem
                         title={letter?.[1]?.title}
-                        category="Thema"
+                        category={
+                          letter?.[0]?.categories?.[0]?.categories_id?.name
+                        }
                         bg="#3FC7B4"
                         content={letter?.[1]?.description}
                         imgSrc={
@@ -416,7 +421,9 @@ export function MasonryGrid({
                         >
                           <BriefItem
                             title={letter?.[2]?.title}
-                            category="Thema"
+                            category={
+                              letter?.[2]?.categories?.[0]?.categories_id?.name
+                            }
                             bg="#3FC7B4"
                             content={letter?.[2]?.description}
                             imgSrc={
@@ -503,7 +510,9 @@ export function MasonryGrid({
                         <BriefItem
                           key={letterContent.id}
                           title={letterContent.title}
-                          category="Thema"
+                          category={
+                            letterContent?.categories?.[0]?.categories_id?.name
+                          }
                           bg={letterContent.bg_color}
                           content={letterContent.description}
                           imgSrc={
@@ -624,7 +633,9 @@ export function MasonryGrid({
                           }
                           content={blogContent.content}
                           postDate={new Date(blogContent.date_created)}
-                          category={"Thema"}
+                          category={
+                            blogContent?.categories?.[0]?.categories_id?.name
+                          }
                           title={blogContent.title}
                         />
                       </motion.div>

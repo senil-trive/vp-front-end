@@ -1,22 +1,23 @@
-import { P, TitleWithHighlights } from "../components/typography";
-import Button from "../components/buttons/Button";
-import { Container } from "@mui/material";
-import ENDPOINTS from "../constants/endpoints";
-import FAQList from "../components/content-types/FAQList/FAQList";
-import { Hero } from "../components/layout";
-import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
-import parseImageURL from "../utils/parseImageURL";
-import { useTheme } from "styled-components";
 import {
   BuddymediaWrapper,
   ReflectiveCardWrapper,
 } from "../styles/kinderen/kletsmeet.styles";
+import { P, TitleWithHighlights } from "../components/typography";
+
+import Button from "../components/buttons/Button";
+import CommonDetailCard from "../components/content-types/CommonDetailCard/CommonDetailCard";
+import { Container } from "@mui/material";
+import { ContainerWrapper } from "../styles/Vrjwilligerswerk/index.styles";
+import ENDPOINTS from "../constants/endpoints";
+import FAQList from "../components/content-types/FAQList/FAQList";
+import { Hero } from "../components/layout";
 import InfoCard from "../components/content-types/InfoCard/InfoCard";
+import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
 import VideoItem from "../components/content-types/VideoItem/VideoItem";
 import { VideoWrapper } from "../styles/Vrjwilligerswerk/VrijwilligerWorden.styles";
-import CommonDetailCard from "../components/content-types/CommonDetailCard/CommonDetailCard";
-import { ContainerWrapper } from "../styles/Vrjwilligerswerk/index.styles";
 import { parseFileURL } from "../utils/parseFileURL";
+import parseImageURL from "../utils/parseImageURL";
+import { useTheme } from "styled-components";
 
 type BuddyPageProps = {
   pageData: any;
@@ -27,7 +28,7 @@ export const getServerSideProps = async () => {
   // fetch page data from API
   try {
     const pageReq = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/buddy_page?fields=*.*.*.*.*`,
+      `${ENDPOINTS.COLLECTIONS}/buddy_page?fields=*.*.*.*.*.*`,
       {
         method: "GET",
         headers: {
@@ -54,6 +55,8 @@ export const getServerSideProps = async () => {
 
 const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
   const { colors } = useTheme();
+
+  console.log(pageData);
   return (
     <ContainerWrapper className="klets-meet">
       <PageWrapper
@@ -128,7 +131,7 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                           title={item?.title}
                           description={item?.description}
                           icon={parseImageURL(item?.title_right_icon?.id)}
-                          category="Thema"
+                          category={item?.categories?.[0]?.categories_id?.name}
                           className="small-fonts h-[100%] flex
                   flex-col"
                         >
@@ -151,7 +154,7 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                           imageUrl={parseImageURL(item?.image?.id)}
                           title={item.title}
                           description={item?.description}
-                          category="Thema"
+                          category={item?.categories?.[0]?.categories_id?.name}
                           icon={parseImageURL(item?.title_right_icon?.id)}
                           className="small-fonts mt-[32px] md:mt-[0px] h-[100%] flex
                   flex-col"
