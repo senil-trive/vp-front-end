@@ -74,7 +74,7 @@ export default function BriefItem({
             className="transition text-white "
             style={{ marginBottom: 56, marginTop: 12, fontWeight: "300" }}
           >
-            {truncate(content, 200)}
+            {truncate(content, 500)}
           </P>
         </div>
         {!btnHidden && (
