@@ -295,7 +295,7 @@ export const getPosts = async ({
   filter,
   meta = "total_count",
 }: DirectusParams) => {
-  let url = `${ENDPOINTS.COLLECTIONS}/vlogposts?filter=[status][_eq]=published&limit=${postPerPage}&page=${page}`;
+  let url = `${ENDPOINTS.COLLECTIONS}/vlogposts?filter=[status][_eq]=published&limit=${postPerPage}&page=${page}&fields=*.*.*`;
   if (meta) {
     url = `${url}&meta=${meta}`;
   }
@@ -326,7 +326,7 @@ export const getTips = async ({
   filter,
   meta = "total_count",
 }: DirectusParams) => {
-  let url = `${ENDPOINTS.COLLECTIONS}/vlogposts?filter=[status][_eq]=published&filter={"categories": { "categories_id": {"name":{"_contains":"Tips"}}}}&limit=${postPerPage}&page=${page}`;
+  let url = `${ENDPOINTS.COLLECTIONS}/vlogposts?filter=[status][_eq]=published&filter={"categories": { "categories_id": {"name":{"_contains":"Tips"}}}}&limit=${postPerPage}&page=${page}&fields=*.*.*`;
   if (meta) {
     url = `${url}&meta=${meta}`;
   }

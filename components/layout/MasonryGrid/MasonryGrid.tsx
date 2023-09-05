@@ -108,6 +108,9 @@ export function MasonryGrid({
                       content={letterContent.description}
                       imgSrc={parseImageURL(letterContent?.image?.id)}
                       fileSrc={`/open-brieven/${letterContent.slug}`}
+                      category={
+                        letterContent?.categories?.[0]?.categories_id?.name
+                      }
                     />
                   </motion.div>
                 );
@@ -147,6 +150,7 @@ export function MasonryGrid({
                 );
               case "blog":
                 const blogContent = content as BlogType;
+                console.log(blogContent);
 
                 return (
                   <motion.div
@@ -159,7 +163,7 @@ export function MasonryGrid({
                     <BlogItem
                       mediaSrc={
                         blogContent.image
-                          ? `${process.env.NEXT_PUBLIC_API_URL}/assets/${blogContent.image}?width=700`
+                          ? `${process.env.NEXT_PUBLIC_API_URL}/assets/${blogContent.image.id}?width=400`
                           : ""
                       }
                       embedSrc={blogContent.youtube_embed}
