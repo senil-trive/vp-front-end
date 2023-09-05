@@ -118,7 +118,6 @@ export default function ChatExampleItem({
   name?: string;
   age?: string;
 }) {
-  console.log(convo);
   return (
     <StyledForumPost>
       <div className="z-10">

@@ -150,7 +150,6 @@ export function MasonryGrid({
                 );
               case "blog":
                 const blogContent = content as BlogType;
-                console.log(blogContent);
 
                 return (
                   <motion.div

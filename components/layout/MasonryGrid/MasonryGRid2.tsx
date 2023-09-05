@@ -85,7 +85,7 @@ export function MasonryGrid({
   const blogQuote = blog_quote?.filter(
     (item: any) => item.id !== blogTips?.[0]?.id
   );
-  console.log(feed);
+
   return (
     <MasonryGridWrapper>
       <Container className="max-w-[1384px] px-[16px] md:px-[32px]">
@@ -667,7 +667,7 @@ export function MasonryGrid({
                 const tiktokContent = content as TikTokPostProps & {
                   home_show_top_data: any;
                 };
-                console.log(tiktokContent);
+
                 return (
                   <>
                     {tiktokContent?.home_show_top_data === null && (
@@ -684,9 +684,6 @@ export function MasonryGrid({
                   </>
                 );
               case "chat":
-                // {
-                //   console.log(chatContent);
-                // }
                 // TODO: replace with CMS content
                 const chatContent = content as any;
 

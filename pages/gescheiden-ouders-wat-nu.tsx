@@ -54,7 +54,7 @@ export const getServerSideProps = async () => {
 
 const GescheidenOudersWatNu: React.FC<BuddyPageProps> = ({ pageData }) => {
   const { colors } = useTheme();
-  console.log(pageData);
+
   return (
     <ContainerWrapper className="klets-meet">
       <PageWrapper
