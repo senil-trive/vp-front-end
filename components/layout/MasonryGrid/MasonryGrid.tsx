@@ -16,12 +16,15 @@ import ForumPost from "../../content-types/ForumPost/ForumPost";
 import { ForumPostType } from "../../../types/forumTypes";
 import { Letter } from "../../../types/content-types/Letter.type";
 import { MasonryGridWrapper } from "./MasonryGrid.styled";
+import TipItem from "../../content-types/TipItem/TipItem";
+import { TipPostType } from "../../../types/tipTypes";
 import VideoItem from "../../content-types/VideoItem/VideoItem";
 import { VideoPropsType } from "../../content-types/VideoItem/VideoItem.types";
 import parseImageURL from "../../../utils/parseImageURL";
 
 export type FeedType =
   | "forum"
+  | "tip"
   | "instagram"
   | "tiktok"
   | "video"
@@ -34,7 +37,13 @@ export type FeedItem = {
   width: 1 | 2 | 3 | number;
   type: FeedType;
   cols?: number;
-  content: Letter | BlogType | ForumPostType | VideoPropsType | TikTokPostProps;
+  content:
+    | Letter
+    | BlogType
+    | ForumPostType
+    | VideoPropsType
+    | TikTokPostProps
+    | TipPostType;
 };
 
 type Props = {
@@ -145,6 +154,31 @@ export function MasonryGrid({
                       }
                       comments={forumContent.comments.length}
                       content={forumContent.content}
+                    />
+                  </motion.div>
+                );
+              case "tip":
+                const tipContent = content as TipPostType;
+                return (
+                  <motion.div
+                    className={`grid-item grid-item-w-${item.width}`}
+                    key={index}
+                    initial="offscreen"
+                    whileInView="onscreen"
+                    viewport={{ once: true, amount: 0.1 }}
+                  >
+                    <TipItem
+                      showButton
+                      buttonUrl={`/tips/${tipContent.slug}`}
+                      truncateContent
+                      postDate={new Date(tipContent.date_created)}
+                      tags={
+                        tipContent.categories?.map(
+                          (cat) => cat.categories_id?.name
+                        ) ?? []
+                      }
+                      title={tipContent.name ?? ""}
+                      content={tipContent.introduction}
                     />
                   </motion.div>
                 );

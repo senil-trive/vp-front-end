@@ -7,12 +7,11 @@ import CardHeader from "../../card/CardHeader/CardHeader";
 import Image from "next/image";
 import React from "react";
 import Tag from "../../buttons/Tag/Tag";
+import VideoItem from "../VideoItem/VideoItem";
 import YoutubePlayer from "../../media/YoutubePlayer";
 import { parseDate } from "../../../utils/parseDate";
 import { truncate } from "../../../utils/truncate";
 import { useTheme } from "styled-components";
-import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
-import VideoItem from "../VideoItem/VideoItem";
 
 type Props = {
   type: "blog" | "vlog";

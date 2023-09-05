@@ -20,6 +20,7 @@ import { Letter } from "../../../types/content-types/Letter.type";
 import Link from "next/link";
 import { MasonryGridWrapper } from "./MasonryGrid.styled";
 import NewPostItem from "../../content-types/NewPostItem/NewPostItem";
+import { TipPostType } from "../../../types/tipTypes";
 import VideoItem from "../../content-types/VideoItem/VideoItem";
 import { VideoPropsType } from "../../content-types/VideoItem/VideoItem.types";
 import { motion } from "framer-motion";
@@ -28,6 +29,7 @@ import parseVideoURL from "../../../utils/parseVideoURL";
 
 export type FeedType =
   | "forum"
+  | "tip"
   | "instagram"
   | "tiktok"
   | "video"
@@ -40,7 +42,13 @@ export type FeedItem = {
   width: 1 | 2 | 3 | number;
   type: FeedType;
   cols?: number;
-  content: Letter | BlogType | ForumPostType | VideoPropsType | TikTokPostProps;
+  content:
+    | Letter
+    | BlogType
+    | ForumPostType
+    | VideoPropsType
+    | TikTokPostProps
+    | TipPostType;
 };
 
 type Props = {
@@ -363,17 +371,17 @@ export function MasonryGrid({
                               buttonUrl={`/forum/${forum?.[0]?.slug}`}
                               truncateContent
                               gender={forum?.[1]?.user_gender}
-                              image={parseImageURL(forum?.[1]?.user_image?.id)}
+                              image={parseImageURL(forum?.[0]?.user_image?.id)}
                               age={forum?.[1]?.user_age}
                               name={forum?.[1]?.user_name}
-                              postDate={new Date(forum[1].date_created)}
+                              postDate={new Date(forum[0].date_created)}
                               tags={
-                                forum?.[1]?.categories?.map(
+                                forum?.[0]?.categories?.map(
                                   (cat: any) => cat.categories_id?.name
                                 ) ?? []
                               }
                               title={
-                                forum?.[1]?.title ??
+                                forum?.[0]?.title ??
                                 "Titel moet in CMS worden ingevoerd"
                               }
                               comments={forum?.[0]?.comments?.length}
@@ -618,7 +626,7 @@ export function MasonryGrid({
                         <BlogItem
                           mediaSrc={
                             blogContent.image
-                              ? `${process.env.NEXT_PUBLIC_API_URL}/assets/${blogContent.image}?width=700`
+                              ? `${process.env.NEXT_PUBLIC_API_URL}/assets/${blogContent.image.id}?width=700`
                               : ""
                           }
                           embedSrc={blogContent.youtube_embed}

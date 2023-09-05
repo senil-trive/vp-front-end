@@ -326,7 +326,7 @@ export const getTips = async ({
   filter,
   meta = "total_count",
 }: DirectusParams) => {
-  let url = `${ENDPOINTS.COLLECTIONS}/vlogposts?filter=[status][_eq]=published&filter={"categories": { "categories_id": {"name":{"_contains":"Tips"}}}}&limit=${postPerPage}&page=${page}&fields=*.*.*`;
+  let url = `${ENDPOINTS.COLLECTIONS}/tips?filter=[status][_eq]=published&limit=${postPerPage}&page=${page}&fields=*.*.*`;
   if (meta) {
     url = `${url}&meta=${meta}`;
   }
@@ -653,6 +653,7 @@ export const getFeed = async ({
     lettersReq,
     videosReq,
     chatReq,
+    tipReq,
   ] = await Promise.all([
     getPosts({
       postPerPage,
@@ -697,6 +698,12 @@ export const getFeed = async ({
       filter,
       meta,
     }),
+    getTips({
+      postPerPage,
+      page,
+      filter,
+      meta,
+    }),
   ]);
 
   return {
@@ -707,6 +714,7 @@ export const getFeed = async ({
     lettersRes: await lettersReq.json(),
     videosRes: await videosReq.json(),
     chatRes: await chatReq.json(),
+    tipsRes: await tipReq.json(),
   };
 };
 
@@ -760,4 +768,21 @@ export const getFaqOverviewData = async () => {
       "Content-Type": "application/json",
     },
   });
+};
+
+/**
+ * Get the tip detail base on the slug
+ * @param slug the post slug
+ * @returns
+ */
+export const getTipDetail = async (slug: string) => {
+  return await fetch(
+    `${ENDPOINTS.COLLECTIONS}/tips?fields=*.*.*.*&filter[slug][_eq]=${slug}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
 };
