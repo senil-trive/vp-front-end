@@ -1,9 +1,9 @@
 import React, { ReactNode } from "react";
-import styled from "styled-components";
 
 import Button from "../../buttons/Button";
 import { P } from "../../typography";
 import UserAvatar from "../../icons/UserAvatar/UserAvatar";
+import styled from "styled-components";
 
 const StyledForumPost = styled.article`
   &:before {
@@ -39,12 +39,13 @@ const StyledForumPost = styled.article`
     display: flex;
     align-items: center;
     gap: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
 
   .content {
-    margin-bottom: 30px;
     z-index: 5;
+    height: fit-content;
+
     > div {
       display: flex;
       gap: 8px;
@@ -83,7 +84,7 @@ function ChatBubble({
 }) {
   return (
     <div
-      className="flex flex-col max-w-[75%]"
+      className="flex flex-col max-w-[85%]"
       style={{
         alignSelf: isLeft ? "flex-start" : "flex-end",
       }}
@@ -139,7 +140,7 @@ export default function ChatExampleItem({
             </P>
           </div>
         </header>
-        <div className="flex flex-col content max-h-[390px] overflow-y-auto">
+        <div className="flex flex-col content max-h-[420px] overflow-y-auto">
           {convo !== undefined &&
             convo?.length > 0 &&
             convo?.map((item, index) => (
