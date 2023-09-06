@@ -50,10 +50,13 @@ const InfoCard: React.FC<InfoCardType> = ({
         )}
         {imageUrl && (
           <CardHeader>
-            <img
+            <Image
+              priority
               src={imageUrl}
               className="absolute h-full w-full top-0 left-0 z-0 object-cover"
               alt={title}
+              width={400}
+              height={300}
             />
             {category && (
               <Tag
@@ -77,6 +80,7 @@ const InfoCard: React.FC<InfoCardType> = ({
 
               {icon !== "" && (
                 <Image
+                  priority
                   src={icon}
                   width={45}
                   height={45}

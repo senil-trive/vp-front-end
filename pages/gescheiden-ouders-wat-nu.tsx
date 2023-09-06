@@ -1,22 +1,24 @@
-import { P, TitleWithHighlights } from "../components/typography";
-import Button from "../components/buttons/Button";
-import { Container } from "@mui/material";
-import ENDPOINTS from "../constants/endpoints";
-import FAQList from "../components/content-types/FAQList/FAQList";
-import { Hero } from "../components/layout";
-import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
-import parseImageURL from "../utils/parseImageURL";
-import { useTheme } from "styled-components";
 import {
   BuddymediaWrapper,
   ReflectiveCardWrapper,
 } from "../styles/kinderen/kletsmeet.styles";
+import { P, TitleWithHighlights } from "../components/typography";
+
+import Button from "../components/buttons/Button";
+import CommonDetailCard from "../components/content-types/CommonDetailCard/CommonDetailCard";
+import { Container } from "@mui/material";
+import { ContainerWrapper } from "../styles/Vrjwilligerswerk/index.styles";
+import ENDPOINTS from "../constants/endpoints";
+import FAQList from "../components/content-types/FAQList/FAQList";
+import { Hero } from "../components/layout";
 import InfoCard from "../components/content-types/InfoCard/InfoCard";
+import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
 import VideoItem from "../components/content-types/VideoItem/VideoItem";
 import { VideoWrapper } from "../styles/Vrjwilligerswerk/VrijwilligerWorden.styles";
-import { ContainerWrapper } from "../styles/Vrjwilligerswerk/index.styles";
 import { parseFileURL } from "../utils/parseFileURL";
-import CommonDetailCard from "../components/content-types/CommonDetailCard/CommonDetailCard";
+import parseImageURL from "../utils/parseImageURL";
+import { useTheme } from "styled-components";
+
 type BuddyPageProps = {
   pageDat: any;
   pageData: any;
@@ -52,7 +54,7 @@ export const getServerSideProps = async () => {
 
 const GescheidenOudersWatNu: React.FC<BuddyPageProps> = ({ pageData }) => {
   const { colors } = useTheme();
-  console.log(pageData);
+
   return (
     <ContainerWrapper className="klets-meet">
       <PageWrapper
@@ -72,7 +74,7 @@ const GescheidenOudersWatNu: React.FC<BuddyPageProps> = ({ pageData }) => {
         <main>
           <Hero
             center
-            imageUrl={parseImageURL(pageData?.hero_image?.id)}
+            imageUrl={parseImageURL(pageData?.hero_image?.id, 1400)}
             style={{
               minHeight: 576,
               position: "relative",
@@ -105,7 +107,6 @@ const GescheidenOudersWatNu: React.FC<BuddyPageProps> = ({ pageData }) => {
                   title={pageData?.media_title}
                   description={pageData?.media_description}
                   icon={"/letterBlog.png"}
-                  category={"Thema"}
                   className="small-fonts bg-[#FE517E] text-[#fff] h-[100%] flex flex-col mb-[40px] md:mb-[0]"
                 >
                   <div className="flex justify-center  mt-[20px] md:mt-[auto]">
@@ -124,7 +125,6 @@ const GescheidenOudersWatNu: React.FC<BuddyPageProps> = ({ pageData }) => {
                   imageUrl={parseImageURL(pageData?.media_2_image?.id)}
                   title={pageData?.media_2_title}
                   description={pageData?.media_2_description}
-                  category="Thema"
                   icon={"/letterBlog.png"}
                   className="small-fonts mt-[32px] md:mt-[0px] h-[100%] flex
                   flex-col"

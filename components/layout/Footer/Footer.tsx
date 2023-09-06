@@ -1,15 +1,16 @@
-import { Grid } from "@mui/material";
-import { Container } from "@mui/system";
-import Image from "next/image";
-import Link from "next/link";
+import { H3, P } from "../../typography";
 import React, { useEffect, useState } from "react";
 import styled, { useTheme } from "styled-components";
+
 import { CompanyInfo } from "../../../types/componayInfoTypes";
-import { getCompanyInfo } from "../../../utils/api";
-import parseImageURL from "../../../utils/parseImageURL";
-import { isInternalLink } from "../../../utils/url";
+import { Container } from "@mui/system";
+import { Grid } from "@mui/material";
+import Image from "next/image";
+import Link from "next/link";
 import Logo from "../../icons/Logo/Logo";
-import { H3, P } from "../../typography";
+import { getCompanyInfo } from "../../../utils/api";
+import { isInternalLink } from "../../../utils/url";
+import parseImageURL from "../../../utils/parseImageURL";
 
 const StyledFooter = styled.footer`
   .footer-top {

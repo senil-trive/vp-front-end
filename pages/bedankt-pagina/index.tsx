@@ -1,12 +1,13 @@
-import React from "react";
 import { P, TitleWithHighlights } from "../../components/typography";
-import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
+
+import Button from "../../components/buttons/Button";
+import ENDPOINTS from "../../constants/endpoints";
 import { Hero } from "../../components/layout";
 import { HeroBannerWrapper } from "../../styles/global.styled";
-import TextWithHighlights from "../../components/typography/TextWithHighlights";
-import ENDPOINTS from "../../constants/endpoints";
 import Link from "next/link";
-import Button from "../../components/buttons/Button";
+import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
+import React from "react";
+import TextWithHighlights from "../../components/typography/TextWithHighlights";
 import parseImageURL from "../../utils/parseImageURL";
 
 export const getServerSideProps = async () => {
@@ -61,7 +62,7 @@ const Bedankt: React.FC<any> = (pageData) => {
     >
       <Hero
         center
-        imageUrl={parseImageURL(thanks_hero_image?.id)}
+        imageUrl={parseImageURL(thanks_hero_image?.id, 1400)}
         style={{
           minHeight: 754,
           position: "relative",

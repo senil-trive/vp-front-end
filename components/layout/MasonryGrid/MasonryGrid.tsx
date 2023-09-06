@@ -5,7 +5,8 @@ import React, { useEffect, useState } from "react";
 import TikTokPost, {
   TikTokPostProps,
 } from "../../content-types/TikTokPost/TikTokPost";
-import { motion, Variants } from "framer-motion";
+import { Variants, motion } from "framer-motion";
+
 import BlogItem from "../../content-types/BlogItem/BlogItem";
 import { BlogType } from "../../../types/content-types/Blog.type";
 import BriefItem from "../../content-types/BriefItem/BriefItem";
@@ -15,12 +16,15 @@ import ForumPost from "../../content-types/ForumPost/ForumPost";
 import { ForumPostType } from "../../../types/forumTypes";
 import { Letter } from "../../../types/content-types/Letter.type";
 import { MasonryGridWrapper } from "./MasonryGrid.styled";
+import TipItem from "../../content-types/TipItem/TipItem";
+import { TipPostType } from "../../../types/tipTypes";
 import VideoItem from "../../content-types/VideoItem/VideoItem";
 import { VideoPropsType } from "../../content-types/VideoItem/VideoItem.types";
 import parseImageURL from "../../../utils/parseImageURL";
 
 export type FeedType =
   | "forum"
+  | "tip"
   | "instagram"
   | "tiktok"
   | "video"
@@ -33,7 +37,13 @@ export type FeedItem = {
   width: 1 | 2 | 3 | number;
   type: FeedType;
   cols?: number;
-  content: Letter | BlogType | ForumPostType | VideoPropsType | TikTokPostProps;
+  content:
+    | Letter
+    | BlogType
+    | ForumPostType
+    | VideoPropsType
+    | TikTokPostProps
+    | TipPostType;
 };
 
 type Props = {
@@ -107,6 +117,9 @@ export function MasonryGrid({
                       content={letterContent.description}
                       imgSrc={parseImageURL(letterContent?.image?.id)}
                       fileSrc={`/open-brieven/${letterContent.slug}`}
+                      category={
+                        letterContent?.categories?.[0]?.categories_id?.name
+                      }
                     />
                   </motion.div>
                 );
@@ -144,6 +157,31 @@ export function MasonryGrid({
                     />
                   </motion.div>
                 );
+              case "tip":
+                const tipContent = content as TipPostType;
+                return (
+                  <motion.div
+                    className={`grid-item grid-item-w-${item.width}`}
+                    key={index}
+                    initial="offscreen"
+                    whileInView="onscreen"
+                    viewport={{ once: true, amount: 0.1 }}
+                  >
+                    <TipItem
+                      showButton
+                      buttonUrl={`/tips/${tipContent.slug}`}
+                      truncateContent
+                      postDate={new Date(tipContent.date_created)}
+                      tags={
+                        tipContent.categories?.map(
+                          (cat) => cat.categories_id?.name
+                        ) ?? []
+                      }
+                      title={tipContent.name ?? ""}
+                      content={tipContent.introduction}
+                    />
+                  </motion.div>
+                );
               case "blog":
                 const blogContent = content as BlogType;
 
@@ -158,7 +196,7 @@ export function MasonryGrid({
                     <BlogItem
                       mediaSrc={
                         blogContent.image
-                          ? `${process.env.NEXT_PUBLIC_API_URL}/assets/${blogContent.image}?width=700`
+                          ? `${process.env.NEXT_PUBLIC_API_URL}/assets/${blogContent.image.id}?width=400`
                           : ""
                       }
                       embedSrc={blogContent.youtube_embed}
@@ -173,7 +211,9 @@ export function MasonryGrid({
                       }
                       content={blogContent.content}
                       postDate={new Date(blogContent.date_created)}
-                      category={"Thema"}
+                      category={
+                        blogContent?.categories?.[0]?.categories_id?.name
+                      }
                       title={blogContent.title}
                     />
                   </motion.div>

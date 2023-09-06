@@ -5,6 +5,7 @@ import { FeedItem } from "../components/layout/MasonryGrid/MasonryGrid";
 import { ForumPostType } from "./forumTypes";
 import { ImageFileType } from "./fileTypes";
 import { Tag } from "./content-types/Tag.type";
+import { TipPostType } from "./tipTypes";
 
 export type HomePageProps = {
   pageData?: {
@@ -45,6 +46,10 @@ export type BlogPageProps = {
 
 export type BlogDetailPageProps = {
   pageData?: BlogType;
+};
+
+export type TipDetailPageProps = {
+  pageData?: TipPostType;
 };
 
 export type ForumPageProps = {

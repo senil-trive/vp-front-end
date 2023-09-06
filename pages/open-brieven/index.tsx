@@ -92,7 +92,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
         <main>
           <Hero
             center
-            imageUrl={parseImageURL(pageData?.hero_image?.id)}
+            imageUrl={parseImageURL(pageData?.hero_image?.id, 1400)}
             style={{
               minHeight: 500,
               position: "relative",
@@ -183,6 +183,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-20">
                 {lettersData?.map((letter: Letter) => (
                   <BriefItem
+                    category={letter.categories?.[0]?.categories_id?.name}
                     key={letter.id}
                     title={letter.title}
                     content={letter.description}
