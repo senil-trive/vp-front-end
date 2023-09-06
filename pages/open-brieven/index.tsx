@@ -158,7 +158,8 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                     description={toplettersData?.[1]?.description}
                     icon={parseImageURL(pageData?.note_write_icon?.id)}
                     category={
-                      toplettersData?.[1]?.categories?.[0]?.categories_id?.name
+                      pageData?.highlighted_letter?.categories?.[0]?.name ||
+                      null
                     }
                     className="small-fonts hover:bg-[#fff] text-[#fff] h-[100%] flex flex-col"
                   >

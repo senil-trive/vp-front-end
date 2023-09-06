@@ -1,5 +1,6 @@
 import { H4, P } from "../../typography";
 
+import { BsChat } from "react-icons/bs";
 import Button from "../../buttons/Button";
 import { FiHeart } from "react-icons/fi";
 import Link from "next/link";
@@ -143,7 +144,7 @@ const StyledForumPost = styled.article<styledProps>`
     }
     .icon-wrapper {
       display: flex;
-      align-items: center;
+
       gap: 5.55px;
     }
     p {
@@ -258,7 +259,7 @@ export default function ForumPost({
           <footer>
             <div>
               <div className="icon-wrapper mr-4">
-                <FiHeart size={24} />
+                <BsChat size={24} />
                 <p className="font-avenir font-light text-[16px] md:text-[18px]">
                   {comments}
                 </p>

@@ -1,9 +1,10 @@
-import { Modal } from "@mui/material";
-import Link from "next/link";
-import { useCookies } from "react-cookie";
-import styled, { useTheme } from "styled-components";
-import Button from "../../buttons/Button";
 import { P, TitleWithHighlights } from "../../typography";
+import styled, { useTheme } from "styled-components";
+
+import Button from "../../buttons/Button";
+import Link from "next/link";
+import { Modal } from "@mui/material";
+import { useCookies } from "react-cookie";
 
 const Wrapper = styled.div`
   width: 70%;

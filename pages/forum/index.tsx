@@ -18,7 +18,6 @@ import ForumPost from "../../components/content-types/ForumPost/ForumPost";
 import { HeroButtonWrapper } from "../../styles/kinderen/index.styles";
 import Image from "next/image";
 import Input from "../../components/form/Input/Input";
-import Link from "next/link";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
 import SearchIcon from "../../components/icons/SearchIcon/SearchIcon";
 import SortBar from "../../components/form/SortBar/SortBar";
@@ -80,6 +79,8 @@ export default function Forum({
   const [currentPage, setCurrentPage] = useState(1);
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
+
+  console.log(posts);
 
   const changePage = (index: number) => {
     if (index <= 1) {

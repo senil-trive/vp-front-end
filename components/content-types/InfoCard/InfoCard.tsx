@@ -58,7 +58,7 @@ const InfoCard: React.FC<InfoCardType> = ({
               width={400}
               height={300}
             />
-            {!!category && (
+            {category && (
               <Tag
                 variant="dark"
                 size="m"
