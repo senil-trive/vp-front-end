@@ -19,6 +19,7 @@ import TextWithHighlights from "../components/typography/TextWithHighlights";
 import { generateFeedTiles } from "../utils/feed-utils";
 import parseImageURL from "../utils/parseImageURL";
 import { useCallbackWhenReachedBottom } from "../utils/scroll";
+import ScrollDown from "../components/layout/ScrollDown/ScrollDown";
 
 const POST_PER_PAGE = 6;
 
@@ -160,16 +161,18 @@ export default function Home({
     },
     [currentPage, posts]
   );
-  useCallbackWhenReachedBottom(async () => {
+
+  const handleScrollDown = async () => {
     if (posts.length < totalPosts && !selectedTag && !isLoading) {
       getAllFeedItem({ append: true, selectedTag: "" });
       setCurrentPage((page) => page + 1);
     }
-
     if (posts.length >= totalPosts) {
       setIsEnd(true);
     }
-  });
+  };
+
+  useCallbackWhenReachedBottom(handleScrollDown);
 
   useEffect(() => {
     if (selectedTag) {
@@ -309,16 +312,16 @@ export default function Home({
           </div>
         </Container>
         <MasonryGrid feed={posts} homepage={true} pagetopRes={pagetopRes} />
-
+        {!isEnd && !isLoading && (
+          <ScrollDown marginTop={94} onClick={handleScrollDown} />
+        )}
         <div className="flex items-center justify-center">
-          {isLoading ? (
-            <CircularProgress size={"30px"} />
-          ) : (
-            isEnd && <P color="info">{pageData?.loader_more_post_message}</P>
-          )}
-
+          {isLoading && <CircularProgress size={"30px"} />}
           {isEnd && posts.length <= 0 && (
             <P color="info">{pageData?.loader_post_message}</P>
+          )}
+          {isEnd && posts.length > 0 && (
+            <P color="info">{pageData?.loader_more_post_message}</P>
           )}
         </div>
       </main>
