@@ -1,17 +1,19 @@
-import { H4, P } from "../../typography";
-
-import { BsChat } from "react-icons/bs";
-import Button from "../../buttons/Button";
-import { FiHeart } from "react-icons/fi";
-import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Tag from "../../buttons/Tag/Tag";
 import { parseDate } from "../../../utils/parseDate";
 import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
 import styled from "styled-components";
 import { truncate } from "../../../utils/truncate";
+import { FiHeart } from "react-icons/fi";
+import { H4, P } from "../../typography";
+import Button from "../../buttons/Button";
+import Link from "next/link";
+import { updateForumDetails } from "../../../utils/api";
+import { useSearchParams } from "next/navigation";
+import { BsChat } from "react-icons/bs";
 
 type Props = {
+  id: string;
   name?: string;
   gender: string;
   age: string;
@@ -28,6 +30,9 @@ type Props = {
   fullHeight?: boolean;
   postDate?: Date;
   image: any;
+  likesCount?: number;
+  commentsCount?: number;
+  fetchData?: () => Promise<void>;
 };
 
 type styledProps = {
@@ -146,6 +151,9 @@ const StyledForumPost = styled.article<styledProps>`
       display: flex;
 
       gap: 5.55px;
+      svg {
+        cursor: pointer;
+      }
     }
     p {
       margin: 0;
@@ -183,6 +191,7 @@ const StyledForumPost = styled.article<styledProps>`
 `;
 
 export default function ForumPost({
+  id,
   button,
   title,
   content,
@@ -196,18 +205,66 @@ export default function ForumPost({
   tags = [],
   name,
   className,
+  likesCount = 0,
+  commentsCount,
+  fetchData,
 }: Props) {
+  const [isPostLiked, setIsPostLiked] = useState(false);
+
   const generateContent = () => {
     if (fullHeight && truncateContent) {
       return parseHTMLtoReact(truncate(content, 500));
     } else if (truncateContent) {
       return parseHTMLtoReact(truncate(content, 180));
     }
-
     return parseHTMLtoReact(content);
   };
+
   const ComponentTag = showButton ? "a" : "div";
   const props = showButton ? { href: buttonUrl } : {};
+
+  useEffect(() => {
+    const likedForumPosts: string[] = JSON.parse(
+      localStorage.getItem("liked-forum-posts") || "[]"
+    );
+    setIsPostLiked(likedForumPosts.includes(id ?? ""));
+  }, [likesCount, id]);
+
+  /**
+   * Update the likes count in CMS and store the liked post id in local storage.
+   */
+  const updateLikesData = async () => {
+    const likedForumPosts = JSON.parse(
+      localStorage.getItem("liked-forum-posts") || "[]"
+    );
+    let payload = {
+      likes_count: likesCount,
+    };
+    if (isPostLiked) {
+      const postIdIndex = likedForumPosts.findIndex(
+        (postId: string) => id === postId
+      );
+      likedForumPosts.splice(postIdIndex, 1);
+      payload.likes_count = payload.likes_count! - 1;
+    } else {
+      likedForumPosts.push(id);
+      payload.likes_count = payload.likes_count! + 1;
+    }
+
+    const response = await updateForumDetails(id, payload);
+    const data = await response.json();
+
+    if (data?.data) {
+      localStorage.setItem(
+        "liked-forum-posts",
+        JSON.stringify(likedForumPosts)
+      );
+      if (fetchData) {
+        fetchData();
+      }
+    }
+  };
+
   return (
     <StyledForumPost
       showButton={showButton}
@@ -259,10 +316,22 @@ export default function ForumPost({
           <footer>
             <div>
               <div className="icon-wrapper mr-4">
-                <BsChat size={24} />
-                <p className="font-avenir font-light text-[16px] md:text-[18px]">
-                  {comments}
-                </p>
+                <div className="flex gap-1 likes">
+                  <FiHeart
+                    size={24}
+                    fill={isPostLiked ? "#fff" : "none"}
+                    onClick={updateLikesData}
+                  />
+                  <p className="font-avenir font-light text-[16px] md:text-[18px]">
+                    {likesCount}
+                  </p>
+                </div>
+                <div className="flex gap-1 comments">
+                  <BsChat size={24} />
+                  <p className="font-avenir font-light text-[16px] md:text-[18px]">
+                    {commentsCount}
+                  </p>
+                </div>
               </div>
             </div>
             <div>

@@ -68,7 +68,6 @@ export default function Tips({ pageData, blogsData, totalPosts, tags }: any) {
   const [sort, setSort] = useState("");
   const [isLoading, setIsLoading] = useState(true);
 
-  console.log(posts);
   // useCallbackWhenReachedBottom(async () => {
   //   if (posts.length < totalCount) {
   //     setIsLoading(true);

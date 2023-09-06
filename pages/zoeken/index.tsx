@@ -219,6 +219,7 @@ export default function Search() {
                 <div id="zoeken-forum">
                   <Link href={`/forum/${forumPosts[0].slug}`}>
                     <ForumPost
+                      id={forumPosts[0]?.id}
                       truncateContent
                       fullHeight={false}
                       gender={forumPosts[0].user_gender}

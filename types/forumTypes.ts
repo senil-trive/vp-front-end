@@ -14,6 +14,7 @@ export type ForumPostType = {
   comments: ForumCommentType[];
   homepage_id: string;
   likes: string;
+  likes_count: number;
   status: "draft";
   slug: string;
   categories?: { categories_id: CategoryType }[];

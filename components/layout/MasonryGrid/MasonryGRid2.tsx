@@ -199,6 +199,7 @@ export function MasonryGrid({
                       <div className="forum-content">
                         <div className="front">
                           <ForumPost
+                            id={forum?.[0]?.id}
                             showButton
                             fullHeight={false}
                             buttonUrl={`/forum/${forum?.[0]?.slug}`}
@@ -224,6 +225,7 @@ export function MasonryGrid({
                         </div>
                         <div className="back z-10">
                           <ForumPost
+                            id={forum?.[0]?.id}
                             showButton
                             fullHeight={false}
                             buttonUrl={`/forum/${forum?.[0]?.slug}`}
@@ -577,6 +579,7 @@ export function MasonryGrid({
                         <div className="forum-content">
                           <div className="front">
                             <ForumPost
+                              id={forumContent?.id}
                               showButton
                               fullHeight={fullHeightItems}
                               buttonUrl={`/forum/${forumContent.slug}`}
@@ -604,6 +607,7 @@ export function MasonryGrid({
                           </div>
                           <div className="back z-10">
                             <ForumPost
+                              id={forumContent?.id}
                               showButton
                               fullHeight={fullHeightItems}
                               buttonUrl={`/forum/${forumContent.slug}`}
