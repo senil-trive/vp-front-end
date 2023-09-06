@@ -134,6 +134,7 @@ export function MasonryGrid({
                     viewport={{ once: true, amount: 0.1 }}
                   >
                     <ForumPost
+                      id={forumContent?.id}
                       showButton
                       fullHeight={fullHeightItems}
                       buttonUrl={`/forum/${forumContent.slug}`}

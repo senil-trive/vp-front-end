@@ -86,6 +86,21 @@ export const postForumWithComments = async (data: any) => {
 };
 
 /**
+ * Update any Forum data ( Here I am using this to update the Likes Count. )
+ * @param forumId
+ */
+export const updateForumDetails = async (forumId: string, data: any) => {
+  const updatedData = JSON.stringify(data);
+  return await fetch(`${ENDPOINTS.COLLECTIONS}/forum_posts/${forumId}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: updatedData,
+  });
+};
+
+/**
  * Add a comment
  * @param type "forum" or "blog"
  * @param data

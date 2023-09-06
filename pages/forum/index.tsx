@@ -80,8 +80,6 @@ export default function Forum({
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
 
-  console.log(posts);
-
   const changePage = (index: number) => {
     if (index <= 1) {
       setCurrentPage(1);
@@ -98,30 +96,31 @@ export default function Forum({
     setSort(x);
   };
 
-  useEffect(() => {
-    const getPaginatedPost = async () => {
-      setIsLoading(true);
-      try {
-        const req = await getForumPosts({
-          postPerPage: FORUM_POST_PER_PAGE,
-          page: currentPage,
-          search,
-          sort,
-          meta: "filter_count",
-          filter:
-            selectedTag.length > 0
-              ? `filter[categories][categories_id][id][_eq]=${selectedTag}`
-              : ``,
-        });
-        const res = await req.json();
-
-        setPosts(res.data ?? []);
-        setTotalCount(res?.meta?.filter_count || 0);
-      } catch (error) {
-        console.log(error);
-      }
+  const getPaginatedPost = async () => {
+    try {
+      const req = await getForumPosts({
+        postPerPage: FORUM_POST_PER_PAGE,
+        page: currentPage,
+        search,
+        sort,
+        meta: "filter_count",
+        filter:
+          selectedTag.length > 0
+            ? `filter[categories][categories_id][id][_eq]=${selectedTag}`
+            : ``,
+      });
+      const res = await req.json();
+      setPosts(res.data ?? []);
+      setTotalCount(res?.meta?.filter_count || 0);
+    } catch (error) {
+      console.log(error);
+    } finally {
       setIsLoading(false);
-    };
+    }
+  };
+
+  useEffect(() => {
+    setIsLoading(true);
     getPaginatedPost();
   }, [currentPage, search, sort, selectedTag]);
 
@@ -287,6 +286,7 @@ export default function Forum({
                       <div className="forum-content">
                         <div className="front">
                           <ForumPost
+                            id={item.id}
                             truncateContent
                             fullHeight={false}
                             gender={item.user_gender}
@@ -305,10 +305,14 @@ export default function Forum({
                             comments={item.comments.length}
                             content={item.content}
                             className="forum-post forum-list"
+                            likesCount={item?.likes_count || 0}
+                            commentsCount={item?.comments?.length || 0}
+                            fetchData={getPaginatedPost}
                           />
                         </div>
                         <div className="back z-10">
                           <ForumPost
+                            id={item.id}
                             truncateContent
                             fullHeight={false}
                             gender={item.user_gender}
@@ -329,6 +333,8 @@ export default function Forum({
                             content={item.content}
                             className="forum-post forum-list"
                             buttonUrl={`/forum/${item?.slug}`}
+                            likesCount={item?.likes_count || 0}
+                            commentsCount={item?.comments?.length || 0}
                           />
                         </div>
                       </div>

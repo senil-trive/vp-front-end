@@ -266,6 +266,7 @@ export default function ZeroResponsesPage({
                     <div className="forum-content">
                       <div className="front">
                         <ForumPost
+                          id={item?.id}
                           truncateContent
                           fullHeight={false}
                           gender={item.user_gender}
@@ -288,6 +289,7 @@ export default function ZeroResponsesPage({
                       </div>
                       <div className="back z-10">
                         <ForumPost
+                          id={item?.id}
                           truncateContent
                           fullHeight={false}
                           gender={item.user_gender}

@@ -7,7 +7,7 @@ import ForumPost from "../../components/content-types/ForumPost/ForumPost";
 import { ForumCommentType, ForumPostType } from "../../types/forumTypes";
 import { GetServerSidePropsContext } from "next";
 import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { getComments } from "../../utils/api";
 import Image from "next/image";
 
@@ -32,6 +32,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     );
 
     const { data } = await res.json();
+
     if (!data[0]) {
       return {
         redirect: "/forum",
@@ -57,6 +58,33 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 };
 
 export default function ForumDetail({ pageData, comments = [] }: Props) {
+  const [newPageData, setNewPageData] = useState<ForumPostType>(pageData);
+
+  useEffect(() => {
+    setNewPageData({ ...pageData });
+  }, [pageData]);
+
+  const fetchPageData = async () => {
+    try {
+      // Get the posts
+      const res = await fetch(
+        `${ENDPOINTS.COLLECTIONS}/forum_posts?fields=categories.*.*,*&filter[slug][_eq]=${pageData.slug}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const { data } = await res.json();
+      if (!!data[0]) {
+        setNewPageData({ ...data[0] });
+      }
+    } catch (error: any) {
+      console.log(error?.message);
+    }
+  };
+
   return (
     <PageWrapper
       seo={{
@@ -80,19 +108,24 @@ export default function ForumDetail({ pageData, comments = [] }: Props) {
         <Grid container>
           <Grid item xs={12} className="mx-auto">
             <ForumPost
-              gender={pageData.user_gender}
-              age={pageData.user_age}
-              postDate={new Date(pageData.date_created)}
+              id={newPageData.id}
+              gender={newPageData.user_gender}
+              age={newPageData.user_age}
+              postDate={new Date(newPageData.date_created)}
               truncateContent={false}
               tags={
-                pageData.categories?.map((cat) => cat.categories_id.name) ?? []
+                newPageData.categories?.map((cat) => cat.categories_id.name) ??
+                []
               }
-              name={pageData?.user_name}
-              title={pageData.title ?? "Titel moet in CMS worden ingevoerd"}
-              content={pageData.content}
+              name={newPageData?.user_name}
+              title={newPageData.title ?? "Titel moet in CMS worden ingevoerd"}
+              content={newPageData.content}
               comments={comments.length}
+              likesCount={newPageData?.likes_count || 0}
+              commentsCount={newPageData?.comments.length || 0}
               fullHeight={false}
-              image={pageData.attachment_image}
+              image={newPageData.attachment_image}
+              fetchData={fetchPageData}
             />
           </Grid>
         </Grid>
