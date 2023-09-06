@@ -132,7 +132,7 @@ const StyledForumPost = styled.article<styledProps>`
     }
   }
   @media (max-width: 767px) {
-    height: auto !importat;
+    height: auto !important;
   }
 `;
 

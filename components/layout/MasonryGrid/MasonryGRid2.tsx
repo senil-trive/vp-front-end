@@ -90,8 +90,13 @@ export function MasonryGrid({
         category?.categories_id?.name === "Tips" && category !== undefined
     );
   });
-  const blogQuote = blog_quote?.filter(
+  const blogQuote1 = blog_quote?.filter(
     (item: any) => item.id !== blogTips?.[0]?.id
+  );
+
+  const blogQuote2 = blog_quote?.filter(
+    (item: any) =>
+      item.id !== blogTips?.[0]?.id && item.id !== blogQuote1?.[0]?.id
   );
 
   return (
@@ -287,7 +292,7 @@ export function MasonryGrid({
                   </div>
                 )}
 
-                {blogQuote?.length > 0 && (
+                {blogQuote1?.length > 0 && (
                   <div className="new-post-item">
                     <motion.div
                       className={`grid-item grid-item-w-10`}
@@ -296,12 +301,12 @@ export function MasonryGrid({
                       viewport={{ once: true, amount: 0.1 }}
                     >
                       <NewPostItem
-                        title={blogQuote?.[0]?.title}
-                        description={blogQuote?.[0]?.content}
+                        title={blogQuote1?.[0]?.title}
+                        description={blogQuote1?.[0]?.content}
                         buttonText="quote"
                         bgImg={
-                          blogQuote?.[0]?.image
-                            ? `${process.env.NEXT_PUBLIC_API_URL}/assets/${blogQuote?.[0]?.image.id}?width=700`
+                          blogQuote1?.[0]?.image
+                            ? `${process.env.NEXT_PUBLIC_API_URL}/assets/${blogQuote1?.[0]?.image.id}?width=700`
                             : ""
                         }
                       />
@@ -329,6 +334,27 @@ export function MasonryGrid({
                             : ""
                         }
                         fileSrc={`/open-brieven/${letter?.[1]?.slug}`}
+                      />
+                    </motion.div>
+                  </div>
+                )}
+                {blogQuote2?.length > 0 && (
+                  <div className="new-post-item">
+                    <motion.div
+                      className={`grid-item grid-item-w-10`}
+                      initial="offscreen"
+                      whileInView="onscreen"
+                      viewport={{ once: true, amount: 0.1 }}
+                    >
+                      <NewPostItem
+                        title={blogQuote2?.[0]?.title}
+                        description={blogQuote2?.[0]?.content}
+                        buttonText="quote"
+                        bgImg={
+                          blogQuote2?.[0]?.image
+                            ? `${process.env.NEXT_PUBLIC_API_URL}/assets/${blogQuote2?.[0]?.image.id}?width=700`
+                            : ""
+                        }
                       />
                     </motion.div>
                   </div>
