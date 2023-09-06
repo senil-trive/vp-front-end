@@ -1,27 +1,28 @@
-import Button from "../../components/buttons/Button";
-import { Container } from "@mui/material";
-import ENDPOINTS from "../../constants/endpoints";
-import FAQList from "../../components/content-types/FAQList/FAQList";
-import { Hero } from "../../components/layout";
-import P from "../../components/typography/P/P";
-import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
-import React, { useState } from "react";
-import TitleWithHighlights from "../../components/typography/TitleWithHighlights";
-import VideoItem from "../../components/content-types/VideoItem/VideoItem";
-import parseImageURL from "../../utils/parseImageURL";
-import { useTheme } from "styled-components";
-import VoulunteerWeek from "../../components/content-types/VolunteerWeek/VolunteerWeek";
-import InfoCard from "../../components/content-types/InfoCard/InfoCard";
-import CommonDetailCard from "../../components/content-types/CommonDetailCard/CommonDetailCard";
 import {
   FaqStyle,
   PeopleWrapper,
   VideoWrapper,
 } from "../../styles/Vrjwilligerswerk/VrijwilligerWorden.styles";
+import React, { useState } from "react";
+
+import Button from "../../components/buttons/Button";
+import CommonDetailCard from "../../components/content-types/CommonDetailCard/CommonDetailCard";
+import { Container } from "@mui/material";
 import { ContainerWrapper } from "../../styles/Vrjwilligerswerk/index.styles";
-import { HeroBannerWrapper } from "../../styles/global.styled";
-import parseVideoURL from "../../utils/parseVideoURL";
+import ENDPOINTS from "../../constants/endpoints";
+import FAQList from "../../components/content-types/FAQList/FAQList";
 import { H3 } from "../../components/typography";
+import { Hero } from "../../components/layout";
+import { HeroBannerWrapper } from "../../styles/global.styled";
+import InfoCard from "../../components/content-types/InfoCard/InfoCard";
+import P from "../../components/typography/P/P";
+import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
+import TitleWithHighlights from "../../components/typography/TitleWithHighlights";
+import VideoItem from "../../components/content-types/VideoItem/VideoItem";
+import VoulunteerWeek from "../../components/content-types/VolunteerWeek/VolunteerWeek";
+import parseImageURL from "../../utils/parseImageURL";
+import parseVideoURL from "../../utils/parseVideoURL";
+import { useTheme } from "styled-components";
 type VolunteersPageProps = {
   pageData: any;
   volunteerweekwork: any;
@@ -92,7 +93,7 @@ const VolunteersPage: React.FC<VolunteersPageProps> = ({
         <main>
           <Hero
             center
-            imageUrl={parseImageURL(pageData?.header_image?.id)}
+            imageUrl={parseImageURL(pageData?.header_image?.id, 1400)}
             style={{
               minHeight: 649,
               position: "relative",

@@ -1,11 +1,12 @@
 import { P, TitleWithHighlights } from "../../../components/typography";
+
 import ENDPOINTS from "../../../constants/endpoints";
 import { Hero } from "../../../components/layout";
-import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
-import parseImageURL from "../../../utils/parseImageURL";
-import { TrainigenHeroWrapper } from "../../../styles/Vrjwilligerswerk/TrainigenWrapper.styles";
 import { HeroBannerWrapper } from "../../../styles/global.styled";
+import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
 import SignupStepperForm from "../../../components/layout/SignupStepperForm";
+import { TrainigenHeroWrapper } from "../../../styles/Vrjwilligerswerk/TrainigenWrapper.styles";
+import parseImageURL from "../../../utils/parseImageURL";
 
 type VolunteersSignupPageProps = {
   pageData: any;
@@ -70,7 +71,7 @@ const VolunteersFAQPage: React.FC<VolunteersSignupPageProps> = ({
           <TrainigenHeroWrapper>
             <Hero
               center
-              imageUrl={parseImageURL(pageData?.hero_image?.id)}
+              imageUrl={parseImageURL(pageData?.hero_image?.id, 1400)}
               style={{
                 minHeight: 554,
                 position: "relative",

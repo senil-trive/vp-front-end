@@ -1,24 +1,25 @@
 import { Container, Grid } from "@mui/material";
-import { Hero } from "../components/layout";
-import { H2, H3, P, TitleWithHighlights } from "../components/typography";
-import React, { useState } from "react";
-import { getForumOverviewPageData, postForum } from "../utils/api";
-import Button from "../components/buttons/Button";
-import { ForumPageProps } from "../types/pageTypes";
-import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
-import parseImageURL from "../utils/parseImageURL";
-import Input from "../components/form/Input/Input";
-import { useForm } from "react-hook-form";
-import { HeroBannerWrapper } from "../styles/global.styled";
-import { StyledForm } from "../styles/CommonFormWrapper.styles";
-import TextArea from "../components/form/TextArea/TextArea";
-import Dropdown from "../components/form/Dropdown/Dropdown";
-import Image from "next/image";
 import {
   ForumRulesWrapper,
   HeroButtonWrapper,
 } from "../styles/kinderen/index.styles";
+import { H2, H3, P, TitleWithHighlights } from "../components/typography";
+import React, { useState } from "react";
+import { getForumOverviewPageData, postForum } from "../utils/api";
+
+import Button from "../components/buttons/Button";
+import Dropdown from "../components/form/Dropdown/Dropdown";
+import { ForumPageProps } from "../types/pageTypes";
+import { Hero } from "../components/layout";
+import { HeroBannerWrapper } from "../styles/global.styled";
+import Image from "next/image";
+import Input from "../components/form/Input/Input";
+import PageWrapper from "../components/layout/PageWrapper/PageWrapper";
+import { StyledForm } from "../styles/CommonFormWrapper.styles";
 import { THEMA } from "../constants/thema";
+import TextArea from "../components/form/TextArea/TextArea";
+import parseImageURL from "../utils/parseImageURL";
+import { useForm } from "react-hook-form";
 
 export const getServerSideProps = async () => {
   try {
@@ -76,7 +77,7 @@ export default function Vraag({ pageData }: ForumPageProps) {
     >
       <Hero
         center
-        imageUrl={parseImageURL(pageData?.message_hero_image?.id)}
+        imageUrl={parseImageURL(pageData?.message_hero_image?.id, 1400)}
         style={{
           minHeight: 656,
           position: "relative",

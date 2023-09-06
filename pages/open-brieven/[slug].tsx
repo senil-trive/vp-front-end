@@ -1,29 +1,31 @@
+import { Document, Page, pdfjs } from "react-pdf";
 import { H3, P, TitleWithHighlights } from "../../components/typography";
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import BreadCrumbs from "../../components/layout/BreadCrumbs/BreadCrumbs";
-import BriefItem from "../../components/content-types/BriefItem/BriefItem";
-import { Container } from "@mui/material";
-import ENDPOINTS from "../../constants/endpoints";
-import { GetServerSidePropsContext } from "next";
-import { Hero } from "../../components/layout";
-import { Letter } from "../../types/content-types/Letter.type";
-import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
-import { parseFileURL } from "../../utils/parseFileURL";
-import parseImageURL from "../../utils/parseImageURL";
 import {
   getComments,
   postLetterDownload,
   postLetterSubscription,
 } from "../../utils/api";
-import LetterForm from "../../components/form/LetterForm/LetterForm";
-import { LetterDownloadType } from "../../types/forumTypes";
+
+import BreadCrumbs from "../../components/layout/BreadCrumbs/BreadCrumbs";
+import BriefItem from "../../components/content-types/BriefItem/BriefItem";
 import CommentForm from "../../components/form/CommentForm/CommentForm";
-import Tag from "../../components/buttons/Tag/Tag";
-import LetterForyou from "../../components/content-types/LetterForyou/LetterForyou";
+import { Container } from "@mui/material";
+import ENDPOINTS from "../../constants/endpoints";
+import { GetServerSidePropsContext } from "next";
+import { Hero } from "../../components/layout";
+import { Letter } from "../../types/content-types/Letter.type";
+import { LetterDownloadType } from "../../types/forumTypes";
+import LetterForm from "../../components/form/LetterForm/LetterForm";
 import { LetterFormWrapper } from "../../styles/kinderen/index.styles";
-import { Document, Page, pdfjs } from "react-pdf";
+import LetterForyou from "../../components/content-types/LetterForyou/LetterForyou";
+import PageWrapper from "../../components/layout/PageWrapper/PageWrapper";
+import Tag from "../../components/buttons/Tag/Tag";
+import { parseFileURL } from "../../utils/parseFileURL";
+import parseImageURL from "../../utils/parseImageURL";
 import styled from "styled-components";
+
 type Props = {
   pageData: Letter & { sub_title?: string; hero_description?: string };
   relatedLetters: Letter[];
@@ -200,7 +202,7 @@ export default function LetterDetail({
       <BreadCrumbs />
       <Hero
         center
-        imageUrl={parseImageURL(pageoverview?.hero_image?.id)}
+        imageUrl={parseImageURL(pageoverview?.hero_image?.id, 1400)}
         style={{
           minHeight: 476,
           position: "relative",

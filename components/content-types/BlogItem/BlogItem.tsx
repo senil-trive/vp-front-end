@@ -10,6 +10,7 @@ import Tag from "../../buttons/Tag/Tag";
 import VideoItem from "../VideoItem/VideoItem";
 import YoutubePlayer from "../../media/YoutubePlayer";
 import { parseDate } from "../../../utils/parseDate";
+import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
 import { truncate } from "../../../utils/truncate";
 import { useTheme } from "styled-components";
 
@@ -61,6 +62,7 @@ export default function BlogItem({
     } else if (mediaSrc) {
       Child = (
         <Image
+          priority
           className="absolute h-full w-full top-0 left-0 z-0 object-cover"
           src={mediaSrc}
           alt={title}

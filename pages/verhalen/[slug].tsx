@@ -167,7 +167,7 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
           center
           imageUrl={
             pageData?.image?.id
-              ? parseImageURL(pageData?.image?.id)
+              ? parseImageURL(pageData?.image?.id, 1400)
               : "/verhalen.png"
           }
           style={{

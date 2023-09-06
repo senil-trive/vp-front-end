@@ -42,6 +42,7 @@ export default function BriefItem({
       <CardHeader style={{ maxHeight: imgHeight, minHeight: imgHeight }}>
         <>
           <Image
+            priority
             className="absolute h-full w-full top-0 left-0 z-0 object-cover"
             src={imgSrc}
             alt={title}

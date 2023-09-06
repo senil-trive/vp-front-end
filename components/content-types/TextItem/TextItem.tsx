@@ -86,6 +86,7 @@ const TextItem: React.FC<TextItemProps> = ({
           </div>
           {imageURL ? (
             <Image
+              priority
               src={imageURL}
               alt={imageAlt}
               width={472}
@@ -100,6 +101,7 @@ const TextItem: React.FC<TextItemProps> = ({
         <>
           {imageURL ? (
             <Image
+              priority
               src={imageURL}
               alt={imageAlt}
               width={472}

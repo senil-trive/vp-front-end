@@ -156,7 +156,7 @@ export default function Tips({ pageData, blogsData, totalPosts, tags }: any) {
           center
           imageUrl={
             pageData?.hero_image?.id
-              ? parseImageURL(pageData?.hero_image?.id)
+              ? parseImageURL(pageData?.hero_image?.id, 1400)
               : "/vrijwilligerswerkheader.png"
           }
           style={{

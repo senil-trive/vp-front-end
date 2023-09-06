@@ -92,7 +92,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
         <main>
           <Hero
             center
-            imageUrl={parseImageURL(pageData?.hero_image?.id)}
+            imageUrl={parseImageURL(pageData?.hero_image?.id, 1400)}
             style={{
               minHeight: 500,
               position: "relative",

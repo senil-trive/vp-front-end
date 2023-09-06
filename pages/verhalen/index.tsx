@@ -131,7 +131,7 @@ export default function Forum({
         center
         imageUrl={
           pageData?.hero_image?.id
-            ? parseImageURL(pageData?.hero_image?.id)
+            ? parseImageURL(pageData?.hero_image?.id, 1400)
             : "/verhalen.png"
         }
         style={{

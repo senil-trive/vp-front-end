@@ -194,7 +194,7 @@ export default function Home({
     >
       <Hero
         center
-        imageUrl={parseImageURL(pageData?.hero_image?.id)}
+        imageUrl={parseImageURL(pageData?.hero_image?.id, 1400)}
         style={{
           minHeight: 649,
           position: "relative",
@@ -242,6 +242,7 @@ export default function Home({
             >
               {pageData?.tag_select_subject_title}
               <Image
+                priority
                 src={parseImageURL(pageData?.thumb_icon?.id)}
                 alt="header icon"
                 width={30}
@@ -290,6 +291,7 @@ export default function Home({
                     {/* Onderwerp{" "} */}
 
                     <Image
+                      priority
                       src={parseImageURL(pageData?.thumb_icon?.id)}
                       alt="hand_icon"
                       width={30}

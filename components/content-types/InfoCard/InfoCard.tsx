@@ -1,13 +1,14 @@
-import Image from "next/image";
-import React from "react";
-import { InfoCardType } from "../../../types/content-types/InfoCard.type";
-import Tag from "../../buttons/Tag/Tag";
+import { H2, P } from "../../typography";
+
 import Card from "../../card/Card";
 import CardHeader from "../../card/CardHeader/CardHeader";
-import { H2, P } from "../../typography";
+import Image from "next/image";
+import { InfoCardType } from "../../../types/content-types/InfoCard.type";
 import { InfoCardWrapper } from "./InfocardWrapper.styles";
-import YoutubePlayer from "../../media/YoutubePlayer";
+import React from "react";
+import Tag from "../../buttons/Tag/Tag";
 import VideoItem from "../VideoItem/VideoItem";
+import YoutubePlayer from "../../media/YoutubePlayer";
 import parseImageURL from "../../../utils/parseImageURL";
 import parseVideoURL from "../../../utils/parseVideoURL";
 
@@ -49,10 +50,13 @@ const InfoCard: React.FC<InfoCardType> = ({
         )}
         {imageUrl && (
           <CardHeader>
-            <img
+            <Image
+              priority
               src={imageUrl}
               className="absolute h-full w-full top-0 left-0 z-0 object-cover"
               alt={title}
+              width={400}
+              height={300}
             />
             {!!category && (
               <Tag
@@ -76,6 +80,7 @@ const InfoCard: React.FC<InfoCardType> = ({
 
               {icon !== "" && (
                 <Image
+                  priority
                   src={icon}
                   width={45}
                   height={45}

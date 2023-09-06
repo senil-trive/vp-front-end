@@ -6,7 +6,6 @@ import Tag from "../../buttons/Tag/Tag";
 import UserAvatar from "../../icons/UserAvatar/UserAvatar";
 import { parseDate } from "../../../utils/parseDate";
 import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
-import parseImageURL from "../../../utils/parseImageURL";
 import styled from "styled-components";
 import { truncate } from "../../../utils/truncate";
 

@@ -74,7 +74,7 @@ const GescheidenOudersWatNu: React.FC<BuddyPageProps> = ({ pageData }) => {
         <main>
           <Hero
             center
-            imageUrl={parseImageURL(pageData?.hero_image?.id)}
+            imageUrl={parseImageURL(pageData?.hero_image?.id, 1400)}
             style={{
               minHeight: 576,
               position: "relative",
