@@ -1,13 +1,14 @@
-import { Grid } from "@mui/material";
 import { H2, P } from "../../typography";
 import React, { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+
 import Button from "../../buttons/Button";
-import { LetterDownloadType } from "../../../types/forumTypes";
+import { Grid } from "@mui/material";
+import Image from "next/image";
 import Input from "../Input/Input";
+import { LetterDownloadType } from "../../../types/forumTypes";
 import Section from "../../layout/Section/Section";
 import styled from "styled-components";
-import Image from "next/image";
 
 const LetterForm = ({
   className,
@@ -170,18 +171,7 @@ const LetterForm = ({
                   }
                 />
               </Grid>
-              <Grid item xs={12} className="items-center flex">
-                <input
-                  id="input-check"
-                  type="checkbox"
-                  name="tips_insipiration_email"
-                  className="bg-transparent mx-1 w-[40px] md:w-[20px] h-[20px]"
-                />
-                <label>
-                  Ja, ik wil graag maandelijks tips & inspiratie via de mail
-                  ontvangen
-                </label>
-              </Grid>
+
               <Grid item xs={12}>
                 <Button
                   variant="info"

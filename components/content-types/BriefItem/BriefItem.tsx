@@ -39,7 +39,7 @@ export default function BriefItem({
   bg = `#3FC7B4`;
   return (
     <Card variant="brief" className={className}>
-      <CardHeader style={{ maxHeight: imgHeight }}>
+      <CardHeader style={{ maxHeight: imgHeight, minHeight: imgHeight }}>
         <>
           <Image
             priority
@@ -73,9 +73,14 @@ export default function BriefItem({
           </div>
           <P
             className="transition text-white "
-            style={{ marginBottom: 56, marginTop: 12, fontWeight: "300" }}
+            style={{
+              maxHeight: 200,
+              marginTop: 12,
+              fontWeight: "300",
+              overflow: "hidden",
+            }}
           >
-            {truncate(content, 200)}
+            {truncate(content, 500)}
           </P>
         </div>
         {!btnHidden && (

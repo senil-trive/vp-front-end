@@ -67,6 +67,8 @@ export default function Tips({ pageData, blogsData, totalPosts, tags }: any) {
 
   const [sort, setSort] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+
+  console.log(posts);
   // useCallbackWhenReachedBottom(async () => {
   //   if (posts.length < totalCount) {
   //     setIsLoading(true);
@@ -113,7 +115,7 @@ export default function Tips({ pageData, blogsData, totalPosts, tags }: any) {
   useEffect(() => {
     const getPaginatedBlogs = async () => {
       try {
-        const req = await getPosts({
+        const req = await getTips({
           postPerPage: POST_PER_PAGE,
           // page: currentPage,
           search,
@@ -121,10 +123,11 @@ export default function Tips({ pageData, blogsData, totalPosts, tags }: any) {
           meta: "filter_count",
           filter:
             selectedTag.length > 0
-              ? `filter={"_and":[{"categories": { "categories_id": { "id": { "_eq": "${selectedTag}"}}}},{"categories": { "categories_id": { "name": { "_eq": "Tips"}}}}]}`
-              : `filter={"categories": { "categories_id": {"name":{"_contains":"Tips"}}}}`,
+              ? `filter={"_and":[{"categories": { "categories_id": { "id": { "_eq": "${selectedTag}"}}}}`
+              : ``,
         });
         const res = await req.json();
+
         setPosts(res.data || []);
         setTotalCount(res.meta.filter_count || 0);
       } catch (error) {
@@ -287,8 +290,8 @@ export default function Tips({ pageData, blogsData, totalPosts, tags }: any) {
             </Container>
             <MasonryGrid
               feed={posts.map((item: any) => ({
-                id: `blog-${uuidv4()}`,
-                type: "blog",
+                id: `tip-${uuidv4()}`,
+                type: "tip",
                 width: 4,
                 content: item,
               }))}

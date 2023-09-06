@@ -17,7 +17,7 @@ export const handleHorizantalScroll = ({
     element.scrollLeft += step;
     scrollAmount += Math.abs(step);
     clearInterval(slideTimer);
-  }, 1000);
+  }, 500);
   if (element.scrollLeft === 0) {
     leftArrow.classList.remove("active");
   } else if (element.scrollLeft > 0) {

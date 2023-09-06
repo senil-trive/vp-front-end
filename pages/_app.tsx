@@ -1,15 +1,15 @@
 import "../styles/globals.css";
 
+import * as fbq from "../lib/fpixel";
+
 import type { AppProps } from "next/app";
 import AppProviders from "../providers/AppProviders";
 import { DefaultSeo } from "next-seo";
 import MaintenanceModal from "../components/modals/MaintenanceModal/Maintenance";
 import { Open_Sans } from "@next/font/google";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-
-import * as fbq from "../lib/fpixel";
 import Script from "next/script";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const openSans = Open_Sans({
   weight: ["300", "400", "700"],
@@ -69,6 +69,24 @@ export default function App({ Component, pageProps }: AppProps) {
           `,
           }}
         />
+
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-B876VXFKLE"
+        />
+        <Script
+          id="ga-script"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+             window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-B876VXFKLE');
+          `,
+          }}
+        />
+
         <Component {...pageProps} />
       </AppProviders>
     </div>

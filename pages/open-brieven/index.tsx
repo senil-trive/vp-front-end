@@ -158,8 +158,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
                     description={toplettersData?.[1]?.description}
                     icon={parseImageURL(pageData?.note_write_icon?.id)}
                     category={
-                      pageData?.highlighted_letter?.categories?.[0]?.name ||
-                      "THEMA"
+                      toplettersData?.[1]?.categories?.[0]?.categories_id?.name
                     }
                     className="small-fonts hover:bg-[#fff] text-[#fff] h-[100%] flex flex-col"
                   >
@@ -183,6 +182,7 @@ const LettersOverviewPage: React.FC<LettersOverviewPageProps> = ({
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-20">
                 {lettersData?.map((letter: Letter) => (
                   <BriefItem
+                    category={letter.categories?.[0]?.categories_id?.name}
                     key={letter.id}
                     title={letter.title}
                     content={letter.description}

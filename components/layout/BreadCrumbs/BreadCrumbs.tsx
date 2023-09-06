@@ -1,9 +1,10 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { getPathFromUrl } from "../../../utils/url";
+
 import { FiChevronRight } from "react-icons/fi";
+import Link from "next/link";
+import { getPathFromUrl } from "../../../utils/url";
+import styled from "styled-components";
+import { useRouter } from "next/router";
 
 type Breadcrumb = {
   /** Breadcrumb title. Example: 'blog-entries' */
@@ -34,9 +35,6 @@ const StyledNav = styled.nav`
         a {
           font-weight: 600;
         }
-      }
-
- 
       }
     }
   }

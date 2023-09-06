@@ -1,11 +1,12 @@
+import React, { Fragment } from "react";
+
 import ChevronDown from "../../../icons/ChevronDown/ChevronDown";
 import ChevronUp from "../../../icons/ChevronUp/ChevronUp";
+import HeaderSubmenu from "../HeaderSubmenu/HeaderSubmenu";
 import { MENU_COLS } from "../../../../constants/mockData";
 import { MenuItem } from "../Header";
 import { P } from "../../../typography";
-import React from "react";
 import styled from "styled-components";
-import HeaderSubmenu from "../HeaderSubmenu/HeaderSubmenu";
 
 type Props = {
   selected?: MenuItem;
@@ -55,9 +56,8 @@ export default function HeaderNav({
     <StyledNav>
       <ul>
         {menuCols.map((menu) => (
-          <>
+          <Fragment key={menu.id}>
             <li
-              key={menu.id}
               className={selected?.id === menu.id ? "selected" : ""}
               onClick={() => onChange(menu)}
             >
@@ -78,7 +78,7 @@ export default function HeaderNav({
                 />
               )} */}
             </>
-          </>
+          </Fragment>
         ))}
       </ul>
     </StyledNav>

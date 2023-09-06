@@ -219,7 +219,7 @@ export default function Forum({
                     }}
                     className="hand-icon"
                   >
-                    <img src="/Onderwerp.png" />
+                    <img src="/Onderwerp.png" alt="Onderwerp" />
                   </span>
                 </H4>
               }

@@ -28,7 +28,7 @@ export const getServerSideProps = async () => {
   // fetch page data from API
   try {
     const pageReq = await fetch(
-      `${ENDPOINTS.COLLECTIONS}/buddy_page?fields=*.*.*.*.*`,
+      `${ENDPOINTS.COLLECTIONS}/buddy_page?fields=*.*.*.*.*.*`,
       {
         method: "GET",
         headers: {
@@ -55,6 +55,7 @@ export const getServerSideProps = async () => {
 
 const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
   const { colors } = useTheme();
+
   return (
     <ContainerWrapper className="klets-meet">
       <PageWrapper
@@ -132,7 +133,7 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                           title={item?.title}
                           description={item?.description}
                           icon={parseImageURL(item?.title_right_icon?.id)}
-                          category="Thema"
+                          category={item?.categories?.[0]?.categories_id?.name}
                           className="small-fonts h-[100%] flex
                   flex-col"
                         >
@@ -155,7 +156,7 @@ const KletsMeetBuddyPage: React.FC<BuddyPageProps> = ({ pageData }) => {
                           imageUrl={parseImageURL(item?.image?.id)}
                           title={item.title}
                           description={item?.description}
-                          category="Thema"
+                          category={item?.categories?.[0]?.categories_id?.name}
                           icon={parseImageURL(item?.title_right_icon?.id)}
                           className="small-fonts mt-[32px] md:mt-[0px] h-[100%] flex
                   flex-col"

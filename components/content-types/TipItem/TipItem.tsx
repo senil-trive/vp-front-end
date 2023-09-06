@@ -1,21 +1,18 @@
 import { H4, P } from "../../typography";
+import styled, { useTheme } from "styled-components";
 
 import Button from "../../buttons/Button";
-import { FiHeart } from "react-icons/fi";
-import Link from "next/link";
+import Card from "../../card/Card";
+import CardFooter from "../../card/CardFooter/CardFooter";
+import CardHeader from "../../card/CardHeader/CardHeader";
 import React from "react";
 import Tag from "../../buttons/Tag/Tag";
 import { parseDate } from "../../../utils/parseDate";
-import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
-import styled from "styled-components";
 import { truncate } from "../../../utils/truncate";
 
 type Props = {
-  name?: string;
-  gender: string;
-  age: string;
   button?: boolean;
-  authorType?: string;
+  author?: string;
   title: string;
   content: string;
   truncateContent?: boolean;
@@ -23,17 +20,14 @@ type Props = {
   buttonUrl?: string;
   className?: string;
   tags: string[];
-  comments?: number;
-  fullHeight?: boolean;
-  postDate?: Date;
-  image: any;
+  postDate: Date;
 };
 
 type styledProps = {
   showButton?: boolean;
 };
 
-const StyledForumPost = styled.article<styledProps>`
+const StyledTipPost = styled.article<styledProps>`
   /* border: 1px solid ${({ theme }) => theme.colors.primary.normal}; */
   border-radius: 8px;
   padding: 24px;
@@ -92,11 +86,6 @@ const StyledForumPost = styled.article<styledProps>`
       }
     }
   }
-
-  /* TODO: required for the home grid */
-  /* display: flex;
-  flex-direction: column;
-  justify-content: space-between; */
 
   header {
     display: flex;
@@ -181,99 +170,78 @@ const StyledForumPost = styled.article<styledProps>`
   }
 `;
 
-export default function ForumPost({
-  button,
+export default function TipItem({
   title,
+  author,
   content,
-  age,
-  comments = 0,
   postDate,
-  truncateContent = true,
-  showButton = false,
   buttonUrl = "",
-  fullHeight = true,
   tags = [],
-  name,
-  className,
 }: Props) {
-  const generateContent = () => {
-    if (fullHeight && truncateContent) {
-      return parseHTMLtoReact(truncate(content, 500));
-    } else if (truncateContent) {
-      return parseHTMLtoReact(truncate(content, 180));
-    }
+  const { colors } = useTheme();
 
-    return parseHTMLtoReact(content);
-  };
-  const ComponentTag = showButton ? "a" : "div";
-  const props = showButton ? { href: buttonUrl } : {};
   return (
-    <StyledForumPost
-      showButton={showButton}
-      style={{ minHeight: fullHeight ? "624px" : "" }}
-      className={`main-forum ${className} overflow-auto`}
-    >
-      <div>
-        <p className="font-extrabold text-lg text-[#fff]">{name}</p>
-        <p className="text-[16px] text-[#fff] md:text-[18px] font-[300]">
-          {age?.includes("jaar") ? age : `${age} jaar`}
-        </p>
-        <div>
-          <div className="content text-[16px] md:text-[18px]">
-            {tags.length > 0 && (
-              <div className="flex flex-wrap forum-tags my-[32px]">
-                {tags.map((item, index) => (
-                  <Tag key={index} size="m" className="forum-tag">
-                    {item}
-                  </Tag>
-                ))}
-              </div>
-            )}
-            {!!title && (
-              <H4
-                variant="bold"
-                color="white"
-                className="title my-[30px] font-[32px]"
+    <Card variant="blog">
+      <CardHeader
+        style={{
+          height: "fit-content",
+        }}
+      >
+        <div className="flex flex-wrap gap-3 forum-tags p-4">
+          {tags.length > 0 &&
+            tags.map((tag, index) => (
+              <Tag
+                key={index}
+                variant="dark"
+                size="m"
+                style={{
+                  backgroundColor: colors.info.normal,
+                  borderColor: colors.info.normal,
+                }}
               >
-                {truncate(title, 75)}
-              </H4>
-            )}
-            <div className="custom_forum_tags">{generateContent()}</div>
-          </div>
+                <>{tag}</>
+              </Tag>
+            ))}
         </div>
-      </div>
-      {button ? (
-        <Link href={buttonUrl} className="forum-link hover:cursor-pointer">
-          <footer>
-            <Button
-              variant="secondary"
-              className="back-act h-[auto] lg:h-[60px] px-[10px] text-[16px] lg:px-[16px] lg:text-[18px]"
-            >
-              Laat een reachtie achter!
-            </Button>
-          </footer>
-        </Link>
-      ) : (
-        <ComponentTag {...props} className="forum-footer">
-          <footer>
-            <div>
-              <div className="icon-wrapper mr-4">
-                <FiHeart size={24} />
-                <p className="font-avenir font-light text-[16px] md:text-[18px]">
-                  {comments}
-                </p>
-              </div>
-            </div>
-            <div>
-              {postDate && (
-                <p className="geplaatst font-avenir font-light text-lg italic text-right">
-                  Geplaatst op {parseDate(postDate)}
-                </p>
-              )}
-            </div>
-          </footer>
-        </ComponentTag>
-      )}
-    </StyledForumPost>
+      </CardHeader>
+      <CardFooter>
+        <H4 className="text-new" style={{ margin: 0 }}>
+          {truncate(title, 23)}
+        </H4>
+        {!!content ? (
+          <div className="blog-description">
+            <P style={{ marginBottom: 30, marginTop: 12 }}>
+              {truncate(content, 600)}
+            </P>
+          </div>
+        ) : (
+          <div style={{ overflowY: "auto", height: 90 }}>
+            {!!content && (
+              <P style={{ marginBottom: 30, marginTop: 12 }}>
+                {content ? truncate(content, 600) : ""}
+              </P>
+            )}
+          </div>
+        )}
+        <div className="flex items-center justify-between author-date mb-[20px] mt-[0]">
+          <p style={{ fontWeight: "700" }} className="text-lg">
+            {author}
+          </p>
+          <p
+            className="italic font-light font-avenir "
+            style={{ fontSize: "18px" }}
+          >
+            Geplaatst op: {parseDate(postDate)}
+          </p>
+        </div>
+        <Button
+          style={{ marginTop: "auto" }}
+          variant={"primary"}
+          href={buttonUrl}
+        >
+          Lees meer
+        </Button>
+      </CardFooter>
+    </Card>
   );
 }

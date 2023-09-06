@@ -44,6 +44,7 @@ export const getServerSideProps = async () => {
       lettersRes,
       videosRes,
       chatRes,
+      tipsRes,
     } = await getFeed({ postPerPage: POST_PER_PAGE, meta: "filter_count" });
     return {
       props: {
@@ -57,6 +58,7 @@ export const getServerSideProps = async () => {
             tiktok: tiktokRes.data,
             videos: videosRes.data,
             chats: chatRes.data,
+            tips: tipsRes.data,
           },
           true
         ),
@@ -67,7 +69,8 @@ export const getServerSideProps = async () => {
             instagramRes.meta.filter_count +
             videosRes.meta.filter_count +
             chatRes.meta.filter_count +
-            tiktokRes.meta.filter_count || 0,
+            tiktokRes.meta.filter_count +
+            tipsRes.meta.filter_count || 0,
         pagetopRes: pagetopRes?.data,
         categories: categoriesRes.data,
       },
@@ -118,6 +121,7 @@ export default function Home({
           lettersRes,
           videosRes,
           chatRes,
+          tipsRes,
         } = await getFeed({
           postPerPage: POST_PER_PAGE,
           page: currentPage + 1,
@@ -137,6 +141,7 @@ export default function Home({
             tiktok: tiktokRes?.data ?? [],
             videos: videosRes?.data ?? [],
             chats: chatRes?.data ?? [],
+            tips: tipsRes?.data ?? [],
           },
 
           // generated first tiles only when its the first load

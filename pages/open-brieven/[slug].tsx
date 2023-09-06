@@ -136,9 +136,7 @@ export default function LetterDetail({
         monthly_tips_and_inspiration_email: data?.tips_inspiration_email,
       });
       setIsSubmitted(true);
-      setLetterPdfMessage(
-        "Er wordt een downloadlink verzonden naar het door u opgegeven e-mailadres"
-      );
+      setLetterPdfMessage("Bedankt! De brief opent in een nieuw scherm.");
       window.open(parseFileURL(pageData.downloadable_document?.id), "_blank");
     } catch (err) {
       console.log(err);
