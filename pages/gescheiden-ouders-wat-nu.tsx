@@ -18,6 +18,7 @@ import { VideoWrapper } from "../styles/Vrjwilligerswerk/VrijwilligerWorden.styl
 import { parseFileURL } from "../utils/parseFileURL";
 import parseImageURL from "../utils/parseImageURL";
 import { useTheme } from "styled-components";
+
 type BuddyPageProps = {
   pageDat: any;
   pageData: any;
@@ -73,7 +74,7 @@ const GescheidenOudersWatNu: React.FC<BuddyPageProps> = ({ pageData }) => {
         <main>
           <Hero
             center
-            imageUrl={parseImageURL(pageData?.hero_image?.id)}
+            imageUrl={parseImageURL(pageData?.hero_image?.id, 1400)}
             style={{
               minHeight: 576,
               position: "relative",
@@ -106,7 +107,6 @@ const GescheidenOudersWatNu: React.FC<BuddyPageProps> = ({ pageData }) => {
                   title={pageData?.media_title}
                   description={pageData?.media_description}
                   icon={"/letterBlog.png"}
-                  category={"Thema"}
                   className="small-fonts bg-[#FE517E] text-[#fff] h-[100%] flex flex-col mb-[40px] md:mb-[0]"
                 >
                   <div className="flex justify-center  mt-[20px] md:mt-[auto]">
@@ -125,7 +125,6 @@ const GescheidenOudersWatNu: React.FC<BuddyPageProps> = ({ pageData }) => {
                   imageUrl={parseImageURL(pageData?.media_2_image?.id)}
                   title={pageData?.media_2_title}
                   description={pageData?.media_2_description}
-                  category="Thema"
                   icon={"/letterBlog.png"}
                   className="small-fonts mt-[32px] md:mt-[0px] h-[100%] flex
                   flex-col"

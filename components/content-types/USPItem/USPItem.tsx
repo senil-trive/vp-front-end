@@ -20,6 +20,7 @@ const USPItem: React.FC<USPItemProps> = ({
     <div className="flex flex-col justify-center items-center">
       {imageURL ? (
         <Image
+          priority
           src={imageURL}
           alt={imageAlt}
           width={112}

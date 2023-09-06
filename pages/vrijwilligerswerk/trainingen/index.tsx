@@ -1,20 +1,20 @@
 import { H3, P, TitleWithHighlights } from "../../../components/typography";
-
-import Button from "../../../components/buttons/Button";
-import { Container } from "@mui/material";
-import ENDPOINTS from "../../../constants/endpoints";
-import { Hero } from "../../../components/layout";
-import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
-import parseImageURL from "../../../utils/parseImageURL";
 import {
   PackageWrapper,
   TrainigenHeroWrapper,
   TrainigenIdealWrapper,
 } from "../../../styles/Vrjwilligerswerk/TrainigenWrapper.styles";
-import InfoCard from "../../../components/content-types/InfoCard/InfoCard";
+
+import Button from "../../../components/buttons/Button";
+import { Container } from "@mui/material";
 import { ContainerWrapper } from "../../../styles/Vrjwilligerswerk/index.styles";
+import ENDPOINTS from "../../../constants/endpoints";
+import { Hero } from "../../../components/layout";
 import { HeroBannerWrapper } from "../../../styles/global.styled";
 import Image from "next/image";
+import InfoCard from "../../../components/content-types/InfoCard/InfoCard";
+import PageWrapper from "../../../components/layout/PageWrapper/PageWrapper";
+import parseImageURL from "../../../utils/parseImageURL";
 
 type VolunteersTrainingPageProps = {
   pageData: any;
@@ -73,7 +73,7 @@ const VolunteersTrainingPage: React.FC<VolunteersTrainingPageProps> = ({
           <TrainigenHeroWrapper>
             <Hero
               center
-              imageUrl={parseImageURL(pageData?.hero_image?.id)}
+              imageUrl={parseImageURL(pageData?.hero_image?.id, 1400)}
               style={{
                 minHeight: 555,
                 position: "relative",

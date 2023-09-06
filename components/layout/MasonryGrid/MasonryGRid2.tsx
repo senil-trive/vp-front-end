@@ -20,6 +20,7 @@ import { Letter } from "../../../types/content-types/Letter.type";
 import Link from "next/link";
 import { MasonryGridWrapper } from "./MasonryGrid.styled";
 import NewPostItem from "../../content-types/NewPostItem/NewPostItem";
+import { TipPostType } from "../../../types/tipTypes";
 import VideoItem from "../../content-types/VideoItem/VideoItem";
 import { VideoPropsType } from "../../content-types/VideoItem/VideoItem.types";
 import { motion } from "framer-motion";
@@ -28,6 +29,7 @@ import parseVideoURL from "../../../utils/parseVideoURL";
 
 export type FeedType =
   | "forum"
+  | "tip"
   | "instagram"
   | "tiktok"
   | "video"
@@ -40,7 +42,13 @@ export type FeedItem = {
   width: 1 | 2 | 3 | number;
   type: FeedType;
   cols?: number;
-  content: Letter | BlogType | ForumPostType | VideoPropsType | TikTokPostProps;
+  content:
+    | Letter
+    | BlogType
+    | ForumPostType
+    | VideoPropsType
+    | TikTokPostProps
+    | TipPostType;
 };
 
 type Props = {
@@ -164,7 +172,9 @@ export function MasonryGrid({
                     >
                       <BriefItem
                         title={letter?.[0]?.title}
-                        category="Thema"
+                        category={
+                          letter?.[0]?.categories?.[0]?.categories_id?.name
+                        }
                         bg="#3FC7B4"
                         content={letter?.[0]?.description}
                         imgSrc={
@@ -313,7 +323,9 @@ export function MasonryGrid({
                     >
                       <BriefItem
                         title={letter?.[1]?.title}
-                        category="Thema"
+                        category={
+                          letter?.[0]?.categories?.[0]?.categories_id?.name
+                        }
                         bg="#3FC7B4"
                         content={letter?.[1]?.description}
                         imgSrc={
@@ -385,17 +397,17 @@ export function MasonryGrid({
                               buttonUrl={`/forum/${forum?.[0]?.slug}`}
                               truncateContent
                               gender={forum?.[1]?.user_gender}
-                              image={parseImageURL(forum?.[1]?.user_image?.id)}
+                              image={parseImageURL(forum?.[0]?.user_image?.id)}
                               age={forum?.[1]?.user_age}
                               name={forum?.[1]?.user_name}
-                              postDate={new Date(forum[1].date_created)}
+                              postDate={new Date(forum[0].date_created)}
                               tags={
-                                forum?.[1]?.categories?.map(
+                                forum?.[0]?.categories?.map(
                                   (cat: any) => cat.categories_id?.name
                                 ) ?? []
                               }
                               title={
-                                forum?.[1]?.title ??
+                                forum?.[0]?.title ??
                                 "Titel moet in CMS worden ingevoerd"
                               }
                               comments={forum?.[0]?.comments?.length}
@@ -443,7 +455,9 @@ export function MasonryGrid({
                         >
                           <BriefItem
                             title={letter?.[2]?.title}
-                            category="Thema"
+                            category={
+                              letter?.[2]?.categories?.[0]?.categories_id?.name
+                            }
                             bg="#3FC7B4"
                             content={letter?.[2]?.description}
                             imgSrc={
@@ -530,7 +544,9 @@ export function MasonryGrid({
                         <BriefItem
                           key={letterContent.id}
                           title={letterContent.title}
-                          category="Thema"
+                          category={
+                            letterContent?.categories?.[0]?.categories_id?.name
+                          }
                           bg={letterContent.bg_color}
                           content={letterContent.description}
                           imgSrc={
@@ -636,7 +652,7 @@ export function MasonryGrid({
                         <BlogItem
                           mediaSrc={
                             blogContent.image
-                              ? `${process.env.NEXT_PUBLIC_API_URL}/assets/${blogContent.image}?width=700`
+                              ? `${process.env.NEXT_PUBLIC_API_URL}/assets/${blogContent.image.id}?width=700`
                               : ""
                           }
                           embedSrc={blogContent.youtube_embed}
@@ -651,7 +667,9 @@ export function MasonryGrid({
                           }
                           content={blogContent.content}
                           postDate={new Date(blogContent.date_created)}
-                          category={"Thema"}
+                          category={
+                            blogContent?.categories?.[0]?.categories_id?.name
+                          }
                           title={blogContent.title}
                         />
                       </motion.div>
@@ -700,9 +718,6 @@ export function MasonryGrid({
                   </>
                 );
               case "chat":
-                // {
-                //   console.log(chatContent);
-                // }
                 // TODO: replace with CMS content
                 const chatContent = content as any;
 

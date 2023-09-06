@@ -1,14 +1,14 @@
 import { H3, P, TitleWithHighlights } from "../../typography";
+import React, { useState } from "react";
 
 import Button from "../../buttons/Button";
 /* eslint-disable @next/next/no-img-element */
 import Card from "../../card/Card";
 import CardFooter from "../../card/CardFooter/CardFooter";
 import CardHeader from "../../card/CardHeader/CardHeader";
-import React, { useState } from "react";
+import Image from "next/image";
 import Tag from "../../buttons/Tag/Tag";
 import { truncate } from "../../../utils/truncate";
-import Image from "next/image";
 
 type Props = {
   btnHidden?: boolean;
@@ -39,9 +39,10 @@ export default function BriefItem({
   bg = `#3FC7B4`;
   return (
     <Card variant="brief" className={className}>
-      <CardHeader style={{ maxHeight: imgHeight }}>
+      <CardHeader style={{ maxHeight: imgHeight, minHeight: imgHeight }}>
         <>
           <Image
+            priority
             className="absolute h-full w-full top-0 left-0 z-0 object-cover"
             src={imgSrc}
             alt={title}
@@ -72,9 +73,14 @@ export default function BriefItem({
           </div>
           <P
             className="transition text-white "
-            style={{ marginBottom: 56, marginTop: 12, fontWeight: "300" }}
+            style={{
+              maxHeight: 200,
+              marginTop: 12,
+              fontWeight: "300",
+              overflow: "hidden",
+            }}
           >
-            {truncate(content, 200)}
+            {truncate(content, 500)}
           </P>
         </div>
         {!btnHidden && (

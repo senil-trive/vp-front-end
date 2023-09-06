@@ -1,14 +1,14 @@
-import { v4 as uuidv4 } from "uuid";
-
-import { InstaPost } from "../components/content-types/InstagramPost/InstagramPost";
-import { TikTokPostProps } from "../components/content-types/TikTokPost/TikTokPost";
-import { FeedItem } from "../components/layout/MasonryGrid/MasonryGrid";
 import { BlogType } from "../types/content-types/Blog.type";
-import { Letter } from "../types/content-types/Letter.type";
-import { VideoType } from "../types/content-types/Video.type";
+import { FeedItem } from "../components/layout/MasonryGrid/MasonryGrid";
 import { ForumPostType } from "../types/forumTypes";
+import { InstaPost } from "../components/content-types/InstagramPost/InstagramPost";
+import { Letter } from "../types/content-types/Letter.type";
+import { TikTokPostProps } from "../components/content-types/TikTokPost/TikTokPost";
+import { TipPostType } from "../types/tipTypes";
+import { VideoType } from "../types/content-types/Video.type";
 import parseImageURL from "./parseImageURL";
 import parseVideoURL from "./parseVideoURL";
+import { v4 as uuidv4 } from "uuid";
 
 /**
  * Checks if a number is even or odds
@@ -74,6 +74,7 @@ export const generateFeedTiles = (
     tiktok = [],
     videos = [],
     chats = [],
+    tips = [],
   }: {
     blogs?: BlogType[];
     letters?: Letter[];
@@ -82,6 +83,7 @@ export const generateFeedTiles = (
     tiktok?: TikTokPostProps[];
     videos?: VideoType[];
     chats?: any;
+    tips?: TipPostType[];
   },
   fixedFirstItems = false
 ) => {
@@ -132,6 +134,14 @@ export const generateFeedTiles = (
     type: "chat",
     content: item,
   }));
+
+  const tipFeedItem: FeedItem[] = tips.map((item: any) => ({
+    id: `tip-${uuidv4()}`,
+    width: 4,
+    type: "tip",
+    content: item,
+  }));
+
   const feedItems: FeedItem[] = [
     ...blogFeedItem,
     ...letterFeedItem,
@@ -140,6 +150,7 @@ export const generateFeedTiles = (
     ...tiktokFeedItem,
     ...videosFeedItem,
     ...chatFeedItem,
+    ...tipFeedItem,
   ];
   return feedItems;
 };

@@ -3,6 +3,7 @@ import { FiHeart } from "react-icons/fi";
 import Link from "next/link";
 import React from "react";
 import Tag from "../../buttons/Tag/Tag";
+import UserAvatar from "../../icons/UserAvatar/UserAvatar";
 import { parseDate } from "../../../utils/parseDate";
 import parseHTMLtoReact from "../../../utils/parseHTMLtoReact";
 import styled from "styled-components";

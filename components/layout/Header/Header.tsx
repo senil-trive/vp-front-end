@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import CloseIcon from "../../icons/CloseIcon/CloseIcon";
 import { ContentStatus } from "../../../types/content-types/Status.type";
 import HeaderNav from "./HeaderNav/HeaderNav";
-import HeaderSubmenu from "./HeaderSubmenu/HeaderSubmenu";
 import HeaderSubmenuMobile from "./HeaderSubmenuMobile/HeaderSubmenuMobile";
 import Link from "next/link";
 import Logo from "../../icons/Logo/Logo";

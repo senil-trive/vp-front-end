@@ -9,16 +9,16 @@ import {
 } from "../utils/api";
 import { useCallback, useEffect, useState } from "react";
 
+import ChevronRight from "../components/icons/ChevronRight/ChevronRight";
 import { HomePageProps } from "../types/pageTypes";
+import Image from "next/image";
 import { MasonryGrid } from "../components/layout/MasonryGrid/MasonryGRid2";
 import PageWrapper from "../components/layout/PageWrapper/PageWrappernew";
 import TagList from "../components/buttons/TagList/TagList";
+import TextWithHighlights from "../components/typography/TextWithHighlights";
 import { generateFeedTiles } from "../utils/feed-utils";
 import parseImageURL from "../utils/parseImageURL";
 import { useCallbackWhenReachedBottom } from "../utils/scroll";
-import ChevronRight from "../components/icons/ChevronRight/ChevronRight";
-import TextWithHighlights from "../components/typography/TextWithHighlights";
-import Image from "next/image";
 
 const POST_PER_PAGE = 6;
 
@@ -44,6 +44,7 @@ export const getServerSideProps = async () => {
       lettersRes,
       videosRes,
       chatRes,
+      tipsRes,
     } = await getFeed({ postPerPage: POST_PER_PAGE, meta: "filter_count" });
     return {
       props: {
@@ -57,6 +58,7 @@ export const getServerSideProps = async () => {
             tiktok: tiktokRes.data,
             videos: videosRes.data,
             chats: chatRes.data,
+            tips: tipsRes.data,
           },
           true
         ),
@@ -67,7 +69,8 @@ export const getServerSideProps = async () => {
             instagramRes.meta.filter_count +
             videosRes.meta.filter_count +
             chatRes.meta.filter_count +
-            tiktokRes.meta.filter_count || 0,
+            tiktokRes.meta.filter_count +
+            tipsRes.meta.filter_count || 0,
         pagetopRes: pagetopRes?.data,
         categories: categoriesRes.data,
       },
@@ -118,6 +121,7 @@ export default function Home({
           lettersRes,
           videosRes,
           chatRes,
+          tipsRes,
         } = await getFeed({
           postPerPage: POST_PER_PAGE,
           page: currentPage + 1,
@@ -137,6 +141,7 @@ export default function Home({
             tiktok: tiktokRes?.data ?? [],
             videos: videosRes?.data ?? [],
             chats: chatRes?.data ?? [],
+            tips: tipsRes?.data ?? [],
           },
 
           // generated first tiles only when its the first load
@@ -189,7 +194,7 @@ export default function Home({
     >
       <Hero
         center
-        imageUrl={parseImageURL(pageData?.hero_image?.id)}
+        imageUrl={parseImageURL(pageData?.hero_image?.id, 1400)}
         style={{
           minHeight: 649,
           position: "relative",
@@ -237,6 +242,7 @@ export default function Home({
             >
               {pageData?.tag_select_subject_title}
               <Image
+                priority
                 src={parseImageURL(pageData?.thumb_icon?.id)}
                 alt="header icon"
                 width={30}
@@ -285,6 +291,7 @@ export default function Home({
                     {/* Onderwerp{" "} */}
 
                     <Image
+                      priority
                       src={parseImageURL(pageData?.thumb_icon?.id)}
                       alt="hand_icon"
                       width={30}

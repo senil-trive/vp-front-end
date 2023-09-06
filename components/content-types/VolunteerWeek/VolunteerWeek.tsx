@@ -1,6 +1,7 @@
-import Image from "next/image";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
+
 import ENDPOINTS from "../../../constants/endpoints";
+import Image from "next/image";
 import Input from "../../form/Input/Input";
 import { VolunteerWrapper } from "./VolunteerWeek.styles";
 
@@ -124,6 +125,7 @@ const VolunteerWeek: React.FC<IProps> = ({
           </h3>
 
           <Image
+            priority
             src="/calendar.png"
             width={25}
             height={25}
