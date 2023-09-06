@@ -139,7 +139,7 @@ export default function TagList({
   selected,
   onSelect,
 }: Props) {
-  const scrollRef = useRef(null);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
   const leftArrow = useRef(null);
   const rightArrow = useRef(null);
   const isSelected = (id: string) => selected === id;

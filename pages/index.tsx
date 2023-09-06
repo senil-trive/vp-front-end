@@ -291,8 +291,6 @@ export default function Home({
                     >
                       {pageData?.tag_subject_title}
                     </span>
-                    {/* Onderwerp{" "} */}
-
                     <Image
                       priority
                       src={parseImageURL(pageData?.thumb_icon?.id)}
