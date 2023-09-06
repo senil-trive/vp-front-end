@@ -13,7 +13,7 @@ import { useSearchParams } from "next/navigation";
 import { BsChat } from "react-icons/bs";
 
 type Props = {
-  id: string;
+  id?: string;
   name?: string;
   gender: string;
   age: string;
@@ -251,8 +251,8 @@ export default function ForumPost({
       payload.likes_count = payload.likes_count! + 1;
     }
 
-    const response = await updateForumDetails(id, payload);
-    const data = await response.json();
+    const response = await updateForumDetails(id!, payload);
+    const data = await response?.json();
 
     if (data?.data) {
       localStorage.setItem(
