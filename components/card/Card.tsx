@@ -204,7 +204,7 @@ const StyledBlogNew = styled(BaseStyle)`
 `;
 
 const StyledPrimary = styled(BaseStyle)`
-  background-color: #006ef7;
+  background-color: #006ef7 !important;
   header {
     height: 294px;
     img,
