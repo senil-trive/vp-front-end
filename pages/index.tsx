@@ -172,8 +172,6 @@ export default function Home({
     }
   };
 
-  useCallbackWhenReachedBottom(handleScrollDown);
-
   useEffect(() => {
     if (selectedTag) {
       getAllFeedItem({ append: false, selectedTag });

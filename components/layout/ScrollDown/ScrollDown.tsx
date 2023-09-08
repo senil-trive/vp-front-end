@@ -44,9 +44,7 @@ const ScrollDown: FC<IProps> = ({ marginTop, onClick }) => {
   return (
     <ScrollDownWrapper marginTop={marginTop}>
       <div className="scroll-down-cta-container">
-        <div className="scroll-down-text">
-          Scroll verder ommeer te ontdekken
-        </div>
+        <div className="scroll-down-text">Ontdek meer</div>
         <FaChevronCircleDown
           onClick={onClick}
           size={38}
