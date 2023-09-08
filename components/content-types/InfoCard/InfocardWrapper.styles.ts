@@ -1,6 +1,12 @@
 import styled from "styled-components";
 
 export const InfoCardWrapper = styled.div`
+  .info-card {
+    cursor: default !important;
+  }
+  .cursor-pointer {
+    cursor: pointer !important;
+  }
   .training {
     height: 180px;
   }

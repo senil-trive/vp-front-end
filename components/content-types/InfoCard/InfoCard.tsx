@@ -39,7 +39,10 @@ const InfoCard: React.FC<InfoCardType> = ({
 }) => {
   return (
     <InfoCardWrapper className={variant}>
-      <Card variant={variant} className={`${className}`}>
+      <Card
+        variant={variant}
+        className={`${className} ${children ? "cursor-pointer" : ""} info-card`}
+      >
         {embedSrc && <YoutubePlayer src={embedSrc} />}
         {mediaSrc && (
           <VideoItem
@@ -91,7 +94,6 @@ const InfoCard: React.FC<InfoCardType> = ({
               )}
             </H2>
           </div>
-          {/* <P > */}
           {description && (
             <div
               style={{ fontFamily: "Avenir" }}
@@ -99,7 +101,6 @@ const InfoCard: React.FC<InfoCardType> = ({
               dangerouslySetInnerHTML={{ __html: description }}
             />
           )}
-          {/* </P> */}
           {children}
         </div>
       </Card>
