@@ -297,8 +297,8 @@ export default function BlogDetail({ pageData }: BlogDetailPageProps) {
               />
               <CommentForm
                 postId={pageData.id}
-                formTitle={"Geef zelf antwoord op deze vraag"}
-                formSubtitle="Vertel ons hoe je heet en hij komt naar je toe!"
+                formTitle={"Laat een reactie achter!"}
+                formSubtitle="Herken jij je in dit verhaal, heb je een goeie tip of wil je iets delen? We horen het graag!"
                 type="forum"
                 submitLabel="Ja, ik wil mijn reactie plaatsen"
                 style={{ margin: "0px", padding: "16px" }}
