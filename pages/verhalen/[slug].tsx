@@ -50,6 +50,7 @@ const StyledBlogContent = styled.article`
   .quote__content {
     position: relative;
     padding: 24px;
+    font-family: Fjalla One !important;
     &::before {
       content: "";
       position: absolute;
@@ -65,8 +66,10 @@ const StyledBlogContent = styled.article`
     h3,
     p {
       color: #fff !important;
+      font-family: Fjalla One !important;
+      text-transform: uppercase;
       strong {
-        font-family: Fjalla One;
+        font-family: Fjalla One !important;
         font-size: 18px;
         font-style: normal;
         font-weight: 400;
