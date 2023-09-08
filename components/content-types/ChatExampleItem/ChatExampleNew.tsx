@@ -162,7 +162,11 @@ export default function ChatExampleItem({
                 from={item.user_name}
                 isLeft={item.dir === "from"}
               >
-                {item.message}
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: item.message,
+                  }}
+                />
               </ChatBubble>
             ))}
         </div>
