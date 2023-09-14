@@ -1,7 +1,7 @@
 image: node:19.2.0
 
-stages:
-  - deploy
+# stages:
+#   - deploy
 
 # # Initialize system
 before_script:
