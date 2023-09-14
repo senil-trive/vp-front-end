@@ -9,6 +9,7 @@ import React from "react";
 import Tag from "../../buttons/Tag/Tag";
 import { parseDate } from "../../../utils/parseDate";
 import { truncate } from "../../../utils/truncate";
+import Image from "next/image";
 
 type Props = {
   button?: boolean;
@@ -21,6 +22,7 @@ type Props = {
   className?: string;
   tags: string[];
   postDate: Date;
+  imageSrc?: string;
 };
 
 type styledProps = {
@@ -177,6 +179,7 @@ export default function TipItem({
   postDate,
   buttonUrl = "",
   tags = [],
+  imageSrc = "",
 }: Props) {
   const { colors } = useTheme();
 
@@ -184,24 +187,36 @@ export default function TipItem({
     <Card variant="blog">
       <CardHeader
         style={{
-          height: "fit-content",
+          height: !!imageSrc ? "" : "fit-content",
         }}
       >
-        <div className="flex flex-wrap gap-3 forum-tags p-4">
-          {tags.length > 0 &&
-            tags.map((tag, index) => (
-              <Tag
-                key={index}
-                variant="dark"
-                size="m"
-                style={{
-                  backgroundColor: colors.info.normal,
-                  borderColor: colors.info.normal,
-                }}
-              >
-                <>{tag}</>
-              </Tag>
-            ))}
+        <div className="relative w-full h-full">
+          {imageSrc && (
+            <Image
+              className="z-0 object-cover"
+              src={imageSrc}
+              alt={title}
+              fill
+              loading="lazy"
+              quality={100}
+            />
+          )}
+          <div className="absolute bottom-0 left-0 p-4 flex flex-wrap gap-3 forum-tags">
+            {tags.length > 0 &&
+              tags.map((tag, index) => (
+                <Tag
+                  key={index}
+                  variant="dark"
+                  size="m"
+                  style={{
+                    backgroundColor: colors.info.normal,
+                    borderColor: colors.info.normal,
+                  }}
+                >
+                  <>{tag}</>
+                </Tag>
+              ))}
+          </div>
         </div>
       </CardHeader>
       <CardFooter>

@@ -6,4 +6,5 @@ export type VideoPropsType = {
   date_created?: string;
   date_updated?: string;
   className?: string;
+  autoPlay?: boolean;
 };
