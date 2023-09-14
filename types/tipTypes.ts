@@ -12,4 +12,9 @@ export type TipPostType = {
   content: string;
   categories?: { categories_id: CategoryType }[];
   author?: string;
+  image?: {
+    filename_download: string;
+    id?: string;
+    type?: string;
+  };
 };

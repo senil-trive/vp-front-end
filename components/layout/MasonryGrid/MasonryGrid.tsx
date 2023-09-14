@@ -180,6 +180,11 @@ export function MasonryGrid({
                       }
                       title={tipContent.name ?? ""}
                       content={tipContent.introduction}
+                      imageSrc={
+                        tipContent.image
+                          ? `${process.env.NEXT_PUBLIC_API_URL}/assets/${tipContent.image?.id}`
+                          : ""
+                      }
                     />
                   </motion.div>
                 );

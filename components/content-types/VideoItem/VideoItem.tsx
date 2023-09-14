@@ -1,5 +1,5 @@
 import { H3, P } from "../../typography";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import IconButton from "../../buttons/IconButton/IconButton";
 import { IoIosPlay } from "react-icons/io";
@@ -63,6 +63,7 @@ export default function VideoItem({
   poster,
   src = placeholderUrl,
   className,
+  autoPlay,
 }: VideoPropsType) {
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -72,7 +73,7 @@ export default function VideoItem({
     const player = videoRef.current;
 
     if (player && !isPlaying) {
-      player.play();
+      player.src = src;
       setIsPlaying(true);
     } else if (player) {
       player.pause();
@@ -88,6 +89,15 @@ export default function VideoItem({
     }
   };
 
+  useEffect(() => {
+    console.log(!!autoPlay, !!videoRef.current);
+    if (autoPlay && videoRef.current) {
+      console.log("here1");
+      setIsPlaying(true);
+      videoRef.current.play();
+    }
+  }, [autoPlay, videoRef.current]);
+
   return (
     <StyledFigure className={className}>
       <video
@@ -96,6 +106,9 @@ export default function VideoItem({
         controls={isPlaying}
         onClick={stopVideo}
         poster={poster}
+        autoPlay={autoPlay}
+        muted
+        loop={autoPlay}
       ></video>
       {!isPlaying && (
         <>
