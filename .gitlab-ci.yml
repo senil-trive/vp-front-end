@@ -1,7 +1,7 @@
 image: node:19.2.0
 
-stages:
-  - deploy
+# stages:
+#   - deploy
 
 # # Initialize system
 before_script:
@@ -44,6 +44,7 @@ deploy_dev:
     - rsync -aO --filter="merge rsync_ignore.txt" $CI_PROJECT_DIR $SERVER_USER@$SERVER_IP:$SERVER_PROJECT_DIR
 
     # Install npm dependencies
+    - ssh $SERVER_USER@$SERVER_IP pwd
     - ssh $SERVER_USER@$SERVER_IP $INSTALL_DEPS_SCRIPT
 
     # Delete pm2 process if it exists
@@ -61,46 +62,32 @@ deploy_dev:
     # Trigger deployments only from development branch
     - development
 
-# # STAGING DEPLOY SCRIPT
-deploy_staging:
-  stage: deploy
-  variables:
-    SERVER_PROJECT_DIR: $PROJECT_BASE_PATH/staging
-  tags:
-    # Runner name
-    - deployment-frontend
-  script:
-    # Scripts to resolve gitlab variables
-    - INSTALL_DEPS_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-front && npm i"
-    - BUILD_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-front && npm run build"
-    - START_PROJECT_SCRIPT="cd $SERVER_PROJECT_DIR/vp-website-front && npm run server:staging"
+variables:
+  DOCKER_IMAGE: "europe-west4-docker.pkg.dev/coherent-racer-225116/vp-docker-registry/website"
 
-    # Inject .env
-    - cat $STAGING_ENV_FILE > .env
+## STAGING DEPLOY
 
-    # Inject .sentryclirc
-    - cat $SENTRY_CLI_RC > .sentryclirc
-
-    # Copy all the content
-    - rsync -aO --filter="merge rsync_ignore.txt" $CI_PROJECT_DIR $SERVER_USER@$SERVER_IP:$SERVER_PROJECT_DIR
-
-    # Install npm dependencies
-    - ssh $SERVER_USER@$SERVER_IP $INSTALL_DEPS_SCRIPT
-
-    # Delete pm2 process if it exists
-    - ssh $SERVER_USER@$SERVER_IP 'pm2 delete -s vp-website-staging || :'
-
-    # Build the project
-    - ssh $SERVER_USER@$SERVER_IP $BUILD_SCRIPT
-
-    # Start pm2 process
-    - ssh $SERVER_USER@$SERVER_IP $START_PROJECT_SCRIPT
-
-  environment:
-    name: staging
+stg-build-job:
+  stage: build
   only:
-    # Trigger deployments only from development branch
-    - staging
+    refs:
+      - staging
+  script:
+    - cat ${GITLAB_JSON} | docker login -u _json_key --password-stdin https://europe-west4-docker.pkg.dev
+    - docker build --no-cache --pull -t ${DOCKER_IMAGE}:latest -t ${DOCKER_IMAGE}:${CI_COMMIT_SHORT_SHA} .
+    - docker push --all-tags ${DOCKER_IMAGE}
+
+stg-deploy-job:
+  stage: deploy
+  only:
+    refs:
+      - staging  
+  variables:
+    USE_GKE_GCLOUD_AUTH_PLUGIN: "True"
+  script:
+    - gcloud auth activate-service-account gitlab@coherent-racer-225116.iam.gserviceaccount.com --key-file=${GITLAB_JSON} --project=coherent-racer-225116
+    - kubectl --kubeconfig=${KUBECONFIG} -n sites set image statefulset/stg-sites-website node=${DOCKER_IMAGE}:${CI_COMMIT_SHORT_SHA}
+
 
 # # PRODUCTION DEPLOY SCRIPT
 deploy_prod:
