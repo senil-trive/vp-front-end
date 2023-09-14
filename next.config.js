@@ -5,6 +5,7 @@ const { withSentryConfig } = require("@sentry/nextjs");
 const moduleExports = {
   reactStrictMode: true,
   swcMinify: true,
+  output: 'standalone',
   images: {
     domains: [
       "admin.villapinedo.nl",
