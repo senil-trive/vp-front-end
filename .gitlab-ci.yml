@@ -89,6 +89,7 @@ stg-build-job:
     refs:
       - staging
   script:
+    - cat ${STAGING_ENV_FILE} > .env
     - cat ${GITLAB_JSON} | docker login -u _json_key --password-stdin https://europe-west4-docker.pkg.dev
     - docker build --no-cache --pull -t ${DOCKER_IMAGE}:latest -t ${DOCKER_IMAGE}:${CI_COMMIT_SHORT_SHA} .
     - docker push --all-tags ${DOCKER_IMAGE}
